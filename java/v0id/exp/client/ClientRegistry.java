@@ -1,0 +1,235 @@
+package v0id.exp.client;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
+import net.minecraft.client.renderer.block.statemap.StateMapperBase;
+import net.minecraft.client.renderer.entity.RenderFallingBlock;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing.Axis;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ColorizerGrass;
+import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.model.ModelLoaderRegistry;
+import net.minecraftforge.client.model.obj.OBJLoader;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import v0id.api.core.util.IFunctionalBlockColor;
+import v0id.api.core.util.IFunctionalItemColor;
+import v0id.api.core.util.IFunctionalRenderFactory;
+import v0id.api.core.util.java.IInstanceProvider;
+import v0id.api.core.util.java.Instance;
+import v0id.api.exp.block.EnumLeafState;
+import v0id.api.exp.block.EnumTreeType;
+import v0id.api.exp.block.IGrass;
+import v0id.api.exp.block.ILeaves;
+import v0id.api.exp.block.property.EnumDirtClass;
+import v0id.api.exp.block.property.EnumRockClass;
+import v0id.api.exp.block.property.EnumWaterLilyType;
+import v0id.api.exp.block.property.ExPBlockProperties;
+import v0id.api.exp.data.ExPBlocks;
+import v0id.api.exp.data.ExPRegistryNames;
+import v0id.exp.block.tree.BlockLeaf;
+import v0id.exp.block.tree.BlockLog;
+import v0id.exp.client.model.ModelLoaderExP;
+import v0id.exp.client.render.entity.RenderFallingTree;
+import v0id.exp.entity.EntityFallingTree;
+import v0id.exp.entity.EntityGravFallingBlock;
+import v0id.exp.registry.AbstractRegistry;
+import v0id.exp.util.Helpers;
+
+public class ClientRegistry extends AbstractRegistry implements IInstanceProvider
+{
+	@Instance
+	public static ClientRegistry instance;
+	
+	public ClientRegistry()
+	{
+		
+	}
+
+	@Override
+	public void preInit(FMLPreInitializationEvent evt)
+	{
+		super.preInit(evt);
+		OBJLoader.INSTANCE.addDomain("exp");
+		for (int i = 0; i < 16; ++i)
+		{
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.rock), i, new ModelResourceLocation(ExPBlocks.rock.getRegistryName(), "inventory-" + i));
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.soil), i, new ModelResourceLocation(ExPBlocks.soil.getRegistryName(), "inventory-" + i));
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.grass), i, new ModelResourceLocation(ExPBlocks.grass.getRegistryName(), "inventory-" + i));
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.grass_dry), i, new ModelResourceLocation(ExPBlocks.grass_dry.getRegistryName(), "inventory-" + i));
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.grass_dead), i, new ModelResourceLocation(ExPBlocks.grass_dead.getRegistryName(), "inventory-" + i));
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.cattail), i, new ModelResourceLocation(ExPBlocks.cattail.getRegistryName(), "class=" + EnumDirtClass.values()[i].getName()));
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.sand), i, new ModelResourceLocation(ExPBlocks.sand.getRegistryName(), "class=" + EnumRockClass.values()[i].getName()));
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.seaweed), i, new ModelResourceLocation(ExPBlocks.seaweed.getRegistryName(), "class=" + EnumRockClass.values()[i].getName()));
+			if (i < 10)
+			{
+				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.waterLily), i, new ModelResourceLocation(ExPBlocks.waterLily.getRegistryName(), "blooming=" + (i >= 5) + ",type=" + EnumWaterLilyType.values()[i % 5].getName()));
+			}
+			
+			if (i < 4)
+			{
+				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.vegetation), i, new ModelResourceLocation(ExPBlocks.vegetation.getRegistryName(), "inventory-" + i));
+			}
+		}
+		
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.coralRock), 0, new ModelResourceLocation(ExPBlocks.coralRock.getRegistryName(), "rtindex=0"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.coralPlant), 0, new ModelResourceLocation(ExPBlocks.coralPlant.getRegistryName(), "ptindex=0,rtindex=0"));
+		Arrays.asList(ExPBlocks.logs).forEach(this::registerLogItemModel);
+		Arrays.asList(ExPBlocks.logsDeco).forEach(this::registerLogItemModel);
+		Arrays.asList(ExPBlocks.leaves).forEach(this::registerLeafItemModel);
+		this.registerCustomStateMappers();
+		IFunctionalRenderFactory.registerEntityRenderingHandler(EntityGravFallingBlock.class, manager -> new RenderFallingBlock(manager));
+		IFunctionalRenderFactory.registerEntityRenderingHandler(EntityFallingTree.class, manager -> new RenderFallingTree(manager));
+		//ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(ExPBlocks.saltWater), item -> new ModelResourceLocation(ExPBlocks.saltWater.getRegistryName(), "fluid"));
+		ModelLoader.setBucketModelDefinition(Item.getItemFromBlock(ExPBlocks.saltWater));
+		ModelLoader.setBucketModelDefinition(Item.getItemFromBlock(ExPBlocks.freshWater));
+		ModelLoader.setBucketModelDefinition(Item.getItemFromBlock(ExPBlocks.lava));
+		ModelLoader.setCustomStateMapper(ExPBlocks.saltWater, new StateMapperFluid(ExPBlocks.saltWater));
+		ModelLoader.setCustomStateMapper(ExPBlocks.freshWater, new StateMapperFluid(ExPBlocks.freshWater));
+		ModelLoader.setCustomStateMapper(ExPBlocks.lava, new StateMapperFluid(ExPBlocks.lava));
+		ModelLoader.setCustomStateMapper(ExPBlocks.cattail, new StateMapperCattail());
+		ModelLoaderRegistry.registerLoader(new ModelLoaderExP());
+	}
+	
+	public void registerLogItemModel(Block b)
+	{
+		for (int i = 0; i < 5; ++i)
+		{
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(b), i * 3 + 1, new ModelResourceLocation(ExPRegistryNames.blockLog, "axis=y,ttype=" + EnumTreeType.values()[i + ((BlockLog)b).logIndex * 5].getName()));
+		}
+	}
+	
+	public void registerLeafItemModel(Block b)
+	{
+		for (int i = 0; i < 15; ++i)
+		{
+			EnumLeafState els = EnumLeafState.values()[i % 3];
+			ResourceLocation rl = new ResourceLocation(ExPRegistryNames.blockLeaves.getResourceDomain(), ExPRegistryNames.blockLeaves.getResourcePath() + "_" + els.getName());
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(b), i, new ModelResourceLocation(rl, "ttype=" + EnumTreeType.values()[i / 3 + ((BlockLeaf)b).logIndex * 5].getName()));
+		}
+	}
+	
+	public void registerCustomStateMappers()
+	{
+		List<Block> lst = Lists.newArrayList();
+		lst.addAll(Arrays.asList(ExPBlocks.logs));
+		lst.addAll(Arrays.asList(ExPBlocks.logsDeco));
+		for (Block b : lst)
+		{
+			ModelLoader.setCustomStateMapper(b, new IStateMapper(){
+
+				@Override
+				public Map<IBlockState, ModelResourceLocation> putStateModelLocations(Block blockIn)
+				{
+					Map<IBlockState, ModelResourceLocation> ret = Maps.newLinkedHashMap();
+					for (int i = 0; i < 15; ++i)
+					{
+						IBlockState state = b.getStateFromMeta(i);
+						String enumName = state.getValue(ExPBlockProperties.TREE_TYPES[((BlockLog)b).logIndex]).getName();
+						String modelLocation = "axis=" + Axis.values()[i % 3].getName() + ",ttype=" + enumName;
+						ModelResourceLocation mrl = new ModelResourceLocation(ExPRegistryNames.blockLog, modelLocation);
+						ret.put(state, mrl);
+					}
+					
+					return ret;
+				}
+			});
+		}
+		
+		lst.clear();
+		lst.addAll(Arrays.asList(ExPBlocks.leaves));
+		for (Block b : lst)
+		{
+			ModelLoader.setCustomStateMapper(b, new IStateMapper(){
+
+				@Override
+				public Map<IBlockState, ModelResourceLocation> putStateModelLocations(Block blockIn)
+				{
+					Map<IBlockState, ModelResourceLocation> ret = Maps.newLinkedHashMap();
+					for (int i = 0; i < 15; ++i)
+					{
+						IBlockState state = b.getStateFromMeta(i);
+						EnumLeafState els = EnumLeafState.values()[i % 3];
+						String enumName = state.getValue(ExPBlockProperties.TREE_TYPES[((BlockLeaf)b).logIndex]).getName();
+						String modelLocation = "ttype=" + enumName;
+						ResourceLocation rl = new ResourceLocation(ExPRegistryNames.blockLeaves.getResourceDomain(), ExPRegistryNames.blockLeaves.getResourcePath() + "_" + els.getName());
+						ModelResourceLocation mrl = new ModelResourceLocation(rl, modelLocation);
+						ret.put(state, mrl);
+					}
+					
+					return ret;
+				}
+			});
+		}
+	}
+	
+	@Override
+	public void init(FMLInitializationEvent evt)
+	{
+		super.init(evt);
+		IFunctionalBlockColor.registerBlockColorHandler(Helpers::getGrassColor, ExPBlocks.grass, ExPBlocks.grass_dry, ExPBlocks.grass_dead);
+		IFunctionalBlockColor.registerBlockColorHandler(Helpers::getGrassColor, ExPBlocks.waterLily);
+		IFunctionalItemColor.registerItemColorHandler((ItemStack stack, int tintIndex) -> 0x02661c, ExPBlocks.grass);
+		IFunctionalItemColor.registerItemColorHandler((ItemStack stack, int tintIndex) -> 0x6a7223, ExPBlocks.grass_dry);
+		IFunctionalItemColor.registerItemColorHandler((ItemStack stack, int tintIndex) -> 0x660000, ExPBlocks.grass_dead);
+		IFunctionalItemColor.registerItemColorHandler((ItemStack stack, int tintIndex) -> ColorizerGrass.getGrassColor(1, 0.5), ExPBlocks.waterLily);
+		IFunctionalBlockColor.registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) -> 
+			worldIn.getBlockState(pos.down()).getBlock() instanceof IGrass ? ((IGrass)worldIn.getBlockState(pos.down()).getBlock()).getGrassColor(worldIn.getBlockState(pos.down()), pos.down(), worldIn) : Helpers.getGrassColor(state, worldIn, pos, tintIndex), ExPBlocks.vegetation);
+		IFunctionalItemColor.registerItemColorHandler((ItemStack stack, int tintIndex) -> ColorizerGrass.getGrassColor(1, 0.5), ExPBlocks.vegetation);
+		IFunctionalBlockColor.registerBlockColorHandler(Helpers::getCoralColor, ExPBlocks.coralRock);
+		IFunctionalBlockColor.registerBlockColorHandler(Helpers::getCoralColor, ExPBlocks.coralPlant);
+		IFunctionalBlockColor.registerBlockColorHandler(Helpers::getLeafColor, ExPBlocks.leaves);
+		IFunctionalItemColor.registerItemColorHandler((ItemStack stack, int tintIndex) -> ((ILeaves)Block.getBlockFromItem(stack.getItem())).getLeavesColorForMeta(stack.getMetadata()), ExPBlocks.leaves);
+	}
+
+	@Override
+	public void postInit(FMLPostInitializationEvent evt)
+	{
+		super.postInit(evt);
+	}
+	
+	class StateMapperFluid extends StateMapperBase
+	{
+		Block b;
+		
+		public StateMapperFluid(Block b)
+		{
+			super();
+			this.b = b;
+		}
+		
+		@Override
+		protected ModelResourceLocation getModelResourceLocation(IBlockState state)
+		{
+			return new ModelResourceLocation(this.b.getRegistryName(), "fluid");
+		}
+	}
+	
+	class StateMapperCattail extends StateMapperBase
+	{
+		public StateMapperCattail()
+		{
+			super();
+		}
+		
+		@Override
+		protected ModelResourceLocation getModelResourceLocation(IBlockState state)
+		{
+			return new ModelResourceLocation("exp:cattail");
+		}
+	}
+}

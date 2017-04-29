@@ -1,0 +1,7 @@
+{
+	"parent": "exp:block/tinted_crop",
+    "textures": {
+        "particle": "#all",
+		"crop" : "#all"
+    }
+}

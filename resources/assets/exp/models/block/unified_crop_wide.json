@@ -1,0 +1,7 @@
+{
+	"parent": "exp:block/crop_wide",
+    "textures": {
+        "particle": "#all",
+		"crop" : "#all"
+    }
+}

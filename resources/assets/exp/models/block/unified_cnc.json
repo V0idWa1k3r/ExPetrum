@@ -1,0 +1,8 @@
+{
+	"parent": "exp:block/cnc",
+    "textures": {
+        "particle": "#all",
+		"crop" : "#all",
+		"cross" : "#all"
+    }
+}

@@ -1,0 +1,176 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"textures" : {
+			"all" : "exp:blocks/dirt/acrisol"
+		},
+		"model" : "cube_all"
+	},
+	"variants" : {
+		"normal": [{
+
+        }],
+		"inventory-0": [{
+			"textures" : {
+				"all" : "exp:blocks/dirt/acrisol"
+			}
+        }],
+		"inventory-1": [{
+			"textures" : {
+				"all" : "exp:blocks/dirt/albeluvisol"
+			}
+        }],
+		"inventory-2": [{
+			"textures" : {
+				"all" : "exp:blocks/dirt/calcisol"
+			}
+        }],
+		"inventory-3": [{
+			"textures" : {
+				"all" : "exp:blocks/dirt/cambisol"
+			}
+        }],
+		"inventory-4": [{
+			"textures" : {
+				"all" : "exp:blocks/dirt/chernozem"
+			}
+        }],
+		"inventory-5": [{
+			"textures" : {
+				"all" : "exp:blocks/dirt/fluvisol"
+			}
+        }],
+		"inventory-6": [{
+			"textures" : {
+				"all" : "exp:blocks/dirt/gleysol"
+			}
+        }],
+		"inventory-7": [{
+			"textures" : {
+				"all" : "exp:blocks/dirt/gypsisol"
+			}
+        }],
+		"inventory-8": [{
+			"textures" : {
+				"all" : "exp:blocks/dirt/peat"
+			}
+        }],
+		"inventory-9": [{
+			"textures" : {
+				"all" : "exp:blocks/dirt/leptosol"
+			}
+        }],
+		"inventory-10": [{
+			"textures" : {
+				"all" : "exp:blocks/dirt/planosol"
+			}
+        }],
+		"inventory-11": [{
+			"textures" : {
+				"all" : "exp:blocks/dirt/podzol"
+			}
+        }],
+		"inventory-12": [{
+			"textures" : {
+				"all" : "exp:blocks/dirt/regosol"
+			}
+        }],
+		"inventory-13": [{
+			"textures" : {
+				"all" : "exp:blocks/dirt/solonchak"
+			}
+        }],
+		"inventory-14": [{
+			"textures" : {
+				"all" : "exp:blocks/dirt/umbrisol"
+			}
+        }],
+		"inventory-15": [{
+			"textures" : {
+				"all" : "exp:blocks/dirt/vertisol"
+			}
+        }],
+		"class" : {
+			"acrisol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/acrisol"
+				}
+			},
+			"albeluvisol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/albeluvisol"
+				}
+			},
+			"calcisol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/calcisol"
+				}
+			},
+			"cambisol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/cambisol"
+				}
+			},
+			"chernozem" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/chernozem"
+				}
+			},
+			"fluvisol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/fluvisol"
+				}
+			},
+			"gleysol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/gleysol"
+				}
+			},
+			"gypsisol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/gypsisol"
+				}
+			},
+			"leptosol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/leptosol"
+				}
+			},
+			"peat" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/peat"
+				}
+			},
+			"planosol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/planosol"
+				}
+			},
+			"podzol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/podzol"
+				}
+			},
+			"regosol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/regosol"
+				}
+			},
+			"solonchak" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/solonchak"
+				}
+			},
+			"umbrisol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/umbrisol"
+				}
+			},
+			"vertisol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/vertisol"
+				}
+			}
+		}
+	}
+}

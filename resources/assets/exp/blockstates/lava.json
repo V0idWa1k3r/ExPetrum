@@ -1,0 +1,24 @@
+{
+	"forge_marker": 1,
+	"variants": {
+		"fluid": {
+			"model": "forge:fluid",
+			"custom": { 
+				"fluid": "exp.lava" 
+			}
+		},
+		"inventory": {
+			"model": "forge:forgebucket",
+			"textures": {
+				"base": "forge:items/bucket_base",
+				"fluid": "forge:items/bucket_fluid",
+				"cover": "forge:items/bucket_cover"
+			},
+			"transform": "forge:default-item",
+			"custom": {
+				"fluid": "exp.lava",
+				"flipGas": true
+			}
+		}
+	}
+}
