@@ -32,7 +32,7 @@ public class ExPHandlerServer
 	@SubscribeEvent
 	public void onWorldTick(TickEvent.WorldTickEvent evt)
 	{
-		if (evt.world.hasCapability(ExPWorldCapability.worldCap, null) && evt.phase == Phase.END)
+		if (evt.world.hasCapability(ExPWorldCapability.worldCap, null) && evt.phase == Phase.END && evt.world.provider.getDimension() == 0)
 		{
 			IExPWorld.of(evt.world).onTick();
 		}

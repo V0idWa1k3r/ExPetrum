@@ -13,6 +13,7 @@ import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.EnumSeason;
 import v0id.api.exp.world.IExPWorld;
+import v0id.exp.net.PacketHandlerWorldData;
 
 public class ExPWorld implements IExPWorld
 {
@@ -182,7 +183,12 @@ public class ExPWorld implements IExPWorld
 	@Override
 	public void onTick()
 	{
-		if (!this.isRemote && this.dayTemp == null || this.persistentTicks % this.today().ticksPerDay == 0)
+		if (this.owner == null || this.owner.provider.getDimension() != 0)
+		{
+			return;
+		}
+		
+		if (!this.isRemote && (this.dayTemp == null || this.persistentTicks % this.today().ticksPerDay == 0))
 		{
 			this.createDayData();
 		}
@@ -203,6 +209,18 @@ public class ExPWorld implements IExPWorld
 		{
 			ExPMisc.modLogger.log(LogLevel.Warning, "%d ticks were skipped by the world! This can cause issues.", ticksSkipped);
 		}
+		
+		if (this.isRemote && this.clientIsDirty)
+		{
+			this.clientIsDirty = false;
+			PacketHandlerWorldData.sendRequestPacket();
+		}
+		
+		if (!this.isRemote && this.serverIsDirty)
+		{
+			this.serverIsDirty = false;
+			PacketHandlerWorldData.sendSyncPacket(this.getWorld());
+		}
 	}
 
 	@Override
@@ -221,6 +239,11 @@ public class ExPWorld implements IExPWorld
 	public NBTTagCompound serializePartialNBT()
 	{
 		NBTTagCompound ret = new NBTTagCompound();
+		if (this.owner == null || this.owner.provider.getDimension() != 0)
+		{
+			return ret;
+		}
+		
 		if (this.persistentTicks_isDirty)
 		{
 			ret.setLong("persistentTicks", this.persistentTicks);
@@ -272,6 +295,11 @@ public class ExPWorld implements IExPWorld
 	
 	public void deserializePartialNBT(NBTTagCompound nbt)
 	{
+		if (this.owner == null || this.owner.provider.getDimension() != 0)
+		{
+			return;
+		}
+		
 		if (nbt.hasKey("persistentTicks"))
 		{
 			this.persistentTicks = nbt.getLong("persistentTicks");
@@ -296,6 +324,11 @@ public class ExPWorld implements IExPWorld
 		if (nbt.hasKey("dayTemp"))
 		{
 			int i = 0;
+			if (this.dayTemp == null)
+			{
+				this.dayTemp = new float[8];
+			}
+			
 			for (NBTTagFloat nbtFloat : NBTList.<NBTTagFloat>of(nbt.getTagList("dayTemp", NBT.TAG_FLOAT)))
 			{
 				this.dayTemp[i++] = nbtFloat.getFloat();
