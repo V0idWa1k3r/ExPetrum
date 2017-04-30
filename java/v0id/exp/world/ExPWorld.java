@@ -30,6 +30,7 @@ public class ExPWorld implements IExPWorld
 	public float[] dayTemp;
 	public float baseHumidity;
 	public float accumulatedHumidity;
+	public int rainTicksRemaining;
 	
 	public boolean persistentTicks_isDirty;
 	public boolean windDirection_isDirty;
@@ -111,7 +112,7 @@ public class ExPWorld implements IExPWorld
 	@Override
 	public void setWindDirection(Vec3d vec)
 	{
-		this.windDirection_isDirty |= this.windDirection.equals(vec);
+		this.windDirection_isDirty |= !this.windDirection.equals(vec);
 		this.serverIsDirty |= this.windDirection_isDirty;
 		this.windDirection = vec;
 	}
@@ -215,6 +216,52 @@ public class ExPWorld implements IExPWorld
 			ExPMisc.modLogger.log(LogLevel.Warning, "%d ticks were skipped by the world! This can cause issues.", ticksSkipped);
 		}
 		
+		this.rainTicksRemaining -= 1 + ticksSkipped;
+		
+		if (this.rainTicksRemaining <= 0 && this.owner.isRaining())
+		{
+			this.owner.setRainStrength(0);
+			this.owner.setThunderStrength(0);
+			this.owner.getWorldInfo().setRaining(false);
+			this.owner.getWorldInfo().setThundering(false);
+		}
+		
+		if (this.rainTicksRemaining > 0 && !this.owner.isRaining())
+		{
+			this.owner.getWorldInfo().setRaining(true);
+			this.owner.setRainStrength(1F);
+		}
+		
+		if (!this.isRemote)
+		{
+			// Need this block as the client for some mysterious reason does not receive temperature correctly upon the initial sync packet
+			// FIXME fix client not receiving correct dayTemperature data!
+			boolean shouldSyncBrokenData = this.persistentTicks % 200 == 0;;
+			this.dayTemp_isDirty |= shouldSyncBrokenData;
+			this.windDirection_isDirty |= this.windStrength_isDirty |= this.dayTemp_isDirty;
+			this.serverIsDirty |= this.dayTemp_isDirty;
+			boolean shouldBeRaining = this.owner.rand.nextDouble() <= this.accumulatedHumidity / 1000;
+			
+			if (this.rainTicksRemaining <= 0)
+			{
+				this.accumulatedHumidity += this.getWorld().rand.nextFloat() / 12000;
+				this.accumulatedHumidity_isDirty = this.persistentTicks % 100 == 0;
+				this.serverIsDirty |= this.accumulatedHumidity_isDirty;
+			}
+			
+			if (shouldBeRaining && this.rainTicksRemaining <= 0)
+			{
+				this.rainTicksRemaining = (int) (1000 + this.getWorld().rand.nextDouble() * 20000);
+			}
+			
+			if (this.getWorld().rand.nextDouble() < 0.001D)
+			{
+				this.setWindDirection(new Vec3d(this.getWorld().rand.nextDouble() - this.getWorld().rand.nextDouble(), -this.getWorld().rand.nextDouble() / 10, this.getWorld().rand.nextDouble() - this.getWorld().rand.nextDouble()).normalize());
+				float strengthRandomFactor = (55F - this.windStrength);
+				this.setWindStrength(this.getWorld().rand.nextFloat() * strengthRandomFactor);
+			}
+		}
+		
 		if (this.isRemote && this.clientIsDirty)
 		{
 			this.clientIsDirty = false;
@@ -294,6 +341,7 @@ public class ExPWorld implements IExPWorld
 			ret.setFloat("accumulatedHumidity", this.accumulatedHumidity);
 		}
 		
+		ret.setInteger("rainTicks", this.rainTicksRemaining);
 		this.setAllDirty(false);
 		return ret;
 	}
@@ -348,6 +396,21 @@ public class ExPWorld implements IExPWorld
 		if (nbt.hasKey("accumulatedHumidity"))
 		{
 			this.accumulatedHumidity = nbt.getFloat("accumulatedHumidity");
+		}
+		
+		this.rainTicksRemaining = nbt.getInteger("rainTicks");
+		if (this.isRemote)
+		{
+			if (this.rainTicksRemaining > 0)
+			{
+				this.owner.getWorldInfo().setRaining(true);
+				this.owner.setRainStrength(1.0F);
+			}
+			else
+			{
+				this.owner.getWorldInfo().setRaining(false);
+				this.owner.setRainStrength(0.0F);
+			}
 		}
 	}
 

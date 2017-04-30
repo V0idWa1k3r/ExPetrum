@@ -199,9 +199,7 @@ public class PlayerHUDRenderer
 		Minecraft.getMinecraft().mcProfiler.endSection();
 		Minecraft.getMinecraft().mcProfiler.endSection();
 	}
-
 	
-
 	private static void renderHotbar(float partialTicks, ScaledResolution sRes)
 	{
 		if (Minecraft.getMinecraft().getRenderViewEntity() instanceof EntityPlayer)

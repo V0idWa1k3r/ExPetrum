@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import v0id.api.core.VoidApi;
 import v0id.exp.client.render.hud.PlayerHUDRenderer;
 import v0id.exp.client.render.sky.WorldSkyRenderer;
+import v0id.exp.client.render.sky.WorldWeatherRenderer;
 
 public class ExPHandlerClient
 {
@@ -34,6 +35,7 @@ public class ExPHandlerClient
 		if (VoidApi.proxy.getClientWorld() != null && VoidApi.proxy.getClientWorld().provider != null && VoidApi.proxy.getClientWorld().provider.getDimension() == 0 && !(VoidApi.proxy.getClientWorld().provider.getSkyRenderer() instanceof WorldSkyRenderer))
 		{
 			VoidApi.proxy.getClientWorld().provider.setSkyRenderer(WorldSkyRenderer.getInstance());
+			VoidApi.proxy.getClientWorld().provider.setWeatherRenderer(WorldWeatherRenderer.getInstance());
 		}
 	}
 	

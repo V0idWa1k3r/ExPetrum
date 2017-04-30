@@ -9,6 +9,8 @@ public class ExPTextures
 {
 	public static ResourceLocation[] PLAYER_HUD = new ResourceLocation[EnumPlayerProgression.values().length];
 	
+	public static ResourceLocation WEATHER = new ResourceLocation(ExPRegistryNames.modid, "textures/misc/weather.png");
+	
 	static
 	{
 		int i = 0;
