@@ -132,6 +132,11 @@ public class ExPWorld implements IExPWorld
 	@Override
 	public float getOverhaulTemperature()
 	{
+		if (this.dayTemp == null)
+		{
+			return 0;
+		}
+		
 		Calendar c = this.today();
 		byte dayProgressCurrent = (byte) (((float)(this.persistentTicks % c.ticksPerDay) / (float)c.ticksPerDay) * 4);
 		float tempCurrent = this.dayTemp[dayProgressCurrent];
@@ -202,7 +207,7 @@ public class ExPWorld implements IExPWorld
 				ticksSkipped = time - this.persistentTicks - 1;
 			}
 			
-			this.persistentTicks = this.owner.getWorldTime();
+			this.setPersistentTicks(time);
 		}
 		
 		if (ticksSkipped >= 24000)

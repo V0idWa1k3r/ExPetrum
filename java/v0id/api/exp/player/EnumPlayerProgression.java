@@ -10,7 +10,7 @@ public enum EnumPlayerProgression
 	STEEL_AGE,			// Achieved by getting first steel
 	
 	// ANYTHING BELOW HERE IS NOT CURRENTLY IMPLEMENTED!
-	// It is however intended.
+	// They are however intended.
 	
 	STEAM_AGE,			// Achieved by creating first steam boiler
 	INDUSTRIAL_AGE,		// Achieved by creating steam-processing machines and rotary steam power

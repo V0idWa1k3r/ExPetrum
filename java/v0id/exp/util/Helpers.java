@@ -11,6 +11,7 @@ import v0id.api.exp.block.EnumGrassState;
 import v0id.api.exp.block.ICanGrowCrop;
 import v0id.api.exp.block.IGrass;
 import v0id.api.exp.block.ILeaves;
+import v0id.api.exp.world.IExPWorld;
 
 public class Helpers
 {
@@ -76,5 +77,44 @@ public class Helpers
 	public static EnumGrassState getSuggestedGrassState(BlockPos pos, World w)
 	{
 		return EnumGrassState.NORMAL;
+	}
+	
+	public static int getWindStrengthIndex(float windKH)
+	{
+		return windKH < 1 ? 0 :
+			windKH >= 1 && windKH <= 5 ? 1 :
+			windKH > 5 && windKH <= 11 ? 2 :
+			windKH > 11 && windKH <= 19 ? 3 :
+			windKH > 19 && windKH <= 28 ? 4 :
+			windKH > 28 && windKH <= 38 ? 5 :
+			windKH > 38 && windKH <= 49 ? 6 :
+			windKH > 49 && windKH <= 61 ? 7 :
+			windKH > 61 && windKH <= 74 ? 8 :
+			windKH > 74 && windKH <= 88 ? 9 :
+			windKH > 88 && windKH <= 102 ? 10 :
+			windKH > 102 && windKH <= 117 ? 11 : 12;
+	}
+	
+	public static float getTemperatureAt(World w, BlockPos pos)
+	{
+		return IExPWorld.of(w).getOverhaulTemperature();
+	}
+	
+	public static int getTemperatureIndex(float tempC)
+	{
+		return 
+			tempC < -30 ? 0 :
+			tempC > -30 && tempC <= -20 ? 1 :
+			tempC > -20 && tempC <= -12 ? 2 :
+			tempC > -12 && tempC <= -2 ? 3 :
+			tempC > -2 && tempC < 2 ? 4 :
+			tempC >= 2 && tempC < 12 ? 5 :
+			tempC >= 12 && tempC < 20 ? 6 :
+			tempC >= 20 && tempC < 30 ? 7 : 8;
+	}
+	
+	public static float getMoistureAt(World w, BlockPos pos)
+	{
+		return w.isRaining() ? 1 : IExPWorld.of(w).getOverhaulHumidity();
 	}
 }
