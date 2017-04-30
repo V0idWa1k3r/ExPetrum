@@ -28,6 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import v0id.api.core.util.ItemBlockWithMetadata;
 import v0id.api.exp.block.ICanGrowCrop;
 import v0id.api.exp.block.property.EnumDirtClass;
+import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.gravity.GravityHelper;
 import v0id.api.exp.gravity.IGravitySusceptible;
@@ -44,7 +45,7 @@ public class BlockSoil extends Block implements IWeightProvider, IGravitySuscept
 		this.setSoundType(SoundType.GROUND);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(DIRT_CLASS, ACRISOL));
-		this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+		this.setCreativeTab(ExPCreativeTabs.tabCommon);
 		GameRegistry.register(this);
 		GameRegistry.register(new ItemBlockWithMetadata(this));
 	}

@@ -6,6 +6,7 @@ import net.minecraft.block.properties.PropertyInteger;
 import v0id.api.core.markers.StaticStorage;
 import v0id.api.exp.block.EnumGrassAmount;
 import v0id.api.exp.block.EnumLeafState;
+import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.block.EnumTreeType;
 
 @StaticStorage
@@ -19,4 +20,8 @@ public class ExPBlockProperties
 	public static final PropertyInteger VEGETATION_GROWTH = PropertyInteger.create("growth", 0, 3);
 	public static PropertyEnum<EnumTreeType>[] TREE_TYPES = new PropertyEnum[6];
 	public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("leafstate", EnumLeafState.class);
+	public static final PropertyInteger ORE_TEXTURE_ID = PropertyInteger.create("oretexture", 0, 2);
+	
+	// Currently not used
+	public static final PropertyEnum<EnumOre> ORE_TYPE = PropertyEnum.create("oretype", EnumOre.class);
 }

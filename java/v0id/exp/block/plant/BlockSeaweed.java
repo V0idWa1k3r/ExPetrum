@@ -27,6 +27,7 @@ import v0id.api.core.util.ItemBlockWithMetadata;
 import v0id.api.exp.block.IWater;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.data.ExPBlocks;
+import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
@@ -47,7 +48,7 @@ public class BlockSeaweed extends Block implements IWeightProvider
 		this.setSoundType(SoundType.PLANT);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ROCK_CLASS, ANDESITE));
-		this.setCreativeTab(CreativeTabs.DECORATIONS);
+		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
 		GameRegistry.register(this);
 		GameRegistry.register(new ItemBlockWithMetadata(this));
 		this.setTickRandomly(true);

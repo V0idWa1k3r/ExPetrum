@@ -8,6 +8,7 @@ import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.exp.block.BlockCoralRock;
 import v0id.exp.block.BlockGrass;
+import v0id.exp.block.BlockOre;
 import v0id.exp.block.BlockSand;
 import v0id.exp.block.BlockSoil;
 import v0id.exp.block.BlockStone;
@@ -67,6 +68,8 @@ public class ExPBlocksRegistry extends AbstractRegistry
 			ExPBlocks.logsDeco[i] = new BlockLog.Decorative(i);
 			ExPBlocks.leaves[i] = new BlockLeaf(i);
 		}
+		
+		ExPBlocks.ore = new BlockOre();
 	}
 
 	@Override

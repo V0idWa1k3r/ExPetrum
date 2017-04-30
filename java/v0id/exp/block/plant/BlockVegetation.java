@@ -30,6 +30,7 @@ import v0id.api.exp.block.EnumGrassAmount;
 import v0id.api.exp.block.EnumGrassState;
 import v0id.api.exp.block.IGrass;
 import v0id.api.exp.block.property.ExPBlockProperties;
+import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.exp.util.Helpers;
@@ -57,7 +58,7 @@ public class BlockVegetation extends BlockBush
 		this.setSoundType(SoundType.PLANT);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(RANDOM_MODEL, 0).withProperty(ExPBlockProperties.VEGETATION_GROWTH, 0));
-		this.setCreativeTab(CreativeTabs.DECORATIONS);
+		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
 		GameRegistry.register(this);
 		GameRegistry.register(new ItemBlockWithMetadata(this));
 		this.setTickRandomly(true);

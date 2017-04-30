@@ -26,7 +26,8 @@ public class ExPRegistryNames
 		blockCoralPlant																						= new ResourceLocation(modid, "coralplant"),
 		blockLog																							= new ResourceLocation(modid, "log"),
 		blockLogDeco																						= new ResourceLocation(modid, "logDeco"),
-		blockLeaves																							= new ResourceLocation(modid, "leaves");
+		blockLeaves																							= new ResourceLocation(modid, "leaves"),
+		blockOre																							= new ResourceLocation(modid, "ore");
 
 	public static final ResourceLocation
 		entityGravFallingBlock																				= new ResourceLocation(modid, "gravFallingBlock"),

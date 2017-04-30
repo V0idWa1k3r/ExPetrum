@@ -143,7 +143,13 @@ public class ExPWorld implements IExPWorld
 		float tempCurrent = this.dayTemp[dayProgressCurrent];
 		float tempNext = this.dayTemp[dayProgressCurrent + 1];
 		float currentToNextProgress = (((this.persistentTicks % c.ticksPerDay) + ((float)c.ticksPerDay / 4F)) - (this.persistentTicks % c.ticksPerDay)) / ((float)c.ticksPerDay / 4F);
-		return this.baseTemp + tempCurrent * (1 - currentToNextProgress) + tempNext * currentToNextProgress;
+		float tempRet = this.baseTemp + tempCurrent * (1 - currentToNextProgress) + tempNext * currentToNextProgress;
+		if (this.rainTicksRemaining > 0 && tempRet > 0)
+		{
+			tempRet *= 0.9F;
+		}
+		
+		return tempRet;
 	}
 
 	@Override
@@ -218,7 +224,18 @@ public class ExPWorld implements IExPWorld
 		
 		this.rainTicksRemaining -= 1 + ticksSkipped;
 		
-		if (this.rainTicksRemaining <= 0 && this.owner.isRaining())
+		if (this.rainTicksRemaining == 0 && this.owner.isRaining())
+		{
+			this.owner.setRainStrength(0);
+			this.owner.setThunderStrength(0);
+			this.owner.getWorldInfo().setRaining(false);
+			this.owner.getWorldInfo().setThundering(false);
+			this.accumulatedHumidity = this.getWorld().rand.nextFloat() / 3;
+			this.accumulatedHumidity_isDirty = true;
+			this.serverIsDirty = true;
+		}
+		
+		if (this.rainTicksRemaining < 0 && this.owner.isRaining())
 		{
 			this.owner.setRainStrength(0);
 			this.owner.setThunderStrength(0);
@@ -240,7 +257,7 @@ public class ExPWorld implements IExPWorld
 			this.dayTemp_isDirty |= shouldSyncBrokenData;
 			this.windDirection_isDirty |= this.windStrength_isDirty |= this.dayTemp_isDirty;
 			this.serverIsDirty |= this.dayTemp_isDirty;
-			boolean shouldBeRaining = this.owner.rand.nextDouble() <= this.accumulatedHumidity / 1000;
+			boolean shouldBeRaining = this.owner.rand.nextDouble() <= this.accumulatedHumidity / 5000;
 			
 			if (this.rainTicksRemaining <= 0)
 			{

@@ -26,6 +26,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import v0id.api.exp.block.property.EnumWaterLilyType;
+import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
@@ -50,7 +51,7 @@ public class BlockWaterLily extends BlockBush implements IWeightProvider
 		this.setSoundType(SoundType.PLANT);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(PLANT_BLOOMING, false).withProperty(LILY_TYPE, LEOPARDESS));
-		this.setCreativeTab(CreativeTabs.DECORATIONS);
+		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
 		GameRegistry.register(this);
 		GameRegistry.register(new ItemBlockWaterLily(this));
 	}

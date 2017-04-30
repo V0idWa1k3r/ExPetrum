@@ -32,6 +32,7 @@ import v0id.api.core.util.IFunctionalRenderFactory;
 import v0id.api.core.util.java.IInstanceProvider;
 import v0id.api.core.util.java.Instance;
 import v0id.api.exp.block.EnumLeafState;
+import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.IGrass;
 import v0id.api.exp.block.ILeaves;
@@ -48,6 +49,7 @@ import v0id.exp.client.render.entity.RenderFallingTree;
 import v0id.exp.entity.EntityFallingTree;
 import v0id.exp.entity.EntityGravFallingBlock;
 import v0id.exp.registry.AbstractRegistry;
+import v0id.exp.tile.TileOre;
 import v0id.exp.util.Helpers;
 
 public class ClientRegistry extends AbstractRegistry implements IInstanceProvider
@@ -91,6 +93,11 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 		Arrays.asList(ExPBlocks.logs).forEach(this::registerLogItemModel);
 		Arrays.asList(ExPBlocks.logsDeco).forEach(this::registerLogItemModel);
 		Arrays.asList(ExPBlocks.leaves).forEach(this::registerLeafItemModel);
+		for (int i = 0; i < EnumRockClass.values().length * EnumOre.values().length * 3; ++i)
+		{
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.ore), i, new ModelResourceLocation(ExPBlocks.ore.getRegistryName(), "class=" + EnumRockClass.values()[i % EnumRockClass.values().length].getName() + ",oretexture=" + EnumOre.values()[(i / EnumRockClass.values().length) % EnumOre.values().length].getTextureIndex()));
+		}
+		
 		this.registerCustomStateMappers();
 		IFunctionalRenderFactory.registerEntityRenderingHandler(EntityGravFallingBlock.class, manager -> new RenderFallingBlock(manager));
 		IFunctionalRenderFactory.registerEntityRenderingHandler(EntityFallingTree.class, manager -> new RenderFallingTree(manager));
@@ -189,11 +196,15 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 		IFunctionalItemColor.registerItemColorHandler((ItemStack stack, int tintIndex) -> ColorizerGrass.getGrassColor(1, 0.5), ExPBlocks.waterLily);
 		IFunctionalBlockColor.registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) -> 
 			worldIn.getBlockState(pos.down()).getBlock() instanceof IGrass ? ((IGrass)worldIn.getBlockState(pos.down()).getBlock()).getGrassColor(worldIn.getBlockState(pos.down()), pos.down(), worldIn) : Helpers.getGrassColor(state, worldIn, pos, tintIndex), ExPBlocks.vegetation);
-		IFunctionalItemColor.registerItemColorHandler((ItemStack stack, int tintIndex) -> ColorizerGrass.getGrassColor(1, 0.5), ExPBlocks.vegetation);
 		IFunctionalBlockColor.registerBlockColorHandler(Helpers::getCoralColor, ExPBlocks.coralRock);
 		IFunctionalBlockColor.registerBlockColorHandler(Helpers::getCoralColor, ExPBlocks.coralPlant);
 		IFunctionalBlockColor.registerBlockColorHandler(Helpers::getLeafColor, ExPBlocks.leaves);
+		IFunctionalBlockColor.registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) -> 
+			worldIn.getTileEntity(pos) instanceof TileOre ? ((TileOre)worldIn.getTileEntity(pos)).type.getColor() : -1, ExPBlocks.ore);
+		IFunctionalItemColor.registerItemColorHandler((ItemStack stack, int tintIndex) -> ColorizerGrass.getGrassColor(1, 0.5), ExPBlocks.vegetation);
 		IFunctionalItemColor.registerItemColorHandler((ItemStack stack, int tintIndex) -> ((ILeaves)Block.getBlockFromItem(stack.getItem())).getLeavesColorForMeta(stack.getMetadata()), ExPBlocks.leaves);
+		IFunctionalItemColor.registerItemColorHandler((ItemStack stack, int tintIndex) -> 
+			EnumOre.values()[(stack.getMetadata() / EnumRockClass.values().length) % EnumOre.values().length].getColor(), ExPBlocks.ore);
 	}
 
 	@Override

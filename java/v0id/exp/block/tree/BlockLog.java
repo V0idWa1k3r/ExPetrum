@@ -31,6 +31,7 @@ import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.ILog;
 import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
+import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.entity.EntityFallingTree;
@@ -76,7 +77,7 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 		this.setResistance(6);
 		this.setSoundType(SoundType.WOOD);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-		this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(AXIS, Axis.Y).withProperty(ExPBlockProperties.TREE_TYPES[this.logIndex], EnumTreeType.values()[this.logIndex * 5]));
 		GameRegistry.register(this);
 		GameRegistry.register(new ItemBlockWithMetadata(this));

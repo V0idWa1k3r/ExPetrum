@@ -26,6 +26,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import v0id.api.core.util.ItemBlockWithMetadata;
 import v0id.api.exp.block.property.EnumRockClass;
+import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.gravity.GravityHelper;
 import v0id.api.exp.gravity.IGravitySusceptible;
@@ -42,7 +43,7 @@ public class BlockStone extends Block implements IWeightProvider, IGravitySuscep
 		this.setSoundType(SoundType.STONE);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ROCK_CLASS, ANDESITE));
-		this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+		this.setCreativeTab(ExPCreativeTabs.tabUnderground);
 		GameRegistry.register(this);
 		GameRegistry.register(new ItemBlockWithMetadata(this));
 	}
@@ -103,12 +104,6 @@ public class BlockStone extends Block implements IWeightProvider, IGravitySuscep
 	public float getExplosionResistance(World world, BlockPos pos, Entity exploder, Explosion explosion)
 	{
 		return world.getBlockState(pos).getValue(ROCK_CLASS).getResistance();
-	}
-
-	@Override
-	public boolean isToolEffective(String type, IBlockState state)
-	{
-		return super.isToolEffective(type, state);
 	}
 
 	@Override

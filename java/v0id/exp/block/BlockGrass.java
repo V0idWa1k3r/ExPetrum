@@ -36,6 +36,7 @@ import v0id.api.exp.block.EnumGrassState;
 import v0id.api.exp.block.IGrass;
 import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.data.ExPBlocks;
+import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.gravity.GravityHelper;
@@ -60,7 +61,7 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 		this.setSoundType(SoundType.PLANT);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(DIRT_CLASS, ACRISOL));
-		this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
 		GameRegistry.register(this);
 		GameRegistry.register(new ItemBlockWithMetadata(this));
 	}
@@ -300,7 +301,7 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 			this.setSoundType(SoundType.PLANT);
 			this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 			this.setDefaultState(this.blockState.getBaseState().withProperty(DIRT_CLASS, ACRISOL));
-			this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+			this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
 			GameRegistry.register(this);
 			GameRegistry.register(new ItemBlockWithMetadata(this));
 		}
@@ -328,7 +329,7 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 			this.setSoundType(SoundType.PLANT);
 			this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 			this.setDefaultState(this.blockState.getBaseState().withProperty(DIRT_CLASS, ACRISOL));
-			this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+			this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
 			GameRegistry.register(this);
 			GameRegistry.register(new ItemBlockWithMetadata(this));
 		}

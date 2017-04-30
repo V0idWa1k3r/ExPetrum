@@ -22,10 +22,12 @@ import v0id.exp.registry.AbstractRegistry;
 import v0id.exp.registry.ExPBiomeRegistry;
 import v0id.exp.registry.ExPBlocksRegistry;
 import v0id.exp.registry.ExPCapabilityRegistry;
+import v0id.exp.registry.ExPCreativeTabsRegistry;
 import v0id.exp.registry.ExPEntityRegistry;
 import v0id.exp.registry.ExPEventRegistry;
 import v0id.exp.registry.ExPFluidRegistry;
 import v0id.exp.registry.ExPNetworkRegistry;
+import v0id.exp.registry.ExPTileRegistry;
 
 @Mod(modid = "exp", useMetadata = true)
 public class ExPetrum
@@ -61,10 +63,12 @@ public class ExPetrum
 		AbstractRegistry.create(ExPCapabilityRegistry.class);
 		AbstractRegistry.create(ExPBiomeRegistry.class);
 		AbstractRegistry.create(ExPFluidRegistry.class);
+		AbstractRegistry.create(ExPCreativeTabsRegistry.class);
 		AbstractRegistry.create(ExPBlocksRegistry.class);
 		AbstractRegistry.create(ExPEventRegistry.class);
 		AbstractRegistry.create(ExPNetworkRegistry.class);
 		AbstractRegistry.create(ExPEntityRegistry.class);
+		AbstractRegistry.create(ExPTileRegistry.class);
 		AbstractRegistry.registries.forEach(reg -> reg.preInit(evt));
 		VoidApi.proxy.executeOnClient("v0id.exp.client.ClientRegistry", "preInit", VoidApi.proxy.provideClientOnlyInstance("v0id.exp.client.ClientRegistry"), FMLPreInitializationEvent.class, evt);
 	}
