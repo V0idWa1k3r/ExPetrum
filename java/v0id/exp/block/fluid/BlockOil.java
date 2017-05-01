@@ -5,7 +5,6 @@ import java.util.Random;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -50,11 +49,5 @@ public class BlockOil extends BlockFluidFinite implements IInitializableBlock
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand)
 	{
 		super.updateTick(world, pos, state, rand);
-		tryFlowUp(world, pos, state);
-	}
-
-	public void tryFlowUp(World world, BlockPos pos, IBlockState state)
-	{
-		
 	}
 }

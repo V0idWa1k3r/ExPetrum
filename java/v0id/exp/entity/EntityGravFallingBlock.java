@@ -43,19 +43,22 @@ public class EntityGravFallingBlock extends EntityFallingBlock
 	@Override
 	public void onUpdate()
     {
-		Block block = this.blockState.getBlock();
-		if (block.isAssociatedBlock(Blocks.AIR) || this.blockState.getMaterial() == Material.AIR)
+		if (this.blockState != null)
 		{
-			this.setDead();
-			return;
-		}
-		
-		updateMovement();
-		checkFall();
-		if (!this.isDead)
-		{
-			List<EntityLivingBase> entities = this.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(this.posX - 0.5D, this.posY - 0.5D, this.posZ - 0.5D, this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D), e -> !this.collidedWith.contains(e));
-			entities.forEach(this::attackEntityByFall);
+			Block block = this.blockState.getBlock();
+			if (block.isAssociatedBlock(Blocks.AIR) || this.blockState.getMaterial() == Material.AIR)
+			{
+				this.setDead();
+				return;
+			}
+			
+			updateMovement();
+			checkFall();
+			if (!this.isDead)
+			{
+				List<EntityLivingBase> entities = this.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(this.posX - 0.5D, this.posY - 0.5D, this.posZ - 0.5D, this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D), e -> !this.collidedWith.contains(e));
+				entities.forEach(this::attackEntityByFall);
+			}
 		}
     }
 	

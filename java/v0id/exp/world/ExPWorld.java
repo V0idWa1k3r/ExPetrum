@@ -149,7 +149,9 @@ public class ExPWorld implements IExPWorld
 			tempRet *= 0.9F;
 		}
 		
-		return tempRet;
+		// Spring temperature ranges fall in the negatives but it would be too harsh to start the player in a winter right away
+		boolean firstSpring = c.getTime() < c.ticksPerDay * c.daysPerMonth * 3;
+		return firstSpring ? Math.max(1, tempRet) : tempRet;
 	}
 
 	@Override
@@ -340,12 +342,15 @@ public class ExPWorld implements IExPWorld
 		if (this.dayTemp_isDirty)
 		{
 			NBTTagList lst = new NBTTagList();
-			for (float f : this.dayTemp)
+			if (this.dayTemp != null)
 			{
-				lst.appendTag(new NBTTagFloat(f));
+				for (float f : this.dayTemp)
+				{
+					lst.appendTag(new NBTTagFloat(f));
+				}
+				
+				ret.setTag("dayTemp", lst);
 			}
-			
-			ret.setTag("dayTemp", lst);
 		}
 		
 		if (this.baseHumidity_isDirty)

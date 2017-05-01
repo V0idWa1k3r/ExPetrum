@@ -14,6 +14,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
@@ -52,6 +53,12 @@ public class BlockPebble extends Block implements IInitializableBlock
 		this.setCreativeTab(ExPCreativeTabs.tabUnderground);
 		GameRegistry.register(this);
 		GameRegistry.register(new ItemBlockWithMetadata(this));
+	}
+	
+	@Override
+	public PathNodeType getAiPathNodeType(IBlockState state, IBlockAccess world, BlockPos pos)
+	{
+		return PathNodeType.OPEN;
 	}
 
 	@Override

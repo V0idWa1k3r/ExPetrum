@@ -29,7 +29,7 @@ import v0id.exp.registry.ExPFluidRegistry;
 import v0id.exp.registry.ExPNetworkRegistry;
 import v0id.exp.registry.ExPTileRegistry;
 
-@Mod(modid = "exp", useMetadata = true)
+@Mod(modid = "exp", useMetadata = true, dependencies = "required-after:voidapi")
 public class ExPetrum
 {
 	@Mod.Instance("exp")
@@ -61,7 +61,6 @@ public class ExPetrum
 	public void preInit(FMLPreInitializationEvent evt)
 	{
 		AbstractRegistry.create(ExPCapabilityRegistry.class);
-		AbstractRegistry.create(ExPBiomeRegistry.class);
 		AbstractRegistry.create(ExPFluidRegistry.class);
 		AbstractRegistry.create(ExPCreativeTabsRegistry.class);
 		AbstractRegistry.create(ExPBlocksRegistry.class);
@@ -69,6 +68,7 @@ public class ExPetrum
 		AbstractRegistry.create(ExPNetworkRegistry.class);
 		AbstractRegistry.create(ExPEntityRegistry.class);
 		AbstractRegistry.create(ExPTileRegistry.class);
+		AbstractRegistry.create(ExPBiomeRegistry.class);
 		AbstractRegistry.registries.forEach(reg -> reg.preInit(evt));
 		VoidApi.proxy.executeOnClient("v0id.exp.client.ClientRegistry", "preInit", VoidApi.proxy.provideClientOnlyInstance("v0id.exp.client.ClientRegistry"), FMLPreInitializationEvent.class, evt);
 	}
