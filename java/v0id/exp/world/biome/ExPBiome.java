@@ -18,6 +18,8 @@ import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.world.EnumSeason;
 import v0id.api.exp.world.IBiome;
 import v0id.api.exp.world.IExPWorld;
+import v0id.exp.world.biome.impl.ExPOcean;
+import v0id.exp.world.biome.impl.ExPRiver;
 import v0id.exp.world.gen.GenerationHelper;
 
 public class ExPBiome extends Biome implements IBiome
@@ -79,7 +81,7 @@ public class ExPBiome extends Biome implements IBiome
 		IBlockState dirtBlock = ExPBlocks.soil.getDefaultState().withProperty(ExPBlockProperties.DIRT_CLASS, GenerationHelper.getDirtTypeAt(worldIn, new BlockPos(x, 0, z)));
 		IBlockState sandBlock = ExPBlocks.sand.getDefaultState().withProperty(ExPBlockProperties.ROCK_CLASS, GenerationHelper.getStoneTypeAt(worldIn, new BlockPos(x, 0, z)));
 		int translationIndex = 0;
-		while (dirtBlock.getValue(ExPBlockProperties.DIRT_CLASS) == EnumDirtClass.PEAT && this.humidityMultiplier <= 1)
+		while (dirtBlock.getValue(ExPBlockProperties.DIRT_CLASS) == EnumDirtClass.PEAT && (this.humidityMultiplier <= 1 || this instanceof ExPRiver || this instanceof ExPOcean))
 		{
 			dirtBlock = ExPBlocks.soil.getDefaultState().withProperty(ExPBlockProperties.DIRT_CLASS, GenerationHelper.getDirtTypeAt(worldIn, new BlockPos(x + (translationIndex++ * 10), 0, z)));
 		}
@@ -223,13 +225,13 @@ public class ExPBiome extends Biome implements IBiome
 	@Override
 	public float getTemperatureBaseModifier()
 	{
-		return this.getTemperatureBaseModifier();
+		return this.temperatureBaseModifier;
 	}
 
 	@Override
 	public float getHumidityBaseModifier()
 	{
-		return this.getHumidityBaseModifier();
+		return this.humidityBaseModifier;
 	}
 	
 	
