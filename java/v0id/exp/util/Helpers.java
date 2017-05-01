@@ -4,6 +4,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import v0id.api.core.VoidApi;
 import v0id.api.core.util.java.ColorHEX;
 import v0id.api.core.util.java.ColorHSV;
@@ -11,6 +12,7 @@ import v0id.api.exp.block.EnumGrassState;
 import v0id.api.exp.block.ICanGrowCrop;
 import v0id.api.exp.block.IGrass;
 import v0id.api.exp.block.ILeaves;
+import v0id.api.exp.world.IBiome;
 import v0id.api.exp.world.IExPWorld;
 
 public class Helpers
@@ -97,7 +99,14 @@ public class Helpers
 	
 	public static float getTemperatureAt(World w, BlockPos pos)
 	{
-		return IExPWorld.of(w).getOverhaulTemperature();
+		float tempBase = IExPWorld.of(w).getOverhaulTemperature();
+		Biome b = w.getBiome(pos);
+		if (b instanceof IBiome)
+		{
+			tempBase *= ((IBiome)b).getTemperatureMultiplier();
+			tempBase += ((IBiome)b).getTemperatureBaseModifier();
+		}
+		return tempBase;
 	}
 	
 	public static int getTemperatureIndex(float tempC)
