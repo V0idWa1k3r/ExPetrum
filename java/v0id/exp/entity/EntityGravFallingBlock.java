@@ -2,6 +2,7 @@ package v0id.exp.entity;
 
 import java.util.List;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 
 import net.minecraft.block.Block;
@@ -12,9 +13,14 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.init.Blocks;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import v0id.api.exp.gravity.IGravitySusceptible;
 
 public class EntityGravFallingBlock extends EntityFallingBlock
@@ -22,11 +28,30 @@ public class EntityGravFallingBlock extends EntityFallingBlock
 	public static final double COLLISION_Y_CONST = 0.009999999776482582D;
 	public IBlockState blockState;
 	public List<Entity> collidedWith = Lists.newArrayList();
+	public static final DataParameter<Optional<IBlockState>> FALLING_BLOCK_SYNC = EntityDataManager.createKey(EntityGravFallingBlock.class, DataSerializers.OPTIONAL_BLOCK_STATE);
 	
 	public EntityGravFallingBlock(World worldIn)
 	{
 		super(worldIn);
 	}
+	
+	@Override
+	protected void entityInit()
+    {
+		super.entityInit();
+        this.dataManager.register(FALLING_BLOCK_SYNC, Optional.absent());
+    }
+	
+	public void setFallingBlock(IBlockState state)
+    {
+        this.dataManager.set(FALLING_BLOCK_SYNC, state == null ? Optional.absent() : Optional.of(state));
+    }
+
+    @SideOnly(Side.CLIENT)
+    public IBlockState getFallingBlock()
+    {
+        return this.dataManager.get(FALLING_BLOCK_SYNC).orNull();
+    }
 	
 	public EntityGravFallingBlock(World worldIn, double x, double y, double z, IBlockState fallingBlockState)
 	{
@@ -43,6 +68,16 @@ public class EntityGravFallingBlock extends EntityFallingBlock
 	@Override
 	public void onUpdate()
     {
+		if (!this.world.isRemote)
+		{
+			this.setFallingBlock(this.blockState);
+		}
+		
+		if (this.world.isRemote)
+		{
+			this.blockState = this.getFallingBlock();
+		}
+		
 		if (this.blockState != null)
 		{
 			Block block = this.blockState.getBlock();
