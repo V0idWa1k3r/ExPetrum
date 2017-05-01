@@ -112,9 +112,11 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 		ModelLoader.setBucketModelDefinition(Item.getItemFromBlock(ExPBlocks.saltWater));
 		ModelLoader.setBucketModelDefinition(Item.getItemFromBlock(ExPBlocks.freshWater));
 		ModelLoader.setBucketModelDefinition(Item.getItemFromBlock(ExPBlocks.lava));
+		ModelLoader.setBucketModelDefinition(Item.getItemFromBlock(ExPBlocks.oil));
 		ModelLoader.setCustomStateMapper(ExPBlocks.saltWater, new StateMapperFluid(ExPBlocks.saltWater));
 		ModelLoader.setCustomStateMapper(ExPBlocks.freshWater, new StateMapperFluid(ExPBlocks.freshWater));
 		ModelLoader.setCustomStateMapper(ExPBlocks.lava, new StateMapperFluid(ExPBlocks.lava));
+		ModelLoader.setCustomStateMapper(ExPBlocks.oil, new StateMapperFluid(ExPBlocks.oil));
 		ModelLoader.setCustomStateMapper(ExPBlocks.cattail, new StateMapperCattail());
 		ModelLoaderRegistry.registerLoader(new ModelLoaderExP());
 	}

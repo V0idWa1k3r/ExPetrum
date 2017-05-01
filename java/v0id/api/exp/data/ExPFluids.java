@@ -7,4 +7,5 @@ public class ExPFluids
 	public static Fluid saltWater;
 	public static Fluid freshWater;
 	public static Fluid lava;
+	public static Fluid oil;
 }

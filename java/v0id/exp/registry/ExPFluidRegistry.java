@@ -40,8 +40,12 @@ public class ExPFluidRegistry extends AbstractRegistry
 		ExPFluids.lava = new Fluid(ExPRegistryNames.fluidLava, new ResourceLocation("exp", "blocks/fluid/lava_still"), new ResourceLocation("exp", "blocks/fluid/lava_flow"))
 				.setLuminosity(15).setDensity(3000).setViscosity(6000).setTemperature(1300).setUnlocalizedName(Blocks.LAVA.getUnlocalizedName());
 		
+		ExPFluids.oil = new Fluid(ExPRegistryNames.fluidOil, new ResourceLocation("exp", "blocks/fluid/oil_still"), new ResourceLocation("exp", "blocks/fluid/oil_flow"))
+				.setDensity(900).setViscosity(8000);
+		
 		FluidRegistry.registerFluid(ExPFluids.saltWater);
 		FluidRegistry.registerFluid(ExPFluids.freshWater);
 		FluidRegistry.registerFluid(ExPFluids.lava);
+		FluidRegistry.registerFluid(ExPFluids.oil);
 	}
 }

@@ -28,4 +28,5 @@ public class ExPBlocks
 	public static Block pebble;
 	public static Block boulder;
 	public static Block boulderOre;
+	public static Block oil;
 }

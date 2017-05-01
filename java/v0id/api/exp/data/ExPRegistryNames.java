@@ -30,7 +30,8 @@ public class ExPRegistryNames
 		blockOre																							= new ResourceLocation(modid, "ore"),
 		blockPebble																							= new ResourceLocation(modid, "pebble"),
 		blockBoulder																						= new ResourceLocation(modid, "boulder"),
-		blockBoulderOre																						= new ResourceLocation(modid, "boulder_ore");
+		blockBoulderOre																						= new ResourceLocation(modid, "boulder_ore"),
+		blockOil																							= new ResourceLocation(modid, "oil");
 
 	public static final ResourceLocation
 		entityGravFallingBlock																				= new ResourceLocation(modid, "gravFallingBlock"),
@@ -39,5 +40,6 @@ public class ExPRegistryNames
 	public static final String
 		fluidSaltWater																						= "exp.salt_water",
 		fluidFreshWater																						= "water",
-		fluidLava																							= "exp.lava";
+		fluidLava																							= "exp.lava",
+		fluidOil																							= "oil";
 }

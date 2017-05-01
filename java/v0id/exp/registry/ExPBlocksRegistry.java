@@ -17,6 +17,7 @@ import v0id.exp.block.BlockSoil;
 import v0id.exp.block.BlockStone;
 import v0id.exp.block.fluid.BlockFreshWater;
 import v0id.exp.block.fluid.BlockLava;
+import v0id.exp.block.fluid.BlockOil;
 import v0id.exp.block.fluid.BlockSaltWater;
 import v0id.exp.block.plant.BlockCattail;
 import v0id.exp.block.plant.BlockCoralPlant;
@@ -76,6 +77,7 @@ public class ExPBlocksRegistry extends AbstractRegistry
 		ExPBlocks.pebble = new BlockPebble();
 		ExPBlocks.boulder = new BlockBoulder();
 		ExPBlocks.boulderOre = new BlockBoulderOre();
+		ExPBlocks.oil = new BlockOil();
 	}
 
 	@Override
