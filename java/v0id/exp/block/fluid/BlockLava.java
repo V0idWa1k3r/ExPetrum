@@ -9,8 +9,9 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPFluids;
 import v0id.api.exp.data.ExPRegistryNames;
+import v0id.exp.block.IInitializableBlock;
 
-public class BlockLava extends BlockFluidFinite
+public class BlockLava extends BlockFluidFinite implements IInitializableBlock
 {
 	public BlockLava()
 	{
@@ -18,6 +19,7 @@ public class BlockLava extends BlockFluidFinite
 		this.initBlock();
 	}
 	
+	@Override
 	public void initBlock()
 	{
 		this.setBlockUnbreakable();

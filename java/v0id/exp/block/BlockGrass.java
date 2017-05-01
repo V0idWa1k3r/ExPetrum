@@ -44,7 +44,7 @@ import v0id.api.exp.gravity.IGravitySusceptible;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.util.Helpers;
 
-public class BlockGrass extends Block implements IWeightProvider, IGravitySusceptible, IGrass
+public class BlockGrass extends Block implements IWeightProvider, IGravitySusceptible, IGrass, IInitializableBlock
 {
 	public BlockGrass()
 	{
@@ -53,6 +53,7 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 		this.setTickRandomly(true);
 	}
 
+	@Override
 	public void initBlock()
 	{
 		this.setHardness(3.5f);

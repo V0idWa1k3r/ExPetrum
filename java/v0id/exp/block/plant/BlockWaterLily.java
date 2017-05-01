@@ -30,10 +30,11 @@ import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
+import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.item.ItemBlockWaterLily;
 import v0id.exp.util.Helpers;
 
-public class BlockWaterLily extends BlockBush implements IWeightProvider
+public class BlockWaterLily extends BlockBush implements IWeightProvider, IInitializableBlock
 {
 	protected static final AxisAlignedBB LILY_PAD_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 0.09375D, 0.9375D);
 	
@@ -43,6 +44,7 @@ public class BlockWaterLily extends BlockBush implements IWeightProvider
 		this.initBlock();
 	}
 
+	@Override
 	public void initBlock()
 	{
 		this.setHardness(0.5f);

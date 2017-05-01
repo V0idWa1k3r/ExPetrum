@@ -33,9 +33,10 @@ import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPRegistryNames;
+import v0id.exp.block.IInitializableBlock;
 import v0id.exp.util.Helpers;
 
-public class BlockVegetation extends BlockBush
+public class BlockVegetation extends BlockBush implements IInitializableBlock
 {
 	// Not exposed, for internal use only(rendering the model)
 	// You do NOT need these! They are purely for rendering! They are not even saved with the meta!
@@ -50,6 +51,7 @@ public class BlockVegetation extends BlockBush
 		this.initBlock();
 	}
 	
+	@Override
 	public void initBlock()
 	{
 		this.setHardness(0);

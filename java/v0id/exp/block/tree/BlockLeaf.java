@@ -35,9 +35,10 @@ import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
+import v0id.exp.block.IInitializableBlock;
 import v0id.exp.util.Helpers;
 
-public class BlockLeaf extends Block implements ILeaves, IWeightProvider
+public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IInitializableBlock
 {
 	// log and not leaf because this is the index of the log this leaf is a leaf of
 	// Sound confusing enough? (>w<)
@@ -50,6 +51,7 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider
 		this.initBlock();
 	}
 	
+	@Override
 	public void initBlock()
 	{
 		try

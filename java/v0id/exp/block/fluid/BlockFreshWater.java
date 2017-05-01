@@ -17,8 +17,9 @@ import v0id.api.exp.block.IWater;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPFluids;
 import v0id.api.exp.data.ExPRegistryNames;
+import v0id.exp.block.IInitializableBlock;
 
-public class BlockFreshWater extends BlockFluidFinite implements IWater
+public class BlockFreshWater extends BlockFluidFinite implements IWater, IInitializableBlock
 {
 	public BlockFreshWater()
 	{
@@ -26,6 +27,7 @@ public class BlockFreshWater extends BlockFluidFinite implements IWater
 		this.initBlock();
 	}
 	
+	@Override
 	public void initBlock()
 	{
 		this.setBlockUnbreakable();

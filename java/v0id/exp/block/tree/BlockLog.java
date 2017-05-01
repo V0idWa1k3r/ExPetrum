@@ -34,9 +34,10 @@ import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
+import v0id.exp.block.IInitializableBlock;
 import v0id.exp.entity.EntityFallingTree;
 
-public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILog
+public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILog, IInitializableBlock
 {
 	public int logIndex = 0;
 	
@@ -47,6 +48,7 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 		this.initBlock();
 	}
 	
+	@Override
 	public void initBlock()
 	{
 		try

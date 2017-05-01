@@ -26,8 +26,9 @@ import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
+import v0id.exp.block.IInitializableBlock;
 
-public class BlockCoralPlant extends Block implements IWeightProvider
+public class BlockCoralPlant extends Block implements IWeightProvider, IInitializableBlock
 {
 	public static PropertyInteger TEXTURE_INDEX_ROCK = PropertyInteger.create("rtindex", 0, 5);
 	public static PropertyInteger TEXTURE_INDEX_PLANT = PropertyInteger.create("ptindex", 0, 15);
@@ -38,6 +39,7 @@ public class BlockCoralPlant extends Block implements IWeightProvider
 		this.initBlock();
 	}
 
+	@Override
 	public void initBlock()
 	{
 		this.setHardness(1f);

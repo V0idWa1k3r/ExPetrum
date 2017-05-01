@@ -25,4 +25,7 @@ public class ExPBlocks
 	public static Block[] logsDeco;
 	public static Block[] leaves;
 	public static Block ore;
+	public static Block pebble;
+	public static Block boulder;
+	public static Block boulderOre;
 }

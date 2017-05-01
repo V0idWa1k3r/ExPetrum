@@ -30,9 +30,10 @@ import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
+import v0id.exp.block.IInitializableBlock;
 import v0id.exp.util.Helpers;
 
-public class BlockCattail extends Block implements IWeightProvider
+public class BlockCattail extends Block implements IWeightProvider, IInitializableBlock
 {
 	public BlockCattail()
 	{
@@ -40,6 +41,7 @@ public class BlockCattail extends Block implements IWeightProvider
 		this.initBlock();
 	}
 
+	@Override
 	public void initBlock()
 	{
 		this.setHardness(0.5f);

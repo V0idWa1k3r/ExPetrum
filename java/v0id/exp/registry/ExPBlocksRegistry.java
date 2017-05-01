@@ -6,9 +6,12 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
+import v0id.exp.block.BlockBoulder;
+import v0id.exp.block.BlockBoulderOre;
 import v0id.exp.block.BlockCoralRock;
 import v0id.exp.block.BlockGrass;
 import v0id.exp.block.BlockOre;
+import v0id.exp.block.BlockPebble;
 import v0id.exp.block.BlockSand;
 import v0id.exp.block.BlockSoil;
 import v0id.exp.block.BlockStone;
@@ -70,6 +73,9 @@ public class ExPBlocksRegistry extends AbstractRegistry
 		}
 		
 		ExPBlocks.ore = new BlockOre();
+		ExPBlocks.pebble = new BlockPebble();
+		ExPBlocks.boulder = new BlockBoulder();
+		ExPBlocks.boulderOre = new BlockBoulderOre();
 	}
 
 	@Override

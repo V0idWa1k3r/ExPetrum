@@ -31,8 +31,9 @@ import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
+import v0id.exp.block.IInitializableBlock;
 
-public class BlockSeaweed extends Block implements IWeightProvider
+public class BlockSeaweed extends Block implements IWeightProvider, IInitializableBlock
 {
 	public BlockSeaweed()
 	{
@@ -40,6 +41,7 @@ public class BlockSeaweed extends Block implements IWeightProvider
 		this.initBlock();
 	}
 
+	@Override
 	public void initBlock()
 	{
 		this.setHardness(1f);

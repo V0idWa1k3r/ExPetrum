@@ -34,20 +34,12 @@ import v0id.api.exp.gravity.GravityHelper;
 import v0id.api.exp.gravity.IGravitySusceptible;
 import v0id.api.exp.inventory.IWeightProvider;
 
-public class BlockSoil extends Block implements IWeightProvider, IGravitySusceptible, ICanGrowCrop
+public class BlockSoil extends Block implements IWeightProvider, IGravitySusceptible, ICanGrowCrop, IInitializableBlock
 {
 	public BlockSoil()
 	{
 		super(Material.GROUND);
-		this.setHardness(3.5f);
-		this.setRegistryName(ExPRegistryNames.blockSoil);
-		this.setResistance(3);
-		this.setSoundType(SoundType.GROUND);
-		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-		this.setDefaultState(this.blockState.getBaseState().withProperty(DIRT_CLASS, ACRISOL));
-		this.setCreativeTab(ExPCreativeTabs.tabCommon);
-		GameRegistry.register(this);
-		GameRegistry.register(new ItemBlockWithMetadata(this));
+		this.initBlock();
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -222,5 +214,19 @@ public class BlockSoil extends Block implements IWeightProvider, IGravitySuscept
 	{
 		EnumDirtClass type = EnumDirtClass.values()[this.getMetaFromState(w.getBlockState(pos))];
 		return type.getGrowthMultiplier() / 50;
+	}
+
+	@Override
+	public void initBlock()
+	{
+		this.setHardness(3.5f);
+		this.setRegistryName(ExPRegistryNames.blockSoil);
+		this.setResistance(3);
+		this.setSoundType(SoundType.GROUND);
+		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(DIRT_CLASS, ACRISOL));
+		this.setCreativeTab(ExPCreativeTabs.tabCommon);
+		GameRegistry.register(this);
+		GameRegistry.register(new ItemBlockWithMetadata(this));
 	}
 }

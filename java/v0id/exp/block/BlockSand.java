@@ -32,20 +32,12 @@ import v0id.api.exp.gravity.GravityHelper;
 import v0id.api.exp.gravity.IGravitySusceptible;
 import v0id.api.exp.inventory.IWeightProvider;
 
-public class BlockSand extends Block implements IWeightProvider, IGravitySusceptible
+public class BlockSand extends Block implements IWeightProvider, IGravitySusceptible, IInitializableBlock
 {
 	public BlockSand()
 	{
 		super(Material.SAND);
-		this.setHardness(2);
-		this.setRegistryName(ExPRegistryNames.blockSand);
-		this.setResistance(5);
-		this.setSoundType(SoundType.SAND);
-		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-		this.setDefaultState(this.blockState.getBaseState().withProperty(ROCK_CLASS, ANDESITE));
-		this.setCreativeTab(ExPCreativeTabs.tabCommon);
-		GameRegistry.register(this);
-		GameRegistry.register(new ItemBlockWithMetadata(this));
+		this.initBlock();
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -156,5 +148,19 @@ public class BlockSand extends Block implements IWeightProvider, IGravitySuscept
 	{
 		super.onBlockAdded(worldIn, pos, state);
 		this.onNeighborChange(worldIn, pos, pos);
+	}
+
+	@Override
+	public void initBlock()
+	{
+		this.setHardness(2);
+		this.setRegistryName(ExPRegistryNames.blockSand);
+		this.setResistance(5);
+		this.setSoundType(SoundType.SAND);
+		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(ROCK_CLASS, ANDESITE));
+		this.setCreativeTab(ExPCreativeTabs.tabCommon);
+		GameRegistry.register(this);
+		GameRegistry.register(new ItemBlockWithMetadata(this));
 	}
 }
