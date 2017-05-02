@@ -14,6 +14,7 @@ public class ExPMountains extends ExPBiome
 		super(properties, biomedata);
 		BiomeDictionary.addTypes(this, Type.MOUNTAIN);
 		this.theBiomeDecorator.treesPerChunk = 3;
+		this.theBiomeDecorator.grassPerChunk = 4;
 		this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.KALOPANAX));
 		this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.BIRCH));
 		this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.CHESTNUT));

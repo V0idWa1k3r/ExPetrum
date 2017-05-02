@@ -15,6 +15,7 @@ public class ExPHills extends ExPBiome
 		BiomeDictionary.addTypes(this, Type.HILLS);
 		this.theBiomeDecorator.treesPerChunk = 1;
         this.theBiomeDecorator.extraTreeChance = 0.05F;
+        this.theBiomeDecorator.grassPerChunk = 4;
         this.treesToGenerate.add(new TreeEntry(2, EnumTreeType.KALOPANAX));
         this.treesToGenerate.add(new TreeEntry(8, EnumTreeType.BIRCH));
         this.treesToGenerate.add(new TreeEntry(2, EnumTreeType.CHESTNUT));

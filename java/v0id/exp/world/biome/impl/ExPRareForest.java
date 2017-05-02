@@ -14,7 +14,7 @@ public class ExPRareForest extends ExPBiome
 		super(properties, biomedata);
 		BiomeDictionary.addTypes(this, Type.FOREST);
 		this.theBiomeDecorator.treesPerChunk = 4;
-        this.theBiomeDecorator.grassPerChunk = 1;
+        this.theBiomeDecorator.grassPerChunk = 8;
         this.treesToGenerate.add(new TreeEntry(5, EnumTreeType.KALOPANAX));
         this.treesToGenerate.add(new TreeEntry(3, EnumTreeType.BIRCH));
         this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.CHESTNUT));

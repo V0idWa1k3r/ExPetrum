@@ -15,6 +15,7 @@ public class ExPWarmPlains extends ExPBiome
 		BiomeDictionary.addTypes(this, Type.PLAINS, Type.HOT);
 		this.theBiomeDecorator.treesPerChunk = 1;
         this.theBiomeDecorator.extraTreeChance = 0.05F;
+        this.theBiomeDecorator.grassPerChunk = 8;
         this.treesToGenerate.add(new TreeEntry(5, EnumTreeType.KALOPANAX));
         this.treesToGenerate.add(new TreeEntry(8, EnumTreeType.ACACIA));
         this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.CHESTNUT));

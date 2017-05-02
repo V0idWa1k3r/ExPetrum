@@ -9,9 +9,6 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import v0id.api.exp.block.EnumTreeType;
-import v0id.api.exp.block.property.EnumWaterLilyType;
-import v0id.api.exp.block.property.ExPBlockProperties;
-import v0id.api.exp.data.ExPBlocks;
 import v0id.exp.world.biome.ExPBiome;
 import v0id.exp.world.gen.tree.TreeEntry;
 
@@ -22,6 +19,7 @@ public class ExPSwampland extends ExPBiome
 		super(properties, biomedata);
 		BiomeDictionary.addTypes(this, Type.SWAMP);
 		this.theBiomeDecorator.treesPerChunk = 3;
+		this.theBiomeDecorator.grassPerChunk = 3;
 		this.treesToGenerate.add(new TreeEntry(8, EnumTreeType.KALOPANAX));
 		this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.CHESTNUT));
 		this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.OAK));
@@ -53,12 +51,6 @@ public class ExPSwampland extends ExPBiome
                     if (k == 62 && chunkPrimerIn.getBlockState(j, k, i) != this.FRESH_WATER)
                     {
                         chunkPrimerIn.setBlockState(j, k, i, this.FRESH_WATER);
-
-                        if (d0 < 0.12D)
-                        {
-                        	EnumWaterLilyType lilyType = EnumWaterLilyType.values()[rand.nextInt(EnumWaterLilyType.values().length)];
-                            chunkPrimerIn.setBlockState(j, k + 1, i, ExPBlocks.waterLily.getDefaultState().withProperty(ExPBlockProperties.LILY_TYPE, lilyType));
-                        }
                     }
 
                     break;

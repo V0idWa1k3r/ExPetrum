@@ -15,6 +15,7 @@ public class ExPSavanna extends ExPBiome
 		BiomeDictionary.addTypes(this, Type.PLAINS, Type.HOT);
 		this.theBiomeDecorator.treesPerChunk = 1;
         this.theBiomeDecorator.extraTreeChance = 0.05F;
+        this.theBiomeDecorator.grassPerChunk = 8;
         this.treesToGenerate.add(new TreeEntry(2, EnumTreeType.KALOPANAX));
         this.treesToGenerate.add(new TreeEntry(60, EnumTreeType.ACACIA));
         this.treesToGenerate.add(new TreeEntry(2, EnumTreeType.CHESTNUT));

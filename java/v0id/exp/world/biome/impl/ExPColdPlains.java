@@ -15,6 +15,7 @@ public class ExPColdPlains extends ExPBiome
 		BiomeDictionary.addTypes(this, Type.PLAINS, Type.COLD);
 		this.theBiomeDecorator.treesPerChunk = 1;
         this.theBiomeDecorator.extraTreeChance = 0.05F;
+        this.theBiomeDecorator.grassPerChunk = 8;
         this.treesToGenerate.add(new TreeEntry(3, EnumTreeType.KALOPANAX));
         this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.BIRCH));
         this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.CHESTNUT));
