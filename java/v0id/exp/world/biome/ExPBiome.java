@@ -196,12 +196,12 @@ public class ExPBiome extends Biome implements IBiome
 				}
 				else
 				{
-					if (current.getBlock() == Blocks.WATER)
+					if (current.getBlock() == Blocks.WATER || current.getBlock() == Blocks.FLOWING_WATER)
 					{
 						chunkPrimerIn.setBlockState(px, y, pz, this.isWaterSalt() ? this.SALT_WATER : this.FRESH_WATER);
 					}
 					
-					if (current.getBlock() == Blocks.LAVA)
+					if (current.getBlock() == Blocks.LAVA || current.getBlock() == Blocks.FLOWING_LAVA)
 					{
 						chunkPrimerIn.setBlockState(px, y, pz, this.LAVA);
 					}
