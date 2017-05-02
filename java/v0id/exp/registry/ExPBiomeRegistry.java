@@ -3,7 +3,6 @@ package v0id.exp.registry;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import v0id.api.exp.data.ExPBiomes;
-import v0id.api.exp.data.ExPMisc;
 import v0id.exp.world.biome.impl.ExPBeach;
 import v0id.exp.world.biome.impl.ExPColdForest;
 import v0id.exp.world.biome.impl.ExPColdPlains;
@@ -23,7 +22,6 @@ import v0id.exp.world.biome.impl.ExPSavanna;
 import v0id.exp.world.biome.impl.ExPSwampland;
 import v0id.exp.world.biome.impl.ExPWarmForest;
 import v0id.exp.world.biome.impl.ExPWarmPlains;
-import v0id.exp.world.gen.WorldTypeExP;
 
 public class ExPBiomeRegistry extends AbstractRegistry
 {
@@ -56,7 +54,6 @@ public class ExPBiomeRegistry extends AbstractRegistry
 		ExPBiomes.rare_forest = ExPRareForest.create();
 		ExPBiomes.hills = ExPHills.create();
 		ExPBiomes.savanna = ExPSavanna.create();
-		ExPMisc.worldTypeExP = new WorldTypeExP("expworld");
 	}
 
 	@Override
