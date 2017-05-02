@@ -32,6 +32,7 @@ public class WorldWeatherRenderer extends IRenderHandler
 			return;
 		}
 		
+		GlStateManager.depthMask(true);
 		Vec3d offset = IExPWorld.of(world).getWindDirection();
 		offset = offset.scale(IExPWorld.of(world).getWindStrength() / 3);
 		float wStr = IExPWorld.of(world).getWindStrength();
@@ -88,9 +89,9 @@ public class WorldWeatherRenderer extends IRenderHandler
 		Tessellator.getInstance().draw();
 		vb.setTranslation(0, 0, 0);
 		GlStateManager.enableCull();
-		GlStateManager.enableCull();
         GlStateManager.disableBlend();
         GlStateManager.alphaFunc(516, 0.1F);
+        GlStateManager.depthMask(false);
 	}
 	
 	public static WorldWeatherRenderer getInstance()
