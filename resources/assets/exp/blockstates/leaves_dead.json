@@ -141,7 +141,7 @@
 			},
 			"jackwood" : {
 				"textures" : {
-					"#material" : "exp:blocks/wood/leaf/dead/jackwood"
+					"all" : "exp:blocks/wood/leaf/dead/jackwood"
 				}
 			},
 			"tsuga" : {
@@ -156,7 +156,7 @@
 			},
 			"koelreuteria" : {
 				"textures" : {
-					"#material" : "exp:blocks/wood/leaf/dead/koelreuteria"
+					"all" : "exp:blocks/wood/leaf/dead/koelreuteria"
 				}
 			}
 		}
