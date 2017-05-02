@@ -1,17 +1,23 @@
 package v0id.exp.world.biome;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.Random;
+
+import com.google.common.collect.Lists;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
@@ -21,6 +27,7 @@ import v0id.api.exp.world.IExPWorld;
 import v0id.exp.world.biome.impl.ExPOcean;
 import v0id.exp.world.biome.impl.ExPRiver;
 import v0id.exp.world.gen.GenerationHelper;
+import v0id.exp.world.gen.tree.TreeEntry;
 
 public class ExPBiome extends Biome implements IBiome
 {
@@ -34,6 +41,8 @@ public class ExPBiome extends Biome implements IBiome
 		SALT_WATER,
 		FRESH_WATER,
 		LAVA;
+	
+	public final List<TreeEntry> treesToGenerate = Lists.newArrayList();
 	
 	public ExPBiome(BiomeProperties properties, float... biomedata)
 	{
@@ -51,6 +60,17 @@ public class ExPBiome extends Biome implements IBiome
 		this.LAVA = ExPBlocks.lava.getStateFromMeta(9);
 		this.setRegistryName("exp", this.getBiomeName());
 		GameRegistry.register(this);
+	}
+	
+	public Optional<EnumTreeType> provideTreeToGenerate(Random rand)
+	{
+		if (this.treesToGenerate.isEmpty())
+		{
+			return Optional.empty();
+		}
+		
+		int weight = rand.nextInt(WeightedRandom.getTotalWeight(this.treesToGenerate));
+		return Optional.of(WeightedRandom.getRandomItem(this.treesToGenerate, weight).treeType);
 	}
 	
 	@Override
