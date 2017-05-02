@@ -18,7 +18,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.relauncher.Side;
+import v0id.api.core.logging.LogLevel;
 import v0id.api.core.util.MC;
+import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.player.ExPPlayerCapability;
 import v0id.api.exp.player.IExPPlayer;
 import v0id.api.exp.world.ExPWorldCapability;
@@ -41,6 +43,11 @@ public class ExPHandlerServer
 	@SubscribeEvent
 	public void onCapabilitiesWorld(AttachCapabilitiesEvent<World> evt)
 	{
+		if (!(evt.getObject().getWorldType() instanceof WorldTypeExP))
+		{
+			ExPMisc.modLogger.log(LogLevel.Debug, "The world initialized without ExPetrum world type! Have you forgot to set it in advanced world settings?");
+		}
+		
 		handleWorldSettings(evt.getObject());
 		evt.addCapability(ExPWorldCapability.KEY, this.createCapabilityProviderOfIExPWorld(evt.getObject()));
 	}

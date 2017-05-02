@@ -1,6 +1,7 @@
 package v0id.exp;
 
 import java.io.InputStream;
+import java.lang.reflect.Field;
 
 import org.apache.commons.io.IOUtils;
 
@@ -13,6 +14,7 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.relauncher.CoreModManager;
 import v0id.api.core.VoidApi;
 import v0id.api.core.logging.LogLevel;
 import v0id.api.core.logging.VoidLogger;
@@ -35,6 +37,7 @@ public class ExPetrum
 {
 	@Mod.Instance("exp")
 	public static ExPetrum instance;
+	public static boolean isDevEnvironment;
 	
 	static
 	{
@@ -61,6 +64,8 @@ public class ExPetrum
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt)
 	{
+		this.setDevEnvironment();
+		ExPMisc.modLogger.log(LogLevel.Debug, "ExPetrum pre initializing.");
 		AbstractRegistry.create(ExPCapabilityRegistry.class);
 		AbstractRegistry.create(ExPFluidRegistry.class);
 		AbstractRegistry.create(ExPCreativeTabsRegistry.class);
@@ -73,20 +78,50 @@ public class ExPetrum
 		AbstractRegistry.create(ExPWorldRegistry.class);
 		AbstractRegistry.registries.forEach(reg -> reg.preInit(evt));
 		VoidApi.proxy.executeOnClient("v0id.exp.client.ClientRegistry", "preInit", VoidApi.proxy.provideClientOnlyInstance("v0id.exp.client.ClientRegistry"), FMLPreInitializationEvent.class, evt);
+		ExPMisc.modLogger.log(LogLevel.Debug, "ExPetrum pre initialized.");
 	}
 	
 	@EventHandler
 	public void init(FMLInitializationEvent evt)
 	{
+		ExPMisc.modLogger.log(LogLevel.Debug, "ExPetrum initializing.");
 		AbstractRegistry.registries.forEach(reg -> reg.init(evt));
 		VoidApi.proxy.executeOnClient("v0id.exp.client.ClientRegistry", "init", VoidApi.proxy.provideClientOnlyInstance("v0id.exp.client.ClientRegistry"), FMLInitializationEvent.class, evt);
+		ExPMisc.modLogger.log(LogLevel.Debug, "ExPetrum initialized.");
 	}
 	
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent evt)
 	{
-		
+		ExPMisc.modLogger.log(LogLevel.Debug, "ExPetrum post initializing.");
 		AbstractRegistry.registries.forEach(reg -> reg.postInit(evt));
 		VoidApi.proxy.executeOnClient("v0id.exp.client.ClientRegistry", "postInit", VoidApi.proxy.provideClientOnlyInstance("v0id.exp.client.ClientRegistry"), FMLPostInitializationEvent.class, evt);
+		ExPMisc.modLogger.log(LogLevel.Debug, "ExPetrum post initialized.");
+	}
+	
+	public void setDevEnvironment()
+	{
+		try
+		{
+			Class<CoreModManager> clazz = CoreModManager.class;
+			Field f = clazz.getDeclaredField("deobfuscatedEnvironment");
+			boolean accessibilityFlag = f.isAccessible();
+			f.setAccessible(true);
+			isDevEnvironment = f.getBoolean(null);
+			f.setAccessible(accessibilityFlag);
+			if (isDevEnvironment)
+			{
+				ExPMisc.modLogger.log(LogLevel.Fine, "ExPetrum has detected dev environment! Additional debug features enabled!");
+				ExPMisc.modLogger.setLevel(LogLevel.Debug);
+			}
+			else
+			{
+				ExPMisc.modLogger.log(LogLevel.Fine, "ExPetrum has detected normal minecraft environment. No debug features enabled.");
+			}
+		}
+		catch (Exception ex)
+		{
+			ExPMisc.modLogger.log(LogLevel.Warning, "ExPetrum was unable to determine the environment it is located in! Assuming normal minecraft instance.");
+		}
 	}
 }
