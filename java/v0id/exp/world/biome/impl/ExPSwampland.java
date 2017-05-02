@@ -66,6 +66,6 @@ public class ExPSwampland extends ExPBiome
             }
         }
 
-        this.generateBiomeTerrain(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
+        super.genTerrainBlocks(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
     }
 }
