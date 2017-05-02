@@ -6,10 +6,12 @@ import net.minecraft.nbt.NBTTagFloat;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.Constants.NBT;
 import v0id.api.core.logging.LogLevel;
 import v0id.api.core.util.nbt.NBTList;
 import v0id.api.exp.data.ExPMisc;
+import v0id.api.exp.event.world.EventGenerateTemperatureTable;
 import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.EnumSeason;
 import v0id.api.exp.world.IExPWorld;
@@ -86,6 +88,10 @@ public class ExPWorld implements IExPWorld
 				this.dayTemp[b + 4] = seasonTomorrow.getTemperatureData().getTemperature(this.owner.rand, monthTomorrowPercentage, dayTomorrowPercentage, 0.25F * (b + 1));
 			}
 		}
+		
+		EventGenerateTemperatureTable egtt = new EventGenerateTemperatureTable(this, this.dayTemp);
+		MinecraftForge.EVENT_BUS.post(egtt);
+		this.dayTemp = egtt.data;
 		
 		this.dayTemp_isDirty = true;
 		this.serverIsDirty = true;
