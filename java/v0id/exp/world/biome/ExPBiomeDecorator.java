@@ -6,9 +6,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDecorator;
+import net.minecraftforge.common.MinecraftForge;
 import v0id.api.core.logging.LogLevel;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.data.ExPMisc;
+import v0id.api.exp.event.world.gen.EventGenTree;
 import v0id.api.exp.world.gen.ITreeGenerator;
 import v0id.api.exp.world.gen.TreeGenerators;
 
@@ -73,7 +75,12 @@ public class ExPBiomeDecorator extends BiomeDecorator
 			}
 			
 			ITreeGenerator treeGen = TreeGenerators.generators.get(type);
-			if (treeGen.generate(worldIn, random, at.up()))
+			EventGenTree treeEvent = new EventGenTree(worldIn, at, random, treeGen);
+			if (MinecraftForge.TERRAIN_GEN_BUS.post(treeEvent))
+			{
+				return;
+			}
+			else if (treeEvent.generator.generate(worldIn, random, at.up()))
 			{
 				return;
 			}
