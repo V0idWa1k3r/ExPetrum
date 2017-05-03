@@ -25,7 +25,6 @@ import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
-import net.minecraftforge.common.BiomeManager.BiomeType;
 import v0id.api.exp.data.ExPBiomes;
 
 public class WorldTypeExP extends WorldType
@@ -430,50 +429,29 @@ public class WorldTypeExP extends WorldType
 	public class GenLayerBiomeMod extends GenLayer
 	{
 		@SuppressWarnings("unchecked")
-	    private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry>[] biomes = new java.util.ArrayList[net.minecraftforge.common.BiomeManager.BiomeType.values().length];
+	    private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> biomes = Lists.newArrayList();
 	    private final ChunkProviderSettings settings;
 
 	    public GenLayerBiomeMod(long p_i45560_1_, GenLayer p_i45560_3_, WorldType p_i45560_4_, ChunkProviderSettings p_i45560_5_)
 	    {
 	        super(p_i45560_1_);
 	        this.parent = p_i45560_3_;
-
-	        for (net.minecraftforge.common.BiomeManager.BiomeType type : net.minecraftforge.common.BiomeManager.BiomeType.values())
-	        {
-	            int idx = type.ordinal();
-
-	            if (this.biomes[idx] == null) 
-	            	this.biomes[idx] = new java.util.ArrayList<net.minecraftforge.common.BiomeManager.BiomeEntry>();
-	            
-	            this.biomes[idx].add(new BiomeEntry(ExPBiomes.plains, 10));
-	            this.biomes[idx].add(new BiomeEntry(ExPBiomes.forest, 10));
-	            this.biomes[idx].add(new BiomeEntry(ExPBiomes.mountains, 10));
-	            this.biomes[idx].add(new BiomeEntry(ExPBiomes.dense_forest, 10));
-	            this.biomes[idx].add(new BiomeEntry(ExPBiomes.swampland, 10));
-	            this.biomes[idx].add(new BiomeEntry(ExPBiomes.rare_forest, 10));
-	            this.biomes[idx].add(new BiomeEntry(ExPBiomes.hills, 10));
-	            if (type == BiomeType.COOL || type == BiomeType.ICY)
-	            {
-	            	this.biomes[idx].add(new BiomeEntry(ExPBiomes.cold_forest, 30));
-	            	this.biomes[idx].add(new BiomeEntry(ExPBiomes.dense_cold_forest, 30));
-	            	this.biomes[idx].add(new BiomeEntry(ExPBiomes.cold_plains, 30));
-	            }
-	            
-	            if (type == BiomeType.DESERT)
-	            {
-	            	this.biomes[idx].add(new BiomeEntry(ExPBiomes.savanna, 30));
-	            	this.biomes[idx].add(new BiomeEntry(ExPBiomes.desert, 30));
-	            }
-	            
-	            if (type == BiomeType.WARM)
-	            {
-	            	this.biomes[idx].add(new BiomeEntry(ExPBiomes.warm_forest, 30));
-	            	this.biomes[idx].add(new BiomeEntry(ExPBiomes.warm_plains, 30));
-	            	this.biomes[idx].add(new BiomeEntry(ExPBiomes.dense_warm_forest, 30));
-	            	this.biomes[idx].add(new BiomeEntry(ExPBiomes.jungle, 30));
-	            }
-	        }
-	        
+	        this.biomes.add(new BiomeEntry(ExPBiomes.plains, 10));
+            this.biomes.add(new BiomeEntry(ExPBiomes.forest, 10));
+            this.biomes.add(new BiomeEntry(ExPBiomes.mountains, 10));
+            this.biomes.add(new BiomeEntry(ExPBiomes.dense_forest, 10));
+            this.biomes.add(new BiomeEntry(ExPBiomes.swampland, 10));
+            this.biomes.add(new BiomeEntry(ExPBiomes.rare_forest, 10));
+            this.biomes.add(new BiomeEntry(ExPBiomes.hills, 10));
+            this.biomes.add(new BiomeEntry(ExPBiomes.cold_forest, 10));
+        	this.biomes.add(new BiomeEntry(ExPBiomes.dense_cold_forest, 10));
+        	this.biomes.add(new BiomeEntry(ExPBiomes.cold_plains, 10));
+        	this.biomes.add(new BiomeEntry(ExPBiomes.savanna, 10));
+        	this.biomes.add(new BiomeEntry(ExPBiomes.desert, 10));
+        	this.biomes.add(new BiomeEntry(ExPBiomes.warm_forest, 10));
+        	this.biomes.add(new BiomeEntry(ExPBiomes.warm_plains, 10));
+        	this.biomes.add(new BiomeEntry(ExPBiomes.dense_warm_forest, 10));
+        	this.biomes.add(new BiomeEntry(ExPBiomes.jungle, 10));
 	        this.settings = p_i45560_5_;
 	    }
 
@@ -495,59 +473,13 @@ public class WorldTypeExP extends WorldType
 	                int k = aint[j + i * areaWidth];
 	                int l = (k & 3840) >> 8;
 	                k = k & -3841;
-
-	                if (this.settings != null && this.settings.fixedBiome >= 0)
-	                {
-	                    aint1[j + i * areaWidth] = this.settings.fixedBiome;
-	                }
-	                else if (isBiomeOceanic(k))
+	                if (isBiomeOceanic(k))
 	                {
 	                    aint1[j + i * areaWidth] = k;
 	                }
-	                else if (k == Biome.getIdForBiome(Biomes.MUSHROOM_ISLAND))
+	                else 
 	                {
-	                    aint1[j + i * areaWidth] = Biome.getIdForBiome(Biomes.PLAINS);
-	                }
-	                else if (k == 1)
-	                {
-	                    if (l > 0)
-	                    {
-	                    	aint1[j + i * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.WARM).biome);
-	                    }
-	                    else
-	                    {
-	                        aint1[j + i * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.DESERT).biome);
-	                    }
-	                }
-	                else if (k == 2)
-	                {
-	                    if (l > 0)
-	                    {
-	                    	aint1[j + i * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.COOL).biome);
-	                    }
-	                    else
-	                    {
-	                        aint1[j + i * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.WARM).biome);
-	                    }
-	                }
-	                else if (k == 3)
-	                {
-	                    if (l > 0)
-	                    {
-	                    	aint1[j + i * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.WARM).biome);
-	                    }
-	                    else
-	                    {
-	                        aint1[j + i * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.COOL).biome);
-	                    }
-	                }
-	                else if (k == 4)
-	                {
-	                    aint1[j + i * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.ICY).biome);
-	                }
-	                else
-	                {
-	                	aint1[j + i * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType.DESERT).biome);
+	                	aint1[j + i * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry().biome);
 	                }
 	            }
 	        }
@@ -555,12 +487,11 @@ public class WorldTypeExP extends WorldType
 	        return aint1;
 	    }
 
-	    protected net.minecraftforge.common.BiomeManager.BiomeEntry getWeightedBiomeEntry(net.minecraftforge.common.BiomeManager.BiomeType type)
+	    protected net.minecraftforge.common.BiomeManager.BiomeEntry getWeightedBiomeEntry()
 	    {
-	        java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> biomeList = this.biomes[type.ordinal()];
-	        int totalWeight = net.minecraft.util.WeightedRandom.getTotalWeight(biomeList);
-	        int weight = net.minecraftforge.common.BiomeManager.isTypeListModded(type)?nextInt(totalWeight):nextInt(totalWeight / 10) * 10;
-	        return (net.minecraftforge.common.BiomeManager.BiomeEntry)net.minecraft.util.WeightedRandom.getRandomItem(biomeList, weight);
+	        int totalWeight = net.minecraft.util.WeightedRandom.getTotalWeight(this.biomes);
+	        int weight = nextInt(totalWeight);
+	        return (net.minecraftforge.common.BiomeManager.BiomeEntry)net.minecraft.util.WeightedRandom.getRandomItem(this.biomes, weight);
 	    }
 	}
 }

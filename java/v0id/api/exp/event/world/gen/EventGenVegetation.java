@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.eventhandler.Cancelable;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
 /**
- * Fired when ExPetrum tries to generate a tree in the world. <br>
+ * Fired when ExPetrum tries to generate tallgrass in the world. <br>
  * This event is fired at MinecraftForge.TERRAIN_GEN_BUS. <br>
  * This event is cancelable.
  * @author V0idWa1k3r
@@ -21,12 +21,12 @@ import net.minecraftforge.fml.common.eventhandler.Event;
 public class EventGenVegetation extends Event
 {
 	/**
-	 * World the tree is generated in
+	 * World the tallgrass is generated in
 	 */
 	public final World world;
 	
 	/**
-	 * Position in the world the tree is generating at
+	 * Position in the world the tallgrass is generating at
 	 */
 	public final BlockPos pos;
 	

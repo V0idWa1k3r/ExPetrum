@@ -18,14 +18,11 @@ import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import v0id.api.exp.block.EnumTreeType;
-import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.world.EnumSeason;
 import v0id.api.exp.world.IBiome;
 import v0id.api.exp.world.IExPWorld;
-import v0id.exp.world.biome.impl.ExPOcean;
-import v0id.exp.world.biome.impl.ExPRiver;
 import v0id.exp.world.gen.GenerationHelper;
 import v0id.exp.world.gen.tree.TreeEntry;
 
@@ -100,12 +97,6 @@ public class ExPBiome extends Biome implements IBiome
 		IBlockState stoneBlock = ExPBlocks.rock.getDefaultState().withProperty(ExPBlockProperties.ROCK_CLASS, GenerationHelper.getStoneTypeAt(worldIn, new BlockPos(x, 0, z)));
 		IBlockState dirtBlock = ExPBlocks.soil.getDefaultState().withProperty(ExPBlockProperties.DIRT_CLASS, GenerationHelper.getDirtTypeAt(worldIn, new BlockPos(x, 0, z)));
 		IBlockState sandBlock = ExPBlocks.sand.getDefaultState().withProperty(ExPBlockProperties.ROCK_CLASS, GenerationHelper.getStoneTypeAt(worldIn, new BlockPos(x, 0, z)));
-		int translationIndex = 0;
-		while (dirtBlock.getValue(ExPBlockProperties.DIRT_CLASS) == EnumDirtClass.PEAT && (this.humidityMultiplier <= 1 || this instanceof ExPRiver || this instanceof ExPOcean))
-		{
-			dirtBlock = ExPBlocks.soil.getDefaultState().withProperty(ExPBlockProperties.DIRT_CLASS, GenerationHelper.getDirtTypeAt(worldIn, new BlockPos(x + (translationIndex++ * 10), 0, z)));
-		}
-		
 		EnumSeason season = IExPWorld.of(worldIn).getCurrentSeason();
 		Block b = season == EnumSeason.WINTER ? ExPBlocks.grass_dead : season == EnumSeason.AUTUMN ? ExPBlocks.grass_dry : ExPBlocks.grass;
 		IBlockState grassBlock = b.getDefaultState().withProperty(ExPBlockProperties.DIRT_CLASS, dirtBlock.getValue(ExPBlockProperties.DIRT_CLASS));
