@@ -1,5 +1,8 @@
 package v0id.api.exp.block;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.util.math.BlockPos;
@@ -11,6 +14,8 @@ import v0id.api.core.VoidApi;
 public interface ILeaves
 {
 	public static final int LEAVES_CHECK_RADIUS = 4;
+	
+	public static final ExecutorService pool = Executors.newCachedThreadPool();
 	
 	// of == blockstate to compare to
 	// state = this state
@@ -28,17 +33,6 @@ public interface ILeaves
 	// Really more for convenience as this is not directly referenced anywhere
 	boolean isEvergreen(IBlockAccess access, IBlockState state, BlockPos pos);
 	
-	// Note that you do NOT need to use these if ou do not like to deal with threads. It just makes checks not on the server's tick thread which can save lots of milliseconds if your check is expensive.
-	// For the default 9x9x9(729 blocks) it might be not necessary at all.
-	// You want to use this if your checks take more than ~70us(nanoseconds) as that is the relative time required to create a new thread.
-	// Measure nanoseconds with System.nanoTime or timersto see if it is more efficient.
-	// Or create your own implementation which uses thread pools(preinitialized threads) which would 100% be worth it for ANY checks.
-	// Google it!
-	// Well... I am not entirely sure if what I've said is true at all :(
-	// Since jvm1.6(java 6) it seems that jvm recycles threads that have previously finished their work
-	// That means that in theory any new thread is kinda? in a thread pool already?
-	// This WILL vary from jvm to jvm though for sure
-	// Not sure what any of the above means? Google it!
 	default void onWoodConnectionCheckFinished(World w, IBlockState state, BlockPos pos, boolean result)
 	{
 		if (!result)
@@ -47,12 +41,11 @@ public interface ILeaves
 		}
 	}
 	
+	// Note that you do NOT need to use these if you do not like to deal with threads. It just makes checks not on the server's tick thread which can save lots of milliseconds if your check is expensive.
+		// For the default 9x9x9(729 blocks) it might be not necessary at all.
 	default void checkWoodConnectionMultiThreaded(final World w, final IBlockState state, final BlockPos pos)
 	{
-		Thread t = new Thread(() -> checkIsAttached(w, pos, this, state));
-		t.setDaemon(true);
-		t.setPriority(Thread.MIN_PRIORITY);
-		t.start();
+		pool.submit(() -> checkIsAttached(w, pos, this, state));
 	}
 	
 	public static void checkIsAttached(World w, BlockPos origin, ILeaves leaf, IBlockState leafState)
