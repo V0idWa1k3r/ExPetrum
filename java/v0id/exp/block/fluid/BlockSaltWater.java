@@ -62,7 +62,7 @@ public class BlockSaltWater extends BlockFluidFinite implements IWater, IInitial
             changed = true;
             if (quantaRemaining == 1)
             {
-                world.setBlockState(pos, state.withProperty(LEVEL, quantaRemaining - 1), 3);
+                world.setBlockState(pos, state.withProperty(LEVEL, quantaRemaining - 1), 2);
                 return;
             }
         }
@@ -94,7 +94,7 @@ public class BlockSaltWater extends BlockFluidFinite implements IWater, IInitial
         {
             if (changed)
             {
-                world.setBlockState(pos, state.withProperty(LEVEL, quantaRemaining - 1), 3);
+                world.setBlockState(pos, state.withProperty(LEVEL, quantaRemaining - 1), 2);
             }
             return;
         }
@@ -123,7 +123,7 @@ public class BlockSaltWater extends BlockFluidFinite implements IWater, IInitial
                     }
                     else
                     {
-                        world.setBlockState(off, getDefaultState().withProperty(LEVEL, newQuanta - 1), 3);
+                        world.setBlockState(off, getDefaultState().withProperty(LEVEL, newQuanta - 1), 2);
                     }
                     world.scheduleUpdate(off, this, this.tickRate);
                 }
@@ -155,13 +155,13 @@ public class BlockSaltWater extends BlockFluidFinite implements IWater, IInitial
             amt += amtToInput;
             if (amt > this.quantaPerBlock)
             {
-                world.setBlockState(other, myState.withProperty(LEVEL, this.quantaPerBlock - 1), 3);
+                world.setBlockState(other, myState.withProperty(LEVEL, this.quantaPerBlock - 1), 2);
                 world.scheduleUpdate(other, this, this.tickRate);
                 return amt - this.quantaPerBlock;
             }
             else if (amt > 0)
             {
-                world.setBlockState(other, myState.withProperty(LEVEL, amt - 1), 3);
+                world.setBlockState(other, myState.withProperty(LEVEL, amt - 1), 2);
                 world.scheduleUpdate(other, this, this.tickRate);
                 world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
                 return 0;
@@ -175,7 +175,7 @@ public class BlockSaltWater extends BlockFluidFinite implements IWater, IInitial
             {
                 if (displaceIfPossible(world, other))
                 {
-                    world.setBlockState(other, myState.withProperty(LEVEL, amtToInput - 1), 3);
+                    world.setBlockState(other, myState.withProperty(LEVEL, amtToInput - 1), 2);
                     world.scheduleUpdate(other, this, this.tickRate);
                     world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);
                     return 0;
@@ -191,8 +191,8 @@ public class BlockSaltWater extends BlockFluidFinite implements IWater, IInitial
                 if (density_other < this.density) // then swap
                 {
                     IBlockState state = world.getBlockState(other);
-                    world.setBlockState(other, myState.withProperty(LEVEL, amtToInput - 1), 3);
-                    world.setBlockState(pos,   state, 3);
+                    world.setBlockState(other, myState.withProperty(LEVEL, amtToInput - 1), 2);
+                    world.setBlockState(pos,   state, 2);
                     world.scheduleUpdate(other, this, this.tickRate);
                     world.scheduleUpdate(pos,   state.getBlock(), state.getBlock().tickRate(world));
                     return 0;

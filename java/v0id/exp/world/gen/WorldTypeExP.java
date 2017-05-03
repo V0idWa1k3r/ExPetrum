@@ -170,6 +170,7 @@ public class WorldTypeExP extends WorldType
 	    /** A list of biomes that the player can spawn in. */
 	    private final List<Biome> biomesToSpawnIn;
 	    public static List<Biome> allowedBiomes = Lists.newArrayList();
+	    public FeatureProvider featureProvider;
 	    
 	    protected BiomeProviderExP()
 	    {
@@ -207,6 +208,7 @@ public class WorldTypeExP extends WorldType
 	        agenlayer = getModdedBiomeGenerators(worldTypeIn, seed, agenlayer);
 	        this.genBiomes = agenlayer[0];
 	        this.biomeIndexLayer = agenlayer[1];
+	        this.featureProvider = new FeatureProvider(seed);
 	    }
 
 	    public BiomeProviderExP(WorldInfo info)
@@ -222,7 +224,7 @@ public class WorldTypeExP extends WorldType
 
 	    public Biome swapHackBiome(Biome b)
 	    {
-	    	return b == Biomes.RIVER ? ExPBiomes.river : b == Biomes.OCEAN ? ExPBiomes.ocean : b == Biomes.BEACH ? ExPBiomes.beach : b == Biomes.PLAINS ? ExPBiomes.plains : b == Biomes.FOREST_HILLS ? ExPBiomes.hills : b == Biomes.JUNGLE || b == Biomes.JUNGLE_EDGE || b == Biomes.JUNGLE_HILLS ? ExPBiomes.jungle : b;
+	    	return b == Biomes.RIVER || b == Biomes.FROZEN_RIVER ? ExPBiomes.river : b == Biomes.OCEAN || b == Biomes.DEEP_OCEAN || b == Biomes.FROZEN_OCEAN ? ExPBiomes.ocean : b == Biomes.BEACH ? ExPBiomes.beach : b == Biomes.PLAINS ? ExPBiomes.plains : b == Biomes.FOREST_HILLS ? ExPBiomes.hills : b == Biomes.JUNGLE || b == Biomes.JUNGLE_EDGE || b == Biomes.JUNGLE_HILLS ? ExPBiomes.jungle : b;
 	    }
 	    
 	    @Override
@@ -329,40 +331,7 @@ public class WorldTypeExP extends WorldType
 	    @Override
 		public boolean areBiomesViable(int x, int z, int radius, List<Biome> allowed)
 	    {
-	        IntCache.resetIntCache();
-	        int i = x - radius >> 2;
-	        int j = z - radius >> 2;
-	        int k = x + radius >> 2;
-	        int l = z + radius >> 2;
-	        int i1 = k - i + 1;
-	        int j1 = l - j + 1;
-	        int[] aint = this.genBiomes.getInts(i, j, i1, j1);
-
-	        try
-	        {
-	            for (int k1 = 0; k1 < i1 * j1; ++k1)
-	            {
-	                Biome biome = Biome.getBiome(aint[k1]);
-
-	                if (!allowed.contains(biome))
-	                {
-	                    return false;
-	                }
-	            }
-
-	            return true;
-	        }
-	        catch (Throwable throwable)
-	        {
-	            CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Invalid Biome id");
-	            CrashReportCategory crashreportcategory = crashreport.makeCategory("Layer");
-	            crashreportcategory.addCrashSection("Layer", this.genBiomes.toString());
-	            crashreportcategory.addCrashSection("x", Integer.valueOf(x));
-	            crashreportcategory.addCrashSection("z", Integer.valueOf(z));
-	            crashreportcategory.addCrashSection("radius", Integer.valueOf(radius));
-	            crashreportcategory.addCrashSection("allowed", allowed);
-	            throw new ReportedException(crashreport);
-	        }
+	        return false;
 	    }
 
 	    @Override
@@ -403,6 +372,7 @@ public class WorldTypeExP extends WorldType
 		public void cleanupCache()
 	    {
 	        this.biomeCache.cleanupCache();
+	        this.featureProvider.cleanupCaches();
 	    }
 
 	    @Override
@@ -416,13 +386,13 @@ public class WorldTypeExP extends WorldType
 	    @Override
 		public boolean isFixedBiome()
 	    {
-	        return this.settings != null && this.settings.fixedBiome >= 0;
+	        return false;
 	    }
 
 	    @Override
 		public Biome getFixedBiome()
 	    {
-	        return this.settings != null && this.settings.fixedBiome >= 0 ? Biome.getBiomeForId(this.settings.fixedBiome) : null;
+	        return null;
 	    }
 	}
 	
@@ -447,11 +417,11 @@ public class WorldTypeExP extends WorldType
         	this.biomes.add(new BiomeEntry(ExPBiomes.dense_cold_forest, 10));
         	this.biomes.add(new BiomeEntry(ExPBiomes.cold_plains, 10));
         	this.biomes.add(new BiomeEntry(ExPBiomes.savanna, 10));
-        	this.biomes.add(new BiomeEntry(ExPBiomes.desert, 10));
         	this.biomes.add(new BiomeEntry(ExPBiomes.warm_forest, 10));
         	this.biomes.add(new BiomeEntry(ExPBiomes.warm_plains, 10));
         	this.biomes.add(new BiomeEntry(ExPBiomes.dense_warm_forest, 10));
         	this.biomes.add(new BiomeEntry(ExPBiomes.jungle, 10));
+	        this.biomes.add(new BiomeEntry(ExPBiomes.desert, 10));
 	        this.settings = p_i45560_5_;
 	    }
 
@@ -471,7 +441,6 @@ public class WorldTypeExP extends WorldType
 	            {
 	                this.initChunkSeed((long)(j + areaX), (long)(i + areaY));
 	                int k = aint[j + i * areaWidth];
-	                int l = (k & 3840) >> 8;
 	                k = k & -3841;
 	                if (isBiomeOceanic(k))
 	                {
