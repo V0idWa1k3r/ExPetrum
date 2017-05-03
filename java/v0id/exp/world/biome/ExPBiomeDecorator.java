@@ -11,11 +11,13 @@ import net.minecraftforge.common.MinecraftForge;
 import v0id.api.core.logging.LogLevel;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.data.ExPMisc;
+import v0id.api.exp.event.world.gen.EventGenBoulder;
 import v0id.api.exp.event.world.gen.EventGenPebble;
 import v0id.api.exp.event.world.gen.EventGenTree;
 import v0id.api.exp.event.world.gen.EventGenVegetation;
 import v0id.api.exp.world.gen.ITreeGenerator;
 import v0id.api.exp.world.gen.TreeGenerators;
+import v0id.exp.world.gen.biome.BoulderGenerator;
 import v0id.exp.world.gen.biome.PebbleGenerator;
 import v0id.exp.world.gen.biome.VegetationGenerator;
 
@@ -24,6 +26,7 @@ public class ExPBiomeDecorator extends BiomeDecorator
 	public static boolean printedWarnings;
 	public static final VegetationGenerator genVegetation = new VegetationGenerator();
 	public static final PebbleGenerator genPebble = new PebbleGenerator();
+	public static final BoulderGenerator genBoulders = new BoulderGenerator();
 	
 	@Override
 	public void decorate(World worldIn, Random random, Biome biome, BlockPos pos)
@@ -36,6 +39,7 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		this.doTreePass(worldIn, random, biome, pos);
 		this.doVegetationPass(worldIn, random, biome, pos);
 		this.doPebblePass(worldIn, random, biome, pos);
+		this.doBoulderPass(worldIn, random, biome, pos);
     }
 
 	private static void printWarnings()
@@ -64,6 +68,11 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		this.pebblePassGenerate(worldIn, rand, biome, pos);
 	}
 	
+	public void doBoulderPass(World worldIn, Random rand, Biome biome, BlockPos pos)
+	{
+		this.boulderPassGenerate(worldIn, rand, biome, pos);
+	}
+	
 	public void pebblePassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)
 	{
 		int x = rand.nextInt(16) + 8;
@@ -71,6 +80,21 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		BlockPos at = worldIn.getHeight(pos.add(x, 0, z));
 		WorldGenerator gen = genPebble;
 		EventGenPebble event = new EventGenPebble(worldIn, at, rand, gen);
+		if (MinecraftForge.TERRAIN_GEN_BUS.post(event))
+		{
+			return;
+		}
+		
+		event.generator.generate(worldIn, rand, at);
+	}
+	
+	public void boulderPassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)
+	{
+		int x = rand.nextInt(16) + 8;
+		int z = rand.nextInt(16) + 8;
+		BlockPos at = worldIn.getHeight(pos.add(x, 0, z));
+		WorldGenerator gen = genBoulders;
+		EventGenBoulder event = new EventGenBoulder(worldIn, at, rand, gen);
 		if (MinecraftForge.TERRAIN_GEN_BUS.post(event))
 		{
 			return;
