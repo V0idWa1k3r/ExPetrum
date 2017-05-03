@@ -25,12 +25,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import v0id.api.core.util.ItemBlockWithMetadata;
+import v0id.api.exp.block.IOreHintReplaceable;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPRegistryNames;
 
-public class BlockPebble extends Block implements IInitializableBlock
+public class BlockPebble extends Block implements IInitializableBlock, IOreHintReplaceable
 {
 	public static final PropertyInteger MODEL_INDEX = PropertyInteger.create("amdl", 0, 3);
 	public static final AxisAlignedBB PEBBLE_AABB = new AxisAlignedBB(0, 0, 0, 1, 0.1, 1);

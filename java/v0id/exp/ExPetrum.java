@@ -2,6 +2,7 @@ package v0id.exp;
 
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.util.stream.Stream;
 
 import org.apache.commons.io.IOUtils;
 
@@ -18,6 +19,7 @@ import net.minecraftforge.fml.relauncher.CoreModManager;
 import v0id.api.core.VoidApi;
 import v0id.api.core.logging.LogLevel;
 import v0id.api.core.logging.VoidLogger;
+import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.world.YearlyTemperatureRange;
 import v0id.exp.registry.AbstractRegistry;
@@ -59,6 +61,7 @@ public class ExPetrum
 		}
 		
 		ExPMisc.modLogger = VoidLogger.createLogger(ExPetrum.class, LogLevel.Fine);
+		Stream.of(EnumOre.values()).forEach(EnumOre::registerWorldgen);
 	}
 	
 	@EventHandler

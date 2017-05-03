@@ -1,108 +1,114 @@
 package v0id.api.exp.block;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
 import net.minecraft.util.IStringSerializable;
+import v0id.api.exp.event.world.gen.OreEntry;
 
 public enum EnumOre implements IStringSerializable
 {
 	// Silver
-	ACANTHITE("Ag2S", 0, 0x8c8a7e),	
+	ACANTHITE("Ag2S", 0, 0x8c8a7e, 10),	
 	
 	// Barium
-	BARITE("BaSO4", 1, 0xdfad94),	
+	BARITE("BaSO4", 1, 0xdfad94, 8),	
 	
 	// Aluminum
-	BAUXITE("Al(OH)3", 2, 0x5c2425),			
+	BAUXITE("Al(OH)3", 2, 0x5c2425, 20),			
 	
 	// Gemstones. Has subtypes in the ore
-	BERYL("Be3Al2(SiO3)6", 0, -1),		
+	BERYL("Be3Al2(SiO3)6", 0, -1, 10),		
 	
 	// Copper
-	BORNITE("Cu5FeS4", 1, 0x6c6d43),		
+	BORNITE("Cu5FeS4", 1, 0x6c6d43, 20),		
 	
 	// Tin
-	CASSITERITE("SnO2", 0, 0x222222),		
+	CASSITERITE("SnO2", 0, 0x222222, 50),		
 	
 	// Copper
-	CHALCOCITE("Cu2S", 0, 0x0f0f0f),		
+	CHALCOCITE("Cu2S", 0, 0x0f0f0f, 30),		
 	
 	// Copper
-	CHALCOPYRITE("CuFeS2", 0, 0xdce329),		
+	CHALCOPYRITE("CuFeS2", 0, 0xdce329, 10),		
 	
 	// Chromium
-	CHROMITE("FeCr2O4", 1, 0xe4e7d2),	
+	CHROMITE("FeCr2O4", 1, 0xe4e7d2, 8),	
 	
 	// Mercury
-	CINNABAR("HgS", 1, 0xe30000),			
+	CINNABAR("HgS", 1, 0xe30000, 10),			
 	
 	// Cobalt
-	COBALTITE("CoAsS", 1, 0xa3856b),			
+	COBALTITE("CoAsS", 1, 0xa3856b, 6),			
 	
 	// Tantalum
-	COLTAN("FeTa2O6", 0, 0xf1b249),			
+	COLTAN("FeTa2O6", 0, 0xf1b249, 6),			
 	
 	// Magnesium
-	DOLOMITE("CaMg(CO3)2", 1, 0xe6d7c0),		
+	DOLOMITE("CaMg(CO3)2", 1, 0xe6d7c0, 10),		
 	
 	// Lead
-	GALENA("PbS", 1, 0x202739),		
+	GALENA("PbS", 1, 0x202739, 20),		
 	
 	// Gold
-	GOLD("Au", 1, 0xdab950),			
+	GOLD("Au", 1, 0xdab950, 10),			
 	
 	// Iron
-	HEMATITE("Fe2O3", 0, 0xa4584a),			
+	HEMATITE("Fe2O3", 0, 0xa4584a, 30),			
 	
 	// Titanium
-	ILMENITE("FeTiO3", 1, 0x644530),	
+	ILMENITE("FeTiO3", 1, 0x644530, 6),	
 	
 	// Iron
-	MAGNETITE("Fe3O4", 0, 0x422329),		
+	MAGNETITE("Fe3O4", 0, 0x422329, 20),		
 	
 	// Copper
-	MALACHITE("Cu2CO3(OH)2", 0, 0x05a67a), 	
+	MALACHITE("Cu2CO3(OH)2", 0, 0x05a67a, 20), 	
 	
 	// Molybdenum
-	MOLYBDENITE("MoS2", 1, 0x58677c),		
+	MOLYBDENITE("MoS2", 1, 0x58677c, 10),		
 	
 	// Nickel + Iron
-	PENTLANDITE("(FeNi)9S8", 1, 0x696e48),	
+	PENTLANDITE("(FeNi)9S8", 1, 0x696e48, 10),	
 	
 	// Manganese
-	PYROLUSITE("MnO2", 1, 0x180023),			
+	PYROLUSITE("MnO2", 1, 0x180023, 15),			
 	
 	// Tungsten
-	SCHEELITE("CaWO4", 0, 0x916002),			
+	SCHEELITE("CaWO4", 0, 0x916002, 10),			
 	
 	// Platinum
-	SPERRYLITE("PtAs2", 0, 0x4c4239),		
+	SPERRYLITE("PtAs2", 0, 0x4c4239, 10),		
 	
 	// Zinc
-	SPHALERITE("ZnS", 0, 0x190a0d),			
+	SPHALERITE("ZnS", 0, 0x190a0d, 15),			
 	
 	// Uranium
-	URANINITE("UO2", 1, 0x000000),			
+	URANINITE("UO2", 1, 0x000000, 10),			
 	
 	// Tungsten
-	WOLFRAMITE("FeWO4", 1, 0x64661b),
+	WOLFRAMITE("FeWO4", 1, 0x64661b, 10),
 	
 	// Coal
-	LIGNITE("C", 0, 0x2c0d01),
+	LIGNITE("C", 0, 0x2c0d01, 30),
 	
 	// Coal
-	BITUMINOUS_COAL("C", 1, 0x555555),
+	BITUMINOUS_COAL("C", 1, 0x555555, 10),
 	
 	// Still coal, but this one can be used for steel!
-	ANTHRACITE("C", 1, 0x83644e),
+	ANTHRACITE("C", 1, 0x83644e, 3),
 	
 	// Still coa... Nah, kidding! It's graphite!
 	// Though technically it IS coal
-	GRAPHITE("C", 0, 0x3a2b20);
+	GRAPHITE("C", 0, 0x3a2b20, 10);
 	
-	EnumOre(String s, int i, int j)
+	EnumOre(String s, int i, int j, int w)
 	{
 		this.formula = s;
 		this.textureIndex = i;
 		this.color = j;
+		this.weight = w;
 	}
 	
 	// TBD
@@ -116,6 +122,11 @@ public enum EnumOre implements IStringSerializable
 	private final int textureIndex;
 	
 	private final int color;
+	
+	private final int weight;
+	
+	// If you are adding new ores add them to this list manualy
+	public static final List<OreEntry> worldgenEntries = Lists.newArrayList();
 
 	@Override
 	public String getName()
@@ -136,5 +147,10 @@ public enum EnumOre implements IStringSerializable
 	public String getFormula()
 	{
 		return this.formula;
+	}
+	
+	public static void registerWorldgen(EnumOre ore)
+	{
+		worldgenEntries.add(new OreEntry(ore, ore.weight));
 	}
 }
