@@ -16,11 +16,15 @@ import v0id.api.exp.event.world.gen.EventGenOre;
 import v0id.api.exp.event.world.gen.EventGenPebble;
 import v0id.api.exp.event.world.gen.EventGenTree;
 import v0id.api.exp.event.world.gen.EventGenVegetation;
+import v0id.api.exp.event.world.gen.EventGenVegetation.Type;
+import v0id.api.exp.world.IBiome;
 import v0id.api.exp.world.gen.ITreeGenerator;
 import v0id.api.exp.world.gen.TreeGenerators;
 import v0id.exp.world.gen.biome.BoulderGenerator;
+import v0id.exp.world.gen.biome.CattailGenerator;
 import v0id.exp.world.gen.biome.OreGenerator;
 import v0id.exp.world.gen.biome.PebbleGenerator;
+import v0id.exp.world.gen.biome.SeaweedGenerator;
 import v0id.exp.world.gen.biome.VegetationGenerator;
 
 public class ExPBiomeDecorator extends BiomeDecorator
@@ -29,6 +33,8 @@ public class ExPBiomeDecorator extends BiomeDecorator
 	public static final VegetationGenerator genVegetation = new VegetationGenerator();
 	public static final PebbleGenerator genPebble = new PebbleGenerator();
 	public static final BoulderGenerator genBoulders = new BoulderGenerator();
+	public static final CattailGenerator genCattails = new CattailGenerator();
+	public static final SeaweedGenerator genSeaweed = new SeaweedGenerator();
 	
 	@Override
 	public void decorate(World worldIn, Random random, Biome biome, BlockPos pos)
@@ -62,8 +68,11 @@ public class ExPBiomeDecorator extends BiomeDecorator
 	{
 		for (int i = 0; i < this.grassPerChunk; ++i)
 		{
-			this.vegetationPassGenerate(worldIn, rand, biome, pos);
+			this.tallgrassPassGenerate(worldIn, rand, biome, pos);
 		}
+		
+		this.cattailPassGenerate(worldIn, rand, biome, pos);
+		this.seaweedPassGenerate(worldIn, rand, biome, pos);
 	}
 	
 	public void doPebblePass(World worldIn, Random rand, Biome biome, BlockPos pos)
@@ -82,6 +91,46 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		{
 			this.orePassGenerate(worldIn, rand, biome, pos);
 		}
+	}
+	
+	public void cattailPassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)
+	{
+		if (!(biome instanceof IBiome) || ((IBiome)biome).isWaterSalt())
+		{
+			return;
+		}
+		
+		int x = rand.nextInt(16) + 8;
+		int z = rand.nextInt(16) + 8;
+		BlockPos at = worldIn.getHeight(pos.add(x, 0, z));
+		WorldGenerator vegetationGen = genCattails;
+		EventGenVegetation event = new EventGenVegetation(worldIn, at, rand, vegetationGen, Type.CATTAIL);
+		if (MinecraftForge.TERRAIN_GEN_BUS.post(event))
+		{
+			return;
+		}
+		
+		event.generator.generate(worldIn, rand, at);
+	}
+	
+	public void seaweedPassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)
+	{
+		if (!(biome instanceof IBiome) || !((IBiome)biome).isWaterSalt())
+		{
+			return;
+		}
+		
+		int x = rand.nextInt(16) + 8;
+		int z = rand.nextInt(16) + 8;
+		BlockPos at = worldIn.getHeight(pos.add(x, 0, z));
+		WorldGenerator vegetationGen = genSeaweed;
+		EventGenVegetation event = new EventGenVegetation(worldIn, at, rand, vegetationGen, Type.SEAWEED);
+		if (MinecraftForge.TERRAIN_GEN_BUS.post(event))
+		{
+			return;
+		}
+		
+		event.generator.generate(worldIn, rand, at);
 	}
 	
 	public void orePassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)
@@ -130,13 +179,13 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		event.generator.generate(worldIn, rand, at);
 	}
 	
-	public void vegetationPassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)
+	public void tallgrassPassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)
 	{
 		int x = rand.nextInt(16) + 8;
 		int z = rand.nextInt(16) + 8;
 		BlockPos at = worldIn.getHeight(pos.add(x, 0, z));
 		WorldGenerator vegetationGen = genVegetation;
-		EventGenVegetation event = new EventGenVegetation(worldIn, at, rand, vegetationGen);
+		EventGenVegetation event = new EventGenVegetation(worldIn, at, rand, vegetationGen, Type.TALLGRASS);
 		if (MinecraftForge.TERRAIN_GEN_BUS.post(event))
 		{
 			return;

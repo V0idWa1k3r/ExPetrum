@@ -43,11 +43,28 @@ public class EventGenVegetation extends Event
 	@Nonnull
 	public WorldGenerator generator;
 	
-	public EventGenVegetation(World w, BlockPos pos, Random rand, WorldGenerator generator)
+	/**
+	 * The type of the generation
+	 */
+	public final Type generationType;
+	
+	public EventGenVegetation(World w, BlockPos pos, Random rand, WorldGenerator generator, Type t)
 	{
 		this.world = w;
 		this.pos = pos;
 		this.rand = rand;
 		this.generator = generator;
+		this.generationType = t;
+	}
+	
+	public static enum Type
+	{
+		TALLGRASS,
+		FLOWER,
+		CATTAIL,
+		SEAWEED,
+		BUSH,
+		TALL_PLANT,
+		OTHER
 	}
 }
