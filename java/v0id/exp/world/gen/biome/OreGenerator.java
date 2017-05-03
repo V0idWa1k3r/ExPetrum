@@ -76,7 +76,7 @@ public class OreGenerator extends WorldGenerator
 				continue;
 			}
 			
-			Vec3d orePtr = new Vec3d(rand.nextDouble(), 0, rand.nextDouble());
+			Vec3d orePtr = new Vec3d(rand.nextDouble() - rand.nextDouble(), 0, rand.nextDouble() - rand.nextDouble());
 			orePtr = orePtr.scale(rand.nextDouble() * 8);
 			BlockPos orePos = new BlockPos(position.getX() + orePtr.xCoord, yLevel, position.getZ() + orePtr.zCoord);
 			if (generatedAt.contains(orePos))
