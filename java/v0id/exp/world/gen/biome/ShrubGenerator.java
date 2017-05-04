@@ -52,11 +52,13 @@ public class ShrubGenerator extends WorldGenerator
 							worldIn.setBlockState(at.up().up(), toSet, 2);
 						}
 					}
+					
+					return true;
 				}
 			}
 		}
 		
-		return true;
+		return false;
 	}
 
 }
