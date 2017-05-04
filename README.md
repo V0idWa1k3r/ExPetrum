@@ -8,3 +8,8 @@ However most of those 'steps' the player makes should not feel frustrating to th
 The world itself should also feel completely different from regular minecraft experience. In vanilla you are the king of the world, doing whatever you want. ExPetrum moves you to the position where that is no longer possible before you are geared up, so it feels like the player is slowly conquering the world and terraforming it to their needs.
 
 While realism is the main goal and it is enforced maybe even too maniacal the base idea still stands - it must be an interesting experience, not the frustrating one.
+
+_ _ _
+
+A new day rises...
+![](https://github.com/V0idWa1k3r/ExPetrum/blob/master/randomdevscreenies/2017-05-04_04.39.55.png)
