@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraft.world.gen.ChunkProviderOverworld;
 import net.minecraft.world.gen.ChunkProviderServer;
 import net.minecraft.world.gen.ChunkProviderSettings;
@@ -26,6 +27,7 @@ import v0id.api.exp.player.IExPPlayer;
 import v0id.api.exp.world.ExPWorldCapability;
 import v0id.api.exp.world.IExPWorld;
 import v0id.exp.player.ExPPlayer;
+import v0id.exp.util.WeatherUtils;
 import v0id.exp.world.ExPWorld;
 import v0id.exp.world.gen.WorldTypeExP;
 
@@ -37,6 +39,10 @@ public class ExPHandlerServer
 		if (evt.world.hasCapability(ExPWorldCapability.worldCap, null) && evt.phase == Phase.END && evt.world.provider.getDimension() == 0)
 		{
 			IExPWorld.of(evt.world).onTick();
+			if (evt.world.isRaining() && evt.world instanceof WorldServer)
+			{
+				WeatherUtils.handleServerTick((WorldServer) evt.world);
+			}
 		}
 	}
 	

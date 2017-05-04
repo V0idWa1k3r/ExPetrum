@@ -9,6 +9,7 @@ import v0id.api.core.VoidApi;
 import v0id.exp.client.render.hud.PlayerHUDRenderer;
 import v0id.exp.client.render.sky.WorldSkyRenderer;
 import v0id.exp.client.render.sky.WorldWeatherRenderer;
+import v0id.exp.util.WeatherUtils;
 
 public class ExPHandlerClient
 {
@@ -32,10 +33,18 @@ public class ExPHandlerClient
 	@SubscribeEvent
 	public void onClientTick(TickEvent.ClientTickEvent event)
 	{
-		if (VoidApi.proxy.getClientWorld() != null && VoidApi.proxy.getClientWorld().provider != null && VoidApi.proxy.getClientWorld().provider.getDimension() == 0 && !(VoidApi.proxy.getClientWorld().provider.getSkyRenderer() instanceof WorldSkyRenderer))
+		if (VoidApi.proxy.getClientWorld() != null && VoidApi.proxy.getClientWorld().provider != null && VoidApi.proxy.getClientWorld().provider.getDimension() == 0)
 		{
-			VoidApi.proxy.getClientWorld().provider.setSkyRenderer(WorldSkyRenderer.getInstance());
-			VoidApi.proxy.getClientWorld().provider.setWeatherRenderer(WorldWeatherRenderer.getInstance());
+			if (!(VoidApi.proxy.getClientWorld().provider.getSkyRenderer() instanceof WorldSkyRenderer))
+			{
+				VoidApi.proxy.getClientWorld().provider.setSkyRenderer(WorldSkyRenderer.getInstance());
+				VoidApi.proxy.getClientWorld().provider.setWeatherRenderer(WorldWeatherRenderer.getInstance());
+			}
+			
+			if (VoidApi.proxy.getClientWorld().isRaining())
+			{
+				WeatherUtils.handleClientTick(VoidApi.proxy.getClientPlayer());
+			}
 		}
 	}
 	
