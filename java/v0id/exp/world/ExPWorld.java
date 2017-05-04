@@ -214,6 +214,7 @@ public class ExPWorld implements IExPWorld
 		}
 		
 		long time = this.owner.getWorldTime();
+		long prevTime = time % 24000;
 		long ticksSkipped = 0;
 		if (time > this.persistentTicks)
 		{
@@ -228,6 +229,11 @@ public class ExPWorld implements IExPWorld
 		if (ticksSkipped >= 24000)
 		{
 			ExPMisc.modLogger.log(LogLevel.Warning, "%d ticks were skipped by the world! This can cause issues.", ticksSkipped);
+		}
+		
+		if (ticksSkipped >= 24000 || prevTime > this.persistentTicks % 24000)
+		{
+			this.createDayData();
 		}
 		
 		this.rainTicksRemaining -= 1 + ticksSkipped;
@@ -261,7 +267,7 @@ public class ExPWorld implements IExPWorld
 		{
 			// Need this block as the client for some mysterious reason does not receive temperature correctly upon the initial sync packet
 			// FIXME fix client not receiving correct dayTemperature data!
-			boolean shouldSyncBrokenData = this.persistentTicks % 200 == 0;;
+			boolean shouldSyncBrokenData = this.persistentTicks % 200 == 0;
 			this.dayTemp_isDirty |= shouldSyncBrokenData;
 			this.windDirection_isDirty |= this.windStrength_isDirty |= this.dayTemp_isDirty;
 			this.serverIsDirty |= this.dayTemp_isDirty;
@@ -269,7 +275,7 @@ public class ExPWorld implements IExPWorld
 			
 			if (this.rainTicksRemaining <= 0)
 			{
-				this.accumulatedHumidity += this.getWorld().rand.nextFloat() / 12000;
+				this.accumulatedHumidity += this.getWorld().rand.nextFloat() / 24000;
 				this.accumulatedHumidity_isDirty = this.persistentTicks % 100 == 0;
 				this.serverIsDirty |= this.accumulatedHumidity_isDirty;
 			}
