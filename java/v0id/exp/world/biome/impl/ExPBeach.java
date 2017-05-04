@@ -17,6 +17,7 @@ public class ExPBeach extends ExPBiome
 		this.fillerBlock = Blocks.SAND.getDefaultState();
 		BiomeDictionary.addTypes(this, Type.BEACH);
 		this.theBiomeDecorator.treesPerChunk = 3;
+		this.theBiomeDecorator.deadBushPerChunk = 0;
 		this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.PALM));
 	}
 	

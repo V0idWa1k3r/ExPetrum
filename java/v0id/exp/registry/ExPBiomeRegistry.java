@@ -19,7 +19,7 @@ import v0id.exp.world.biome.impl.ExPPlains;
 import v0id.exp.world.biome.impl.ExPRareForest;
 import v0id.exp.world.biome.impl.ExPRiver;
 import v0id.exp.world.biome.impl.ExPSavanna;
-import v0id.exp.world.biome.impl.ExPSwampland;
+import v0id.exp.world.biome.impl.ExPLake;
 import v0id.exp.world.biome.impl.ExPWarmForest;
 import v0id.exp.world.biome.impl.ExPWarmPlains;
 
@@ -48,7 +48,7 @@ public class ExPBiomeRegistry extends AbstractRegistry
 		ExPBiomes.dense_forest = ExPDenseForest.create();
 		ExPBiomes.dense_cold_forest = ExPDenseColdForest.create();
 		ExPBiomes.dense_warm_forest = ExPDenseWarmForest.create();
-		ExPBiomes.swampland = ExPSwampland.create();
+		ExPBiomes.swampland = ExPLake.create();
 		ExPBiomes.jungle = ExPJungle.create();
 		ExPBiomes.desert = ExPDesert.create();
 		ExPBiomes.rare_forest = ExPRareForest.create();

@@ -3,8 +3,10 @@ package v0id.exp.world.biome.impl;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.exp.world.biome.ExPBiome;
+import v0id.exp.world.gen.ShrubEntry;
 import v0id.exp.world.gen.tree.TreeEntry;
 
 public class ExPRareForest extends ExPBiome
@@ -15,6 +17,7 @@ public class ExPRareForest extends ExPBiome
 		BiomeDictionary.addTypes(this, Type.FOREST);
 		this.theBiomeDecorator.treesPerChunk = 4;
         this.theBiomeDecorator.grassPerChunk = 8;
+        this.theBiomeDecorator.deadBushPerChunk = 4;
         this.treesToGenerate.add(new TreeEntry(5, EnumTreeType.KALOPANAX));
         this.treesToGenerate.add(new TreeEntry(3, EnumTreeType.BIRCH));
         this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.CHESTNUT));
@@ -27,6 +30,11 @@ public class ExPRareForest extends ExPBiome
         this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.ELM));
         this.treesToGenerate.add(new TreeEntry(2, EnumTreeType.ASPEN));
         this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.KOELREUTERIA));
+        this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.CERCIS_CANADENSIS));
+        this.shrubsToGenerate.add(new ShrubEntry(1, EnumShrubType.CHAMAEROPS));
+        this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.EUONYMUS));
+        this.shrubsToGenerate.add(new ShrubEntry(2, EnumShrubType.KAPUKA));
+        this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.LAURUS_NOBILIS));
 	}
 
 	public static ExPRareForest create()

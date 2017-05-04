@@ -3,8 +3,10 @@ package v0id.exp.world.biome.impl;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.exp.world.biome.ExPBiome;
+import v0id.exp.world.gen.ShrubEntry;
 import v0id.exp.world.gen.tree.TreeEntry;
 
 public class ExPWarmPlains extends ExPBiome
@@ -16,6 +18,7 @@ public class ExPWarmPlains extends ExPBiome
 		this.theBiomeDecorator.treesPerChunk = 1;
         this.theBiomeDecorator.extraTreeChance = 0.05F;
         this.theBiomeDecorator.grassPerChunk = 8;
+        this.theBiomeDecorator.deadBushPerChunk = 4;
         this.treesToGenerate.add(new TreeEntry(5, EnumTreeType.KALOPANAX));
         this.treesToGenerate.add(new TreeEntry(8, EnumTreeType.ACACIA));
         this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.CHESTNUT));
@@ -29,6 +32,13 @@ public class ExPWarmPlains extends ExPBiome
         this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.PARROTIA));
         this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.SWEETGUM));
         this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.JACKWOOD));
+        this.shrubsToGenerate.add(new ShrubEntry(5, EnumShrubType.SPOTTED_LAUREL));
+        this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.CORNUS_KOUSA));
+        this.shrubsToGenerate.add(new ShrubEntry(3, EnumShrubType.EUONYMUS));
+        this.shrubsToGenerate.add(new ShrubEntry(3, EnumShrubType.EUONYMUS_JAPONICUS));
+        this.shrubsToGenerate.add(new ShrubEntry(1, EnumShrubType.ILEX));
+        this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.LAURUS_NOBILIS));
+        this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.MAHONIA_X_MEDIA));
 	}
 	
 	public static ExPWarmPlains create()

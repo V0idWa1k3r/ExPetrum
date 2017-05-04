@@ -17,6 +17,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
@@ -24,6 +25,7 @@ import v0id.api.exp.world.EnumSeason;
 import v0id.api.exp.world.IBiome;
 import v0id.api.exp.world.IExPWorld;
 import v0id.exp.world.gen.GenerationHelper;
+import v0id.exp.world.gen.ShrubEntry;
 import v0id.exp.world.gen.tree.TreeEntry;
 
 public class ExPBiome extends Biome implements IBiome
@@ -40,6 +42,7 @@ public class ExPBiome extends Biome implements IBiome
 		LAVA;
 	
 	public final List<TreeEntry> treesToGenerate = Lists.newArrayList();
+	public final List<ShrubEntry> shrubsToGenerate = Lists.newArrayList();
 	
 	public ExPBiome(BiomeProperties properties, float... biomedata)
 	{
@@ -68,6 +71,17 @@ public class ExPBiome extends Biome implements IBiome
 		
 		int weight = rand.nextInt(WeightedRandom.getTotalWeight(this.treesToGenerate));
 		return Optional.of(WeightedRandom.getRandomItem(this.treesToGenerate, weight).treeType);
+	}
+	
+	public Optional<EnumShrubType> provideShrubToGenerate(Random rand)
+	{
+		if (this.shrubsToGenerate.isEmpty())
+		{
+			return Optional.empty();
+		}
+		
+		int weight = rand.nextInt(WeightedRandom.getTotalWeight(this.shrubsToGenerate));
+		return Optional.of(WeightedRandom.getRandomItem(this.shrubsToGenerate, weight).getShrubType());
 	}
 	
 	@Override

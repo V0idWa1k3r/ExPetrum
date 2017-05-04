@@ -9,6 +9,8 @@ import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.MinecraftForge;
 import v0id.api.core.logging.LogLevel;
+import v0id.api.exp.block.EnumShrubState;
+import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.event.world.gen.EventGenBoulder;
@@ -17,7 +19,9 @@ import v0id.api.exp.event.world.gen.EventGenPebble;
 import v0id.api.exp.event.world.gen.EventGenTree;
 import v0id.api.exp.event.world.gen.EventGenVegetation;
 import v0id.api.exp.event.world.gen.EventGenVegetation.Type;
+import v0id.api.exp.world.EnumSeason;
 import v0id.api.exp.world.IBiome;
+import v0id.api.exp.world.IExPWorld;
 import v0id.api.exp.world.gen.ITreeGenerator;
 import v0id.api.exp.world.gen.TreeGenerators;
 import v0id.exp.world.gen.biome.BoulderGenerator;
@@ -25,6 +29,7 @@ import v0id.exp.world.gen.biome.CattailGenerator;
 import v0id.exp.world.gen.biome.OreGenerator;
 import v0id.exp.world.gen.biome.PebbleGenerator;
 import v0id.exp.world.gen.biome.SeaweedGenerator;
+import v0id.exp.world.gen.biome.ShrubGenerator;
 import v0id.exp.world.gen.biome.VegetationGenerator;
 
 public class ExPBiomeDecorator extends BiomeDecorator
@@ -46,6 +51,7 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		
 		this.doTreePass(worldIn, random, biome, pos);
 		this.doVegetationPass(worldIn, random, biome, pos);
+		this.doShrubsPass(worldIn, random, biome, pos);
 		this.doPebblePass(worldIn, random, biome, pos);
 		this.doBoulderPass(worldIn, random, biome, pos);
 		this.doOrePass(worldIn, random, biome, pos);
@@ -62,6 +68,14 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		ExPMisc.modLogger.log(LogLevel.Fine, "However that should not be the issue for the most part as chunk runaway should happen rarely");
 		ExPMisc.modLogger.log(LogLevel.Fine, "Thanks for reading this. Have a nice day :)");
 		printedWarnings = true;
+	}
+	
+	public void doShrubsPass(World worldIn, Random rand, Biome biome, BlockPos pos)
+	{
+		for (int i = 0; i < this.deadBushPerChunk; ++i)
+		{
+			this.shrubsPassGenerate(worldIn, rand, biome, pos);
+		}
 	}
 	
 	public void doVegetationPass(World worldIn, Random rand, Biome biome, BlockPos pos)
@@ -91,6 +105,34 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		{
 			this.orePassGenerate(worldIn, rand, biome, pos);
 		}
+	}
+	
+	public void shrubsPassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)
+	{
+		if (!(biome instanceof ExPBiome))
+		{
+			return;
+		}
+		
+		int x = rand.nextInt(16) + 8;
+		int z = rand.nextInt(16) + 8;
+		BlockPos at = worldIn.getHeight(pos.add(x, 0, z));
+		EnumShrubType typeToGenerate = ((ExPBiome)biome).provideShrubToGenerate(rand).orElse(null);
+		if (typeToGenerate == null)
+		{
+			return;
+		}
+		
+		EnumSeason currentSeason = IExPWorld.of(worldIn).getCurrentSeason();
+		EnumShrubState stateToGenerate = currentSeason == EnumSeason.WINTER ? EnumShrubState.DEAD : currentSeason == EnumSeason.AUTUMN ? EnumShrubState.AUTUMN : EnumShrubState.NORMAL;
+		WorldGenerator shrubsGen = new ShrubGenerator(typeToGenerate, stateToGenerate);
+		EventGenVegetation event = new EventGenVegetation(worldIn, at, rand, shrubsGen, Type.BUSH);
+		if (MinecraftForge.TERRAIN_GEN_BUS.post(event))
+		{
+			return;
+		}
+		
+		event.generator.generate(worldIn, rand, at);
 	}
 	
 	public void cattailPassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)

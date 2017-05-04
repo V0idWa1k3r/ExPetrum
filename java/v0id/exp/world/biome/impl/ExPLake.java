@@ -8,18 +8,21 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.exp.world.biome.ExPBiome;
+import v0id.exp.world.gen.ShrubEntry;
 import v0id.exp.world.gen.tree.TreeEntry;
 
-public class ExPSwampland extends ExPBiome
+public class ExPLake extends ExPBiome
 {
-	public ExPSwampland(BiomeProperties properties, float... biomedata)
+	public ExPLake(BiomeProperties properties, float... biomedata)
 	{
 		super(properties, biomedata);
 		BiomeDictionary.addTypes(this, Type.SWAMP);
 		this.theBiomeDecorator.treesPerChunk = 3;
 		this.theBiomeDecorator.grassPerChunk = 3;
+		this.theBiomeDecorator.deadBushPerChunk = 6;
 		this.treesToGenerate.add(new TreeEntry(8, EnumTreeType.KALOPANAX));
 		this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.CHESTNUT));
 		this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.OAK));
@@ -27,11 +30,17 @@ public class ExPSwampland extends ExPBiome
 		this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.WILLOW));
 		this.treesToGenerate.add(new TreeEntry(3, EnumTreeType.MANGROVE));
 		this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.JACKWOOD));
+		this.shrubsToGenerate.add(new ShrubEntry(20, EnumShrubType.SPOTTED_LAUREL));
+		this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.CERCIS_CANADENSIS));
+		this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.CORNUS_KOUSA));
+		this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.EUONYMUS_JAPONICUS));
+		this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.LAURUS_NOBILIS));
+		this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.RED_ROBIN));
 	}
 	
-	public static ExPSwampland create()
+	public static ExPLake create()
 	{
-		return new ExPSwampland(new Biome.BiomeProperties("swampland").setBaseHeight(-0.2F).setHeightVariation(0.1F), 1.5F, 1.1F, -1F, 0.1F);
+		return new ExPLake(new Biome.BiomeProperties("lake").setBaseHeight(-0.2F).setHeightVariation(0.1F), 1.5F, 1.1F, -1F, 0.1F);
 	}
 	
 	@Override

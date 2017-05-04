@@ -15,6 +15,7 @@ public class ExPDesert extends ExPBiome
 		super(properties, biomedata);
 		BiomeDictionary.addTypes(this, Type.PLAINS);
 		this.theBiomeDecorator.treesPerChunk = 1;
+		this.theBiomeDecorator.deadBushPerChunk = 0;
 		this.topBlock = Blocks.SAND.getDefaultState();
         this.fillerBlock = Blocks.SAND.getDefaultState();
         this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.ACACIA));

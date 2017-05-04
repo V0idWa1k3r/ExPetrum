@@ -10,6 +10,7 @@ public class ExPOcean extends ExPBiome
 	public ExPOcean(BiomeProperties properties, float... biomedata)
 	{
 		super(properties, biomedata);
+		this.theBiomeDecorator.deadBushPerChunk = 0;
 		BiomeDictionary.addTypes(this, Type.OCEAN);
 	}
 	
