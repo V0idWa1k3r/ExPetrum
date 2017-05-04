@@ -34,7 +34,7 @@ import v0id.exp.registry.ExPNetworkRegistry;
 import v0id.exp.registry.ExPTileRegistry;
 import v0id.exp.registry.ExPWorldRegistry;
 
-@Mod(modid = "exp", useMetadata = true, dependencies = "required-after:voidapi")
+@Mod(modid = "exp", useMetadata = true, dependencies = "required-after:voidapi", version = "1.11.2-1.0.0.0")
 public class ExPetrum
 {
 	@Mod.Instance("exp")

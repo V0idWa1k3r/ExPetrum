@@ -2,6 +2,7 @@ package v0id.exp.block.tree;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.Random;
 
 import javax.annotation.Nullable;
 
@@ -86,8 +87,33 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ExPBlockProperties.LEAF_STATE, EnumLeafState.NORMAL).withProperty(ExPBlockProperties.TREE_TYPES[this.logIndex], EnumTreeType.values()[this.logIndex * 5]));
 		GameRegistry.register(this);
 		GameRegistry.register(new ItemBlockWithMetadata(this));
+		this.setTickRandomly(true);
 	}
 	
+	
+	
+	@Override
+	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    {
+		super.updateTick(worldIn, pos, state, rand);
+		for (int dx = -LEAVES_CHECK_RADIUS; dx <= LEAVES_CHECK_RADIUS; ++dx)
+		{
+			for (int dy = -LEAVES_CHECK_RADIUS; dy <= LEAVES_CHECK_RADIUS; ++dy)
+			{
+				for (int dz = -LEAVES_CHECK_RADIUS; dz <= LEAVES_CHECK_RADIUS; ++dz)
+				{
+					BlockPos offset = pos.add(dx, dy, dz);
+					if (this.isSameWoodType(worldIn, state, pos, worldIn.getBlockState(offset)))
+					{
+						return;
+					}
+				}
+			}
+		}
+		
+		worldIn.setBlockToAir(pos);
+    }
+
 	@Override
 	public PathNodeType getAiPathNodeType(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
