@@ -78,7 +78,10 @@ public class WeatherUtils
 						return;
 					}
 					
-					w.setBlockState(heightPos, ExPBlocks.freshWater.getDefaultState(), 2);
+					if (state.isSideSolid(w, heightPos.down(), EnumFacing.UP))
+					{
+						w.setBlockState(heightPos, ExPBlocks.freshWater.getDefaultState(), 2);
+					}
 				}
 			}
 		}

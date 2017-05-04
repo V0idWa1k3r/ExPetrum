@@ -96,6 +96,7 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
 		super.updateTick(worldIn, pos, state, rand);
+		boolean foundWood = false;
 		for (int dx = -LEAVES_CHECK_RADIUS; dx <= LEAVES_CHECK_RADIUS; ++dx)
 		{
 			for (int dy = -LEAVES_CHECK_RADIUS; dy <= LEAVES_CHECK_RADIUS; ++dy)
@@ -105,13 +106,28 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 					BlockPos offset = pos.add(dx, dy, dz);
 					if (this.isSameWoodType(worldIn, state, pos, worldIn.getBlockState(offset)))
 					{
-						return;
+						foundWood = true;
+						break;
 					}
 				}
 			}
 		}
 		
-		worldIn.setBlockToAir(pos);
+		if (!foundWood)
+		{
+			worldIn.setBlockToAir(pos);
+		}
+		else
+		{
+			if (worldIn.rand.nextInt(64) == 0)
+			{
+				EnumLeafState suggestion = EnumLeafState.values()[Helpers.getSuggestedGrassState(pos, worldIn).ordinal()];
+				if (state.getValue(ExPBlockProperties.LEAF_STATE) != suggestion && !state.getValue(ExPBlockProperties.TREE_TYPES[this.logIndex]).isEvergreen())
+				{
+					worldIn.setBlockState(pos, state.withProperty(ExPBlockProperties.LEAF_STATE, suggestion), 2);
+				}
+			}
+		}
     }
 
 	@Override

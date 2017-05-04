@@ -42,6 +42,7 @@ import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.gravity.GravityHelper;
 import v0id.api.exp.gravity.IGravitySusceptible;
 import v0id.api.exp.inventory.IWeightProvider;
+import v0id.exp.block.plant.BlockShrub;
 import v0id.exp.util.Helpers;
 
 public class BlockGrass extends Block implements IWeightProvider, IGravitySusceptible, IGrass, IInitializableBlock
@@ -70,7 +71,7 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 	@Override
 	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable)
 	{
-		return this.getState() == EnumGrassState.NORMAL && plantable.getPlantType(world, pos) == EnumPlantType.Plains;
+		return plantable instanceof BlockShrub ? true : this.getState() != EnumGrassState.DEAD && plantable.getPlantType(world, pos) == EnumPlantType.Plains;
 	}
 
 	@Override
@@ -100,6 +101,11 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 
 	public void checkState(World worldIn, BlockPos pos, IBlockState state, Random rand, float growthRateModifier)
 	{
+		if (rand.nextInt(64) != 0)
+		{
+			return;
+		}
+		
 		EnumGrassState suggested = Helpers.getSuggestedGrassState(pos, worldIn);
 		if (suggested != this.getState())
 		{
@@ -109,7 +115,7 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 				{
 					if (rand.nextBoolean())
 					{
-						worldIn.setBlockState(pos, ExPBlocks.grass_dry.getDefaultState().withProperty(DIRT_CLASS, state.getValue(DIRT_CLASS)));
+						worldIn.setBlockState(pos, ExPBlocks.grass_dry.getDefaultState().withProperty(DIRT_CLASS, state.getValue(DIRT_CLASS)), 2);
 						// TODO grass drying out effects
 					}
 					
@@ -119,13 +125,13 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 				{
 					if (suggested == EnumGrassState.NORMAL && rand.nextDouble() <= growthRateModifier)
 					{
-						worldIn.setBlockState(pos, ExPBlocks.grass.getDefaultState().withProperty(DIRT_CLASS, state.getValue(DIRT_CLASS)));
+						worldIn.setBlockState(pos, ExPBlocks.grass.getDefaultState().withProperty(DIRT_CLASS, state.getValue(DIRT_CLASS)), 2);
 						// TODO grass growing effects
 					}
 					
 					if (suggested == EnumGrassState.DEAD)
 					{
-						worldIn.setBlockState(pos, ExPBlocks.grass_dead.getDefaultState().withProperty(DIRT_CLASS, state.getValue(DIRT_CLASS)));
+						worldIn.setBlockState(pos, ExPBlocks.grass_dead.getDefaultState().withProperty(DIRT_CLASS, state.getValue(DIRT_CLASS)), 2);
 						// TODO grass dying out effects
 					}
 					
@@ -135,7 +141,7 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 				{
 					if(rand.nextDouble() <= growthRateModifier)
 					{
-						worldIn.setBlockState(pos, ExPBlocks.grass_dry.getDefaultState().withProperty(DIRT_CLASS, state.getValue(DIRT_CLASS)));
+						worldIn.setBlockState(pos, ExPBlocks.grass_dry.getDefaultState().withProperty(DIRT_CLASS, state.getValue(DIRT_CLASS)), 2);
 						// TODO grass growing effects
 					}
 					
@@ -152,6 +158,11 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 
 	public void trySpread(World worldIn, BlockPos pos, Random rand, float growthRateModifier)
 	{
+		if (rand.nextInt(128) == 0 && worldIn.isAirBlock(pos.up()) && this.getState() == EnumGrassState.NORMAL)
+		{
+			worldIn.setBlockState(pos, ExPBlocks.vegetation.getDefaultState(), 2);
+		}
+		
 		BlockPos offset = pos.add(rand.nextInt(ExPMisc.GRASS_SPREAD_OFFSET) - rand.nextInt(ExPMisc.GRASS_SPREAD_OFFSET), rand.nextInt(ExPMisc.GRASS_SPREAD_OFFSET) - rand.nextInt(ExPMisc.GRASS_SPREAD_OFFSET), rand.nextInt(ExPMisc.GRASS_SPREAD_OFFSET) - rand.nextInt(ExPMisc.GRASS_SPREAD_OFFSET));
 		IBlockState spreadToCheck = worldIn.getBlockState(offset);
 		if (this.getState() != EnumGrassState.DEAD && spreadToCheck.getBlock() == ExPBlocks.soil && Helpers.canPlantGrow(offset, worldIn) && rand.nextDouble() <= growthRateModifier / (this.getState() == EnumGrassState.DRY ? 2 : 1))

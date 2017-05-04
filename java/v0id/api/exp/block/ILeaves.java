@@ -13,7 +13,7 @@ import v0id.api.core.VoidApi;
 
 public interface ILeaves
 {
-	public static final int LEAVES_CHECK_RADIUS = 5;
+	public static final int LEAVES_CHECK_RADIUS = 4;
 	
 	public static final ExecutorService pool = Executors.newFixedThreadPool(4);
 	
