@@ -31,7 +31,11 @@ public class ExPRegistryNames
 		blockPebble																							= new ResourceLocation(modid, "pebble"),
 		blockBoulder																						= new ResourceLocation(modid, "boulder"),
 		blockBoulderOre																						= new ResourceLocation(modid, "boulder_ore"),
-		blockOil																							= new ResourceLocation(modid, "oil");
+		blockOil																							= new ResourceLocation(modid, "oil"),
+		blockShrubNormal																					= new ResourceLocation(modid, "shrub_normal"),
+		blockShrubBlooming																					= new ResourceLocation(modid, "shrub_blooming"),
+		blockShrubAutumn																					= new ResourceLocation(modid, "shrub_autumn"),
+		blockShrubDead																						= new ResourceLocation(modid, "shrub_dead");
 
 	public static final ResourceLocation
 		entityGravFallingBlock																				= new ResourceLocation(modid, "gravFallingBlock"),

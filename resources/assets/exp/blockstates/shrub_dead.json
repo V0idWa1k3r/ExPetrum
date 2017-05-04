@@ -1,0 +1,106 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "exp:shrub_common",
+		"transform": "forge:default-block",
+		"gui3d" : true,
+		"textures" : {
+			"wood" : "exp:blocks/shrub/wood/spotted_laurel",
+			"leaves" : "exp:blocks/shrub/leaf/dead/none",
+			"flowers" : "exp:blocks/shrub/leaf/blooming/none"
+		}
+	},
+	"variants" : {
+		"normal": [{}],
+		"istall" : {
+			"true" : {
+				"model" : "exp:shrub_tall"
+			},
+			"false" : {
+				"model" : "exp:shrub_common"
+			}
+		},
+		"type" : {
+			"spotted_laurel" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/spotted_laurel"
+				}
+			},
+			"box" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/box"
+				}
+			},
+			"cercis_canadensis" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/cercis_canadensis"
+				}
+			},
+			"chamaerops" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/chamaerops"
+				}
+			},
+			"variegated_dogwood" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/variegated_dogwood"
+				}
+			},
+			"cornus_kousa" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/cornus_kousa"
+				}
+			},
+			"elaeagnus" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/elaeagnus"
+				}
+			},
+			"euonymus" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/euonymus"
+				}
+			},
+			"euonymus_japonicus" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/euonymus_japonicus"
+				}
+			},
+			"kapuka" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/kapuka"
+				}
+			},
+			"ilex" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/ilex"
+				}
+			},
+			"laurus_nobilis" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/laurus_nobilis"
+				}
+			},
+			"mahonia_x_media" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/mahonia_x_media"
+				}
+			},
+			"red_robin" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/red_robin"
+				}
+			},
+			"whin" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/whin"
+				}
+			},
+			"prunus" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/prunus"
+				}
+			}
+		}
+	}
+}

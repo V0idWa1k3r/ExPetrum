@@ -7,6 +7,7 @@ import v0id.api.core.markers.StaticStorage;
 import v0id.api.exp.block.EnumGrassAmount;
 import v0id.api.exp.block.EnumLeafState;
 import v0id.api.exp.block.EnumOre;
+import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 
 @StaticStorage
@@ -21,6 +22,8 @@ public class ExPBlockProperties
 	public static PropertyEnum<EnumTreeType>[] TREE_TYPES = new PropertyEnum[6];
 	public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("leafstate", EnumLeafState.class);
 	public static final PropertyInteger ORE_TEXTURE_ID = PropertyInteger.create("oretexture", 0, 2);
+	public static final PropertyEnum<EnumShrubType> SHRUB_TYPE = PropertyEnum.create("type", EnumShrubType.class);
+	public static final PropertyBool SHRUB_IS_TALL = PropertyBool.create("istall");
 	
 	// Currently not used
 	public static final PropertyEnum<EnumOre> ORE_TYPE = PropertyEnum.create("oretype", EnumOre.class);

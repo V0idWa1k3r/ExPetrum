@@ -29,4 +29,5 @@ public class ExPBlocks
 	public static Block boulder;
 	public static Block boulderOre;
 	public static Block oil;
+	public static Block[] shrubs;
 }

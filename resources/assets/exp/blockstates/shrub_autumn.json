@@ -1,0 +1,122 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "exp:shrub_common",
+		"transform": "forge:default-block",
+		"gui3d" : true,
+		"textures" : {
+			"wood" : "exp:blocks/shrub/wood/spotted_laurel",
+			"leaves" : "exp:blocks/shrub/leaf/autumn/spotted_laurel",
+			"flowers" : "exp:blocks/shrub/leaf/blooming/none"
+		}
+	},
+	"variants" : {
+		"normal": [{}],
+		"istall" : {
+			"true" : {
+				"model" : "exp:shrub_tall"
+			},
+			"false" : {
+				"model" : "exp:shrub_common"
+			}
+		},
+		"type" : {
+			"spotted_laurel" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/spotted_laurel",
+					"leaves" : "exp:blocks/shrub/leaf/autumn/spotted_laurel"
+				}
+			},
+			"box" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/box",
+					"leaves" : "exp:blocks/shrub/leaf/autumn/box"
+				}
+			},
+			"cercis_canadensis" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/cercis_canadensis",
+					"leaves" : "exp:blocks/shrub/leaf/autumn/cercis_canadensis"
+				}
+			},
+			"chamaerops" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/chamaerops",
+					"leaves" : "exp:blocks/shrub/leaf/autumn/chamaerops"
+				}
+			},
+			"variegated_dogwood" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/variegated_dogwood",
+					"leaves" : "exp:blocks/shrub/leaf/autumn/variegated_dogwood"
+				}
+			},
+			"cornus_kousa" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/cornus_kousa",
+					"leaves" : "exp:blocks/shrub/leaf/autumn/cornus_kousa"
+				}
+			},
+			"elaeagnus" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/elaeagnus",
+					"leaves" : "exp:blocks/shrub/leaf/autumn/elaeagnus"
+				}
+			},
+			"euonymus" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/euonymus",
+					"leaves" : "exp:blocks/shrub/leaf/autumn/euonymus"
+				}
+			},
+			"euonymus_japonicus" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/euonymus_japonicus",
+					"leaves" : "exp:blocks/shrub/leaf/autumn/euonymus_japonicus"
+				}
+			},
+			"kapuka" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/kapuka",
+					"leaves" : "exp:blocks/shrub/leaf/autumn/kapuka"
+				}
+			},
+			"ilex" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/ilex",
+					"leaves" : "exp:blocks/shrub/leaf/autumn/ilex"
+				}
+			},
+			"laurus_nobilis" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/laurus_nobilis",
+					"leaves" : "exp:blocks/shrub/leaf/autumn/laurus_nobilis"
+				}
+			},
+			"mahonia_x_media" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/mahonia_x_media",
+					"leaves" : "exp:blocks/shrub/leaf/autumn/mahonia_x_media"
+				}
+			},
+			"red_robin" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/red_robin",
+					"leaves" : "exp:blocks/shrub/leaf/autumn/red_robin"
+				}
+			},
+			"whin" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/whin",
+					"leaves" : "exp:blocks/shrub/leaf/autumn/whin"
+				}
+			},
+			"prunus" : {
+				"textures" : {
+					"wood" : "exp:blocks/shrub/wood/prunus",
+					"leaves" : "exp:blocks/shrub/leaf/autumn/prunus"
+				}
+			}
+		}
+	}
+}

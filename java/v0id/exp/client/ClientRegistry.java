@@ -3,6 +3,7 @@ package v0id.exp.client;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -33,9 +34,11 @@ import v0id.api.core.util.java.IInstanceProvider;
 import v0id.api.core.util.java.Instance;
 import v0id.api.exp.block.EnumLeafState;
 import v0id.api.exp.block.EnumOre;
+import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.IGrass;
 import v0id.api.exp.block.ILeaves;
+import v0id.api.exp.block.IShrub;
 import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.block.property.EnumWaterLilyType;
@@ -69,6 +72,8 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 		OBJLoader.INSTANCE.addDomain("exp");
 		for (int i = 0; i < 16; ++i)
 		{
+			// Lambda capture
+			Integer iWrapper = new Integer(i);
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.rock), i, new ModelResourceLocation(ExPBlocks.rock.getRegistryName(), "inventory-" + i));
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.soil), i, new ModelResourceLocation(ExPBlocks.soil.getRegistryName(), "inventory-" + i));
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.grass), i, new ModelResourceLocation(ExPBlocks.grass.getRegistryName(), "inventory-" + i));
@@ -77,6 +82,7 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.cattail), i, new ModelResourceLocation(ExPBlocks.cattail.getRegistryName(), "class=" + EnumDirtClass.values()[i].getName()));
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.sand), i, new ModelResourceLocation(ExPBlocks.sand.getRegistryName(), "class=" + EnumRockClass.values()[i].getName()));
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.seaweed), i, new ModelResourceLocation(ExPBlocks.seaweed.getRegistryName(), "class=" + EnumRockClass.values()[i].getName()));
+			Stream.of(ExPBlocks.shrubs).forEach(s -> ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(s), iWrapper, new ModelResourceLocation(s.getRegistryName(), "istall=false,type=" + EnumShrubType.values()[iWrapper])));
 			if (i < 10)
 			{
 				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.waterLily), i, new ModelResourceLocation(ExPBlocks.waterLily.getRegistryName(), "blooming=" + (i >= 5) + ",type=" + EnumWaterLilyType.values()[i % 5].getName()));
@@ -205,12 +211,15 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 		IFunctionalItemColor.registerItemColorHandler((ItemStack stack, int tintIndex) -> ColorizerGrass.getGrassColor(1, 0.5), ExPBlocks.waterLily);
 		IFunctionalBlockColor.registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) -> 
 			worldIn.getBlockState(pos.down()).getBlock() instanceof IGrass ? ((IGrass)worldIn.getBlockState(pos.down()).getBlock()).getGrassColor(worldIn.getBlockState(pos.down()), pos.down(), worldIn) : Helpers.getGrassColor(state, worldIn, pos, tintIndex), ExPBlocks.vegetation);
+		IFunctionalBlockColor.registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) -> 
+			worldIn.getBlockState(pos).getBlock() instanceof IShrub ? ((IShrub)worldIn.getBlockState(pos).getBlock()).getShrubColor(state, pos, worldIn) : Helpers.getGrassColor(state, worldIn, pos, tintIndex), ExPBlocks.shrubs);
 		IFunctionalBlockColor.registerBlockColorHandler(Helpers::getCoralColor, ExPBlocks.coralRock);
 		IFunctionalBlockColor.registerBlockColorHandler(Helpers::getCoralColor, ExPBlocks.coralPlant);
 		IFunctionalBlockColor.registerBlockColorHandler(Helpers::getLeafColor, ExPBlocks.leaves);
 		IFunctionalBlockColor.registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) -> 
 			worldIn.getTileEntity(pos) instanceof TileOre ? ((TileOre)worldIn.getTileEntity(pos)).type.getColor() : -1, ExPBlocks.ore, ExPBlocks.boulderOre);
 		IFunctionalItemColor.registerItemColorHandler((ItemStack stack, int tintIndex) -> ColorizerGrass.getGrassColor(1, 0.5), ExPBlocks.vegetation);
+		IFunctionalItemColor.registerItemColorHandler((ItemStack stack, int tintIndex) -> ColorizerGrass.getGrassColor(1, 0.5), ExPBlocks.shrubs);
 		IFunctionalItemColor.registerItemColorHandler((ItemStack stack, int tintIndex) -> ((ILeaves)Block.getBlockFromItem(stack.getItem())).getLeavesColorForMeta(stack.getMetadata()), ExPBlocks.leaves);
 		IFunctionalItemColor.registerItemColorHandler((ItemStack stack, int tintIndex) -> 
 			EnumOre.values()[(stack.getMetadata() / EnumRockClass.values().length) % EnumOre.values().length].getColor(), ExPBlocks.ore, ExPBlocks.boulderOre);

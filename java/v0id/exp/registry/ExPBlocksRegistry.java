@@ -1,8 +1,11 @@
 package v0id.exp.registry;
 
+import java.util.stream.Stream;
+
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import v0id.api.exp.block.EnumShrubState;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
@@ -22,6 +25,7 @@ import v0id.exp.block.fluid.BlockSaltWater;
 import v0id.exp.block.plant.BlockCattail;
 import v0id.exp.block.plant.BlockCoralPlant;
 import v0id.exp.block.plant.BlockSeaweed;
+import v0id.exp.block.plant.BlockShrub;
 import v0id.exp.block.plant.BlockVegetation;
 import v0id.exp.block.plant.BlockWaterLily;
 import v0id.exp.block.tree.BlockLeaf;
@@ -78,6 +82,8 @@ public class ExPBlocksRegistry extends AbstractRegistry
 		ExPBlocks.boulder = new BlockBoulder();
 		ExPBlocks.boulderOre = new BlockBoulderOre();
 		ExPBlocks.oil = new BlockOil();
+		ExPBlocks.shrubs = new BlockShrub[EnumShrubState.values().length];
+		Stream.of(EnumShrubState.values()).forEach(s -> ExPBlocks.shrubs[s.ordinal()] = new BlockShrub(s));
 	}
 
 	@Override

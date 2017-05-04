@@ -15,6 +15,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNodeType;
@@ -88,9 +89,8 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 		GameRegistry.register(this);
 		GameRegistry.register(new ItemBlockWithMetadata(this));
 		this.setTickRandomly(true);
+		Blocks.FIRE.setFireInfo(this, 30, 60);
 	}
-	
-	
 	
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
@@ -201,8 +201,6 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
     {
         return false;
     }
-    
-    
 	
 	@Override
 	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
