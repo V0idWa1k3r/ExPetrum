@@ -13,5 +13,3 @@ _ _ _
 
 A new day rises...
 ![](https://github.com/V0idWa1k3r/ExPetrum/blob/master/randomdevscreenies/2017-05-04_04.39.55.png)
-
-You can see more screenshots [here](https://github.com/V0idWa1k3r/ExPetrum/tree/master/randomdevscreenies). I will add them periodically when I feel the need to do so.
