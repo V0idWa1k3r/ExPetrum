@@ -45,7 +45,7 @@ public class TreeGenerator extends WorldGenerator implements ITreeGenerator
 	public IBlockState makeLeaves()
 	{
 		IExPWorld w = IExPWorld.of(this.worldGen);
-		EnumLeafState leafState = w.getCurrentSeason() == EnumSeason.WINTER ? EnumLeafState.DEAD : w.getCurrentSeason() == EnumSeason.AUTUMN ? EnumLeafState.AUTUMN : EnumLeafState.NORMAL;
+		EnumLeafState leafState = this.treeType.isEvergreen() ? EnumLeafState.NORMAL : w.getCurrentSeason() == EnumSeason.WINTER ? EnumLeafState.DEAD : w.getCurrentSeason() == EnumSeason.AUTUMN ? EnumLeafState.AUTUMN : EnumLeafState.NORMAL;
 		return ExPBlocks.leaves[this.treeType.ordinal() / 5].getDefaultState().withProperty(ExPBlockProperties.TREE_TYPES[this.treeType.ordinal() / 5], this.treeType).withProperty(ExPBlockProperties.LEAF_STATE, leafState);
 	}
 	

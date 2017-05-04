@@ -160,7 +160,7 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 	{
 		if (rand.nextInt(128) == 0 && worldIn.isAirBlock(pos.up()) && this.getState() == EnumGrassState.NORMAL)
 		{
-			worldIn.setBlockState(pos, ExPBlocks.vegetation.getDefaultState(), 2);
+			worldIn.setBlockState(pos.up(), ExPBlocks.vegetation.getDefaultState(), 2);
 		}
 		
 		BlockPos offset = pos.add(rand.nextInt(ExPMisc.GRASS_SPREAD_OFFSET) - rand.nextInt(ExPMisc.GRASS_SPREAD_OFFSET), rand.nextInt(ExPMisc.GRASS_SPREAD_OFFSET) - rand.nextInt(ExPMisc.GRASS_SPREAD_OFFSET), rand.nextInt(ExPMisc.GRASS_SPREAD_OFFSET) - rand.nextInt(ExPMisc.GRASS_SPREAD_OFFSET));
