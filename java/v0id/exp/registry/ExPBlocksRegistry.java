@@ -13,9 +13,11 @@ import v0id.exp.block.BlockBoulder;
 import v0id.exp.block.BlockBoulderOre;
 import v0id.exp.block.BlockCoralRock;
 import v0id.exp.block.BlockGrass;
+import v0id.exp.block.BlockIce;
 import v0id.exp.block.BlockOre;
 import v0id.exp.block.BlockPebble;
 import v0id.exp.block.BlockSand;
+import v0id.exp.block.BlockSnow;
 import v0id.exp.block.BlockSoil;
 import v0id.exp.block.BlockStone;
 import v0id.exp.block.fluid.BlockFreshWater;
@@ -84,6 +86,8 @@ public class ExPBlocksRegistry extends AbstractRegistry
 		ExPBlocks.oil = new BlockOil();
 		ExPBlocks.shrubs = new BlockShrub[EnumShrubState.values().length];
 		Stream.of(EnumShrubState.values()).forEach(s -> ExPBlocks.shrubs[s.ordinal()] = new BlockShrub(s));
+		ExPBlocks.snow = new BlockSnow();
+		ExPBlocks.ice = new BlockIce();
 	}
 
 	@Override

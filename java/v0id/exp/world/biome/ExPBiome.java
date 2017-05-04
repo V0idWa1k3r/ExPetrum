@@ -39,7 +39,9 @@ public class ExPBiome extends Biome implements IBiome
 	public final IBlockState 
 		SALT_WATER,
 		FRESH_WATER,
-		LAVA;
+		LAVA,
+		SALT_ICE,
+		FRESH_ICE;
 	
 	public final List<TreeEntry> treesToGenerate = Lists.newArrayList();
 	public final List<ShrubEntry> shrubsToGenerate = Lists.newArrayList();
@@ -58,6 +60,8 @@ public class ExPBiome extends Biome implements IBiome
 		this.SALT_WATER = ExPBlocks.saltWater.getStateFromMeta(9);
 		this.FRESH_WATER = ExPBlocks.freshWater.getStateFromMeta(9);
 		this.LAVA = ExPBlocks.lava.getStateFromMeta(9);
+		this.SALT_ICE = ExPBlocks.ice.getDefaultState().withProperty(ExPBlockProperties.ICE_IS_SALT, true);
+		this.FRESH_ICE = ExPBlocks.ice.getDefaultState().withProperty(ExPBlockProperties.ICE_IS_SALT, false);
 		this.setRegistryName("exp", this.getBiomeName());
 		GameRegistry.register(this);
 	}
@@ -170,8 +174,7 @@ public class ExPBiome extends Biome implements IBiome
 							// Cold
 							if (temp <= 0)
 							{
-								// TODO implement ice blocks
-								grassSetter = ICE;
+								grassSetter = this.isWaterSalt() ? this.SALT_ICE : this.FRESH_ICE;
 							}
 							else
 							{

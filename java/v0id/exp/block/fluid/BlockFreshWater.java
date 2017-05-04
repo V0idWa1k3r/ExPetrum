@@ -18,10 +18,12 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fluids.BlockFluidFinite;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import v0id.api.exp.block.IWater;
+import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPFluids;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.exp.block.IInitializableBlock;
+import v0id.exp.util.Helpers;
 
 public class BlockFreshWater extends BlockFluidFinite implements IWater, IInitializableBlock
 {
@@ -42,7 +44,41 @@ public class BlockFreshWater extends BlockFluidFinite implements IWater, IInitia
 		GameRegistry.register(this);
 		GameRegistry.register(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 		this.setQuantaPerBlock(10);
+		this.setTickRandomly(true);
 	}
+	
+	@Override
+	public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random)
+    {
+		super.randomTick(worldIn, pos, state, random);
+		if (worldIn.getBlockState(pos) == state)
+		{
+			int quantaCurrent = this.getQuantaValue(worldIn, pos);
+			if (quantaCurrent < 4)
+			{
+				float temp = Helpers.getTemperatureAt(worldIn, pos);
+				if (temp > 0 && random.nextFloat() < temp / 40)
+				{
+					if (quantaCurrent <= 1)
+					{
+						worldIn.setBlockToAir(pos);
+					}
+					else
+					{
+						worldIn.setBlockState(pos, state.withProperty(LEVEL, quantaCurrent - 2));
+					}
+				}
+			}
+			else
+			{
+				float temp = Helpers.getTemperatureAt(worldIn, pos);
+				if (temp < 0 && random.nextFloat() < temp / 10)
+				{
+					worldIn.setBlockState(pos, ExPBlocks.ice.getDefaultState());
+				}
+			}
+		}
+    }
 	
     @Override
     public void updateTick(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand)

@@ -93,12 +93,18 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.vegetation), i, new ModelResourceLocation(ExPBlocks.vegetation.getRegistryName(), "inventory-" + i));
 			}
 			
+			if (i < 2)
+			{
+				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.ice), i, new ModelResourceLocation(ExPBlocks.ice.getRegistryName(), "salt=" + (i == 1)));
+			}
+			
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.pebble), i, new ModelResourceLocation(ExPBlocks.pebble.getRegistryName(), "amdl=0,class=" + EnumRockClass.values()[i].getName()));
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.boulder), i, new ModelResourceLocation(ExPBlocks.boulder.getRegistryName(), "amdl=0,class=" + EnumRockClass.values()[i].getName()));
 		}
 		
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.coralRock), 0, new ModelResourceLocation(ExPBlocks.coralRock.getRegistryName(), "rtindex=0"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.coralPlant), 0, new ModelResourceLocation(ExPBlocks.coralPlant.getRegistryName(), "ptindex=0,rtindex=0"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.snow), 0, new ModelResourceLocation(ExPBlocks.snow.getRegistryName(), "layers=1"));
 		Arrays.asList(ExPBlocks.logs).forEach(this::registerLogItemModel);
 		Arrays.asList(ExPBlocks.logsDeco).forEach(this::registerLogItemModel);
 		Arrays.asList(ExPBlocks.leaves).forEach(this::registerLeafItemModel);

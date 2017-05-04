@@ -12,6 +12,7 @@ import v0id.api.exp.block.EnumGrassState;
 import v0id.api.exp.block.ICanGrowCrop;
 import v0id.api.exp.block.IGrass;
 import v0id.api.exp.block.ILeaves;
+import v0id.api.exp.world.EnumSeason;
 import v0id.api.exp.world.IBiome;
 import v0id.api.exp.world.IExPWorld;
 
@@ -78,7 +79,9 @@ public class Helpers
 	
 	public static EnumGrassState getSuggestedGrassState(BlockPos pos, World w)
 	{
-		return EnumGrassState.NORMAL;
+		IExPWorld world = IExPWorld.of(w);
+		EnumSeason season = world.getCurrentSeason();
+		return season == EnumSeason.WINTER ? EnumGrassState.DEAD : season == EnumSeason.AUTUMN ? EnumGrassState.DRY : EnumGrassState.NORMAL;
 	}
 	
 	public static int getWindStrengthIndex(float windKH)

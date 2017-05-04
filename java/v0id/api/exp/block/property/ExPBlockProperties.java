@@ -24,6 +24,7 @@ public class ExPBlockProperties
 	public static final PropertyInteger ORE_TEXTURE_ID = PropertyInteger.create("oretexture", 0, 2);
 	public static final PropertyEnum<EnumShrubType> SHRUB_TYPE = PropertyEnum.create("type", EnumShrubType.class);
 	public static final PropertyBool SHRUB_IS_TALL = PropertyBool.create("istall");
+	public static final PropertyBool ICE_IS_SALT = PropertyBool.create("salt");
 	
 	// Currently not used
 	public static final PropertyEnum<EnumOre> ORE_TYPE = PropertyEnum.create("oretype", EnumOre.class);

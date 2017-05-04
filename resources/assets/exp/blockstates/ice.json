@@ -1,0 +1,27 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "cube_all",
+		"textures" : {
+			"all" : "blocks/ice",
+			"particle" : "#all"
+		}
+	},
+	"variants": {
+		"normal": [{}],
+		"salt" : {
+			"true" : {
+				"textures" : {
+					"all" : "exp:blocks/fluid/ice_salt",
+					"particle" : "#all"
+				}
+			},
+			"false" : {
+				"textures" : {
+					"all" : "blocks/ice",
+					"particle" : "#all"
+				}
+			}
+		}
+	}
+}
