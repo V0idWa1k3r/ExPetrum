@@ -3,6 +3,9 @@ package v0id.exp.block;
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
 import static v0id.api.exp.block.property.ExPBlockProperties.ROCK_CLASS;
 
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
+
 import com.google.common.base.Predicate;
 
 import net.minecraft.block.Block;
@@ -24,15 +27,18 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.core.util.ItemBlockWithMetadata;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.data.ExPCreativeTabs;
+import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
+import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.gravity.GravityHelper;
 import v0id.api.exp.gravity.IGravitySusceptible;
 import v0id.api.exp.inventory.IWeightProvider;
 
-public class BlockStone extends Block implements IWeightProvider, IGravitySusceptible, IInitializableBlock
+public class BlockStone extends Block implements IWeightProvider, IGravitySusceptible, IInitializableBlock, IOreDictEntry
 {
 	public BlockStone()
 	{
@@ -156,5 +162,15 @@ public class BlockStone extends Block implements IWeightProvider, IGravitySuscep
 		this.setCreativeTab(ExPCreativeTabs.tabUnderground);
 		GameRegistry.register(this);
 		GameRegistry.register(new ItemBlockWithMetadata(this));
+	}
+	
+	@Override
+	public void registerOreDictNames()
+	{
+		Stream.of(ExPOreDict.blockStone).forEach(s -> { 
+			OreDictionary.registerOre(s, new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE)); 
+			AtomicInteger i = new AtomicInteger(0);
+			Stream.of(ExPOreDict.rockNames).forEach(ss -> OreDictionary.registerOre(s + Character.toUpperCase(ss.charAt(0)) + ss.substring(1), new ItemStack(this, 1, i.getAndIncrement())));
+		});
 	}
 }

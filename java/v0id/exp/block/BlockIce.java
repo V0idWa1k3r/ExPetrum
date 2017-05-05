@@ -1,6 +1,7 @@
 package v0id.exp.block;
 
 import java.util.Random;
+import java.util.stream.Stream;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -23,16 +24,19 @@ import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.core.util.ItemBlockWithMetadata;
 import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
+import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
+import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.gravity.GravityHelper;
 import v0id.api.exp.gravity.IGravitySusceptible;
 import v0id.exp.util.Helpers;
 
-public class BlockIce extends Block implements IInitializableBlock, IGravitySusceptible
+public class BlockIce extends Block implements IInitializableBlock, IGravitySusceptible, IOreDictEntry
 {
 	public BlockIce()
 	{
@@ -156,5 +160,13 @@ public class BlockIce extends Block implements IInitializableBlock, IGravitySusc
 				return;
 			}
 		}
+	}
+	
+	@Override
+	public void registerOreDictNames()
+	{
+		Stream.of(ExPOreDict.blockIce).forEach(s -> OreDictionary.registerOre(s, new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE)));
+		Stream.of(ExPOreDict.blockIceFresh).forEach(s -> OreDictionary.registerOre(s, new ItemStack(this, 1, 0)));
+		Stream.of(ExPOreDict.blockIceSalt).forEach(s -> OreDictionary.registerOre(s, new ItemStack(this, 1, 1)));
 	}
 }

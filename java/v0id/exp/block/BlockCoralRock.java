@@ -1,5 +1,7 @@
 package v0id.exp.block;
 
+import java.util.stream.Stream;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -14,15 +16,18 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.core.util.ItemBlockWithMetadata;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPMisc;
+import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
+import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.gravity.GravityHelper;
 import v0id.api.exp.gravity.IGravitySusceptible;
 import v0id.api.exp.inventory.IWeightProvider;
 
-public class BlockCoralRock extends Block implements IWeightProvider, IGravitySusceptible, IInitializableBlock
+public class BlockCoralRock extends Block implements IWeightProvider, IGravitySusceptible, IInitializableBlock, IOreDictEntry
 {
 	public static PropertyInteger TEXTURE_INDEX_ROCK = PropertyInteger.create("rtindex", 0, 5);
 	
@@ -115,5 +120,11 @@ public class BlockCoralRock extends Block implements IWeightProvider, IGravitySu
 		this.setCreativeTab(ExPCreativeTabs.tabCommon);
 		GameRegistry.register(this);
 		GameRegistry.register(new ItemBlockWithMetadata(this));
+	}
+	
+	@Override
+	public void registerOreDictNames()
+	{
+		Stream.of(ExPOreDict.blockCoralRock).forEach(s -> OreDictionary.registerOre(s, new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE)));
 	}
 }

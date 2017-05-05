@@ -3,6 +3,8 @@ package v0id.exp.block.tree;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRotatedPillar;
@@ -27,18 +29,21 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.core.util.ItemBlockWithMetadata;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.ILog;
 import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
+import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
+import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.block.IInitializableBlock;
 import v0id.exp.entity.EntityFallingTree;
 
-public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILog, IInitializableBlock
+public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILog, IInitializableBlock, IOreDictEntry
 {
 	public int logIndex = 0;
 	
@@ -243,5 +248,15 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 			return new ResourceLocation(ExPRegistryNames.blockLogDeco.getResourceDomain(), ExPRegistryNames.blockLogDeco.getResourcePath() + this.logIndex);
 		}
 		
+	}
+	
+	@Override
+	public void registerOreDictNames()
+	{
+		Stream.of(ExPOreDict.blockLog).forEach(s -> { 
+			OreDictionary.registerOre(s, new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE)); 
+			AtomicInteger i = new AtomicInteger(1);
+			ExPBlockProperties.TREE_TYPES[this.logIndex].getAllowedValues().stream().map(EnumTreeType::getName).forEach(ss -> OreDictionary.registerOre(s + Character.toUpperCase(ss.charAt(0)) + ss.substring(1), new ItemStack(this, 1, i.getAndAdd(3))));
+		});
 	}
 }

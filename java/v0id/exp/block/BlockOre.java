@@ -4,6 +4,7 @@ import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
 import static v0id.api.exp.block.property.ExPBlockProperties.ROCK_CLASS;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -27,15 +28,18 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPCreativeTabs;
+import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
+import v0id.api.exp.data.IOreDictEntry;
 import v0id.exp.block.item.ItemBlockOre;
 import v0id.exp.tile.TileOre;
 
-public class BlockOre extends Block implements ITileEntityProvider, IInitializableBlock
+public class BlockOre extends Block implements ITileEntityProvider, IInitializableBlock, IOreDictEntry
 {
 	public static final float ORE_HARDNESS_MODIFIER = 2F;
 
@@ -154,4 +158,10 @@ public class BlockOre extends Block implements ITileEntityProvider, IInitializab
         super.breakBlock(worldIn, pos, state);
         worldIn.removeTileEntity(pos);
     }
+	
+	@Override
+	public void registerOreDictNames()
+	{
+		Stream.of(ExPOreDict.blockOre).forEach(s -> OreDictionary.registerOre(s, new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE)));
+	}
 }

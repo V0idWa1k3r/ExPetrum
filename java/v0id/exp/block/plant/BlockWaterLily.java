@@ -5,6 +5,7 @@ import static v0id.api.exp.block.property.ExPBlockProperties.LILY_TYPE;
 import static v0id.api.exp.block.property.ExPBlockProperties.PLANT_BLOOMING;
 
 import java.util.Random;
+import java.util.stream.Stream;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -25,16 +26,19 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.exp.block.property.EnumWaterLilyType;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPMisc;
+import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
+import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.item.ItemBlockWaterLily;
 import v0id.exp.util.Helpers;
 
-public class BlockWaterLily extends BlockBush implements IWeightProvider, IInitializableBlock
+public class BlockWaterLily extends BlockBush implements IWeightProvider, IInitializableBlock, IOreDictEntry
 {
 	protected static final AxisAlignedBB LILY_PAD_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 0.09375D, 0.9375D);
 	
@@ -211,5 +215,11 @@ public class BlockWaterLily extends BlockBush implements IWeightProvider, IIniti
 	public EnumOffsetType getOffsetType()
 	{
 		return EnumOffsetType.XYZ;
+	}
+	
+	@Override
+	public void registerOreDictNames()
+	{
+		Stream.of(ExPOreDict.blockWaterLily).forEach(s -> OreDictionary.registerOre(s, new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE)));
 	}
 }

@@ -3,6 +3,7 @@ package v0id.exp.block;
 import static net.minecraft.block.BlockSnow.LAYERS;
 
 import java.util.Random;
+import java.util.stream.Stream;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -22,13 +23,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.exp.data.ExPCreativeTabs;
+import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
+import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.gravity.GravityHelper;
 import v0id.api.exp.gravity.IGravitySusceptible;
 import v0id.exp.util.Helpers;
 
-public class BlockSnow extends Block implements IGravitySusceptible, IInitializableBlock
+public class BlockSnow extends Block implements IGravitySusceptible, IInitializableBlock, IOreDictEntry
 {
 	protected static final AxisAlignedBB[] SNOW_AABB = new AxisAlignedBB[] {new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.25D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.375D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.75D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)};
 
@@ -186,5 +190,11 @@ public class BlockSnow extends Block implements IGravitySusceptible, IInitializa
 				GravityHelper.doFall(world.getBlockState(pos), w, pos, neighbor);
 			}
 		}
+	}
+
+	@Override
+	public void registerOreDictNames()
+	{
+		Stream.of(ExPOreDict.blockSnow).forEach(s -> OreDictionary.registerOre(s, new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE)));
 	}
 }

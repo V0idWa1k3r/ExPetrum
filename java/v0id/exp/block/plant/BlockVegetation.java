@@ -1,6 +1,7 @@
 package v0id.exp.block.plant;
 
 import java.util.Random;
+import java.util.stream.Stream;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -25,6 +26,7 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.core.util.ItemBlockWithMetadata;
 import v0id.api.exp.block.EnumGrassAmount;
 import v0id.api.exp.block.EnumGrassState;
@@ -32,11 +34,13 @@ import v0id.api.exp.block.IGrass;
 import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPMisc;
+import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
+import v0id.api.exp.data.IOreDictEntry;
 import v0id.exp.block.IInitializableBlock;
 import v0id.exp.util.Helpers;
 
-public class BlockVegetation extends BlockBush implements IInitializableBlock
+public class BlockVegetation extends BlockBush implements IInitializableBlock, IOreDictEntry
 {
 	// Not exposed, for internal use only(rendering the model)
 	// You do NOT need these! They are purely for rendering! They are not even saved with the meta!
@@ -229,5 +233,9 @@ public class BlockVegetation extends BlockBush implements IInitializableBlock
 		return super.isAssociatedBlock(other) || other instanceof BlockTallGrass;
 	}
 	
-	
+	@Override
+	public void registerOreDictNames()
+	{
+		Stream.of(ExPOreDict.blockVegetation).forEach(s -> OreDictionary.registerOre(s, new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE)));
+	}
 }

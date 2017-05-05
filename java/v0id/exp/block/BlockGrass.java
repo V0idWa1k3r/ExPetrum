@@ -4,6 +4,8 @@ import static v0id.api.exp.block.property.EnumDirtClass.ACRISOL;
 import static v0id.api.exp.block.property.ExPBlockProperties.DIRT_CLASS;
 
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 import com.google.common.base.Predicate;
 
@@ -29,6 +31,7 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.core.util.ItemBlockWithMetadata;
 import v0id.api.core.util.java.ColorRGB;
 import v0id.api.exp.block.EnumGrassAmount;
@@ -38,14 +41,16 @@ import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPMisc;
+import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
+import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.gravity.GravityHelper;
 import v0id.api.exp.gravity.IGravitySusceptible;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.block.plant.BlockShrub;
 import v0id.exp.util.Helpers;
 
-public class BlockGrass extends Block implements IWeightProvider, IGravitySusceptible, IGrass, IInitializableBlock
+public class BlockGrass extends Block implements IWeightProvider, IGravitySusceptible, IGrass, IInitializableBlock, IOreDictEntry
 {
 	public BlockGrass()
 	{
@@ -357,5 +362,15 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 	public EnumGrassAmount getAmount(IBlockState state, BlockPos pos, IBlockAccess w)
 	{
 		return state.getValue(DIRT_CLASS).getAmount();
+	}
+
+	@Override
+	public void registerOreDictNames()
+	{
+		Stream.of(ExPOreDict.blockGrass).forEach(s -> { 
+			OreDictionary.registerOre(s, new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE)); 
+			AtomicInteger i = new AtomicInteger(0);
+			Stream.of(ExPOreDict.soilNames).forEach(ss -> OreDictionary.registerOre(s + Character.toUpperCase(ss.charAt(0)) + ss.substring(1), new ItemStack(this, 1, i.getAndIncrement())));
+		});
 	}
 }

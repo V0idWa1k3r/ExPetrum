@@ -1,6 +1,8 @@
 package v0id.exp.block.plant;
 
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -24,6 +26,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.core.util.ItemBlockWithMetadata;
 import v0id.api.exp.block.EnumGrassState;
 import v0id.api.exp.block.EnumShrubState;
@@ -33,11 +36,13 @@ import v0id.api.exp.block.IShrub;
 import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
+import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
+import v0id.api.exp.data.IOreDictEntry;
 import v0id.exp.block.IInitializableBlock;
 import v0id.exp.util.Helpers;
 
-public class BlockShrub extends Block implements IInitializableBlock, IShrub, IPlantable
+public class BlockShrub extends Block implements IInitializableBlock, IShrub, IPlantable, IOreDictEntry
 {
 	public static final AxisAlignedBB BASIC_AABB = new AxisAlignedBB(0.3, 0, 0.3, 0.7, 0.5, 0.7);
 	public static final AxisAlignedBB FULL_AABB = new AxisAlignedBB(0.3, 0, 0.3, 0.7, 0.5, 0.7);
@@ -299,5 +304,15 @@ public class BlockShrub extends Block implements IInitializableBlock, IShrub, IP
 	public IBlockState getPlant(IBlockAccess world, BlockPos pos)
 	{
 		return world.getBlockState(pos);
+	}
+
+	@Override
+	public void registerOreDictNames()
+	{
+		Stream.of(ExPOreDict.blockShrub).forEach(s -> { 
+			OreDictionary.registerOre(s, new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE)); 
+			AtomicInteger i = new AtomicInteger(0);
+			Stream.of(ExPOreDict.bushNames).forEach(ss -> OreDictionary.registerOre(s + Character.toUpperCase(ss.charAt(0)) + ss.substring(1), new ItemStack(this, 1, i.getAndIncrement())));
+		});
 	}
 }

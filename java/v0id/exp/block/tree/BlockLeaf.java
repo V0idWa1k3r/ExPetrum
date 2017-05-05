@@ -3,6 +3,8 @@ package v0id.exp.block.tree;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 import javax.annotation.Nullable;
 
@@ -29,18 +31,21 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.core.util.ItemBlockWithMetadata;
 import v0id.api.exp.block.EnumLeafState;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.ILeaves;
 import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPCreativeTabs;
+import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
+import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.block.IInitializableBlock;
 import v0id.exp.util.Helpers;
 
-public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IInitializableBlock
+public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IInitializableBlock, IOreDictEntry
 {
 	// log and not leaf because this is the index of the log this leaf is a leaf of
 	// Sound confusing enough? (>w<)
@@ -280,6 +285,16 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 		EnumLeafState state = EnumLeafState.values()[meta % 3];
 		
 		return state == EnumLeafState.NORMAL ? 0x166612 : -1;
+	}
+
+	@Override
+	public void registerOreDictNames()
+	{
+		Stream.of(ExPOreDict.blockLeaf).forEach(s -> { 
+			OreDictionary.registerOre(s, new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE)); 
+			AtomicInteger i = new AtomicInteger(0);
+			ExPBlockProperties.TREE_TYPES[this.logIndex].getAllowedValues().stream().map(EnumTreeType::getName).forEach(ss -> OreDictionary.registerOre(s + Character.toUpperCase(ss.charAt(0)) + ss.substring(1), new ItemStack(this, 1, i.getAndAdd(3))));
+		});
 	}
 
 }
