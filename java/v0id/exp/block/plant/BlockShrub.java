@@ -31,11 +31,13 @@ import v0id.api.core.util.ItemBlockWithMetadata;
 import v0id.api.exp.block.EnumGrassState;
 import v0id.api.exp.block.EnumShrubState;
 import v0id.api.exp.block.EnumShrubType;
+import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.IGrass;
 import v0id.api.exp.block.IShrub;
 import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
+import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
@@ -69,6 +71,18 @@ public class BlockShrub extends Block implements IInitializableBlock, IShrub, IP
 		GameRegistry.register(new ItemBlockWithMetadata(this));
 		this.setTickRandomly(true);
 		Blocks.FIRE.setFireInfo(this, 60, 100);
+	}
+
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	{
+		return ExPItems.stick;
+	}
+
+	@Override
+	public int damageDropped(IBlockState state)
+	{
+		return state.getValue(ExPBlockProperties.SHRUB_TYPE).ordinal() + EnumTreeType.values().length;
 	}
 
 	@Override

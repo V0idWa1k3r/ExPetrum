@@ -2,6 +2,8 @@ package v0id.api.exp.data;
 
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import v0id.api.core.markers.StaticStorage;
 import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
@@ -31,8 +33,13 @@ public class ExPOreDict
 		blockLog																										= { "logWood" },
 		blockLeaf																										= { "treeLeaves" };
 	
+	public static final String[]
+		itemRock																										= { "itemRock" },
+		itemStick																										= { "stickWood" };
+	
 	public static final String[] rockNames = Stream.of(EnumRockClass.values()).map(EnumRockClass::getName).toArray(String[]::new);
 	public static final String[] soilNames = Stream.of(EnumDirtClass.values()).map(EnumDirtClass::getName).toArray(String[]::new);
 	public static final String[] treeNames = Stream.of(EnumTreeType.values()).map(EnumTreeType::getName).toArray(String[]::new);
 	public static final String[] bushNames = Stream.of(EnumShrubType.values()).map(EnumShrubType::getName).toArray(String[]::new);
+	public static final String[] stickNames = ArrayUtils.addAll(treeNames, bushNames);
 }

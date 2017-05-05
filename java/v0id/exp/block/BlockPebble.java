@@ -3,6 +3,7 @@ package v0id.exp.block;
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
 import static v0id.api.exp.block.property.ExPBlockProperties.ROCK_CLASS;
 
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
@@ -32,6 +33,7 @@ import v0id.api.core.util.ItemBlockWithMetadata;
 import v0id.api.exp.block.IOreHintReplaceable;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.data.ExPCreativeTabs;
+import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
@@ -61,6 +63,24 @@ public class BlockPebble extends Block implements IInitializableBlock, IOreHintR
 		GameRegistry.register(this);
 		GameRegistry.register(new ItemBlockWithMetadata(this));
 	}
+	
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	{
+		return ExPItems.rock;
+	}
+
+	@Override
+	public int quantityDroppedWithBonus(int fortune, Random random)
+    {
+        return 1;
+    }
+
+	@Override
+	public int damageDropped(IBlockState state)
+    {
+        return state.getValue(ROCK_CLASS).ordinal();
+    }
 	
 	@Override
 	public PathNodeType getAiPathNodeType(IBlockState state, IBlockAccess world, BlockPos pos)

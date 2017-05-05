@@ -30,6 +30,7 @@ import v0id.exp.registry.ExPCreativeTabsRegistry;
 import v0id.exp.registry.ExPEntityRegistry;
 import v0id.exp.registry.ExPEventRegistry;
 import v0id.exp.registry.ExPFluidRegistry;
+import v0id.exp.registry.ExPItemsRegistry;
 import v0id.exp.registry.ExPNetworkRegistry;
 import v0id.exp.registry.ExPOreDictRegistry;
 import v0id.exp.registry.ExPTileRegistry;
@@ -74,6 +75,7 @@ public class ExPetrum
 		AbstractRegistry.create(ExPFluidRegistry.class);
 		AbstractRegistry.create(ExPCreativeTabsRegistry.class);
 		AbstractRegistry.create(ExPBlocksRegistry.class);
+		AbstractRegistry.create(ExPItemsRegistry.class);
 		AbstractRegistry.create(ExPEventRegistry.class);
 		AbstractRegistry.create(ExPNetworkRegistry.class);
 		AbstractRegistry.create(ExPEntityRegistry.class);

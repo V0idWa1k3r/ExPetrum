@@ -4,6 +4,7 @@ import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
 import static v0id.api.exp.block.property.ExPBlockProperties.ROCK_CLASS;
 
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Stream;
 
 import net.minecraft.block.Block;
@@ -33,6 +34,7 @@ import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPCreativeTabs;
+import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
@@ -63,6 +65,24 @@ public class BlockBoulderOre extends Block implements ITileEntityProvider, IInit
 		GameRegistry.register(this);
 		GameRegistry.register(new ItemBlockBoulderOre(this));
 	}
+	
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	{
+		return ExPItems.rock;
+	}
+
+	@Override
+	public int quantityDroppedWithBonus(int fortune, Random random)
+    {
+        return 3 + random.nextInt(4);
+    }
+
+	@Override
+	public int damageDropped(IBlockState state)
+    {
+        return state.getValue(ROCK_CLASS).ordinal();
+    }
 	
 	@SideOnly(Side.CLIENT)
 	@Override

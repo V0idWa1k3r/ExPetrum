@@ -184,7 +184,7 @@ public class BlockWaterLily extends BlockBush implements IWeightProvider, IIniti
 	@Override
 	public int damageDropped(IBlockState state)
 	{
-		return this.getMetaFromState(state);
+		return this.getMetaFromState(state) % 5;
 	}
 
 	@Override

@@ -44,6 +44,7 @@ import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.block.property.EnumWaterLilyType;
 import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
+import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.exp.block.tree.BlockLeaf;
 import v0id.exp.block.tree.BlockLog;
@@ -100,6 +101,7 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 			
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.pebble), i, new ModelResourceLocation(ExPBlocks.pebble.getRegistryName(), "amdl=0,class=" + EnumRockClass.values()[i].getName()));
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.boulder), i, new ModelResourceLocation(ExPBlocks.boulder.getRegistryName(), "amdl=0,class=" + EnumRockClass.values()[i].getName()));
+			ModelLoader.setCustomModelResourceLocation(ExPItems.rock, i, new ModelResourceLocation(ExPItems.rock.getRegistryName(), "class=" + EnumRockClass.values()[i].getName()));
 		}
 		
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.coralRock), 0, new ModelResourceLocation(ExPBlocks.coralRock.getRegistryName(), "rtindex=0"));
@@ -115,6 +117,11 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 			{
 				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.boulderOre), i, new ModelResourceLocation(ExPBlocks.boulderOre.getRegistryName(), "class=" + EnumRockClass.values()[i % EnumRockClass.values().length].getName() + ",oretexture=" + EnumOre.values()[(i / EnumRockClass.values().length) % EnumOre.values().length].getTextureIndex()));
 			}
+		}
+		
+		for (int i = 0; i < EnumTreeType.values().length + EnumShrubType.values().length; ++i)
+		{
+			ModelLoader.setCustomModelResourceLocation(ExPItems.stick, i, new ModelResourceLocation(ExPItems.stick.getRegistryName(), "type=" + (i < EnumTreeType.values().length ? EnumTreeType.values()[i].getName() : EnumShrubType.values()[i - EnumTreeType.values().length].getName())));
 		}
 		
 		this.registerCustomStateMappers();

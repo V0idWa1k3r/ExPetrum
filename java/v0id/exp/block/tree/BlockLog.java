@@ -3,6 +3,7 @@ package v0id.exp.block.tree;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
@@ -92,6 +93,18 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 		Blocks.FIRE.setFireInfo(this, 5, 5);
 	}
 	
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	{
+		return Item.getItemFromBlock(ExPBlocks.logsDeco[this.logIndex]);
+	}
+
+	@Override
+	public int damageDropped(IBlockState state)
+	{
+		return 1 + (state.getValue(ExPBlockProperties.TREE_TYPES[this.logIndex]).ordinal() % 5) * 3;
+	}
+
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
 	{

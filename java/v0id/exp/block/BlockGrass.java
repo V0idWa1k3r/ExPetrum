@@ -287,6 +287,12 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
     }
 
 	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	{
+		return Item.getItemFromBlock(ExPBlocks.soil);
+	}
+
+	@Override
 	public int getGrassColor(IBlockState state, BlockPos pos, IBlockAccess w)
 	{
 		int baseColor = this.getState() == EnumGrassState.NORMAL ? 0x02661c : this.getState() == EnumGrassState.DRY ? 0x6a7223 : 0x660000;

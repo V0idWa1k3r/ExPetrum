@@ -38,6 +38,7 @@ import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.ILeaves;
 import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPCreativeTabs;
+import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
@@ -84,7 +85,7 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 			FMLCommonHandler.instance().raiseException(ex, "ExPetrum was umable to reflect BlockStateContainer field!", true);
 		}
 		
-		this.setHardness(0.5f);
+		this.setHardness(1.5f);
 		this.setRegistryName(this.createRegistryLocation());
 		this.setResistance(0.5f);
 		this.setSoundType(SoundType.PLANT);
@@ -97,6 +98,24 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 		Blocks.FIRE.setFireInfo(this, 30, 60);
 	}
 	
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	{
+		return ExPItems.stick;
+	}
+
+	@Override
+	public int damageDropped(IBlockState state)
+	{
+		return state.getValue(ExPBlockProperties.TREE_TYPES[this.logIndex]).ordinal();
+	}
+
+	@Override
+	public int quantityDroppedWithBonus(int fortune, Random random)
+	{
+		return 1 + random.nextInt(3);
+	}
+
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {

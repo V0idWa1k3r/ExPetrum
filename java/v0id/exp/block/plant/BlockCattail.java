@@ -86,12 +86,6 @@ public class BlockCattail extends Block implements IWeightProvider, IInitializab
 	}
 
 	@Override
-	public int damageDropped(IBlockState state)
-	{
-		return this.getMetaFromState(state);
-	}
-
-	@Override
 	protected BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer(this, DIRT_CLASS);
