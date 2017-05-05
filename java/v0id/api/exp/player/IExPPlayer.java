@@ -205,6 +205,17 @@ public interface IExPPlayer extends INBTSerializable<NBTTagCompound>
 	void triggerStage(EnumPlayerProgression progression);
 	
 	/**
+	 * Resets the data back to default values. Used upon player's death
+	 */
+	void resetData();
+	
+	/**
+	 * Handles the situation where some ticks have been skipped by the server (most likely the player slept)
+	 * @param skipped - the amount of ticks skipped
+	 */
+	void skipTicks(int skipped);
+	
+	/**
 	 * A simple helper to get the data of a specified player
 	 * @param p : the player to get the data of
 	 * @return The data attached to a specified player

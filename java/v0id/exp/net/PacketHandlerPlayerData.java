@@ -18,7 +18,7 @@ public class PacketHandlerPlayerData implements IPacketHandler
 	public void handleData(NBTTagCompound data)
 	{
 		EntityPlayer reciever = VoidApi.proxy.getClientPlayer();
-		if (reciever.getName().equals(data.getString("owner")))
+		if (reciever != null && reciever.getName().equals(data.getString("owner")))
 		{
 			IExPPlayer.of(reciever).deserializeNBT(data);
 		}

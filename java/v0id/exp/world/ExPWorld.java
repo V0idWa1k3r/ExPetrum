@@ -12,6 +12,7 @@ import v0id.api.core.logging.LogLevel;
 import v0id.api.core.util.nbt.NBTList;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.event.world.EventGenerateTemperatureTable;
+import v0id.api.exp.player.IExPPlayer;
 import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.EnumSeason;
 import v0id.api.exp.world.IExPWorld;
@@ -224,6 +225,12 @@ public class ExPWorld implements IExPWorld
 			}
 			
 			this.setPersistentTicks(time);
+		}
+		
+		if (ticksSkipped >= 100)
+		{
+			final int skipped = (int) ticksSkipped;
+			this.getWorld().playerEntities.forEach(e -> IExPPlayer.of(e).skipTicks(skipped));
 		}
 		
 		if (ticksSkipped >= 24000)

@@ -49,6 +49,7 @@ public class ExPPlayer implements IExPPlayer
 	public List<IDisease> diseases = Lists.newArrayList();
 	public boolean isFemale;
 	public EnumPlayerProgression stage = EnumPlayerProgression.STONE_AGE;
+	public int skippedTicks;
 	
 	public boolean health_isDirty;
 	public boolean modifiers_isDirty;
@@ -492,6 +493,13 @@ public class ExPPlayer implements IExPPlayer
 	@Override
 	public void onTick()
 	{
+		PlayerManager.tick(this.getOwner(), this, 0);
+		int timesSkipped = 0;
+		while (++timesSkipped < 5 && (this.skippedTicks -= 100) > 0)
+		{
+			PlayerManager.tick(this.getOwner(), this, 100);
+		}
+		
 		if (this.owner.world.isRemote && this.clientIsDirty)
 		{
 			this.clientIsDirty = false;
@@ -569,6 +577,11 @@ public class ExPPlayer implements IExPPlayer
 			ret.partsData.put(part, "");
 		}
 		
+		for (Nutrient n : Nutrient.values())
+		{
+			ret.nutritionLevels.put(n, 100F);
+		}
+		
 		return ret;
 	}
 	
@@ -594,5 +607,35 @@ public class ExPPlayer implements IExPPlayer
 			this.serverIsDirty = this.stage_isDirty = true;
 			this.stage = progression;
 		}
+	}
+
+	@Override
+	public void resetData()
+	{
+		this.health = this.maxHealth = 5000f;
+		this.calories = 2000;
+		this.thirst = this.maxThirst = 3000;
+		this.temperature = 36.6F;
+		this.partsData.clear();
+		this.partsState.clear();
+		this.diseases.clear();
+		for (BodyPart part : BodyPart.values())
+		{
+			this.partsState.put(part, 100f);
+			this.partsData.put(part, "");
+		}
+		
+		for (Nutrient n : Nutrient.values())
+		{
+			this.nutritionLevels.put(n, 100F);
+		}
+		
+		this.clientIsDirty = true;
+	}
+
+	@Override
+	public void skipTicks(int skipped)
+	{
+		this.skippedTicks += skipped;
 	}
 }
