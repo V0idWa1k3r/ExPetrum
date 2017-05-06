@@ -37,11 +37,13 @@ public class ExPRegistryNames
 		blockShrubAutumn																					= new ResourceLocation(modid, "shrub_autumn"),
 		blockShrubDead																						= new ResourceLocation(modid, "shrub_dead"),
 		blockSnow																							= new ResourceLocation(modid, "snow"),
-		blockIce																							= new ResourceLocation(modid, "ice");
+		blockIce																							= new ResourceLocation(modid, "ice"),
+		blockBoulderWorked																					= new ResourceLocation(modid, "boulder_worked");
 
 	public static final ResourceLocation
 		itemRock																							= new ResourceLocation(modid, "item_rock"),
-		itemStick																							= new ResourceLocation(modid, "item_stick");
+		itemStick																							= new ResourceLocation(modid, "item_stick"),
+		itemToolhead																						= new ResourceLocation(modid, "item_toolhead");
 	
 	public static final ResourceLocation
 		entityGravFallingBlock																				= new ResourceLocation(modid, "gravFallingBlock"),

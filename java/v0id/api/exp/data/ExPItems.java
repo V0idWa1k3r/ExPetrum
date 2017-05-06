@@ -8,4 +8,5 @@ public class ExPItems
 {
 	public static Item rock;
 	public static Item stick;
+	public static Item toolHead;
 }

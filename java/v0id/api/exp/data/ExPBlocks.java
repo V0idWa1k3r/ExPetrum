@@ -32,4 +32,5 @@ public class ExPBlocks
 	public static Block[] shrubs;
 	public static Block snow;
 	public static Block ice;
+	public static Block workedBoulder;
 }

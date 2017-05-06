@@ -4,6 +4,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import v0id.api.exp.data.ExPItems;
 import v0id.exp.item.ItemRock;
 import v0id.exp.item.ItemStick;
+import v0id.exp.item.ItemToolHead;
 
 public class ExPItemsRegistry extends AbstractRegistry
 {
@@ -18,5 +19,6 @@ public class ExPItemsRegistry extends AbstractRegistry
 		super.preInit(evt);
 		ExPItems.rock = new ItemRock();
 		ExPItems.stick = new ItemStick();
+		ExPItems.toolHead = new ItemToolHead();
 	}
 }

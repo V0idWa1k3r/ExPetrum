@@ -20,6 +20,7 @@ import v0id.exp.block.BlockSand;
 import v0id.exp.block.BlockSnow;
 import v0id.exp.block.BlockSoil;
 import v0id.exp.block.BlockStone;
+import v0id.exp.block.BlockWorkedBoulder;
 import v0id.exp.block.fluid.BlockFreshWater;
 import v0id.exp.block.fluid.BlockLava;
 import v0id.exp.block.fluid.BlockOil;
@@ -88,6 +89,7 @@ public class ExPBlocksRegistry extends AbstractRegistry
 		Stream.of(EnumShrubState.values()).forEach(s -> ExPBlocks.shrubs[s.ordinal()] = new BlockShrub(s));
 		ExPBlocks.snow = new BlockSnow();
 		ExPBlocks.ice = new BlockIce();
+		ExPBlocks.workedBoulder = new BlockWorkedBoulder();
 	}
 
 	@Override

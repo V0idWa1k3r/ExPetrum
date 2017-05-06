@@ -46,6 +46,7 @@ import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.data.ExPRegistryNames;
+import v0id.api.exp.item.EnumToolhead;
 import v0id.exp.block.tree.BlockLeaf;
 import v0id.exp.block.tree.BlockLog;
 import v0id.exp.client.model.ModelLoaderExP;
@@ -102,6 +103,7 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.pebble), i, new ModelResourceLocation(ExPBlocks.pebble.getRegistryName(), "amdl=0,class=" + EnumRockClass.values()[i].getName()));
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.boulder), i, new ModelResourceLocation(ExPBlocks.boulder.getRegistryName(), "amdl=0,class=" + EnumRockClass.values()[i].getName()));
 			ModelLoader.setCustomModelResourceLocation(ExPItems.rock, i, new ModelResourceLocation(ExPItems.rock.getRegistryName(), "class=" + EnumRockClass.values()[i].getName()));
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.workedBoulder), i, new ModelResourceLocation(ExPBlocks.workedBoulder.getRegistryName(), "class=" + EnumRockClass.values()[i].getName() + ",workindex=0"));
 		}
 		
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.coralRock), 0, new ModelResourceLocation(ExPBlocks.coralRock.getRegistryName(), "rtindex=0"));
@@ -122,6 +124,11 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 		for (int i = 0; i < EnumTreeType.values().length + EnumShrubType.values().length; ++i)
 		{
 			ModelLoader.setCustomModelResourceLocation(ExPItems.stick, i, new ModelResourceLocation(ExPItems.stick.getRegistryName(), "type=" + (i < EnumTreeType.values().length ? EnumTreeType.values()[i].getName() : EnumShrubType.values()[i - EnumTreeType.values().length].getName())));
+		}
+		
+		for (int i = 0; i < EnumToolhead.values().length; ++i)
+		{
+			ModelLoader.setCustomModelResourceLocation(ExPItems.toolHead, i, new ModelResourceLocation(ExPItems.toolHead.getRegistryName(), "type=" + EnumToolhead.values()[i].getName()));
 		}
 		
 		this.registerCustomStateMappers();

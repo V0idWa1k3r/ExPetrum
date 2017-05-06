@@ -9,4 +9,5 @@ public class ExPCreativeTabs
 	public static CreativeTabs tabPlantlife;
 	public static CreativeTabs tabCommon;
 	public static CreativeTabs tabMiscBlocks;
+	public static CreativeTabs tabTools;
 }

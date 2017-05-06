@@ -16,13 +16,16 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -33,12 +36,14 @@ import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.core.util.ItemBlockWithMetadata;
 import v0id.api.exp.block.IOreHintReplaceable;
 import v0id.api.exp.block.property.EnumRockClass;
+import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
+import v0id.exp.item.ItemRock;
 
 public class BlockBoulder extends Block implements IInitializableBlock, IOreHintReplaceable, IOreDictEntry
 {
@@ -86,7 +91,39 @@ public class BlockBoulder extends Block implements IInitializableBlock, IOreHint
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,	EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		return true;
+		if (playerIn != null)
+		{
+			ItemStack held = playerIn.getHeldItem(hand);
+			if (!held.isEmpty() && held.getItem() instanceof ItemRock)
+			{
+				for (int i = 0; i < 16; ++i)
+				{
+					worldIn.spawnParticle(EnumParticleTypes.BLOCK_CRACK, pos.getX() + worldIn.rand.nextDouble(), pos.getY() + worldIn.rand.nextDouble(), pos.getZ() + worldIn.rand.nextDouble(), 0, 0, 0, Block.getStateId(state));
+				}
+				
+				if (!worldIn.isRemote)
+				{
+					if (worldIn.rand.nextInt(8) == 0)
+					{
+						worldIn.playSound(null, pos, SoundEvents.BLOCK_ANVIL_FALL, SoundCategory.BLOCKS, 1, 0.1f);
+						worldIn.setBlockState(pos, ExPBlocks.workedBoulder.getDefaultState().withProperty(ROCK_CLASS, state.getValue(ROCK_CLASS)));
+						held.shrink(1);
+					}
+					else
+					{
+						worldIn.playSound(null, pos, SoundEvents.BLOCK_ANVIL_STEP, SoundCategory.BLOCKS, 1, 2f);
+						if (worldIn.rand.nextBoolean() && worldIn.rand.nextBoolean())
+						{
+							held.shrink(1);
+						}
+					}
+				}
+				
+				return true;
+			}
+		}
+		
+		return false;
 	}
 
 	@Override
