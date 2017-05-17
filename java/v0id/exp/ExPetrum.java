@@ -1,5 +1,6 @@
 package v0id.exp;
 
+import java.io.File;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.stream.Stream;
@@ -10,8 +11,10 @@ import com.google.gson.Gson;
 
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -22,6 +25,7 @@ import v0id.api.core.logging.VoidLogger;
 import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.world.YearlyTemperatureRange;
+import v0id.exp.crop.CropDataLoader;
 import v0id.exp.registry.AbstractRegistry;
 import v0id.exp.registry.ExPBiomeRegistry;
 import v0id.exp.registry.ExPBlocksRegistry;
@@ -41,7 +45,9 @@ public class ExPetrum
 {
 	@Mod.Instance("exp")
 	public static ExPetrum instance;
+	public static ModContainer containerOfSelf;
 	public static boolean isDevEnvironment;
+	public static File configDirectory;
 	
 	static
 	{
@@ -69,8 +75,11 @@ public class ExPetrum
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt)
 	{
+		containerOfSelf = Loader.instance().activeModContainer();
+		this.configDirectory = evt.getModConfigurationDirectory();
 		this.setDevEnvironment();
 		ExPMisc.modLogger.log(LogLevel.Debug, "ExPetrum pre initializing.");
+		CropDataLoader.loadAllData();
 		AbstractRegistry.create(ExPCapabilityRegistry.class);
 		AbstractRegistry.create(ExPFluidRegistry.class);
 		AbstractRegistry.create(ExPCreativeTabsRegistry.class);
