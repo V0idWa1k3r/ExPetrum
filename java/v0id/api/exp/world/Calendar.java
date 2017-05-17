@@ -10,7 +10,7 @@ public class Calendar implements INBTSerializable<NBTTagLong>
 	// Fyi, the ticksPerDay for real life metrics would be 1728000! 72 times bigger!
 	public long ticksPerDay = 24000;
 	public long daysPerMonth = 30;
-	public long monthsPerYear = 12;
+	public long monthsPerYear = 4;
 	public long hoursPerDay = 24;
 	public long minutesPerHour = 60;
 	public long secondsPerMinute = 60;

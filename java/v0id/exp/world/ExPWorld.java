@@ -64,10 +64,8 @@ public class ExPWorld implements IExPWorld
 		Calendar tomorrow = new Calendar(this.getPersistentTicks() + today.ticksPerDay);
 		byte monthToday = today.getMonth();
 		byte monthTomorrow = tomorrow.getMonth();
-		EnumSeason seasonToday = EnumSeason.values()[monthToday / 3];
-		EnumSeason seasonTomorrow = EnumSeason.values()[monthTomorrow / 3];
-		float monthTodayPercentage = (float)monthToday / 3F;
-		float monthTomorrowPercentage = (float)monthTomorrow / 3F;
+		EnumSeason seasonToday = EnumSeason.values()[monthToday];
+		EnumSeason seasonTomorrow = EnumSeason.values()[monthTomorrow];
 		byte dayToday = today.getDay();
 		byte dayTomorrow = tomorrow.getDay();
 		float dayTodayPercentage = (float)dayToday / (float)today.daysPerMonth;
@@ -77,8 +75,8 @@ public class ExPWorld implements IExPWorld
 			this.dayTemp = new float[8];
 			for (byte b = 0; b < 4; ++b)
 			{
-				this.dayTemp[b] = seasonToday.getTemperatureData().getTemperature(this.owner.rand, monthTodayPercentage, dayTodayPercentage, 0.25F * (b + 1));
-				this.dayTemp[b + 4] = seasonTomorrow.getTemperatureData().getTemperature(this.owner.rand, monthTomorrowPercentage, dayTomorrowPercentage, 0.25F * (b + 1));
+				this.dayTemp[b] = seasonToday.getTemperatureData().getTemperature(this.owner.rand, dayTodayPercentage, dayTodayPercentage, 0.25F * (b + 1));
+				this.dayTemp[b + 4] = seasonTomorrow.getTemperatureData().getTemperature(this.owner.rand, dayTomorrowPercentage, dayTomorrowPercentage, 0.25F * (b + 1));
 			}
 		}
 		else
@@ -86,7 +84,7 @@ public class ExPWorld implements IExPWorld
 			for (byte b = 0; b < 4; ++b)
 			{
 				this.dayTemp[b] = this.dayTemp[b + 4];
-				this.dayTemp[b + 4] = seasonTomorrow.getTemperatureData().getTemperature(this.owner.rand, monthTomorrowPercentage, dayTomorrowPercentage, 0.25F * (b + 1));
+				this.dayTemp[b + 4] = seasonTomorrow.getTemperatureData().getTemperature(this.owner.rand, dayTomorrowPercentage, dayTomorrowPercentage, 0.25F * (b + 1));
 			}
 		}
 		
@@ -101,13 +99,13 @@ public class ExPWorld implements IExPWorld
 	@Override
 	public Calendar today()
 	{
-		return this.dayTimeKeeper.withTicks(this.getPersistentTicks());
+		return this.dayTimeKeeper.withTicks(this.getPersistentTicks() + this.dayTimeKeeper.ticksPerMonth);
 	}
 
 	@Override
 	public EnumSeason getCurrentSeason()
 	{
-		return EnumSeason.values()[Math.min(this.today().getMonth() / 3, 11)];
+		return EnumSeason.values()[Math.min(this.today().getMonth(), 3)];
 	}
 
 	@Override
@@ -156,9 +154,7 @@ public class ExPWorld implements IExPWorld
 			tempRet *= 0.9F;
 		}
 		
-		// Spring temperature ranges fall in the negatives but it would be too harsh to start the player in a winter right away
-		boolean firstSpring = c.getTime() < c.ticksPerDay * c.daysPerMonth * 3;
-		return firstSpring ? Math.max(1, tempRet) : tempRet;
+		return tempRet;
 	}
 
 	@Override
