@@ -8,6 +8,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.exp.world.biome.ExPBiome;
@@ -19,7 +20,6 @@ public class ExPLake extends ExPBiome
 	public ExPLake(BiomeProperties properties, float... biomedata)
 	{
 		super(properties, biomedata);
-		BiomeDictionary.addTypes(this, Type.SWAMP);
 		this.theBiomeDecorator.treesPerChunk = 3;
 		this.theBiomeDecorator.grassPerChunk = 3;
 		this.theBiomeDecorator.deadBushPerChunk = 6;
@@ -36,6 +36,13 @@ public class ExPLake extends ExPBiome
 		this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.EUONYMUS_JAPONICUS));
 		this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.LAURUS_NOBILIS));
 		this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.RED_ROBIN));
+	}
+	
+	@Override
+	public void registerBiome(IForgeRegistry<Biome> registry)
+	{
+		super.registerBiome(registry);
+		BiomeDictionary.addTypes(this, Type.SWAMP);
 	}
 	
 	public static ExPLake create()

@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.property.ExPBlockProperties;
@@ -24,11 +24,12 @@ import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.world.EnumSeason;
 import v0id.api.exp.world.IBiome;
 import v0id.api.exp.world.IExPWorld;
+import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.world.gen.GenerationHelper;
 import v0id.exp.world.gen.ShrubEntry;
 import v0id.exp.world.gen.tree.TreeEntry;
 
-public class ExPBiome extends Biome implements IBiome
+public class ExPBiome extends Biome implements IBiome, IBiomeRegistryEntry
 {
 	public final float
 		temperatureMultiplier,
@@ -63,7 +64,7 @@ public class ExPBiome extends Biome implements IBiome
 		this.SALT_ICE = ExPBlocks.ice.getDefaultState().withProperty(ExPBlockProperties.ICE_IS_SALT, true);
 		this.FRESH_ICE = ExPBlocks.ice.getDefaultState().withProperty(ExPBlockProperties.ICE_IS_SALT, false);
 		this.setRegistryName("exp", this.getBiomeName());
-		GameRegistry.register(this);
+		ExPHandlerRegistry.biomeEntries.add(this);
 	}
 	
 	public Optional<EnumTreeType> provideTreeToGenerate(Random rand)
@@ -261,7 +262,10 @@ public class ExPBiome extends Biome implements IBiome
 	{
 		return this.humidityBaseModifier;
 	}
-	
-	
 
+	@Override
+	public void registerBiome(IForgeRegistry<Biome> registry)
+	{
+		registry.register(this);
+	}
 }

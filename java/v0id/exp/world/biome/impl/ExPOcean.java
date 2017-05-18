@@ -3,6 +3,7 @@ package v0id.exp.world.biome.impl;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import v0id.exp.world.biome.ExPBiome;
 
 public class ExPOcean extends ExPBiome
@@ -11,6 +12,12 @@ public class ExPOcean extends ExPBiome
 	{
 		super(properties, biomedata);
 		this.theBiomeDecorator.deadBushPerChunk = 0;
+	}
+	
+	@Override
+	public void registerBiome(IForgeRegistry<Biome> registry)
+	{
+		super.registerBiome(registry);
 		BiomeDictionary.addTypes(this, Type.OCEAN);
 	}
 	

@@ -1,7 +1,5 @@
 package v0id.exp.registry;
 
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import v0id.api.exp.data.ExPBiomes;
 import v0id.exp.world.biome.impl.ExPBeach;
 import v0id.exp.world.biome.impl.ExPColdForest;
@@ -13,28 +11,20 @@ import v0id.exp.world.biome.impl.ExPDesert;
 import v0id.exp.world.biome.impl.ExPForest;
 import v0id.exp.world.biome.impl.ExPHills;
 import v0id.exp.world.biome.impl.ExPJungle;
+import v0id.exp.world.biome.impl.ExPLake;
 import v0id.exp.world.biome.impl.ExPMountains;
 import v0id.exp.world.biome.impl.ExPOcean;
 import v0id.exp.world.biome.impl.ExPPlains;
 import v0id.exp.world.biome.impl.ExPRareForest;
 import v0id.exp.world.biome.impl.ExPRiver;
 import v0id.exp.world.biome.impl.ExPSavanna;
-import v0id.exp.world.biome.impl.ExPLake;
 import v0id.exp.world.biome.impl.ExPWarmForest;
 import v0id.exp.world.biome.impl.ExPWarmPlains;
 
 public class ExPBiomeRegistry extends AbstractRegistry
 {
-
-	public ExPBiomeRegistry()
+	static 
 	{
-		super();
-	}
-
-	@Override
-	public void preInit(FMLPreInitializationEvent evt)
-	{
-		super.preInit(evt);
 		ExPBiomes.river = ExPRiver.create();
 		ExPBiomes.ocean = ExPOcean.create();
 		ExPBiomes.beach = ExPBeach.create();
@@ -55,10 +45,9 @@ public class ExPBiomeRegistry extends AbstractRegistry
 		ExPBiomes.hills = ExPHills.create();
 		ExPBiomes.savanna = ExPSavanna.create();
 	}
-
-	@Override
-	public void postInit(FMLPostInitializationEvent evt)
+	
+	public ExPBiomeRegistry()
 	{
-		super.postInit(evt);
+		super();
 	}
 }

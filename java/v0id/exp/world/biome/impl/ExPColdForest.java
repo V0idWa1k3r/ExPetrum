@@ -3,6 +3,7 @@ package v0id.exp.world.biome.impl;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.exp.world.biome.ExPBiome;
@@ -14,7 +15,6 @@ public class ExPColdForest extends ExPBiome
 	public ExPColdForest(BiomeProperties properties, float... biomedata)
 	{
 		super(properties, biomedata);
-		BiomeDictionary.addTypes(this, Type.FOREST, Type.COLD);
 		this.theBiomeDecorator.treesPerChunk = 10;
         this.theBiomeDecorator.grassPerChunk = 4;
         this.theBiomeDecorator.deadBushPerChunk = 8;
@@ -40,6 +40,13 @@ public class ExPColdForest extends ExPBiome
         this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.KAPUKA));
         this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.WHIN));
         this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.PRUNUS));
+	}
+	
+	@Override
+	public void registerBiome(IForgeRegistry<Biome> registry)
+	{
+		super.registerBiome(registry);
+		BiomeDictionary.addTypes(this, Type.FOREST, Type.COLD);
 	}
 
 	public static ExPColdForest create()

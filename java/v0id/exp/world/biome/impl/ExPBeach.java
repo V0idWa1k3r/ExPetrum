@@ -4,6 +4,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.exp.world.biome.ExPBiome;
 import v0id.exp.world.gen.tree.TreeEntry;
@@ -15,10 +16,16 @@ public class ExPBeach extends ExPBiome
 		super(properties, biomedata);
 		this.topBlock = Blocks.SAND.getDefaultState();
 		this.fillerBlock = Blocks.SAND.getDefaultState();
-		BiomeDictionary.addTypes(this, Type.BEACH);
 		this.theBiomeDecorator.treesPerChunk = 3;
 		this.theBiomeDecorator.deadBushPerChunk = 0;
 		this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.PALM));
+	}
+	
+	@Override
+	public void registerBiome(IForgeRegistry<Biome> registry)
+	{
+		super.registerBiome(registry);
+		BiomeDictionary.addTypes(this, Type.BEACH);
 	}
 	
 	public static ExPBeach create()

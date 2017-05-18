@@ -3,6 +3,7 @@ package v0id.exp.world.biome.impl;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.exp.world.biome.ExPBiome;
@@ -14,7 +15,6 @@ public class ExPMountains extends ExPBiome
 	public ExPMountains(BiomeProperties properties, float... biomedata)
 	{
 		super(properties, biomedata);
-		BiomeDictionary.addTypes(this, Type.MOUNTAIN);
 		this.theBiomeDecorator.treesPerChunk = 3;
 		this.theBiomeDecorator.grassPerChunk = 4;
 		this.theBiomeDecorator.deadBushPerChunk = 2;
@@ -36,6 +36,13 @@ public class ExPMountains extends ExPBiome
 		this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.PRUNUS));
 	}
 
+	@Override
+	public void registerBiome(IForgeRegistry<Biome> registry)
+	{
+		super.registerBiome(registry);
+		BiomeDictionary.addTypes(this, Type.MOUNTAIN);
+	}
+	
 	public static ExPMountains create()
 	{
 		return new ExPMountains(new Biome.BiomeProperties("mountains").setBaseHeight(0.45F).setHeightVariation(0.3F), 1F, 1F, -4F, 0F);
