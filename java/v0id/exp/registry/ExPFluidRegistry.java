@@ -10,15 +10,8 @@ import v0id.api.exp.data.ExPRegistryNames;
 
 public class ExPFluidRegistry extends AbstractRegistry
 {
-	public ExPFluidRegistry()
+	static
 	{
-		super();
-	}
-
-	@Override
-	public void preInit(FMLPreInitializationEvent evt)
-	{
-		super.preInit(evt);
 		ExPFluids.saltWater = new Fluid(ExPRegistryNames.fluidSaltWater, new ResourceLocation("exp", "blocks/fluid/water_still"), new ResourceLocation("exp", "blocks/fluid/water_flow")){
 			
 			@Override
@@ -43,6 +36,17 @@ public class ExPFluidRegistry extends AbstractRegistry
 		ExPFluids.oil = new Fluid(ExPRegistryNames.fluidOil, new ResourceLocation("exp", "blocks/fluid/oil_still"), new ResourceLocation("exp", "blocks/fluid/oil_flow"))
 				.setDensity(900).setViscosity(8000);
 		
+	}
+	
+	public ExPFluidRegistry()
+	{
+		super();
+	}
+
+	@Override
+	public void preInit(FMLPreInitializationEvent evt)
+	{
+		super.preInit(evt);
 		FluidRegistry.registerFluid(ExPFluids.saltWater);
 		FluidRegistry.registerFluid(ExPFluids.freshWater);
 		FluidRegistry.registerFluid(ExPFluids.lava);

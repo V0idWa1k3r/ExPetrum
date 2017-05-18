@@ -24,7 +24,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
@@ -38,10 +38,13 @@ import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
+import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
+import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
 
-public class BlockVegetation extends BlockBush implements IInitializableBlock, IOreDictEntry
+public class BlockVegetation extends BlockBush implements IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {
 	// Not exposed, for internal use only(rendering the model)
 	// You do NOT need these! They are purely for rendering! They are not even saved with the meta!
@@ -66,10 +69,10 @@ public class BlockVegetation extends BlockBush implements IInitializableBlock, I
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(RANDOM_MODEL, 0).withProperty(ExPBlockProperties.VEGETATION_GROWTH, 0));
 		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
-		GameRegistry.register(this);
-		GameRegistry.register(new ItemBlockWithMetadata(this));
 		this.setTickRandomly(true);
 		Blocks.FIRE.setFireInfo(this, 60, 100);
+		ExPHandlerRegistry.blockEntries.add(this);
+		ExPHandlerRegistry.itemEntries.add(this);
 	}
 	
 	@Override
@@ -244,5 +247,17 @@ public class BlockVegetation extends BlockBush implements IInitializableBlock, I
 	public void registerOreDictNames()
 	{
 		Stream.of(ExPOreDict.blockVegetation).forEach(s -> OreDictionary.registerOre(s, new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE)));
+	}
+
+	@Override
+	public void registerItem(IForgeRegistry<Item> registry)
+	{
+		registry.register(new ItemBlockWithMetadata(this));
+	}
+
+	@Override
+	public void registerBlock(IForgeRegistry<Block> registry)
+	{
+		registry.register(this);
 	}
 }

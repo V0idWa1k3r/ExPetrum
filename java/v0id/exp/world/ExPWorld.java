@@ -70,13 +70,15 @@ public class ExPWorld implements IExPWorld
 		byte dayTomorrow = tomorrow.getDay();
 		float dayTodayPercentage = (float)dayToday / (float)today.daysPerMonth;
 		float dayTomorrowPercentage = (float)dayTomorrow / (float)today.daysPerMonth;
+		float weekTodayPercentage = (float)(dayToday % 10) / 10F;
+		float weekTomorrowPercentage = (float)(dayTomorrow % 10) / 10F;
 		if (this.dayTemp == null)
 		{
 			this.dayTemp = new float[8];
 			for (byte b = 0; b < 4; ++b)
 			{
-				this.dayTemp[b] = seasonToday.getTemperatureData().getTemperature(this.owner.rand, dayTodayPercentage, dayTodayPercentage, 0.25F * (b + 1));
-				this.dayTemp[b + 4] = seasonTomorrow.getTemperatureData().getTemperature(this.owner.rand, dayTomorrowPercentage, dayTomorrowPercentage, 0.25F * (b + 1));
+				this.dayTemp[b] = seasonToday.getTemperatureData().getTemperature(this.owner.rand, dayTodayPercentage, weekTodayPercentage, 0.25F * (b + 1));
+				this.dayTemp[b + 4] = seasonTomorrow.getTemperatureData().getTemperature(this.owner.rand, dayTomorrowPercentage, weekTomorrowPercentage, 0.25F * (b + 1));
 			}
 		}
 		else

@@ -27,7 +27,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.core.util.ItemBlockWithMetadata;
 import v0id.api.exp.block.IOreHintReplaceable;
@@ -38,8 +38,10 @@ import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
+import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.handler.ExPHandlerRegistry;
 
-public class BlockPebble extends Block implements IInitializableBlock, IOreHintReplaceable, IOreDictEntry
+public class BlockPebble extends Block implements IInitializableBlock, IOreHintReplaceable, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {
 	public static final PropertyInteger MODEL_INDEX = PropertyInteger.create("amdl", 0, 3);
 	public static final AxisAlignedBB PEBBLE_AABB = new AxisAlignedBB(0, 0, 0, 1, 0.1, 1);
@@ -60,8 +62,8 @@ public class BlockPebble extends Block implements IInitializableBlock, IOreHintR
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ROCK_CLASS, ANDESITE).withProperty(MODEL_INDEX, 0));
 		this.setCreativeTab(ExPCreativeTabs.tabUnderground);
-		GameRegistry.register(this);
-		GameRegistry.register(new ItemBlockWithMetadata(this));
+		ExPHandlerRegistry.blockEntries.add(this);
+		ExPHandlerRegistry.itemEntries.add(this);
 	}
 	
 	@Override
@@ -216,5 +218,17 @@ public class BlockPebble extends Block implements IInitializableBlock, IOreHintR
 			AtomicInteger i = new AtomicInteger(0);
 			Stream.of(ExPOreDict.rockNames).forEach(ss -> OreDictionary.registerOre(s + Character.toUpperCase(ss.charAt(0)) + ss.substring(1), new ItemStack(this, 1, i.getAndIncrement())));
 		});
+	}
+
+	@Override
+	public void registerItem(IForgeRegistry<Item> registry)
+	{
+		registry.register(new ItemBlockWithMetadata(this));
+	}
+
+	@Override
+	public void registerBlock(IForgeRegistry<Block> registry)
+	{
+		registry.register(this);
 	}
 }

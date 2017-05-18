@@ -22,6 +22,7 @@ import net.minecraftforge.fml.relauncher.CoreModManager;
 import v0id.api.core.VoidApi;
 import v0id.api.core.logging.LogLevel;
 import v0id.api.core.logging.VoidLogger;
+import v0id.api.core.util.java.Reflector;
 import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.world.YearlyTemperatureRange;
@@ -70,16 +71,13 @@ public class ExPetrum
 		
 		ExPMisc.modLogger = VoidLogger.createLogger(ExPetrum.class, LogLevel.Fine);
 		Stream.of(EnumOre.values()).forEach(EnumOre::registerWorldgen);
+		CropDataLoader.loadAllData();
+		createRegistries();
+		Reflector.preloadClass("v0id.exp.handler.ExPHandlerRegistry", false);
 	}
 	
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent evt)
+	public static void createRegistries()
 	{
-		containerOfSelf = Loader.instance().activeModContainer();
-		this.configDirectory = evt.getModConfigurationDirectory();
-		this.setDevEnvironment();
-		ExPMisc.modLogger.log(LogLevel.Debug, "ExPetrum pre initializing.");
-		CropDataLoader.loadAllData();
 		AbstractRegistry.create(ExPCapabilityRegistry.class);
 		AbstractRegistry.create(ExPFluidRegistry.class);
 		AbstractRegistry.create(ExPCreativeTabsRegistry.class);
@@ -92,6 +90,15 @@ public class ExPetrum
 		AbstractRegistry.create(ExPBiomeRegistry.class);
 		AbstractRegistry.create(ExPWorldRegistry.class);
 		AbstractRegistry.create(ExPOreDictRegistry.class);
+	}
+	
+	@EventHandler
+	public void preInit(FMLPreInitializationEvent evt)
+	{
+		containerOfSelf = Loader.instance().activeModContainer();
+		this.configDirectory = evt.getModConfigurationDirectory();
+		this.setDevEnvironment();
+		ExPMisc.modLogger.log(LogLevel.Debug, "ExPetrum pre initializing.");
 		AbstractRegistry.registries.forEach(reg -> reg.preInit(evt));
 		VoidApi.proxy.executeOnClient("v0id.exp.client.ClientRegistry", "preInit", VoidApi.proxy.provideClientOnlyInstance("v0id.exp.client.ClientRegistry"), FMLPreInitializationEvent.class, evt);
 		ExPMisc.modLogger.log(LogLevel.Debug, "ExPetrum pre initialized.");

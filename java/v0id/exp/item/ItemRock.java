@@ -7,7 +7,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.data.ExPCreativeTabs;
@@ -15,8 +15,10 @@ import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
+import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.handler.ExPHandlerRegistry;
 
-public class ItemRock extends Item implements IInitializableItem, IWeightProvider, IOreDictEntry
+public class ItemRock extends Item implements IInitializableItem, IWeightProvider, IOreDictEntry, IItemRegistryEntry
 {
 	public ItemRock()
 	{
@@ -45,7 +47,7 @@ public class ItemRock extends Item implements IInitializableItem, IWeightProvide
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabUnderground);
 		this.setHasSubtypes(true);
-		GameRegistry.register(this);
+		ExPHandlerRegistry.itemEntries.add(this);
 	}
 
 	@Override
@@ -62,5 +64,11 @@ public class ItemRock extends Item implements IInitializableItem, IWeightProvide
 			AtomicInteger i = new AtomicInteger(0);
 			Stream.of(ExPOreDict.rockNames).forEach(ss -> OreDictionary.registerOre(s + Character.toUpperCase(ss.charAt(0)) + ss.substring(1), new ItemStack(this, 1, i.getAndIncrement())));
 		});
+	}
+
+	@Override
+	public void registerItem(IForgeRegistry<Item> registry)
+	{
+		registry.register(this);
 	}
 }

@@ -10,12 +10,13 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityFallingBlock;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.core.util.ItemBlockWithMetadata;
 import v0id.api.exp.data.ExPCreativeTabs;
@@ -26,8 +27,10 @@ import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.gravity.GravityHelper;
 import v0id.api.exp.gravity.IGravitySusceptible;
 import v0id.api.exp.inventory.IWeightProvider;
+import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.handler.ExPHandlerRegistry;
 
-public class BlockCoralRock extends Block implements IWeightProvider, IGravitySusceptible, IInitializableBlock, IOreDictEntry
+public class BlockCoralRock extends Block implements IWeightProvider, IGravitySusceptible, IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {
 	public static PropertyInteger TEXTURE_INDEX_ROCK = PropertyInteger.create("rtindex", 0, 5);
 	
@@ -118,13 +121,25 @@ public class BlockCoralRock extends Block implements IWeightProvider, IGravitySu
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TEXTURE_INDEX_ROCK, 0));
 		this.setCreativeTab(ExPCreativeTabs.tabCommon);
-		GameRegistry.register(this);
-		GameRegistry.register(new ItemBlockWithMetadata(this));
+		ExPHandlerRegistry.blockEntries.add(this);
+		ExPHandlerRegistry.itemEntries.add(this);
 	}
 	
 	@Override
 	public void registerOreDictNames()
 	{
 		Stream.of(ExPOreDict.blockCoralRock).forEach(s -> OreDictionary.registerOre(s, new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE)));
+	}
+
+	@Override
+	public void registerItem(IForgeRegistry<Item> registry)
+	{
+		registry.register(new ItemBlockWithMetadata(this));
+	}
+
+	@Override
+	public void registerBlock(IForgeRegistry<Block> registry)
+	{
+		registry.register(this);
 	}
 }

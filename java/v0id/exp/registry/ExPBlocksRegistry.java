@@ -3,8 +3,6 @@ package v0id.exp.registry;
 import java.util.stream.Stream;
 
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import v0id.api.exp.block.EnumShrubState;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.property.ExPBlockProperties;
@@ -36,15 +34,8 @@ import v0id.exp.block.tree.BlockLog;
 
 public class ExPBlocksRegistry extends AbstractRegistry
 {
-	public ExPBlocksRegistry()
+	static
 	{
-		super();
-	}
-
-	@Override
-	public void preInit(FMLPreInitializationEvent evt)
-	{
-		super.preInit(evt);
 		ExPBlocks.rock = new BlockStone();
 		ExPBlocks.soil = new BlockSoil();
 		ExPBlocks.grass = new BlockGrass();
@@ -91,10 +82,9 @@ public class ExPBlocksRegistry extends AbstractRegistry
 		ExPBlocks.ice = new BlockIce();
 		ExPBlocks.workedBoulder = new BlockWorkedBoulder();
 	}
-
-	@Override
-	public void init(FMLInitializationEvent evt)
+	
+	public ExPBlocksRegistry()
 	{
-		super.init(evt);
+		super();
 	}
 }

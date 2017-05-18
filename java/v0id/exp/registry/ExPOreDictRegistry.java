@@ -19,6 +19,4 @@ public class ExPOreDictRegistry extends AbstractRegistry
 		OreDictManager.mapStorage(ExPItems.class);
 		OreDictManager.register();
 	}
-
-	
 }

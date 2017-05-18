@@ -17,7 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import v0id.api.core.util.ItemBlockWithMetadata;
@@ -26,9 +26,12 @@ import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
+import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
+import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.handler.ExPHandlerRegistry;
 
-public class BlockCoralPlant extends Block implements IWeightProvider, IInitializableBlock
+public class BlockCoralPlant extends Block implements IWeightProvider, IInitializableBlock, IBlockRegistryEntry, IItemRegistryEntry
 {
 	public static PropertyInteger TEXTURE_INDEX_ROCK = PropertyInteger.create("rtindex", 0, 5);
 	public static PropertyInteger TEXTURE_INDEX_PLANT = PropertyInteger.create("ptindex", 0, 15);
@@ -49,9 +52,9 @@ public class BlockCoralPlant extends Block implements IWeightProvider, IInitiali
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TEXTURE_INDEX_ROCK, 0).withProperty(TEXTURE_INDEX_PLANT, 0));
 		this.setCreativeTab(ExPCreativeTabs.tabCommon);
-		GameRegistry.register(this);
-		GameRegistry.register(new ItemBlockWithMetadata(this));
 		this.setTickRandomly(true);
+		ExPHandlerRegistry.blockEntries.add(this);
+		ExPHandlerRegistry.itemEntries.add(this);
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -147,5 +150,17 @@ public class BlockCoralPlant extends Block implements IWeightProvider, IInitiali
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
 		return this.getExtendedState(state, worldIn, pos);
+	}
+
+	@Override
+	public void registerItem(IForgeRegistry<Item> registry)
+	{
+		registry.register(new ItemBlockWithMetadata(this));
+	}
+
+	@Override
+	public void registerBlock(IForgeRegistry<Block> registry)
+	{
+		registry.register(this);
 	}
 }

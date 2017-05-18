@@ -25,7 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
@@ -36,10 +36,12 @@ import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
+import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockOre;
+import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.tile.TileOre;
 
-public class BlockOre extends Block implements ITileEntityProvider, IInitializableBlock, IOreDictEntry
+public class BlockOre extends Block implements ITileEntityProvider, IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {
 	public static final float ORE_HARDNESS_MODIFIER = 2F;
 
@@ -59,8 +61,8 @@ public class BlockOre extends Block implements ITileEntityProvider, IInitializab
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ROCK_CLASS, ANDESITE).withProperty(ExPBlockProperties.ORE_TEXTURE_ID, 0));
 		this.setCreativeTab(ExPCreativeTabs.tabOres);
-		GameRegistry.register(this);
-		GameRegistry.register(new ItemBlockOre(this));
+		ExPHandlerRegistry.blockEntries.add(this);
+		ExPHandlerRegistry.itemEntries.add(this);
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -163,5 +165,17 @@ public class BlockOre extends Block implements ITileEntityProvider, IInitializab
 	public void registerOreDictNames()
 	{
 		Stream.of(ExPOreDict.blockOre).forEach(s -> OreDictionary.registerOre(s, new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE)));
+	}
+
+	@Override
+	public void registerItem(IForgeRegistry<Item> registry)
+	{
+		registry.register(new ItemBlockOre(this));
+	}
+
+	@Override
+	public void registerBlock(IForgeRegistry<Block> registry)
+	{
+		registry.register(this);	
 	}
 }

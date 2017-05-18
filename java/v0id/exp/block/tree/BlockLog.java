@@ -29,7 +29,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.core.util.ItemBlockWithMetadata;
 import v0id.api.exp.block.EnumTreeType;
@@ -41,10 +41,13 @@ import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
+import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
+import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.entity.EntityFallingTree;
+import v0id.exp.handler.ExPHandlerRegistry;
 
-public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILog, IInitializableBlock, IOreDictEntry
+public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILog, IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {
 	public int logIndex = 0;
 	
@@ -88,9 +91,9 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(AXIS, Axis.Y).withProperty(ExPBlockProperties.TREE_TYPES[this.logIndex], EnumTreeType.values()[this.logIndex * 5]));
-		GameRegistry.register(this);
-		GameRegistry.register(new ItemBlockWithMetadata(this));
 		Blocks.FIRE.setFireInfo(this, 5, 5);
+		ExPHandlerRegistry.blockEntries.add(this);
+		ExPHandlerRegistry.itemEntries.add(this);
 	}
 	
 	@Override
@@ -260,7 +263,6 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 		{
 			return new ResourceLocation(ExPRegistryNames.blockLogDeco.getResourceDomain(), ExPRegistryNames.blockLogDeco.getResourcePath() + this.logIndex);
 		}
-		
 	}
 	
 	@Override
@@ -271,5 +273,17 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 			AtomicInteger i = new AtomicInteger(1);
 			ExPBlockProperties.TREE_TYPES[this.logIndex].getAllowedValues().stream().map(EnumTreeType::getName).forEach(ss -> OreDictionary.registerOre(s + Character.toUpperCase(ss.charAt(0)) + ss.substring(1), new ItemStack(this, 1, i.getAndAdd(3))));
 		});
+	}
+
+	@Override
+	public void registerItem(IForgeRegistry<Item> registry)
+	{
+		registry.register(new ItemBlockWithMetadata(this));
+	}
+
+	@Override
+	public void registerBlock(IForgeRegistry<Block> registry)
+	{
+		registry.register(this);
 	}
 }

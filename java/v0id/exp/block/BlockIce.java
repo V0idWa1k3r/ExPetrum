@@ -22,7 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidBase;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
@@ -35,9 +35,11 @@ import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.gravity.GravityHelper;
 import v0id.api.exp.gravity.IGravitySusceptible;
+import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
 
-public class BlockIce extends Block implements IInitializableBlock, IGravitySusceptible, IOreDictEntry
+public class BlockIce extends Block implements IInitializableBlock, IGravitySusceptible, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {
 	public BlockIce()
 	{
@@ -89,9 +91,9 @@ public class BlockIce extends Block implements IInitializableBlock, IGravitySusc
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ExPBlockProperties.ICE_IS_SALT, false));
 		this.setCreativeTab(ExPCreativeTabs.tabCommon);
-		GameRegistry.register(this);
-		GameRegistry.register(new ItemBlockWithMetadata(this));
 		this.setTickRandomly(true);
+		ExPHandlerRegistry.blockEntries.add(this);
+		ExPHandlerRegistry.itemEntries.add(this);
 	}
 
 	@Override
@@ -175,5 +177,17 @@ public class BlockIce extends Block implements IInitializableBlock, IGravitySusc
 		Stream.of(ExPOreDict.blockIce).forEach(s -> OreDictionary.registerOre(s, new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE)));
 		Stream.of(ExPOreDict.blockIceFresh).forEach(s -> OreDictionary.registerOre(s, new ItemStack(this, 1, 0)));
 		Stream.of(ExPOreDict.blockIceSalt).forEach(s -> OreDictionary.registerOre(s, new ItemStack(this, 1, 1)));
+	}
+
+	@Override
+	public void registerItem(IForgeRegistry<Item> registry)
+	{
+		registry.register(new ItemBlockWithMetadata(this));
+	}
+
+	@Override
+	public void registerBlock(IForgeRegistry<Block> registry)
+	{
+		registry.register(this);
 	}
 }

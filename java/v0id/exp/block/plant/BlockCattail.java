@@ -20,7 +20,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import v0id.api.core.util.ItemBlockWithMetadata;
@@ -30,10 +30,13 @@ import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
+import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
+import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
 
-public class BlockCattail extends Block implements IWeightProvider, IInitializableBlock
+public class BlockCattail extends Block implements IWeightProvider, IInitializableBlock, IBlockRegistryEntry, IItemRegistryEntry
 {
 	public BlockCattail()
 	{
@@ -51,9 +54,9 @@ public class BlockCattail extends Block implements IWeightProvider, IInitializab
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(DIRT_CLASS, ACRISOL));
 		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
-		GameRegistry.register(this);
-		GameRegistry.register(new ItemBlockWithMetadata(this));
 		this.setTickRandomly(true);
+		ExPHandlerRegistry.blockEntries.add(this);
+		ExPHandlerRegistry.itemEntries.add(this);
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -176,5 +179,17 @@ public class BlockCattail extends Block implements IWeightProvider, IInitializab
 	public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state)
 	{
 		worldIn.setBlockState(pos, ExPBlocks.soil.getDefaultState().withProperty(DIRT_CLASS, state.getValue(DIRT_CLASS)));
+	}
+
+	@Override
+	public void registerItem(IForgeRegistry<Item> registry)
+	{
+		registry.register(new ItemBlockWithMetadata(this));
+	}
+
+	@Override
+	public void registerBlock(IForgeRegistry<Block> registry)
+	{
+		registry.register(this);
 	}
 }

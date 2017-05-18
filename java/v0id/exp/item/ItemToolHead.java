@@ -4,15 +4,17 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
+import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.handler.ExPHandlerRegistry;
 
-public class ItemToolHead extends Item implements IInitializableItem, IWeightProvider, IOreDictEntry
+public class ItemToolHead extends Item implements IInitializableItem, IWeightProvider, IOreDictEntry, IItemRegistryEntry
 {
 	public ItemToolHead()
 	{
@@ -41,7 +43,7 @@ public class ItemToolHead extends Item implements IInitializableItem, IWeightPro
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabTools);
 		this.setHasSubtypes(true);
-		GameRegistry.register(this);
+		ExPHandlerRegistry.itemEntries.add(this);
 	}
 
 	@Override
@@ -60,5 +62,11 @@ public class ItemToolHead extends Item implements IInitializableItem, IWeightPro
 		{
 			OreDictionary.registerOre(ExPOreDict.itemToolHeads[i], new ItemStack(this, 1, i));
 		}
+	}
+
+	@Override
+	public void registerItem(IForgeRegistry<Item> registry)
+	{
+		registry.register(this);
 	}
 }

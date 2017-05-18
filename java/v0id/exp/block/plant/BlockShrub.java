@@ -25,7 +25,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.core.util.ItemBlockWithMetadata;
 import v0id.api.exp.block.EnumGrassState;
@@ -41,10 +41,13 @@ import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
+import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
+import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
 
-public class BlockShrub extends Block implements IInitializableBlock, IShrub, IPlantable, IOreDictEntry
+public class BlockShrub extends Block implements IInitializableBlock, IShrub, IPlantable, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {
 	public static final AxisAlignedBB BASIC_AABB = new AxisAlignedBB(0.3, 0, 0.3, 0.7, 0.5, 0.7);
 	public static final AxisAlignedBB FULL_AABB = new AxisAlignedBB(0.3, 0, 0.3, 0.7, 0.5, 0.7);
@@ -67,10 +70,10 @@ public class BlockShrub extends Block implements IInitializableBlock, IShrub, IP
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ExPBlockProperties.SHRUB_TYPE, EnumShrubType.SPOTTED_LAUREL).withProperty(ExPBlockProperties.SHRUB_IS_TALL, false));
 		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
-		GameRegistry.register(this);
-		GameRegistry.register(new ItemBlockWithMetadata(this));
 		this.setTickRandomly(true);
 		Blocks.FIRE.setFireInfo(this, 60, 100);
+		ExPHandlerRegistry.blockEntries.add(this);
+		ExPHandlerRegistry.itemEntries.add(this);
 	}
 
 	@Override
@@ -328,5 +331,17 @@ public class BlockShrub extends Block implements IInitializableBlock, IShrub, IP
 			AtomicInteger i = new AtomicInteger(0);
 			Stream.of(ExPOreDict.bushNames).forEach(ss -> OreDictionary.registerOre(s + Character.toUpperCase(ss.charAt(0)) + ss.substring(1), new ItemStack(this, 1, i.getAndIncrement())));
 		});
+	}
+
+	@Override
+	public void registerItem(IForgeRegistry<Item> registry)
+	{
+		registry.register(new ItemBlockWithMetadata(this));
+	}
+
+	@Override
+	public void registerBlock(IForgeRegistry<Block> registry)
+	{
+		registry.register(this);
 	}
 }

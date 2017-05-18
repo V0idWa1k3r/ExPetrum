@@ -2,7 +2,6 @@ package v0id.exp.registry;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import v0id.api.exp.data.ExPBlocks;
@@ -10,15 +9,8 @@ import v0id.api.exp.data.ExPCreativeTabs;
 
 public class ExPCreativeTabsRegistry extends AbstractRegistry
 {
-	public ExPCreativeTabsRegistry()
+	static
 	{
-		super();
-	}
-
-	@Override
-	public void preInit(FMLPreInitializationEvent evt)
-	{
-		super.preInit(evt);
 		ExPCreativeTabs.tabUnderground = new CreativeTabs(CreativeTabs.getNextID(), "exp.underground"){
 			@SideOnly(Side.CLIENT)
 			@Override
@@ -64,6 +56,9 @@ public class ExPCreativeTabsRegistry extends AbstractRegistry
 			}
 		};
 	}
-
 	
+	public ExPCreativeTabsRegistry()
+	{
+		super();
+	}
 }
