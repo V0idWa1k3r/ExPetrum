@@ -4,6 +4,7 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
+import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -17,9 +18,8 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.ProgressManager;
-import net.minecraftforge.fml.common.ProgressManager.ProgressBar;
 import v0id.api.core.logging.LogLevel;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.tile.crop.CropData;
@@ -32,7 +32,6 @@ public class CropDataLoader
 	
 	public static void loadAllData()
 	{
-		ProgressBar bar = ProgressManager.push("ExPetrum - Loading crops", EnumCrop.values().length - 1);
 		File configLocation = new File(new File(ExPetrum.configDirectory, "ExPetrum"), "CropData");
 		if (!configLocation.exists() || configLocation.listFiles(f -> f.getName().endsWith(".json")).length < EnumCrop.values().length)
 		{
@@ -50,10 +49,16 @@ public class CropDataLoader
 					JsonObject data = parser.parse(fileContents).getAsJsonObject();
 					if (data.has("crop"))
 					{
+						String val = data.get("crop").getAsString();
+						if (EnumCrop.valueOf(val) == null)
+						{
+							ExPMisc.modLogger.log(LogLevel.Warning, "Found a JSON of unknown crop %s! That crop will be injected and attempted to be loaded.", val);
+							EnumHelper.addEnum(EnumCrop.class, val, new Class[0], new Object[0]);
+						}
+						
 						CropData cropData = serializer.fromJson(data, CropData.class);
 						cropData.crop.setData(cropData);
 						ExPMisc.modLogger.log(LogLevel.Debug, "Parsed crop %s from %s", cropData.crop.name(), f.getAbsolutePath());
-						bar.step(cropData.crop.name());
 					}
 					else
 					{
@@ -77,8 +82,10 @@ public class CropDataLoader
 		{
 			FMLCommonHandler.instance().raiseException(ex, "ExPetrum was unable to load crop data!", true);
 		}
-
-		ProgressManager.pop(bar);
+		
+		Stream.of(EnumCrop.values()).forEach(c -> { 
+			assert c.getData() != null : String.format("ExPetrum was unable to load crop data for %s! Please, delete the CropData folder inside ExPetrum folder in your config folder and restart the game.", c.name());
+		});
 	}
 	
 	public static void createAllData(File f)

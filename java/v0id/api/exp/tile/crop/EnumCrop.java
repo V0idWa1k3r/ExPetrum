@@ -36,7 +36,7 @@ public enum EnumCrop implements IStringSerializable
 	LEEK,
 	PEPPER,
 	SPINACH,
-	YAM,
+	SWEET_POTATO,
 	CASSAVA;
 
 	EnumCrop()

@@ -5,5 +5,7 @@ public enum EnumCropBug
 	NONE,
 	EARWIG,
 	BROWN_PLANTHOPPER,
-	MOTH;
+	MOTH,
+	MAGGOTS,
+	NEMATODE;
 }
