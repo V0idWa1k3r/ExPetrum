@@ -3,12 +3,20 @@ package v0id.api.exp.tile.crop;
 import java.util.EnumMap;
 import java.util.Optional;
 
+import javax.annotation.Nullable;
+
 import org.apache.commons.lang3.tuple.Pair;
 
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.INBTSerializable;
 import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.EnumSeason;
@@ -77,10 +85,31 @@ public interface IExPCrop extends INBTSerializable<NBTTagCompound>
 	
 	/**
 	 * Gets a list of drops this plant will drop when mature. This list is constructed dynamically and may change any time. <br>
-	 * Non-mature crops will drop either nothing or their own seeds when harvested with bare hands.
+	 * Non-mature crops will drop nothing when harvested with bare hands.
 	 * @return A list of drops this plant will drop when mature
 	 */
 	NonNullList<ItemStack> getMatureDrops();
+	
+	/**
+	 * Gets a list of seeds that this plant will drop. This list is constructed dynamically and may change any time. <br>
+	 * For non-mature crops the list will be empty. <br>
+	 * Seeds are harvested with a knife.
+	 * @return A list of seeds this plant will drop
+	 */
+	NonNullList<ItemStack> getSeedDrops();
+	
+	/**
+	 * Handles the harvest logic for crops. Exposed for any kind of auto-harvesters?
+	 * @param harvester : the player that harvests the crop. May be null
+	 * @param harvestedIn : the world the crop is in. May be null, then the world field from tileentity will be used
+	 * @param harvestedAt : the position in the world the crop is at. May be null, then the position of the tileentity will be used
+	 * @param selfBlockReference : the blockstate of the crop. May be null, then will be obtined from the world and position
+	 * @param playerHarvestHand : the hand the player uses to harvest the crop. May be null, will default to player's active hand if the player is present.
+	 * @param playerHarvestItem : the itemstack the player harvests the crop with. This for once may NOT be null
+	 * @param isHarvestingWithRMB : is the player breaking the crop or harvesting it properly with right click?
+	 * @return A list of drops obtained from the plant and a result indicating whether the harvest was a success(plant was mature and it's block state in the world was handled), fail(plant was not mature) or pass(there was no harvester to begin with as the plant died)
+	 */
+	Pair<EnumActionResult, NonNullList<ItemStack>> onHarvest(@Nullable EntityPlayer harvester, @Nullable World harvestedIn, @Nullable BlockPos harvestedAt, @Nullable IBlockState selfBlockReference, @Nullable EnumHand playerHarvestHand, ItemStack playerHarvestItem, boolean isHarvestingWithRMB);
 	
 	/**
 	 * Happens when a player transfers this crop to a new location
@@ -188,4 +217,13 @@ public interface IExPCrop extends INBTSerializable<NBTTagCompound>
 	 * @return - one of the valid EnumCropHarvestAction actions
 	 */
 	EnumCropHarvestAction getHarvestAction();
+	
+	/**
+	 * Is the crop dead?
+	 * @return a boolean value indicating whether this crop is dead.
+	 */
+	default boolean isDead()
+	{
+		return this.getHealth() <= 0;
+	}
 }
