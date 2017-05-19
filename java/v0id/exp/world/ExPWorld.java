@@ -61,7 +61,7 @@ public class ExPWorld implements IExPWorld
 	public void createDayData()
 	{
 		Calendar today = this.today();
-		Calendar tomorrow = new Calendar(this.getPersistentTicks() + today.ticksPerDay);
+		Calendar tomorrow = new Calendar(today.getTime() + today.ticksPerDay);
 		byte monthToday = today.getMonth();
 		byte monthTomorrow = tomorrow.getMonth();
 		EnumSeason seasonToday = EnumSeason.values()[monthToday];
