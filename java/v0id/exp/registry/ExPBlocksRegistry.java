@@ -25,6 +25,7 @@ import v0id.exp.block.fluid.BlockOil;
 import v0id.exp.block.fluid.BlockSaltWater;
 import v0id.exp.block.plant.BlockCattail;
 import v0id.exp.block.plant.BlockCoralPlant;
+import v0id.exp.block.plant.BlockCrop;
 import v0id.exp.block.plant.BlockSeaweed;
 import v0id.exp.block.plant.BlockShrub;
 import v0id.exp.block.plant.BlockVegetation;
@@ -81,6 +82,7 @@ public class ExPBlocksRegistry extends AbstractRegistry
 		ExPBlocks.snow = new BlockSnow();
 		ExPBlocks.ice = new BlockIce();
 		ExPBlocks.workedBoulder = new BlockWorkedBoulder();
+		ExPBlocks.crop = new BlockCrop();
 	}
 	
 	public ExPBlocksRegistry()

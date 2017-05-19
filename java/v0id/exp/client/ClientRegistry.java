@@ -47,6 +47,7 @@ import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.item.EnumToolhead;
+import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.exp.block.tree.BlockLeaf;
 import v0id.exp.block.tree.BlockLog;
 import v0id.exp.client.model.ModelLoaderExP;
@@ -144,6 +145,7 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 		ModelLoader.setCustomStateMapper(ExPBlocks.lava, new StateMapperFluid(ExPBlocks.lava));
 		ModelLoader.setCustomStateMapper(ExPBlocks.oil, new StateMapperFluid(ExPBlocks.oil));
 		ModelLoader.setCustomStateMapper(ExPBlocks.cattail, new StateMapperCattail());
+		ModelLoader.setCustomStateMapper(ExPBlocks.crop, new StateMapperCrop(ExPBlocks.crop));
 		ModelLoaderRegistry.registerLoader(new ModelLoaderExP());
 	}
 	
@@ -249,6 +251,24 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 	public void postInit(FMLPostInitializationEvent evt)
 	{
 		super.postInit(evt);
+	}
+	
+	class StateMapperCrop extends StateMapperBase
+	{
+		Block b;
+
+		public StateMapperCrop(Block b)
+		{
+			super();
+			this.b = b;
+		}
+
+		@Override
+		protected ModelResourceLocation getModelResourceLocation(IBlockState state)
+		{
+			EnumCrop cropType = state.getValue(ExPBlockProperties.CROP_TYPE);
+			return new ModelResourceLocation(new ResourceLocation(this.b.getRegistryName().getResourceDomain(), String.format("crops/%s", cropType.getName())), cropType.getData() == null ? "normal" : String.format("stage=%d", Math.min(state.getValue(ExPBlockProperties.CROP_GROWTH_STAGE), cropType.getData().growthStages - 1)));
+		}
 	}
 	
 	class StateMapperFluid extends StateMapperBase

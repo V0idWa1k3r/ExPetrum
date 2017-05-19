@@ -46,6 +46,11 @@ public class TemperatureRange implements INBTSerializable<NBTTagCompound>
 	{
 		return (float) (this.getMin() + rand.nextDouble() * (this.getMax() - this.getMin()));
 	}
+	
+	public boolean isWithinRange(float f)
+	{
+		return f >= this.min && f <= this.max;
+	}
 
 	@Override
 	public NBTTagCompound serializeNBT()

@@ -37,6 +37,7 @@ public class CropStats implements INBTSerializable<NBTTagCompound>
 	public float health;
 	public float growthRate;
 	public float waterConsumption;
+	public float growth;
 	public EnumMap<EnumPlantNutrient, Float> nutrientConsumption = Maps.newEnumMap(EnumPlantNutrient.class);
 	
 	// Ensures that nothing is null
@@ -46,6 +47,23 @@ public class CropStats implements INBTSerializable<NBTTagCompound>
 		{
 			this.growthRanges[i] = new TemperatureRange();
 		}
+	}
+	
+	public void createDefaults(EnumCrop crop)
+	{
+		assert crop != EnumCrop.DEAD : "Can't create cropstats of a dead crop!";
+		this.growthRanges[0] = crop.getData().minimalTemperature;
+		this.growthRanges[1] = crop.getData().optimalTemperature;
+		this.growthRanges[2] = crop.getData().perfectTemperature;
+		this.humidityGrowthRange = Pair.of(crop.getData().humidityRange.getMin(), crop.getData().humidityRange.getMax());
+		this.generation = 0;
+		this.wild = true;
+		this.type = crop;
+		this.health = crop.getData().baseHealth;
+		this.growthRate = crop.getData().growthRate;
+		this.waterConsumption = crop.getData().waterConsumption;
+		this.growth = 0;
+		crop.getData().nutrientConsumption.forEach((EnumPlantNutrient nutrient, Float value) -> this.nutrientConsumption.put(nutrient, value));
 	}
 	
 	public NBTTagCompound createItemNBT(World w)
@@ -81,6 +99,7 @@ public class CropStats implements INBTSerializable<NBTTagCompound>
 		ret.setFloat("health", this.health);
 		ret.setFloat("growthRate", this.growthRate);
 		ret.setFloat("waterConsumption", this.waterConsumption);
+		ret.setFloat("growth", this.growth);
 		NBTTagList lst = new NBTTagList();
 		this.nutrientConsumption.forEach((EnumPlantNutrient nutrient, Float f) -> {
 			NBTTagCompound tag = new NBTTagCompound();
@@ -108,6 +127,7 @@ public class CropStats implements INBTSerializable<NBTTagCompound>
 		this.health = nbt.getFloat("health");
 		this.growthRate = nbt.getFloat("growthRate");
 		this.waterConsumption = nbt.getFloat("waterConsumption");
+		this.growth = nbt.getFloat("growth");
 		this.nutrientConsumption.clear();
 		NBTList.<NBTTagCompound>of(nbt.getTagList("nutrientConsumption", NBT.TAG_COMPOUND)).forEach(tag -> this.nutrientConsumption.put(EnumPlantNutrient.values()[tag.getByte("nutrient")], tag.getFloat("anount")));
 	}

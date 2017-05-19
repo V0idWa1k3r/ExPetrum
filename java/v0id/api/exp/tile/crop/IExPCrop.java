@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
@@ -206,11 +207,11 @@ public interface IExPCrop extends INBTSerializable<NBTTagCompound>
 	void setBeingEaten(boolean b);
 	
 	/**
-	 * Gets the harvest season for this crop. <br>
-	 * The crop will still grow in any season, but it will only reach maturity in it's harvest season.
+	 * Checks if the given season is crop's harvest season
+	 * @param season - the season to check
 	 * @return
 	 */
-	EnumSeason getHarvestSeason();
+	boolean isHarvestSeason(EnumSeason season);
 	
 	/**
 	 * Determines what happens to the crop plant when it is harvested(right-clicked)
@@ -219,11 +220,27 @@ public interface IExPCrop extends INBTSerializable<NBTTagCompound>
 	EnumCropHarvestAction getHarvestAction();
 	
 	/**
+	 * Damages the crop
+	 * @param damage : the amount to damage by
+	 */
+	void causeDamage(float damage);
+	
+	/**
 	 * Is the crop dead?
 	 * @return a boolean value indicating whether this crop is dead.
 	 */
 	default boolean isDead()
 	{
-		return this.getHealth() <= 0;
+		return this.getHealth() <= 0 || this.getType() == EnumCrop.DEAD;
+	}
+	
+	public static IExPCrop of(TileEntity tile, EnumFacing facing)
+	{
+		return tile.hasCapability(ExPCropCapability.cropCap, facing) ? tile.getCapability(ExPCropCapability.cropCap, facing) : null;
+	}
+	
+	public static IExPCrop of(TileEntity tile)
+	{
+		return of(tile, null);
 	}
 }

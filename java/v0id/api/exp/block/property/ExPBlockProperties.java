@@ -9,6 +9,7 @@ import v0id.api.exp.block.EnumLeafState;
 import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
+import v0id.api.exp.tile.crop.EnumCrop;
 
 @StaticStorage
 public class ExPBlockProperties
@@ -26,6 +27,9 @@ public class ExPBlockProperties
 	public static final PropertyBool SHRUB_IS_TALL = PropertyBool.create("istall");
 	public static final PropertyBool ICE_IS_SALT = PropertyBool.create("salt");
 	public static final PropertyInteger WORKED_BOULDER_INDEX = PropertyInteger.create("workindex", 0, 7);
+	// Note that some values of this property are unused, use the CropData from EnumCrop obtained from a capability.
+	public static final PropertyInteger CROP_GROWTH_STAGE = PropertyInteger.create("stage", 0, 15);
+	public static final PropertyEnum<EnumCrop> CROP_TYPE = PropertyEnum.create("type", EnumCrop.class);
 	
 	// Currently not used
 	public static final PropertyEnum<EnumOre> ORE_TYPE = PropertyEnum.create("oretype", EnumOre.class);
