@@ -1,0 +1,15 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "exp:unified_cross",
+		"gui3d" : true,
+		"transform": "forge:default-block",
+		"textures" : {
+			"all": "exp:blocks/plants/crops/dead"
+		}
+	},
+	"variants" : {
+		"normal": [{}],
+		"inventory": [{}]
+	}
+}
