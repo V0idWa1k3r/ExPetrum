@@ -10,6 +10,7 @@ import v0id.api.exp.data.ExPBlocks;
 import v0id.exp.block.BlockBoulder;
 import v0id.exp.block.BlockBoulderOre;
 import v0id.exp.block.BlockCoralRock;
+import v0id.exp.block.BlockFarmland;
 import v0id.exp.block.BlockGrass;
 import v0id.exp.block.BlockIce;
 import v0id.exp.block.BlockOre;
@@ -83,6 +84,7 @@ public class ExPBlocksRegistry extends AbstractRegistry
 		ExPBlocks.ice = new BlockIce();
 		ExPBlocks.workedBoulder = new BlockWorkedBoulder();
 		ExPBlocks.crop = new BlockCrop();
+		ExPBlocks.farmland = new BlockFarmland();
 	}
 	
 	public ExPBlocksRegistry()

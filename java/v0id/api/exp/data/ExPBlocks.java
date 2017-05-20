@@ -34,4 +34,5 @@ public class ExPBlocks
 	public static Block ice;
 	public static Block workedBoulder;
 	public static Block crop;
+	public static Block farmland;
 }

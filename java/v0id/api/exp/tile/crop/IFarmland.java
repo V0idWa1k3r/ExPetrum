@@ -1,5 +1,6 @@
 package v0id.api.exp.tile.crop;
 
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -9,8 +10,14 @@ import net.minecraftforge.common.util.INBTSerializable;
  * @author V0idWa1k3r
  *
  */
-public interface IFarmland extends INBTSerializable
+public interface IFarmland extends INBTSerializable<NBTTagCompound>
 {
+	/**
+	 * Gets the tileentity this capability is bound to
+	 * @return
+	 */
+	TileEntity getContainer();
+	
 	/**
 	 * Getter for the nutrient level of the farmland
 	 * @param nut : the nutrient to get the level of
@@ -47,6 +54,11 @@ public interface IFarmland extends INBTSerializable
 	 * Handles the world ticking
 	 */
 	void onWorldTick();
+	
+	/**
+	 * Marks the farmland for sync
+	 */
+	void setDirty();
 	
 	public static IFarmland of(TileEntity tile, EnumFacing facing)
 	{

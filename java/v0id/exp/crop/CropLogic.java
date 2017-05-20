@@ -16,6 +16,27 @@ import v0id.exp.util.Helpers;
 
 public class CropLogic
 {
+	public static void onFarmlandUpdate(ExPFarmland farmland)
+	{
+		Calendar prev = farmland.timeKeeper;
+		if (prev.getTime() == 0)
+		{
+			prev.setTime(IExPWorld.of(farmland.getContainer().getWorld()).today().getTime());
+		}
+		else
+		{
+			Calendar current = IExPWorld.of(farmland.getContainer().getWorld()).today();
+			long ticksDelta = current.getTime() - prev.getTime();
+			farmland.timeKeeper = current;
+			handleFarmlandTimePassed(farmland, ticksDelta, current);
+		}
+	}
+	
+	public static void handleFarmlandTimePassed(ExPFarmland farmland, long ticks, Calendar calendarReference)
+	{
+		
+	}
+	
 	public static void onWorldUpdate(ExPCrop crop)
 	{
 		Calendar prev = crop.timeKeeper;
@@ -68,7 +89,7 @@ public class CropLogic
 		}
 		
 		IFarmland farmland = IFarmland.of(tile, EnumFacing.UP);
-		float waterConsumption = crop.getWaterConsumption() / calendarReference.ticksPerDay;
+		float waterConsumption = crop.getWaterConsumption() / calendarReference.ticksPerDay / 100;
 		float waterConsumed = waterConsumption * ticks;
 		float waterPresent = farmland.getMoisture();
 		float waterActuallyConsumed = Math.min(waterConsumed, waterPresent);
@@ -133,6 +154,8 @@ public class CropLogic
 		{
 			crop.causeDamage(ticks * 0.0002F);
 		}
+		
+		farmland.setDirty();
 	}
 	
 	public static boolean consumeNutrients(IFarmland of, long ticks, ExPCrop crop, Calendar calendarReference)
