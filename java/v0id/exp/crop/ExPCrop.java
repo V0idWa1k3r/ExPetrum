@@ -206,7 +206,7 @@ public class ExPCrop implements IExPCrop
 	@Override
 	public int getGrowthIndex()
 	{
-		return this.stats.type == EnumCrop.DEAD ? 0 : (int)(this.stats.growth / this.stats.type.getData().growthStages);
+		return (int) (this.stats.type == EnumCrop.DEAD ? 0 : (int)(this.stats.growth * (this.stats.type.getData().growthStages - 1)));
 	}
 
 	@Override
