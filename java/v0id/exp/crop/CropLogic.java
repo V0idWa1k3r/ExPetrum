@@ -9,6 +9,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import v0id.api.exp.event.crop.EventFarmlandUpdate;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.tile.crop.EnumPlantNutrient;
 import v0id.api.exp.tile.crop.ExPCropCapability;
@@ -16,6 +18,7 @@ import v0id.api.exp.tile.crop.ExPFarmlandCapability;
 import v0id.api.exp.tile.crop.IFarmland;
 import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.IExPWorld;
+import v0id.api.exp.world.ImmutableCalendar;
 import v0id.exp.block.plant.BlockVegetation;
 import v0id.exp.util.Helpers;
 
@@ -23,6 +26,11 @@ public class CropLogic
 {
 	public static void onFarmlandUpdate(ExPFarmland farmland)
 	{
+		if (MinecraftForge.EVENT_BUS.post(new EventFarmlandUpdate.Pre(farmland, farmland.getContainer().getWorld(), farmland.getContainer().getPos())))
+		{
+			return;
+		}
+		
 		Calendar prev = farmland.timeKeeper;
 		if (prev.getTime() == 0)
 		{
@@ -35,12 +43,22 @@ public class CropLogic
 			farmland.timeKeeper = current;
 			handleFarmlandTimePassed(farmland, ticksDelta, current);
 		}
+		
+		MinecraftForge.EVENT_BUS.post(new EventFarmlandUpdate.Post(farmland, farmland.getContainer().getWorld(), farmland.getContainer().getPos()));
 	}
 	
 	public static void handleFarmlandTimePassed(ExPFarmland farmland, long ticks, Calendar calendarReference)
 	{
 		World w = farmland.getContainer().getWorld();
 		BlockPos pos = farmland.getContainer().getPos();
+		ImmutableCalendar ref = new ImmutableCalendar(calendarReference);
+		EventFarmlandUpdate.Logic.Pre pre = new EventFarmlandUpdate.Logic.Pre(farmland, w, pos, ref, ticks);
+		if (MinecraftForge.EVENT_BUS.post(pre))
+		{
+			return;
+		}
+		
+		ticks = pre.ticksHappened;
 		IBlockState above = w.getBlockState(pos.up());
 		boolean canSeeTheSky = w.canBlockSeeSky(pos.up());
 		TileEntity tileAbove = w.getTileEntity(pos.up());
@@ -49,9 +67,11 @@ public class CropLogic
 			return;
 		}
 		
-		final float waterLoss = (0.00001f * (above.getBlock() instanceof BlockVegetation ? 2 : 1)) * ticks;
-		final float nutrientGain = (1.39e-6F * (above.getBlock() instanceof BlockVegetation ? -10 : 1)) * ticks;
-		if (w.isRaining() && canSeeTheSky)
+		EventFarmlandUpdate.Logic.WaterNutrientLogic wnLogic = new EventFarmlandUpdate.Logic.WaterNutrientLogic(farmland, w, pos, ref, ticks, (0.00001f * (above.getBlock() instanceof BlockVegetation ? 2 : 1)) * ticks, (1.39e-6F * (above.getBlock() instanceof BlockVegetation ? -10 : 1)) * ticks);
+		MinecraftForge.EVENT_BUS.post(wnLogic);
+		float waterLoss = wnLogic.waterLossBase;
+		float nutrientGain = wnLogic.nutrientGainBase;
+		if (w.isRaining() && canSeeTheSky && !MinecraftForge.EVENT_BUS.post(new EventFarmlandUpdate.Logic.Rain(farmland, w, pos, ref, ticks)))
 		{
 			farmland.setMoisture(1);
 		}
@@ -61,6 +81,7 @@ public class CropLogic
 		}
 		
 		Stream.of(EnumPlantNutrient.values()).forEach(n -> farmland.setNutrient(n, MathHelper.clamp(farmland.getNutrient(n) + nutrientGain, 0, 1)));
+		MinecraftForge.EVENT_BUS.post(new EventFarmlandUpdate.Logic.Post(farmland, w, pos, ref, ticks));
 		farmland.setDirty();
 	}
 	
