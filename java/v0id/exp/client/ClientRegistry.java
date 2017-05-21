@@ -115,6 +115,7 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.coralRock), 0, new ModelResourceLocation(ExPBlocks.coralRock.getRegistryName(), "rtindex=0"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.coralPlant), 0, new ModelResourceLocation(ExPBlocks.coralPlant.getRegistryName(), "ptindex=0,rtindex=0"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.snow), 0, new ModelResourceLocation(ExPBlocks.snow.getRegistryName(), "layers=1"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.crop), 0, new ModelResourceLocation("exp:crops/dead", "normal"));
 		Arrays.asList(ExPBlocks.logs).forEach(this::registerLogItemModel);
 		Arrays.asList(ExPBlocks.logsDeco).forEach(this::registerLogItemModel);
 		Arrays.asList(ExPBlocks.leaves).forEach(this::registerLeafItemModel);
