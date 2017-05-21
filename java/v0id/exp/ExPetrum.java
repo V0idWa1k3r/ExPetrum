@@ -69,6 +69,7 @@ public class ExPetrum
 			FMLCommonHandler.instance().raiseException(ex, "ExPetrum was unable to read it's temperatures json file data!", true);
 		}
 		
+		configDirectory = Loader.instance().getConfigDir();
 		ExPMisc.modLogger = VoidLogger.createLogger(ExPetrum.class, LogLevel.Fine);
 		Stream.of(EnumOre.values()).forEach(EnumOre::registerWorldgen);
 		CropDataLoader.loadAllData();
