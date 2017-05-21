@@ -5,6 +5,8 @@ import static v0id.api.exp.block.property.ExPBlockProperties.ROCK_CLASS;
 
 import java.util.Random;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -197,9 +199,10 @@ public class BlockSeaweed extends Block implements IWeightProvider, IInitializab
 	}
 
 	@Override
-	public float provideVolume(ItemStack item)
+	public Pair<Byte, Byte> provideVolume(ItemStack item)
 	{
-		return 0;
+		// TODO Auto-generated method stub
+		return Pair.of((byte)1, (byte)1);
 	}
 
 	@Override

@@ -3,6 +3,8 @@ package v0id.exp.item;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -34,10 +36,10 @@ public class ItemRock extends Item implements IInitializableItem, IWeightProvide
 	}
 
 	@Override
-	public float provideVolume(ItemStack item)
+	public Pair<Byte, Byte> provideVolume(ItemStack item)
 	{
 		// TODO Auto-generated method stub
-		return 0;
+		return Pair.of((byte)1, (byte)1);
 	}
 
 	@Override

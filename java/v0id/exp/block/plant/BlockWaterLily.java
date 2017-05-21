@@ -7,6 +7,8 @@ import static v0id.api.exp.block.property.ExPBlockProperties.PLANT_BLOOMING;
 import java.util.Random;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
@@ -208,9 +210,10 @@ public class BlockWaterLily extends BlockBush implements IWeightProvider, IIniti
 	}
 
 	@Override
-	public float provideVolume(ItemStack item)
+	public Pair<Byte, Byte> provideVolume(ItemStack item)
 	{
-		return 0;
+		// TODO Auto-generated method stub
+		return Pair.of((byte)1, (byte)1);
 	}
 
 	@Override

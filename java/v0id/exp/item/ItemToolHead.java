@@ -1,5 +1,7 @@
 package v0id.exp.item;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -30,10 +32,10 @@ public class ItemToolHead extends Item implements IInitializableItem, IWeightPro
 	}
 
 	@Override
-	public float provideVolume(ItemStack item)
+	public Pair<Byte, Byte> provideVolume(ItemStack item)
 	{
 		// TODO Auto-generated method stub
-		return 0;
+		return Pair.of((byte)3, (byte)1);
 	}
 
 	@Override

@@ -6,6 +6,8 @@ import static v0id.api.exp.block.property.ExPBlockProperties.DIRT_CLASS;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Predicate;
 
 import net.minecraft.block.Block;
@@ -109,9 +111,10 @@ public class BlockSoil extends Block implements IWeightProvider, IGravitySuscept
 	}
 
 	@Override
-	public float provideVolume(ItemStack item)
+	public Pair<Byte, Byte> provideVolume(ItemStack item)
 	{
-		return 0;
+		// TODO Auto-generated method stub
+		return Pair.of((byte)1, (byte)1);
 	}
 
 	@Override

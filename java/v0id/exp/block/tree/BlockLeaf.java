@@ -8,6 +8,8 @@ import java.util.stream.Stream;
 
 import javax.annotation.Nullable;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.SoundType;
@@ -282,10 +284,10 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 	}
 
 	@Override
-	public float provideVolume(ItemStack item)
+	public Pair<Byte, Byte> provideVolume(ItemStack item)
 	{
 		// TODO Auto-generated method stub
-		return 0;
+		return Pair.of((byte)1, (byte)1);
 	}
 
 	@Override
