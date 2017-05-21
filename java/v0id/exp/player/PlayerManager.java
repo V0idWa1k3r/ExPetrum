@@ -146,7 +146,10 @@ public class PlayerManager
 			}
 		}
 		
-		data.setThirst(data.getThirst() - tChange * modifier, true);
+		if (!player.capabilities.isCreativeMode)
+		{
+			data.setThirst(data.getThirst() - tChange * modifier, true);
+		}
 	}
 	
 	public static void handleHunger(EntityPlayer player, IExPPlayer data, int skippedTicks)
@@ -206,12 +209,18 @@ public class PlayerManager
 	
 	public static void handlePlayerPlaceBlock(EntityPlayer player, IExPPlayer data)
 	{
-		data.setCalories(data.getCalories() - 0.1F);
+		if (!player.capabilities.isCreativeMode)
+		{
+			data.setCalories(data.getCalories() - 0.1F);
+		}
 	}
 	
 	public static void handlePlayerBrokeBlock(EntityPlayer player, IExPPlayer data)
 	{
-		data.setCalories(data.getCalories() - 1);
+		if (!player.capabilities.isCreativeMode)
+		{
+			data.setCalories(data.getCalories() - 1);
+		}
 	}
 	
 	public static void handleHungerChange(EntityPlayer of, IExPPlayer data, float multiplier)
@@ -223,11 +232,14 @@ public class PlayerManager
 		}
 		
 		cRemoved *= multiplier;
-		data.setCalories(data.getCalories() - cRemoved);
-		float cCurrent = data.getCalories();
-		for (Nutrient n : Nutrient.values())
+		if (!of.capabilities.isCreativeMode)
 		{
-			data.setNutritionLevel(Math.max(0, data.getNutritionLevel(n) - (cCurrent >= 500 ? 0.001F : 0.005F) * multiplier), n);
+			data.setCalories(data.getCalories() - cRemoved);
+			float cCurrent = data.getCalories();
+			for (Nutrient n : Nutrient.values())
+			{
+				data.setNutritionLevel(Math.max(0, data.getNutritionLevel(n) - (cCurrent >= 500 ? 0.001F : 0.005F) * multiplier), n);
+			}
 		}
 	}
 

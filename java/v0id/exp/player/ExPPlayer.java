@@ -386,6 +386,7 @@ public class ExPPlayer implements IExPPlayer
 	@Override
 	public void setCalories(float newValue)
 	{
+		newValue = Math.max(0, newValue);
 		this.calories_isDirty |= newValue != this.calories;
 		this.serverIsDirty |= this.calories_isDirty;
 		this.calories = newValue;
