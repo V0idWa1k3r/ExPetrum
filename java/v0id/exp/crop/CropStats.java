@@ -69,15 +69,23 @@ public class CropStats implements INBTSerializable<NBTTagCompound>
 	public NBTTagCompound createItemNBT(World w)
 	{
 		NBTTagCompound ret = this.serializeNBT();
-		this.uprootedAt = Optional.of(IExPWorld.of(w).today());
-		ret.setTag("uprootedAt", this.uprootedAt.get().serializeNBT());
+		if (w != null)
+		{
+			this.uprootedAt = Optional.of(IExPWorld.of(w).today());
+			ret.setTag("uprootedAt", this.uprootedAt.get().serializeNBT());
+		}
+		
 		return ret;
 	}
 	
 	public void createFromItemNBT(NBTTagCompound tag)
 	{
 		this.uprootedAt = Optional.of(new Calendar());
-		this.uprootedAt.get().deserializeNBT((NBTTagLong) tag.getTag("uprootedAt"));
+		if (tag.hasKey("uprootedAt", NBT.TAG_LONG))
+		{
+			this.uprootedAt.get().deserializeNBT((NBTTagLong) tag.getTag("uprootedAt"));
+		}
+		
 		this.deserializeNBT(tag);
 	}
 	
@@ -123,7 +131,11 @@ public class CropStats implements INBTSerializable<NBTTagCompound>
 		this.wild = nbt.getBoolean("wild");
 		this.type = EnumCrop.values()[nbt.getByte("type")];
 		this.plantedAt = new Calendar();
-		this.plantedAt.deserializeNBT((NBTTagLong) nbt.getTag("plantedAt"));
+		if (nbt.hasKey("plantedAt"))
+		{
+			this.plantedAt.deserializeNBT((NBTTagLong) nbt.getTag("plantedAt"));
+		}
+		
 		this.health = nbt.getFloat("health");
 		this.growthRate = nbt.getFloat("growthRate");
 		this.waterConsumption = nbt.getFloat("waterConsumption");

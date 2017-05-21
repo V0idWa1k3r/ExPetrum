@@ -16,7 +16,7 @@ public class ItemBlockWithMetadata extends ItemBlock
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		return String.format("%s.%d", super.getUnlocalizedName(stack));
+		return super.getUnlocalizedName(stack);
 	}
 	
 	@Override

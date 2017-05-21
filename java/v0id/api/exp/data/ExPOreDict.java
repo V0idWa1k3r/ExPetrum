@@ -9,6 +9,7 @@ import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.block.property.EnumRockClass;
+import v0id.api.exp.tile.crop.EnumCrop;
 
 @StaticStorage
 public class ExPOreDict
@@ -36,11 +37,13 @@ public class ExPOreDict
 	public static final String[]
 		itemRock																										= { "itemRock" },
 		itemStick																										= { "stickWood" },
-		itemToolHeads																									= { "toolheadHammerStone", "toolheadAxeStone", "toolheadShovelStone", "toolheadSpearStone", "toolheadKnifeStone", "toolheadChiselStone", "toolheadArrowStone" };
+		itemToolHeads																									= { "toolheadHammerStone", "toolheadAxeStone", "toolheadShovelStone", "toolheadSpearStone", "toolheadKnifeStone", "toolheadChiselStone", "toolheadArrowStone" },
+		itemSeeds																										= { "seeds", "seed" };
 	
 	public static final String[] rockNames = Stream.of(EnumRockClass.values()).map(EnumRockClass::getName).toArray(String[]::new);
 	public static final String[] soilNames = Stream.of(EnumDirtClass.values()).map(EnumDirtClass::getName).toArray(String[]::new);
 	public static final String[] treeNames = Stream.of(EnumTreeType.values()).map(EnumTreeType::getName).toArray(String[]::new);
 	public static final String[] bushNames = Stream.of(EnumShrubType.values()).map(EnumShrubType::getName).toArray(String[]::new);
+	public static final String[] cropNames = Stream.of(EnumCrop.values()).map(EnumCrop::getName).toArray(String[]::new);
 	public static final String[] stickNames = ArrayUtils.addAll(treeNames, bushNames);
 }

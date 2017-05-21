@@ -45,7 +45,8 @@ public class ExPRegistryNames
 	public static final ResourceLocation
 		itemRock																							= new ResourceLocation(modid, "item_rock"),
 		itemStick																							= new ResourceLocation(modid, "item_stick"),
-		itemToolhead																						= new ResourceLocation(modid, "item_toolhead");
+		itemToolhead																						= new ResourceLocation(modid, "item_toolhead"),
+		itemSeeds																							= new ResourceLocation(modid, "item_seeds");
 	
 	public static final ResourceLocation
 		entityGravFallingBlock																				= new ResourceLocation(modid, "gravFallingBlock"),

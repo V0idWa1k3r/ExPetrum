@@ -137,6 +137,11 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 			ModelLoader.setCustomModelResourceLocation(ExPItems.toolHead, i, new ModelResourceLocation(ExPItems.toolHead.getRegistryName(), "type=" + EnumToolhead.values()[i].getName()));
 		}
 		
+		for (int i = 0; i < EnumCrop.values().length - 1; ++i)
+		{
+			ModelLoader.setCustomModelResourceLocation(ExPItems.seeds, i, new ModelResourceLocation(ExPItems.seeds.getRegistryName(), "crop=" + EnumCrop.values()[i + 1].getName()));
+		}
+		
 		this.registerCustomStateMappers();
 		IFunctionalRenderFactory.registerEntityRenderingHandler(EntityGravFallingBlock.class, manager -> new RenderFallingBlock(manager));
 		IFunctionalRenderFactory.registerEntityRenderingHandler(EntityFallingTree.class, manager -> new RenderFallingTree(manager));
