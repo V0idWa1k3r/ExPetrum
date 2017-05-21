@@ -224,7 +224,7 @@ public class WorldTypeExP extends WorldType
 
 	    public Biome swapHackBiome(Biome b)
 	    {
-	    	return b == Biomes.RIVER || b == Biomes.FROZEN_RIVER ? ExPBiomes.river : b == Biomes.OCEAN || b == Biomes.DEEP_OCEAN || b == Biomes.FROZEN_OCEAN ? ExPBiomes.ocean : b == Biomes.BEACH ? ExPBiomes.beach : b == Biomes.PLAINS ? ExPBiomes.plains : b == Biomes.FOREST_HILLS ? ExPBiomes.hills : b == Biomes.JUNGLE || b == Biomes.JUNGLE_EDGE || b == Biomes.JUNGLE_HILLS ? ExPBiomes.jungle : b;
+	    	return b == Biomes.RIVER || b == Biomes.FROZEN_RIVER ? ExPBiomes.river : b == Biomes.OCEAN || b == Biomes.DEEP_OCEAN || b == Biomes.FROZEN_OCEAN ? ExPBiomes.ocean : b == Biomes.BEACH ? ExPBiomes.beach : b == Biomes.PLAINS ? ExPBiomes.plains : b == Biomes.FOREST_HILLS ? ExPBiomes.hills : b == Biomes.JUNGLE || b == Biomes.JUNGLE_EDGE || b == Biomes.JUNGLE_HILLS ? ExPBiomes.jungle : b == Biomes.FOREST ? ExPBiomes.forest : b;
 	    }
 	    
 	    @Override
