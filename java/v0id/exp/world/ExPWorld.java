@@ -276,7 +276,7 @@ public class ExPWorld implements IExPWorld
 			this.dayTemp_isDirty |= shouldSyncBrokenData;
 			this.windDirection_isDirty |= this.windStrength_isDirty |= this.dayTemp_isDirty;
 			this.serverIsDirty |= this.dayTemp_isDirty;
-			boolean shouldBeRaining = this.owner.rand.nextDouble() <= this.accumulatedHumidity / 5000;
+			boolean shouldBeRaining = this.owner.rand.nextDouble() <= this.accumulatedHumidity / 10000;
 			
 			if (this.rainTicksRemaining <= 0)
 			{
