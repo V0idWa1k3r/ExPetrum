@@ -62,8 +62,7 @@ public class BlockPebble extends Block implements IInitializableBlock, IOreHintR
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ROCK_CLASS, ANDESITE).withProperty(MODEL_INDEX, 0));
 		this.setCreativeTab(ExPCreativeTabs.tabUnderground);
-		ExPHandlerRegistry.blockEntries.add(this);
-		ExPHandlerRegistry.itemEntries.add(this);
+		ExPHandlerRegistry.put(this);
 	}
 	
 	@Override

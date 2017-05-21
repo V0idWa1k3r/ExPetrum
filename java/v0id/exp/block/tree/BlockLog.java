@@ -92,8 +92,7 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(AXIS, Axis.Y).withProperty(ExPBlockProperties.TREE_TYPES[this.logIndex], EnumTreeType.values()[this.logIndex * 5]));
 		Blocks.FIRE.setFireInfo(this, 5, 5);
-		ExPHandlerRegistry.blockEntries.add(this);
-		ExPHandlerRegistry.itemEntries.add(this);
+		ExPHandlerRegistry.put(this);
 	}
 	
 	@Override

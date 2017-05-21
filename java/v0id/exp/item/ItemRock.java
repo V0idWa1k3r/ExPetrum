@@ -47,7 +47,7 @@ public class ItemRock extends Item implements IInitializableItem, IWeightProvide
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabUnderground);
 		this.setHasSubtypes(true);
-		ExPHandlerRegistry.itemEntries.add(this);
+		ExPHandlerRegistry.put(this);
 	}
 
 	@Override

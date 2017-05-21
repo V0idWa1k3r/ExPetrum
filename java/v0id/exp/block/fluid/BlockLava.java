@@ -33,8 +33,7 @@ public class BlockLava extends BlockFluidFinite implements IInitializableBlock, 
 		this.setLightOpacity(Blocks.LAVA.getLightOpacity(Blocks.LAVA.getDefaultState()));
 		this.setLightLevel(1);
 		this.setQuantaPerBlock(10);
-		ExPHandlerRegistry.blockEntries.add(this);
-		ExPHandlerRegistry.itemEntries.add(this);
+		ExPHandlerRegistry.put(this);
 	}
 
 	@Override

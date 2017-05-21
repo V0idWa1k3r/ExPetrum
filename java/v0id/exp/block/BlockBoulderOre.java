@@ -64,8 +64,7 @@ public class BlockBoulderOre extends Block implements ITileEntityProvider, IInit
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ROCK_CLASS, ANDESITE).withProperty(ExPBlockProperties.ORE_TEXTURE_ID, 0));
 		this.setCreativeTab(ExPCreativeTabs.tabOres);
-		ExPHandlerRegistry.blockEntries.add(this);
-		ExPHandlerRegistry.itemEntries.add(this);
+		ExPHandlerRegistry.put(this);
 	}
 	
 	@Override

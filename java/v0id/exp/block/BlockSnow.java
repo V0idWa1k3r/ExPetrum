@@ -64,8 +64,7 @@ public class BlockSnow extends Block implements IGravitySusceptible, IInitializa
 		this.setDefaultState(this.blockState.getBaseState().withProperty(LAYERS, 1));
 		this.setCreativeTab(ExPCreativeTabs.tabCommon);
 		this.setTickRandomly(true);
-		ExPHandlerRegistry.blockEntries.add(this);
-		ExPHandlerRegistry.itemEntries.add(this);
+		ExPHandlerRegistry.put(this);
 	}
 
 	@Override

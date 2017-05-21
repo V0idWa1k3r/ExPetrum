@@ -97,8 +97,7 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ExPBlockProperties.LEAF_STATE, EnumLeafState.NORMAL).withProperty(ExPBlockProperties.TREE_TYPES[this.logIndex], EnumTreeType.values()[this.logIndex * 5]));
 		this.setTickRandomly(true);
 		Blocks.FIRE.setFireInfo(this, 30, 60);
-		ExPHandlerRegistry.blockEntries.add(this);
-		ExPHandlerRegistry.itemEntries.add(this);
+		ExPHandlerRegistry.put(this);
 	}
 	
 	@Override

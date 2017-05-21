@@ -121,8 +121,7 @@ public class BlockCoralRock extends Block implements IWeightProvider, IGravitySu
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TEXTURE_INDEX_ROCK, 0));
 		this.setCreativeTab(ExPCreativeTabs.tabCommon);
-		ExPHandlerRegistry.blockEntries.add(this);
-		ExPHandlerRegistry.itemEntries.add(this);
+		ExPHandlerRegistry.put(this);
 	}
 	
 	@Override

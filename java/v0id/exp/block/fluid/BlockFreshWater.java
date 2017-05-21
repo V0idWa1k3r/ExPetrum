@@ -47,8 +47,7 @@ public class BlockFreshWater extends BlockFluidFinite implements IWater, IInitia
 		this.setLightOpacity(Blocks.WATER.getLightOpacity(Blocks.WATER.getDefaultState()));
 		this.setQuantaPerBlock(10);
 		this.setTickRandomly(true);
-		ExPHandlerRegistry.blockEntries.add(this);
-		ExPHandlerRegistry.itemEntries.add(this);
+		ExPHandlerRegistry.put(this);
 	}
 	
 	@Override

@@ -68,7 +68,7 @@ public class ExPBiome extends Biome implements IBiome, IBiomeRegistryEntry
 		this.FRESH_ICE = ExPBlocks.ice.getDefaultState().withProperty(ExPBlockProperties.ICE_IS_SALT, false);
 		this.setRegistryName("exp", this.getBiomeName());
 		Stream.of(EnumCrop.values()).filter(c -> c != EnumCrop.DEAD && c.getData().foundIn.contains(this.getBiomeName().toLowerCase())).forEach(this.cropsToGenerate::add);
-		ExPHandlerRegistry.biomeEntries.add(this);
+		ExPHandlerRegistry.put(this);
 	}
 	
 	public Optional<EnumTreeType> provideTreeToGenerate(Random rand)

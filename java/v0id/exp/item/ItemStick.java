@@ -48,7 +48,7 @@ public class ItemStick extends Item implements IInitializableItem, IWeightProvid
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
 		this.setHasSubtypes(true);
-		ExPHandlerRegistry.itemEntries.add(this);
+		ExPHandlerRegistry.put(this);
 	}
 
 	@Override

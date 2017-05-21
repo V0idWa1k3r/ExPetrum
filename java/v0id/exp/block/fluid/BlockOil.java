@@ -40,8 +40,7 @@ public class BlockOil extends BlockFluidFinite implements IInitializableBlock, I
 		this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
 		this.setLightOpacity(0);
 		this.setQuantaPerBlock(10);
-		ExPHandlerRegistry.blockEntries.add(this);
-		ExPHandlerRegistry.itemEntries.add(this);
+		ExPHandlerRegistry.put(this);
 	}
 
 	@Override

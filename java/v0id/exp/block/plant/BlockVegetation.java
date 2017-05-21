@@ -71,8 +71,7 @@ public class BlockVegetation extends BlockBush implements IInitializableBlock, I
 		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
 		this.setTickRandomly(true);
 		Blocks.FIRE.setFireInfo(this, 60, 100);
-		ExPHandlerRegistry.blockEntries.add(this);
-		ExPHandlerRegistry.itemEntries.add(this);
+		ExPHandlerRegistry.put(this);
 	}
 	
 	@Override

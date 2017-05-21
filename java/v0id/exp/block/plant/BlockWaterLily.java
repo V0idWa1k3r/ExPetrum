@@ -61,8 +61,7 @@ public class BlockWaterLily extends BlockBush implements IWeightProvider, IIniti
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(PLANT_BLOOMING, false).withProperty(LILY_TYPE, LEOPARDESS));
 		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
-		ExPHandlerRegistry.blockEntries.add(this);
-		ExPHandlerRegistry.itemEntries.add(this);
+		ExPHandlerRegistry.put(this);
 	}
 	
 	@Override

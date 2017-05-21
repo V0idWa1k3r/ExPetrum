@@ -168,8 +168,7 @@ public class BlockSand extends Block implements IWeightProvider, IGravitySuscept
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ROCK_CLASS, ANDESITE));
 		this.setCreativeTab(ExPCreativeTabs.tabCommon);
-		ExPHandlerRegistry.blockEntries.add(this);
-		ExPHandlerRegistry.itemEntries.add(this);
+		ExPHandlerRegistry.put(this);
 	}
 	
 	@Override

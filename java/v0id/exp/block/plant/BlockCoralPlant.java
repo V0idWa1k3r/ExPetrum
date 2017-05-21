@@ -53,8 +53,7 @@ public class BlockCoralPlant extends Block implements IWeightProvider, IInitiali
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TEXTURE_INDEX_ROCK, 0).withProperty(TEXTURE_INDEX_PLANT, 0));
 		this.setCreativeTab(ExPCreativeTabs.tabCommon);
 		this.setTickRandomly(true);
-		ExPHandlerRegistry.blockEntries.add(this);
-		ExPHandlerRegistry.itemEntries.add(this);
+		ExPHandlerRegistry.put(this);
 	}
 	
 	@SideOnly(Side.CLIENT)

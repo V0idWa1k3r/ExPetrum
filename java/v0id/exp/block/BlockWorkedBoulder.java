@@ -71,8 +71,7 @@ public class BlockWorkedBoulder extends Block implements ITileEntityProvider, II
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ROCK_CLASS, ANDESITE).withProperty(ExPBlockProperties.WORKED_BOULDER_INDEX, 0));
 		this.setCreativeTab(ExPCreativeTabs.tabUnderground);
-		ExPHandlerRegistry.blockEntries.add(this);
-		ExPHandlerRegistry.itemEntries.add(this);
+		ExPHandlerRegistry.put(this);
 	}
 	
 	@Override

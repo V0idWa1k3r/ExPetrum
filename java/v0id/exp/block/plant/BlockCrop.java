@@ -110,8 +110,7 @@ public class BlockCrop extends BlockContainer implements IInitializableBlock, IB
 		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
 		this.setTickRandomly(true);
 		this.setHarvestLevel("scythe", 0);
-		ExPHandlerRegistry.blockEntries.add(this);
-		ExPHandlerRegistry.itemEntries.add(this);
+		ExPHandlerRegistry.put(this);
 	}
 	
 	@Override

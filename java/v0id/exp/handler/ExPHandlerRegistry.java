@@ -18,9 +18,27 @@ import v0id.exp.world.biome.IBiomeRegistryEntry;
 @Mod.EventBusSubscriber(modid = ExPRegistryNames.modid)
 public class ExPHandlerRegistry
 {
-	public static final List<IBlockRegistryEntry> blockEntries = Lists.newArrayList();
-	public static final List<IItemRegistryEntry> itemEntries = Lists.newArrayList();
-	public static final List<IBiomeRegistryEntry> biomeEntries = Lists.newArrayList();
+	private static final List<IBlockRegistryEntry> blockEntries = Lists.newArrayList();
+	private static final List<IItemRegistryEntry> itemEntries = Lists.newArrayList();
+	private static final List<IBiomeRegistryEntry> biomeEntries = Lists.newArrayList();
+	
+	public static void put(Object o)
+	{
+		if (o instanceof IBlockRegistryEntry)
+		{
+			blockEntries.add((IBlockRegistryEntry) o);
+		}
+		
+		if (o instanceof IItemRegistryEntry)
+		{
+			itemEntries.add((IItemRegistryEntry) o);
+		}
+		
+		if (o instanceof IBiomeRegistryEntry)
+		{
+			biomeEntries.add((IBiomeRegistryEntry) o);
+		}
+	}
 	
 	@SubscribeEvent
 	public static void onBlocksRegistry(RegistryEvent.Register<Block> event)
