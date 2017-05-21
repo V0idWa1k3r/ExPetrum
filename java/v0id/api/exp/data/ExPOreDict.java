@@ -44,6 +44,6 @@ public class ExPOreDict
 	public static final String[] soilNames = Stream.of(EnumDirtClass.values()).map(EnumDirtClass::getName).toArray(String[]::new);
 	public static final String[] treeNames = Stream.of(EnumTreeType.values()).map(EnumTreeType::getName).toArray(String[]::new);
 	public static final String[] bushNames = Stream.of(EnumShrubType.values()).map(EnumShrubType::getName).toArray(String[]::new);
-	public static final String[] cropNames = Stream.of(EnumCrop.values()).map(EnumCrop::getName).toArray(String[]::new);
+	public static final String[] cropNames = Stream.of(EnumCrop.values()).filter(EnumCrop.DEAD::nequals).map(EnumCrop::getName).toArray(String[]::new);
 	public static final String[] stickNames = ArrayUtils.addAll(treeNames, bushNames);
 }

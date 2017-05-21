@@ -64,4 +64,9 @@ public enum EnumCrop implements IStringSerializable
 	{
 		this.data = data;
 	}
+	
+	public final boolean nequals(Object other) 
+	{
+        return !this.equals(other);
+    }
 }
