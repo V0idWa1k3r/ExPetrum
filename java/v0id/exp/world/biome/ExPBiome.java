@@ -3,6 +3,7 @@ package v0id.exp.world.biome;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Stream;
 
 import com.google.common.collect.Lists;
 
@@ -21,6 +22,7 @@ import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
+import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.world.EnumSeason;
 import v0id.api.exp.world.IBiome;
 import v0id.api.exp.world.IExPWorld;
@@ -46,6 +48,7 @@ public class ExPBiome extends Biome implements IBiome, IBiomeRegistryEntry
 	
 	public final List<TreeEntry> treesToGenerate = Lists.newArrayList();
 	public final List<ShrubEntry> shrubsToGenerate = Lists.newArrayList();
+	public final List<EnumCrop> cropsToGenerate = Lists.newArrayList();
 	
 	public ExPBiome(BiomeProperties properties, float... biomedata)
 	{
@@ -64,6 +67,7 @@ public class ExPBiome extends Biome implements IBiome, IBiomeRegistryEntry
 		this.SALT_ICE = ExPBlocks.ice.getDefaultState().withProperty(ExPBlockProperties.ICE_IS_SALT, true);
 		this.FRESH_ICE = ExPBlocks.ice.getDefaultState().withProperty(ExPBlockProperties.ICE_IS_SALT, false);
 		this.setRegistryName("exp", this.getBiomeName());
+		Stream.of(EnumCrop.values()).filter(c -> c != EnumCrop.DEAD && c.getData().foundIn.contains(this.getBiomeName().toLowerCase())).forEach(this.cropsToGenerate::add);
 		ExPHandlerRegistry.biomeEntries.add(this);
 	}
 	

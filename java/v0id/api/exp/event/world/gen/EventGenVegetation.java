@@ -65,6 +65,7 @@ public class EventGenVegetation extends Event
 		SEAWEED,
 		BUSH,
 		TALL_PLANT,
+		WILD_CROP,
 		OTHER
 	}
 }

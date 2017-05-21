@@ -26,6 +26,7 @@ import v0id.api.exp.world.gen.ITreeGenerator;
 import v0id.api.exp.world.gen.TreeGenerators;
 import v0id.exp.world.gen.biome.BoulderGenerator;
 import v0id.exp.world.gen.biome.CattailGenerator;
+import v0id.exp.world.gen.biome.CropGenerator;
 import v0id.exp.world.gen.biome.OreGenerator;
 import v0id.exp.world.gen.biome.PebbleGenerator;
 import v0id.exp.world.gen.biome.SeaweedGenerator;
@@ -55,6 +56,7 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		this.doPebblePass(worldIn, random, biome, pos);
 		this.doBoulderPass(worldIn, random, biome, pos);
 		this.doOrePass(worldIn, random, biome, pos);
+		this.doCropsPass(worldIn, random, biome, pos);
     }
 
 	private static void printWarnings()
@@ -68,6 +70,11 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		ExPMisc.modLogger.log(LogLevel.Fine, "However that should not be the issue for the most part as chunk runaway should happen rarely");
 		ExPMisc.modLogger.log(LogLevel.Fine, "Thanks for reading this. Have a nice day :)");
 		printedWarnings = true;
+	}
+	
+	public void doCropsPass(World worldIn, Random rand, Biome biome, BlockPos pos)
+	{
+		this.cropsPassGenerate(worldIn, rand, biome, pos);
 	}
 	
 	public void doShrubsPass(World worldIn, Random rand, Biome biome, BlockPos pos)
@@ -105,6 +112,27 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		{
 			this.orePassGenerate(worldIn, rand, biome, pos);
 		}
+	}
+	
+	public void cropsPassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)
+	{
+		if (!(biome instanceof ExPBiome))
+		{
+			return;
+		}
+		
+		int x = rand.nextInt(16) + 8;
+		int z = rand.nextInt(16) + 8;
+		BlockPos at = worldIn.getHeight(pos.add(x, 0, z));
+		
+		WorldGenerator cropsGen = new CropGenerator((ExPBiome) biome);
+		EventGenVegetation event = new EventGenVegetation(worldIn, at, rand, cropsGen, Type.WILD_CROP);
+		if (MinecraftForge.TERRAIN_GEN_BUS.post(event))
+		{
+			return;
+		}
+		
+		event.generator.generate(worldIn, rand, at);
 	}
 	
 	public void shrubsPassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)
