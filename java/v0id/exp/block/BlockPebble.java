@@ -29,7 +29,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
-import v0id.api.core.util.ItemBlockWithMetadata;
 import v0id.api.exp.block.IOreHintReplaceable;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.data.ExPCreativeTabs;
@@ -39,6 +38,7 @@ import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
 import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.handler.ExPHandlerRegistry;
 
 public class BlockPebble extends Block implements IInitializableBlock, IOreHintReplaceable, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry

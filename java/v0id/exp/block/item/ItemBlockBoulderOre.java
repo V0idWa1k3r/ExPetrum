@@ -8,7 +8,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import v0id.api.core.util.ItemBlockWithMetadata;
 import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.exp.tile.TileOre;

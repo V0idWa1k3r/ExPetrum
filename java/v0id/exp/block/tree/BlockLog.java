@@ -31,7 +31,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
-import v0id.api.core.util.ItemBlockWithMetadata;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.ILog;
 import v0id.api.exp.block.property.ExPBlockProperties;
@@ -44,6 +43,7 @@ import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.entity.EntityFallingTree;
 import v0id.exp.handler.ExPHandlerRegistry;
 

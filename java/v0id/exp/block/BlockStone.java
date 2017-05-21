@@ -28,7 +28,6 @@ import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-import v0id.api.core.util.ItemBlockWithMetadata;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPOreDict;
@@ -38,6 +37,7 @@ import v0id.api.exp.gravity.GravityHelper;
 import v0id.api.exp.gravity.IGravitySusceptible;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.handler.ExPHandlerRegistry;
 
 public class BlockStone extends Block implements IWeightProvider, IGravitySusceptible, IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry

@@ -32,7 +32,6 @@ import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-import v0id.api.core.util.ItemBlockWithMetadata;
 import v0id.api.core.util.java.ColorRGB;
 import v0id.api.exp.block.EnumGrassAmount;
 import v0id.api.exp.block.EnumGrassState;
@@ -48,6 +47,7 @@ import v0id.api.exp.gravity.GravityHelper;
 import v0id.api.exp.gravity.IGravitySusceptible;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.block.plant.BlockShrub;
 import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
@@ -78,7 +78,7 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 	@Override
 	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable)
 	{
-		return plantable instanceof BlockShrub ? true : this.getState() != EnumGrassState.DEAD && plantable.getPlantType(world, pos) == EnumPlantType.Plains;
+		return plantable instanceof BlockShrub ? true : this.getState() != EnumGrassState.DEAD && plantable.getPlantType(world, pos.up()) == EnumPlantType.Plains;
 	}
 
 	@Override
