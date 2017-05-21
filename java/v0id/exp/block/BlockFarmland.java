@@ -117,6 +117,7 @@ public class BlockFarmland extends BlockContainer implements IInitializableBlock
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(DIRT_CLASS, ACRISOL));
 		this.setCreativeTab(ExPCreativeTabs.tabCommon);
+		this.setTickRandomly(true);
 		ExPHandlerRegistry.blockEntries.add(this);
 		ExPHandlerRegistry.itemEntries.add(this);
 	}

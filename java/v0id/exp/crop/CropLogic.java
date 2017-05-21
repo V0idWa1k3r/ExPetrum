@@ -1,17 +1,22 @@
 package v0id.exp.crop;
 
 import java.util.Map.Entry;
+import java.util.stream.Stream;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.tile.crop.EnumPlantNutrient;
+import v0id.api.exp.tile.crop.ExPCropCapability;
 import v0id.api.exp.tile.crop.ExPFarmlandCapability;
 import v0id.api.exp.tile.crop.IFarmland;
 import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.IExPWorld;
+import v0id.exp.block.plant.BlockVegetation;
 import v0id.exp.util.Helpers;
 
 public class CropLogic
@@ -34,7 +39,29 @@ public class CropLogic
 	
 	public static void handleFarmlandTimePassed(ExPFarmland farmland, long ticks, Calendar calendarReference)
 	{
+		World w = farmland.getContainer().getWorld();
+		BlockPos pos = farmland.getContainer().getPos();
+		IBlockState above = w.getBlockState(pos.up());
+		boolean canSeeTheSky = w.canBlockSeeSky(pos.up());
+		TileEntity tileAbove = w.getTileEntity(pos.up());
+		if (tileAbove != null && tileAbove.hasCapability(ExPCropCapability.cropCap, EnumFacing.DOWN))
+		{
+			return;
+		}
 		
+		final float waterLoss = (0.00001f * (above.getBlock() instanceof BlockVegetation ? 2 : 1)) * ticks;
+		final float nutrientGain = (1.39e-6F * (above.getBlock() instanceof BlockVegetation ? -10 : 1)) * ticks;
+		if (w.isRaining() && canSeeTheSky)
+		{
+			farmland.setMoisture(1);
+		}
+		else
+		{
+			farmland.setMoisture(MathHelper.clamp(farmland.getMoisture() - waterLoss, 0, 1));
+		}
+		
+		Stream.of(EnumPlantNutrient.values()).forEach(n -> farmland.setNutrient(n, MathHelper.clamp(farmland.getNutrient(n) + nutrientGain, 0, 1)));
+		farmland.setDirty();
 	}
 	
 	public static void onWorldUpdate(ExPCrop crop)

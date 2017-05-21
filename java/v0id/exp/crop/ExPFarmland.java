@@ -2,6 +2,7 @@ package v0id.exp.crop;
 
 import java.util.EnumMap;
 import java.util.Map.Entry;
+import java.util.stream.Stream;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -24,6 +25,11 @@ public class ExPFarmland implements IFarmland
 	public EnumMap<EnumPlantNutrient, Float> nutrientData = new EnumMap(EnumPlantNutrient.class);
 	public float moistureLevel;
 	public Calendar timeKeeper = new Calendar();
+	
+	public ExPFarmland()
+	{
+		Stream.of(EnumPlantNutrient.values()).forEach(n -> this.nutrientData.put(n, 0F));
+	}
 	
 	@Override
 	public NBTTagCompound serializeNBT()
@@ -118,5 +124,11 @@ public class ExPFarmland implements IFarmland
 		ExPFarmland ret = createDefault();
 		ret.holder = tile;
 		return ret;
+	}
+	
+	public static int getColor(IFarmland of)
+	{
+		float colorMultiplier = 0.25F + (1 - of.getMoisture()) / 1.5F;
+		return ((int)(colorMultiplier * 255F) << 16) + ((int)(colorMultiplier * 255F) << 8) + (int)(colorMultiplier * 255F);
 	}
 }

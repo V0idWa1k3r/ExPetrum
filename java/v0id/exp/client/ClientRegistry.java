@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.entity.RenderFallingBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -48,10 +49,13 @@ import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.item.EnumToolhead;
 import v0id.api.exp.tile.crop.EnumCrop;
+import v0id.api.exp.tile.crop.ExPFarmlandCapability;
+import v0id.api.exp.tile.crop.IFarmland;
 import v0id.exp.block.tree.BlockLeaf;
 import v0id.exp.block.tree.BlockLog;
 import v0id.exp.client.model.ModelLoaderExP;
 import v0id.exp.client.render.entity.RenderFallingTree;
+import v0id.exp.crop.ExPFarmland;
 import v0id.exp.entity.EntityFallingTree;
 import v0id.exp.entity.EntityGravFallingBlock;
 import v0id.exp.registry.AbstractRegistry;
@@ -246,6 +250,8 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 		IFunctionalItemColor.registerItemColorHandler((ItemStack stack, int tintIndex) -> ((ILeaves)Block.getBlockFromItem(stack.getItem())).getLeavesColorForMeta(stack.getMetadata()), ExPBlocks.leaves);
 		IFunctionalItemColor.registerItemColorHandler((ItemStack stack, int tintIndex) -> 
 			EnumOre.values()[(stack.getMetadata() / EnumRockClass.values().length) % EnumOre.values().length].getColor(), ExPBlocks.ore, ExPBlocks.boulderOre);
+		IFunctionalBlockColor.registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) -> 
+			worldIn.getTileEntity(pos) != null && worldIn.getTileEntity(pos).hasCapability(ExPFarmlandCapability.farmlandCap, EnumFacing.UP) ? ExPFarmland.getColor(IFarmland.of(worldIn.getTileEntity(pos), EnumFacing.UP)) : -1, ExPBlocks.farmland);
 	}
 
 	@Override
