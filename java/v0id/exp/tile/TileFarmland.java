@@ -61,12 +61,12 @@ public class TileFarmland extends TileEntity
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing)
 	{
-		return capability == ExPFarmlandCapability.farmlandCap && facing == EnumFacing.UP || facing == null ? true : super.hasCapability(capability, facing);
+		return capability == ExPFarmlandCapability.farmlandCap && (facing == EnumFacing.UP || facing == null) ? true : super.hasCapability(capability, facing);
 	}
 
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
 	{
-		return capability == ExPFarmlandCapability.farmlandCap && facing == EnumFacing.UP || facing == null ? (T) this.farmlandState : super.getCapability(capability, facing);
+		return capability == ExPFarmlandCapability.farmlandCap && (facing == EnumFacing.UP || facing == null) ? (T) this.farmlandState : super.getCapability(capability, facing);
 	}
 }

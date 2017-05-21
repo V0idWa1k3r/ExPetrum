@@ -85,6 +85,7 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.cattail), i, new ModelResourceLocation(ExPBlocks.cattail.getRegistryName(), "class=" + EnumDirtClass.values()[i].getName()));
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.sand), i, new ModelResourceLocation(ExPBlocks.sand.getRegistryName(), "class=" + EnumRockClass.values()[i].getName()));
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.seaweed), i, new ModelResourceLocation(ExPBlocks.seaweed.getRegistryName(), "class=" + EnumRockClass.values()[i].getName()));
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.farmland), i, new ModelResourceLocation(ExPBlocks.farmland.getRegistryName(), "class=" + EnumDirtClass.values()[i].getName()));
 			Stream.of(ExPBlocks.shrubs).forEach(s -> ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(s), iWrapper, new ModelResourceLocation(s.getRegistryName(), "istall=false,type=" + EnumShrubType.values()[iWrapper])));
 			if (i < 10)
 			{

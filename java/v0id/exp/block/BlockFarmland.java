@@ -18,6 +18,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
@@ -29,7 +30,11 @@ import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import v0id.api.core.util.ItemBlockWithMetadata;
+import v0id.api.core.util.java.ColorRGB;
+import v0id.api.exp.block.EnumGrassAmount;
+import v0id.api.exp.block.EnumGrassState;
 import v0id.api.exp.block.ICanGrowCrop;
+import v0id.api.exp.block.IGrass;
 import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
@@ -41,7 +46,7 @@ import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.tile.TileFarmland;
 
-public class BlockFarmland extends BlockContainer implements IInitializableBlock, IBlockRegistryEntry, IItemRegistryEntry, IGravitySusceptible, ICanGrowCrop
+public class BlockFarmland extends BlockContainer implements IInitializableBlock, IBlockRegistryEntry, IItemRegistryEntry, IGravitySusceptible, ICanGrowCrop, IGrass
 {
 	public BlockFarmland()
 	{
@@ -55,6 +60,12 @@ public class BlockFarmland extends BlockContainer implements IInitializableBlock
 		EnumDirtClass type = EnumDirtClass.values()[this.getMetaFromState(w.getBlockState(pos))];
 		return type.getNutrientMultiplier();
 	}
+	
+	@Override
+	public EnumBlockRenderType getRenderType(IBlockState state)
+    {
+        return EnumBlockRenderType.MODEL;
+    }
 
 	@Override
 	public float getHumidityLevel(World w, BlockPos pos)
@@ -217,6 +228,26 @@ public class BlockFarmland extends BlockContainer implements IInitializableBlock
 			list.add(new ItemStack(itemIn, 1, i));
 		}
 	}
-	
-	
+
+	@Override
+	public int getGrassColor(IBlockState state, BlockPos pos, IBlockAccess w)
+	{
+		int baseColor = 0x02661c;
+		int mulColor = w.getBiome(pos).getGrassColorAtPos(pos);
+		ColorRGB rgbBase = ColorRGB.FromHEX(baseColor);
+		ColorRGB mulBase = ColorRGB.FromHEX(mulColor);
+		return ((int)((rgbBase.R + mulBase.R) * 127.5) << 16) + ((int)((rgbBase.G + mulBase.G) * 127.5) << 8) + (int)((rgbBase.B + mulBase.B) * 127.5);
+	}
+
+	@Override
+	public EnumGrassState getState()
+	{
+		return EnumGrassState.NORMAL;
+	}
+
+	@Override
+	public EnumGrassAmount getAmount(IBlockState state, BlockPos pos, IBlockAccess w)
+	{
+		return EnumGrassAmount.values()[Math.max(state.getValue(DIRT_CLASS).getAmount().ordinal() - 1, 0)];
+	}
 }

@@ -1,0 +1,111 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"textures" : {
+			"all" : "exp:blocks/dirt/acrisol",
+			"farmland" : "exp:blocks/dirt/farmland/acrisol"
+		},
+		"model" : "exp:farmland"
+	},
+	"variants" : {
+		"normal": [{}],
+		"class" : {
+			"acrisol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/acrisol",
+					"farmland" : "exp:blocks/dirt/farmland/acrisol"
+				}
+			},
+			"albeluvisol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/albeluvisol",
+					"farmland" : "exp:blocks/dirt/farmland/albeluvisol"
+				}
+			},
+			"calcisol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/calcisol",
+					"farmland" : "exp:blocks/dirt/farmland/calcisol"
+				}
+			},
+			"cambisol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/cambisol",
+					"farmland" : "exp:blocks/dirt/farmland/cambisol"
+				}
+			},
+			"chernozem" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/chernozem",
+					"farmland" : "exp:blocks/dirt/farmland/chernozem"
+				}
+			},
+			"fluvisol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/fluvisol",
+					"farmland" : "exp:blocks/dirt/farmland/fluvisol"
+				}
+			},
+			"gleysol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/gleysol",
+					"farmland" : "exp:blocks/dirt/farmland/gleysol"
+				}
+			},
+			"gypsisol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/gypsisol",
+					"farmland" : "exp:blocks/dirt/farmland/gypsisol"
+				}
+			},
+			"leptosol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/leptosol",
+					"farmland" : "exp:blocks/dirt/farmland/leptosol"
+				}
+			},
+			"peat" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/peat",
+					"farmland" : "exp:blocks/dirt/farmland/peat"
+				}
+			},
+			"planosol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/planosol",
+					"farmland" : "exp:blocks/dirt/farmland/planosol"
+				}
+			},
+			"podzol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/podzol",
+					"farmland" : "exp:blocks/dirt/farmland/podzol"
+				}
+			},
+			"regosol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/regosol",
+					"farmland" : "exp:blocks/dirt/farmland/regosol"
+				}
+			},
+			"solonchak" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/solonchak",
+					"farmland" : "exp:blocks/dirt/farmland/solonchak"
+				}
+			},
+			"umbrisol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/umbrisol",
+					"farmland" : "exp:blocks/dirt/farmland/umbrisol"
+				}
+			},
+			"vertisol" : {
+				"textures" : {
+					"all" : "exp:blocks/dirt/vertisol",
+					"farmland" : "exp:blocks/dirt/farmland/vertisol"
+				}
+			}
+		}
+	}
+}
