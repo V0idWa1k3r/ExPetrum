@@ -15,7 +15,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
@@ -107,6 +109,7 @@ public class BlockCrop extends BlockContainer implements IInitializableBlock, IB
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ExPBlockProperties.CROP_GROWTH_STAGE, 0).withProperty(ExPBlockProperties.CROP_TYPE, EnumCrop.DEAD));
 		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
 		this.setTickRandomly(true);
+		this.setHarvestLevel("scythe", 0);
 		ExPHandlerRegistry.blockEntries.add(this);
 		ExPHandlerRegistry.itemEntries.add(this);
 	}
@@ -237,5 +240,19 @@ public class BlockCrop extends BlockContainer implements IInitializableBlock, IB
 	public IBlockState getPlant(IBlockAccess world, BlockPos pos)
 	{
 		return this.getExtendedState(this.getDefaultState(), world, pos);
+	}
+	
+	@Override
+	public String getHarvestTool(IBlockState state)
+    {
+        return "scythe";
+    }
+
+	@Override
+	public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World worldIn, BlockPos pos)
+	{
+		// Axes are hardcoded to break blocks with a material of PLANT at their efficiency speed, need to fix that.
+		ItemStack stack = player.getHeldItemMainhand();
+		return !stack.isEmpty() && stack.getItem() instanceof ItemAxe ? super.getPlayerRelativeBlockHardness(state, player, worldIn, pos) / ((ItemAxe)stack.getItem()).getStrVsBlock(stack, state) : super.getPlayerRelativeBlockHardness(state, player, worldIn, pos);
 	}
 }
