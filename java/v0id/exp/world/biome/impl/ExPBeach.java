@@ -16,8 +16,8 @@ public class ExPBeach extends ExPBiome
 		super(properties, biomedata);
 		this.topBlock = Blocks.SAND.getDefaultState();
 		this.fillerBlock = Blocks.SAND.getDefaultState();
-		this.theBiomeDecorator.treesPerChunk = 3;
-		this.theBiomeDecorator.deadBushPerChunk = 0;
+		this.decorator.treesPerChunk = 3;
+		this.decorator.deadBushPerChunk = 0;
 		this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.PALM));
 	}
 	

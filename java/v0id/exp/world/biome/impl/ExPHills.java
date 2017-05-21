@@ -15,10 +15,10 @@ public class ExPHills extends ExPBiome
 	public ExPHills(BiomeProperties properties, float... biomedata)
 	{
 		super(properties, biomedata);
-		this.theBiomeDecorator.treesPerChunk = 1;
-        this.theBiomeDecorator.extraTreeChance = 0.05F;
-        this.theBiomeDecorator.grassPerChunk = 4;
-        this.theBiomeDecorator.deadBushPerChunk = 2;
+		this.decorator.treesPerChunk = 1;
+        this.decorator.extraTreeChance = 0.05F;
+        this.decorator.grassPerChunk = 4;
+        this.decorator.deadBushPerChunk = 2;
         this.treesToGenerate.add(new TreeEntry(2, EnumTreeType.KALOPANAX));
         this.treesToGenerate.add(new TreeEntry(8, EnumTreeType.BIRCH));
         this.treesToGenerate.add(new TreeEntry(2, EnumTreeType.CHESTNUT));

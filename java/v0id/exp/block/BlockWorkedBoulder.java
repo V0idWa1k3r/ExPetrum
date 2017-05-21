@@ -156,21 +156,9 @@ public class BlockWorkedBoulder extends Block implements ITileEntityProvider, II
     }
 	
 	@Override
-	public boolean isFullyOpaque(IBlockState state)
-	{
-		return false;
-	}
-	
-	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
 		return this.BOULDER_AABB;
-	}
-
-	@Override
-	public boolean isBlockSolid(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
-	{
-		return false;
 	}
 
 	@Override

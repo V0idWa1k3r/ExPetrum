@@ -152,7 +152,7 @@ public class BlockSoil extends Block implements IWeightProvider, IGravitySuscept
 	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction,IPlantable plantable)
 	{
 		EnumDirtClass type = EnumDirtClass.values()[this.getMetaFromState(state)];
-		switch (plantable.getPlantType(world, pos))
+		switch (plantable.getPlantType(world, pos.offset(direction)))
 		{
 			case Plains:
 			{

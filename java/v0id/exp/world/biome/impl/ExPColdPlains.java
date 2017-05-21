@@ -15,10 +15,10 @@ public class ExPColdPlains extends ExPBiome
 	public ExPColdPlains(BiomeProperties properties, float... biomedata)
 	{
 		super(properties, biomedata);
-		this.theBiomeDecorator.treesPerChunk = 1;
-        this.theBiomeDecorator.extraTreeChance = 0.05F;
-        this.theBiomeDecorator.grassPerChunk = 8;
-        this.theBiomeDecorator.deadBushPerChunk = 2;
+		this.decorator.treesPerChunk = 1;
+        this.decorator.extraTreeChance = 0.05F;
+        this.decorator.grassPerChunk = 8;
+        this.decorator.deadBushPerChunk = 2;
         this.treesToGenerate.add(new TreeEntry(3, EnumTreeType.KALOPANAX));
         this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.BIRCH));
         this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.CHESTNUT));

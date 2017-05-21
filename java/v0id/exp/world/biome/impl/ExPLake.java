@@ -20,9 +20,9 @@ public class ExPLake extends ExPBiome
 	public ExPLake(BiomeProperties properties, float... biomedata)
 	{
 		super(properties, biomedata);
-		this.theBiomeDecorator.treesPerChunk = 3;
-		this.theBiomeDecorator.grassPerChunk = 3;
-		this.theBiomeDecorator.deadBushPerChunk = 6;
+		this.decorator.treesPerChunk = 3;
+		this.decorator.grassPerChunk = 3;
+		this.decorator.deadBushPerChunk = 6;
 		this.treesToGenerate.add(new TreeEntry(8, EnumTreeType.KALOPANAX));
 		this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.CHESTNUT));
 		this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.OAK));

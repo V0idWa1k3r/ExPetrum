@@ -15,10 +15,10 @@ public class ExPWarmPlains extends ExPBiome
 	public ExPWarmPlains(BiomeProperties properties, float... biomedata)
 	{
 		super(properties, biomedata);
-		this.theBiomeDecorator.treesPerChunk = 1;
-        this.theBiomeDecorator.extraTreeChance = 0.05F;
-        this.theBiomeDecorator.grassPerChunk = 8;
-        this.theBiomeDecorator.deadBushPerChunk = 4;
+		this.decorator.treesPerChunk = 1;
+        this.decorator.extraTreeChance = 0.05F;
+        this.decorator.grassPerChunk = 8;
+        this.decorator.deadBushPerChunk = 4;
         this.treesToGenerate.add(new TreeEntry(5, EnumTreeType.KALOPANAX));
         this.treesToGenerate.add(new TreeEntry(8, EnumTreeType.ACACIA));
         this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.CHESTNUT));

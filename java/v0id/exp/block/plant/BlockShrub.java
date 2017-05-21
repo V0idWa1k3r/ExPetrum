@@ -107,18 +107,6 @@ public class BlockShrub extends Block implements IInitializableBlock, IShrub, IP
 	}
 
 	@Override
-	public boolean isFullyOpaque(IBlockState state)
-	{
-		return false;
-	}
-
-	@Override
-	public boolean isBlockSolid(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
-	{
-		return false;
-	}
-
-	@Override
 	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;

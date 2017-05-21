@@ -15,10 +15,10 @@ public class ExPSavanna extends ExPBiome
 	public ExPSavanna(BiomeProperties properties, float... biomedata)
 	{
 		super(properties, biomedata);
-		this.theBiomeDecorator.treesPerChunk = 1;
-        this.theBiomeDecorator.extraTreeChance = 0.05F;
-        this.theBiomeDecorator.grassPerChunk = 8;
-        this.theBiomeDecorator.deadBushPerChunk = 3;
+		this.decorator.treesPerChunk = 1;
+        this.decorator.extraTreeChance = 0.05F;
+        this.decorator.grassPerChunk = 8;
+        this.decorator.deadBushPerChunk = 3;
         this.treesToGenerate.add(new TreeEntry(2, EnumTreeType.KALOPANAX));
         this.treesToGenerate.add(new TreeEntry(60, EnumTreeType.ACACIA));
         this.treesToGenerate.add(new TreeEntry(2, EnumTreeType.CHESTNUT));

@@ -14,8 +14,8 @@ public class ExPDesert extends ExPBiome
 	public ExPDesert(BiomeProperties properties, float... biomedata)
 	{
 		super(properties, biomedata);
-		this.theBiomeDecorator.treesPerChunk = 1;
-		this.theBiomeDecorator.deadBushPerChunk = 0;
+		this.decorator.treesPerChunk = 1;
+		this.decorator.deadBushPerChunk = 0;
 		this.topBlock = Blocks.SAND.getDefaultState();
         this.fillerBlock = Blocks.SAND.getDefaultState();
         this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.ACACIA));

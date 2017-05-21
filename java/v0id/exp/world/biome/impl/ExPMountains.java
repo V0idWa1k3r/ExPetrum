@@ -15,9 +15,9 @@ public class ExPMountains extends ExPBiome
 	public ExPMountains(BiomeProperties properties, float... biomedata)
 	{
 		super(properties, biomedata);
-		this.theBiomeDecorator.treesPerChunk = 3;
-		this.theBiomeDecorator.grassPerChunk = 4;
-		this.theBiomeDecorator.deadBushPerChunk = 2;
+		this.decorator.treesPerChunk = 3;
+		this.decorator.grassPerChunk = 4;
+		this.decorator.deadBushPerChunk = 2;
 		this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.KALOPANAX));
 		this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.BIRCH));
 		this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.CHESTNUT));

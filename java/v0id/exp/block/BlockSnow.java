@@ -136,7 +136,7 @@ public class BlockSnow extends Block implements IGravitySusceptible, IInitializa
 	}
 	
 	@Override
-	public boolean isFullyOpaque(IBlockState state)
+	public boolean isTopSolid(IBlockState state)
     {
         return state.getValue(LAYERS) == 8;
     }

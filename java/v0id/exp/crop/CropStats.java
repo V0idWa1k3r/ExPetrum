@@ -28,7 +28,7 @@ import v0id.api.exp.world.TemperatureRange;
 public class CropStats implements INBTSerializable<NBTTagCompound>
 {
 	public TemperatureRange[] growthRanges = new TemperatureRange[3];
-	public Pair<Float, Float> humidityGrowthRange;
+	public Pair<Float, Float> humidityGrowthRange = Pair.of(0F, 1F);
 	public int generation;
 	public boolean wild;
 	public EnumCrop type = EnumCrop.DEAD;

@@ -135,12 +135,6 @@ public class BlockBoulder extends Block implements IInitializableBlock, IOreHint
 	}
 
 	@Override
-	public boolean isFullyOpaque(IBlockState state)
-	{
-		return false;
-	}
-
-	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
 		return this.getDefaultState().withProperty(ROCK_CLASS, EnumRockClass.values()[meta]);
@@ -162,12 +156,6 @@ public class BlockBoulder extends Block implements IInitializableBlock, IOreHint
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
 		return this.BOULDER_AABB;
-	}
-
-	@Override
-	public boolean isBlockSolid(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
-	{
-		return false;
 	}
 
 	@Override

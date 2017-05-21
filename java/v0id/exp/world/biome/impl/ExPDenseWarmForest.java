@@ -15,9 +15,9 @@ public class ExPDenseWarmForest extends ExPBiome
 	public ExPDenseWarmForest(BiomeProperties properties, float... biomedata)
 	{
 		super(properties, biomedata);
-		this.theBiomeDecorator.treesPerChunk = 20;
-        this.theBiomeDecorator.grassPerChunk = 4;
-        this.theBiomeDecorator.deadBushPerChunk = 6;
+		this.decorator.treesPerChunk = 20;
+        this.decorator.grassPerChunk = 4;
+        this.decorator.deadBushPerChunk = 6;
         this.treesToGenerate.add(new TreeEntry(8, EnumTreeType.KALOPANAX));
         this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.BIRCH));
         this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.ACACIA));

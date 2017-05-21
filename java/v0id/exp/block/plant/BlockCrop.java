@@ -2,6 +2,8 @@ package v0id.exp.block.plant;
 
 import java.util.Random;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
@@ -15,6 +17,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -23,6 +27,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPRegistryNames;
@@ -45,6 +51,38 @@ public class BlockCrop extends BlockContainer implements IInitializableBlock, IB
 		super(Material.PLANTS);
 		this.initBlock();
 	}
+	
+	@Override
+	@Nullable
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
+    {
+        return NULL_AABB;
+    }
+
+	@Override
+	@SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer()
+    {
+        return BlockRenderLayer.CUTOUT;
+    }
+	
+    @Override
+	public boolean isOpaqueCube(IBlockState state)
+    {
+        return false;
+    }
+
+    @Override
+	public boolean isFullCube(IBlockState state)
+    {
+        return false;
+    }
+    
+    @Override
+	public EnumBlockRenderType getRenderType(IBlockState state)
+    {
+        return EnumBlockRenderType.MODEL;
+    }
 
 	@Override
 	public void registerItem(IForgeRegistry<Item> registry)
@@ -180,6 +218,11 @@ public class BlockCrop extends BlockContainer implements IInitializableBlock, IB
 	@Override
 	public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
+		if (world.getTileEntity(pos) == null)
+		{
+			return state;
+		}
+		
 		IExPCrop data = IExPCrop.of(world.getTileEntity(pos));
 		return this.getDefaultState().withProperty(ExPBlockProperties.CROP_GROWTH_STAGE, data.getGrowthIndex()).withProperty(ExPBlockProperties.CROP_TYPE, data.getType());
 	}

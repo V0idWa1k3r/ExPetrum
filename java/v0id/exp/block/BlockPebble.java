@@ -91,12 +91,6 @@ public class BlockPebble extends Block implements IInitializableBlock, IOreHintR
 	}
 
 	@Override
-	public boolean isFullyOpaque(IBlockState state)
-	{
-		return false;
-	}
-
-	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
 		return this.getDefaultState().withProperty(ROCK_CLASS, EnumRockClass.values()[meta]);
@@ -118,12 +112,6 @@ public class BlockPebble extends Block implements IInitializableBlock, IOreHintR
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
 		return this.PEBBLE_AABB;
-	}
-
-	@Override
-	public boolean isBlockSolid(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
-	{
-		return false;
 	}
 
 	@Override
