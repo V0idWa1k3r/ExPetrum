@@ -1,16 +1,14 @@
 package v0id.exp.block.item;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockWithMetadata extends ItemBlock
+public class ItemBlockWithMetadata extends ItemBlockWeighted
 {
 	public ItemBlockWithMetadata(Block block)
 	{
 		super(block);
 		this.setHasSubtypes(true);
-		this.setRegistryName(block.getRegistryName());
 	}
 
 	@Override

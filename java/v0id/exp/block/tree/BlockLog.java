@@ -197,8 +197,7 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 	@Override
 	public Pair<Byte, Byte> provideVolume(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		return Pair.of((byte)1, (byte)1);
+		return Pair.of((byte)2, (byte)3);
 	}
 
 	@Override

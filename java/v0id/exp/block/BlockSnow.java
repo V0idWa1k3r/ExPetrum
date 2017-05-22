@@ -34,6 +34,7 @@ import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.gravity.GravityHelper;
 import v0id.api.exp.gravity.IGravitySusceptible;
 import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.block.item.ItemBlockWeighted;
 import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
 
@@ -211,7 +212,7 @@ public class BlockSnow extends Block implements IGravitySusceptible, IInitializa
 	@Override
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
-		GameRegistry.register(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+		GameRegistry.register(new ItemBlockWeighted(this));
 	}
 
 	@Override

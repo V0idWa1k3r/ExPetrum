@@ -9,7 +9,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -27,6 +26,7 @@ import v0id.api.exp.data.ExPRegistryNames;
 import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.block.item.ItemBlockWeighted;
 import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
 
@@ -255,7 +255,7 @@ public class BlockSaltWater extends BlockFluidFinite implements IWater, IInitial
 	@Override
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
-		registry.register(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+		registry.register(new ItemBlockWeighted(this));
 	}
 
 	@Override

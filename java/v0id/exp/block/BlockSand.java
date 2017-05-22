@@ -123,8 +123,7 @@ public class BlockSand extends Block implements IWeightProvider, IGravitySuscept
 	@Override
 	public Pair<Byte, Byte> provideVolume(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		return Pair.of((byte)1, (byte)1);
+		return Pair.of((byte)2, (byte)2);
 	}
 	
 	@Override
