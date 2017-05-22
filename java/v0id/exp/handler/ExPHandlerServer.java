@@ -1,12 +1,19 @@
 package v0id.exp.handler;
 
 import java.lang.reflect.Field;
+import java.util.Optional;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ContainerPlayer;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.stats.StatList;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
@@ -20,8 +27,11 @@ import net.minecraft.world.gen.ChunkProviderSettings;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -40,12 +50,122 @@ import v0id.api.exp.world.ExPWorldCapability;
 import v0id.api.exp.world.IExPWorld;
 import v0id.exp.player.ExPPlayer;
 import v0id.exp.player.PlayerManager;
+import v0id.exp.player.inventory.ManagedSlot;
+import v0id.exp.player.inventory.PlayerInventoryHelper;
 import v0id.exp.util.WeatherUtils;
 import v0id.exp.world.ExPWorld;
 import v0id.exp.world.gen.WorldTypeExP;
 
 public class ExPHandlerServer
 {
+	@SubscribeEvent
+	public void onTryPickupItem(EntityItemPickupEvent event)
+	{
+		if (event.getItem() != null && !event.getItem().getEntityItem().isEmpty() && !event.getItem().isDead && !event.getEntityPlayer().world.isRemote)
+		{
+			int i = PlayerInventoryHelper.findFirstAvailableSlotFor(event.getItem().getEntityItem(), Optional.empty(), event.getEntityPlayer());
+			if (i == -1)
+			{
+				event.setCanceled(true);
+			}
+			else
+			{
+				if (i < Short.MAX_VALUE)
+				{
+					event.getEntityPlayer().inventory.setInventorySlotContents(i, event.getItem().getEntityItem().copy());
+					net.minecraftforge.fml.common.FMLCommonHandler.instance().firePlayerItemPickupEvent(event.getEntityPlayer(), event.getItem());
+					event.getEntityPlayer().onItemPickup(event.getItem(), event.getItem().getEntityItem().getCount());
+					event.getEntityPlayer().addStat(StatList.getObjectsPickedUpStats(event.getItem().getEntityItem().getItem()), event.getItem().getEntityItem().getCount());
+					event.getItem().setDead();
+					event.setCanceled(true);
+				}
+				else
+				{
+					int slotID = i - Short.MAX_VALUE;
+					ItemStack toIncrement = event.getEntityPlayer().inventory.getStackInSlot(slotID);
+					Optional<Slot> s = Optional.ofNullable(event.getEntityPlayer().openContainer != null ? event.getEntityPlayer().openContainer.getSlot(slotID) : null);
+					int max = Math.min(toIncrement.getMaxStackSize(), s.isPresent() ? s.get().getItemStackLimit(toIncrement) : event.getEntityPlayer().inventory.getInventoryStackLimit());
+					int current = toIncrement.getCount();
+					final int added = Math.min(event.getItem().getEntityItem().getCount(), max - current);
+					net.minecraftforge.fml.common.FMLCommonHandler.instance().firePlayerItemPickupEvent(event.getEntityPlayer(), event.getItem());
+					event.getEntityPlayer().addStat(StatList.getObjectsPickedUpStats(event.getItem().getEntityItem().getItem()), added);
+					event.getItem().getEntityItem().shrink(added);
+					toIncrement.grow(added);
+					event.getEntityPlayer().world.playSound(null, event.getEntityPlayer().getPosition(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.2F, (event.getEntityPlayer().world.rand.nextFloat() - event.getEntityPlayer().world.rand.nextFloat()) * 1.4F + 2.0F);
+					if (toIncrement.isEmpty())
+					{
+						event.getItem().setDead();
+					}
+					
+					event.setCanceled(true);
+				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onContainerOpened(PlayerContainerEvent.Open event)
+	{
+		try
+		{
+			Container c = event.getContainer();
+			for (int i = 0; i < c.inventorySlots.size(); ++i)
+			{
+				Slot s = c.inventorySlots.get(i);
+				if (s.inventory instanceof InventoryPlayer && !(s instanceof ManagedSlot) && s.getSlotIndex() >= 9 && s.getSlotIndex() < 36)
+				{
+					ManagedSlot wrapper = new ManagedSlot(s);
+					c.inventorySlots.remove(i);
+					c.inventorySlots.add(i, wrapper);
+				}
+			}
+		}
+		catch (Exception ex)
+		{
+			ExPMisc.modLogger.log(LogLevel.Error, "ExPetrum was unable to initialize it's inventory system! This is most likely caused by another mod!", ex);
+		}
+	}
+	
+	@SubscribeEvent
+	public void onEntityJoinWorld(EntityJoinWorldEvent event)
+	{
+		if (event.getEntity() instanceof EntityPlayer)
+		{
+			try
+			{
+				EntityPlayer player = (EntityPlayer) event.getEntity();
+				ContainerPlayer playerContainer = (ContainerPlayer) player.inventoryContainer;
+				Optional<ContainerPlayer> inventoryContainer = Optional.empty();
+				if (player.inventoryContainer instanceof ContainerPlayer)
+				{
+					inventoryContainer = Optional.of((ContainerPlayer)player.inventoryContainer);
+				}
+				
+				for (int i = 9; i < 36; ++i)
+				{
+					Slot s = playerContainer.getSlot(i);
+					ManagedSlot wrapper = new ManagedSlot(s);
+					playerContainer.inventorySlots.remove(i);
+					playerContainer.inventorySlots.add(i, wrapper);
+					if (inventoryContainer.isPresent())
+					{
+						s = inventoryContainer.get().getSlot(i);
+						if (!(s instanceof ManagedSlot))
+						{
+							wrapper = new ManagedSlot(s);
+							inventoryContainer.get().inventorySlots.remove(i);
+							inventoryContainer.get().inventorySlots.add(i, wrapper);
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				ExPMisc.modLogger.log(LogLevel.Error, "ExPetrum was unable to initialize it's inventory system! This is most likely caused by another mod!", ex);
+			}
+		}
+	}
+	
 	@SubscribeEvent
 	public void onRightClick(PlayerInteractEvent.RightClickBlock event)
 	{

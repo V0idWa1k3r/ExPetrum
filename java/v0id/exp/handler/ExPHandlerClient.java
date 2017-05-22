@@ -2,7 +2,12 @@ package v0id.exp.handler;
 
 import java.lang.reflect.Field;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiCreateWorld;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.Slot;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -12,13 +17,44 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import v0id.api.core.VoidApi;
 import v0id.api.core.logging.LogLevel;
 import v0id.api.exp.data.ExPMisc;
+import v0id.exp.client.render.gui.PlayerInventoryRenderer;
 import v0id.exp.client.render.hud.PlayerHUDRenderer;
 import v0id.exp.client.render.sky.WorldSkyRenderer;
 import v0id.exp.client.render.sky.WorldWeatherRenderer;
+import v0id.exp.player.inventory.ManagedSlot;
 import v0id.exp.util.WeatherUtils;
 
 public class ExPHandlerClient
 {
+	@SubscribeEvent
+	public void onOpenGui(GuiScreenEvent.InitGuiEvent event)
+	{
+		if (event.getGui() instanceof GuiContainer)
+		{
+			GuiContainer gc = (GuiContainer) event.getGui();
+			Container c = gc.inventorySlots;
+			for (int i = 0; i < c.inventorySlots.size(); ++i)
+			{
+				Slot s = c.inventorySlots.get(i);
+				if (s.inventory instanceof InventoryPlayer && !(s instanceof ManagedSlot) && s.getSlotIndex() >= 9 && s.getSlotIndex() < 36)
+				{
+					ManagedSlot wrapper = new ManagedSlot(s);
+					c.inventorySlots.remove(i);
+					c.inventorySlots.add(i, wrapper);
+				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onDrawGui(GuiScreenEvent.DrawScreenEvent.Pre event)
+	{
+		if (event.getGui() instanceof GuiContainer)
+		{
+			PlayerInventoryRenderer.render(Minecraft.getMinecraft().player, event.getGui());
+		}
+	}
+	
 	@SubscribeEvent
 	public void onInitGui(GuiScreenEvent.InitGuiEvent event)
 	{

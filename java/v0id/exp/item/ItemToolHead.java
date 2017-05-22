@@ -15,6 +15,7 @@ import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.handler.ExPHandlerRegistry;
+import v0id.exp.player.inventory.PlayerInventoryHelper;
 
 public class ItemToolHead extends Item implements IInitializableItem, IWeightProvider, IOreDictEntry, IItemRegistryEntry
 {
@@ -34,8 +35,30 @@ public class ItemToolHead extends Item implements IInitializableItem, IWeightPro
 	@Override
 	public Pair<Byte, Byte> provideVolume(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		return Pair.of((byte)3, (byte)1);
+		switch (item.getMetadata())
+		{
+			case 0:
+			{
+				return Pair.of((byte)3, (byte)2);
+			}
+			
+			case 1:
+			case 2:
+			{
+				return Pair.of((byte)2, (byte)2);
+			}
+			
+			case 3:
+			case 4:
+			{
+				return Pair.of((byte)1, (byte)2);
+			}
+			
+			default:
+			{
+				return PlayerInventoryHelper.defaultVolume;
+			}
+		}
 	}
 
 	@Override
