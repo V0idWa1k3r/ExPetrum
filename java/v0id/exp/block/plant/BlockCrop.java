@@ -4,6 +4,8 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
@@ -11,6 +13,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -19,8 +22,11 @@ import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -201,7 +207,20 @@ public class BlockCrop extends BlockContainer implements IInitializableBlock, IB
 	@Override
 	public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player)
 	{
-		// TODO Auto-generated method stub
+		if (worldIn.getTileEntity(pos) != null && worldIn.getTileEntity(pos).hasCapability(ExPCropCapability.cropCap, null))
+		{
+			IExPCrop crop = IExPCrop.of(worldIn.getTileEntity(pos));
+			Pair<EnumActionResult, NonNullList<ItemStack>> ret = crop.onHarvest(player, worldIn, pos, state, EnumHand.MAIN_HAND, player.getHeldItemMainhand(), false);
+			if (ret.getLeft() == EnumActionResult.SUCCESS)
+			{
+				for (ItemStack is : ret.getRight())
+				{
+					EntityItem drop = new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, is.copy());
+					worldIn.spawnEntity(drop);
+				}
+			}
+		}
+		
 		super.onBlockHarvested(worldIn, pos, state, player);
 	}
 
@@ -253,5 +272,30 @@ public class BlockCrop extends BlockContainer implements IInitializableBlock, IB
 		// Axes are hardcoded to break blocks with a material of PLANT at their efficiency speed, need to fix that.
 		ItemStack stack = player.getHeldItemMainhand();
 		return !stack.isEmpty() && stack.getItem() instanceof ItemAxe ? super.getPlayerRelativeBlockHardness(state, player, worldIn, pos) / ((ItemAxe)stack.getItem()).getStrVsBlock(stack, state) : super.getPlayerRelativeBlockHardness(state, player, worldIn, pos);
+	}
+
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	{
+		if (worldIn.isRemote)
+		{
+			return true;
+		}
+		
+		if (worldIn.getTileEntity(pos) != null && worldIn.getTileEntity(pos).hasCapability(ExPCropCapability.cropCap, null))
+		{
+			IExPCrop crop = IExPCrop.of(worldIn.getTileEntity(pos));
+			Pair<EnumActionResult, NonNullList<ItemStack>> ret = crop.onHarvest(playerIn, worldIn, pos, state, hand, playerIn.getHeldItem(hand), true);
+			if (ret.getLeft() == EnumActionResult.SUCCESS)
+			{
+				for (ItemStack is : ret.getRight())
+				{
+					EntityItem drop = new EntityItem(worldIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, is.copy());
+					worldIn.spawnEntity(drop);
+				}
+			}
+		}
+		
+		return false;
 	}
 }

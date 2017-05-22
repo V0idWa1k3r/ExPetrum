@@ -27,7 +27,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
+import v0id.api.core.VoidApi;
 import v0id.api.core.network.VoidNetwork;
+import v0id.api.core.settings.VCSettings;
 import v0id.api.core.util.nbt.NBTChain;
 import v0id.api.core.util.nbt.NBTList;
 import v0id.api.exp.block.ILeaves;
@@ -289,6 +291,11 @@ public class EntityFallingTree extends Entity
 	@Override
 	public void onUpdate()
 	{
+		if (((VCSettings)(VoidApi.config.dataHolder)).recoveryMode)
+		{
+			return;
+		}
+		
 		if (!this.world.isRemote)
 		{
 			this.getDataManager().set(FALL_ANGLE, this.fallAngle);

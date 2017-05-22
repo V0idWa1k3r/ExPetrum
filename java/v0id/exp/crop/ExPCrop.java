@@ -19,6 +19,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import v0id.api.core.VCStatics;
 import v0id.api.core.network.PacketType;
 import v0id.api.core.network.VoidNetwork;
 import v0id.api.core.util.DimBlockPos;
@@ -122,12 +123,11 @@ public class ExPCrop implements IExPCrop
 	@Override
 	public NonNullList<ItemStack> getSeedDrops()
 	{
-		// TODO Auto-generated method stub
-		return NonNullList.withSize(0, ItemStack.EMPTY);
+		return NonNullList.withSize(1, CropLogic.createSeeds(this, VCStatics.rng));
 	}
 
 	@Override
-	public Pair<EnumActionResult, NonNullList<ItemStack>> onHarvest(EntityPlayer harvester, World harvestedIn,	BlockPos harvestedAt, IBlockState selfBlockReference, EnumHand playerHarvestHand,ItemStack playerHarvestItem, boolean isHarvestingWithRMB)
+	public Pair<EnumActionResult, NonNullList<ItemStack>> onHarvest(EntityPlayer harvester, World harvestedIn, BlockPos harvestedAt, IBlockState selfBlockReference, EnumHand playerHarvestHand,ItemStack playerHarvestItem, boolean isHarvestingWithRMB)
 	{
 		// TODO Auto-generated method stub
 		return Pair.of(EnumActionResult.PASS, NonNullList.withSize(0, ItemStack.EMPTY));

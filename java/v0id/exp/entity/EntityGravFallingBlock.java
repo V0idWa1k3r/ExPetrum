@@ -21,6 +21,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import v0id.api.core.VoidApi;
+import v0id.api.core.settings.VCSettings;
 import v0id.api.exp.gravity.IGravitySusceptible;
 
 public class EntityGravFallingBlock extends EntityFallingBlock
@@ -68,6 +70,11 @@ public class EntityGravFallingBlock extends EntityFallingBlock
 	@Override
 	public void onUpdate()
     {
+		if (((VCSettings)(VoidApi.config.dataHolder)).recoveryMode)
+		{
+			return;
+		}
+		
 		if (!this.world.isRemote)
 		{
 			this.setFallingBlock(this.blockState);

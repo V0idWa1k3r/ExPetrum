@@ -49,6 +49,26 @@ public class CropStats implements INBTSerializable<NBTTagCompound>
 		}
 	}
 	
+	public CropStats(CropStats other)
+	{
+		for (int i = 0; i < 3; ++i)
+		{
+			this.growthRanges[i] = new TemperatureRange(other.growthRanges[i].min, other.growthRanges[i].max);
+		}
+		
+		this.humidityGrowthRange = Pair.of(other.humidityGrowthRange.getLeft(), other.humidityGrowthRange.getRight());
+		this.generation = other.generation;
+		this.wild = other.wild;
+		this.type = other.type;
+		this.plantedAt = new Calendar(other.plantedAt.getTime());
+		this.uprootedAt = Optional.ofNullable(other.uprootedAt.isPresent() ? new Calendar(other.uprootedAt.get().getTime()) : null);
+		this.health = other.health;
+		this.growthRate = other.growthRate;
+		this.waterConsumption = other.waterConsumption;
+		this.growth = other.growth;
+		other.nutrientConsumption.forEach(this.nutrientConsumption::put);
+	}
+	
 	public void createDefaults(EnumCrop crop)
 	{
 		assert crop != EnumCrop.DEAD : "Can't create cropstats of a dead crop!";

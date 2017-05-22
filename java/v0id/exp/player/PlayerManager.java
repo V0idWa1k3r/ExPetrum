@@ -188,6 +188,11 @@ public class PlayerManager
 		Item i = stack.getItem();
 		if (i instanceof IExPFood)
 		{
+			if (((IExPFood)i).skipHandlers(stack))
+			{
+				return;
+			}
+			
 			IExPFood food = (IExPFood) i;
 			applyFoodStats(player, data, food.getCalories(stack), food.getNutrients(stack));
 		}

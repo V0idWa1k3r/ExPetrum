@@ -81,7 +81,6 @@ public class ItemSeeds extends Item implements IInitializableItem, IItemRegistry
 	@Override
 	public Pair<Byte, Byte> provideVolume(ItemStack item)
 	{
-		// TODO Auto-generated method stub
 		return Pair.of((byte)1, (byte)1);
 	}
 

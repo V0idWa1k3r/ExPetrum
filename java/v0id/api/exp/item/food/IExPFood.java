@@ -10,4 +10,6 @@ public interface IExPFood
 	float getCalories(ItemStack stack);
 	
 	EnumMap<Nutrient, Float> getNutrients(ItemStack stack);
+	
+	boolean skipHandlers(ItemStack stack);
 }

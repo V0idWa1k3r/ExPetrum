@@ -1,31 +1,90 @@
 package v0id.exp.crop;
 
 import java.util.Map.Entry;
+import java.util.Random;
 import java.util.stream.Stream;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import v0id.api.core.VoidApi;
+import v0id.api.core.settings.VCSettings;
+import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.event.crop.EventFarmlandUpdate;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.tile.crop.EnumPlantNutrient;
 import v0id.api.exp.tile.crop.ExPCropCapability;
 import v0id.api.exp.tile.crop.ExPFarmlandCapability;
+import v0id.api.exp.tile.crop.ExPSeedsCapability;
+import v0id.api.exp.tile.crop.IExPSeed;
 import v0id.api.exp.tile.crop.IFarmland;
 import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.IExPWorld;
 import v0id.api.exp.world.ImmutableCalendar;
+import v0id.api.exp.world.TemperatureRange;
 import v0id.exp.block.plant.BlockVegetation;
 import v0id.exp.util.Helpers;
 
 public class CropLogic
 {
+	public static ItemStack createSeeds(ExPCrop crop, Random rand)
+	{
+		ItemStack seeds = new ItemStack(ExPItems.seeds, 1, crop.getType().ordinal() - 1);
+		CropStats stats = new CropStats(crop.stats);
+		++stats.generation;
+		stats.growth = 0;
+		stats.wild = false;
+		float randomChanceMultipleSeeds = Math.min(6, (float)crop.getGeneration() * 0.1F);
+		while (randomChanceMultipleSeeds > 0)
+		{
+			if (rand.nextDouble() * randomChanceMultipleSeeds < 0.5)
+			{
+				seeds.grow(1);
+			}
+			
+			--randomChanceMultipleSeeds;
+		}
+		
+		if (rand.nextInt(35) < crop.getGeneration())
+		{
+			TemperatureRange rangeMin = crop.getSurvivalTemperature();
+			TemperatureRange rangeMed = crop.getOptimalTemperature();
+			TemperatureRange rangeHig = crop.getSurvivalTemperature();
+			if (rangeMin.min > -20 && rangeMin.max < 60)
+			{
+				stats.growthRanges[0] = new TemperatureRange(rangeMin.min * 1.05F, rangeMin.max * 1.05F);
+				stats.growthRanges[1] = new TemperatureRange(rangeMed.min * 1.05F, rangeMed.max * 1.05F);
+				stats.growthRanges[2] = new TemperatureRange(rangeHig.min * 1.05F, rangeHig.max * 1.05F);
+			}
+		}
+		
+		if (rand.nextInt(100) < crop.getGeneration())
+		{
+			stats.growthRate *= 1.1;
+		}
+		
+		if (rand.nextInt(20) < crop.getGeneration())
+		{
+			stats.waterConsumption *= 0.94F;
+		}
+		
+		IExPSeed cap = seeds.getCapability(ExPSeedsCapability.seedsCap, null);
+		cap.setExtendedData(stats.createItemNBT(null));
+		return seeds;
+	}
+	
 	public static void onFarmlandUpdate(ExPFarmland farmland)
 	{
+		if (((VCSettings)(VoidApi.config.dataHolder)).recoveryMode)
+		{
+			return;
+		}
+		
 		if (MinecraftForge.EVENT_BUS.post(new EventFarmlandUpdate.Pre(farmland, farmland.getContainer().getWorld(), farmland.getContainer().getPos())))
 		{
 			return;
@@ -87,6 +146,11 @@ public class CropLogic
 	
 	public static void onWorldUpdate(ExPCrop crop)
 	{
+		if (((VCSettings)(VoidApi.config.dataHolder)).recoveryMode)
+		{
+			return;
+		}
+		
 		Calendar prev = crop.timeKeeper;
 		
 		// Should not happen
