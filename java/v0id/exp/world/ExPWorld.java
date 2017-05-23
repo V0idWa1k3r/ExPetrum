@@ -149,7 +149,7 @@ public class ExPWorld implements IExPWorld
 		byte dayProgressCurrent = (byte) (((float)(this.persistentTicks % c.ticksPerDay) / (float)c.ticksPerDay) * 4);
 		float tempCurrent = this.dayTemp[dayProgressCurrent];
 		float tempNext = this.dayTemp[dayProgressCurrent + 1];
-		float currentToNextProgress = (((this.persistentTicks % c.ticksPerDay) + ((float)c.ticksPerDay / 4F)) - (this.persistentTicks % c.ticksPerDay)) / ((float)c.ticksPerDay / 4F);
+		float currentToNextProgress = (this.persistentTicks % ((float)c.ticksPerDay / 4F)) / ((float)c.ticksPerDay / 4F);
 		float tempRet = this.baseTemp + tempCurrent * (1 - currentToNextProgress) + tempNext * currentToNextProgress;
 		if (this.rainTicksRemaining > 0 && tempRet > 0)
 		{
