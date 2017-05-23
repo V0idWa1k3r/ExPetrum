@@ -27,6 +27,7 @@ import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.world.YearlyTemperatureRange;
 import v0id.exp.crop.CropDataLoader;
+import v0id.exp.player.inventory.WeightDataLoader;
 import v0id.exp.registry.AbstractRegistry;
 import v0id.exp.registry.ExPBiomeRegistry;
 import v0id.exp.registry.ExPBlocksRegistry;
@@ -73,6 +74,7 @@ public class ExPetrum
 		ExPMisc.modLogger = VoidLogger.createLogger(ExPetrum.class, LogLevel.Fine);
 		Stream.of(EnumOre.values()).forEach(EnumOre::registerWorldgen);
 		CropDataLoader.loadAllData();
+		WeightDataLoader.loadAllData();
 		createRegistries();
 		Reflector.preloadClass("v0id.exp.handler.ExPHandlerRegistry", false);
 	}
