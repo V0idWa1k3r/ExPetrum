@@ -1,6 +1,7 @@
 package v0id.exp.registry;
 
 import v0id.api.exp.data.ExPItems;
+import v0id.exp.item.ItemFood;
 import v0id.exp.item.ItemRock;
 import v0id.exp.item.ItemSeeds;
 import v0id.exp.item.ItemStick;
@@ -14,6 +15,7 @@ public class ExPItemsRegistry extends AbstractRegistry
 		ExPItems.stick = new ItemStick();
 		ExPItems.toolHead = new ItemToolHead();
 		ExPItems.seeds = new ItemSeeds();
+		ExPItems.food = new ItemFood();
 	}
 	
 	public ExPItemsRegistry()

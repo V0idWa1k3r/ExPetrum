@@ -10,4 +10,5 @@ public class ExPItems
 	public static Item stick;
 	public static Item toolHead;
 	public static Item seeds;
+	public static Item food;
 }
