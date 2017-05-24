@@ -48,6 +48,7 @@ import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.item.EnumToolhead;
+import v0id.api.exp.item.food.FoodEntry;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.tile.crop.ExPFarmlandCapability;
 import v0id.api.exp.tile.crop.IFarmland;
@@ -141,6 +142,11 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 		for (int i = 0; i < EnumCrop.values().length - 1; ++i)
 		{
 			ModelLoader.setCustomModelResourceLocation(ExPItems.seeds, i, new ModelResourceLocation(ExPItems.seeds.getRegistryName(), "crop=" + EnumCrop.values()[i + 1].getName()));
+		}
+		
+		for (int i = 0; i < FoodEntry.allEntries.size(); ++i)
+		{
+			ModelLoader.setCustomModelResourceLocation(ExPItems.food, i, new ModelResourceLocation(ExPItems.food.getRegistryName(), "type=" + FoodEntry.allEntries.get(i).getUnlocalizedName()));
 		}
 		
 		this.registerCustomStateMappers();

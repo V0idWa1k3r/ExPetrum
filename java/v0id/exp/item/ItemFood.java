@@ -28,7 +28,7 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		return this.getEntry(stack).getUnlocalizedName();
+		return super.getUnlocalizedName() + this.getEntry(stack).getUnlocalizedName();
 	}
 
 	@Override
@@ -81,6 +81,7 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 		ExPHandlerRegistry.put(this);
 		this.setRegistryName(ExPRegistryNames.itemFood);
 		this.setMaxStackSize(1);
+		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 	}
 
 	public float getTotalWeight(ItemStack is)
