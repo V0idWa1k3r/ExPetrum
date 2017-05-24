@@ -215,6 +215,17 @@ public interface IExPPlayer extends INBTSerializable<NBTTagCompound>
 	 */
 	void skipTicks(int skipped);
 	
+	// ==========================================Future additions========================================================//
+	/*
+	float getEnergy();
+	
+	void setEnergy(float newVal, boolean clamp);
+	
+	SkillTable getSkillTable();
+	
+	void notifySkillTableChange();
+	*/
+	
 	/**
 	 * A simple helper to get the data of a specified player
 	 * @param p : the player to get the data of
