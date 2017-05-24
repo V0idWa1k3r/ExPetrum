@@ -42,7 +42,7 @@ public class ImmutableCalendar extends Calendar
 	@Override
 	public void recalculateMetrics()
 	{
-		throw new UnsupportedOperationException();
+		
 	}
 	
 	@Override
