@@ -60,7 +60,7 @@ public class PlayerInventoryRenderer
 				continue;
 			}
 			
-			Pair<Byte, Byte> volume = is.getItem() instanceof IWeightProvider ? ((IWeightProvider)is.getItem()).provideVolume(is) : PlayerInventoryHelper.defaultVolume;
+			Pair<Byte, Byte> volume = PlayerInventoryHelper.getVolume(is);
 			int x = (i - 9) % 9;
 			int y = (i - 9) / 9;
 			putOutlinedRectangle(buffer, x * 18 + 1, y * 18 + 1, volume.getLeft() * 18 - 2, volume.getRight() * 18 - 2, 0.5F, 0.5F, 0.5F, 1F, 0, colorG, 1F, 1F);
@@ -86,10 +86,9 @@ public class PlayerInventoryRenderer
 		
 		tec.draw();
 		buffer.setTranslation(0, 0, 0);
+		GlStateManager.enableTexture2D();
 		GlStateManager.disableAlpha();
 		GlStateManager.disableBlend();
-		//GlStateManager.enableLighting();
-		GlStateManager.enableTexture2D();
 	}
 	
 	public static void putRectangle(VertexBuffer buffer, int x, int y, int w, int h, float... color)
