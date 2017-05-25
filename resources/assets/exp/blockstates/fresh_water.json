@@ -8,12 +8,7 @@
 			}
 		},
 		"inventory": {
-			"model": "forge:forgebucket",
-			"textures": {
-				"base": "forge:items/bucket_base",
-				"fluid": "forge:items/bucket_fluid",
-				"cover": "forge:items/bucket_cover"
-			},
+			"model": "forge:fluid",
 			"transform": "forge:default-item",
 			"custom": {
 				"fluid": "water",

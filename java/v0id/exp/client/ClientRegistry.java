@@ -153,10 +153,10 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 		IFunctionalRenderFactory.registerEntityRenderingHandler(EntityGravFallingBlock.class, manager -> new RenderFallingBlock(manager));
 		IFunctionalRenderFactory.registerEntityRenderingHandler(EntityFallingTree.class, manager -> new RenderFallingTree(manager));
 		//ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(ExPBlocks.saltWater), item -> new ModelResourceLocation(ExPBlocks.saltWater.getRegistryName(), "fluid"));
-		ModelLoader.setBucketModelDefinition(Item.getItemFromBlock(ExPBlocks.saltWater));
-		ModelLoader.setBucketModelDefinition(Item.getItemFromBlock(ExPBlocks.freshWater));
-		ModelLoader.setBucketModelDefinition(Item.getItemFromBlock(ExPBlocks.lava));
-		ModelLoader.setBucketModelDefinition(Item.getItemFromBlock(ExPBlocks.oil));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.saltWater), 0, new ModelResourceLocation(ExPBlocks.saltWater.getRegistryName(), "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.freshWater), 0, new ModelResourceLocation(ExPBlocks.freshWater.getRegistryName(), "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.lava), 0, new ModelResourceLocation(ExPBlocks.lava.getRegistryName(), "inventory"));
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.oil), 0, new ModelResourceLocation(ExPBlocks.oil.getRegistryName(), "inventory"));
 		ModelLoader.setCustomStateMapper(ExPBlocks.saltWater, new StateMapperFluid(ExPBlocks.saltWater));
 		ModelLoader.setCustomStateMapper(ExPBlocks.freshWater, new StateMapperFluid(ExPBlocks.freshWater));
 		ModelLoader.setCustomStateMapper(ExPBlocks.lava, new StateMapperFluid(ExPBlocks.lava));
