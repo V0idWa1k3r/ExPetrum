@@ -21,6 +21,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.util.Constants.NBT;
 import v0id.api.core.util.nbt.NBTChain;
 import v0id.api.core.util.nbt.NBTList;
+import v0id.api.exp.combat.SpecialAttack;
+import v0id.api.exp.combat.SpecialAttack.AttackWrapper;
 import v0id.api.exp.player.BodyPart;
 import v0id.api.exp.player.EnumPlayerProgression;
 import v0id.api.exp.player.IDisease;
@@ -50,6 +52,7 @@ public class ExPPlayer implements IExPPlayer
 	public boolean isFemale;
 	public EnumPlayerProgression stage = EnumPlayerProgression.STONE_AGE;
 	public int skippedTicks;
+	public SpecialAttack.AttackWrapper attackWrapper;
 	
 	public boolean health_isDirty;
 	public boolean modifiers_isDirty;
@@ -63,6 +66,7 @@ public class ExPPlayer implements IExPPlayer
 	public boolean partsData_isDirty;
 	public boolean diseases_isDirty;
 	public boolean stage_isDirty;
+	public boolean attackWrapper_isDirty;
 	
 	@Override
 	public NBTTagCompound serializeNBT()
@@ -184,6 +188,11 @@ public class ExPPlayer implements IExPPlayer
 			ret.setByte("stage", (byte) this.stage.ordinal());
 		}
 		
+		if (this.attackWrapper_isDirty)
+		{
+			ret.setTag("attackWrapper", this.attackWrapper == null ? NBTChain.startChain().withBool("valid", false).endChain() : this.attackWrapper.serializeNBT());
+		}
+		
 		this.setAllDirty(false);
 		return ret;
 	}
@@ -288,6 +297,25 @@ public class ExPPlayer implements IExPPlayer
 		if (nbt.hasKey("stage"))
 		{
 			this.stage = EnumPlayerProgression.values()[nbt.getByte("stage")];
+		}
+		
+		if (nbt.hasKey("attackWrapper"))
+		{
+			if (nbt.getCompoundTag("attackWrapper").hasKey("valid", NBT.TAG_BYTE))
+			{
+				this.attackWrapper = null;
+			}
+			else
+			{
+				this.attackWrapper = new SpecialAttack.AttackWrapper(null, 0);
+				this.attackWrapper.deserializeNBT(nbt.getCompoundTag("attackWrapper"));
+				AttackWrapper wrapper = this.attackWrapper.attackInstance.wrap();
+				if (wrapper.getClass() != this.attackWrapper.getClass())
+				{
+					this.attackWrapper = wrapper;
+					wrapper.deserializeNBT(nbt.getCompoundTag("attackWrapper"));
+				}
+			}
 		}
 	}
 	
@@ -501,6 +529,16 @@ public class ExPPlayer implements IExPPlayer
 			PlayerManager.tick(this.getOwner(), this, 100);
 		}
 		
+		if (this.attackWrapper != null)
+		{
+			this.attackWrapper.onTick(this.getOwner());
+			if (this.attackWrapper.executionTime <= 0)
+			{
+				this.attackWrapper.onEnd(this.getOwner());
+				this.attackWrapper = null;
+			}
+		}
+		
 		if (this.owner.world.isRemote && this.clientIsDirty)
 		{
 			this.clientIsDirty = false;
@@ -557,7 +595,7 @@ public class ExPPlayer implements IExPPlayer
 	
 	public void setAllDirty(boolean b)
 	{
-		this.health_isDirty = this.modifiers_isDirty = this.maxHealth_isDirty = this.calories_isDirty = this.nutritionLevels_isDirty = this.thirst_isDirty = this.maxThirst_isDirty = this.temperature_isDirty = this.partsState_isDirty = this.partsData_isDirty = this.diseases_isDirty = this.stage_isDirty = b;
+		this.health_isDirty = this.modifiers_isDirty = this.maxHealth_isDirty = this.calories_isDirty = this.nutritionLevels_isDirty = this.thirst_isDirty = this.maxThirst_isDirty = this.temperature_isDirty = this.partsState_isDirty = this.partsData_isDirty = this.diseases_isDirty = this.stage_isDirty = this.attackWrapper_isDirty = b;
 	}
 	
 	public static ExPPlayer createDefault()
@@ -620,6 +658,7 @@ public class ExPPlayer implements IExPPlayer
 		this.partsData.clear();
 		this.partsState.clear();
 		this.diseases.clear();
+		this.attackWrapper = null;
 		for (BodyPart part : BodyPart.values())
 		{
 			this.partsState.put(part, 100f);
@@ -638,5 +677,22 @@ public class ExPPlayer implements IExPPlayer
 	public void skipTicks(int skipped)
 	{
 		this.skippedTicks += skipped;
+	}
+
+	@Override
+	public AttackWrapper getCurrentSpecialAttack()
+	{
+		return this.attackWrapper;
+	}
+
+	@Override
+	public void setCurrentSpecialAttack(AttackWrapper wrapper, boolean invokeOnStart)
+	{
+		this.attackWrapper = wrapper;
+		this.attackWrapper_isDirty = this.serverIsDirty = true;
+		if (invokeOnStart)
+		{
+			wrapper.onStart(this.getOwner());
+		}
 	}
 }

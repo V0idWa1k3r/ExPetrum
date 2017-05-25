@@ -15,6 +15,7 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.ModContainer;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -28,6 +29,7 @@ import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.world.YearlyTemperatureRange;
 import v0id.exp.crop.CropDataLoader;
 import v0id.exp.player.inventory.WeightDataLoader;
+import v0id.exp.proxy.IExPProxy;
 import v0id.exp.registry.AbstractRegistry;
 import v0id.exp.registry.ExPBiomeRegistry;
 import v0id.exp.registry.ExPBlocksRegistry;
@@ -40,6 +42,7 @@ import v0id.exp.registry.ExPItemsRegistry;
 import v0id.exp.registry.ExPNetworkRegistry;
 import v0id.exp.registry.ExPOreDictRegistry;
 import v0id.exp.registry.ExPTileRegistry;
+import v0id.exp.registry.ExPWeaponAttacksRegistry;
 import v0id.exp.registry.ExPWorldRegistry;
 
 @Mod(modid = "exp", useMetadata = true, dependencies = "required-after:voidapi;after:chiselsandbits;after:jei", version = "1.11.2-1.0.0.0")
@@ -50,6 +53,8 @@ public class ExPetrum
 	public static ModContainer containerOfSelf;
 	public static boolean isDevEnvironment;
 	public static File configDirectory;
+	@SidedProxy(clientSide = "v0id.exp.proxy.ExPProxyClient", serverSide = "v0id.exp.proxy.ExPProxyServer")
+	public static IExPProxy proxy;
 	
 	static
 	{
@@ -93,6 +98,7 @@ public class ExPetrum
 		AbstractRegistry.create(ExPBiomeRegistry.class);
 		AbstractRegistry.create(ExPWorldRegistry.class);
 		AbstractRegistry.create(ExPOreDictRegistry.class);
+		AbstractRegistry.create(ExPWeaponAttacksRegistry.class);
 	}
 	
 	@EventHandler

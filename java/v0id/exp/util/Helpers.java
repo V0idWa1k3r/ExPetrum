@@ -1,7 +1,17 @@
 package v0id.exp.util;
 
+import java.util.List;
+import java.util.Optional;
+
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Lists;
+
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -21,6 +31,29 @@ public class Helpers
 	public static final double TIME_TO_DEGREE_CONST = 0.01275;
 	public static final int DAYNIGHT_LENGTH = 24000;
 
+	public static <T extends Entity>List<T> rayTraceEntities(World w, Vec3d pos, Vec3d ray, Optional<Predicate<T>> entityFilter, Class<T> entityClazz)
+	{
+		AxisAlignedBB aabb = new AxisAlignedBB(pos, pos.add(new Vec3d(1, 1, 1))).addCoord(ray.xCoord, ray.yCoord, ray.zCoord);
+		Vec3d checkVec = pos.add(ray);
+		List<T> l = w.getEntitiesWithinAABB(entityClazz, aabb, entityFilter.orElse(Predicates.alwaysTrue()));
+		List<T> ret = Lists.newArrayList();
+		for (T t : l)
+		{
+			AxisAlignedBB entityBB = t.getEntityBoundingBox();
+			if (entityBB == null)
+			{
+				continue;
+			}
+			
+			if (entityBB.intersects(pos, checkVec))
+			{
+				ret.add(t);
+			}
+		}
+		
+		return ret;
+	}
+	
 	public static int getLeafColor(IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex)
 	{
 		if (state.getBlock() instanceof ILeaves)

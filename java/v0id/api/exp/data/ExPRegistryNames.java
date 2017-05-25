@@ -53,6 +53,9 @@ public class ExPRegistryNames
 		entityGravFallingBlock																				= new ResourceLocation(modid, "gravFallingBlock"),
 		entityFallingTree																					= new ResourceLocation(modid, "fallingTree");
 	
+	public static final ResourceLocation
+		specialAttackPiercingDash																			= new ResourceLocation(modid, "piercingDash");
+	
 	public static final String
 		fluidSaltWater																						= "exp.salt_water",
 		fluidFreshWater																						= "water",

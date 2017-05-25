@@ -10,6 +10,7 @@ import com.google.common.collect.Maps;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
@@ -44,9 +45,11 @@ import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.block.property.EnumWaterLilyType;
 import v0id.api.exp.block.property.ExPBlockProperties;
+import v0id.api.exp.combat.condition.ExecuteConditionKeyBindings;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.data.ExPRegistryNames;
+import v0id.api.exp.data.ExPWeaponAttacks;
 import v0id.api.exp.item.EnumToolhead;
 import v0id.api.exp.item.food.FoodEntry;
 import v0id.api.exp.tile.crop.EnumCrop;
@@ -71,6 +74,11 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 	public ClientRegistry()
 	{
 		
+	}
+	
+	public void initAttacksConditions()
+	{
+		ExPWeaponAttacks.piercingDash.executeConditions.add(new ExecuteConditionKeyBindings(Minecraft.getMinecraft().gameSettings.keyBindForward));
 	}
 
 	@Override
@@ -164,6 +172,7 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 		ModelLoader.setCustomStateMapper(ExPBlocks.cattail, new StateMapperCattail());
 		ModelLoader.setCustomStateMapper(ExPBlocks.crop, new StateMapperCrop(ExPBlocks.crop));
 		ModelLoaderRegistry.registerLoader(new ModelLoaderExP());
+		this.initAttacksConditions();
 	}
 	
 	public void registerLogItemModel(Block b)

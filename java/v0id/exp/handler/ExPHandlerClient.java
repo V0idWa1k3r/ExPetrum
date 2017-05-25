@@ -10,8 +10,10 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
+import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import v0id.api.core.VoidApi;
@@ -19,13 +21,39 @@ import v0id.api.core.logging.LogLevel;
 import v0id.api.exp.data.ExPMisc;
 import v0id.exp.client.render.gui.PlayerInventoryRenderer;
 import v0id.exp.client.render.hud.PlayerHUDRenderer;
+import v0id.exp.client.render.hud.SpecialAttackRenderer;
 import v0id.exp.client.render.sky.WorldSkyRenderer;
 import v0id.exp.client.render.sky.WorldWeatherRenderer;
+import v0id.exp.combat.ClientCombatHandler;
 import v0id.exp.player.inventory.ManagedSlot;
 import v0id.exp.util.WeatherUtils;
 
 public class ExPHandlerClient
 {
+	@SubscribeEvent
+	public void onRenderWorldLast(RenderHandEvent event)
+	{
+		if (SpecialAttackRenderer.render(event.getPartialTicks()))
+		{
+			event.setCanceled(true);
+		}
+	}
+	
+	@SubscribeEvent
+	public void onMouseStateChanged(MouseEvent event)
+	{
+		if (Minecraft.getMinecraft().player != null && Minecraft.getMinecraft().currentScreen == null && Minecraft.getMinecraft().player.getCooledAttackStrength(0.0F) == 1)
+		{
+			if (event.isButtonstate())
+			{
+				if (event.getButton() == 0 || event.getButton() == 1)
+				{
+					ClientCombatHandler.processClick(Minecraft.getMinecraft().player, event.getButton() == 1);
+				}
+			}
+		}
+	}
+	
 	@SubscribeEvent
 	public void onOpenGui(GuiScreenEvent.InitGuiEvent event)
 	{

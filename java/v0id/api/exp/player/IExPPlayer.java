@@ -7,6 +7,7 @@ import com.google.common.collect.ImmutableCollection;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
+import v0id.api.exp.combat.SpecialAttack;
 
 public interface IExPPlayer extends INBTSerializable<NBTTagCompound>
 {
@@ -214,6 +215,19 @@ public interface IExPPlayer extends INBTSerializable<NBTTagCompound>
 	 * @param skipped - the amount of ticks skipped
 	 */
 	void skipTicks(int skipped);
+	
+	/**
+	 * Gets the wrapper of current special attack the player is performing.
+	 * @return - The wrapper of current special attack the player is performing.
+	 */
+	SpecialAttack.AttackWrapper getCurrentSpecialAttack();
+	
+	/**
+	 * Sets the current wrapper of player's special attack to a given value. May be null
+	 * @param wrapper : the wrapper to set
+	 * @param invokeOnStart : should wrapper's onStart method be invoked?
+	 */
+	void setCurrentSpecialAttack(SpecialAttack.AttackWrapper wrapper, boolean invokeOnStart);
 	
 	// ==========================================Future additions========================================================//
 	/*
