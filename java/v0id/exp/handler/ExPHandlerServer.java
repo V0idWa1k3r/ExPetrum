@@ -36,6 +36,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fluids.BlockFluidBase;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
@@ -58,7 +59,7 @@ import v0id.exp.world.gen.WorldTypeExP;
 
 public class ExPHandlerServer
 {
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onTryPickupItem(EntityItemPickupEvent event)
 	{
 		if (event.getItem() != null && !event.getItem().getEntityItem().isEmpty() && !event.getItem().isDead && !event.getEntityPlayer().world.isRemote)
