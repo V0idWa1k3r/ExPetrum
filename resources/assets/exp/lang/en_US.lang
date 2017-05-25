@@ -115,3 +115,6 @@ exp.block.ore.desc.richness.1=Richness: Normal
 exp.block.ore.desc.richness.2=Richness: Rich
 
 tile.exp.ore.name=Ore
+
+exp.txt.item.desc.rot=%s%% Rotten
+exp.txt.item.desc.weight=%s Gram
