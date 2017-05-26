@@ -31,6 +31,23 @@ public class Helpers
 	public static final double TIME_TO_DEGREE_CONST = 0.01275;
 	public static final int DAYNIGHT_LENGTH = 24000;
 
+	public static <T extends Entity> T getClosest(List<T> entities, Entity to)
+	{
+		T ret = null;
+		double dist = Double.MAX_VALUE;
+		for (T t : entities)
+		{
+			double distance = t.getDistanceToEntity(to);
+			if (distance < dist)
+			{
+				dist = distance;
+				ret = t;
+			}
+		}
+		
+		return ret;
+	}
+	
 	public static <T extends Entity>List<T> rayTraceEntities(World w, Vec3d pos, Vec3d ray, Optional<Predicate<T>> entityFilter, Class<T> entityClazz)
 	{
 		AxisAlignedBB aabb = new AxisAlignedBB(pos, pos.add(new Vec3d(1, 1, 1))).addCoord(ray.xCoord, ray.yCoord, ray.zCoord);

@@ -8,4 +8,5 @@ public class ExPWeaponAttacks
 {
 	public static SpecialAttack piercingDash;
 	public static SpecialAttack slash;
+	public static SpecialAttack downStrike;
 }

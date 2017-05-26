@@ -55,7 +55,8 @@ public class ExPRegistryNames
 	
 	public static final ResourceLocation
 		specialAttackPiercingDash																			= new ResourceLocation(modid, "piercingDash"),
-		specialAttackSlash																					= new ResourceLocation(modid, "slash");
+		specialAttackSlash																					= new ResourceLocation(modid, "slash"),
+		specialAttackDownStrike																				= new ResourceLocation(modid, "downStrike");
 	
 	public static final ResourceLocation
 		potionStunned																						= new ResourceLocation(modid, "stunned");
