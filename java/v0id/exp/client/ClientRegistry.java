@@ -1,6 +1,7 @@
 package v0id.exp.client;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -45,6 +46,7 @@ import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.block.property.EnumWaterLilyType;
 import v0id.api.exp.block.property.ExPBlockProperties;
+import v0id.api.exp.combat.SpecialAttack;
 import v0id.api.exp.combat.condition.ExecuteConditionKeyBindings;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPItems;
@@ -280,6 +282,8 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 	public void postInit(FMLPostInitializationEvent evt)
 	{
 		super.postInit(evt);
+
+		Collections.sort(SpecialAttack.sortedData, (SpecialAttack l, SpecialAttack r) -> l.executeConditions.size() - r.executeConditions.size());
 	}
 	
 	class StateMapperCrop extends StateMapperBase

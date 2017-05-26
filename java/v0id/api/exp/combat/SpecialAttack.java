@@ -1,6 +1,5 @@
 package v0id.api.exp.combat;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +25,6 @@ public abstract class SpecialAttack
 		this.id = id;
 		registry.put(id, this);
 		sortedData.add(this);
-		Collections.sort(sortedData, (SpecialAttack l, SpecialAttack r) -> l.executeConditions.size() - r.executeConditions.size());
 	}
 
 	public int getExecutionTime()
