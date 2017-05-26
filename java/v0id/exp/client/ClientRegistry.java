@@ -79,6 +79,7 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 	public void initAttacksConditions()
 	{
 		ExPWeaponAttacks.piercingDash.executeConditions.add(new ExecuteConditionKeyBindings(Minecraft.getMinecraft().gameSettings.keyBindForward));
+		ExPWeaponAttacks.slash.executeConditions.add(new ExecuteConditionKeyBindings(Minecraft.getMinecraft().gameSettings.keyBindBack));
 	}
 
 	@Override

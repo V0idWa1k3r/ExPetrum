@@ -39,6 +39,21 @@ public class SpecialAttackRenderer
 				GlStateManager.popMatrix();
 				return true;
 			}
+			
+			if (data.getCurrentSpecialAttack().attackInstance == ExPWeaponAttacks.slash)
+			{
+				int current = data.getCurrentSpecialAttack().executionTime;
+				float animationIndex = ((float)current - partialTicks) / data.getCurrentSpecialAttack().attackInstance.getExecutionTime();
+				float rotateYIndex = 60 - animationIndex * 120;
+				
+				GlStateManager.pushMatrix();
+				GlStateManager.translate(-0.09, -0.2, -0.25);
+				GlStateManager.rotate(135 + rotateYIndex, 0, 1, 0);
+				GlStateManager.rotate(90, 1, 0, 0);
+				Minecraft.getMinecraft().getRenderItem().renderItem(is, player, TransformType.GROUND, true);
+				GlStateManager.popMatrix();
+				return true;
+			}
 		}
 		
 		return false;

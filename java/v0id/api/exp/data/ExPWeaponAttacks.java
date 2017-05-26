@@ -7,4 +7,5 @@ import v0id.api.exp.combat.SpecialAttack;
 public class ExPWeaponAttacks
 {
 	public static SpecialAttack piercingDash;
+	public static SpecialAttack slash;
 }
