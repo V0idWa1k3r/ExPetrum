@@ -58,7 +58,7 @@ public class PiercingDash extends SpecialAttack
 		
 		player.motionX += look.xCoord / 5;
 		player.motionZ += look.zCoord / 5;
-		for (int i = 0; i < 200; ++i)
+		for (int i = 0; i < 50; ++i)
 		{
 			double randomMagnitude = player.world.rand.nextDouble();
 			Vec3d at = new Vec3d(pos.xCoord + look.xCoord * randomMagnitude, pos.yCoord + player.getEyeHeight() - 0.25 + look.yCoord * randomMagnitude, pos.zCoord + look.zCoord * randomMagnitude);
