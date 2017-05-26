@@ -35,7 +35,7 @@ public class ClientCombatHandler
 		if (!player.getHeldItemMainhand().isEmpty() || (!player.getHeldItemOffhand().isEmpty() && rightClick))
 		{
 			ItemStack is = !player.getHeldItemMainhand().isEmpty() ? player.getHeldItemMainhand() : player.getHeldItemOffhand();
-			for (SpecialAttack attack : SpecialAttack.registry.values())
+			for (SpecialAttack attack : SpecialAttack.sortedData)
 			{
 				if (attack.canExecute(player, WeaponType.getType(is), EnumWeaponWeight.getWeaponWeight(is), rightClick))
 				{
@@ -56,6 +56,7 @@ public class ClientCombatHandler
 					
 					NBTTagCompound tag = NBTChain.startChain().withString("uuid", player.getPersistentID().toString()).withString("attackID", attack.id).withBool("rightClick", rightClick).endChain();
 					VoidNetwork.sendDataToServer(ExPPackets.SPECIAL_ATTACK, tag);
+					return;
 				}
 			}
 		}
