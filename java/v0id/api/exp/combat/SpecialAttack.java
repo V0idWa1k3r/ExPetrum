@@ -104,7 +104,11 @@ public abstract class SpecialAttack
 		
 		public void onEnd(EntityPlayer player)
 		{
-			this.attackInstance.onExecutionEnd(player);
+			// Can sometimes desync and mess up
+			if (this.attackInstance != null)
+			{
+				this.attackInstance.onExecutionEnd(player);
+			}
 		}
 	}
 	
