@@ -25,9 +25,9 @@ public class ExecuteConditionKeyBindings implements IExecuteCondition
 	{
 		for (KeyBinding kb : this.bindings)
 		{
-			if (kb.isKeyDown())
+			if (!kb.isKeyDown())
 			{
-				return true;
+				return false;
 			}
 		}
 		
