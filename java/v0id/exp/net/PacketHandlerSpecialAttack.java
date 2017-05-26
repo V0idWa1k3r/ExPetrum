@@ -1,7 +1,9 @@
 package v0id.exp.net;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
+import v0id.api.core.VoidApi;
 import v0id.api.core.network.IPacketHandler;
 import v0id.api.core.util.MC;
 import v0id.exp.ExPetrum;
@@ -15,11 +17,11 @@ public class PacketHandlerSpecialAttack implements IPacketHandler
 		Side s = MC.getSide();
 		if (s == Side.SERVER)
 		{
-			ServerCombatHandler.handle(data);
+			FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> ServerCombatHandler.handle(data));
 		}
 		else
 		{
-			ExPetrum.proxy.handleSpecialAttackPacket(data);
+			VoidApi.proxy.getClientListener().addScheduledTask(() -> ExPetrum.proxy.handleSpecialAttackPacket(data));
 		}
 	}
 
