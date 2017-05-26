@@ -1,5 +1,6 @@
 package v0id.api.exp.combat;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ public abstract class SpecialAttack
 	
 	private int executionTime;
 	public final String id;
+	private String sortName;
 	public final List<IExecuteCondition> executeConditions = Lists.newArrayList();
 
 	public SpecialAttack(String id)
@@ -25,6 +27,7 @@ public abstract class SpecialAttack
 		this.id = id;
 		registry.put(id, this);
 		sortedData.add(this);
+		this.setSortName(id);
 	}
 
 	public int getExecutionTime()
@@ -50,6 +53,17 @@ public abstract class SpecialAttack
 		return new AttackWrapper(this, this.getExecutionTime());
 	}
 	
+	public String getSortName()
+	{
+		return this.sortName;
+	}
+
+	public void setSortName(String sortName)
+	{
+		this.sortName = sortName;
+		Collections.sort(sortedData, (SpecialAttack l, SpecialAttack r) -> l.getSortName().compareTo(r.getSortName()));
+	}
+
 	public static class AttackWrapper implements INBTSerializable<NBTTagCompound>
 	{
 		public SpecialAttack attackInstance;
