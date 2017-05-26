@@ -335,7 +335,9 @@ public class PlayerManager
 		if (armorItem instanceof ISpecialArmor)
 		{
 			ISpecialArmor specialArmor = (ISpecialArmor) armorItem;
-			return ArmorProperties.applyArmor(player, NonNullList.withSize(1, armor), source, amount);
+			float value = ArmorProperties.applyArmor(player, NonNullList.withSize(1, armor), source, amount);
+			specialArmor.damageArmor(player, armor, source, (int) amount / 2, slotDamaged.getSlotIndex());
+			return value;
 		}
 		else
 		{
@@ -351,6 +353,11 @@ public class PlayerManager
 				{
 					toughnessMod *= mod.getAmount();
 				}
+			}
+			
+			if (armor.attemptDamageItem((int) (amount / 2), player.world.rand))
+			{
+				armor.setCount(0);
 			}
 			
 			return amount * (1 / toughnessMod);

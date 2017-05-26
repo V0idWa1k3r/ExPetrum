@@ -41,6 +41,7 @@ import v0id.exp.registry.ExPFluidRegistry;
 import v0id.exp.registry.ExPItemsRegistry;
 import v0id.exp.registry.ExPNetworkRegistry;
 import v0id.exp.registry.ExPOreDictRegistry;
+import v0id.exp.registry.ExPPotionRegistry;
 import v0id.exp.registry.ExPTileRegistry;
 import v0id.exp.registry.ExPWeaponAttacksRegistry;
 import v0id.exp.registry.ExPWorldRegistry;
@@ -99,6 +100,7 @@ public class ExPetrum
 		AbstractRegistry.create(ExPWorldRegistry.class);
 		AbstractRegistry.create(ExPOreDictRegistry.class);
 		AbstractRegistry.create(ExPWeaponAttacksRegistry.class);
+		AbstractRegistry.create(ExPPotionRegistry.class);
 	}
 	
 	@EventHandler

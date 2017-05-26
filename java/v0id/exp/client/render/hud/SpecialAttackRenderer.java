@@ -12,6 +12,11 @@ public class SpecialAttackRenderer
 {
 	public static boolean render(float partialTicks)
 	{
+		if (Minecraft.getMinecraft().gameSettings.thirdPersonView != 0)
+		{
+			return false;
+		}
+		
 		EntityPlayer player = Minecraft.getMinecraft().player;
 		IExPPlayer data = IExPPlayer.of(player);
 		if (data != null && data.getCurrentSpecialAttack() != null)
@@ -45,7 +50,6 @@ public class SpecialAttackRenderer
 				int current = data.getCurrentSpecialAttack().executionTime;
 				float animationIndex = ((float)current - partialTicks) / data.getCurrentSpecialAttack().attackInstance.getExecutionTime();
 				float rotateYIndex = 60 - animationIndex * 120;
-				
 				GlStateManager.pushMatrix();
 				GlStateManager.translate(-0.09, -0.2, -0.25);
 				GlStateManager.rotate(135 + rotateYIndex, 0, 1, 0);

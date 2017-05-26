@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
@@ -28,7 +29,9 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
@@ -45,6 +48,7 @@ import v0id.api.core.logging.LogLevel;
 import v0id.api.core.util.MC;
 import v0id.api.exp.block.IWater;
 import v0id.api.exp.data.ExPMisc;
+import v0id.api.exp.data.ExPPotions;
 import v0id.api.exp.player.ExPPlayerCapability;
 import v0id.api.exp.player.IExPPlayer;
 import v0id.api.exp.world.ExPWorldCapability;
@@ -59,6 +63,102 @@ import v0id.exp.world.gen.WorldTypeExP;
 
 public class ExPHandlerServer
 {
+	@SubscribeEvent
+	public void onLivingJump(LivingJumpEvent event)
+	{
+		if (event.getEntityLiving() != null)
+		{
+			if (event.getEntityLiving().isPotionActive(ExPPotions.stunned))
+			{
+				event.getEntityLiving().motionY -= 10;
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onInteractLeftClickBlock(PlayerInteractEvent.LeftClickBlock event)
+	{
+		if (event.getEntityPlayer() != null)
+		{
+			if (event.getEntityPlayer().isPotionActive(ExPPotions.stunned))
+			{
+				event.setCanceled(true);
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onInteractRightClickBlock(PlayerInteractEvent.RightClickBlock event)
+	{
+		if (event.getEntityPlayer() != null)
+		{
+			if (event.getEntityPlayer().isPotionActive(ExPPotions.stunned))
+			{
+				event.setCanceled(true);
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onInteractRightClickItem(PlayerInteractEvent.RightClickItem event)
+	{
+		if (event.getEntityPlayer() != null)
+		{
+			if (event.getEntityPlayer().isPotionActive(ExPPotions.stunned))
+			{
+				event.setCanceled(true);
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onInteractEntitySpecific(PlayerInteractEvent.EntityInteractSpecific event)
+	{
+		if (event.getEntityPlayer() != null)
+		{
+			if (event.getEntityPlayer().isPotionActive(ExPPotions.stunned))
+			{
+				event.setCanceled(true);
+			}
+		}	
+	}
+	
+	@SubscribeEvent
+	public void onInteractEntity(PlayerInteractEvent.EntityInteract event)
+	{
+		if (event.getEntityPlayer() != null)
+		{
+			if (event.getEntityPlayer().isPotionActive(ExPPotions.stunned))
+			{
+				event.setCanceled(true);
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onBreakSpeed(PlayerEvent.BreakSpeed event)
+	{
+		if (event.getEntityPlayer() != null)
+		{
+			if (event.getEntityPlayer().isPotionActive(ExPPotions.stunned))
+			{
+				event.setCanceled(true);
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onLivingAttack(LivingAttackEvent event)
+	{
+		if (event.getSource() != null && event.getSource().getSourceOfDamage() != null)
+		{
+			if (event.getSource().getSourceOfDamage() instanceof EntityLivingBase && ((EntityLivingBase)event.getSource().getSourceOfDamage()).isPotionActive(ExPPotions.stunned))
+			{
+				event.setCanceled(true);
+			}
+		}
+	}
+	
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onTryPickupItem(EntityItemPickupEvent event)
 	{

@@ -7,6 +7,8 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
@@ -15,6 +17,7 @@ import net.minecraft.util.math.Vec3d;
 import v0id.api.exp.combat.EnumWeaponWeight;
 import v0id.api.exp.combat.SpecialAttack;
 import v0id.api.exp.combat.WeaponType;
+import v0id.api.exp.data.ExPPotions;
 import v0id.api.exp.data.ExPRegistryNames;
 
 public class Slash extends SpecialAttack
@@ -35,6 +38,8 @@ public class Slash extends SpecialAttack
 	@Override
 	public void onExecutionStart(EntityPlayer player)
 	{
+		ItemStack is = player.getHeldItemMainhand().isEmpty() ? player.getHeldItemOffhand() : player.getHeldItemMainhand();
+		EnumWeaponWeight weight = EnumWeaponWeight.getWeaponWeight(is);
 		player.world.playSound(player, player.getPosition(), SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 1, 1F);
 		Vec3d playerLook = player.getLookVec();
 		Vec3d playerPos = player.getPositionVector();
@@ -58,6 +63,10 @@ public class Slash extends SpecialAttack
 			
 			ent.attackEntityFrom(DamageSource.causePlayerDamage(player), (float) (player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue() * 0.85F));
 			player.world.playSound(player, ent.getPosition(), SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 1, 2F);
+			if (!player.world.isRemote && weight == EnumWeaponWeight.HEAVY && player.world.rand.nextBoolean())
+			{
+				ent.addPotionEffect(new PotionEffect(ExPPotions.stunned, 100, 0, false, false));
+			}
 		}
 	}
 
@@ -70,6 +79,6 @@ public class Slash extends SpecialAttack
 	@Override
 	public boolean canExecute(EntityPlayer player, WeaponType currentWeapon, EnumWeaponWeight currentWeaponWeight, boolean invokedWithRightClick)
 	{
-		return !invokedWithRightClick && !currentWeapon.isAssociated(WeaponType.DAGGER) && currentWeapon != WeaponType.SPEAR && currentWeapon != WeaponType.NONE;
+		return player.getActiveItemStack().isEmpty() && !invokedWithRightClick && !currentWeapon.isAssociated(WeaponType.DAGGER) && currentWeapon != WeaponType.SPEAR && currentWeapon != WeaponType.NONE;
 	}
 }

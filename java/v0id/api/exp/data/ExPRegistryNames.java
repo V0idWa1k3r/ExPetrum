@@ -57,6 +57,9 @@ public class ExPRegistryNames
 		specialAttackPiercingDash																			= new ResourceLocation(modid, "piercingDash"),
 		specialAttackSlash																					= new ResourceLocation(modid, "slash");
 	
+	public static final ResourceLocation
+		potionStunned																						= new ResourceLocation(modid, "stunned");
+	
 	public static final String
 		fluidSaltWater																						= "exp.salt_water",
 		fluidFreshWater																						= "water",
