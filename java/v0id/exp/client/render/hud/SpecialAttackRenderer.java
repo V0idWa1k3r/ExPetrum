@@ -68,7 +68,6 @@ public class SpecialAttackRenderer
 				GlStateManager.rotate(110, 0, 1, 0);
 				GlStateManager.rotate(25, 1, 0, 0);
 				GlStateManager.rotate(10 - (1 - animationIndex) * 180, 0, 0, 1);
-				
 				Minecraft.getMinecraft().getRenderItem().renderItem(is, player, TransformType.GROUND, true);
 				GlStateManager.popMatrix();
 				return true;
@@ -100,6 +99,30 @@ public class SpecialAttackRenderer
 				GlStateManager.pushMatrix();
 				GlStateManager.translate(-0.56F, -0.52F, -0.72F - (1 - animationIndex));
 				Minecraft.getMinecraft().getRenderItem().renderItem(is, player, TransformType.FIRST_PERSON_LEFT_HAND, true);
+				GlStateManager.popMatrix();
+				return true;
+			}
+			
+			if (data.getCurrentSpecialAttack().attackInstance == ExPWeaponAttacks.behead)
+			{
+				int current = data.getCurrentSpecialAttack().executionTime;
+				float animationIndex = ((float)current - partialTicks) / data.getCurrentSpecialAttack().attackInstance.getExecutionTime();
+				float translateYIndex = 0;
+				float translateXIndex = 0;
+				float rotateXIndex = 0;
+				if (animationIndex < 0.5F)
+				{
+					translateYIndex = animationIndex - 0.5F;
+					translateXIndex = animationIndex - 0.5F;
+					rotateXIndex = (0.5F - animationIndex) * 90;
+				}
+				
+				GlStateManager.pushMatrix();
+				GlStateManager.translate(0.3 + translateXIndex, 0.1 + translateYIndex, -0.2);
+				GlStateManager.rotate(130, 0, 1, 0);
+				GlStateManager.rotate(180 + rotateXIndex, 1, 0, 0);
+				GlStateManager.rotate(-90, 0, 0, 1);
+				Minecraft.getMinecraft().getRenderItem().renderItem(is, player, TransformType.GROUND, true);
 				GlStateManager.popMatrix();
 				return true;
 			}

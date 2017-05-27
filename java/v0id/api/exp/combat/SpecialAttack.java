@@ -9,6 +9,7 @@ import com.google.common.collect.Maps;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.INBTSerializable;
 
 public abstract class SpecialAttack
@@ -21,6 +22,11 @@ public abstract class SpecialAttack
 	private String sortName;
 	public final List<IExecuteCondition> executeConditions = Lists.newArrayList();
 
+	public SpecialAttack(ResourceLocation loc)
+	{
+		this(loc.toString());
+	}
+	
 	public SpecialAttack(String id)
 	{
 		super();

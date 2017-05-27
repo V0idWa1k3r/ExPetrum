@@ -1,6 +1,7 @@
 package v0id.exp.registry;
 
 import v0id.api.exp.data.ExPWeaponAttacks;
+import v0id.exp.combat.impl.Behead;
 import v0id.exp.combat.impl.DownStrike;
 import v0id.exp.combat.impl.PiercingDash;
 import v0id.exp.combat.impl.ShieldSlam;
@@ -16,6 +17,7 @@ public class ExPWeaponAttacksRegistry extends AbstractRegistry
 		ExPWeaponAttacks.downStrike = new DownStrike();
 		ExPWeaponAttacks.spin = new Spin();
 		ExPWeaponAttacks.shieldSlam = new ShieldSlam();
+		ExPWeaponAttacks.behead = new Behead();
 	}
 	
 	public ExPWeaponAttacksRegistry()
