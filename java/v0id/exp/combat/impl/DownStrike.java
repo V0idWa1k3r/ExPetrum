@@ -48,12 +48,12 @@ public class DownStrike extends SpecialAttack
 		{
 			if (!player.world.isRemote)
 			{
-				assumedToBeLookedAt.addPotionEffect(new PotionEffect(ExPPotions.stunned, weight == EnumWeaponWeight.NORMAL ? 20 : 60, 0, false, false));
+				assumedToBeLookedAt.addPotionEffect(new PotionEffect(ExPPotions.stunned, weight == EnumWeaponWeight.NORMAL ? 20 : 30, 0, false, false));
 			}
 			
 			player.world.playSound(player, player.getPosition(), SoundEvents.ENTITY_PLAYER_ATTACK_KNOCKBACK, SoundCategory.PLAYERS, 1, 1F);
 			Vec3d targetPos = assumedToBeLookedAt.getPositionVector();
-			assumedToBeLookedAt.knockBack(player, 2, pos.xCoord - targetPos.xCoord, pos.zCoord - targetPos.zCoord);
+			assumedToBeLookedAt.knockBack(player, 1, pos.xCoord - targetPos.xCoord, pos.zCoord - targetPos.zCoord);
 			for (int i = 0; i < 50; ++i)
 			{
 				player.world.spawnParticle(EnumParticleTypes.CRIT_MAGIC, targetPos.xCoord + player.world.rand.nextDouble() - player.world.rand.nextDouble(), targetPos.yCoord + assumedToBeLookedAt.getEyeHeight() + player.world.rand.nextDouble() - player.world.rand.nextDouble(), targetPos.zCoord + player.world.rand.nextDouble() - player.world.rand.nextDouble(), 0, -0.1, 0, new int[0]);
@@ -71,7 +71,7 @@ public class DownStrike extends SpecialAttack
 	@Override
 	public boolean canExecute(EntityPlayer player, WeaponType currentWeapon, EnumWeaponWeight currentWeaponWeight, boolean invokedWithRightClick)
 	{
-		return !invokedWithRightClick && (currentWeapon.isAssociated(WeaponType.HAMMER) || currentWeapon.isAssociated(WeaponType.AXE) || currentWeapon.isAssociated(WeaponType.SWORD) && currentWeaponWeight != EnumWeaponWeight.LIGHT);
+		return player.getActiveItemStack().isEmpty() && !invokedWithRightClick && (currentWeapon.isAssociated(WeaponType.HAMMER) || currentWeapon.isAssociated(WeaponType.AXE) || currentWeapon.isAssociated(WeaponType.SWORD) && currentWeaponWeight != EnumWeaponWeight.LIGHT);
 	}
 
 }
