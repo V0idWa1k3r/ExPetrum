@@ -78,7 +78,7 @@ public class Spin extends SpecialAttack
 	@Override
 	public boolean canExecute(EntityPlayer player, WeaponType currentWeapon, EnumWeaponWeight currentWeaponWeight, boolean invokedWithRightClick)
 	{
-		return !invokedWithRightClick && currentWeaponWeight != EnumWeaponWeight.LIGHT && (currentWeapon.isAssociated(WeaponType.SWORD) || currentWeapon.isAssociated(WeaponType.HAMMER) || currentWeapon.isAssociated(WeaponType.AXE));
+		return player.getActiveItemStack().isEmpty() && !invokedWithRightClick && currentWeaponWeight != EnumWeaponWeight.LIGHT && (currentWeapon.isAssociated(WeaponType.SWORD) || currentWeapon.isAssociated(WeaponType.HAMMER) || currentWeapon.isAssociated(WeaponType.AXE));
 	}
 
 }
