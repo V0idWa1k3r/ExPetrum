@@ -52,6 +52,7 @@ import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.ExPWeaponAttacks;
 import v0id.api.exp.item.EnumToolhead;
 import v0id.api.exp.item.food.FoodEntry;
+import v0id.api.exp.metal.EnumMetal;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.tile.crop.ExPFarmlandCapability;
 import v0id.api.exp.tile.crop.IFarmland;
@@ -164,6 +165,11 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 		for (int i = 0; i < FoodEntry.allEntries.size(); ++i)
 		{
 			ModelLoader.setCustomModelResourceLocation(ExPItems.food, i, new ModelResourceLocation(ExPItems.food.getRegistryName(), "type=" + FoodEntry.allEntries.get(i).getUnlocalizedName()));
+		}
+		
+		for (int i = 0; i < EnumMetal.values().length; ++i)
+		{
+			ModelLoader.setCustomModelResourceLocation(ExPItems.ingot, i, new ModelResourceLocation(ExPItems.ingot.getRegistryName(), "inventory"));
 		}
 		
 		this.registerCustomStateMappers();
@@ -283,6 +289,8 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 			EnumOre.values()[(stack.getMetadata() / EnumRockClass.values().length) % EnumOre.values().length].getColor(), ExPBlocks.ore, ExPBlocks.boulderOre);
 		IFunctionalBlockColor.registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) -> 
 			worldIn.getTileEntity(pos) != null && worldIn.getTileEntity(pos).hasCapability(ExPFarmlandCapability.farmlandCap, EnumFacing.UP) ? ExPFarmland.getColor(IFarmland.of(worldIn.getTileEntity(pos), EnumFacing.UP)) : -1, ExPBlocks.farmland);
+		IFunctionalItemColor.registerItemColorHandler((ItemStack stack, int tintIndex) -> 
+			EnumMetal.values()[stack.getMetadata()].getColor(), ExPItems.ingot);
 	}
 
 	@Override

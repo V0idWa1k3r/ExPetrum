@@ -101,7 +101,10 @@ public enum EnumOre implements IStringSerializable
 	
 	// Still coa... Nah, kidding! It's graphite!
 	// Though technically it IS coal
-	GRAPHITE("C", 0, 0x3a2b20, 10);
+	GRAPHITE("C", 0, 0x3a2b20, 10),
+	
+	// Bismuthinite
+	BISMUTHINITE("Bi2S3", 0, 0xb0aa94, 20);
 	
 	EnumOre(String s, int i, int j, int w)
 	{

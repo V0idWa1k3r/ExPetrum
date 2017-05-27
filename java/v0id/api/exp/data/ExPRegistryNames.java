@@ -47,7 +47,8 @@ public class ExPRegistryNames
 		itemStick																							= new ResourceLocation(modid, "item_stick"),
 		itemToolhead																						= new ResourceLocation(modid, "item_toolhead"),
 		itemSeeds																							= new ResourceLocation(modid, "item_seeds"),
-		itemFood																							= new ResourceLocation(modid, "item_food");
+		itemFood																							= new ResourceLocation(modid, "item_food"),
+		itemIngot																							= new ResourceLocation(modid, "item_ingot");
 	
 	public static final ResourceLocation
 		entityGravFallingBlock																				= new ResourceLocation(modid, "gravFallingBlock"),

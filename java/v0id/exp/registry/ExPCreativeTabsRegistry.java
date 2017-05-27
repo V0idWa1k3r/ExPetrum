@@ -6,6 +6,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
+import v0id.api.exp.data.ExPItems;
 
 public class ExPCreativeTabsRegistry extends AbstractRegistry
 {
@@ -53,6 +54,15 @@ public class ExPCreativeTabsRegistry extends AbstractRegistry
 			public ItemStack getTabIconItem()
 			{
 				return new ItemStack(ExPBlocks.freshWater);
+			}
+		};
+		
+		ExPCreativeTabs.tabMetals = new CreativeTabs(CreativeTabs.getNextID(), "exp.metals"){
+			@SideOnly(Side.CLIENT)
+			@Override
+			public ItemStack getTabIconItem()
+			{
+				return new ItemStack(ExPItems.ingot);
 			}
 		};
 	}
