@@ -5,6 +5,8 @@ import java.lang.reflect.Field;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiCreateWorld;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.inventory.GuiContainerCreative;
+import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
@@ -60,11 +62,16 @@ public class ExPHandlerClient
 		if (event.getGui() instanceof GuiContainer)
 		{
 			GuiContainer gc = (GuiContainer) event.getGui();
+			if ((gc instanceof GuiInventory || gc instanceof GuiContainerCreative) && Minecraft.getMinecraft().player.capabilities.isCreativeMode)
+			{
+				return;
+			}
+			
 			Container c = gc.inventorySlots;
 			for (int i = 0; i < c.inventorySlots.size(); ++i)
 			{
 				Slot s = c.inventorySlots.get(i);
-				if (s.inventory instanceof InventoryPlayer && !(s instanceof ManagedSlot) && s.getSlotIndex() >= 9 && s.getSlotIndex() < 36)
+				if (s.getClass().equals(Slot.class) && s.inventory instanceof InventoryPlayer && !(s instanceof ManagedSlot) && s.getSlotIndex() >= 9 && s.getSlotIndex() < 36)
 				{
 					ManagedSlot wrapper = new ManagedSlot(s);
 					c.inventorySlots.remove(i);
