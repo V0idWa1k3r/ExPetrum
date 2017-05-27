@@ -51,7 +51,8 @@ public class ExPRegistryNames
 	
 	public static final ResourceLocation
 		entityGravFallingBlock																				= new ResourceLocation(modid, "gravFallingBlock"),
-		entityFallingTree																					= new ResourceLocation(modid, "fallingTree");
+		entityFallingTree																					= new ResourceLocation(modid, "fallingTree"),
+		entityThrownWeapon																					= new ResourceLocation(modid, "thrownWeapon");
 	
 	public static final ResourceLocation
 		specialAttackPiercingDash																			= new ResourceLocation(modid, "piercingDash"),
@@ -60,7 +61,8 @@ public class ExPRegistryNames
 		specialAttackSpin																					= new ResourceLocation(modid, "spin"),
 		specialAttackShieldSlam																				= new ResourceLocation(modid, "shieldSlam"),
 		specialAttackBehead																					= new ResourceLocation(modid, "behead"),
-		specialAttackStab																					= new ResourceLocation(modid, "stab");
+		specialAttackStab																					= new ResourceLocation(modid, "stab"),
+		specialAttackThrow																					= new ResourceLocation(modid, "entityThrow");
 	
 	public static final ResourceLocation
 		potionStunned																						= new ResourceLocation(modid, "stunned");

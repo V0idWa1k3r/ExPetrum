@@ -59,9 +59,11 @@ import v0id.exp.block.tree.BlockLeaf;
 import v0id.exp.block.tree.BlockLog;
 import v0id.exp.client.model.ModelLoaderExP;
 import v0id.exp.client.render.entity.RenderFallingTree;
+import v0id.exp.client.render.entity.RenderThrownWeapon;
 import v0id.exp.crop.ExPFarmland;
 import v0id.exp.entity.EntityFallingTree;
 import v0id.exp.entity.EntityGravFallingBlock;
+import v0id.exp.entity.EntityThrownWeapon;
 import v0id.exp.registry.AbstractRegistry;
 import v0id.exp.tile.TileOre;
 import v0id.exp.util.Helpers;
@@ -85,6 +87,7 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 		ExPWeaponAttacks.shieldSlam.executeConditions.add(new ExecuteConditionKeyBindings(Minecraft.getMinecraft().gameSettings.keyBindForward));
 		ExPWeaponAttacks.behead.executeConditions.add(new ExecuteConditionKeyBindings(Minecraft.getMinecraft().gameSettings.keyBindRight));
 		ExPWeaponAttacks.stab.executeConditions.add(new ExecuteConditionKeyBindings(Minecraft.getMinecraft().gameSettings.keyBindBack));
+		ExPWeaponAttacks.itemThrow.executeConditions.add(new ExecuteConditionKeyBindings(Minecraft.getMinecraft().gameSettings.keyBindBack, Minecraft.getMinecraft().gameSettings.keyBindForward));
 	}
 
 	@Override
@@ -164,8 +167,9 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 		}
 		
 		this.registerCustomStateMappers();
-		IFunctionalRenderFactory.registerEntityRenderingHandler(EntityGravFallingBlock.class, manager -> new RenderFallingBlock(manager));
-		IFunctionalRenderFactory.registerEntityRenderingHandler(EntityFallingTree.class, manager -> new RenderFallingTree(manager));
+		IFunctionalRenderFactory.registerEntityRenderingHandler(EntityGravFallingBlock.class, RenderFallingBlock::new);
+		IFunctionalRenderFactory.registerEntityRenderingHandler(EntityFallingTree.class, RenderFallingTree::new);
+		IFunctionalRenderFactory.registerEntityRenderingHandler(EntityThrownWeapon.class, RenderThrownWeapon::new);
 		//ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(ExPBlocks.saltWater), item -> new ModelResourceLocation(ExPBlocks.saltWater.getRegistryName(), "fluid"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.saltWater), 0, new ModelResourceLocation(ExPBlocks.saltWater.getRegistryName(), "inventory"));
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.freshWater), 0, new ModelResourceLocation(ExPBlocks.freshWater.getRegistryName(), "inventory"));
