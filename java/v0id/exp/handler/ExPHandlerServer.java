@@ -213,7 +213,7 @@ public class ExPHandlerServer
 			for (int i = 0; i < c.inventorySlots.size(); ++i)
 			{
 				Slot s = c.inventorySlots.get(i);
-				if (s.inventory instanceof InventoryPlayer && !(s instanceof ManagedSlot) && s.getSlotIndex() >= 9 && s.getSlotIndex() < 36)
+				if (s.getClass().equals(Slot.class) && s.inventory instanceof InventoryPlayer && !(s instanceof ManagedSlot) && s.getSlotIndex() >= 9 && s.getSlotIndex() < 36)
 				{
 					ManagedSlot wrapper = new ManagedSlot(s);
 					c.inventorySlots.remove(i);

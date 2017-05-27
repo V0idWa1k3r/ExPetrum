@@ -10,4 +10,5 @@ public class ExPWeaponAttacks
 	public static SpecialAttack slash;
 	public static SpecialAttack downStrike;
 	public static SpecialAttack spin;
+	public static SpecialAttack shieldSlam;
 }

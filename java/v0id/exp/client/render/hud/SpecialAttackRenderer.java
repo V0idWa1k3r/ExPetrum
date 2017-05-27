@@ -86,6 +86,23 @@ public class SpecialAttackRenderer
 				GlStateManager.popMatrix();
 				return true;
 			}
+			
+			if (data.getCurrentSpecialAttack().attackInstance == ExPWeaponAttacks.shieldSlam)
+			{
+				is = player.getActiveItemStack();
+				if (is.isEmpty())
+				{
+					return false;
+				}
+				
+				int current = data.getCurrentSpecialAttack().executionTime;
+				float animationIndex = ((float)current * 2F - partialTicks) / data.getCurrentSpecialAttack().attackInstance.getExecutionTime();
+				GlStateManager.pushMatrix();
+				GlStateManager.translate(-0.56F, -0.52F, -0.72F - (1 - animationIndex));
+				Minecraft.getMinecraft().getRenderItem().renderItem(is, player, TransformType.FIRST_PERSON_LEFT_HAND, true);
+				GlStateManager.popMatrix();
+				return true;
+			}
 		}
 		
 		return false;
