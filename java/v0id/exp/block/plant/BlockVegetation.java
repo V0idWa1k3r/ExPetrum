@@ -37,6 +37,7 @@ import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
+import v0id.exp.block.BlockFarmland;
 import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.item.IItemRegistryEntry;
@@ -75,6 +76,12 @@ public class BlockVegetation extends BlockBush implements IInitializableBlock, I
 	}
 	
 	@Override
+	public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos)
+	{
+		return worldIn.getBlockState(pos.down()) instanceof BlockFarmland ? 10 : super.getBlockHardness(blockState, worldIn, pos);
+	}
+
+	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
 		return Items.AIR;
@@ -89,7 +96,7 @@ public class BlockVegetation extends BlockBush implements IInitializableBlock, I
 	@Override
 	public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos)
     {
-        return true;
+        return !(worldIn.getBlockState(pos).getBlock() instanceof BlockFarmland);
     }
 	
 	@SideOnly(Side.CLIENT)
