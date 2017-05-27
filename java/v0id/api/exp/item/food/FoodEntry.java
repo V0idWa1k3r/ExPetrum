@@ -3,9 +3,10 @@ package v0id.api.exp.item.food;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.mojang.realmsclient.util.Pair;
 
 import v0id.api.exp.player.Nutrient;
 
