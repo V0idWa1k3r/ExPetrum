@@ -1,5 +1,7 @@
 package v0id.exp.client.render.hud;
 
+import java.util.Random;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
@@ -10,6 +12,8 @@ import v0id.api.exp.player.IExPPlayer;
 
 public class SpecialAttackRenderer
 {
+	private static final Random rand = new Random();
+	
 	public static boolean render(float partialTicks)
 	{
 		if (Minecraft.getMinecraft().gameSettings.thirdPersonView != 0)
@@ -122,6 +126,19 @@ public class SpecialAttackRenderer
 				GlStateManager.rotate(130, 0, 1, 0);
 				GlStateManager.rotate(180 + rotateXIndex, 1, 0, 0);
 				GlStateManager.rotate(-90, 0, 0, 1);
+				Minecraft.getMinecraft().getRenderItem().renderItem(is, player, TransformType.GROUND, true);
+				GlStateManager.popMatrix();
+				return true;
+			}
+			
+			if (data.getCurrentSpecialAttack().attackInstance == ExPWeaponAttacks.stab)
+			{
+				int current = data.getCurrentSpecialAttack().executionTime;
+				rand.setSeed(player.ticksExisted + current * 100000L);
+				GlStateManager.pushMatrix();
+				GlStateManager.translate(-0.3 + rand.nextFloat() * 0.6F, -0.25 + rand.nextFloat() * 0.1F, -0.25 - partialTicks * 0.3);
+				GlStateManager.rotate(135, 0, 1, 0);
+				GlStateManager.rotate(90, 1, 0, 0);
 				Minecraft.getMinecraft().getRenderItem().renderItem(is, player, TransformType.GROUND, true);
 				GlStateManager.popMatrix();
 				return true;

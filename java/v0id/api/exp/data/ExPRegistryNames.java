@@ -59,7 +59,8 @@ public class ExPRegistryNames
 		specialAttackDownStrike																				= new ResourceLocation(modid, "downStrike"),
 		specialAttackSpin																					= new ResourceLocation(modid, "spin"),
 		specialAttackShieldSlam																				= new ResourceLocation(modid, "shieldSlam"),
-		specialAttackBehead																					= new ResourceLocation(modid, "behead");
+		specialAttackBehead																					= new ResourceLocation(modid, "behead"),
+		specialAttackStab																					= new ResourceLocation(modid, "stab");
 	
 	public static final ResourceLocation
 		potionStunned																						= new ResourceLocation(modid, "stunned");

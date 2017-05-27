@@ -7,6 +7,7 @@ import v0id.exp.combat.impl.PiercingDash;
 import v0id.exp.combat.impl.ShieldSlam;
 import v0id.exp.combat.impl.Slash;
 import v0id.exp.combat.impl.Spin;
+import v0id.exp.combat.impl.Stab;
 
 public class ExPWeaponAttacksRegistry extends AbstractRegistry
 {
@@ -18,6 +19,7 @@ public class ExPWeaponAttacksRegistry extends AbstractRegistry
 		ExPWeaponAttacks.spin = new Spin();
 		ExPWeaponAttacks.shieldSlam = new ShieldSlam();
 		ExPWeaponAttacks.behead = new Behead();
+		ExPWeaponAttacks.stab = new Stab();
 	}
 	
 	public ExPWeaponAttacksRegistry()
