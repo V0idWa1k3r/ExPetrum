@@ -1,0 +1,65 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "exp:handheld",
+		"gui3d" : true,
+		"textures" : {
+			"layer0" : "exp:items/tools/hoe/stone"
+		}
+	},
+	"variants" : {
+		"inventory" : [{}],
+		"material" : {
+			"stone" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/hoe/stone"
+				}
+			},
+			"copper" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/hoe/copper"
+				}
+			},
+			"bronze" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/hoe/bronze"
+				}
+			},
+			"bismuth_bronze" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/hoe/bismuth_bronze"
+				}
+			},
+			"leaded_bronze" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/hoe/leaded_bronze"
+				}
+			},
+			"manganese_bronze" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/hoe/manganese_bronze"
+				}
+			},
+			"rose_alloy" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/hoe/rose_alloy"
+				}
+			},
+			"iron" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/hoe/iron"
+				}
+			},
+			"steel" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/hoe/steel"
+				}
+			},
+			"tool_steel" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/hoe/tool_steel"
+				}
+			}
+		}
+	}
+}

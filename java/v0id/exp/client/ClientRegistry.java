@@ -53,6 +53,7 @@ import v0id.api.exp.data.ExPWeaponAttacks;
 import v0id.api.exp.item.EnumToolhead;
 import v0id.api.exp.item.food.FoodEntry;
 import v0id.api.exp.metal.EnumMetal;
+import v0id.api.exp.metal.EnumToolStats;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.tile.crop.ExPFarmlandCapability;
 import v0id.api.exp.tile.crop.IFarmland;
@@ -170,6 +171,14 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 		for (int i = 0; i < EnumMetal.values().length; ++i)
 		{
 			ModelLoader.setCustomModelResourceLocation(ExPItems.ingot, i, new ModelResourceLocation(ExPItems.ingot.getRegistryName(), "inventory"));
+		}
+		
+		List<Item> toolsList = Arrays.asList(new Item[]{ ExPItems.knife, ExPItems.pickaxe, ExPItems.axe, ExPItems.shovel, ExPItems.hoe, ExPItems.sword, ExPItems.scythe, ExPItems.battleaxe, ExPItems.hammer, ExPItems.spear });
+		toolsList.stream().forEach(tool -> ModelLoader.setCustomMeshDefinition(tool, stack -> new ModelResourceLocation(new ResourceLocation(tool.getRegistryName().getResourceDomain(), "tools/" + tool.getRegistryName().getResourcePath()), "material=" + EnumToolStats.values()[stack.getMetadata()].getName())));
+		for (int i = 0; i < EnumToolStats.values().length; ++i)
+		{
+			Integer lambdaCaptureInt = new Integer(i);
+			toolsList.stream().forEach(tool -> ModelLoader.registerItemVariants(tool, new ModelResourceLocation(new ResourceLocation(tool.getRegistryName().getResourceDomain(), "tools/" + tool.getRegistryName().getResourcePath()), "material=" + EnumToolStats.values()[lambdaCaptureInt].getName())));
 		}
 		
 		this.registerCustomStateMappers();

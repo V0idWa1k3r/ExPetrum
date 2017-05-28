@@ -48,7 +48,17 @@ public class ExPRegistryNames
 		itemToolhead																						= new ResourceLocation(modid, "item_toolhead"),
 		itemSeeds																							= new ResourceLocation(modid, "item_seeds"),
 		itemFood																							= new ResourceLocation(modid, "item_food"),
-		itemIngot																							= new ResourceLocation(modid, "item_ingot");
+		itemIngot																							= new ResourceLocation(modid, "item_ingot"),
+		itemKnife																							= new ResourceLocation(modid, "item_knife"),
+		itemPickaxe																							= new ResourceLocation(modid, "item_pickaxe"),
+		itemAxe																								= new ResourceLocation(modid, "item_axe"),
+		itemShovel																							= new ResourceLocation(modid, "item_shovel"),
+		itemHoe																								= new ResourceLocation(modid, "item_hoe"),
+		itemSword																							= new ResourceLocation(modid, "item_sword"),
+		itemScythe																							= new ResourceLocation(modid, "item_scythe"),
+		itemBattleaxe																						= new ResourceLocation(modid, "item_battleaxe"),
+		itemHammer																							= new ResourceLocation(modid, "item_hammer"),
+		itemSpear																							= new ResourceLocation(modid, "item_spear");
 	
 	public static final ResourceLocation
 		entityGravFallingBlock																				= new ResourceLocation(modid, "gravFallingBlock"),

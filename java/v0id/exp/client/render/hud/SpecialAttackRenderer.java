@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import v0id.api.exp.data.ExPWeaponAttacks;
 import v0id.api.exp.player.IExPPlayer;
+import v0id.exp.item.tool.ItemSpear;
 
 public class SpecialAttackRenderer
 {
@@ -41,8 +42,8 @@ public class SpecialAttackRenderer
 				}
 				
 				GlStateManager.pushMatrix();
-				GlStateManager.translate(-0.09, -0.15, -0.25 + translateZIndex);
-				GlStateManager.rotate(135, 0, 1, 0);
+				GlStateManager.translate(-0.09 + (is.getItem() instanceof ItemSpear ? 0.18 : 0), -0.15, -0.25 + translateZIndex);
+				GlStateManager.rotate(135 + (is.getItem() instanceof ItemSpear ? 90 : 0), 0, 1, 0);
 				GlStateManager.rotate(90, 1, 0, 0);
 				Minecraft.getMinecraft().getRenderItem().renderItem(is, player, TransformType.GROUND, true);
 				GlStateManager.popMatrix();

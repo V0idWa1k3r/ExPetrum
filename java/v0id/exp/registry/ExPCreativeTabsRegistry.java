@@ -65,6 +65,15 @@ public class ExPCreativeTabsRegistry extends AbstractRegistry
 				return new ItemStack(ExPItems.ingot);
 			}
 		};
+		
+		ExPCreativeTabs.tabTools = new CreativeTabs(CreativeTabs.getNextID(), "exp.tools"){
+			@SideOnly(Side.CLIENT)
+			@Override
+			public ItemStack getTabIconItem()
+			{
+				return new ItemStack(ExPItems.knife);
+			}
+		};
 	}
 	
 	public ExPCreativeTabsRegistry()

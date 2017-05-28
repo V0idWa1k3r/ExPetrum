@@ -57,6 +57,9 @@ public class WeaponType
 	// A hardened hammer. Extremely heavy
 	public static final WeaponType BATTLEHAMMER = new WeaponType(HAMMER);
 	
+	// A Scythe
+	public static final WeaponType SCYTHE = new WeaponType(SWORD);
+	
 	// Unknown weapon type.
 	public static final WeaponType NONE = new WeaponType();
 	

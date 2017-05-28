@@ -1,0 +1,65 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "exp:handheld",
+		"gui3d" : true,
+		"textures" : {
+			"layer0" : "exp:items/tools/shovel/stone"
+		}
+	},
+	"variants" : {
+		"inventory" : [{}],
+		"material" : {
+			"stone" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/shovel/stone"
+				}
+			},
+			"copper" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/shovel/copper"
+				}
+			},
+			"bronze" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/shovel/bronze"
+				}
+			},
+			"bismuth_bronze" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/shovel/bismuth_bronze"
+				}
+			},
+			"leaded_bronze" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/shovel/leaded_bronze"
+				}
+			},
+			"manganese_bronze" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/shovel/manganese_bronze"
+				}
+			},
+			"rose_alloy" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/shovel/rose_alloy"
+				}
+			},
+			"iron" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/shovel/iron"
+				}
+			},
+			"steel" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/shovel/steel"
+				}
+			},
+			"tool_steel" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/shovel/tool_steel"
+				}
+			}
+		}
+	}
+}

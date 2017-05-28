@@ -1,0 +1,65 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "exp:handheld",
+		"gui3d" : true,
+		"textures" : {
+			"layer0" : "exp:items/tools/spear/stone"
+		}
+	},
+	"variants" : {
+		"inventory" : [{}],
+		"material" : {
+			"stone" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/spear/stone"
+				}
+			},
+			"copper" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/spear/copper"
+				}
+			},
+			"bronze" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/spear/bronze"
+				}
+			},
+			"bismuth_bronze" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/spear/bismuth_bronze"
+				}
+			},
+			"leaded_bronze" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/spear/leaded_bronze"
+				}
+			},
+			"manganese_bronze" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/spear/manganese_bronze"
+				}
+			},
+			"rose_alloy" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/spear/rose_alloy"
+				}
+			},
+			"iron" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/spear/iron"
+				}
+			},
+			"steel" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/spear/steel"
+				}
+			},
+			"tool_steel" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/spear/tool_steel"
+				}
+			}
+		}
+	}
+}
