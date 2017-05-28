@@ -89,12 +89,8 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 		float growthRateModifier = Helpers.getGenericGrowthModifier(pos, worldIn, false);
 		if (!worldIn.isRemote)
 		{
-			if (Helpers.canPlantGrow(pos, worldIn))
-			{
-				trySpread(worldIn, pos, rand, growthRateModifier);
-				checkState(worldIn, pos, state, rand, growthRateModifier);
-			}
-			
+			trySpread(worldIn, pos, rand, growthRateModifier);
+			checkState(worldIn, pos, state, rand, growthRateModifier);
 			checkBeingDeletedByBlockAbove(worldIn, pos, state);
 		}
 	}
@@ -166,6 +162,11 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 
 	public void trySpread(World worldIn, BlockPos pos, Random rand, float growthRateModifier)
 	{
+		if (!Helpers.canPlantGrow(pos, worldIn))
+		{
+			return;
+		}
+		
 		if (rand.nextInt(128) == 0 && worldIn.isAirBlock(pos.up()) && this.getState() == EnumGrassState.NORMAL)
 		{
 			worldIn.setBlockState(pos.up(), ExPBlocks.vegetation.getDefaultState(), 2);
