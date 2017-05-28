@@ -5,6 +5,7 @@ import java.lang.reflect.Constructor;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityFallingBlock;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import v0id.api.core.logging.LogLevel;
@@ -16,8 +17,8 @@ public class GravityHelper
 	
 	public static boolean isSupported(World world, BlockPos pos)
 	{
-		// If there is a full block under our block and there is a full block under that block and a full block under that block consider the block supported. 
-		if (world.getBlockState(pos.down()).isOpaqueCube())
+		// If there is a full block under our block consider the block supported. 
+		if (world.getBlockState(pos.down()).isOpaqueCube() || world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP))
 		{
 			return true;
 		}
