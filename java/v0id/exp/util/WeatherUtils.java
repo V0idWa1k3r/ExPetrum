@@ -32,7 +32,7 @@ public class WeatherUtils
 			boolean snows = Helpers.getTemperatureAt(w, heightPos) <= 0;
 			if (snows)
 			{
-				if (w.rand.nextInt(16) == 0)
+				if (w.rand.nextInt(64) == 0)
 				{
 					IBlockState state = w.getBlockState(heightPos.down());
 					IBlockState state1 = w.getBlockState(heightPos);
