@@ -3,6 +3,7 @@ package v0id.api.exp.combat;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -100,7 +101,8 @@ public abstract class SpecialAttack
 		
 		public void onTick(EntityPlayer player)
 		{
-			this.attackInstance.onExecutionTick(player, this.executionTime--);
+			// FIXME Fix the threading nightmare you have created instead of dirty hacks like this one!!!
+			Optional.of(this.attackInstance).ifPresent(i -> i.onExecutionTick(player, this.executionTime--));
 		}
 		
 		public void onStart(EntityPlayer player)
