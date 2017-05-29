@@ -30,6 +30,7 @@ import v0id.api.exp.item.food.FoodEntry;
 import v0id.api.exp.item.food.IExPFood;
 import v0id.api.exp.player.IExPPlayer;
 import v0id.api.exp.player.Nutrient;
+import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.IExPWorld;
 import v0id.exp.block.item.IItemRegistryEntry;
@@ -336,6 +337,159 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 		if (w.getTotalWorldTime() % 500 == 0)
 		{
 			this.checkRot(is, w, pos, 1);
+		}
+	}
+	
+	public static int getMetadataFromCrop(EnumCrop crop)
+	{
+		switch (crop)
+		{
+			case MAIZE:
+			{
+				return FoodEntry.CORN.getId();
+			}
+			
+			case RICE:
+			{
+				return FoodEntry.RICE.getId();
+			}
+			
+			case WHEAT:
+			{
+				return FoodEntry.WHEAT.getId();
+			}
+			
+			case BARLEY:
+			{
+				return FoodEntry.BARLEY.getId();
+			}
+			
+			case SORGHUM:
+			{
+				return FoodEntry.SORGHUM.getId();
+			}
+			
+			case MILLET:
+			{
+				return FoodEntry.MILLET.getId();
+			}
+			
+			case OAT:
+			{
+				return FoodEntry.OAT.getId();
+			}
+			
+			case RYE:
+			{
+				return FoodEntry.RYE.getId();
+			}
+			
+			case CABBAGE:
+			{
+				return FoodEntry.CABBAGE.getId();
+			}
+			
+			case TURNIP:
+			{
+				return FoodEntry.TURNIP.getId();
+			}
+			
+			case RADISH:
+			{
+				return FoodEntry.RADISH.getId();
+			}
+			
+			case CARROT:
+			{
+				return FoodEntry.CARROT.getId();
+			}
+			
+			case PARSNIP:
+			{
+				return FoodEntry.PARSNIP.getId();
+			}
+			
+			case BEETROOT:
+			{
+				return FoodEntry.BEETROOT.getId();
+			}
+			
+			case LETTUCE:
+			{
+				return FoodEntry.LETTUCE.getId();
+			}
+			
+			case BEANS:
+			{
+				return FoodEntry.BEANS.getId();
+			}
+			
+			case PEAS:
+			{
+				return FoodEntry.PEAS.getId();
+			}
+			
+			case POTATO:
+			{
+				return FoodEntry.POTATO.getId();
+			}
+			
+			case EGGPLANT:
+			{
+				return FoodEntry.EGGPLANT.getId();
+			}
+			
+			case TOMATO:
+			{
+				return FoodEntry.TOMATO.getId();
+			}
+			
+			case CUCUMBER:
+			{
+				return FoodEntry.CUCUMBER.getId();
+			}
+			
+			case PUMPKIN:
+			{
+				return FoodEntry.PUMPKIN.getId();
+			}
+			
+			case ONION:
+			{
+				return FoodEntry.ONION.getId();
+			}
+			
+			case GARLIC:
+			{
+				return FoodEntry.GARLIC.getId();
+			}
+			
+			case LEEK:
+			{
+				return FoodEntry.LEEK.getId();
+			}
+			
+			case SPINACH:
+			{
+				return FoodEntry.SPINACH.getId();
+			}
+			
+			case SWEET_POTATO:
+			{
+				return FoodEntry.SWEET_POTATO.getId();
+			}
+			
+			case CASSAVA:
+			{
+				return FoodEntry.CASSAVA.getId();
+			}
+			
+			case PEPPER:
+			case DEAD:
+			default:
+			{
+				return -1;
+			}
 		}
 	}
 }

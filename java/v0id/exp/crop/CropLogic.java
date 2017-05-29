@@ -4,10 +4,13 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -16,6 +19,8 @@ import v0id.api.core.VoidApi;
 import v0id.api.core.settings.VCSettings;
 import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.event.crop.EventFarmlandUpdate;
+import v0id.api.exp.item.food.FoodEntry;
+import v0id.api.exp.quality.EnumQuality;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.tile.crop.EnumPlantNutrient;
 import v0id.api.exp.tile.crop.ExPCropCapability;
@@ -28,13 +33,69 @@ import v0id.api.exp.world.IExPWorld;
 import v0id.api.exp.world.ImmutableCalendar;
 import v0id.api.exp.world.TemperatureRange;
 import v0id.exp.block.plant.BlockVegetation;
+import v0id.exp.item.ItemFood;
 import v0id.exp.util.Helpers;
 
 public class CropLogic
 {
+	public static NonNullList<ItemStack> createDrops(ExPCrop crop, Random rand)
+	{
+		if (crop.isDead())
+		{
+			return NonNullList.withSize(0, ItemStack.EMPTY);
+		}
+		
+		int meta = ItemFood.getMetadataFromCrop(crop.getType());
+		if (meta == -1)
+		{
+			if (crop.getType() == EnumCrop.PEPPER)
+			{
+				int growthIndex = crop.getGrowthIndex();
+				int growthMax = crop.getType().getData().growthStages - 1;
+				if (growthIndex == growthMax)
+				{
+					meta = FoodEntry.PEPPER_RED.getId();
+				}
+				else
+				{
+					if (growthIndex == growthMax - 1)
+					{
+						meta = FoodEntry.PEPPER_YELLOW.getId();
+					}
+					else
+					{
+						meta = FoodEntry.PEPPER_GREEN.getId();
+					}
+				}
+			}
+			else
+			{
+				return NonNullList.withSize(0, ItemStack.EMPTY);
+			}
+		}
+		
+		ItemStack food = new ItemStack(ExPItems.food, 1, meta);
+		ItemFood item = (ItemFood) food.getItem();
+		int generation = crop.getGeneration();
+		Pair<Float, Float> dropWeight = crop.getType().getDropWeight();
+		float randomAmount = dropWeight.getLeft() + rand.nextFloat() * (dropWeight.getRight() - dropWeight.getLeft());
+		randomAmount *= Math.min(2, 1 + (float) generation / 100);
+		randomAmount *= crop.getHealth() / crop.getType().getData().baseHealth;
+		item.setLastTickTime(food, IExPWorld.of(crop.getContainer().getWorld()).today());
+		item.setTotalWeight(food, randomAmount);
+		TemperatureRange rangeMin = crop.getSurvivalTemperature();
+		TemperatureRange rangeMed = crop.getOptimalTemperature();
+		TemperatureRange rangeHig = crop.getIdealTemperature();
+		float temperature = Helpers.getTemperatureAt(crop.getContainer().getWorld(), crop.getContainer().getPos());
+		float qualityMultiplier = rangeHig.isWithinRange(temperature) ? 1.0F : rangeMed.isWithinRange(temperature) ? 0.5F : rangeMin.isWithinRange(temperature) ? 0.25F : 0F;
+		EnumQuality quality = crop.isWild() ? EnumQuality.PLAIN : EnumQuality.values()[Math.min((int)((rand.nextFloat() * qualityMultiplier) * (EnumQuality.values().length - 1)), EnumQuality.values().length - 1)];
+		quality.setForItem(food);
+		return NonNullList.withSize(1, food);
+	}
+	
 	public static ItemStack createSeeds(ExPCrop crop, Random rand)
 	{
-		ItemStack seeds = new ItemStack(ExPItems.seeds, 1, crop.getType().ordinal() - 1);
+		ItemStack seeds = new ItemStack(ExPItems.seeds, crop.isWild() ? 1 : 2, crop.getType().ordinal() - 1);
 		CropStats stats = new CropStats(crop.stats);
 		++stats.generation;
 		stats.growth = 0;
@@ -54,7 +115,7 @@ public class CropLogic
 		{
 			TemperatureRange rangeMin = crop.getSurvivalTemperature();
 			TemperatureRange rangeMed = crop.getOptimalTemperature();
-			TemperatureRange rangeHig = crop.getSurvivalTemperature();
+			TemperatureRange rangeHig = crop.getIdealTemperature();
 			if (rangeMin.min > -20 && rangeMin.max < 60)
 			{
 				stats.growthRanges[0] = new TemperatureRange(rangeMin.min * 1.05F, rangeMin.max * 1.05F);

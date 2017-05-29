@@ -1,14 +1,18 @@
 package v0id.exp.crop;
 
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagLong;
@@ -16,6 +20,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
@@ -23,6 +28,8 @@ import v0id.api.core.VCStatics;
 import v0id.api.core.network.PacketType;
 import v0id.api.core.network.VoidNetwork;
 import v0id.api.core.util.DimBlockPos;
+import v0id.api.exp.block.property.ExPBlockProperties;
+import v0id.api.exp.metal.EnumToolClass;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.tile.crop.EnumCropBug;
 import v0id.api.exp.tile.crop.EnumCropHarvestAction;
@@ -116,8 +123,7 @@ public class ExPCrop implements IExPCrop
 	@Override
 	public NonNullList<ItemStack> getMatureDrops()
 	{
-		// TODO Auto-generated method stub
-		return NonNullList.withSize(0, ItemStack.EMPTY);
+		return CropLogic.createDrops(this, VCStatics.rng);
 	}
 
 	@Override
@@ -129,8 +135,159 @@ public class ExPCrop implements IExPCrop
 	@Override
 	public Pair<EnumActionResult, NonNullList<ItemStack>> onHarvest(EntityPlayer harvester, World harvestedIn, BlockPos harvestedAt, IBlockState selfBlockReference, EnumHand playerHarvestHand,ItemStack playerHarvestItem, boolean isHarvestingWithRMB)
 	{
-		// TODO Auto-generated method stub
-		return Pair.of(EnumActionResult.PASS, NonNullList.withSize(0, ItemStack.EMPTY));
+		harvestedIn = Optional.ofNullable(harvestedIn).orElse(this.getContainer().getWorld());
+		if (this.isDead() || harvestedIn.isRemote)
+		{
+			return Pair.of(EnumActionResult.PASS, NonNullList.withSize(0, ItemStack.EMPTY));
+		}
+		
+		harvestedAt = Optional.ofNullable(harvestedAt).orElse(this.getContainer().getPos());
+		selfBlockReference = Optional.ofNullable(selfBlockReference).orElse(harvestedIn.getBlockState(harvestedAt));
+		Set<String> toolClasses = playerHarvestItem.getItem().getToolClasses(playerHarvestItem);
+		List<ItemStack> dropsBase = Lists.newArrayList();
+		
+		if (this.getGrowth() <= 1)
+		{
+			if (this.getType() == EnumCrop.PEPPER)
+			{
+				int stage = this.getGrowthIndex();
+				if (toolClasses.contains(EnumToolClass.KNIFE.getName()))
+				{
+					dropsBase.addAll(this.getSeedDrops());
+					if (isHarvestingWithRMB)
+					{
+						this.setGrowth(0.4F);
+						harvestedIn.setBlockState(harvestedAt, selfBlockReference.withProperty(ExPBlockProperties.CROP_GROWTH_STAGE, 4));
+						NBTTagCompound sent = new NBTTagCompound();
+						sent.setTag("tileData", this.getContainer().serializeNBT());
+						sent.setTag("blockPosData", new DimBlockPos(this.getContainer().getPos(), this.getContainer().getWorld().provider.getDimension()).serializeNBT());
+						VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new TargetPoint(this.getContainer().getWorld().provider.getDimension(), this.getContainer().getPos().getX(), this.getContainer().getPos().getY(), this.getContainer().getPos().getZ(), 96));
+					}
+					
+					if (harvester != null)
+					{
+						playerHarvestItem.damageItem(1, harvester);
+					}
+				}
+				else
+				{
+					if (stage >= this.getType().getData().growthStages - 3)
+					{
+						dropsBase.addAll(this.getMatureDrops());
+						if (isHarvestingWithRMB)
+						{
+							this.setGrowth(0.4F);
+							harvestedIn.setBlockState(harvestedAt, selfBlockReference.withProperty(ExPBlockProperties.CROP_GROWTH_STAGE, 4));
+							NBTTagCompound sent = new NBTTagCompound();
+							sent.setTag("tileData", this.getContainer().serializeNBT());
+							sent.setTag("blockPosData", new DimBlockPos(this.getContainer().getPos(), this.getContainer().getWorld().provider.getDimension()).serializeNBT());
+							VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new TargetPoint(this.getContainer().getWorld().provider.getDimension(), this.getContainer().getPos().getX(), this.getContainer().getPos().getY(), this.getContainer().getPos().getZ(), 96));
+						}
+					}
+				}
+			}
+			else
+			{
+				if (this.getGrowth() == 1)
+				{
+					if (toolClasses.contains(EnumToolClass.KNIFE.getName()))
+					{
+						dropsBase.addAll(this.getSeedDrops());
+						this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference);
+						if (harvester != null)
+						{
+							playerHarvestItem.damageItem(1, harvester);
+						}
+					}
+					else
+					{
+						if (this.getType().isGrain())
+						{
+							if (toolClasses.contains(EnumToolClass.SCYTHE.getName()))
+							{
+								dropsBase.addAll(this.getMatureDrops());
+								this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference);
+							}
+							else
+							{
+								if (isHarvestingWithRMB)
+								{
+									if (harvestedIn.rand.nextDouble() < 0.1D)
+									{
+										dropsBase.addAll(this.getMatureDrops());
+										this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference);
+									}
+									else
+									{
+										harvestedIn.playSound(null, harvestedAt, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1, 1);
+									}
+								}
+								else
+								{
+									dropsBase.addAll(this.getMatureDrops());
+									this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference);
+								}
+							}
+						}
+						else
+						{
+							if (isHarvestingWithRMB)
+							{
+								if (harvestedIn.rand.nextDouble() < 0.3D)
+								{
+									dropsBase.addAll(this.getMatureDrops());
+									this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference);
+								}
+								else
+								{
+									harvestedIn.playSound(null, harvestedAt, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1, 1);
+								}
+							}
+							else
+							{
+								dropsBase.addAll(this.getMatureDrops());
+								this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference);
+							}
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			return Pair.of(EnumActionResult.FAIL, NonNullList.withSize(0, ItemStack.EMPTY));
+		}
+		
+		NonNullList<ItemStack> ret = NonNullList.withSize(dropsBase.size(), ItemStack.EMPTY);
+		for (int i = 0; i < dropsBase.size(); ++i)
+		{
+			ret.set(i, dropsBase.get(i));
+		}
+		
+		return Pair.of(EnumActionResult.SUCCESS, ret);
+	}
+	
+	public void handleHarvest(World w, BlockPos pos, IBlockState state)
+	{
+		if (this.getHarvestAction() == EnumCropHarvestAction.DESTROY)
+		{
+			w.setBlockToAir(pos);
+		}
+		else
+		{
+			if (this.getHarvestAction() == EnumCropHarvestAction.SPECIAL)
+			{
+				return;
+			}
+			
+			int setbackBy = this.getHarvestAction().ordinal();
+			this.setGrowth((float)(this.getType().getData().growthStages - setbackBy) / this.getType().getData().growthStages);
+			w.setBlockState(pos, state.withProperty(ExPBlockProperties.CROP_GROWTH_STAGE, this.getGrowthIndex()));
+			NBTTagCompound sent = new NBTTagCompound();
+			sent.setTag("tileData", this.getContainer().serializeNBT());
+			sent.setTag("blockPosData", new DimBlockPos(this.getContainer().getPos(), this.getContainer().getWorld().provider.getDimension()).serializeNBT());
+			VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new TargetPoint(this.getContainer().getWorld().provider.getDimension(), this.getContainer().getPos().getX(), this.getContainer().getPos().getY(), this.getContainer().getPos().getZ(), 96));
+		}
 	}
 
 	@Override
