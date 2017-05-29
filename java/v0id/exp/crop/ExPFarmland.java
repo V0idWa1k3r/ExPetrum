@@ -59,7 +59,10 @@ public class ExPFarmland implements IFarmland
 			this.nutrientData.put(EnumPlantNutrient.values()[nbt.getByte("key")], nbt.getFloat("value"));
 		}
 		
-		this.timeKeeper.deserializeNBT((NBTTagLong) nbt.getTag("calendar"));
+		if (nbt.hasKey("calendar"))
+		{
+			this.timeKeeper.deserializeNBT((NBTTagLong) nbt.getTag("calendar"));
+		}
 	}
 
 	@Override
