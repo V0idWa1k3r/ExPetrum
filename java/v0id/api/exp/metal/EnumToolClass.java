@@ -13,7 +13,9 @@ public enum EnumToolClass implements IStringSerializable
 	SCYTHE("scythe"),
 	BATTLEAXE("axe"),
 	HAMMER("hammer"),
-	SPEAR("sword");
+	SPEAR("sword"),
+	WATERING_CAN("watering_can"),
+	GARDENING_SPADE("spade");
 
 	EnumToolClass(String s)
 	{

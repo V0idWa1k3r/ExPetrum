@@ -22,4 +22,6 @@ public class ExPItems
 	public static Item battleaxe;
 	public static Item hammer;
 	public static Item spear;
+	public static Item watering_can;
+	public static Item gardening_spade;
 }

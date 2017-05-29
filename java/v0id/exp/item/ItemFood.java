@@ -215,7 +215,6 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 		return true;
 	}
 
-	// FIXME change this when forge fixes the inversion on this method!
 	@Override
 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged)
 	{

@@ -14,6 +14,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityFallingBlock;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -26,12 +27,16 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import v0id.api.core.util.java.ColorRGB;
 import v0id.api.exp.block.EnumGrassAmount;
 import v0id.api.exp.block.EnumGrassState;
+import v0id.api.exp.block.IAcceptsWaterCan;
 import v0id.api.exp.block.ICanGrowCrop;
 import v0id.api.exp.block.IGrass;
 import v0id.api.exp.block.property.EnumDirtClass;
@@ -46,7 +51,7 @@ import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.tile.TileFarmland;
 
-public class BlockFarmland extends BlockContainer implements IInitializableBlock, IBlockRegistryEntry, IItemRegistryEntry, IGravitySusceptible, ICanGrowCrop, IGrass
+public class BlockFarmland extends BlockContainer implements IInitializableBlock, IBlockRegistryEntry, IItemRegistryEntry, IGravitySusceptible, ICanGrowCrop, IGrass, IAcceptsWaterCan
 {
 	public BlockFarmland()
 	{
@@ -249,5 +254,29 @@ public class BlockFarmland extends BlockContainer implements IInitializableBlock
 	public EnumGrassAmount getAmount(IBlockState state, BlockPos pos, IBlockAccess w)
 	{
 		return EnumGrassAmount.values()[Math.max(state.getValue(DIRT_CLASS).getAmount().ordinal() - 1, 0)];
+	}
+
+	@Override
+	public void acceptWatering(EntityPlayer player, World w, BlockPos pos, IBlockState state, IFluidHandlerItem wateringCanCapability, ItemStack wateringCanStack, int wateringCanTier)
+	{
+		if (player.ticksExisted % 20 == 0 && !w.isRemote)
+		{
+			TileEntity tile = w.getTileEntity(pos);
+			if (tile != null && tile.hasCapability(ExPFarmlandCapability.farmlandCap, EnumFacing.UP))
+			{
+				FluidStack cost = new FluidStack(FluidRegistry.WATER, (int)(10 * (1F - (float)wateringCanTier / 10)));
+				FluidStack tryDrain = wateringCanCapability.drain(cost, false);
+				if (tryDrain != null && tryDrain.amount == cost.amount)
+				{
+					IFarmland farmlandCap = tile.getCapability(ExPFarmlandCapability.farmlandCap, EnumFacing.UP);
+					if (farmlandCap.getMoisture() <= 0.91F)
+					{
+						farmlandCap.setMoisture(farmlandCap.getMoisture() + 0.1F);
+						wateringCanCapability.drain(cost, true);
+						farmlandCap.setDirty();
+					}
+				}
+			}
+		}
 	}
 }

@@ -191,7 +191,7 @@ public class CropLogic
 		MinecraftForge.EVENT_BUS.post(wnLogic);
 		float waterLoss = wnLogic.waterLossBase;
 		float nutrientGain = wnLogic.nutrientGainBase;
-		if (w.isRaining() && canSeeTheSky && !MinecraftForge.EVENT_BUS.post(new EventFarmlandUpdate.Logic.Rain(farmland, w, pos, ref, ticks)))
+		if (w.isRaining() && w.getPrecipitationHeight(pos).getY() <= pos.getY() && !MinecraftForge.EVENT_BUS.post(new EventFarmlandUpdate.Logic.Rain(farmland, w, pos, ref, ticks)))
 		{
 			farmland.setMoisture(1);
 		}

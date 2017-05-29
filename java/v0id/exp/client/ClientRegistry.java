@@ -67,6 +67,7 @@ import v0id.exp.entity.EntityFallingTree;
 import v0id.exp.entity.EntityGravFallingBlock;
 import v0id.exp.entity.EntityThrownWeapon;
 import v0id.exp.registry.AbstractRegistry;
+import v0id.exp.tile.TileFarmland;
 import v0id.exp.tile.TileOre;
 import v0id.exp.util.Helpers;
 
@@ -173,7 +174,7 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 			ModelLoader.setCustomModelResourceLocation(ExPItems.ingot, i, new ModelResourceLocation(ExPItems.ingot.getRegistryName(), "inventory"));
 		}
 		
-		List<Item> toolsList = Arrays.asList(new Item[]{ ExPItems.knife, ExPItems.pickaxe, ExPItems.axe, ExPItems.shovel, ExPItems.hoe, ExPItems.sword, ExPItems.scythe, ExPItems.battleaxe, ExPItems.hammer, ExPItems.spear });
+		List<Item> toolsList = Arrays.asList(new Item[]{ ExPItems.knife, ExPItems.pickaxe, ExPItems.axe, ExPItems.shovel, ExPItems.hoe, ExPItems.sword, ExPItems.scythe, ExPItems.battleaxe, ExPItems.hammer, ExPItems.spear, ExPItems.watering_can });
 		toolsList.stream().forEach(tool -> ModelLoader.setCustomMeshDefinition(tool, stack -> new ModelResourceLocation(new ResourceLocation(tool.getRegistryName().getResourceDomain(), "tools/" + tool.getRegistryName().getResourcePath()), "material=" + EnumToolStats.values()[stack.getMetadata()].getName())));
 		for (int i = 0; i < EnumToolStats.values().length; ++i)
 		{
@@ -297,7 +298,7 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 		IFunctionalItemColor.registerItemColorHandler((ItemStack stack, int tintIndex) -> 
 			EnumOre.values()[(stack.getMetadata() / EnumRockClass.values().length) % EnumOre.values().length].getColor(), ExPBlocks.ore, ExPBlocks.boulderOre);
 		IFunctionalBlockColor.registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) -> 
-			worldIn.getTileEntity(pos) != null && worldIn.getTileEntity(pos).hasCapability(ExPFarmlandCapability.farmlandCap, EnumFacing.UP) ? ExPFarmland.getColor(IFarmland.of(worldIn.getTileEntity(pos), EnumFacing.UP)) : -1, ExPBlocks.farmland);
+			worldIn.getTileEntity(pos) != null && worldIn.getTileEntity(pos) instanceof TileFarmland && worldIn.getTileEntity(pos).hasCapability(ExPFarmlandCapability.farmlandCap, EnumFacing.UP) ? ExPFarmland.getColor(IFarmland.of(worldIn.getTileEntity(pos), EnumFacing.UP)) : -1, ExPBlocks.farmland);
 		IFunctionalItemColor.registerItemColorHandler((ItemStack stack, int tintIndex) -> 
 			EnumMetal.values()[stack.getMetadata()].getColor(), ExPItems.ingot);
 	}

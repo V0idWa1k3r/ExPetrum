@@ -30,6 +30,7 @@ public abstract class ItemExPTool extends ItemTool implements IExPTool
 	{
 		super(1, 1, ExPMisc.materialExPetrum, effectiveOn);
 		this.setFull3D();
+		this.setHasSubtypes(true);
 	}
 	
 	@Override

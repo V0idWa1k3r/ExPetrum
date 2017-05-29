@@ -27,6 +27,7 @@ public abstract class ItemExPWeapon extends ItemSword implements IExPTool
 	{
 		super(ExPMisc.materialExPetrum);
 		this.setFull3D();
+		this.setHasSubtypes(true);
 	}
 	
 	@Override

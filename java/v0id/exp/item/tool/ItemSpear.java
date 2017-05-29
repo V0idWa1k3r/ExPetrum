@@ -2,8 +2,14 @@ package v0id.exp.item.tool;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import v0id.api.exp.combat.EnumWeaponWeight;
 import v0id.api.exp.combat.IWeapon;
@@ -91,4 +97,22 @@ public class ItemSpear extends ItemExPWeapon implements IWeapon, IWeightProvider
 		return -2F;
 	}
 
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+    {
+		playerIn.setActiveHand(handIn);
+		return ActionResult.newResult(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+    }
+
+	@Override
+	public EnumAction getItemUseAction(ItemStack stack)
+	{
+		return EnumAction.BOW;
+	}
+
+	@Override
+	public int getMaxItemUseDuration(ItemStack stack)
+	{
+		return 72000;
+	}
 }

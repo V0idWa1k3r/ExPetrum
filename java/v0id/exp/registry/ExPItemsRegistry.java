@@ -17,6 +17,7 @@ import v0id.exp.item.tool.ItemScythe;
 import v0id.exp.item.tool.ItemShovel;
 import v0id.exp.item.tool.ItemSpear;
 import v0id.exp.item.tool.ItemSword;
+import v0id.exp.item.tool.ItemWateringCan;
 
 public class ExPItemsRegistry extends AbstractRegistry
 {
@@ -38,6 +39,7 @@ public class ExPItemsRegistry extends AbstractRegistry
 		ExPItems.battleaxe = new ItemBattleaxe();
 		ExPItems.hammer = new ItemHammer();
 		ExPItems.spear = new ItemSpear();
+		ExPItems.watering_can = new ItemWateringCan();
 	}
 	
 	public ExPItemsRegistry()

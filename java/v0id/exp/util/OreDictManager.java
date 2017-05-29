@@ -50,7 +50,7 @@ public class OreDictManager
 			else
 			{
 				Object at = f.get(null);
-				if (IOreDictEntry.class.isAssignableFrom(at.getClass()))
+				if (at != null && IOreDictEntry.class.isAssignableFrom(at.getClass()))
 				{
 					((IOreDictEntry)f.get(null)).registerOreDictNames();
 				}
