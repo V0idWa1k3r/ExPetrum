@@ -118,3 +118,9 @@ tile.exp.ore.name=Ore
 
 exp.txt.item.desc.rot=%s%% Rotten
 exp.txt.item.desc.weight=%s Gram
+exp.txt.item.desc.water=Water: %dmb
+exp.txt.item.desc.water.none=It's empty
+exp.txt.item.desc.water.leq25=There is some water
+exp.txt.item.desc.water.leq50=It's half way filled
+exp.txt.item.desc.water.leq75=It's mostly filled
+exp.txt.item.desc.water.100=It's full of water
