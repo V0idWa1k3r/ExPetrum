@@ -5,28 +5,48 @@ import java.util.stream.Stream;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import v0id.api.core.logging.LogLevel;
+import v0id.api.core.network.PacketType;
+import v0id.api.core.network.VoidNetwork;
+import v0id.api.core.util.DimBlockPos;
+import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPItems;
+import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.api.exp.tile.crop.EnumCrop;
+import v0id.api.exp.tile.crop.ExPFarmlandCapability;
 import v0id.api.exp.tile.crop.ExPSeedsCapability;
+import v0id.api.exp.tile.crop.IExPCrop;
 import v0id.api.exp.tile.crop.IExPSeed;
+import v0id.api.exp.world.Calendar;
+import v0id.api.exp.world.IExPWorld;
 import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.crop.CropStats;
+import v0id.exp.crop.ExPCrop;
 import v0id.exp.handler.ExPHandlerRegistry;
+import v0id.exp.tile.TileCrop;
 
 public class ItemSeeds extends Item implements IInitializableItem, IItemRegistryEntry, IOreDictEntry, IWeightProvider
 {
@@ -88,6 +108,48 @@ public class ItemSeeds extends Item implements IInitializableItem, IItemRegistry
 	public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt)
 	{
 		return new CapabilityExPSeeds(stack);
+	}
+
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	{
+		if (worldIn.isRemote)
+		{
+			return EnumActionResult.FAIL;
+		}
+		
+		IBlockState state = worldIn.getBlockState(pos);
+		TileEntity tile = worldIn.getTileEntity(pos);
+		if (tile != null && tile.hasCapability(ExPFarmlandCapability.farmlandCap, EnumFacing.UP))
+		{
+			if (worldIn.isAirBlock(pos.up()))
+			{
+				// FIXME fix packet pipeline render issues!
+				try
+				{
+					ItemStack held = player.getHeldItem(hand);
+					CapabilityExPSeeds seedsCap = (CapabilityExPSeeds) held.getCapability(ExPSeedsCapability.seedsCap, null);
+					CropStats stats = new CropStats(seedsCap.getOrCreateStats());
+					worldIn.setBlockState(pos.up(), ExPBlocks.crop.getDefaultState());
+					TileCrop cropTile = (TileCrop) worldIn.getTileEntity(pos.up());
+					ExPCrop cropCap = (ExPCrop) IExPCrop.of(cropTile);
+					cropCap.stats = stats;
+					cropCap.timeKeeper = new Calendar(IExPWorld.of(worldIn).today().getTime());
+					NBTTagCompound sent = new NBTTagCompound();
+					sent.setTag("tileData", cropTile.serializeNBT());
+					sent.setTag("blockPosData", new DimBlockPos(pos.up(), worldIn.provider.getDimension()).serializeNBT());
+					VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new TargetPoint(worldIn.provider.getDimension(), pos.getX(), pos.up().getY(), pos.getZ(), 96));
+					held.shrink(1);
+					return EnumActionResult.SUCCESS;
+				}
+				catch (Exception ex)
+				{
+					ExPMisc.modLogger.log(LogLevel.Error, "Unable to place seeds at %s!", ex, pos.toString());
+				}
+			}
+		}
+		
+		return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 	}
 
 	public static class CapabilityExPSeeds implements IExPSeed, ICapabilityProvider
