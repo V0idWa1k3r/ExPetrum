@@ -161,7 +161,7 @@ public class CropStats implements INBTSerializable<NBTTagCompound>
 		this.waterConsumption = nbt.getFloat("waterConsumption");
 		this.growth = nbt.getFloat("growth");
 		this.nutrientConsumption.clear();
-		NBTList.<NBTTagCompound>of(nbt.getTagList("nutrientConsumption", NBT.TAG_COMPOUND)).forEach(tag -> this.nutrientConsumption.put(EnumPlantNutrient.values()[tag.getByte("nutrient")], tag.getFloat("anount")));
+		NBTList.<NBTTagCompound>of(nbt.getTagList("nutrientConsumption", NBT.TAG_COMPOUND)).forEach(tag -> this.nutrientConsumption.put(EnumPlantNutrient.values()[tag.getByte("nutrient")], tag.getFloat("amount")));
 	}
 
 }
