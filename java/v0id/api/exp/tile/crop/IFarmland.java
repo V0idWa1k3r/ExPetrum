@@ -62,7 +62,7 @@ public interface IFarmland extends INBTSerializable<NBTTagCompound>
 	
 	public static IFarmland of(TileEntity tile, EnumFacing facing)
 	{
-		return tile.hasCapability(ExPFarmlandCapability.farmlandCap, facing) ? tile.getCapability(ExPFarmlandCapability.farmlandCap, facing) : null;
+		return tile == null ? null : tile.hasCapability(ExPFarmlandCapability.farmlandCap, facing) ? tile.getCapability(ExPFarmlandCapability.farmlandCap, facing) : null;
 	}
 	
 	public static IFarmland of(TileEntity tile)

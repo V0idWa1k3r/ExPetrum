@@ -131,6 +131,11 @@ public class ExPFarmland implements IFarmland
 	
 	public static int getColor(IFarmland of)
 	{
+		if (of == null)
+		{
+			return -1;
+		}
+		
 		float colorMultiplier = 0.25F + (1 - of.getMoisture()) / 1.5F;
 		return ((int)(colorMultiplier * 255F) << 16) + ((int)(colorMultiplier * 255F) << 8) + (int)(colorMultiplier * 255F);
 	}
