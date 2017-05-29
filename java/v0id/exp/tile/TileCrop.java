@@ -1,10 +1,13 @@
 package v0id.exp.tile;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import v0id.api.exp.tile.crop.ExPCropCapability;
 import v0id.exp.crop.ExPCrop;
@@ -68,5 +71,11 @@ public class TileCrop extends TileEntity
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
 	{
 		return capability == ExPCropCapability.cropCap ? (T) this.cropState : super.getCapability(capability, facing);
+	}
+
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate)
+	{
+		return oldState.getBlock() != newSate.getBlock();
 	}
 }
