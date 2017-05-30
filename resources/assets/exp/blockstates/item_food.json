@@ -164,6 +164,66 @@
 				"textures" : {
 					"layer0" : "exp:items/plant/crop/wheat"
 				}
+			},
+			"blackberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/blackberry"
+				}
+			},
+			"cloudberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/cloudberry"
+				}
+			},
+			"raspberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/raspberry"
+				}
+			},
+			"blueberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/blueberry"
+				}
+			},
+			"cranberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/cranberry"
+				}
+			},
+			"elderberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/elderberry"
+				}
+			},
+			"gooseberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/gooseberry"
+				}
+			},
+			"hackberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/hackberry"
+				}
+			},
+			"strawberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/strawberry"
+				}
+			},
+			"wolfberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/wolfberry"
+				}
+			},
+			"salmonberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/salmonberry"
+				}
+			},
+			"crowberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/crowberry"
+				}
 			}
 		}
 	}

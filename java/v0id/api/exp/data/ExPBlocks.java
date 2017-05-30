@@ -35,4 +35,5 @@ public class ExPBlocks
 	public static Block workedBoulder;
 	public static Block crop;
 	public static Block farmland;
+	public static Block[] berryBushes;
 }

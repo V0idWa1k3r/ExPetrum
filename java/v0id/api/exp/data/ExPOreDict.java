@@ -5,6 +5,7 @@ import java.util.stream.Stream;
 import org.apache.commons.lang3.ArrayUtils;
 
 import v0id.api.core.markers.StaticStorage;
+import v0id.api.exp.block.EnumBerry;
 import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.property.EnumDirtClass;
@@ -45,5 +46,6 @@ public class ExPOreDict
 	public static final String[] treeNames = Stream.of(EnumTreeType.values()).map(EnumTreeType::getName).toArray(String[]::new);
 	public static final String[] bushNames = Stream.of(EnumShrubType.values()).map(EnumShrubType::getName).toArray(String[]::new);
 	public static final String[] cropNames = Stream.of(EnumCrop.values()).filter(EnumCrop.DEAD::nequals).map(EnumCrop::getName).toArray(String[]::new);
-	public static final String[] stickNames = ArrayUtils.addAll(treeNames, bushNames);
+	public static final String[] berryNames = Stream.of(EnumBerry.values()).map(EnumBerry::getName).toArray(String[]::new);
+	public static final String[] stickNames = ArrayUtils.addAll(ArrayUtils.addAll(treeNames, bushNames), berryNames);
 }

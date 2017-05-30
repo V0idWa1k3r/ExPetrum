@@ -4,6 +4,7 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
 import v0id.api.core.markers.StaticStorage;
+import v0id.api.exp.block.EnumBerry;
 import v0id.api.exp.block.EnumGrassAmount;
 import v0id.api.exp.block.EnumLeafState;
 import v0id.api.exp.block.EnumOre;
@@ -24,6 +25,7 @@ public class ExPBlockProperties
 	public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("leafstate", EnumLeafState.class);
 	public static final PropertyInteger ORE_TEXTURE_ID = PropertyInteger.create("oretexture", 0, 2);
 	public static final PropertyEnum<EnumShrubType> SHRUB_TYPE = PropertyEnum.create("type", EnumShrubType.class);
+	public static final PropertyEnum<EnumBerry> BERRY_BUSH_TYPE = PropertyEnum.create("type", EnumBerry.class);
 	public static final PropertyBool SHRUB_IS_TALL = PropertyBool.create("istall");
 	public static final PropertyBool ICE_IS_SALT = PropertyBool.create("salt");
 	public static final PropertyInteger WORKED_BOULDER_INDEX = PropertyInteger.create("workindex", 0, 7);

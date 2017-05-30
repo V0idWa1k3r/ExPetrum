@@ -238,6 +238,66 @@
 				"textures" : {
 					"layer0" : "exp:items/common/stick/prunus"
 				}
+			},
+			"blackberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/blackberry"
+				}
+			},
+			"cloudberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/cloudberry"
+				}
+			},
+			"raspberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/raspberry"
+				}
+			},
+			"blueberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/blueberry"
+				}
+			},
+			"cranberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/cranberry"
+				}
+			},
+			"elderberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/elderberry"
+				}
+			},
+			"gooseberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/gooseberry"
+				}
+			},
+			"hackberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/hackberry"
+				}
+			},
+			"strawberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/strawberry"
+				}
+			},
+			"wolfberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/wolfberry"
+				}
+			},
+			"salmonberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/salmonberry"
+				}
+			},
+			"crowberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/crowberry"
+				}
 			}
 		}
 	}

@@ -9,4 +9,6 @@ public interface IShrub
 	int getShrubColor(IBlockState state, BlockPos pos, IBlockAccess w);
 	
 	EnumShrubState getState();
+	
+	int getShrubInternalType();
 }

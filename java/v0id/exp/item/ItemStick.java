@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import v0id.api.exp.block.EnumBerry;
 import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.data.ExPCreativeTabs;
@@ -58,6 +59,7 @@ public class ItemStick extends Item implements IInitializableItem, IWeightProvid
 	{
 		Stream.of(EnumTreeType.values()).forEach(c -> subItems.add(new ItemStack(itemIn, 1, c.ordinal())));
 		Stream.of(EnumShrubType.values()).forEach(c -> subItems.add(new ItemStack(itemIn, 1, EnumTreeType.values().length + c.ordinal())));
+		Stream.of(EnumBerry.values()).forEach(c -> subItems.add(new ItemStack(itemIn, 1, EnumTreeType.values().length + EnumShrubType.values().length + c.ordinal())));
 	}
 
 	@Override

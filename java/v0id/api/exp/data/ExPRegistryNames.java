@@ -40,7 +40,11 @@ public class ExPRegistryNames
 		blockIce																							= new ResourceLocation(modid, "ice"),
 		blockBoulderWorked																					= new ResourceLocation(modid, "boulder_worked"),
 		blockCrop																							= new ResourceLocation(modid, "crop"),
-		blockFarmland																						= new ResourceLocation(modid, "farmland");
+		blockFarmland																						= new ResourceLocation(modid, "farmland"),
+		blockBerryBushNormal																				= new ResourceLocation(modid, "berry_bush_normal"),
+		blockBerryBushBerries																				= new ResourceLocation(modid, "berry_bush_berries"),
+		blockBerryBushAutumn																				= new ResourceLocation(modid, "berry_bush_autumn"),
+		blockBerryBushDead																					= new ResourceLocation(modid, "berry_bush_dead");
 
 	public static final ResourceLocation
 		itemRock																							= new ResourceLocation(modid, "item_rock"),

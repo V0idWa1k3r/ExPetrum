@@ -159,7 +159,7 @@ public class BlockShrub extends Block implements IInitializableBlock, IShrub, IP
 			return;
 		}
 		
-		if (worldIn.getBlockState(pos.down()).getBlock() instanceof IShrub)
+		if (worldIn.getBlockState(pos.down()).getBlock() instanceof IShrub && ((IShrub)worldIn.getBlockState(pos.down()).getBlock()).getShrubInternalType() == this.getShrubInternalType())
 		{
 			EnumShrubState sstate = ((IShrub)worldIn.getBlockState(pos.down()).getBlock()).getState();
 			if (sstate != this.getState())
@@ -285,7 +285,7 @@ public class BlockShrub extends Block implements IInitializableBlock, IShrub, IP
 	{
 		IBlockState at = world.getBlockState(pos);
 		IBlockState self = world.getBlockState(pos.offset(facing));
-		return at.getBlock() instanceof IShrub && at.getValue(ExPBlockProperties.SHRUB_TYPE) == self.getValue(ExPBlockProperties.SHRUB_TYPE);
+		return at.getBlock() instanceof IShrub  && ((IShrub)at.getBlock()).getShrubInternalType() == this.getShrubInternalType() && at.getValue(ExPBlockProperties.SHRUB_TYPE) == self.getValue(ExPBlockProperties.SHRUB_TYPE);
 	}
 
 	@Override
@@ -338,5 +338,11 @@ public class BlockShrub extends Block implements IInitializableBlock, IShrub, IP
 	public void registerBlock(IForgeRegistry<Block> registry)
 	{
 		registry.register(this);
+	}
+
+	@Override
+	public int getShrubInternalType()
+	{
+		return 0;
 	}
 }

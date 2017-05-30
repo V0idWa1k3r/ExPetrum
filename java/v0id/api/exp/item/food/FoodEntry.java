@@ -32,6 +32,9 @@ public class FoodEntry
 	// Display name
 	private String unlocalizedName;
 	
+	// Is the food poisonous?
+	private boolean isPoisonous;
+	
 	public static final List<FoodEntry> allEntries = Lists.newArrayList();
 	
 	public FoodEntry()
@@ -91,6 +94,12 @@ public class FoodEntry
 	public FoodEntry withNutrients(Map<Nutrient, Float> map)
 	{
 		this.setNutrientData(map);
+		return this;
+	}
+	
+	public FoodEntry setPoisonous()
+	{
+		this.setPoisonous(true);
 		return this;
 	}
 	
@@ -169,6 +178,16 @@ public class FoodEntry
 		this.unlocalizedName = unlocalizedName;
 	}
 
+	public boolean isPoisonous()
+	{
+		return this.isPoisonous;
+	}
+
+	public void setPoisonous(boolean isPoisonous)
+	{
+		this.isPoisonous = isPoisonous;
+	}
+
 	private static int index;
 	
 	// Mind the BALANCE_MULTIPLIER. Very unrealistic but needed so it is not frustrating to gather food.
@@ -206,5 +225,16 @@ public class FoodEntry
 	public static final FoodEntry TOMATO = new FoodEntry().withCalories(18 * BALANCE_MULTIPLIER).withName("tomato");
 	public static final FoodEntry TURNIP = new FoodEntry().withCalories(20 * BALANCE_MULTIPLIER).withName("turnip");
 	public static final FoodEntry WHEAT = new FoodEntry().withCalories(327 * BALANCE_MULTIPLIER).withName("wheat");
-	
+	public static final FoodEntry BLACKBERRY = new FoodEntry().withCalories(43 * BALANCE_MULTIPLIER).withName("blackberry");
+	public static final FoodEntry CLOUDBERRY = new FoodEntry().withCalories(51 * BALANCE_MULTIPLIER).withName("cloudberry");
+	public static final FoodEntry RASPBERRY = new FoodEntry().withCalories(51 * BALANCE_MULTIPLIER).withName("raspberry");
+	public static final FoodEntry BLUEBERRY = new FoodEntry().withCalories(57 * BALANCE_MULTIPLIER).withName("blueberry");
+	public static final FoodEntry CRANBERRY = new FoodEntry().withCalories(46 * BALANCE_MULTIPLIER).withName("cranberry");
+	public static final FoodEntry ELDERBERRY = new FoodEntry().withCalories(73 * BALANCE_MULTIPLIER).withName("elderberry");
+	public static final FoodEntry GOOSEBERRY = new FoodEntry().withCalories(44 * BALANCE_MULTIPLIER).withName("gooseberry");
+	public static final FoodEntry HACKBERRY = new FoodEntry().withCalories(54 * BALANCE_MULTIPLIER).withName("hackberry");
+	public static final FoodEntry STRAWBERRY = new FoodEntry().withCalories(33 * BALANCE_MULTIPLIER).withName("strawberry");
+	public static final FoodEntry WOLFBERRY = new FoodEntry().withCalories(37 * BALANCE_MULTIPLIER).withName("wolfberry").setPoisonous();
+	public static final FoodEntry SALMONBERRY = new FoodEntry().withCalories(47 * BALANCE_MULTIPLIER).withName("salmonberry");
+	public static final FoodEntry CROWBERRY = new FoodEntry().withCalories(43 * BALANCE_MULTIPLIER).withName("crowberry");
 }

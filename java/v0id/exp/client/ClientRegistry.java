@@ -34,6 +34,7 @@ import v0id.api.core.util.IFunctionalItemColor;
 import v0id.api.core.util.IFunctionalRenderFactory;
 import v0id.api.core.util.java.IInstanceProvider;
 import v0id.api.core.util.java.Instance;
+import v0id.api.exp.block.EnumBerry;
 import v0id.api.exp.block.EnumLeafState;
 import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.block.EnumShrubType;
@@ -48,6 +49,7 @@ import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.combat.condition.ExecuteConditionKeyBindings;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPItems;
+import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.ExPWeaponAttacks;
 import v0id.api.exp.item.EnumToolhead;
@@ -149,9 +151,9 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 			}
 		}
 		
-		for (int i = 0; i < EnumTreeType.values().length + EnumShrubType.values().length; ++i)
+		for (int i = 0; i < EnumTreeType.values().length + EnumShrubType.values().length + EnumBerry.values().length; ++i)
 		{
-			ModelLoader.setCustomModelResourceLocation(ExPItems.stick, i, new ModelResourceLocation(ExPItems.stick.getRegistryName(), "type=" + (i < EnumTreeType.values().length ? EnumTreeType.values()[i].getName() : EnumShrubType.values()[i - EnumTreeType.values().length].getName())));
+			ModelLoader.setCustomModelResourceLocation(ExPItems.stick, i, new ModelResourceLocation(ExPItems.stick.getRegistryName(), "type=" + ExPOreDict.stickNames[i]));
 		}
 		
 		for (int i = 0; i < EnumToolhead.values().length; ++i)
