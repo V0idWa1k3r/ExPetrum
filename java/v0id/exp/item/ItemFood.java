@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import v0id.api.core.util.I18n;
+import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.item.IContainerTickable;
@@ -124,6 +125,7 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 		this.setRegistryName(ExPRegistryNames.itemFood);
 		this.setMaxStackSize(1);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+		this.setCreativeTab(ExPCreativeTabs.tabFood);
 	}
 	
 	@Override

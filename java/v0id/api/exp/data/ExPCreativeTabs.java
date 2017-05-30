@@ -11,4 +11,5 @@ public class ExPCreativeTabs
 	public static CreativeTabs tabMiscBlocks;
 	public static CreativeTabs tabTools;
 	public static CreativeTabs tabMetals;
+	public static CreativeTabs tabFood;
 }
