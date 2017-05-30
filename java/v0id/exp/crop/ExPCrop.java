@@ -151,7 +151,7 @@ public class ExPCrop implements IExPCrop
 			if (this.getType() == EnumCrop.PEPPER)
 			{
 				int stage = this.getGrowthIndex();
-				if (toolClasses.contains(EnumToolClass.KNIFE.getName()))
+				if (toolClasses.contains(EnumToolClass.KNIFE.getName()) && stage >= this.getType().getData().growthStages - 3)
 				{
 					dropsBase.addAll(this.getSeedDrops());
 					if (isHarvestingWithRMB)
@@ -183,6 +183,10 @@ public class ExPCrop implements IExPCrop
 							sent.setTag("blockPosData", new DimBlockPos(this.getContainer().getPos(), this.getContainer().getWorld().provider.getDimension()).serializeNBT());
 							VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new TargetPoint(this.getContainer().getWorld().provider.getDimension(), this.getContainer().getPos().getX(), this.getContainer().getPos().getY(), this.getContainer().getPos().getZ(), 96));
 						}
+					}
+					else
+					{
+						return Pair.of(EnumActionResult.FAIL, NonNullList.withSize(0, ItemStack.EMPTY));
 					}
 				}
 			}

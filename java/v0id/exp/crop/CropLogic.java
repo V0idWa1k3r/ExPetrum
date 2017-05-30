@@ -64,7 +64,14 @@ public class CropLogic
 					}
 					else
 					{
-						meta = FoodEntry.PEPPER_GREEN.getId();
+						if (growthIndex == growthMax - 2)
+						{
+							meta = FoodEntry.PEPPER_GREEN.getId();
+						}
+						else
+						{
+							return NonNullList.withSize(0, ItemStack.EMPTY);
+						}
 					}
 				}
 			}
