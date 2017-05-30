@@ -55,8 +55,8 @@ import v0id.exp.util.Helpers;
 
 public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {
-	// log and not leaf because this is the index of the log this leaf is a leaf of
-	// Sound confusing enough? (>w<)
+	// Log and not leaf because this is the index of the log this leaf is a leaf of
+	// Sounds confusing enough? (>w<)
 	public int logIndex = 0;
 	
 	public BlockLeaf(int i)
