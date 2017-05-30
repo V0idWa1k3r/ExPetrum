@@ -3,7 +3,7 @@ package v0id.exp.crop;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+import java.util.Random;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -23,12 +23,15 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import v0id.api.core.VCStatics;
 import v0id.api.core.network.PacketType;
 import v0id.api.core.network.VoidNetwork;
 import v0id.api.core.util.DimBlockPos;
-import v0id.api.exp.block.property.ExPBlockProperties;
+import v0id.api.exp.event.crop.CropEvent;
+import v0id.api.exp.event.crop.CropEvent.Harvest.Action;
 import v0id.api.exp.metal.EnumToolClass;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.tile.crop.EnumCropBug;
@@ -78,10 +81,7 @@ public class ExPCrop implements IExPCrop
 	public void onWorldTick()
 	{
 		CropLogic.onWorldUpdate(this);
-		NBTTagCompound sent = new NBTTagCompound();
-		sent.setTag("tileData", this.getContainer().serializeNBT());
-		sent.setTag("blockPosData", new DimBlockPos(this.getContainer().getPos(), this.getContainer().getWorld().provider.getDimension()).serializeNBT());
-		VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new TargetPoint(this.getContainer().getWorld().provider.getDimension(), this.getContainer().getPos().getX(), this.getContainer().getPos().getY(), this.getContainer().getPos().getZ(), 96));
+		this.sendUpdatePacket();
 	}
 
 	@Override
@@ -136,32 +136,34 @@ public class ExPCrop implements IExPCrop
 	public Pair<EnumActionResult, NonNullList<ItemStack>> onHarvest(EntityPlayer harvester, World harvestedIn, BlockPos harvestedAt, IBlockState selfBlockReference, EnumHand playerHarvestHand,ItemStack playerHarvestItem, boolean isHarvestingWithRMB)
 	{
 		harvestedIn = Optional.ofNullable(harvestedIn).orElse(this.getContainer().getWorld());
-		if (this.isDead() || harvestedIn.isRemote)
+		if (this.isDead() || harvestedIn.isRemote || MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.Pre(this, harvestedIn, harvestedAt, isHarvestingWithRMB)))
 		{
 			return Pair.of(EnumActionResult.PASS, NonNullList.withSize(0, ItemStack.EMPTY));
 		}
 		
 		harvestedAt = Optional.ofNullable(harvestedAt).orElse(this.getContainer().getPos());
 		selfBlockReference = Optional.ofNullable(selfBlockReference).orElse(harvestedIn.getBlockState(harvestedAt));
-		Set<String> toolClasses = playerHarvestItem.getItem().getToolClasses(playerHarvestItem);
+		CropEvent.Harvest.KnifeCheck checkEvent = new CropEvent.Harvest.KnifeCheck(this, harvestedIn, harvestedAt, playerHarvestItem, isHarvestingWithRMB);
+		MinecraftForge.EVENT_BUS.post(checkEvent);
+		boolean isUsingKnife = checkEvent.getResult() == Result.DEFAULT ? playerHarvestItem.getItem().getToolClasses(playerHarvestItem).contains(EnumToolClass.KNIFE.getName()) : checkEvent.getResult() == Result.ALLOW ? true : false;
 		List<ItemStack> dropsBase = Lists.newArrayList();
-		
 		if (this.getGrowth() <= 1)
 		{
 			if (this.getType() == EnumCrop.PEPPER)
 			{
 				int stage = this.getGrowthIndex();
-				if (toolClasses.contains(EnumToolClass.KNIFE.getName()) && stage >= this.getType().getData().growthStages - 3)
+				if (isUsingKnife && stage >= this.getType().getData().growthStages - 3)
 				{
 					dropsBase.addAll(this.getSeedDrops());
+					MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.PopulateDropList(this, harvestedIn, harvestedAt, isHarvestingWithRMB, dropsBase, Action.HARVEST_SEEDS));
 					if (isHarvestingWithRMB)
 					{
-						this.setGrowth(0.4F);
-						harvestedIn.setBlockState(harvestedAt, selfBlockReference.withProperty(ExPBlockProperties.CROP_GROWTH_STAGE, 4));
-						NBTTagCompound sent = new NBTTagCompound();
-						sent.setTag("tileData", this.getContainer().serializeNBT());
-						sent.setTag("blockPosData", new DimBlockPos(this.getContainer().getPos(), this.getContainer().getWorld().provider.getDimension()).serializeNBT());
-						VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new TargetPoint(this.getContainer().getWorld().provider.getDimension(), this.getContainer().getPos().getX(), this.getContainer().getPos().getY(), this.getContainer().getPos().getZ(), 96));
+						CropEvent.Harvest.PepperSetGrowth evt = new CropEvent.Harvest.PepperSetGrowth(this, harvestedIn, harvestedAt, isHarvestingWithRMB, 0.4F, Action.HARVEST_SEEDS);
+						if (!MinecraftForge.EVENT_BUS.post(evt))
+						{
+							this.setGrowth(evt.growth);
+							this.sendUpdatePacket();
+						}
 					}
 					
 					if (harvester != null)
@@ -174,18 +176,20 @@ public class ExPCrop implements IExPCrop
 					if (stage >= this.getType().getData().growthStages - 3)
 					{
 						dropsBase.addAll(this.getMatureDrops());
+						MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.PopulateDropList(this, harvestedIn, harvestedAt, isHarvestingWithRMB, dropsBase, Action.HARVEST_DROPS));
 						if (isHarvestingWithRMB)
 						{
-							this.setGrowth(0.4F);
-							harvestedIn.setBlockState(harvestedAt, selfBlockReference.withProperty(ExPBlockProperties.CROP_GROWTH_STAGE, 4));
-							NBTTagCompound sent = new NBTTagCompound();
-							sent.setTag("tileData", this.getContainer().serializeNBT());
-							sent.setTag("blockPosData", new DimBlockPos(this.getContainer().getPos(), this.getContainer().getWorld().provider.getDimension()).serializeNBT());
-							VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new TargetPoint(this.getContainer().getWorld().provider.getDimension(), this.getContainer().getPos().getX(), this.getContainer().getPos().getY(), this.getContainer().getPos().getZ(), 96));
+							CropEvent.Harvest.PepperSetGrowth evt = new CropEvent.Harvest.PepperSetGrowth(this, harvestedIn, harvestedAt, isHarvestingWithRMB, 0.4F, Action.HARVEST_DROPS);
+							if (!MinecraftForge.EVENT_BUS.post(evt))
+							{
+								this.setGrowth(evt.growth);
+								this.sendUpdatePacket();
+							}
 						}
 					}
 					else
 					{
+						MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.Post(this, harvestedIn, harvestedAt, isHarvestingWithRMB));
 						return Pair.of(EnumActionResult.FAIL, NonNullList.withSize(0, ItemStack.EMPTY));
 					}
 				}
@@ -194,10 +198,11 @@ public class ExPCrop implements IExPCrop
 			{
 				if (this.getGrowth() == 1)
 				{
-					if (toolClasses.contains(EnumToolClass.KNIFE.getName()))
+					if (isUsingKnife)
 					{
 						dropsBase.addAll(this.getSeedDrops());
-						this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference);
+						MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.PopulateDropList(this, harvestedIn, harvestedAt, isHarvestingWithRMB, dropsBase, Action.HARVEST_SEEDS));
+						this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference, Action.HARVEST_SEEDS, isHarvestingWithRMB);
 						if (harvester != null)
 						{
 							playerHarvestItem.damageItem(1, harvester);
@@ -207,19 +212,21 @@ public class ExPCrop implements IExPCrop
 					{
 						if (this.getType().isGrain())
 						{
-							if (toolClasses.contains(EnumToolClass.SCYTHE.getName()))
+							if (playerHarvestItem.getItem().getToolClasses(playerHarvestItem).contains(EnumToolClass.SCYTHE.getName()))
 							{
 								dropsBase.addAll(this.getMatureDrops());
-								this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference);
+								MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.PopulateDropList(this, harvestedIn, harvestedAt, isHarvestingWithRMB, dropsBase, Action.HARVEST_DROPS));
+								this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference, Action.HARVEST_DROPS, isHarvestingWithRMB);
 							}
 							else
 							{
 								if (isHarvestingWithRMB)
 								{
-									if (harvestedIn.rand.nextDouble() < 0.1D)
+									if (this.tryHarvest(0.1, harvestedIn, harvestedAt, harvestedIn.rand))
 									{
 										dropsBase.addAll(this.getMatureDrops());
-										this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference);
+										MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.PopulateDropList(this, harvestedIn, harvestedAt, isHarvestingWithRMB, dropsBase, Action.HARVEST_DROPS));
+										this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference, Action.HARVEST_DROPS, isHarvestingWithRMB);
 									}
 									else
 									{
@@ -229,7 +236,8 @@ public class ExPCrop implements IExPCrop
 								else
 								{
 									dropsBase.addAll(this.getMatureDrops());
-									this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference);
+									MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.PopulateDropList(this, harvestedIn, harvestedAt, isHarvestingWithRMB, dropsBase, Action.HARVEST_DROPS));
+									this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference, Action.HARVEST_DROPS, isHarvestingWithRMB);
 								}
 							}
 						}
@@ -237,10 +245,11 @@ public class ExPCrop implements IExPCrop
 						{
 							if (isHarvestingWithRMB)
 							{
-								if (harvestedIn.rand.nextDouble() < 0.3D)
+								if (this.tryHarvest(0.3, harvestedIn, harvestedAt, harvestedIn.rand))
 								{
 									dropsBase.addAll(this.getMatureDrops());
-									this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference);
+									MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.PopulateDropList(this, harvestedIn, harvestedAt, isHarvestingWithRMB, dropsBase, Action.HARVEST_DROPS));
+									this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference, Action.HARVEST_DROPS, isHarvestingWithRMB);
 								}
 								else
 								{
@@ -250,7 +259,8 @@ public class ExPCrop implements IExPCrop
 							else
 							{
 								dropsBase.addAll(this.getMatureDrops());
-								this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference);
+								MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.PopulateDropList(this, harvestedIn, harvestedAt, isHarvestingWithRMB, dropsBase, Action.HARVEST_DROPS));
+								this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference, Action.HARVEST_DROPS, isHarvestingWithRMB);
 							}
 						}
 					}
@@ -259,6 +269,7 @@ public class ExPCrop implements IExPCrop
 		}
 		else
 		{
+			MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.Post(this, harvestedIn, harvestedAt, isHarvestingWithRMB));
 			return Pair.of(EnumActionResult.FAIL, NonNullList.withSize(0, ItemStack.EMPTY));
 		}
 		
@@ -268,29 +279,64 @@ public class ExPCrop implements IExPCrop
 			ret.set(i, dropsBase.get(i));
 		}
 		
+		MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.Post(this, harvestedIn, harvestedAt, isHarvestingWithRMB));
 		return Pair.of(EnumActionResult.SUCCESS, ret);
 	}
 	
-	public void handleHarvest(World w, BlockPos pos, IBlockState state)
+	public boolean tryHarvest(double baseChance, World w, BlockPos pos, Random rand)
 	{
-		if (this.getHarvestAction() == EnumCropHarvestAction.DESTROY)
+		CropEvent.Harvest.HarvestAttempt event = new CropEvent.Harvest.HarvestAttempt(this, w, pos, baseChance);
+		switch (event.getResult())
+		{
+			case DENY:
+			{
+				return false;
+			}
+			
+			case ALLOW:
+			{
+				return true;
+			}
+			
+			default:
+			{
+				return rand.nextDouble() <= baseChance;
+			}
+		}
+	}
+	
+	public void sendUpdatePacket()
+	{
+		NBTTagCompound sent = new NBTTagCompound();
+		sent.setTag("tileData", this.getContainer().serializeNBT());
+		sent.setTag("blockPosData", new DimBlockPos(this.getContainer().getPos(), this.getContainer().getWorld().provider.getDimension()).serializeNBT());
+		VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new TargetPoint(this.getContainer().getWorld().provider.getDimension(), this.getContainer().getPos().getX(), this.getContainer().getPos().getY(), this.getContainer().getPos().getZ(), 96));
+	}
+	
+	public void handleHarvest(World w, BlockPos pos, IBlockState state, Action a, boolean b)
+	{
+		EnumCropHarvestAction todo = this.getHarvestAction();
+		CropEvent.Harvest.OnHarvest evt = new CropEvent.Harvest.OnHarvest(this, w, pos, b, a, todo);
+		if (MinecraftForge.EVENT_BUS.post(evt))
+		{
+			return;
+		}
+		
+		todo = evt.actionAttempted;
+		if (todo == EnumCropHarvestAction.DESTROY)
 		{
 			w.setBlockToAir(pos);
 		}
 		else
 		{
-			if (this.getHarvestAction() == EnumCropHarvestAction.SPECIAL)
+			if (todo == EnumCropHarvestAction.SPECIAL)
 			{
 				return;
 			}
 			
 			int setbackBy = this.getHarvestAction().ordinal();
 			this.setGrowth((float)(this.getType().getData().growthStages - setbackBy) / this.getType().getData().growthStages);
-			w.setBlockState(pos, state.withProperty(ExPBlockProperties.CROP_GROWTH_STAGE, this.getGrowthIndex()));
-			NBTTagCompound sent = new NBTTagCompound();
-			sent.setTag("tileData", this.getContainer().serializeNBT());
-			sent.setTag("blockPosData", new DimBlockPos(this.getContainer().getPos(), this.getContainer().getWorld().provider.getDimension()).serializeNBT());
-			VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new TargetPoint(this.getContainer().getWorld().provider.getDimension(), this.getContainer().getPos().getX(), this.getContainer().getPos().getY(), this.getContainer().getPos().getZ(), 96));
+			this.sendUpdatePacket();
 		}
 	}
 
@@ -442,11 +488,13 @@ public class ExPCrop implements IExPCrop
 	@Override
 	public void causeDamage(float damage)
 	{
-		if (this.isDead())
+		CropEvent.Damage dmgEvent = new CropEvent.Damage(this, this.getContainer().getWorld(), this.getContainer().getPos(), damage);
+		if (this.isDead() || MinecraftForge.EVENT_BUS.post(dmgEvent))
 		{
 			return;
 		}
 		
+		damage = dmgEvent.amount;
 		this.setHealth(this.getHealth() - damage);
 		if (this.isDead())
 		{

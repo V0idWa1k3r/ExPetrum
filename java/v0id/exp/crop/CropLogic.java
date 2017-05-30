@@ -15,9 +15,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import v0id.api.core.VoidApi;
 import v0id.api.core.settings.VCSettings;
 import v0id.api.exp.data.ExPItems;
+import v0id.api.exp.event.crop.CropEvent;
 import v0id.api.exp.event.crop.EventFarmlandUpdate;
 import v0id.api.exp.item.food.FoodEntry;
 import v0id.api.exp.quality.EnumQuality;
@@ -219,6 +221,11 @@ public class CropLogic
 			return;
 		}
 		
+		if (MinecraftForge.EVENT_BUS.post(new CropEvent.Update.Pre(crop, crop.getContainer().getWorld(), crop.getContainer().getPos())))
+		{
+			return;
+		}
+		
 		Calendar prev = crop.timeKeeper;
 		
 		// Should not happen
@@ -233,6 +240,11 @@ public class CropLogic
 			crop.timeKeeper = current;
 			handleTimePassed(crop, ticksDelta, current);
 		}
+		
+		if (crop.getContainer() != null && !crop.getContainer().isInvalid() && crop.getContainer().getWorld() != null && crop.getContainer().getPos() != null && !crop.getContainer().getWorld().isAirBlock(crop.getContainer().getPos()))
+		{
+			MinecraftForge.EVENT_BUS.post(new CropEvent.Update.Post(crop, crop.getContainer().getWorld(), crop.getContainer().getPos()));
+		}
 	}
 	
 	public static void handleTimePassed(ExPCrop crop, long ticks, Calendar calendarReference)
@@ -243,6 +255,7 @@ public class CropLogic
 			return;
 		}
 		
+		ImmutableCalendar immutableRef = new ImmutableCalendar(calendarReference);
 		World w = crop.getContainer().getWorld();
 		BlockPos pos = crop.getContainer().getPos();
 		TileEntity tile = w.getTileEntity(pos.down());
@@ -251,7 +264,11 @@ public class CropLogic
 		{
 			if (crop.getSurvivalTemperature().isWithinRange(Helpers.getTemperatureAt(w, pos)))
 			{
-				crop.setGrowth(Math.min(1, crop.getGrowth() + ticks * (crop.stats.growthRate / (90 * calendarReference.ticksPerDay))));
+				CropEvent.Update.Logic.WildGrowth evt = new CropEvent.Update.Logic.WildGrowth(crop, w, pos, ticks, immutableRef, ticks * (crop.stats.growthRate / (90 * calendarReference.ticksPerDay)));
+				if (!MinecraftForge.EVENT_BUS.post(evt))
+				{
+					crop.setGrowth(Math.min(1, crop.getGrowth() + evt.growth));
+				}
 			}
 			else
 			{
@@ -273,10 +290,18 @@ public class CropLogic
 		float waterConsumed = waterConsumption * ticks;
 		float waterPresent = farmland.getMoisture();
 		float waterActuallyConsumed = Math.min(waterConsumed, waterPresent);
-		float waterLeft = waterPresent - waterActuallyConsumed;
 		long ticksWaterConsumedFor = (long) (waterActuallyConsumed / waterConsumption);
-		farmland.setMoisture(waterLeft);
-		boolean allNutrientsFine = consumeNutrients(farmland, ticks, crop, calendarReference);
+		CropEvent.Update.Logic.WaterConsumption waterConsumedEvent = new CropEvent.Update.Logic.WaterConsumption(crop, w, pos, ticks, immutableRef, waterActuallyConsumed, ticksWaterConsumedFor, farmland);
+		boolean waterConsumptionEventResult = MinecraftForge.EVENT_BUS.post(waterConsumedEvent);
+		waterActuallyConsumed = waterConsumedEvent.waterConsumed;
+		ticksWaterConsumedFor = waterConsumedEvent.ticksWaterConsumedFor;
+		float waterLeft = waterPresent - waterActuallyConsumed;
+		if (!waterConsumptionEventResult)
+		{
+			farmland.setMoisture(waterLeft);
+		}
+		
+		boolean allNutrientsFine = consumeNutrients(farmland, ticks, crop, calendarReference, w, pos, immutableRef);
 		boolean moistureInRange = waterPresent >= crop.getType().getData().humidityRange.min && waterPresent <= crop.getType().getData().humidityRange.max;
 		float temperature = Helpers.getTemperatureAt(w, pos);
 		boolean inBaseRange = crop.getSurvivalTemperature().isWithinRange(temperature);
@@ -305,9 +330,17 @@ public class CropLogic
 			}
 			
 			growthMultiplier *= farmland.getGrowthMultiplier();
+			CropEvent.Update.Logic.GrowthRate growthRateEvent = new CropEvent.Update.Logic.GrowthRate(crop, w, pos, ticks, immutableRef, farmland, growthMultiplier);
+			MinecraftForge.EVENT_BUS.post(growthRateEvent);
+			growthMultiplier = growthRateEvent.growthRate;
 			growthTicks = (long) (ticksWaterConsumedFor * growthMultiplier);
 			float grownBy = growthTicks * (crop.stats.growthRate / (calendarReference.ticksPerDay * 30));
-			crop.setGrowth(crop.getGrowth() == 1 ? 1 : Math.min(crop.isHarvestSeason(IExPWorld.of(w).getCurrentSeason()) ? 1 : 0.99F, crop.getGrowth() + grownBy));
+			CropEvent.Update.Logic.Growth growthEvent = new CropEvent.Update.Logic.Growth(crop, w, pos, ticks, immutableRef, farmland, grownBy);
+			if (!MinecraftForge.EVENT_BUS.post(growthEvent))
+			{
+				crop.setGrowth(crop.getGrowth() == 1 ? 1 : Math.min(crop.isHarvestSeason(IExPWorld.of(w).getCurrentSeason()) ? 1 : 0.99F, crop.getGrowth() + growthEvent.growth));
+			}
+			
 			if (ticks > ticksWaterConsumedFor)
 			{
 				crop.causeDamage((ticksWaterConsumedFor - ticks) * 0.0005F);
@@ -316,7 +349,11 @@ public class CropLogic
 			{
 				if (!crop.isSick && moistureInRange)
 				{
-					crop.setHealth(Math.min(crop.getType().getData().baseHealth, crop.getHealth() + ticks * 0.0001F));
+					CropEvent.Update.Logic.Heal healEvent = new CropEvent.Update.Logic.Heal(crop, w, pos, ticks, immutableRef, farmland, ticks * 0.0001F);
+					if (!MinecraftForge.EVENT_BUS.post(healEvent))
+					{
+						crop.setHealth(Math.min(crop.getType().getData().baseHealth, crop.getHealth() + healEvent.heal));
+					}
 				}
 			}
 		}
@@ -338,17 +375,42 @@ public class CropLogic
 		farmland.setDirty();
 	}
 	
-	public static boolean consumeNutrients(IFarmland of, long ticks, ExPCrop crop, Calendar calendarReference)
+	public static boolean consumeNutrients(IFarmland of, long ticks, ExPCrop crop, Calendar calendarReference, World w, BlockPos at, ImmutableCalendar c)
 	{
+		CropEvent.Update.Logic.NutrientConsumption.Pre pre = new CropEvent.Update.Logic.NutrientConsumption.Pre(crop, w, at, ticks, c, of);
+		MinecraftForge.EVENT_BUS.post(pre);
+		Result res = pre.getResult();
+		if (res != Result.DEFAULT)
+		{
+			return res == Result.ALLOW;
+		}
+		
 		boolean consumedAll = true;
 		for (Entry<EnumPlantNutrient, Float> kv : crop.getNutrientConsumption().entrySet())
 		{
 			float nutrientConsumed = kv.getValue() / calendarReference.ticksPerDay;
 			float nutrientCurrent = of.getNutrient(kv.getKey());
-			float actuallyConsumed = Math.min(nutrientCurrent, nutrientConsumed);
+			CropEvent.Update.Logic.NutrientConsumption.Consume evt = new CropEvent.Update.Logic.NutrientConsumption.Consume(crop, w, at, ticks, c, of, kv.getKey(), Math.min(nutrientCurrent, nutrientConsumed));
+			MinecraftForge.EVENT_BUS.post(evt);
+			Result rese = evt.getResult();
+			if (rese != Result.DEFAULT)
+			{
+				consumedAll &= rese == Result.ALLOW;
+				continue;
+			}
+			
+			float actuallyConsumed = evt.consumed;
 			float left = nutrientCurrent - actuallyConsumed;
 			of.setNutrient(kv.getKey(), left);
 			consumedAll &= actuallyConsumed < nutrientCurrent;
+		}
+		
+		CropEvent.Update.Logic.NutrientConsumption.Post post = new CropEvent.Update.Logic.NutrientConsumption.Post(crop, w, at, ticks, c, of);
+		MinecraftForge.EVENT_BUS.post(post);
+		Result resp = post.getResult();
+		if (resp != Result.DEFAULT)
+		{
+			return resp == Result.ALLOW;
 		}
 		
 		return consumedAll;
