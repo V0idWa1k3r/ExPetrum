@@ -1,5 +1,6 @@
 package v0id.exp.world.biome.impl;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
@@ -12,6 +13,8 @@ public class ExPOcean extends ExPBiome
 	{
 		super(properties, biomedata);
 		this.decorator.deadBushPerChunk = 0;
+		this.topBlock = Blocks.SAND.getDefaultState();
+		this.fillerBlock = Blocks.SAND.getDefaultState();
 	}
 	
 	@Override
