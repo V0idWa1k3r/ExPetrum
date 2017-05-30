@@ -2,11 +2,13 @@ package v0id.exp.world.biome;
 
 import java.util.Random;
 
+import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import v0id.api.core.logging.LogLevel;
 import v0id.api.exp.block.EnumShrubState;
@@ -14,6 +16,7 @@ import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.event.world.gen.EventGenBoulder;
+import v0id.api.exp.event.world.gen.EventGenCoral;
 import v0id.api.exp.event.world.gen.EventGenOre;
 import v0id.api.exp.event.world.gen.EventGenPebble;
 import v0id.api.exp.event.world.gen.EventGenTree;
@@ -26,6 +29,7 @@ import v0id.api.exp.world.gen.ITreeGenerator;
 import v0id.api.exp.world.gen.TreeGenerators;
 import v0id.exp.world.gen.biome.BoulderGenerator;
 import v0id.exp.world.gen.biome.CattailGenerator;
+import v0id.exp.world.gen.biome.CoralGenerator;
 import v0id.exp.world.gen.biome.CropGenerator;
 import v0id.exp.world.gen.biome.OreGenerator;
 import v0id.exp.world.gen.biome.PebbleGenerator;
@@ -41,6 +45,7 @@ public class ExPBiomeDecorator extends BiomeDecorator
 	public static final BoulderGenerator genBoulders = new BoulderGenerator();
 	public static final CattailGenerator genCattails = new CattailGenerator();
 	public static final SeaweedGenerator genSeaweed = new SeaweedGenerator();
+	public static final CoralGenerator genCoral = new CoralGenerator();
 	
 	@Override
 	public void decorate(World worldIn, Random random, Biome biome, BlockPos pos)
@@ -57,6 +62,7 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		this.doBoulderPass(worldIn, random, biome, pos);
 		this.doOrePass(worldIn, random, biome, pos);
 		this.doCropsPass(worldIn, random, biome, pos);
+		this.doCoralPass(worldIn, random, biome, pos);
     }
 
 	private static void printWarnings()
@@ -70,6 +76,11 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		ExPMisc.modLogger.log(LogLevel.Fine, "However that should not be the issue for the most part as chunk runaway should happen rarely");
 		ExPMisc.modLogger.log(LogLevel.Fine, "Thanks for reading this. Have a nice day :)");
 		printedWarnings = true;
+	}
+	
+	public void doCoralPass(World worldIn, Random rand, Biome biome, BlockPos pos)
+	{
+		this.coralPassGenerate(worldIn, rand, biome, pos);
 	}
 	
 	public void doCropsPass(World worldIn, Random rand, Biome biome, BlockPos pos)
@@ -112,6 +123,26 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		{
 			this.orePassGenerate(worldIn, rand, biome, pos);
 		}
+	}
+	
+	public void coralPassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)
+	{
+		if (!BiomeDictionary.areSimilar(biome, Biomes.OCEAN))
+		{
+			return;
+		}
+		
+		int x = rand.nextInt(16) + 8;
+		int z = rand.nextInt(16) + 8;
+		BlockPos at = worldIn.getHeight(pos.add(x, 0, z));
+		WorldGenerator coralGen = this.genCoral;
+		EventGenCoral event = new EventGenCoral(worldIn, at, rand, coralGen);
+		if (MinecraftForge.TERRAIN_GEN_BUS.post(event))
+		{
+			return;
+		}
+		
+		event.generator.generate(worldIn, rand, at);
 	}
 	
 	public void cropsPassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)
