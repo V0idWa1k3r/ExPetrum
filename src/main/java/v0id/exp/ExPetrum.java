@@ -60,23 +60,8 @@ public class ExPetrum
 	static
 	{
 		FluidRegistry.enableUniversalBucket();
-		try
-		{
-			// By the way this file contains 682 lines of pure json :P
-			// I have not constructed it manually, no
-			// I wrote a C# program that did it for me :D
-			try (InputStream is = ExPetrum.class.getResourceAsStream("/assets/exp/data/seasonsTemperatureRanges.json"))
-			{
-				String s = IOUtils.toString(is);
-				YearlyTemperatureRange.instance = new Gson().fromJson(s, YearlyTemperatureRange.class);
-			}
-		}
-		catch (Exception ex)
-		{
-			FMLCommonHandler.instance().raiseException(ex, "ExPetrum was unable to read it's temperatures json file data!", true);
-		}
-		
-		configDirectory = Loader.instance().getConfigDir();
+        loadTemperatureRanges();
+        configDirectory = Loader.instance().getConfigDir();
 		ExPMisc.modLogger = VoidLogger.createLogger(ExPetrum.class, LogLevel.Fine);
 		Stream.of(EnumOre.values()).forEach(EnumOre::registerWorldgen);
 		CropDataLoader.loadAllData();
@@ -84,8 +69,27 @@ public class ExPetrum
 		createRegistries();
 		Reflector.preloadClass("v0id.exp.handler.ExPHandlerRegistry", false);
 	}
-	
-	public static void createRegistries()
+
+    private static void loadTemperatureRanges()
+    {
+        try
+        {
+            // By the way this file contains 682 lines of pure json :P
+            // I have not constructed it manually, no
+            // I wrote a C# program that did it for me :D
+            try (InputStream is = ExPetrum.class.getResourceAsStream("/assets/exp/data/seasonsTemperatureRanges.json"))
+            {
+                String s = IOUtils.toString(is);
+                YearlyTemperatureRange.instance = new Gson().fromJson(s, YearlyTemperatureRange.class);
+            }
+        }
+        catch (Exception ex)
+        {
+            FMLCommonHandler.instance().raiseException(ex, "ExPetrum was unable to read it's temperatures json file data!", true);
+        }
+    }
+
+    public static void createRegistries()
 	{
 		AbstractRegistry.create(ExPCapabilityRegistry.class);
 		AbstractRegistry.create(ExPFluidRegistry.class);
@@ -107,7 +111,6 @@ public class ExPetrum
 	public void preInit(FMLPreInitializationEvent evt)
 	{
 		containerOfSelf = Loader.instance().activeModContainer();
-		configDirectory = evt.getModConfigurationDirectory();
 		this.setDevEnvironment();
 		ExPMisc.modLogger.log(LogLevel.Debug, "ExPetrum pre initializing.");
         AbstractRegistry.registries.add(proxy);
