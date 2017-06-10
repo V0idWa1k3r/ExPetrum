@@ -1,0 +1,57 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "all": "exp:blocks/plants/crops/beans/0"
+    },
+    "model": "exp:unified_cross",
+    "guid3d": true,
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "stage": {
+      "0": {
+        "textures": {
+          "all": "exp:blocks/plants/crops/beans/0",
+		  "cross" : "exp:blocks/plants/crops/stick"
+        },
+        "model": "exp:seeds_cross"
+      },
+      "1": {
+        "textures": {
+          "all": "exp:blocks/plants/crops/beans/1"
+        }
+      },
+      "2": {
+        "textures": {
+          "all": "exp:blocks/plants/crops/beans/2"
+        }
+      },
+      "3": {
+        "textures": {
+          "all": "exp:blocks/plants/crops/beans/3"
+        }
+      },
+      "4": {
+        "textures": {
+          "all": "exp:blocks/plants/crops/beans/4"
+        }
+      },
+      "5": {
+        "textures": {
+          "all": "exp:blocks/plants/crops/beans/5"
+        }
+      },
+      "6": {
+        "textures": {
+          "all": "exp:blocks/plants/crops/beans/6"
+        }
+      },
+      "7": {
+        "textures": {
+          "all": "exp:blocks/plants/crops/beans/7"
+        }
+      }
+    }
+  }
+}

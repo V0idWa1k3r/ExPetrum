@@ -1,0 +1,49 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "exp:item_generated",
+		"transform": "forge:default-item",
+		"textures" : {
+			"layer0" : "exp:items/common/toolpart/stone_hammerhead"
+		}
+	},
+	"variants" : {
+		"type" : {
+			"hammer_stone" : {
+				"textures" : {
+					"layer0" : "exp:items/common/toolpart/stone_hammerhead"
+				}
+			},
+			"axe_stone" : {
+				"textures" : {
+					"layer0" : "exp:items/common/toolpart/stone_axehead"
+				}
+			},
+			"shovel_stone" : {
+				"textures" : {
+					"layer0" : "exp:items/common/toolpart/stone_shovelhead"
+				}
+			},
+			"spear_stone" : {
+				"textures" : {
+					"layer0" : "exp:items/common/toolpart/stone_spearhead"
+				}
+			},
+			"knife_stone" : {
+				"textures" : {
+					"layer0" : "exp:items/common/toolpart/stone_knifehead"
+				}
+			},
+			"chisel_stone" : {
+				"textures" : {
+					"layer0" : "exp:items/common/toolpart/stone_chiselhead"
+				}
+			},
+			"arrow_stone" : {
+				"textures" : {
+					"layer0" : "exp:items/common/toolpart/stone_arrowhead"
+				}
+			}
+		}
+	}
+}

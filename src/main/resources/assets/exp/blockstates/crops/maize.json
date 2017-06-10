@@ -1,0 +1,56 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "all": "exp:blocks/plants/crops/maize/0"
+    },
+    "model": "exp:unified_cross",
+    "guid3d": true,
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "stage": {
+      "0": {
+        "textures": {
+          "all": "exp:blocks/plants/crops/maize/0"
+        },
+        "model": "exp:seeds"
+      },
+      "1": {
+        "textures": {
+          "all": "exp:blocks/plants/crops/maize/1"
+        }
+      },
+      "2": {
+        "textures": {
+          "all": "exp:blocks/plants/crops/maize/2"
+        }
+      },
+      "3": {
+        "textures": {
+          "all": "exp:blocks/plants/crops/maize/3"
+        }
+      },
+      "4": {
+        "textures": {
+          "all": "exp:blocks/plants/crops/maize/4"
+        }
+      },
+      "5": {
+        "textures": {
+          "all": "exp:blocks/plants/crops/maize/5"
+        }
+      },
+      "6": {
+        "textures": {
+          "all": "exp:blocks/plants/crops/maize/6"
+        }
+      },
+      "7": {
+        "textures": {
+          "all": "exp:blocks/plants/crops/maize/7"
+        }
+      }
+    }
+  }
+}

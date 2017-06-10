@@ -1,0 +1,230 @@
+{
+	"forge_marker" : 1,
+	"defaults" :
+	{
+		"model" : "exp:item_generated",
+		"transform": "forge:default-item",
+		"textures" : {
+			"layer0" : "exp:items/plant/crop/barley"
+		}
+	},
+	"variants" : {
+		"type" : {
+			"barley" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/barley"
+				}
+			},
+			"beans" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/beans"
+				}
+			},
+			"beetroot" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/beetroot"
+				}
+			},
+			"cabbage" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/cabbage"
+				}
+			},
+			"carrot" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/carrot"
+				}
+			},
+			"cassava" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/cassava"
+				}
+			},
+			"corn" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/corn"
+				}
+			},
+			"cucumber" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/cucumber"
+				}
+			},
+			"eggplant" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/eggplant"
+				}
+			},
+			"garlic" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/garlic"
+				}
+			},
+			"leek" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/leek"
+				}
+			},
+			"lettuce" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/lettuce"
+				}
+			},
+			"millet" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/millet"
+				}
+			},
+			"oat" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/oat"
+				}
+			},
+			"onion" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/onion"
+				}
+			},
+			"parsnip" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/parsnip"
+				}
+			},
+			"peas" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/peas"
+				}
+			},
+			"pepper_green" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/pepper_green"
+				}
+			},
+			"pepper_yellow" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/pepper_yellow"
+				}
+			},
+			"pepper_red" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/pepper_red"
+				}
+			},
+			"potato" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/potato"
+				}
+			},
+			"pumpkin" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/pumpkin"
+				}
+			},
+			"radish" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/radish"
+				}
+			},
+			"rice" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/rice"
+				}
+			},
+			"rye" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/rye"
+				}
+			},
+			"sorghum" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/sorghum"
+				}
+			},
+			"spinach" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/spinach"
+				}
+			},
+			"sweet_potato" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/sweet_potato"
+				}
+			},
+			"tomato" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/tomato"
+				}
+			},
+			"turnip" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/turnip"
+				}
+			},
+			"wheat" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/crop/wheat"
+				}
+			},
+			"blackberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/blackberry"
+				}
+			},
+			"cloudberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/cloudberry"
+				}
+			},
+			"raspberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/raspberry"
+				}
+			},
+			"blueberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/blueberry"
+				}
+			},
+			"cranberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/cranberry"
+				}
+			},
+			"elderberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/elderberry"
+				}
+			},
+			"gooseberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/gooseberry"
+				}
+			},
+			"hackberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/hackberry"
+				}
+			},
+			"strawberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/strawberry"
+				}
+			},
+			"wolfberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/wolfberry"
+				}
+			},
+			"salmonberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/salmonberry"
+				}
+			},
+			"crowberry" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/berry/crowberry"
+				}
+			}
+		}
+	}
+}

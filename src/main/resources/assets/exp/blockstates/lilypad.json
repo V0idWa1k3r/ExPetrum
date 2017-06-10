@@ -1,0 +1,50 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "waterlily",
+		"gui3d" : true,
+		"transform": "forge:default-block",
+		"textures" : {
+			"particle": "exp:blocks/plants/deco/water/waterlily",
+			"texture": "exp:blocks/plants/deco/water/waterlily"
+		}
+	},
+	"variants" : {
+		"normal": [{
+			
+        }],
+		"blooming" : {
+			"true" : {
+				"submodel" : "cross"
+			},
+			"false" : {}
+		},
+		"type" : {
+			"leopardess" : {
+				"textures" : {
+					"cross" : "exp:blocks/plants/deco/water/lily_leopardess"
+				}
+			},
+			"antares" : {
+				"textures" : {
+					"cross" : "exp:blocks/plants/deco/water/lily_antares"
+				}
+			},
+			"sturtevantii" : {
+				"textures" : {
+					"cross" : "exp:blocks/plants/deco/water/lily_sturtevantii"
+				}
+			},
+			"red_flare" : {
+				"textures" : {
+					"cross" : "exp:blocks/plants/deco/water/lily_red_flare"
+				}
+			},
+			"blue_beauty" : {
+				"textures" : {
+					"cross" : "exp:blocks/plants/deco/water/lily_blue_beauty"
+				}
+			}
+		}
+	}
+}

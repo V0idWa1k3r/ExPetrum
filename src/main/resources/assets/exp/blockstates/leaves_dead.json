@@ -1,0 +1,165 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "leaves",
+		"textures" : {
+			"all" : "exp:blocks/wood/leaf/dead/kalopanax"
+		}
+	},
+	"variants": {
+        "normal": [{}],
+		"ttype" : {
+			"kalopanax" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/kalopanax"
+				}
+			},
+			"birch" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/birch"
+				}
+			},
+			"acacia" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/acacia"
+				}
+			},
+			"chestnut" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/chestnut"
+				}
+			},
+			"oak" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/oak"
+				}
+			},
+			"hickory" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/hickory"
+				}
+			},
+			"baobab" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/baobab"
+				}
+			},
+			"kapok" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/kapok"
+				}
+			},
+			"eucalyptus" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/eucalyptus"
+				}
+			},
+			"ash" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/ash"
+				}
+			},
+			"willow" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/willow"
+				}
+			},
+			"maple" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/maple"
+				}
+			},
+			"redwood" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/redwood"
+				}
+			},
+			"fir" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/fir"
+				}
+			},
+			"cedar" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/cedar"
+				}
+			},
+			"spruce" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/spruce"
+				}
+			},
+			"pine" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/pine"
+				}
+			},
+			"elm" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/elm"
+				}
+			},
+			"palm" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/palm"
+				}
+			},
+			"teak" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/teak"
+				}
+			},
+			"aspen" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/aspen"
+				}
+			},
+			"rowan" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/rowan"
+				}
+			},
+			"mangrove" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/mangrove"
+				}
+			},
+			"tupelo" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/tupelo"
+				}
+			},
+			"parrotia" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/parrotia"
+				}
+			},
+			"sweetgum" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/sweetgum"
+				}
+			},
+			"jackwood" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/jackwood"
+				}
+			},
+			"tsuga" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/tsuga"
+				}
+			},
+			"viburnum" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/viburnum"
+				}
+			},
+			"koelreuteria" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/dead/koelreuteria"
+				}
+			}
+		}
+    }
+	
+}

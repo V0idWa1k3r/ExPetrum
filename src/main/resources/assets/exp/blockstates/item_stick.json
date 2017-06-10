@@ -1,0 +1,304 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "exp:item_generated",
+		"transform": "forge:default-item",
+		"textures" : {
+			"layer0" : "exp:items/common/stick/generic"
+		}
+	},
+	"variants" : {
+		"type" : {
+			"kalopanax" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/kalopanax"
+				}
+			},
+			"birch" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/birch"
+				}
+			},
+			"acacia" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/acacia"
+				}
+			},
+			"chestnut" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/chestnut"
+				}
+			},
+			"oak" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/oak"
+				}
+			},
+			"hickory" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/hickory"
+				}
+			},
+			"baobab" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/baobab"
+				}
+			},
+			"kapok" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/kapok"
+				}
+			},
+			"eucalyptus" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/eucalyptus"
+				}
+			},
+			"ash" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/ash"
+				}
+			},
+			"willow" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/willow"
+				}
+			},
+			"maple" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/maple"
+				}
+			},
+			"redwood" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/redwood"
+				}
+			},
+			"fir" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/fir"
+				}
+			},
+			"cedar" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/cedar"
+				}
+			},
+			"spruce" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/spruce"
+				}
+			},
+			"pine" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/pine"
+				}
+			},
+			"elm" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/elm"
+				}
+			},
+			"palm" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/palm"
+				}
+			},
+			"teak" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/teak"
+				}
+			},
+			"aspen" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/aspen"
+				}
+			},
+			"rowan" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/rowan"
+				}
+			},
+			"mangrove" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/mangrove"
+				}
+			},
+			"tupelo" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/tupelo"
+				}
+			},
+			"parrotia" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/parrotia"
+				}
+			},
+			"sweetgum" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/sweetgum"
+				}
+			},
+			"jackwood" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/jackwood"
+				}
+			},
+			"tsuga" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/tsuga"
+				}
+			},
+			"viburnum" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/viburnum"
+				}
+			},
+			"koelreuteria" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/koelreuteria"
+				}
+			},
+			"spotted_laurel" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/spotted_laurel"
+				}
+			},
+			"box" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/box"
+				}
+			},
+			"cercis_canadensis" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/cercis_canadensis"
+				}
+			},
+			"chamaerops" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/chamaerops"
+				}
+			},
+			"variegated_dogwood" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/variegated_dogwood"
+				}
+			},
+			"cornus_kousa" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/cornus_kousa"
+				}
+			},
+			"elaeagnus" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/elaeagnus"
+				}
+			},
+			"euonymus" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/euonymus"
+				}
+			},
+			"euonymus_japonicus" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/euonymus_japonicus"
+				}
+			},
+			"kapuka" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/kapuka"
+				}
+			},
+			"ilex" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/ilex"
+				}
+			},
+			"laurus_nobilis" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/laurus_nobilis"
+				}
+			},
+			"mahonia_x_media" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/mahonia_x_media"
+				}
+			},
+			"red_robin" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/red_robin"
+				}
+			},
+			"whin" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/whin"
+				}
+			},
+			"prunus" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/prunus"
+				}
+			},
+			"blackberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/blackberry"
+				}
+			},
+			"cloudberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/cloudberry"
+				}
+			},
+			"raspberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/raspberry"
+				}
+			},
+			"blueberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/blueberry"
+				}
+			},
+			"cranberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/cranberry"
+				}
+			},
+			"elderberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/elderberry"
+				}
+			},
+			"gooseberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/gooseberry"
+				}
+			},
+			"hackberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/hackberry"
+				}
+			},
+			"strawberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/strawberry"
+				}
+			},
+			"wolfberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/wolfberry"
+				}
+			},
+			"salmonberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/salmonberry"
+				}
+			},
+			"crowberry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/crowberry"
+				}
+			}
+		}
+	}
+}

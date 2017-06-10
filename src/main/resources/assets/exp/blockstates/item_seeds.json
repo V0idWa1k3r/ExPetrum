@@ -1,0 +1,159 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "exp:item_generated",
+		"transform": "forge:default-item",
+		"textures" : {
+			"layer0" : "exp:items/plant/seeds/barley"
+		}
+	},
+	"variants" : {
+		"crop" : {
+			"barley" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/barley"
+				}
+			},
+			"beans" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/beans"
+				}
+			},
+			"beetroot" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/beetroot"
+				}
+			},
+			"cabbage" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/cabbage"
+				}
+			},
+			"carrot" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/carrot"
+				}
+			},
+			"cassava" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/cassava"
+				}
+			},
+			"cucumber" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/cucumber"
+				}
+			},
+			"eggplant" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/eggplant"
+				}
+			},
+			"garlic" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/garlic"
+				}
+			},
+			"leek" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/leek"
+				}
+			},
+			"lettuce" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/lettuce"
+				}
+			},
+			"maize" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/corn"
+				}
+			},
+			"millet" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/millet"
+				}
+			},
+			"oat" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/oat"
+				}
+			},
+			"onion" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/onion"
+				}
+			},
+			"parsnip" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/parsnip"
+				}
+			},
+			"peas" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/peas"
+				}
+			},
+			"pepper" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/pepper"
+				}
+			},
+			"potato" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/potato"
+				}
+			},
+			"pumpkin" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/pumpkin"
+				}
+			},
+			"radish" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/radish"
+				}
+			},
+			"rice" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/rice"
+				}
+			},
+			"rye" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/rye"
+				}
+			},
+			"sorghum" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/sorghum"
+				}
+			},
+			"spinach" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/spinach"
+				}
+			},
+			"sweet_potato" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/sweet_potato"
+				}
+			},
+			"tomato" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/tomato"
+				}
+			},
+			"turnip" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/turnip"
+				}
+			},
+			"wheat" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/seeds/wheat"
+				}
+			}
+		}
+	}
+}

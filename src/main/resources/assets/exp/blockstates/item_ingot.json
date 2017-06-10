@@ -1,0 +1,13 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "exp:ingot.objexp",
+		"transform": "forge:default-item",
+		"textures" : {
+			"#material" : "exp:items/common/ingot"
+		}
+	},
+	"variants" : {
+		"inventory" : [{}]
+	}
+}
