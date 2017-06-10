@@ -1,0 +1,86 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "exp:shrub_common",
+		"transform": "forge:default-block",
+		"gui3d" : true,
+		"textures" : {
+			"wood" : "exp:blocks/shrub/wood/blackberry",
+			"leaves" : "exp:blocks/shrub/leaf/dead/none",
+			"flowers" : "exp:blocks/shrub/leaf/blooming/none"
+		}
+	},
+	"variants" : {
+		"normal": [{}],
+		"istall" : {
+			"true" : {
+				"model" : "exp:shrub_tall"
+			},
+			"false" : {
+				"model" : "exp:shrub_common"
+			}
+		},
+		"type" : {
+			"blackberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/blackberry"
+                }
+			},
+            "cloudberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/cloudberry"
+                }
+            },
+            "raspberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/raspberry"
+                }
+            },
+            "blueberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/blueberry"
+                }
+            },
+            "cranberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/cranberry"
+                }
+            },
+            "elderberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/elderberry"
+                }
+            },
+            "gooseberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/gooseberry"
+                }
+            },
+            "hackberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/hackberry"
+                }
+            },
+            "strawberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/strawberry"
+                }
+            },
+            "wolfberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/wolfberry"
+                }
+            },
+            "salmonberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/salmonberry"
+                }
+            },
+            "crowberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/crowberry"
+                }
+            }
+		}
+	}
+}

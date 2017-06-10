@@ -30,6 +30,7 @@ import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.apache.commons.lang3.ArrayUtils;
 import v0id.api.core.util.IFunctionalBlockColor;
 import v0id.api.core.util.IFunctionalItemColor;
 import v0id.api.core.util.IFunctionalRenderFactory;
@@ -106,7 +107,7 @@ public class ClientRegistry implements IInstanceProvider, ILifecycleListener
 		for (int i = 0; i < 16; ++i)
 		{
 			// Lambda capture
-			Integer iWrapper = new Integer(i);
+			Integer iWrapper = i;
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.rock), i, new ModelResourceLocation(ExPBlocks.rock.getRegistryName(), "inventory-" + i));
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.soil), i, new ModelResourceLocation(ExPBlocks.soil.getRegistryName(), "inventory-" + i));
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.grass), i, new ModelResourceLocation(ExPBlocks.grass.getRegistryName(), "inventory-" + i));
@@ -131,6 +132,14 @@ public class ClientRegistry implements IInstanceProvider, ILifecycleListener
 			{
 				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.ice), i, new ModelResourceLocation(ExPBlocks.ice.getRegistryName(), "salt=" + (i == 1)));
 			}
+
+			if (i < EnumBerry.values().length)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.berryBushes[j]), i, new ModelResourceLocation(ExPBlocks.berryBushes[j].getRegistryName(), "istall=false,type=" + (EnumBerry.values()[i].getName())));
+                }
+            }
 			
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.pebble), i, new ModelResourceLocation(ExPBlocks.pebble.getRegistryName(), "amdl=0,class=" + EnumRockClass.values()[i].getName()));
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.boulder), i, new ModelResourceLocation(ExPBlocks.boulder.getRegistryName(), "amdl=0,class=" + EnumRockClass.values()[i].getName()));
@@ -179,12 +188,12 @@ public class ClientRegistry implements IInstanceProvider, ILifecycleListener
 			ModelLoader.setCustomModelResourceLocation(ExPItems.ingot, i, new ModelResourceLocation(ExPItems.ingot.getRegistryName(), "inventory"));
 		}
 		
-		List<Item> toolsList = Arrays.asList(new Item[]{ ExPItems.knife, ExPItems.pickaxe, ExPItems.axe, ExPItems.shovel, ExPItems.hoe, ExPItems.sword, ExPItems.scythe, ExPItems.battleaxe, ExPItems.hammer, ExPItems.spear, ExPItems.watering_can });
-		toolsList.stream().forEach(tool -> ModelLoader.setCustomMeshDefinition(tool, stack -> new ModelResourceLocation(new ResourceLocation(tool.getRegistryName().getResourceDomain(), "tools/" + tool.getRegistryName().getResourcePath()), "material=" + EnumToolStats.values()[stack.getMetadata()].getName())));
+		List<Item> toolsList = Arrays.asList(ExPItems.knife, ExPItems.pickaxe, ExPItems.axe, ExPItems.shovel, ExPItems.hoe, ExPItems.sword, ExPItems.scythe, ExPItems.battleaxe, ExPItems.hammer, ExPItems.spear, ExPItems.watering_can);
+		toolsList.forEach(tool -> ModelLoader.setCustomMeshDefinition(tool, stack -> new ModelResourceLocation(new ResourceLocation(tool.getRegistryName().getResourceDomain(), "tools/" + tool.getRegistryName().getResourcePath()), "material=" + EnumToolStats.values()[stack.getMetadata()].getName())));
 		for (int i = 0; i < EnumToolStats.values().length; ++i)
 		{
-			Integer lambdaCaptureInt = new Integer(i);
-			toolsList.stream().forEach(tool -> ModelLoader.registerItemVariants(tool, new ModelResourceLocation(new ResourceLocation(tool.getRegistryName().getResourceDomain(), "tools/" + tool.getRegistryName().getResourcePath()), "material=" + EnumToolStats.values()[lambdaCaptureInt].getName())));
+			Integer lambdaCaptureInt = i;
+			toolsList.forEach(tool -> ModelLoader.registerItemVariants(tool, new ModelResourceLocation(new ResourceLocation(tool.getRegistryName().getResourceDomain(), "tools/" + tool.getRegistryName().getResourcePath()), "material=" + EnumToolStats.values()[lambdaCaptureInt].getName())));
 		}
 		
 		this.registerCustomStateMappers();
@@ -290,14 +299,14 @@ public class ClientRegistry implements IInstanceProvider, ILifecycleListener
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) -> 
 			worldIn.getBlockState(pos.down()).getBlock() instanceof IGrass ? ((IGrass)worldIn.getBlockState(pos.down()).getBlock()).getGrassColor(worldIn.getBlockState(pos.down()), pos.down(), worldIn) : Helpers.getGrassColor(state, worldIn, pos, tintIndex), ExPBlocks.vegetation);
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) -> 
-			worldIn.getBlockState(pos).getBlock() instanceof IShrub ? ((IShrub)worldIn.getBlockState(pos).getBlock()).getShrubColor(state, pos, worldIn) : Helpers.getGrassColor(state, worldIn, pos, tintIndex), ExPBlocks.shrubs);
+			worldIn.getBlockState(pos).getBlock() instanceof IShrub ? ((IShrub)worldIn.getBlockState(pos).getBlock()).getShrubColor(state, pos, worldIn) : Helpers.getGrassColor(state, worldIn, pos, tintIndex), ArrayUtils.addAll(ExPBlocks.shrubs, ExPBlocks.berryBushes));
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(Helpers::getCoralColor, ExPBlocks.coralRock);
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(Helpers::getCoralColor, ExPBlocks.coralPlant);
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(Helpers::getLeafColor, ExPBlocks.leaves);
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) -> 
 			worldIn.getTileEntity(pos) instanceof TileOre ? ((TileOre)worldIn.getTileEntity(pos)).type.getColor() : -1, ExPBlocks.ore, ExPBlocks.boulderOre);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> ColorizerGrass.getGrassColor(1, 0.5), ExPBlocks.vegetation);
-		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> ColorizerGrass.getGrassColor(1, 0.5), ExPBlocks.shrubs);
+		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> ColorizerGrass.getGrassColor(1, 0.5), ArrayUtils.addAll(ExPBlocks.shrubs, ExPBlocks.berryBushes));
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> ((ILeaves)Block.getBlockFromItem(stack.getItem())).getLeavesColorForMeta(stack.getMetadata()), ExPBlocks.leaves);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) ->
 			EnumOre.values()[(stack.getMetadata() / EnumRockClass.values().length) % EnumOre.values().length].getColor(), ExPBlocks.ore, ExPBlocks.boulderOre);

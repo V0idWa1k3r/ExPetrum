@@ -1,0 +1,98 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "exp:shrub_common",
+		"transform": "forge:default-block",
+		"gui3d" : true,
+		"textures" : {
+			"wood" : "exp:blocks/shrub/wood/blackberry",
+			"leaves" : "exp:blocks/shrub/leaf/autumn/blackberry",
+			"flowers" : "exp:blocks/shrub/leaf/blooming/none"
+		}
+	},
+	"variants" : {
+		"normal": [{}],
+		"istall" : {
+			"true" : {
+				"model" : "exp:shrub_tall"
+			},
+			"false" : {
+				"model" : "exp:shrub_common"
+			}
+		},
+		"type" : {
+			"blackberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/blackberry",
+                    "leaves" : "exp:blocks/shrub/leaf/autumn/blackberry"
+                }
+			},
+            "cloudberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/cloudberry",
+                    "leaves" : "exp:blocks/shrub/leaf/autumn/cloudberry"
+                }
+            },
+            "raspberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/raspberry",
+                    "leaves" : "exp:blocks/shrub/leaf/autumn/raspberry"
+                }
+            },
+            "blueberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/blueberry",
+                    "leaves" : "exp:blocks/shrub/leaf/autumn/blueberry"
+                }
+            },
+            "cranberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/cranberry",
+                    "leaves" : "exp:blocks/shrub/leaf/autumn/cranberry"
+                }
+            },
+            "elderberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/elderberry",
+                    "leaves" : "exp:blocks/shrub/leaf/autumn/elderberry"
+                }
+            },
+            "gooseberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/gooseberry",
+                    "leaves" : "exp:blocks/shrub/leaf/autumn/gooseberry"
+                }
+            },
+            "hackberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/hackberry",
+                    "leaves" : "exp:blocks/shrub/leaf/autumn/hackberry"
+                }
+            },
+            "strawberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/strawberry",
+                    "leaves" : "exp:blocks/shrub/leaf/autumn/strawberry"
+                }
+            },
+            "wolfberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/wolfberry",
+                    "leaves" : "exp:blocks/shrub/leaf/autumn/wolfberry"
+                }
+            },
+            "salmonberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/salmonberry",
+                    "leaves" : "exp:blocks/shrub/leaf/autumn/salmonberry"
+                }
+            },
+            "crowberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/crowberry",
+                    "leaves" : "exp:blocks/shrub/leaf/autumn/crowberry"
+                }
+            }
+		}
+	}
+}

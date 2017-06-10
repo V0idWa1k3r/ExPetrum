@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.exp.block.EnumBerry;
@@ -58,6 +59,12 @@ public class BlockBerryBush extends BlockShrub
 	{
 		return state.getValue(ExPBlockProperties.BERRY_BUSH_TYPE).ordinal() + EnumTreeType.values().length + EnumShrubType.values().length;
 	}
+
+    @Override
+    public int getShrubColor(IBlockState state, BlockPos pos, IBlockAccess w)
+    {
+        return this.getState() == EnumShrubState.NORMAL || this.getState() == EnumShrubState.BLOOMING ? w.getBlockState(pos.down()).getBlock() instanceof IShrub ? ((IShrub)w.getBlockState(pos.down()).getBlock()).getShrubColor(w.getBlockState(pos.down()), pos.down(), w) : w.getBlockState(pos.down()).getBlock() instanceof IGrass ? ((IGrass)w.getBlockState(pos.down()).getBlock()).getGrassColor(w.getBlockState(pos.down()), pos.down(), w) : w.getBiome(pos).getGrassColorAtPos(pos) : -1;
+    }
 
 	@Override
 	public IBlockState getStateFromMeta(int meta)
@@ -116,6 +123,14 @@ public class BlockBerryBush extends BlockShrub
 	protected BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer(this, new IProperty[]{ ExPBlockProperties.BERRY_BUSH_TYPE, ExPBlockProperties.SHRUB_IS_TALL });
+	}
+
+	@Override
+	public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing)
+	{
+		IBlockState at = world.getBlockState(pos);
+		IBlockState self = world.getBlockState(pos.offset(facing));
+		return at.getBlock() instanceof IShrub  && ((IShrub)at.getBlock()).getShrubInternalType() == this.getShrubInternalType() && at.getValue(ExPBlockProperties.BERRY_BUSH_TYPE) == self.getValue(ExPBlockProperties.BERRY_BUSH_TYPE);
 	}
 
 	@Override

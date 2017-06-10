@@ -1,0 +1,110 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "exp:shrub_common",
+		"transform": "forge:default-block",
+		"gui3d" : true,
+		"textures" : {
+			"wood" : "exp:blocks/shrub/wood/blackberry",
+			"leaves" : "exp:blocks/shrub/leaf/normal/blackberry",
+			"flowers" : "exp:items/plant/berry/blackberry"
+		}
+	},
+	"variants" : {
+		"normal": [{}],
+		"istall" : {
+			"true" : {
+				"model" : "exp:shrub_tall"
+			},
+			"false" : {
+				"model" : "exp:shrub_common"
+			}
+		},
+		"type" : {
+			"blackberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/blackberry",
+                    "leaves" : "exp:blocks/shrub/leaf/normal/blackberry",
+                    "flowers" : "exp:items/plant/berry/blackberry"
+                }
+			},
+            "cloudberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/cloudberry",
+                    "leaves" : "exp:blocks/shrub/leaf/normal/cloudberry",
+                    "flowers" : "exp:items/plant/berry/cloudberry"
+                }
+            },
+            "raspberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/raspberry",
+                    "leaves" : "exp:blocks/shrub/leaf/normal/raspberry",
+                    "flowers" : "exp:items/plant/berry/raspberry"
+                }
+            },
+            "blueberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/blueberry",
+                    "leaves" : "exp:blocks/shrub/leaf/normal/blueberry",
+                    "flowers" : "exp:items/plant/berry/blueberry"
+                }
+            },
+            "cranberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/cranberry",
+                    "leaves" : "exp:blocks/shrub/leaf/normal/cranberry",
+                    "flowers" : "exp:items/plant/berry/cranberry"
+                }
+            },
+            "elderberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/elderberry",
+                    "leaves" : "exp:blocks/shrub/leaf/normal/elderberry",
+                    "flowers" : "exp:items/plant/berry/elderberry"
+                }
+            },
+            "gooseberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/gooseberry",
+                    "leaves" : "exp:blocks/shrub/leaf/normal/gooseberry",
+                    "flowers" : "exp:items/plant/berry/gooseberry"
+                }
+            },
+            "hackberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/hackberry",
+                    "leaves" : "exp:blocks/shrub/leaf/normal/hackberry",
+                    "flowers" : "exp:items/plant/berry/hackberry"
+                }
+            },
+            "strawberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/strawberry",
+                    "leaves" : "exp:blocks/shrub/leaf/normal/strawberry",
+                    "flowers" : "exp:items/plant/berry/strawberry"
+                }
+            },
+            "wolfberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/wolfberry",
+                    "leaves" : "exp:blocks/shrub/leaf/normal/wolfberry",
+                    "flowers" : "exp:items/plant/berry/wolfberry"
+                }
+            },
+            "salmonberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/salmonberry",
+                    "leaves" : "exp:blocks/shrub/leaf/normal/salmonberry",
+                    "flowers" : "exp:items/plant/berry/salmonberry"
+                }
+            },
+            "crowberry" : {
+                "textures" : {
+                    "wood" : "exp:blocks/shrub/wood/crowberry",
+                    "leaves" : "exp:blocks/shrub/leaf/normal/crowberry",
+                    "flowers" : "exp:items/plant/berry/crowberry"
+                }
+            }
+		}
+	}
+}
