@@ -107,11 +107,11 @@ public class ExPetrum
 	public void preInit(FMLPreInitializationEvent evt)
 	{
 		containerOfSelf = Loader.instance().activeModContainer();
-		this.configDirectory = evt.getModConfigurationDirectory();
+		configDirectory = evt.getModConfigurationDirectory();
 		this.setDevEnvironment();
 		ExPMisc.modLogger.log(LogLevel.Debug, "ExPetrum pre initializing.");
+        AbstractRegistry.registries.add(proxy);
 		AbstractRegistry.registries.forEach(reg -> reg.preInit(evt));
-		VoidApi.proxy.executeOnClient("v0id.exp.client.ClientRegistry", "preInit", VoidApi.proxy.provideClientOnlyInstance("v0id.exp.client.ClientRegistry"), FMLPreInitializationEvent.class, evt);
 		ExPMisc.modLogger.log(LogLevel.Debug, "ExPetrum pre initialized.");
 	}
 	
@@ -120,7 +120,6 @@ public class ExPetrum
 	{
 		ExPMisc.modLogger.log(LogLevel.Debug, "ExPetrum initializing.");
 		AbstractRegistry.registries.forEach(reg -> reg.init(evt));
-		VoidApi.proxy.executeOnClient("v0id.exp.client.ClientRegistry", "init", VoidApi.proxy.provideClientOnlyInstance("v0id.exp.client.ClientRegistry"), FMLInitializationEvent.class, evt);
 		ExPMisc.modLogger.log(LogLevel.Debug, "ExPetrum initialized.");
 	}
 	
@@ -129,11 +128,10 @@ public class ExPetrum
 	{
 		ExPMisc.modLogger.log(LogLevel.Debug, "ExPetrum post initializing.");
 		AbstractRegistry.registries.forEach(reg -> reg.postInit(evt));
-		VoidApi.proxy.executeOnClient("v0id.exp.client.ClientRegistry", "postInit", VoidApi.proxy.provideClientOnlyInstance("v0id.exp.client.ClientRegistry"), FMLPostInitializationEvent.class, evt);
 		ExPMisc.modLogger.log(LogLevel.Debug, "ExPetrum post initialized.");
 	}
 	
-	public void setDevEnvironment()
+	private void setDevEnvironment()
 	{
 		try
 		{

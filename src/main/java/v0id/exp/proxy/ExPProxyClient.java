@@ -1,6 +1,9 @@
 package v0id.exp.proxy;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import v0id.exp.client.ClientRegistry;
 import v0id.exp.combat.ClientCombatHandler;
 
 public class ExPProxyClient implements IExPProxy
@@ -10,4 +13,16 @@ public class ExPProxyClient implements IExPProxy
 	{
 		ClientCombatHandler.handle(tag);
 	}
+
+    @Override
+    public void preInit(FMLPreInitializationEvent evt)
+    {
+        ClientRegistry.instance.preInit(evt);
+    }
+
+    @Override
+    public void init(FMLInitializationEvent evt)
+    {
+        ClientRegistry.instance.init(evt);
+    }
 }

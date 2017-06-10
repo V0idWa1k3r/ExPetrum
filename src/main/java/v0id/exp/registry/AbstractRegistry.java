@@ -8,20 +8,14 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-public abstract class AbstractRegistry
+public abstract class AbstractRegistry implements ILifecycleListener
 {
-	public static List<AbstractRegistry> registries = Lists.newArrayList();
+	public static List<ILifecycleListener> registries = Lists.newArrayList();
 	
 	public AbstractRegistry()
 	{
 		registries.add(this);
 	}
-	
-	public void preInit(FMLPreInitializationEvent evt){}
-	
-	public void init(FMLInitializationEvent evt){}
-	
-	public void postInit(FMLPostInitializationEvent evt){}
 	
 	public static AbstractRegistry create(Class<? extends AbstractRegistry> clazz) 
 	{
