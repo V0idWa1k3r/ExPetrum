@@ -70,13 +70,14 @@ import v0id.exp.entity.EntityFallingTree;
 import v0id.exp.entity.EntityGravFallingBlock;
 import v0id.exp.entity.EntityThrownWeapon;
 import v0id.exp.registry.AbstractRegistry;
+import v0id.exp.registry.ILifecycleListener;
 import v0id.exp.tile.TileFarmland;
 import v0id.exp.tile.TileOre;
 import v0id.exp.util.Helpers;
 
 import javax.annotation.Nullable;
 
-public class ClientRegistry extends AbstractRegistry implements IInstanceProvider
+public class ClientRegistry implements IInstanceProvider, ILifecycleListener
 {
 	@Instance
 	public static ClientRegistry instance;
@@ -101,7 +102,6 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 	@Override
 	public void preInit(FMLPreInitializationEvent evt)
 	{
-		super.preInit(evt);
 		OBJLoader.INSTANCE.addDomain("exp");
 		for (int i = 0; i < 16; ++i)
 		{
@@ -277,11 +277,10 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 			});
 		}
 	}
-	
+
 	@Override
 	public void init(FMLInitializationEvent evt)
 	{
-		super.init(evt);
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(Helpers::getGrassColor, ExPBlocks.grass, ExPBlocks.grass_dry, ExPBlocks.grass_dead);
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(Helpers::getGrassColor, ExPBlocks.waterLily);
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> 0x02661c, ExPBlocks.grass);
@@ -311,7 +310,7 @@ public class ClientRegistry extends AbstractRegistry implements IInstanceProvide
 	@Override
 	public void postInit(FMLPostInitializationEvent evt)
 	{
-		super.postInit(evt);
+
 	}
 	
 	class StateMapperCrop extends StateMapperBase

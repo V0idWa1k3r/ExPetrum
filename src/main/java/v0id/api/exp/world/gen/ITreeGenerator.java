@@ -22,5 +22,5 @@ public interface ITreeGenerator
 	
 	IBlockState getWood();
 	
-	public boolean generate(World worldIn, Random rand, BlockPos position);
+	boolean generate(World worldIn, Random rand, BlockPos position);
 }

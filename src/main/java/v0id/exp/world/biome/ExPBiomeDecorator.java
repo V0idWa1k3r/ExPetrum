@@ -15,27 +15,14 @@ import v0id.api.exp.block.EnumShrubState;
 import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.data.ExPMisc;
-import v0id.api.exp.event.world.gen.EventGenBoulder;
-import v0id.api.exp.event.world.gen.EventGenCoral;
-import v0id.api.exp.event.world.gen.EventGenOre;
-import v0id.api.exp.event.world.gen.EventGenPebble;
-import v0id.api.exp.event.world.gen.EventGenTree;
-import v0id.api.exp.event.world.gen.EventGenVegetation;
+import v0id.api.exp.event.world.gen.*;
 import v0id.api.exp.event.world.gen.EventGenVegetation.Type;
 import v0id.api.exp.world.EnumSeason;
 import v0id.api.exp.world.IBiome;
 import v0id.api.exp.world.IExPWorld;
 import v0id.api.exp.world.gen.ITreeGenerator;
 import v0id.api.exp.world.gen.TreeGenerators;
-import v0id.exp.world.gen.biome.BoulderGenerator;
-import v0id.exp.world.gen.biome.CattailGenerator;
-import v0id.exp.world.gen.biome.CoralGenerator;
-import v0id.exp.world.gen.biome.CropGenerator;
-import v0id.exp.world.gen.biome.OreGenerator;
-import v0id.exp.world.gen.biome.PebbleGenerator;
-import v0id.exp.world.gen.biome.SeaweedGenerator;
-import v0id.exp.world.gen.biome.ShrubGenerator;
-import v0id.exp.world.gen.biome.VegetationGenerator;
+import v0id.exp.world.gen.biome.*;
 
 public class ExPBiomeDecorator extends BiomeDecorator
 {
@@ -46,6 +33,7 @@ public class ExPBiomeDecorator extends BiomeDecorator
 	public static final CattailGenerator genCattails = new CattailGenerator();
 	public static final SeaweedGenerator genSeaweed = new SeaweedGenerator();
 	public static final CoralGenerator genCoral = new CoralGenerator();
+	public static final OilGenerator genOil = new OilGenerator();
 	
 	@Override
 	public void decorate(World worldIn, Random random, Biome biome, BlockPos pos)
@@ -63,6 +51,7 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		this.doOrePass(worldIn, random, biome, pos);
 		this.doCropsPass(worldIn, random, biome, pos);
 		this.doCoralPass(worldIn, random, biome, pos);
+		this.doOilPass(worldIn, random, biome, pos);
     }
 
 	private static void printWarnings()
@@ -122,6 +111,30 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		if (rand.nextDouble() <= 0.1)
 		{
 			this.orePassGenerate(worldIn, rand, biome, pos);
+		}
+	}
+
+	public void doOilPass(World worldIn, Random rand, Biome biome, BlockPos pos)
+	{
+		this.oilPassGenerate(worldIn, rand, biome, pos);
+	}
+
+	public void oilPassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)
+	{
+		float chance = BiomeDictionary.hasType(biome, BiomeDictionary.Type.SANDY) ? 0.03125F : 0.015625F;
+		if (rand.nextFloat() < chance)
+		{
+			int x = rand.nextInt(16) + 8;
+			int z = rand.nextInt(16) + 8;
+			BlockPos at = new BlockPos(x, 0, z);
+			WorldGenerator oilGen = genOil;
+			EventGenOil event = new EventGenOil(worldIn, at, rand, oilGen);
+			if (MinecraftForge.TERRAIN_GEN_BUS.post(event))
+			{
+				return;
+			}
+
+			event.generator.generate(worldIn, rand, pos.add(at));
 		}
 	}
 	

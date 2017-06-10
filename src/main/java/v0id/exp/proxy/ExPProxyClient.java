@@ -17,6 +17,7 @@ public class ExPProxyClient implements IExPProxy
     @Override
     public void preInit(FMLPreInitializationEvent evt)
     {
+        ClientRegistry.instance = new ClientRegistry();
         ClientRegistry.instance.preInit(evt);
     }
 

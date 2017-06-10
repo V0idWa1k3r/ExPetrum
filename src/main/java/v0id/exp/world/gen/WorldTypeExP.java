@@ -42,6 +42,12 @@ public class WorldTypeExP extends WorldType
 	     ret = new net.minecraft.world.gen.layer.GenLayerBiomeEdge(1000L, ret);
 	     return ret;
 	}
+
+	@Override
+	public float getCloudHeight()
+	{
+		return Float.MAX_VALUE;
+	}
 	
 	@Override
 	public BiomeProvider getBiomeProvider(World world)

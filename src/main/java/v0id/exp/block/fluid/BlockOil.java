@@ -6,6 +6,7 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -40,6 +41,7 @@ public class BlockOil extends BlockFluidFinite implements IInitializableBlock, I
 		this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
 		this.setLightOpacity(0);
 		this.setQuantaPerBlock(10);
+        Blocks.FIRE.setFireInfo(this, 1000, 2);
 		ExPHandlerRegistry.put(this);
 	}
 
