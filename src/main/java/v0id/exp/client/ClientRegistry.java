@@ -67,7 +67,7 @@ public class ClientRegistry implements IInstanceProvider, ILifecycleListener
 	
 	public ClientRegistry()
 	{
-		
+
 	}
 	
 	public void initAttacksConditions()

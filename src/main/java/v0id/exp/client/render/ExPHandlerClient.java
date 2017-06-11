@@ -1,6 +1,4 @@
-package v0id.exp.handler;
-
-import java.lang.reflect.Field;
+package v0id.exp.client.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiCreateWorld;
@@ -10,17 +8,14 @@ import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
-import net.minecraftforge.client.event.EntityViewRenderEvent;
-import net.minecraftforge.client.event.GuiScreenEvent;
-import net.minecraftforge.client.event.MouseEvent;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
-import net.minecraftforge.client.event.RenderHandEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import v0id.api.core.VoidApi;
 import v0id.api.core.logging.LogLevel;
 import v0id.api.exp.data.ExPMisc;
+import v0id.exp.client.fx.ParticleEngine;
 import v0id.exp.client.render.gui.PlayerInventoryRenderer;
 import v0id.exp.client.render.hud.PlayerHUDRenderer;
 import v0id.exp.client.render.hud.SpecialAttackRenderer;
@@ -30,10 +25,24 @@ import v0id.exp.combat.ClientCombatHandler;
 import v0id.exp.player.inventory.ManagedSlot;
 import v0id.exp.util.WeatherUtils;
 
+import java.lang.reflect.Field;
+
 public class ExPHandlerClient
 {
+    @SubscribeEvent
+    public void onWorldRenderLast(RenderWorldLastEvent event)
+    {
+        ExPMisc.defaultParticleEngineImpl.renderTick(event.getPartialTicks());
+    }
+
 	@SubscribeEvent
-	public void onRenderWorldLast(RenderHandEvent event)
+	public void onWorldLoaded(WorldEvent.Load event)
+	{
+        ParticleEngine.onWorldChanged();
+	}
+
+	@SubscribeEvent
+	public void onRenderHand(RenderHandEvent event)
 	{
 		if (SpecialAttackRenderer.render(event.getPartialTicks()))
 		{
@@ -138,19 +147,24 @@ public class ExPHandlerClient
 	@SubscribeEvent
 	public void onClientTick(TickEvent.ClientTickEvent event)
 	{
-		if (VoidApi.proxy.getClientWorld() != null && VoidApi.proxy.getClientWorld().provider != null && VoidApi.proxy.getClientWorld().provider.getDimension() == 0)
+		if (Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().world.provider != null && Minecraft.getMinecraft().world.provider.getDimension() == 0)
 		{
-			if (!(VoidApi.proxy.getClientWorld().provider.getSkyRenderer() instanceof WorldSkyRenderer))
+			if (!(Minecraft.getMinecraft().world.provider.getSkyRenderer() instanceof WorldSkyRenderer))
 			{
-				VoidApi.proxy.getClientWorld().provider.setSkyRenderer(WorldSkyRenderer.getInstance());
-				VoidApi.proxy.getClientWorld().provider.setWeatherRenderer(WorldWeatherRenderer.getInstance());
+                Minecraft.getMinecraft().world.provider.setSkyRenderer(WorldSkyRenderer.getInstance());
+                Minecraft.getMinecraft().world.provider.setWeatherRenderer(WorldWeatherRenderer.getInstance());
 			}
 			
-			if (VoidApi.proxy.getClientWorld().isRaining())
+			if (Minecraft.getMinecraft().world.isRaining())
 			{
-				WeatherUtils.handleClientTick(VoidApi.proxy.getClientPlayer());
+				WeatherUtils.handleClientTick(Minecraft.getMinecraft().player);
 			}
 		}
+
+        if (Minecraft.getMinecraft().world != null && event.phase == TickEvent.Phase.START)
+        {
+            ExPMisc.defaultParticleEngineImpl.tick();
+        }
 	}
 	
 	@SubscribeEvent

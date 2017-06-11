@@ -3,11 +3,18 @@ package v0id.exp.proxy;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import v0id.api.exp.data.ExPMisc;
 import v0id.exp.client.ClientRegistry;
+import v0id.exp.client.fx.ParticleEngine;
 import v0id.exp.combat.ClientCombatHandler;
 
 public class ExPProxyClient implements IExPProxy
 {
+    static
+    {
+        ExPMisc.defaultParticleEngineImpl = new ParticleEngine();
+    }
+
 	@Override
 	public void handleSpecialAttackPacket(NBTTagCompound tag)
 	{
