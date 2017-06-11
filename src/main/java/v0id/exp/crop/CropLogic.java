@@ -1,11 +1,5 @@
 package v0id.exp.crop;
 
-import java.util.Map.Entry;
-import java.util.Random;
-import java.util.stream.Stream;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -16,6 +10,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.core.VoidApi;
 import v0id.api.core.settings.VCSettings;
 import v0id.api.exp.data.ExPItems;
@@ -23,13 +18,7 @@ import v0id.api.exp.event.crop.CropEvent;
 import v0id.api.exp.event.crop.EventFarmlandUpdate;
 import v0id.api.exp.item.food.FoodEntry;
 import v0id.api.exp.quality.EnumQuality;
-import v0id.api.exp.tile.crop.EnumCrop;
-import v0id.api.exp.tile.crop.EnumPlantNutrient;
-import v0id.api.exp.tile.crop.ExPCropCapability;
-import v0id.api.exp.tile.crop.ExPFarmlandCapability;
-import v0id.api.exp.tile.crop.ExPSeedsCapability;
-import v0id.api.exp.tile.crop.IExPSeed;
-import v0id.api.exp.tile.crop.IFarmland;
+import v0id.api.exp.tile.crop.*;
 import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.IExPWorld;
 import v0id.api.exp.world.ImmutableCalendar;
@@ -37,6 +26,10 @@ import v0id.api.exp.world.TemperatureRange;
 import v0id.exp.block.plant.BlockVegetation;
 import v0id.exp.item.ItemFood;
 import v0id.exp.util.Helpers;
+
+import java.util.Map.Entry;
+import java.util.Random;
+import java.util.stream.Stream;
 
 public class CropLogic
 {
@@ -200,7 +193,7 @@ public class CropLogic
 		MinecraftForge.EVENT_BUS.post(wnLogic);
 		float waterLoss = wnLogic.waterLossBase;
 		float nutrientGain = wnLogic.nutrientGainBase;
-		if (w.isRaining() && w.getPrecipitationHeight(pos).getY() <= pos.getY() && !MinecraftForge.EVENT_BUS.post(new EventFarmlandUpdate.Logic.Rain(farmland, w, pos, ref, ticks)))
+		if (w.isRaining() && w.getPrecipitationHeight(pos).getY() - 1 <= pos.getY() && !MinecraftForge.EVENT_BUS.post(new EventFarmlandUpdate.Logic.Rain(farmland, w, pos, ref, ticks)))
 		{
 			farmland.setMoisture(1);
 		}
