@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
@@ -195,6 +196,9 @@ public class ClientRegistry implements IInstanceProvider, ILifecycleListener
 		ModelLoader.setCustomStateMapper(ExPBlocks.crop, new StateMapperCrop(ExPBlocks.crop));
 		ModelLoaderRegistry.registerLoader(new ModelLoaderExP());
 		this.initAttacksConditions();
+		ModelResourceLocation loc_bucket = new ModelResourceLocation(ExPItems.basket.getRegistryName(), "inventory");
+		ModelLoader.setCustomMeshDefinition(ExPItems.basket, i -> loc_bucket);
+        ModelBakery.registerItemVariants(ExPItems.basket, loc_bucket);
 	}
 	
 	public void registerLogItemModel(Block b)

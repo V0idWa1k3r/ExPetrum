@@ -24,4 +24,5 @@ public class ExPItems
 	public static Item spear;
 	public static Item watering_can;
 	public static Item gardening_spade;
+    public static Item basket;
 }

@@ -64,8 +64,9 @@ public class ExPRegistryNames
 		itemHammer																							= new ResourceLocation(modid, "item_hammer"),
 		itemSpear																							= new ResourceLocation(modid, "item_spear"),
 		itemWateringCan																						= new ResourceLocation(modid, "item_watering_can"),
-		itemGardeningSpade																					= new ResourceLocation(modid, "item_gardening_spade");
-	
+		itemGardeningSpade																					= new ResourceLocation(modid, "item_gardening_spade"),
+		itemBasket																							= new ResourceLocation(modid, "item_basket");
+
 	public static final ResourceLocation
 		entityGravFallingBlock																				= new ResourceLocation(modid, "gravFallingBlock"),
 		entityFallingTree																					= new ResourceLocation(modid, "fallingTree"),

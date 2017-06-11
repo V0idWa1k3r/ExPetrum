@@ -1,7 +1,5 @@
 package v0id.exp.world.biome;
 
-import java.util.Random;
-
 import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -23,6 +21,8 @@ import v0id.api.exp.world.IExPWorld;
 import v0id.api.exp.world.gen.ITreeGenerator;
 import v0id.api.exp.world.gen.TreeGenerators;
 import v0id.exp.world.gen.biome.*;
+
+import java.util.Random;
 
 public class ExPBiomeDecorator extends BiomeDecorator
 {
@@ -46,6 +46,7 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		this.doTreePass(worldIn, random, biome, pos);
 		this.doVegetationPass(worldIn, random, biome, pos);
 		this.doShrubsPass(worldIn, random, biome, pos);
+		this.doBerryBushesPass(worldIn, random, biome, pos);
 		this.doPebblePass(worldIn, random, biome, pos);
 		this.doBoulderPass(worldIn, random, biome, pos);
 		this.doOrePass(worldIn, random, biome, pos);
@@ -76,6 +77,17 @@ public class ExPBiomeDecorator extends BiomeDecorator
 	{
 		this.cropsPassGenerate(worldIn, rand, biome, pos);
 	}
+
+    public void doBerryBushesPass(World worldIn, Random rand, Biome biome, BlockPos pos)
+    {
+        for (int i = 0; i < this.deadBushPerChunk; ++i)
+        {
+            if (rand.nextBoolean())
+            {
+                this.beyyBushesPassGenerate(worldIn, rand, biome, pos);
+            }
+        }
+    }
 	
 	public void doShrubsPass(World worldIn, Random rand, Biome biome, BlockPos pos)
 	{
@@ -206,6 +218,28 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		
 		event.generator.generate(worldIn, rand, at);
 	}
+
+    public void beyyBushesPassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)
+    {
+        if (!(biome instanceof ExPBiome))
+        {
+            return;
+        }
+
+        int x = rand.nextInt(16) + 8;
+        int z = rand.nextInt(16) + 8;
+        BlockPos at = worldIn.getHeight(pos.add(x, 0, z));
+        EnumSeason currentSeason = IExPWorld.of(worldIn).getCurrentSeason();
+        EnumShrubState stateToGenerate = currentSeason == EnumSeason.WINTER ? EnumShrubState.DEAD : currentSeason == EnumSeason.AUTUMN ? EnumShrubState.AUTUMN : rand.nextFloat() < 0.3 ? EnumShrubState.BLOOMING : EnumShrubState.NORMAL;
+        WorldGenerator gen = new BerryBushGenerator(stateToGenerate);
+        EventGenVegetation event = new EventGenVegetation(worldIn, at, rand, gen, Type.BERRY_BUSH);
+        if (MinecraftForge.TERRAIN_GEN_BUS.post(event))
+        {
+            return;
+        }
+
+        event.generator.generate(worldIn, rand, at);
+    }
 	
 	public void cattailPassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)
 	{

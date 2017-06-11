@@ -31,6 +31,7 @@ public class ExPItemsRegistry extends AbstractRegistry
 		ExPItems.spear = new ItemSpear();
 		ExPItems.watering_can = new ItemWateringCan();
 		ExPItems.gardening_spade = new ItemGardeningSpade();
+		ExPItems.basket = new ItemBasket();
 	}
 	
 	public ExPItemsRegistry()

@@ -1,14 +1,13 @@
 package v0id.api.exp.event.world.gen;
 
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.common.eventhandler.Cancelable;
 import net.minecraftforge.fml.common.eventhandler.Event;
+
+import javax.annotation.Nonnull;
+import java.util.Random;
 
 /**
  * Fired when ExPetrum tries to generate tallgrass in the world. <br>
@@ -64,6 +63,7 @@ public class EventGenVegetation extends Event
 		CATTAIL,
 		SEAWEED,
 		BUSH,
+		BERRY_BUSH,
 		TALL_PLANT,
 		WILD_CROP,
 		OTHER
