@@ -74,6 +74,11 @@ public class ItemSeeds extends Item implements IInitializableItem, IItemRegistry
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
+		if (tab != this.getCreativeTab())
+		{
+			return;
+		}
+
 		for (int i = 0; i < EnumCrop.values().length - 1; ++i)
 		{
 			subItems.add(new ItemStack(this, 1, i));

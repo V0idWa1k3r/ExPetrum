@@ -66,6 +66,11 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
+        if (tab != this.getCreativeTab())
+        {
+            return;
+        }
+
 		for (int i = 0; i < FoodEntry.allEntries.size(); ++i)
 		{
 			subItems.add(new ItemStack(this, 1, i));

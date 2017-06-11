@@ -1,20 +1,13 @@
 package v0id.exp.client;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Stream;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
-import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.entity.RenderFallingBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -31,29 +24,16 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.commons.lang3.ArrayUtils;
-import v0id.api.core.util.IFunctionalBlockColor;
-import v0id.api.core.util.IFunctionalItemColor;
 import v0id.api.core.util.IFunctionalRenderFactory;
 import v0id.api.core.util.java.IInstanceProvider;
 import v0id.api.core.util.java.Instance;
-import v0id.api.exp.block.EnumBerry;
-import v0id.api.exp.block.EnumLeafState;
-import v0id.api.exp.block.EnumOre;
-import v0id.api.exp.block.EnumShrubType;
-import v0id.api.exp.block.EnumTreeType;
-import v0id.api.exp.block.IGrass;
-import v0id.api.exp.block.ILeaves;
-import v0id.api.exp.block.IShrub;
+import v0id.api.exp.block.*;
 import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.block.property.EnumWaterLilyType;
 import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.combat.condition.ExecuteConditionKeyBindings;
-import v0id.api.exp.data.ExPBlocks;
-import v0id.api.exp.data.ExPItems;
-import v0id.api.exp.data.ExPOreDict;
-import v0id.api.exp.data.ExPRegistryNames;
-import v0id.api.exp.data.ExPWeaponAttacks;
+import v0id.api.exp.data.*;
 import v0id.api.exp.item.EnumToolhead;
 import v0id.api.exp.item.food.FoodEntry;
 import v0id.api.exp.metal.EnumMetal;
@@ -70,13 +50,15 @@ import v0id.exp.crop.ExPFarmland;
 import v0id.exp.entity.EntityFallingTree;
 import v0id.exp.entity.EntityGravFallingBlock;
 import v0id.exp.entity.EntityThrownWeapon;
-import v0id.exp.registry.AbstractRegistry;
 import v0id.exp.registry.ILifecycleListener;
 import v0id.exp.tile.TileFarmland;
 import v0id.exp.tile.TileOre;
 import v0id.exp.util.Helpers;
 
-import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
 
 public class ClientRegistry implements IInstanceProvider, ILifecycleListener
 {
@@ -188,7 +170,7 @@ public class ClientRegistry implements IInstanceProvider, ILifecycleListener
 			ModelLoader.setCustomModelResourceLocation(ExPItems.ingot, i, new ModelResourceLocation(ExPItems.ingot.getRegistryName(), "inventory"));
 		}
 		
-		List<Item> toolsList = Arrays.asList(ExPItems.knife, ExPItems.pickaxe, ExPItems.axe, ExPItems.shovel, ExPItems.hoe, ExPItems.sword, ExPItems.scythe, ExPItems.battleaxe, ExPItems.hammer, ExPItems.spear, ExPItems.watering_can);
+		List<Item> toolsList = Arrays.asList(ExPItems.knife, ExPItems.pickaxe, ExPItems.axe, ExPItems.shovel, ExPItems.hoe, ExPItems.sword, ExPItems.scythe, ExPItems.battleaxe, ExPItems.hammer, ExPItems.spear, ExPItems.watering_can, ExPItems.gardening_spade);
 		toolsList.forEach(tool -> ModelLoader.setCustomMeshDefinition(tool, stack -> new ModelResourceLocation(new ResourceLocation(tool.getRegistryName().getResourceDomain(), "tools/" + tool.getRegistryName().getResourcePath()), "material=" + EnumToolStats.values()[stack.getMetadata()].getName())));
 		for (int i = 0; i < EnumToolStats.values().length; ++i)
 		{

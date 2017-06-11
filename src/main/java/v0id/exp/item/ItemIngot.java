@@ -61,6 +61,11 @@ public class ItemIngot extends Item implements IInitializableItem, IWeightProvid
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
+		if (tab != this.getCreativeTab())
+		{
+			return;
+		}
+
 		for (int i = 0; i < EnumMetal.values().length; ++i)
 		{
 			subItems.add(new ItemStack(this, 1, i));

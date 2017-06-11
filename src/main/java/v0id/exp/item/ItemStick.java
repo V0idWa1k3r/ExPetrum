@@ -56,6 +56,11 @@ public class ItemStick extends Item implements IInitializableItem, IWeightProvid
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
+		if (tab != this.getCreativeTab())
+		{
+			return;
+		}
+
 		Stream.of(EnumTreeType.values()).forEach(c -> subItems.add(new ItemStack(this, 1, c.ordinal())));
 		Stream.of(EnumShrubType.values()).forEach(c -> subItems.add(new ItemStack(this, 1, EnumTreeType.values().length + c.ordinal())));
 		Stream.of(EnumBerry.values()).forEach(c -> subItems.add(new ItemStack(this, 1, EnumTreeType.values().length + EnumShrubType.values().length + c.ordinal())));

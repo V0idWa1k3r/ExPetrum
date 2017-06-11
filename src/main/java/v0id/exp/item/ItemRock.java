@@ -54,6 +54,11 @@ public class ItemRock extends Item implements IInitializableItem, IWeightProvide
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
+		if (tab != this.getCreativeTab())
+		{
+			return;
+		}
+
 		Stream.of(EnumRockClass.values()).forEach(c -> subItems.add(new ItemStack(this, 1, c.ordinal())));
 	}
 

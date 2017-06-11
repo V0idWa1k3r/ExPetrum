@@ -7,17 +7,7 @@ import v0id.exp.item.ItemRock;
 import v0id.exp.item.ItemSeeds;
 import v0id.exp.item.ItemStick;
 import v0id.exp.item.ItemToolHead;
-import v0id.exp.item.tool.ItemAxe;
-import v0id.exp.item.tool.ItemBattleaxe;
-import v0id.exp.item.tool.ItemHammer;
-import v0id.exp.item.tool.ItemHoe;
-import v0id.exp.item.tool.ItemKnife;
-import v0id.exp.item.tool.ItemPickaxe;
-import v0id.exp.item.tool.ItemScythe;
-import v0id.exp.item.tool.ItemShovel;
-import v0id.exp.item.tool.ItemSpear;
-import v0id.exp.item.tool.ItemSword;
-import v0id.exp.item.tool.ItemWateringCan;
+import v0id.exp.item.tool.*;
 
 public class ExPItemsRegistry extends AbstractRegistry
 {
@@ -40,6 +30,7 @@ public class ExPItemsRegistry extends AbstractRegistry
 		ExPItems.hammer = new ItemHammer();
 		ExPItems.spear = new ItemSpear();
 		ExPItems.watering_can = new ItemWateringCan();
+		ExPItems.gardening_spade = new ItemGardeningSpade();
 	}
 	
 	public ExPItemsRegistry()

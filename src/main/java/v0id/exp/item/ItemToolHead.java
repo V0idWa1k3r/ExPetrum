@@ -74,6 +74,11 @@ public class ItemToolHead extends Item implements IInitializableItem, IWeightPro
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
+		if (tab != this.getCreativeTab())
+		{
+			return;
+		}
+
 		for (int i = 0; i < 7; ++i)
 		{
 			subItems.add(new ItemStack(this, 1, i));

@@ -57,6 +57,11 @@ public abstract class ItemExPWeapon extends ItemSword implements IExPTool
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
+		if (tab != this.getCreativeTab())
+		{
+			return;
+		}
+
 		for (int i = 0; i < EnumToolStats.values().length; ++i)
 		{
 			subItems.add(new ItemStack(this, 1, i));
