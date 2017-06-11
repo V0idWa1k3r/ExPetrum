@@ -182,8 +182,7 @@ public class CropLogic
 		
 		ticks = pre.ticksHappened;
 		IBlockState above = w.getBlockState(pos.up());
-		boolean canSeeTheSky = w.canBlockSeeSky(pos.up());
-		TileEntity tileAbove = w.getTileEntity(pos.up());
+        TileEntity tileAbove = w.getTileEntity(pos.up());
 		if (tileAbove != null && tileAbove.hasCapability(ExPCropCapability.cropCap, EnumFacing.DOWN))
 		{
 			return;
@@ -234,7 +233,7 @@ public class CropLogic
 			handleTimePassed(crop, ticksDelta, current);
 		}
 		
-		if (crop.getContainer() != null && !crop.getContainer().isInvalid() && crop.getContainer().getWorld() != null && crop.getContainer().getPos() != null && !crop.getContainer().getWorld().isAirBlock(crop.getContainer().getPos()))
+		if (crop.getContainer() != null && !crop.getContainer().isInvalid() && !crop.getContainer().getWorld().isAirBlock(crop.getContainer().getPos()))
 		{
 			MinecraftForge.EVENT_BUS.post(new CropEvent.Update.Post(crop, crop.getContainer().getWorld(), crop.getContainer().getPos()));
 		}
@@ -299,7 +298,7 @@ public class CropLogic
 		float temperature = Helpers.getTemperatureAt(w, pos);
 		boolean inBaseRange = crop.getSurvivalTemperature().isWithinRange(temperature);
 		boolean canGrow = crop.canGrowOverride(Helpers.canPlantGrow(pos, w)) && inBaseRange; 
-		long growthTicks = 0;
+		long growthTicks;
 		if (canGrow)
 		{
 			float growthMultiplier = 0.25F;

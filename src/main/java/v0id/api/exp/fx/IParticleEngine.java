@@ -21,7 +21,7 @@ public interface IParticleEngine
 
     default VertexFormat getDrawFormat()
     {
-        return DefaultVertexFormats.POSITION_TEX_LMAP_COLOR;
+        return DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP;
     }
 
     IParticleFactory getFactoryFor(EnumParticle type);

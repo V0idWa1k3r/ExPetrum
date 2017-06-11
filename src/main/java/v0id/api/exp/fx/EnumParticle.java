@@ -8,7 +8,7 @@ import v0id.api.core.util.java.Rectangle;
  */
 public enum EnumParticle
 {
-    ;
+    LEAF(new Rectangle(0, 0, 16, 16), BlockRenderLayer.CUTOUT);
 
     EnumParticle(Rectangle renderRectangle, BlockRenderLayer layer)
     {

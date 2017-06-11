@@ -21,18 +21,23 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.tuple.Pair;
+import v0id.api.core.util.java.ColorRGB;
 import v0id.api.exp.block.EnumLeafState;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.ILeaves;
 import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.*;
+import v0id.api.exp.fx.EnumParticle;
 import v0id.api.exp.inventory.IWeightProvider;
+import v0id.api.exp.world.IExPWorld;
+import v0id.exp.ExPetrum;
 import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.item.IItemRegistryEntry;
@@ -190,6 +195,42 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 	public ResourceLocation createRegistryLocation()
 	{
 		return new ResourceLocation(ExPRegistryNames.blockLeaves.getResourceDomain(), ExPRegistryNames.blockLeaves.getResourcePath() + this.logIndex);
+	}
+
+	@Override
+	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
+	{
+	    if (this.getLeavesState(worldIn, stateIn, pos) == EnumLeafState.DEAD)
+        {
+            return;
+        }
+
+	    if (stateIn.getValue(ExPBlockProperties.TREE_TYPES[this.logIndex]).isEvergreen())
+        {
+            return;
+        }
+
+        if (rand.nextFloat() >= IExPWorld.of(worldIn).getWindStrength() / 550F)
+        {
+            return;
+        }
+
+	    Vec3d windDir = IExPWorld.of(worldIn).getWindDirection().scale(IExPWorld.of(worldIn).getWindStrength());
+        ColorRGB rgbColor = ColorRGB.FromHEX(this.getLeavesColor(worldIn, stateIn, pos));
+        if (this.getLeavesState(worldIn, stateIn, pos) == EnumLeafState.AUTUMN)
+        {
+            rgbColor = ColorRGB.FromHEX(rand.nextBoolean() ? 0xff7a00 : rand.nextBoolean() ? 0xff0000 : 0xffcc00);
+        }
+
+        ExPetrum.proxy.spawnParticle(
+                EnumParticle.LEAF,
+                new float[]{ pos.getX() - 1 + rand.nextFloat() * 3, pos.getY() - 1 + rand.nextFloat() * 3, pos.getZ() - 1 + rand.nextFloat() * 3, (float) (windDir.x / 20), (float) (windDir.y / 20), (float) (windDir.z / 20) },
+                new float[]{ rgbColor.getR(), rgbColor.getG(), rgbColor.getB(), 1 },
+                (byte)0b000,
+                100,
+                0.1F + 0.1F * rand.nextFloat(),
+                new short[]{ 240, 240 });
+		super.randomDisplayTick(stateIn, worldIn, pos, rand);
 	}
 
 	@Override

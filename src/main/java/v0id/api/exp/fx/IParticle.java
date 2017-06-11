@@ -12,7 +12,7 @@ public interface IParticle
 
     void onTick();
 
-    void draw(BufferBuilder buffer, float partialTicks);
+    void draw(BufferBuilder buffer, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ);
 
     boolean isInvalid();
 
