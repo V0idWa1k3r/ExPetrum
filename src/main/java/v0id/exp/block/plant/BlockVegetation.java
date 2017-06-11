@@ -1,8 +1,5 @@
 package v0id.exp.block.plant;
 
-import java.util.Random;
-import java.util.stream.Stream;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockTallGrass;
@@ -32,11 +29,7 @@ import v0id.api.exp.block.EnumGrassAmount;
 import v0id.api.exp.block.EnumGrassState;
 import v0id.api.exp.block.IGrass;
 import v0id.api.exp.block.property.ExPBlockProperties;
-import v0id.api.exp.data.ExPCreativeTabs;
-import v0id.api.exp.data.ExPMisc;
-import v0id.api.exp.data.ExPOreDict;
-import v0id.api.exp.data.ExPRegistryNames;
-import v0id.api.exp.data.IOreDictEntry;
+import v0id.api.exp.data.*;
 import v0id.exp.block.BlockFarmland;
 import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
@@ -44,6 +37,9 @@ import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
+
+import java.util.Random;
+import java.util.stream.Stream;
 
 public class BlockVegetation extends BlockBush implements IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {
@@ -101,11 +97,11 @@ public class BlockVegetation extends BlockBush implements IInitializableBlock, I
 	
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		for (int i = 0; i < 4; ++i)
 		{
-			list.add(new ItemStack(itemIn, 1, i));
+			list.add(new ItemStack(this, 1, i));
 		}
 	}
 	

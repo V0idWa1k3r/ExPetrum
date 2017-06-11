@@ -1,37 +1,28 @@
 package v0id.exp.item.tool;
 
-import java.util.List;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.fluids.BlockFluidFinite;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidBlock;
+import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
+import org.apache.commons.lang3.tuple.Pair;
+import v0id.api.core.VoidApi;
 import v0id.api.core.util.I18n;
 import v0id.api.exp.block.IAcceptsWaterCan;
 import v0id.api.exp.data.ExPCreativeTabs;
@@ -44,6 +35,8 @@ import v0id.api.exp.player.IExPPlayer;
 import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.item.IInitializableItem;
+
+import java.util.List;
 
 public class ItemWateringCan extends ItemExPTool implements IWeightProvider, IInitializableItem, IItemRegistryEntry, IOreDictEntry
 {
@@ -291,9 +284,9 @@ public class ItemWateringCan extends ItemExPTool implements IWeightProvider, IIn
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced)
 	{
-		super.addInformation(stack, playerIn, tooltip, advanced);
+		super.addInformation(stack, world, tooltip, advanced);
 		IFluidHandlerItem cap = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 		if (cap != null)
 		{
@@ -307,36 +300,40 @@ public class ItemWateringCan extends ItemExPTool implements IWeightProvider, IIn
 				}
 				else
 				{
-					if (IExPPlayer.of(playerIn).getProgressionStage().ordinal() < EnumPlayerProgression.IRON_AGE.ordinal())
-					{
-						float percentage = (float)fStack.amount / props[0].getCapacity();
-						if (percentage <= 0.25F)
-						{
-							tooltip.add(I18n.format("exp.txt.item.desc.water.leq25"));
-						}
-						else
-						{
-							if (percentage <= 0.5F)
-							{
-								tooltip.add(I18n.format("exp.txt.item.desc.water.leq50"));
-							}
-							else
-							{
-								if (percentage <= 0.75F)
-								{
-									tooltip.add(I18n.format("exp.txt.item.desc.water.leq75"));
-								}
-								else
-								{
-									tooltip.add(I18n.format("exp.txt.item.desc.water.100"));
-								}
-							}
-						}
-					}
-					else
-					{
-						tooltip.add(I18n.format("exp.txt.item.desc.water", fStack.amount));
-					}
+                    EntityPlayer playerIn = VoidApi.proxy.getClientPlayer();
+                    if (playerIn != null)
+                    {
+                        if (IExPPlayer.of(playerIn).getProgressionStage().ordinal() < EnumPlayerProgression.IRON_AGE.ordinal())
+                        {
+                            float percentage = (float) fStack.amount / props[0].getCapacity();
+                            if (percentage <= 0.25F)
+                            {
+                                tooltip.add(I18n.format("exp.txt.item.desc.water.leq25"));
+                            }
+                            else
+                            {
+                                if (percentage <= 0.5F)
+                                {
+                                    tooltip.add(I18n.format("exp.txt.item.desc.water.leq50"));
+                                }
+                                else
+                                {
+                                    if (percentage <= 0.75F)
+                                    {
+                                        tooltip.add(I18n.format("exp.txt.item.desc.water.leq75"));
+                                    }
+                                    else
+                                    {
+                                        tooltip.add(I18n.format("exp.txt.item.desc.water.100"));
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            tooltip.add(I18n.format("exp.txt.item.desc.water", fStack.amount));
+                        }
+                    }
 				}
 			}
 		}

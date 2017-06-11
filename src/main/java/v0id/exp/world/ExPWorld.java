@@ -1,15 +1,11 @@
 package v0id.exp.world;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagDouble;
-import net.minecraft.nbt.NBTTagFloat;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.*;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.Constants.NBT;
 import v0id.api.core.logging.LogLevel;
-import v0id.api.core.util.nbt.NBTList;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.event.world.EventGenerateTemperatureTable;
 import v0id.api.exp.player.IExPPlayer;
@@ -421,9 +417,9 @@ public class ExPWorld implements IExPWorld
 				this.dayTemp = new float[8];
 			}
 			
-			for (NBTTagFloat nbtFloat : NBTList.<NBTTagFloat>of(nbt.getTagList("dayTemp", NBT.TAG_FLOAT)))
+			for (NBTBase nbtFloat : nbt.getTagList("dayTemp", NBT.TAG_FLOAT))
 			{
-				this.dayTemp[i++] = nbtFloat.getFloat();
+				this.dayTemp[i++] = ((NBTTagFloat)nbtFloat).getFloat();
 			}
 		}
 		

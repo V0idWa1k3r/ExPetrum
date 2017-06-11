@@ -13,7 +13,6 @@ import net.minecraft.nbt.NBTTagLong;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.Constants.NBT;
-import v0id.api.core.util.nbt.NBTList;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.tile.crop.EnumPlantNutrient;
 import v0id.api.exp.world.Calendar;
@@ -161,7 +160,7 @@ public class CropStats implements INBTSerializable<NBTTagCompound>
 		this.waterConsumption = nbt.getFloat("waterConsumption");
 		this.growth = nbt.getFloat("growth");
 		this.nutrientConsumption.clear();
-		NBTList.<NBTTagCompound>of(nbt.getTagList("nutrientConsumption", NBT.TAG_COMPOUND)).forEach(tag -> this.nutrientConsumption.put(EnumPlantNutrient.values()[tag.getByte("nutrient")], tag.getFloat("amount")));
+		nbt.getTagList("nutrientConsumption", NBT.TAG_COMPOUND).forEach(tag -> this.nutrientConsumption.put(EnumPlantNutrient.values()[((NBTTagCompound)tag).getByte("nutrient")], ((NBTTagCompound)tag).getFloat("amount")));
 	}
 
 }

@@ -1,15 +1,12 @@
 package v0id.exp.item;
 
-import java.util.stream.Stream;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
@@ -18,6 +15,8 @@ import v0id.api.exp.metal.EnumMetal;
 import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.player.inventory.PlayerInventoryHelper;
+
+import java.util.stream.Stream;
 
 public class ItemIngot extends Item implements IInitializableItem, IWeightProvider, IOreDictEntry, IItemRegistryEntry
 {
@@ -60,11 +59,11 @@ public class ItemIngot extends Item implements IInitializableItem, IWeightProvid
 	}
 
 	@Override
-	public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems)
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
 		for (int i = 0; i < EnumMetal.values().length; ++i)
 		{
-			subItems.add(new ItemStack(itemIn, 1, i));
+			subItems.add(new ItemStack(this, 1, i));
 		}
 	}
 

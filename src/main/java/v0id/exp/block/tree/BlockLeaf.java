@@ -1,15 +1,5 @@
 package v0id.exp.block.tree;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Stream;
-
-import javax.annotation.Nullable;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.SoundType;
@@ -36,15 +26,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.block.EnumLeafState;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.ILeaves;
 import v0id.api.exp.block.property.ExPBlockProperties;
-import v0id.api.exp.data.ExPCreativeTabs;
-import v0id.api.exp.data.ExPItems;
-import v0id.api.exp.data.ExPOreDict;
-import v0id.api.exp.data.ExPRegistryNames;
-import v0id.api.exp.data.IOreDictEntry;
+import v0id.api.exp.data.*;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
@@ -52,6 +39,13 @@ import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
+
+import javax.annotation.Nullable;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {
@@ -243,11 +237,11 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
     }
 	
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		for (int i = 0; i < 15; ++i)
 		{
-			list.add(new ItemStack(itemIn, 1, i));
+			list.add(new ItemStack(this, 1, i));
 		}
 	}
 

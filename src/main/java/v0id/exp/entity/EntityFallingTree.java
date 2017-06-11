@@ -15,6 +15,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTUtil;
@@ -31,7 +32,6 @@ import v0id.api.core.VoidApi;
 import v0id.api.core.network.VoidNetwork;
 import v0id.api.core.settings.VCSettings;
 import v0id.api.core.util.nbt.NBTChain;
-import v0id.api.core.util.nbt.NBTList;
 import v0id.api.exp.block.ILeaves;
 import v0id.api.exp.block.ILog;
 import v0id.api.exp.data.ExPPackets;
@@ -254,8 +254,9 @@ public class EntityFallingTree extends Entity
 	public void deserializeDataFromNBT(NBTTagCompound compound)
 	{
 		this.data.clear();
-		for (NBTTagCompound tag : NBTList.<NBTTagCompound>of(compound.getTagList("data", NBT.TAG_COMPOUND)))
+		for (NBTBase base : compound.getTagList("data", NBT.TAG_COMPOUND))
 		{
+			NBTTagCompound tag = (NBTTagCompound) base;
 			NBTTagCompound pTag = tag.getCompoundTag("pos");
 			BlockPos pos = new BlockPos(pTag.getInteger("X"), pTag.getInteger("Y"), pTag.getInteger("Z"));
 			IBlockState state = NBTUtil.readBlockState(tag);

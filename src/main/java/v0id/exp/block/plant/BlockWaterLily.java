@@ -1,14 +1,5 @@
 package v0id.exp.block.plant;
 
-import static v0id.api.exp.block.property.EnumWaterLilyType.LEOPARDESS;
-import static v0id.api.exp.block.property.ExPBlockProperties.LILY_TYPE;
-import static v0id.api.exp.block.property.ExPBlockProperties.PLANT_BLOOMING;
-
-import java.util.Random;
-import java.util.stream.Stream;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
@@ -29,12 +20,9 @@ import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.block.property.EnumWaterLilyType;
-import v0id.api.exp.data.ExPCreativeTabs;
-import v0id.api.exp.data.ExPMisc;
-import v0id.api.exp.data.ExPOreDict;
-import v0id.api.exp.data.ExPRegistryNames;
-import v0id.api.exp.data.IOreDictEntry;
+import v0id.api.exp.data.*;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
@@ -42,6 +30,13 @@ import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockWaterLily;
 import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
+
+import java.util.Random;
+import java.util.stream.Stream;
+
+import static v0id.api.exp.block.property.EnumWaterLilyType.LEOPARDESS;
+import static v0id.api.exp.block.property.ExPBlockProperties.LILY_TYPE;
+import static v0id.api.exp.block.property.ExPBlockProperties.PLANT_BLOOMING;
 
 public class BlockWaterLily extends BlockBush implements IWeightProvider, IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {
@@ -165,11 +160,11 @@ public class BlockWaterLily extends BlockBush implements IWeightProvider, IIniti
 	
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		for (int i = 0; i < EnumWaterLilyType.values().length * 2; ++i)
 		{
-			list.add(new ItemStack(itemIn, 1, i));
+			list.add(new ItemStack(this, 1, i));
 		}
 	}
 

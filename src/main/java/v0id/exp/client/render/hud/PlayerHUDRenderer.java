@@ -8,7 +8,7 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -81,7 +81,7 @@ public class PlayerHUDRenderer
 		World w = Minecraft.getMinecraft().world;
 		IExPWorld world = IExPWorld.of(w);
 		Minecraft.getMinecraft().renderEngine.bindTexture(ExPTextures.PLAYER_HUD[player.getProgressionStage().ordinal()]);
-		VertexBuffer vb = Tessellator.getInstance().getBuffer();
+		BufferBuilder vb = Tessellator.getInstance().getBuffer();
 		ScaledResolution sRes = new ScaledResolution(Minecraft.getMinecraft());
 		EnumHandSide hand = p.getPrimaryHand().opposite();
 		float cX = sRes.getScaledWidth() / 2;

@@ -1,15 +1,11 @@
 package v0id.exp.block.plant;
 
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Stream;
-
 import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
@@ -17,13 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
-import v0id.api.exp.block.EnumBerry;
-import v0id.api.exp.block.EnumGrassState;
-import v0id.api.exp.block.EnumShrubState;
-import v0id.api.exp.block.EnumShrubType;
-import v0id.api.exp.block.EnumTreeType;
-import v0id.api.exp.block.IGrass;
-import v0id.api.exp.block.IShrub;
+import v0id.api.exp.block.*;
 import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
@@ -31,6 +21,9 @@ import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
+
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 public class BlockBerryBush extends BlockShrub
 {
@@ -111,11 +104,11 @@ public class BlockBerryBush extends BlockShrub
 	}
 
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		for (int i = 0; i < EnumBerry.values().length; ++i)
 		{
-			list.add(new ItemStack(itemIn, 1, i));
+			list.add(new ItemStack(this, 1, i));
 		}
 	}
 

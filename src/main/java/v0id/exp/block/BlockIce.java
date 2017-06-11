@@ -1,8 +1,5 @@
 package v0id.exp.block;
 
-import java.util.Random;
-import java.util.stream.Stream;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
@@ -27,17 +24,16 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.exp.block.property.ExPBlockProperties;
-import v0id.api.exp.data.ExPBlocks;
-import v0id.api.exp.data.ExPCreativeTabs;
-import v0id.api.exp.data.ExPOreDict;
-import v0id.api.exp.data.ExPRegistryNames;
-import v0id.api.exp.data.IOreDictEntry;
+import v0id.api.exp.data.*;
 import v0id.api.exp.gravity.GravityHelper;
 import v0id.api.exp.gravity.IGravitySusceptible;
 import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
+
+import java.util.Random;
+import java.util.stream.Stream;
 
 public class BlockIce extends Block implements IInitializableBlock, IGravitySusceptible, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {
@@ -150,10 +146,10 @@ public class BlockIce extends Block implements IInitializableBlock, IGravitySusc
 	}
 
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
-		list.add(new ItemStack(itemIn, 1, 0));
-		list.add(new ItemStack(itemIn, 1, 1));
+		list.add(new ItemStack(this, 1, 0));
+		list.add(new ItemStack(this, 1, 1));
 	}
 
 	@Override

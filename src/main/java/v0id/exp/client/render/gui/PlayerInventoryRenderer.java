@@ -1,25 +1,24 @@
 package v0id.exp.client.render.gui;
 
-import java.util.Optional;
-
-import org.apache.commons.lang3.tuple.Pair;
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import org.apache.commons.lang3.tuple.Pair;
+import org.lwjgl.opengl.GL11;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.player.inventory.ManagedSlot;
 import v0id.exp.player.inventory.PlayerInventoryHelper;
+
+import java.util.Optional;
 
 public class PlayerInventoryRenderer
 {
@@ -27,7 +26,7 @@ public class PlayerInventoryRenderer
 	{
 		GuiContainer gInv = (GuiContainer) inventoryUI;
 		Tessellator tec = Tessellator.getInstance();
-		VertexBuffer buffer = tec.getBuffer();
+		BufferBuilder buffer = tec.getBuffer();
 		InventoryPlayer inventory = player.inventory;
 		ManagedSlot mSlot = null;
 		for (Slot s : gInv.inventorySlots.inventorySlots)
@@ -91,7 +90,7 @@ public class PlayerInventoryRenderer
 		GlStateManager.disableBlend();
 	}
 	
-	public static void putRectangle(VertexBuffer buffer, int x, int y, int w, int h, float... color)
+	public static void putRectangle(BufferBuilder buffer, int x, int y, int w, int h, float... color)
 	{
 		buffer.pos(x, 		y + h, 0)	.color(color[0], color[1], color[2], color[3]).endVertex();
 		buffer.pos(x + w, 	y + h, 0)	.color(color[0], color[1], color[2], color[3]).endVertex();
@@ -99,7 +98,7 @@ public class PlayerInventoryRenderer
 		buffer.pos(x, 		y, 0)		.color(color[0], color[1], color[2], color[3]).endVertex();
 	}
 	
-	public static void putOutlinedRectangle(VertexBuffer buffer, int x, int y, int w, int h, float... color)
+	public static void putOutlinedRectangle(BufferBuilder buffer, int x, int y, int w, int h, float... color)
 	{
 		putRectangle(buffer, x, y, w, h, color);
 		float[] colorOutline = new float[4];

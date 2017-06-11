@@ -1,36 +1,23 @@
 package v0id.exp.player;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.ImmutableCollection;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.TreeMultimap;
-
+import com.google.common.collect.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagFloat;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.util.Constants.NBT;
 import v0id.api.core.util.nbt.NBTChain;
-import v0id.api.core.util.nbt.NBTList;
 import v0id.api.exp.combat.SpecialAttack;
 import v0id.api.exp.combat.SpecialAttack.AttackWrapper;
-import v0id.api.exp.player.BodyPart;
-import v0id.api.exp.player.EnumPlayerProgression;
-import v0id.api.exp.player.IDisease;
-import v0id.api.exp.player.IExPPlayer;
-import v0id.api.exp.player.IModifier;
-import v0id.api.exp.player.ModifierCollection;
-import v0id.api.exp.player.Nutrient;
+import v0id.api.exp.player.*;
 import v0id.exp.net.PacketHandlerPlayerData;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 public class ExPPlayer implements IExPPlayer
 {
@@ -213,10 +200,11 @@ public class ExPPlayer implements IExPPlayer
 		{
 			this.modifiers.clear();
 			NBTTagList lst = nbt.getTagList("modifiers", NBT.TAG_COMPOUND);
-			for (NBTTagCompound tag : new NBTList<NBTTagCompound>(lst))
+			for (NBTBase tagBase : lst)
 			{
 				try
 				{
+					NBTTagCompound tag = (NBTTagCompound) tagBase;
 					Class<IModifier> clazz = (Class<IModifier>) Class.forName(tag.getString("_clazz"));
 					IModifier instance = clazz.newInstance();
 					instance.deserializeNBT(tag);
@@ -270,19 +258,19 @@ public class ExPPlayer implements IExPPlayer
 		if (nbt.hasKey("partsData"))
 		{
 			this.partsData.clear();
-			NBTList.<NBTTagCompound>of(nbt.getTagList("partsData", NBT.TAG_COMPOUND)).forEach(tag -> this.partsData.put(BodyPart.values()[tag.getByte("part")], tag.getString("value")));
+			nbt.getTagList("partsData", NBT.TAG_COMPOUND).forEach(tag -> this.partsData.put(BodyPart.values()[((NBTTagCompound)tag).getByte("part")], ((NBTTagCompound)tag).getString("value")));
 		}
 		
 		if (nbt.hasKey("diseases"))
 		{
 			this.diseases.clear();
-			for (NBTTagCompound tag : NBTList.<NBTTagCompound>of(nbt.getTagList("diseases", NBT.TAG_COMPOUND)))
+			for (NBTBase tag : nbt.getTagList("diseases", NBT.TAG_COMPOUND))
 			{
 				try
 				{
-					Class<IDisease> clazz = (Class<IDisease>) Class.forName(tag.getString("_clazz"));
+					Class<IDisease> clazz = (Class<IDisease>) Class.forName(((NBTTagCompound)tag).getString("_clazz"));
 					IDisease disease = clazz.newInstance();
-					disease.deserializeNBT(tag);
+					disease.deserializeNBT(((NBTTagCompound)tag));
 					this.diseases.add(disease);
 				}
 				catch(Exception ex)

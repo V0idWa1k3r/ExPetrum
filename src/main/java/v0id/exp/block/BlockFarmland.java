@@ -1,10 +1,5 @@
 package v0id.exp.block;
 
-import static v0id.api.exp.block.property.EnumDirtClass.ACRISOL;
-import static v0id.api.exp.block.property.ExPBlockProperties.DIRT_CLASS;
-
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
@@ -34,11 +29,7 @@ import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import v0id.api.core.util.java.ColorRGB;
-import v0id.api.exp.block.EnumGrassAmount;
-import v0id.api.exp.block.EnumGrassState;
-import v0id.api.exp.block.IAcceptsWaterCan;
-import v0id.api.exp.block.ICanGrowCrop;
-import v0id.api.exp.block.IGrass;
+import v0id.api.exp.block.*;
 import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
@@ -50,6 +41,11 @@ import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.tile.TileFarmland;
+
+import java.util.Random;
+
+import static v0id.api.exp.block.property.EnumDirtClass.ACRISOL;
+import static v0id.api.exp.block.property.ExPBlockProperties.DIRT_CLASS;
 
 public class BlockFarmland extends BlockContainer implements IInitializableBlock, IBlockRegistryEntry, IItemRegistryEntry, IGravitySusceptible, ICanGrowCrop, IGrass, IAcceptsWaterCan
 {
@@ -226,11 +222,11 @@ public class BlockFarmland extends BlockContainer implements IInitializableBlock
 	
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		for (int i = 0; i < EnumDirtClass.values().length; ++i)
 		{
-			list.add(new ItemStack(itemIn, 1, i));
+			list.add(new ItemStack(this, 1, i));
 		}
 	}
 

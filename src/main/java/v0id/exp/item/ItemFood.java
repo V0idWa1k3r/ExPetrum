@@ -1,9 +1,6 @@
 package v0id.exp.item;
 
-import java.text.DecimalFormat;
-import java.util.EnumMap;
-import java.util.List;
-
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -38,6 +35,10 @@ import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
 
+import java.text.DecimalFormat;
+import java.util.EnumMap;
+import java.util.List;
+
 public class ItemFood extends net.minecraft.item.ItemFood implements IInitializableItem, IOreDictEntry, IItemRegistryEntry, IExPFood, IContainerTickable
 {
 	public ItemFood()
@@ -53,9 +54,9 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced)
 	{
-		super.addInformation(stack, playerIn, tooltip, advanced);
+		super.addInformation(stack, world, tooltip, advanced);
 		DecimalFormat df = new DecimalFormat("#.#");
 		DecimalFormat df1 = new DecimalFormat("#,###");
 		tooltip.add(I18n.format("exp.txt.item.desc.rot", df.format((this.getTotalRot(stack) / this.getEntry(stack).getBaseHealth()) * 100)));
@@ -63,11 +64,11 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 	}
 
 	@Override
-	public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems)
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
 		for (int i = 0; i < FoodEntry.allEntries.size(); ++i)
 		{
-			subItems.add(new ItemStack(itemIn, 1, i));
+			subItems.add(new ItemStack(this, 1, i));
 		}
 	}
 

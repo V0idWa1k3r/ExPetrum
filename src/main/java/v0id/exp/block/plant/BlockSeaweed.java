@@ -1,12 +1,5 @@
 package v0id.exp.block.plant;
 
-import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
-import static v0id.api.exp.block.property.ExPBlockProperties.ROCK_CLASS;
-
-import java.util.Random;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -25,6 +18,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.block.IWater;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.data.ExPBlocks;
@@ -37,6 +31,11 @@ import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.handler.ExPHandlerRegistry;
+
+import java.util.Random;
+
+import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
+import static v0id.api.exp.block.property.ExPBlockProperties.ROCK_CLASS;
 
 public class BlockSeaweed extends Block implements IWeightProvider, IInitializableBlock, IBlockRegistryEntry, IItemRegistryEntry
 {
@@ -69,11 +68,11 @@ public class BlockSeaweed extends Block implements IWeightProvider, IInitializab
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		for (int i = 0; i < EnumRockClass.values().length; ++i)
 		{
-			list.add(new ItemStack(itemIn, 1, i));
+			list.add(new ItemStack(this, 1, i));
 		}
 	}
 

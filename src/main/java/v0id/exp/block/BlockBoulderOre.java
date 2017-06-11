@@ -1,12 +1,5 @@
 package v0id.exp.block;
 
-import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
-import static v0id.api.exp.block.property.ExPBlockProperties.ROCK_CLASS;
-
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Stream;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -14,8 +7,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -33,15 +26,19 @@ import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.block.property.ExPBlockProperties;
-import v0id.api.exp.data.ExPCreativeTabs;
-import v0id.api.exp.data.ExPItems;
-import v0id.api.exp.data.ExPOreDict;
-import v0id.api.exp.data.ExPRegistryNames;
-import v0id.api.exp.data.IOreDictEntry;
+import v0id.api.exp.data.*;
 import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockBoulderOre;
 import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.tile.TileOre;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Stream;
+
+import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
+import static v0id.api.exp.block.property.ExPBlockProperties.ROCK_CLASS;
 
 public class BlockBoulderOre extends Block implements ITileEntityProvider, IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {
@@ -87,16 +84,16 @@ public class BlockBoulderOre extends Block implements ITileEntityProvider, IInit
 	
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		for (int i = 0; i < EnumRockClass.values().length * EnumOre.values().length; ++i)
 		{
-			list.add(new ItemStack(itemIn, 1, i));
+			list.add(new ItemStack(this, 1, i));
 		}
 	}
 	
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
+	public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced)
 	{
 		int oreIndex = (stack.getMetadata() / EnumRockClass.values().length) % EnumOre.values().length;
 		int oreRichnessIndex = stack.getMetadata() / (EnumRockClass.values().length * EnumOre.values().length);

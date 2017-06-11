@@ -22,9 +22,9 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraft.world.gen.ChunkProviderOverworld;
+import net.minecraft.world.gen.ChunkGeneratorOverworld;
+import net.minecraft.world.gen.ChunkGeneratorSettings;
 import net.minecraft.world.gen.ChunkProviderServer;
-import net.minecraft.world.gen.ChunkProviderSettings;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -389,15 +389,15 @@ public class ExPHandlerServer
 			if (w.getChunkProvider() instanceof ChunkProviderServer && w.getWorldType() instanceof WorldTypeExP)
 			{
 				ChunkProviderServer cps = (ChunkProviderServer) w.getChunkProvider();
-				if (cps.chunkGenerator instanceof ChunkProviderOverworld)
+				if (cps.chunkGenerator instanceof ChunkGeneratorOverworld)
 				{
-					ChunkProviderOverworld cpo = (ChunkProviderOverworld) cps.chunkGenerator;
-					for (Field f : ChunkProviderOverworld.class.getDeclaredFields())
+					ChunkGeneratorOverworld cpo = (ChunkGeneratorOverworld) cps.chunkGenerator;
+					for (Field f : ChunkGeneratorOverworld.class.getDeclaredFields())
 					{
-						if (f.getType() == ChunkProviderSettings.class)
+						if (f.getType() == ChunkGeneratorSettings.class)
 						{
 							f.setAccessible(true);
-							ChunkProviderSettings.Factory factory = new ChunkProviderSettings.Factory();
+							ChunkGeneratorSettings.Factory factory = new ChunkGeneratorSettings.Factory();
 							factory.seaLevel = 127;
 							factory.baseSize = 17.25f;
 							f.set(cpo, factory.build());

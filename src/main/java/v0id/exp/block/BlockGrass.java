@@ -1,16 +1,6 @@
 package v0id.exp.block;
 
-import static v0id.api.exp.block.property.EnumDirtClass.ACRISOL;
-import static v0id.api.exp.block.property.ExPBlockProperties.DIRT_CLASS;
-
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Stream;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Predicate;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -34,17 +24,13 @@ import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.core.util.java.ColorRGB;
 import v0id.api.exp.block.EnumGrassAmount;
 import v0id.api.exp.block.EnumGrassState;
 import v0id.api.exp.block.IGrass;
 import v0id.api.exp.block.property.EnumDirtClass;
-import v0id.api.exp.data.ExPBlocks;
-import v0id.api.exp.data.ExPCreativeTabs;
-import v0id.api.exp.data.ExPMisc;
-import v0id.api.exp.data.ExPOreDict;
-import v0id.api.exp.data.ExPRegistryNames;
-import v0id.api.exp.data.IOreDictEntry;
+import v0id.api.exp.data.*;
 import v0id.api.exp.gravity.GravityHelper;
 import v0id.api.exp.gravity.IGravitySusceptible;
 import v0id.api.exp.inventory.IWeightProvider;
@@ -53,6 +39,13 @@ import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.block.plant.BlockShrub;
 import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
+
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
+
+import static v0id.api.exp.block.property.EnumDirtClass.ACRISOL;
+import static v0id.api.exp.block.property.ExPBlockProperties.DIRT_CLASS;
 
 public class BlockGrass extends Block implements IWeightProvider, IGravitySusceptible, IGrass, IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {
@@ -187,11 +180,11 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		for (int i = 0; i < EnumDirtClass.values().length; ++i)
 		{
-			list.add(new ItemStack(itemIn, 1, i));
+			list.add(new ItemStack(this, 1, i));
 		}
 	}
 

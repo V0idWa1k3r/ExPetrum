@@ -20,7 +20,7 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeCache;
 import net.minecraft.world.biome.BiomeProvider;
-import net.minecraft.world.gen.ChunkProviderSettings;
+import net.minecraft.world.gen.ChunkGeneratorSettings;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 import net.minecraft.world.storage.WorldInfo;
@@ -35,7 +35,7 @@ public class WorldTypeExP extends WorldType
 	}
 
 	@Override
-	public GenLayer getBiomeLayer(long worldSeed, GenLayer parentLayer, ChunkProviderSettings chunkProviderSettings)
+	public GenLayer getBiomeLayer(long worldSeed, GenLayer parentLayer, ChunkGeneratorSettings chunkProviderSettings)
 	{
 		 net.minecraft.world.gen.layer.GenLayer ret = new GenLayerBiomeMod(200L, parentLayer, this, chunkProviderSettings);
 	     ret = net.minecraft.world.gen.layer.GenLayerZoom.magnify(1000L, ret, 2);
@@ -167,7 +167,7 @@ public class WorldTypeExP extends WorldType
 	
 	public static class BiomeProviderExP extends BiomeProvider
 	{
-		private ChunkProviderSettings settings;
+		private ChunkGeneratorSettings settings;
 	    private GenLayer genBiomes;
 	    /** A GenLayer containing the indices into BiomeGenBase.biomeList[] */
 	    private GenLayer biomeIndexLayer;
@@ -207,7 +207,7 @@ public class WorldTypeExP extends WorldType
 
 	        if (worldTypeIn == WorldType.CUSTOMIZED && !options.isEmpty())
 	        {
-	            this.settings = ChunkProviderSettings.Factory.jsonToFactory(options).build();
+	            this.settings = ChunkGeneratorSettings.Factory.jsonToFactory(options).build();
 	        }
 
 	        GenLayer[] agenlayer = GenLayer.initializeAllBiomeGenerators(seed, worldTypeIn, this.settings);
@@ -406,9 +406,9 @@ public class WorldTypeExP extends WorldType
 	{
 		@SuppressWarnings("unchecked")
 	    private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> biomes = Lists.newArrayList();
-	    private final ChunkProviderSettings settings;
+	    private final ChunkGeneratorSettings settings;
 
-	    public GenLayerBiomeMod(long p_i45560_1_, GenLayer p_i45560_3_, WorldType p_i45560_4_, ChunkProviderSettings p_i45560_5_)
+	    public GenLayerBiomeMod(long p_i45560_1_, GenLayer p_i45560_3_, WorldType p_i45560_4_, ChunkGeneratorSettings p_i45560_5_)
 	    {
 	        super(p_i45560_1_);
 	        this.parent = p_i45560_3_;

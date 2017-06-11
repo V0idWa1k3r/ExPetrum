@@ -1,17 +1,11 @@
 package v0id.exp.player;
 
-import java.lang.reflect.Field;
-import java.util.EnumMap;
-import java.util.List;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.collect.Multimap;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -24,6 +18,7 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.common.ISpecialArmor;
 import net.minecraftforge.common.ISpecialArmor.ArmorProperties;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.data.ExPDamageMappings;
 import v0id.api.exp.data.ExPDamageMappings.DamageMapping;
 import v0id.api.exp.item.food.FoodManager;
@@ -31,6 +26,10 @@ import v0id.api.exp.item.food.IExPFood;
 import v0id.api.exp.player.BodyPart;
 import v0id.api.exp.player.IExPPlayer;
 import v0id.api.exp.player.Nutrient;
+
+import java.lang.reflect.Field;
+import java.util.EnumMap;
+import java.util.List;
 
 public class PlayerManager
 {
@@ -354,10 +353,13 @@ public class PlayerManager
 					toughnessMod *= mod.getAmount();
 				}
 			}
-			
-			if (armor.attemptDamageItem((int) (amount / 2), player.world.rand))
+
+			if (player instanceof EntityPlayerMP)
 			{
-				armor.setCount(0);
+				if (armor.attemptDamageItem((int) (amount / 2), player.world.rand, (EntityPlayerMP) player))
+				{
+					armor.setCount(0);
+				}
 			}
 			
 			return amount * (1 / toughnessMod);

@@ -1,10 +1,5 @@
 package v0id.exp.item;
 
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Stream;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,23 +18,14 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.core.logging.LogLevel;
 import v0id.api.core.network.PacketType;
 import v0id.api.core.network.VoidNetwork;
 import v0id.api.core.util.DimBlockPos;
-import v0id.api.exp.data.ExPBlocks;
-import v0id.api.exp.data.ExPCreativeTabs;
-import v0id.api.exp.data.ExPItems;
-import v0id.api.exp.data.ExPMisc;
-import v0id.api.exp.data.ExPOreDict;
-import v0id.api.exp.data.ExPRegistryNames;
-import v0id.api.exp.data.IOreDictEntry;
+import v0id.api.exp.data.*;
 import v0id.api.exp.inventory.IWeightProvider;
-import v0id.api.exp.tile.crop.EnumCrop;
-import v0id.api.exp.tile.crop.ExPFarmlandCapability;
-import v0id.api.exp.tile.crop.ExPSeedsCapability;
-import v0id.api.exp.tile.crop.IExPCrop;
-import v0id.api.exp.tile.crop.IExPSeed;
+import v0id.api.exp.tile.crop.*;
 import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.IExPWorld;
 import v0id.exp.block.item.IItemRegistryEntry;
@@ -47,6 +33,9 @@ import v0id.exp.crop.CropStats;
 import v0id.exp.crop.ExPCrop;
 import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.tile.TileCrop;
+
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 public class ItemSeeds extends Item implements IInitializableItem, IItemRegistryEntry, IOreDictEntry, IWeightProvider
 {
@@ -83,11 +72,11 @@ public class ItemSeeds extends Item implements IInitializableItem, IItemRegistry
 	}
 
 	@Override
-	public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems)
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
 		for (int i = 0; i < EnumCrop.values().length - 1; ++i)
 		{
-			subItems.add(new ItemStack(itemIn, 1, i));
+			subItems.add(new ItemStack(this, 1, i));
 		}
 	}
 

@@ -1,11 +1,5 @@
 package v0id.exp.block;
 
-import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
-import static v0id.api.exp.block.property.ExPBlockProperties.ROCK_CLASS;
-
-import java.util.Random;
-import java.util.stream.Stream;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -21,12 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -40,16 +29,18 @@ import v0id.api.core.network.VoidNetwork;
 import v0id.api.core.util.DimBlockPos;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.block.property.ExPBlockProperties;
-import v0id.api.exp.data.ExPCreativeTabs;
-import v0id.api.exp.data.ExPItems;
-import v0id.api.exp.data.ExPOreDict;
-import v0id.api.exp.data.ExPRegistryNames;
-import v0id.api.exp.data.IOreDictEntry;
+import v0id.api.exp.data.*;
 import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.item.ItemRock;
 import v0id.exp.tile.TileWorkedBoulder;
+
+import java.util.Random;
+import java.util.stream.Stream;
+
+import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
+import static v0id.api.exp.block.property.ExPBlockProperties.ROCK_CLASS;
 
 public class BlockWorkedBoulder extends Block implements ITileEntityProvider, IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {
@@ -82,11 +73,11 @@ public class BlockWorkedBoulder extends Block implements ITileEntityProvider, II
 	
 	@SideOnly(Side.CLIENT)
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		for (int i = 0; i < EnumRockClass.values().length; ++i)
 		{
-			list.add(new ItemStack(itemIn, 1, i));
+			list.add(new ItemStack(this, 1, i));
 		}
 	}
 

@@ -1,11 +1,8 @@
 package v0id.exp.item.tool;
 
-import java.util.Set;
-
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,7 +10,6 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.util.NonNullList;
@@ -21,6 +17,8 @@ import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.metal.EnumMetal;
 import v0id.api.exp.metal.EnumToolStats;
 import v0id.exp.item.ItemIngot;
+
+import java.util.Set;
 
 public abstract class ItemExPTool extends ItemTool implements IExPTool
 {
@@ -60,11 +58,11 @@ public abstract class ItemExPTool extends ItemTool implements IExPTool
 	}
 
 	@Override
-	public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems)
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
 		for (int i = 0; i < EnumToolStats.values().length; ++i)
 		{
-			subItems.add(new ItemStack(itemIn, 1, i));
+			subItems.add(new ItemStack(this, 1, i));
 		}
 	}
 

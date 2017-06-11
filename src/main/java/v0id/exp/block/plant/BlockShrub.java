@@ -1,9 +1,5 @@
 package v0id.exp.block.plant;
 
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Stream;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -29,25 +25,19 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
-import v0id.api.exp.block.EnumGrassState;
-import v0id.api.exp.block.EnumShrubState;
-import v0id.api.exp.block.EnumShrubType;
-import v0id.api.exp.block.EnumTreeType;
-import v0id.api.exp.block.IGrass;
-import v0id.api.exp.block.IShrub;
+import v0id.api.exp.block.*;
 import v0id.api.exp.block.property.ExPBlockProperties;
-import v0id.api.exp.data.ExPBlocks;
-import v0id.api.exp.data.ExPCreativeTabs;
-import v0id.api.exp.data.ExPItems;
-import v0id.api.exp.data.ExPOreDict;
-import v0id.api.exp.data.ExPRegistryNames;
-import v0id.api.exp.data.IOreDictEntry;
+import v0id.api.exp.data.*;
 import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
+
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 public class BlockShrub extends Block implements IInitializableBlock, IShrub, IPlantable, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {
@@ -232,11 +222,11 @@ public class BlockShrub extends Block implements IInitializableBlock, IShrub, IP
 	}
 
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		for (int i = 0; i < EnumShrubType.values().length; ++i)
 		{
-			list.add(new ItemStack(itemIn, 1, i));
+			list.add(new ItemStack(this, 1, i));
 		}
 	}
 

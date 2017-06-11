@@ -1,14 +1,5 @@
 package v0id.exp.block.tree;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Stream;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.SoundType;
@@ -16,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,14 +25,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import org.apache.commons.lang3.tuple.Pair;
+import v0id.api.core.VoidApi;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.ILog;
 import v0id.api.exp.block.property.ExPBlockProperties;
-import v0id.api.exp.data.ExPBlocks;
-import v0id.api.exp.data.ExPCreativeTabs;
-import v0id.api.exp.data.ExPOreDict;
-import v0id.api.exp.data.ExPRegistryNames;
-import v0id.api.exp.data.IOreDictEntry;
+import v0id.api.exp.data.*;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
@@ -48,6 +38,14 @@ import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.entity.EntityFallingTree;
 import v0id.exp.handler.ExPHandlerRegistry;
+
+import javax.annotation.Nullable;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILog, IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {
@@ -116,37 +114,41 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced)
+	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced)
 	{
 		if (this instanceof Decorative)
 		{
-			super.addInformation(stack, player, tooltip, advanced);
+			super.addInformation(stack, world, tooltip, advanced);
 			return;
 		}
+
+		EntityPlayer player = VoidApi.proxy.getClientPlayer();
+		if (player != null)
+        {
+            if (player.capabilities.isCreativeMode)
+            {
+                tooltip.add("This block is NOT FOR BUILDING!!!");
+                tooltip.add("This is a block of an alive tree!");
+                tooltip.add("Breaking it will trigger the \"fall\" effect of a tree!");
+            }
+            else
+            {
+                tooltip.add("You should NEVER get this block");
+                tooltip.add("If you have somehow obtained it without using cheats PLEASE report it to V0id!");
+            }
+        }
 		
-		if (player.capabilities.isCreativeMode)
-		{
-			tooltip.add("This block is NOT FOR BUILDING!!!");
-			tooltip.add("This is a block of an alive tree!");
-			tooltip.add("Breaking it will trigger the \"fall\" effect of a tree!");
-		}
-		else
-		{
-			tooltip.add("You should NEVER get this block");
-			tooltip.add("If you have somehow obtained it without using cheats PLEASE report it to V0id!");
-		}
-		
-		super.addInformation(stack, player, tooltip, advanced);
+		super.addInformation(stack, world, tooltip, advanced);
 	}
 
 	@Override
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		for (int i = 0; i < 5; ++i)
 		{
 			IBlockState state = this.getDefaultState().withProperty(ExPBlockProperties.TREE_TYPES[this.logIndex], EnumTreeType.values()[this.logIndex * 5 + i]);
 			int meta = this.getMetaFromState(state);
-			list.add(new ItemStack(itemIn, 1, meta));
+			list.add(new ItemStack(this, 1, meta));
 		}
 	}
 

@@ -4,6 +4,7 @@ import java.util.EnumMap;
 import java.util.Map.Entry;
 import java.util.stream.Stream;
 
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagLong;
@@ -13,7 +14,6 @@ import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import v0id.api.core.network.PacketType;
 import v0id.api.core.network.VoidNetwork;
 import v0id.api.core.util.DimBlockPos;
-import v0id.api.core.util.nbt.NBTList;
 import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.tile.crop.EnumPlantNutrient;
 import v0id.api.exp.tile.crop.IFarmland;
@@ -54,9 +54,10 @@ public class ExPFarmland implements IFarmland
 	public void deserializeNBT(NBTTagCompound nbt)
 	{
 		this.moistureLevel = nbt.getFloat("moisture");
-		for (NBTTagCompound tag : NBTList.<NBTTagCompound>of(nbt.getTagList("nutrientData", NBT.TAG_COMPOUND)))
+		for (NBTBase tag : nbt.getTagList("nutrientData", NBT.TAG_COMPOUND))
 		{
-			this.nutrientData.put(EnumPlantNutrient.values()[nbt.getByte("key")], nbt.getFloat("value"));
+			NBTTagCompound tagCompound = (NBTTagCompound) tag;
+			this.nutrientData.put(EnumPlantNutrient.values()[tagCompound.getByte("key")], tagCompound.getFloat("value"));
 		}
 		
 		if (nbt.hasKey("calendar"))
