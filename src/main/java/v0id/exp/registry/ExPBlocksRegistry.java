@@ -1,39 +1,18 @@
 package v0id.exp.registry;
 
-import java.util.stream.Stream;
-
-import net.minecraft.block.properties.PropertyEnum;
 import v0id.api.exp.block.EnumShrubState;
 import v0id.api.exp.block.EnumTreeType;
-import v0id.api.exp.block.property.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
-import v0id.exp.block.BlockBoulder;
-import v0id.exp.block.BlockBoulderOre;
-import v0id.exp.block.BlockCoralRock;
-import v0id.exp.block.BlockFarmland;
-import v0id.exp.block.BlockGrass;
-import v0id.exp.block.BlockIce;
-import v0id.exp.block.BlockOre;
-import v0id.exp.block.BlockPebble;
-import v0id.exp.block.BlockSand;
-import v0id.exp.block.BlockSnow;
-import v0id.exp.block.BlockSoil;
-import v0id.exp.block.BlockStone;
-import v0id.exp.block.BlockWorkedBoulder;
+import v0id.exp.block.*;
 import v0id.exp.block.fluid.BlockFreshWater;
 import v0id.exp.block.fluid.BlockLava;
 import v0id.exp.block.fluid.BlockOil;
 import v0id.exp.block.fluid.BlockSaltWater;
-import v0id.exp.block.plant.BlockBerryBush;
-import v0id.exp.block.plant.BlockCattail;
-import v0id.exp.block.plant.BlockCoralPlant;
-import v0id.exp.block.plant.BlockCrop;
-import v0id.exp.block.plant.BlockSeaweed;
-import v0id.exp.block.plant.BlockShrub;
-import v0id.exp.block.plant.BlockVegetation;
-import v0id.exp.block.plant.BlockWaterLily;
+import v0id.exp.block.plant.*;
 import v0id.exp.block.tree.BlockLeaf;
 import v0id.exp.block.tree.BlockLog;
+
+import java.util.stream.Stream;
 
 public class ExPBlocksRegistry extends AbstractRegistry
 {
@@ -63,8 +42,6 @@ public class ExPBlocksRegistry extends AbstractRegistry
 			{
 				EnumTreeType.typesForIndex[i][j] = EnumTreeType.values()[i * 5 + j];
 			}
-			
-			ExPBlockProperties.TREE_TYPES[i] = PropertyEnum.create("ttype", EnumTreeType.class, EnumTreeType.typesForIndex[i]);
 		}
 		
 		for (int i = 0; i < 6; ++i)

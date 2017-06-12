@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -24,7 +23,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.tuple.Pair;
@@ -46,8 +44,6 @@ import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
 
 import javax.annotation.Nullable;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
@@ -68,36 +64,13 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 	@Override
 	public void initBlock()
 	{
-		try
-		{
-			Field blockStateFld = null;
-			for (Field f : Block.class.getDeclaredFields())
-			{
-				if (f.getType().equals(BlockStateContainer.class))
-				{
-					blockStateFld = f;
-					break;
-				}
-			}
-			
-			blockStateFld.setAccessible(true);
-			Field modifiersField = Field.class.getDeclaredField("modifiers");
-			modifiersField.setAccessible(true);
-			modifiersField.set(blockStateFld, modifiersField.getModifiers() & ~Modifier.FINAL);
-			blockStateFld.set(this, this.createBlockState());
-		}
-		catch (Exception ex)
-		{
-			FMLCommonHandler.instance().raiseException(ex, "ExPetrum was umable to reflect BlockStateContainer field!", true);
-		}
-		
 		this.setHardness(1.5f);
 		this.setRegistryName(this.createRegistryLocation());
 		this.setResistance(0.5f);
 		this.setSoundType(SoundType.PLANT);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(ExPBlockProperties.LEAF_STATE, EnumLeafState.NORMAL).withProperty(ExPBlockProperties.TREE_TYPES[this.logIndex], EnumTreeType.values()[this.logIndex * 5]));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(ExPBlockProperties.LEAF_STATE, EnumLeafState.NORMAL).withProperty(ExPBlockProperties.TREE_TYPE, EnumTreeType.values()[this.logIndex * 5]));
 		this.setTickRandomly(true);
 		Blocks.FIRE.setFireInfo(this, 30, 60);
 		ExPHandlerRegistry.put(this);
@@ -112,7 +85,7 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 	@Override
 	public int damageDropped(IBlockState state)
 	{
-		return state.getValue(ExPBlockProperties.TREE_TYPES[this.logIndex]).ordinal();
+		return state.getValue(ExPBlockProperties.TREE_TYPE).ordinal();
 	}
 
 	@Override
@@ -151,7 +124,7 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 			if (worldIn.rand.nextInt(64) == 0)
 			{
 				EnumLeafState suggestion = EnumLeafState.values()[Helpers.getSuggestedGrassState(pos, worldIn).ordinal()];
-				if (state.getValue(ExPBlockProperties.LEAF_STATE) != suggestion && !state.getValue(ExPBlockProperties.TREE_TYPES[this.logIndex]).isEvergreen())
+				if (state.getValue(ExPBlockProperties.LEAF_STATE) != suggestion && !state.getValue(ExPBlockProperties.TREE_TYPE).isEvergreen())
 				{
 					worldIn.setBlockState(pos, state.withProperty(ExPBlockProperties.LEAF_STATE, suggestion), 2);
 				}
@@ -168,7 +141,7 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 	@Override
 	public IBlockState getStateFromMeta(int meta)
     {
-        return this.getDefaultState().withProperty(ExPBlockProperties.LEAF_STATE, EnumLeafState.values()[meta % 3]).withProperty(ExPBlockProperties.TREE_TYPES[this.logIndex], EnumTreeType.values()[meta / 3 + this.logIndex * 5]);
+        return this.getDefaultState().withProperty(ExPBlockProperties.LEAF_STATE, EnumLeafState.values()[meta % 3]).withProperty(ExPBlockProperties.TREE_TYPE, EnumTreeType.values()[meta / 3 + this.logIndex * 5]);
     }
 
     /**
@@ -177,7 +150,13 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
     @Override
 	public int getMetaFromState(IBlockState state)
     {
-    	return (state.getValue(ExPBlockProperties.TREE_TYPES[this.logIndex]).ordinal() - this.logIndex * 5) * 3 + state.getValue(ExPBlockProperties.LEAF_STATE).ordinal();
+        int ordinal = state.getValue(ExPBlockProperties.TREE_TYPE).ordinal();
+        if (ordinal * 3 < this.logIndex * 15 || ordinal * 3 >= (this.logIndex + 1) * 15)
+        {
+            return 0;
+        }
+
+    	return (ordinal - this.logIndex * 5) * 3 + state.getValue(ExPBlockProperties.LEAF_STATE).ordinal();
     }
 
     @Override
@@ -189,7 +168,7 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 	@Override
 	protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {ExPBlockProperties.LEAF_STATE, ExPBlockProperties.TREE_TYPES[this.logIndex]});
+        return new BlockStateContainer(this, ExPBlockProperties.LEAF_STATE, ExPBlockProperties.TREE_TYPE);
     }
 
 	public ResourceLocation createRegistryLocation()
@@ -205,7 +184,12 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
             return;
         }
 
-	    if (stateIn.getValue(ExPBlockProperties.TREE_TYPES[this.logIndex]).isEvergreen())
+        if (this.getLeavesState(worldIn, stateIn, pos) == EnumLeafState.NORMAL && rand.nextFloat() > 0.25F)
+        {
+            return;
+        }
+
+	    if (stateIn.getValue(ExPBlockProperties.TREE_TYPE).isEvergreen())
         {
             return;
         }
@@ -294,7 +278,7 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 			int logIndex = ((BlockLog)of.getBlock()).logIndex;
 			if (logIndex == this.logIndex)
 			{
-				return state.getValue(ExPBlockProperties.TREE_TYPES[this.logIndex]) == of.getValue(ExPBlockProperties.TREE_TYPES[this.logIndex]);
+				return state.getValue(ExPBlockProperties.TREE_TYPE) == of.getValue(ExPBlockProperties.TREE_TYPE);
 			}
 		}
 		
@@ -316,7 +300,7 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 	@Override
 	public boolean isEvergreen(IBlockAccess access, IBlockState state, BlockPos pos)
 	{
-		return state.getValue(ExPBlockProperties.TREE_TYPES[this.logIndex]).isEvergreen();
+		return state.getValue(ExPBlockProperties.TREE_TYPE).isEvergreen();
 	}
 
 	@Override
@@ -347,7 +331,7 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 		Stream.of(ExPOreDict.blockLeaf).forEach(s -> { 
 			OreDictionary.registerOre(s, new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE)); 
 			AtomicInteger i = new AtomicInteger(0);
-			ExPBlockProperties.TREE_TYPES[this.logIndex].getAllowedValues().stream().map(EnumTreeType::getName).forEach(ss -> OreDictionary.registerOre(s + Character.toUpperCase(ss.charAt(0)) + ss.substring(1), new ItemStack(this, 1, i.getAndAdd(3))));
+			ExPBlockProperties.TREE_TYPE.getAllowedValues().stream().map(EnumTreeType::getName).forEach(ss -> OreDictionary.registerOre(s + Character.toUpperCase(ss.charAt(0)) + ss.substring(1), new ItemStack(this, 1, i.getAndAdd(3))));
 		});
 	}
 

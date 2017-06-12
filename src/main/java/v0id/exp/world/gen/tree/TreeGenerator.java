@@ -1,16 +1,11 @@
 package v0id.exp.world.gen.tree;
 
-import java.util.Random;
-import java.util.function.BiConsumer;
-import java.util.function.Function;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.core.logging.LogLevel;
 import v0id.api.exp.block.EnumLeafState;
 import v0id.api.exp.block.EnumTreeType;
@@ -20,6 +15,10 @@ import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.world.EnumSeason;
 import v0id.api.exp.world.IExPWorld;
 import v0id.api.exp.world.gen.ITreeGenerator;
+
+import java.util.Random;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 
 public class TreeGenerator extends WorldGenerator implements ITreeGenerator
 {
@@ -39,14 +38,14 @@ public class TreeGenerator extends WorldGenerator implements ITreeGenerator
 	
 	public IBlockState makeWood()
 	{
-		return ExPBlocks.logs[this.treeType.ordinal() / 5].getDefaultState().withProperty(ExPBlockProperties.TREE_TYPES[this.treeType.ordinal() / 5], this.treeType);
+		return ExPBlocks.logs[this.treeType.ordinal() / 5].getDefaultState().withProperty(ExPBlockProperties.TREE_TYPE, this.treeType);
 	}
 	
 	public IBlockState makeLeaves()
 	{
 		IExPWorld w = IExPWorld.of(this.worldGen);
 		EnumLeafState leafState = this.treeType.isEvergreen() ? EnumLeafState.NORMAL : w.getCurrentSeason() == EnumSeason.WINTER ? EnumLeafState.DEAD : w.getCurrentSeason() == EnumSeason.AUTUMN ? EnumLeafState.AUTUMN : EnumLeafState.NORMAL;
-		return ExPBlocks.leaves[this.treeType.ordinal() / 5].getDefaultState().withProperty(ExPBlockProperties.TREE_TYPES[this.treeType.ordinal() / 5], this.treeType).withProperty(ExPBlockProperties.LEAF_STATE, leafState);
+		return ExPBlocks.leaves[this.treeType.ordinal() / 5].getDefaultState().withProperty(ExPBlockProperties.TREE_TYPE, this.treeType).withProperty(ExPBlockProperties.LEAF_STATE, leafState);
 	}
 	
 	public TreeGenerator updateState()

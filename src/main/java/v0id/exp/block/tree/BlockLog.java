@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -22,7 +21,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.tuple.Pair;
@@ -40,8 +38,6 @@ import v0id.exp.entity.EntityFallingTree;
 import v0id.exp.handler.ExPHandlerRegistry;
 
 import javax.annotation.Nullable;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -61,36 +57,13 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 	@Override
 	public void initBlock()
 	{
-		try
-		{
-			Field blockStateFld = null;
-			for (Field f : Block.class.getDeclaredFields())
-			{
-				if (f.getType().equals(BlockStateContainer.class))
-				{
-					blockStateFld = f;
-					break;
-				}
-			}
-			
-			blockStateFld.setAccessible(true);
-			Field modifiersField = Field.class.getDeclaredField("modifiers");
-			modifiersField.setAccessible(true);
-			modifiersField.set(blockStateFld, modifiersField.getModifiers() & ~Modifier.FINAL);
-			blockStateFld.set(this, this.createBlockState());
-		}
-		catch (Exception ex)
-		{
-			FMLCommonHandler.instance().raiseException(ex, "ExPetrum was umable to reflect BlockStateContainer field!", true);
-		}
-		
 		this.setHardness(6);
 		this.setRegistryName(createRegistryLocation());
 		this.setResistance(6);
 		this.setSoundType(SoundType.WOOD);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(AXIS, Axis.Y).withProperty(ExPBlockProperties.TREE_TYPES[this.logIndex], EnumTreeType.values()[this.logIndex * 5]));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(AXIS, Axis.Y).withProperty(ExPBlockProperties.TREE_TYPE, EnumTreeType.values()[this.logIndex * 5]));
 		Blocks.FIRE.setFireInfo(this, 5, 5);
 		ExPHandlerRegistry.put(this);
 	}
@@ -104,13 +77,13 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 	@Override
 	public int damageDropped(IBlockState state)
 	{
-		return 1 + (state.getValue(ExPBlockProperties.TREE_TYPES[this.logIndex]).ordinal() % 5) * 3;
+		return 1 + (state.getValue(ExPBlockProperties.TREE_TYPE).ordinal() % 5) * 3;
 	}
 
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
 	{
-		return new ItemStack(this, 1, 1 + (state.getValue(ExPBlockProperties.TREE_TYPES[this.logIndex]).ordinal() % 5) * 3);
+		return new ItemStack(this, 1, 1 + (state.getValue(ExPBlockProperties.TREE_TYPE).ordinal() % 5) * 3);
 	}
 
 	@Override
@@ -146,7 +119,7 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 	{
 		for (int i = 0; i < 5; ++i)
 		{
-			IBlockState state = this.getDefaultState().withProperty(ExPBlockProperties.TREE_TYPES[this.logIndex], EnumTreeType.values()[this.logIndex * 5 + i]);
+			IBlockState state = this.getDefaultState().withProperty(ExPBlockProperties.TREE_TYPE, EnumTreeType.values()[this.logIndex * 5 + i]);
 			int meta = this.getMetaFromState(state);
 			list.add(new ItemStack(this, 1, meta));
 		}
@@ -155,7 +128,7 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 	@Override
 	public IBlockState getStateFromMeta(int meta)
     {
-        return this.getDefaultState().withProperty(AXIS, Axis.values()[meta % 3]).withProperty(ExPBlockProperties.TREE_TYPES[this.logIndex], EnumTreeType.values()[meta / 3 + this.logIndex * 5]);
+        return this.getDefaultState().withProperty(AXIS, Axis.values()[meta % 3]).withProperty(ExPBlockProperties.TREE_TYPE, EnumTreeType.values()[meta / 3 + this.logIndex * 5]);
     }
 
     /**
@@ -164,13 +137,19 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
     @Override
 	public int getMetaFromState(IBlockState state)
     {
-    	return (state.getValue(ExPBlockProperties.TREE_TYPES[this.logIndex]).ordinal() - this.logIndex * 5) * 3 + state.getValue(AXIS).ordinal();
+    	int ordinal = state.getValue(ExPBlockProperties.TREE_TYPE).ordinal();
+    	if (ordinal * 3 < this.logIndex * 15 || ordinal * 3 >= (this.logIndex + 1) * 15)
+        {
+            return 0;
+        }
+
+    	return (ordinal - this.logIndex * 5) * 3 + state.getValue(AXIS).ordinal();
     }
 
     @Override
 	protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {AXIS, ExPBlockProperties.TREE_TYPES[this.logIndex]});
+        return new BlockStateContainer(this, AXIS, ExPBlockProperties.TREE_TYPE);
     }
 
 	public ResourceLocation createRegistryLocation()
@@ -211,7 +190,7 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 	@Override
 	public boolean isSameWoodType(World w, IBlockState state, BlockPos pos, IBlockState of)
 	{
-		return this instanceof Decorative ? false : of.getBlock() == this && of.getValue(ExPBlockProperties.TREE_TYPES[this.logIndex]) == state.getValue(ExPBlockProperties.TREE_TYPES[this.logIndex]);
+		return !(this instanceof Decorative) && (of.getBlock() == this && of.getValue(ExPBlockProperties.TREE_TYPE) == state.getValue(ExPBlockProperties.TREE_TYPE));
 	}
 
 	@Override
@@ -268,7 +247,7 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 		Stream.of(ExPOreDict.blockLog).forEach(s -> { 
 			OreDictionary.registerOre(s, new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE)); 
 			AtomicInteger i = new AtomicInteger(1);
-			ExPBlockProperties.TREE_TYPES[this.logIndex].getAllowedValues().stream().map(EnumTreeType::getName).forEach(ss -> OreDictionary.registerOre(s + Character.toUpperCase(ss.charAt(0)) + ss.substring(1), new ItemStack(this, 1, i.getAndAdd(3))));
+			ExPBlockProperties.TREE_TYPE.getAllowedValues().stream().map(EnumTreeType::getName).forEach(ss -> OreDictionary.registerOre(s + Character.toUpperCase(ss.charAt(0)) + ss.substring(1), new ItemStack(this, 1, i.getAndAdd(3))));
 		});
 	}
 

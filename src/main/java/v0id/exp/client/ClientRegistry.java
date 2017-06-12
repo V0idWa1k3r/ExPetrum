@@ -235,7 +235,7 @@ public class ClientRegistry implements IInstanceProvider, ILifecycleListener
 					for (int i = 0; i < 15; ++i)
 					{
 						IBlockState state = b.getStateFromMeta(i);
-						String enumName = state.getValue(ExPBlockProperties.TREE_TYPES[((BlockLog)b).logIndex]).getName();
+						String enumName = state.getValue(ExPBlockProperties.TREE_TYPE).getName();
 						String modelLocation = "axis=" + Axis.values()[i % 3].getName() + ",ttype=" + enumName;
 						ModelResourceLocation mrl = new ModelResourceLocation(ExPRegistryNames.blockLog, modelLocation);
 						ret.put(state, mrl);
@@ -260,7 +260,7 @@ public class ClientRegistry implements IInstanceProvider, ILifecycleListener
 					{
 						IBlockState state = b.getStateFromMeta(i);
 						EnumLeafState els = EnumLeafState.values()[i % 3];
-						String enumName = state.getValue(ExPBlockProperties.TREE_TYPES[((BlockLeaf)b).logIndex]).getName();
+						String enumName = state.getValue(ExPBlockProperties.TREE_TYPE).getName();
 						String modelLocation = "ttype=" + enumName;
 						ResourceLocation rl = new ResourceLocation(ExPRegistryNames.blockLeaves.getResourceDomain(), ExPRegistryNames.blockLeaves.getResourcePath() + "_" + els.getName());
 						ModelResourceLocation mrl = new ModelResourceLocation(rl, modelLocation);
