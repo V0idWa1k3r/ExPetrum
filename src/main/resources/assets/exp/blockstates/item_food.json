@@ -224,7 +224,82 @@
 				"textures" : {
 					"layer0" : "exp:items/plant/berry/crowberry"
 				}
-			}
+			},
+            "apple" : {
+                "textures" : {
+                    "layer0" : "exp:items/plant/fruit/apple"
+                }
+            },
+            "apricot" : {
+                "textures" : {
+                    "layer0" : "exp:items/plant/fruit/apricot"
+                }
+            },
+            "avocado" : {
+                "textures" : {
+                    "layer0" : "exp:items/plant/fruit/avocado"
+                }
+            },
+            "banana" : {
+                "textures" : {
+                    "layer0" : "exp:items/plant/fruit/banana"
+                }
+            },
+            "carambola" : {
+                "textures" : {
+                    "layer0" : "exp:items/plant/fruit/carambola"
+                }
+            },
+            "cherry" : {
+                "textures" : {
+                    "layer0" : "exp:items/plant/fruit/cherry"
+                }
+            },
+            "grapefruit" : {
+                "textures" : {
+                    "layer0" : "exp:items/plant/fruit/grapefruit"
+                }
+            },
+            "lemon" : {
+                "textures" : {
+                    "layer0" : "exp:items/plant/fruit/lemon"
+                }
+            },
+            "olive" : {
+                "textures" : {
+                    "layer0" : "exp:items/plant/fruit/olive"
+                }
+            },
+            "orange" : {
+                "textures" : {
+                    "layer0" : "exp:items/plant/fruit/orange"
+                }
+            },
+            "peach" : {
+                "textures" : {
+                    "layer0" : "exp:items/plant/fruit/peach"
+                }
+            },
+            "pear" : {
+                "textures" : {
+                    "layer0" : "exp:items/plant/fruit/pear"
+                }
+            },
+            "plum" : {
+                "textures" : {
+                    "layer0" : "exp:items/plant/fruit/plum"
+                }
+            },
+            "pomegranate" : {
+                "textures" : {
+                    "layer0" : "exp:items/plant/fruit/pomegranate"
+                }
+            },
+            "walnut" : {
+                "textures" : {
+                    "layer0" : "exp:items/plant/fruit/walnut"
+                }
+            }
 		}
 	}
 }

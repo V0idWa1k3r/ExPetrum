@@ -1,14 +1,12 @@
 package v0id.api.exp.item.food;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.player.Nutrient;
+
+import java.util.List;
+import java.util.Map;
 
 public class FoodEntry
 {
@@ -237,4 +235,19 @@ public class FoodEntry
 	public static final FoodEntry WOLFBERRY = new FoodEntry().withCalories(37 * BALANCE_MULTIPLIER).withName("wolfberry").setPoisonous();
 	public static final FoodEntry SALMONBERRY = new FoodEntry().withCalories(47 * BALANCE_MULTIPLIER).withName("salmonberry");
 	public static final FoodEntry CROWBERRY = new FoodEntry().withCalories(43 * BALANCE_MULTIPLIER).withName("crowberry");
+    public static final FoodEntry APPLE = new FoodEntry().withCalories(52 * BALANCE_MULTIPLIER).withName("apple");
+    public static final FoodEntry OLIVE = new FoodEntry().withCalories(148 * BALANCE_MULTIPLIER).withName("olive");
+    public static final FoodEntry PEACH = new FoodEntry().withCalories(39 * BALANCE_MULTIPLIER).withName("peach");
+    public static final FoodEntry ORANGE = new FoodEntry().withCalories(47 * BALANCE_MULTIPLIER).withName("orange");
+    public static final FoodEntry PEAR = new FoodEntry().withCalories(57 * BALANCE_MULTIPLIER).withName("pear");
+    public static final FoodEntry PLUM = new FoodEntry().withCalories(46 * BALANCE_MULTIPLIER).withName("plum");
+    public static final FoodEntry BANANA = new FoodEntry().withCalories(89 * BALANCE_MULTIPLIER).withName("banana");
+    public static final FoodEntry LEMON = new FoodEntry().withCalories(29 * BALANCE_MULTIPLIER).withName("lemon");
+    public static final FoodEntry APRICOT = new FoodEntry().withCalories(48 * BALANCE_MULTIPLIER).withName("apricot");
+    public static final FoodEntry WALNUT = new FoodEntry().withCalories(654 * BALANCE_MULTIPLIER).withName("walnut");
+    public static final FoodEntry CHERRY = new FoodEntry().withCalories(63 * BALANCE_MULTIPLIER).withName("cherry");
+    public static final FoodEntry POMEGRANATE = new FoodEntry().withCalories(83 * BALANCE_MULTIPLIER).withName("pomegranate");
+    public static final FoodEntry GRAPEFRUIT = new FoodEntry().withCalories(33 * BALANCE_MULTIPLIER).withName("grapefruit");
+    public static final FoodEntry AVOCADO = new FoodEntry().withCalories(160 * BALANCE_MULTIPLIER).withName("avocado");
+    public static final FoodEntry CARAMBOLA = new FoodEntry().withCalories(31 * BALANCE_MULTIPLIER).withName("carambola");
 }

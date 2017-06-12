@@ -95,7 +95,7 @@ public class BlockBerryBush extends BlockShrub
 			EnumShrubState sstate = ((IShrub)worldIn.getBlockState(pos.down()).getBlock()).getState();
 			if (sstate != this.getState() && sstate != EnumShrubState.BLOOMING)
 			{
-				worldIn.setBlockState(pos, ExPBlocks.shrubs[sstate.ordinal()].getDefaultState().withProperty(ExPBlockProperties.SHRUB_TYPE, state.getValue(ExPBlockProperties.SHRUB_TYPE)));
+				worldIn.setBlockState(pos, ExPBlocks.berryBushes[sstate.ordinal()].getDefaultState().withProperty(ExPBlockProperties.BERRY_BUSH_TYPE, state.getValue(ExPBlockProperties.BERRY_BUSH_TYPE)));
             }
 		}
 		else
