@@ -28,7 +28,7 @@ import v0id.api.core.network.PacketType;
 import v0id.api.core.network.VoidNetwork;
 import v0id.api.core.util.DimBlockPos;
 import v0id.api.exp.block.property.EnumRockClass;
-import v0id.api.exp.block.property.ExPBlockProperties;
+import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.*;
 import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockWithMetadata;
@@ -40,7 +40,7 @@ import java.util.Random;
 import java.util.stream.Stream;
 
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
-import static v0id.api.exp.block.property.ExPBlockProperties.ROCK_CLASS;
+import static v0id.api.exp.data.ExPBlockProperties.ROCK_CLASS;
 
 public class BlockWorkedBoulder extends Block implements ITileEntityProvider, IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {

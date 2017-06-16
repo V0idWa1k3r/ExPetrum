@@ -35,8 +35,8 @@ import java.util.Random;
 import java.util.stream.Stream;
 
 import static v0id.api.exp.block.property.EnumWaterLilyType.LEOPARDESS;
-import static v0id.api.exp.block.property.ExPBlockProperties.LILY_TYPE;
-import static v0id.api.exp.block.property.ExPBlockProperties.PLANT_BLOOMING;
+import static v0id.api.exp.data.ExPBlockProperties.LILY_TYPE;
+import static v0id.api.exp.data.ExPBlockProperties.PLANT_BLOOMING;
 
 public class BlockWaterLily extends BlockBush implements IWeightProvider, IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {

@@ -18,7 +18,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.exp.block.*;
-import v0id.api.exp.block.property.ExPBlockProperties;
+import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.*;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.world.IExPWorld;

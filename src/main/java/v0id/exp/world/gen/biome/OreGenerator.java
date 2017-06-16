@@ -22,7 +22,7 @@ import v0id.api.core.logging.LogLevel;
 import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.block.IOreHintReplaceable;
 import v0id.api.exp.block.property.EnumRockClass;
-import v0id.api.exp.block.property.ExPBlockProperties;
+import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPMisc;
 import v0id.exp.tile.TileOre;

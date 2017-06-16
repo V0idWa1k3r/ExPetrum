@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import v0id.api.core.logging.LogLevel;
 import v0id.api.exp.block.property.EnumDirtClass;
-import v0id.api.exp.block.property.ExPBlockProperties;
+import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.combat.EnumWeaponWeight;
 import v0id.api.exp.combat.IWeapon;
 import v0id.api.exp.combat.WeaponType;

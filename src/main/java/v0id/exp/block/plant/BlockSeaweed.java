@@ -35,7 +35,7 @@ import v0id.exp.handler.ExPHandlerRegistry;
 import java.util.Random;
 
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
-import static v0id.api.exp.block.property.ExPBlockProperties.ROCK_CLASS;
+import static v0id.api.exp.data.ExPBlockProperties.ROCK_CLASS;
 
 public class BlockSeaweed extends Block implements IWeightProvider, IInitializableBlock, IBlockRegistryEntry, IItemRegistryEntry
 {

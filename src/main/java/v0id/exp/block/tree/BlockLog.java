@@ -27,7 +27,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.core.VoidApi;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.ILog;
-import v0id.api.exp.block.property.ExPBlockProperties;
+import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.*;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.block.IBlockRegistryEntry;

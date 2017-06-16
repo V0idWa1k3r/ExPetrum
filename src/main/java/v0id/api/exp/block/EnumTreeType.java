@@ -63,6 +63,23 @@ public enum EnumTreeType implements IStringSerializable
 	public static EnumTreeType[][] typesForIndex = new EnumTreeType[9][5];
 
 	private final boolean evergreen;
+
+	public boolean bearsFruit()
+    {
+        return this.associatedFruit != null;
+    }
+
+    public EnumFruit getAssociatedFruit()
+    {
+        return associatedFruit;
+    }
+
+    public void setAssociatedFruit(EnumFruit associatedFruit)
+    {
+        this.associatedFruit = associatedFruit;
+    }
+
+    private EnumFruit associatedFruit = null;
 	
 	@Override
 	public String getName()

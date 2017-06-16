@@ -20,7 +20,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.common.model.IModelState;
 import v0id.api.exp.block.property.EnumDirtClass;
-import v0id.api.exp.block.property.ExPBlockProperties;
+import v0id.api.exp.data.ExPBlockProperties;
 
 public class ModelCattailBaked implements IBakedModel
 {

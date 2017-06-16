@@ -1,10 +1,13 @@
-package v0id.api.exp.block.property;
+package v0id.api.exp.data;
 
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
 import v0id.api.core.markers.StaticStorage;
 import v0id.api.exp.block.*;
+import v0id.api.exp.block.property.EnumDirtClass;
+import v0id.api.exp.block.property.EnumRockClass;
+import v0id.api.exp.block.property.EnumWaterLilyType;
 import v0id.api.exp.tile.crop.EnumCrop;
 
 @StaticStorage
@@ -16,7 +19,7 @@ public class ExPBlockProperties
 	public static final PropertyEnum<EnumWaterLilyType> LILY_TYPE = PropertyEnum.create("type", EnumWaterLilyType.class);
 	public static final PropertyInteger VEGETATION_GROWTH = PropertyInteger.create("growth", 0, 3);
     public static PropertyEnum<EnumTreeType> TREE_TYPE = PropertyEnum.create("ttype", EnumTreeType.class);
-    public static PropertyEnum<EnumFruitTree> FRUIT_TREE_TYPE = PropertyEnum.create("ttype", EnumFruitTree.class);
+    public static PropertyEnum<EnumFruit> FRUIT_TYPE = PropertyEnum.create("type", EnumFruit.class);
 	public static final PropertyEnum<EnumLeafState> LEAF_STATE = PropertyEnum.create("leafstate", EnumLeafState.class);
 	public static final PropertyInteger ORE_TEXTURE_ID = PropertyInteger.create("oretexture", 0, 2);
 	public static final PropertyEnum<EnumShrubType> SHRUB_TYPE = PropertyEnum.create("type", EnumShrubType.class);

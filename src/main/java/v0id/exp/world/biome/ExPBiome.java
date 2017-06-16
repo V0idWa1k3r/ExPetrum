@@ -17,7 +17,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import v0id.api.core.VoidApi;
 import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
-import v0id.api.exp.block.property.ExPBlockProperties;
+import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.world.EnumSeason;

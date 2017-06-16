@@ -9,7 +9,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.core.logging.LogLevel;
 import v0id.api.exp.block.EnumLeafState;
 import v0id.api.exp.block.EnumTreeType;
-import v0id.api.exp.block.property.ExPBlockProperties;
+import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.world.EnumSeason;

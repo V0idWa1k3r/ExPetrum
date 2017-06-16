@@ -40,7 +40,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 import static v0id.api.exp.block.property.EnumDirtClass.ACRISOL;
-import static v0id.api.exp.block.property.ExPBlockProperties.DIRT_CLASS;
+import static v0id.api.exp.data.ExPBlockProperties.DIRT_CLASS;
 
 public class BlockSoil extends Block implements IWeightProvider, IGravitySusceptible, ICanGrowCrop, IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {

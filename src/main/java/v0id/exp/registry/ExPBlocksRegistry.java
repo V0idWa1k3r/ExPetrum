@@ -67,6 +67,7 @@ public class ExPBlocksRegistry extends AbstractRegistry
 		ExPBlocks.workedBoulder = new BlockWorkedBoulder();
 		ExPBlocks.crop = new BlockCrop();
 		ExPBlocks.farmland = new BlockFarmland();
+		ExPBlocks.fruit = new BlockFruit();
 	}
 	
 	public ExPBlocksRegistry()

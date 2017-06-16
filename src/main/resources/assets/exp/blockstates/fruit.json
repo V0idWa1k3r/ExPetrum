@@ -1,0 +1,105 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"textures" : {
+			"all" : "exp:blocks/plants/fruit/apple",
+            "particle" : "#all"
+		},
+		"model" : "exp:fruit_big"
+	},
+	"variants" : {
+		"normal": [{}],
+		"type" : {
+            "apple" : {
+                "textures" : {
+                    "all" : "exp:blocks/plants/fruit/apple"
+                },
+                "model" : "exp:fruit_big"
+            },
+            "olive" : {
+                "textures" : {
+                    "all" : "exp:blocks/plants/fruit/olive"
+                },
+                "model" : "exp:fruit_small"
+            },
+            "peach" : {
+                "textures" : {
+                    "all" : "exp:blocks/plants/fruit/peach"
+                },
+                "model" : "exp:fruit_big"
+            },
+            "orange" : {
+                "textures" : {
+                    "all" : "exp:blocks/plants/fruit/orange"
+                },
+                "model" : "exp:fruit_big"
+            },
+            "pear" : {
+                "textures" : {
+                    "all" : "exp:blocks/plants/fruit/pear"
+                },
+                "model" : "exp:fruit_medium"
+            },
+            "plum" : {
+                "textures" : {
+                    "all" : "exp:blocks/plants/fruit/plum"
+                },
+                "model" : "exp:fruit_medium"
+            },
+            "banana" : {
+                "textures" : {
+                    "all" : "exp:blocks/plants/fruit/banana"
+                },
+                "model" : "exp:banana"
+            },
+            "lemon" : {
+                "textures" : {
+                    "all" : "exp:blocks/plants/fruit/lemon"
+                },
+                "model" : "exp:fruit_medium"
+            },
+            "apricot" : {
+                "textures" : {
+                    "all" : "exp:blocks/plants/fruit/apricot"
+                },
+                "model" : "exp:fruit_big"
+            },
+            "walnut" : {
+                "textures" : {
+                    "all" : "exp:blocks/plants/fruit/walnut"
+                },
+                "model" : "exp:fruit_small"
+            },
+            "cherry" : {
+                "textures" : {
+                    "all" : "exp:blocks/plants/fruit/cherry"
+                },
+                "model" : "exp:fruit_small"
+            },
+            "pomegranate" : {
+                "textures" : {
+                    "all" : "exp:blocks/plants/fruit/pomegranate"
+                },
+                "model" : "exp:fruit_medium"
+            },
+            "grapefruit" : {
+                "textures" : {
+                    "all" : "exp:blocks/plants/fruit/grapefruit"
+                },
+                "model" : "exp:fruit_big"
+            },
+            "avocado" : {
+                "textures" : {
+                    "all" : "exp:blocks/plants/fruit/avocado"
+                },
+                "model" : "exp:fruit_medium"
+            },
+            "carambola" : {
+                "textures" : {
+                    "all" : "exp:blocks/plants/fruit/carambola"
+                },
+                "model" : "exp:fruit_medium"
+            }
+        }
+	}
+}

@@ -45,7 +45,7 @@ import v0id.exp.tile.TileFarmland;
 import java.util.Random;
 
 import static v0id.api.exp.block.property.EnumDirtClass.ACRISOL;
-import static v0id.api.exp.block.property.ExPBlockProperties.DIRT_CLASS;
+import static v0id.api.exp.data.ExPBlockProperties.DIRT_CLASS;
 
 public class BlockFarmland extends BlockContainer implements IInitializableBlock, IBlockRegistryEntry, IItemRegistryEntry, IGravitySusceptible, ICanGrowCrop, IGrass, IAcceptsWaterCan
 {

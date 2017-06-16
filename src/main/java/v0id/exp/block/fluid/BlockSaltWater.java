@@ -18,7 +18,7 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fluids.BlockFluidFinite;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import v0id.api.exp.block.IWater;
-import v0id.api.exp.block.property.ExPBlockProperties;
+import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPFluids;

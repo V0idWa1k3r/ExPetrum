@@ -28,7 +28,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.exp.block.EnumGrassAmount;
 import v0id.api.exp.block.EnumGrassState;
 import v0id.api.exp.block.IGrass;
-import v0id.api.exp.block.property.ExPBlockProperties;
+import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.*;
 import v0id.exp.block.BlockFarmland;
 import v0id.exp.block.IBlockRegistryEntry;

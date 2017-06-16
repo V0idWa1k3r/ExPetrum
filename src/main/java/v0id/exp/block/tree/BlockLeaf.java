@@ -30,7 +30,7 @@ import v0id.api.core.util.java.ColorRGB;
 import v0id.api.exp.block.EnumLeafState;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.ILeaves;
-import v0id.api.exp.block.property.ExPBlockProperties;
+import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.*;
 import v0id.api.exp.fx.EnumParticle;
 import v0id.api.exp.inventory.IWeightProvider;

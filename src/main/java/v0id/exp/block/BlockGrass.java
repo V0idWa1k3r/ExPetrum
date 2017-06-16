@@ -45,7 +45,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 import static v0id.api.exp.block.property.EnumDirtClass.ACRISOL;
-import static v0id.api.exp.block.property.ExPBlockProperties.DIRT_CLASS;
+import static v0id.api.exp.data.ExPBlockProperties.DIRT_CLASS;
 
 public class BlockGrass extends Block implements IWeightProvider, IGravitySusceptible, IGrass, IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {

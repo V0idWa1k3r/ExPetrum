@@ -35,7 +35,7 @@ import v0id.exp.util.Helpers;
 import java.util.Random;
 
 import static v0id.api.exp.block.property.EnumDirtClass.ACRISOL;
-import static v0id.api.exp.block.property.ExPBlockProperties.DIRT_CLASS;
+import static v0id.api.exp.data.ExPBlockProperties.DIRT_CLASS;
 
 public class BlockCattail extends Block implements IWeightProvider, IInitializableBlock, IBlockRegistryEntry, IItemRegistryEntry
 {

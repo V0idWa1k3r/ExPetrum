@@ -32,7 +32,7 @@ import v0id.api.exp.block.*;
 import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.block.property.EnumWaterLilyType;
-import v0id.api.exp.block.property.ExPBlockProperties;
+import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.combat.condition.ExecuteConditionKeyBindings;
 import v0id.api.exp.data.*;
 import v0id.api.exp.item.EnumToolhead;
@@ -101,6 +101,11 @@ public class ClientRegistry implements IInstanceProvider, ILifecycleListener
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.seaweed), i, new ModelResourceLocation(ExPBlocks.seaweed.getRegistryName(), "class=" + EnumRockClass.values()[i].getName()));
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.farmland), i, new ModelResourceLocation(ExPBlocks.farmland.getRegistryName(), "class=" + EnumDirtClass.values()[i].getName()));
 			Stream.of(ExPBlocks.shrubs).forEach(s -> ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(s), iWrapper, new ModelResourceLocation(s.getRegistryName(), "istall=false,type=" + EnumShrubType.values()[iWrapper])));
+			if (i < 15)
+            {
+                ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.fruit), i, new ModelResourceLocation(ExPBlocks.fruit.getRegistryName(), "type=" + EnumFruit.values()[i].getName()));
+            }
+
 			if (i < 10)
 			{
 				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.waterLily), i, new ModelResourceLocation(ExPBlocks.waterLily.getRegistryName(), "blooming=" + (i >= 5) + ",type=" + EnumWaterLilyType.values()[i % 5].getName()));
