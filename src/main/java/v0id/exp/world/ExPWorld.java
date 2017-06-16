@@ -1,6 +1,8 @@
 package v0id.exp.world;
 
+import com.google.common.collect.Maps;
 import net.minecraft.nbt.*;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -12,7 +14,11 @@ import v0id.api.exp.player.IExPPlayer;
 import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.EnumSeason;
 import v0id.api.exp.world.IExPWorld;
+import v0id.api.exp.world.chunk.IExPChunk;
 import v0id.exp.net.PacketHandlerWorldData;
+import v0id.exp.world.chunk.ExPChunk;
+
+import java.util.Map;
 
 public class ExPWorld implements IExPWorld
 {
@@ -38,8 +44,10 @@ public class ExPWorld implements IExPWorld
 	public boolean dayTemp_isDirty;
 	public boolean baseHumidity_isDirty;
 	public boolean accumulatedHumidity_isDirty;
-	
-	@Override
+
+	public final Map<ChunkPos, IExPChunk> chunkDataMap = Maps.newHashMap();
+
+    @Override
 	public long getPersistentTicks()
 	{
 		return this.persistentTicks;
@@ -307,7 +315,13 @@ public class ExPWorld implements IExPWorld
 		}
 	}
 
-	@Override
+    @Override
+    public IExPChunk getChunkDataAt(ChunkPos pos)
+    {
+        return chunkDataMap.getOrDefault(pos, ExPChunk.EMPTY);
+    }
+
+    @Override
 	public NBTTagCompound serializeNBT()
 	{
 		this.setAllDirty(true);

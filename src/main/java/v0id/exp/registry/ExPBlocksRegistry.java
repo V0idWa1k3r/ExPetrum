@@ -33,10 +33,10 @@ public class ExPBlocksRegistry extends AbstractRegistry
 		ExPBlocks.seaweed = new BlockSeaweed();
 		ExPBlocks.coralRock = new BlockCoralRock();
 		ExPBlocks.coralPlant = new BlockCoralPlant();
-		ExPBlocks.logs = new BlockLog[6];
-		ExPBlocks.logsDeco = new BlockLog[6];
-		ExPBlocks.leaves = new BlockLeaf[6];
-		for (int i = 0; i < 6; ++i)
+		ExPBlocks.logs = new BlockLog[9];
+		ExPBlocks.logsDeco = new BlockLog[9];
+		ExPBlocks.leaves = new BlockLeaf[9];
+		for (int i = 0; i < 9; ++i)
 		{
 			for (int j = 0; j < 5; ++j)
 			{
@@ -44,7 +44,7 @@ public class ExPBlocksRegistry extends AbstractRegistry
 			}
 		}
 		
-		for (int i = 0; i < 6; ++i)
+		for (int i = 0; i < 9; ++i)
 		{
 			ExPBlocks.logs[i] = new BlockLog(i);
 			ExPBlocks.logsDeco[i] = new BlockLog.Decorative(i);

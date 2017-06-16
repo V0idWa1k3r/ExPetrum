@@ -33,7 +33,22 @@ public enum EnumTreeType implements IStringSerializable
 	JACKWOOD,
 	TSUGA(true),
 	VIBURNUM,
-	KOELREUTERIA;
+	KOELREUTERIA,
+    APPLE,
+    OLIVE,
+    PEACH,
+    ORANGE,
+    PEAR,
+    PLUM,
+    BANANA,
+    LEMON,
+    APRICOT,
+    WALNUT,
+    CHERRY,
+    POMEGRANATE,
+    GRAPEFRUIT,
+    AVOCADO,
+    CARAMBOLA;
 	
 	EnumTreeType(boolean b)
 	{
@@ -45,7 +60,7 @@ public enum EnumTreeType implements IStringSerializable
 		this(false);
 	}
 	
-	public static EnumTreeType[][] typesForIndex = new EnumTreeType[6][5];
+	public static EnumTreeType[][] typesForIndex = new EnumTreeType[9][5];
 
 	private final boolean evergreen;
 	

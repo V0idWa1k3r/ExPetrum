@@ -298,6 +298,81 @@
 				"textures" : {
 					"layer0" : "exp:items/common/stick/crowberry"
 				}
+			},
+			"apple" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/apple"
+				}
+			},
+			"apricot" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/apricot"
+				}
+			},
+			"olive" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/olive"
+				}
+			},
+			"peach" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/peach"
+				}
+			},
+			"orange" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/orange"
+				}
+			},
+			"pear" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/pear"
+				}
+			},
+			"plum" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/plum"
+				}
+			},
+			"banana" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/banana"
+				}
+			},
+			"lemon" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/lemon"
+				}
+			},
+			"walnut" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/walnut"
+				}
+			},
+			"cherry" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/cherry"
+				}
+			},
+			"pomegranate" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/pomegranate"
+				}
+			},
+			"grapefruit" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/grapefruit"
+				}
+			},
+			"avocado" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/avocado"
+				}
+			},
+			"carambola" : {
+				"textures" : {
+					"layer0" : "exp:items/common/stick/carambola"
+				}
 			}
 		}
 	}

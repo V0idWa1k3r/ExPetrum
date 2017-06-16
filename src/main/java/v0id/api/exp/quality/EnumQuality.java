@@ -14,7 +14,7 @@ public enum EnumQuality implements IStringSerializable
 	
 	private final EnumRarity associatedRarity;
 
-	private EnumQuality(EnumRarity associatedRarity)
+	EnumQuality(EnumRarity associatedRarity)
 	{
 		this.associatedRarity = associatedRarity;
 	}

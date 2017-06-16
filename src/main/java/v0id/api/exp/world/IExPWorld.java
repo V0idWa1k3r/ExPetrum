@@ -1,12 +1,14 @@
 package v0id.api.exp.world;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.INBTSerializable;
 import v0id.api.core.logging.LogLevel;
 import v0id.api.exp.ExPApi;
+import v0id.api.exp.world.chunk.IExPChunk;
 
 public interface IExPWorld extends INBTSerializable<NBTTagCompound>
 {
@@ -111,6 +113,8 @@ public interface IExPWorld extends INBTSerializable<NBTTagCompound>
 	 * The onTick event, duh
 	 */
 	void onTick();
+
+	IExPChunk getChunkDataAt(ChunkPos pos);
 	
 	public static IExPWorld of(World w)
 	{

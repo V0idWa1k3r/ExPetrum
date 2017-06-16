@@ -1,12 +1,6 @@
 package v0id.exp.world.biome;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
-import java.util.stream.Stream;
-
 import com.google.common.collect.Lists;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -17,7 +11,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import v0id.api.core.VoidApi;
 import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.property.ExPBlockProperties;
@@ -30,6 +27,11 @@ import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.world.gen.GenerationHelper;
 import v0id.exp.world.gen.ShrubEntry;
 import v0id.exp.world.gen.tree.TreeEntry;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
+import java.util.stream.Stream;
 
 public class ExPBiome extends Biome implements IBiome, IBiomeRegistryEntry
 {
@@ -102,8 +104,24 @@ public class ExPBiome extends Biome implements IBiome, IBiomeRegistryEntry
 	@Override
 	public boolean canRain()
     {
-		return false;
+        World w;
+        if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
+        {
+            w = VoidApi.proxy.getClientWorld();
+        }
+        else
+        {
+            w = FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld();
+        }
+
+		return IExPWorld.of(w).getCurrentSeason() != EnumSeason.WINTER;
     }
+
+    @Override
+	public boolean getEnableSnow()
+	{
+		return false;
+	}
 	
 	@Override
 	public BiomeDecorator createBiomeDecorator()
