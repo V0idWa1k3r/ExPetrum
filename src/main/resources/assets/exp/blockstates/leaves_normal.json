@@ -158,8 +158,82 @@
 				"textures" : {
 					"all" : "exp:blocks/wood/leaf/normal/koelreuteria"
 				}
+			},
+			"apple" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/normal/apple"
+				}
+			},
+			"apricot" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/normal/apricot"
+				}
+			},
+			"olive" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/normal/olive"
+				}
+			},
+			"peach" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/normal/peach"
+				}
+			},
+			"orange" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/normal/orange"
+				}
+			},
+			"pear" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/normal/pear"
+				}
+			},
+			"plum" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/normal/plum"
+				}
+			},
+			"banana" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/normal/banana"
+				}
+			},
+			"lemon" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/normal/lemon"
+				}
+			},
+			"walnut" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/normal/walnut"
+				}
+			},
+			"cherry" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/normal/cherry"
+				}
+			},
+			"pomegranate" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/normal/pomegranate"
+				}
+			},
+			"grapefruit" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/normal/grapefruit"
+				}
+			},
+			"avocado" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/normal/avocado"
+				}
+			},
+			"carambola" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/leaf/normal/carambola"
+				}
 			}
 		}
     }
-	
 }

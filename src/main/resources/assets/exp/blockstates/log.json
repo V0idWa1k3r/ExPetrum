@@ -173,7 +173,82 @@
 				"textures" : {
 					"#material" : "exp:blocks/wood/log/koelreuteria"
 				}
-			}
+			},
+			"apple" : {
+                "textures" : {
+                    "#material" : "exp:blocks/wood/log/apple"
+                }
+            },
+            "apricot" : {
+                "textures" : {
+                    "#material" : "exp:blocks/wood/log/apricot"
+                }
+            },
+            "olive" : {
+                "textures" : {
+                    "#material" : "exp:blocks/wood/log/olive"
+                }
+            },
+            "peach" : {
+                "textures" : {
+                    "#material" : "exp:blocks/wood/log/peach"
+                }
+            },
+            "orange" : {
+                "textures" : {
+                    "#material" : "exp:blocks/wood/log/orange"
+                }
+            },
+            "pear" : {
+                "textures" : {
+                    "#material" : "exp:blocks/wood/log/pear"
+                }
+            },
+            "plum" : {
+                "textures" : {
+                    "#material" : "exp:blocks/wood/log/plum"
+                }
+            },
+            "banana" : {
+                "textures" : {
+                    "#material" : "exp:blocks/wood/log/banana"
+                }
+            },
+            "lemon" : {
+                "textures" : {
+                    "#material" : "exp:blocks/wood/log/lemon"
+                }
+            },
+            "walnut" : {
+                "textures" : {
+                    "#material" : "exp:blocks/wood/log/walnut"
+                }
+            },
+            "cherry" : {
+                "textures" : {
+                    "#material" : "exp:blocks/wood/log/cherry"
+                }
+            },
+            "pomegranate" : {
+                "textures" : {
+                    "#material" : "exp:blocks/wood/log/pomegranate"
+                }
+            },
+            "grapefruit" : {
+                "textures" : {
+                    "#material" : "exp:blocks/wood/log/grapefruit"
+                }
+            },
+            "avocado" : {
+                "textures" : {
+                    "#material" : "exp:blocks/wood/log/avocado"
+                }
+            },
+            "carambola" : {
+                "textures" : {
+                    "#material" : "exp:blocks/wood/log/carambola"
+                }
+            }
 		}
     }
 	
