@@ -1,9 +1,6 @@
 package v0id.exp.entity;
 
-import java.lang.reflect.Field;
-
 import com.google.common.collect.Multimap;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -25,9 +22,11 @@ import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLLog;
 
+import java.lang.reflect.Field;
+
 public class EntityThrownWeapon extends EntityThrowable
 {
-	public static final DataParameter<ItemStack> STACK = EntityDataManager.createKey(EntityThrownWeapon.class, DataSerializers.OPTIONAL_ITEM_STACK);
+	public static final DataParameter<ItemStack> STACK = EntityDataManager.createKey(EntityThrownWeapon.class, DataSerializers.ITEM_STACK);
 	
 	public EntityThrownWeapon(World w)
 	{

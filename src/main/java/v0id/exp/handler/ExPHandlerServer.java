@@ -1,8 +1,5 @@
 package v0id.exp.handler;
 
-import java.lang.reflect.Field;
-import java.util.Optional;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -60,6 +57,9 @@ import v0id.exp.player.inventory.PlayerInventoryHelper;
 import v0id.exp.util.WeatherUtils;
 import v0id.exp.world.ExPWorld;
 import v0id.exp.world.gen.WorldTypeExP;
+
+import java.lang.reflect.Field;
+import java.util.Optional;
 
 public class ExPHandlerServer
 {
