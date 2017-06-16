@@ -6,6 +6,7 @@ import net.minecraftforge.common.util.EnumHelper;
 import v0id.api.core.logging.VoidLogger;
 import v0id.api.core.markers.StaticStorage;
 import v0id.api.exp.fx.IParticleEngine;
+import v0id.api.exp.settings.ISettingsManager;
 
 import java.util.Random;
 
@@ -22,4 +23,5 @@ public class ExPMisc
 	public static final ToolMaterial materialExPetrum = EnumHelper.addToolMaterial("EXPETRUM", 1, 1, 1, 1, 1);
 	public static VoidLogger modLogger;
 	public static IParticleEngine defaultParticleEngineImpl;
+	public static ISettingsManager rootSettingsManager;
 }

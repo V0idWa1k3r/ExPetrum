@@ -1,4 +1,4 @@
-package v0id.exp.client.render;
+package v0id.exp.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiCreateWorld;
@@ -23,6 +23,7 @@ import v0id.exp.client.render.sky.WorldSkyRenderer;
 import v0id.exp.client.render.sky.WorldWeatherRenderer;
 import v0id.exp.combat.ClientCombatHandler;
 import v0id.exp.player.inventory.ManagedSlot;
+import v0id.exp.settings.impl.SettingsClient;
 import v0id.exp.util.WeatherUtils;
 
 import java.lang.reflect.Field;
@@ -149,11 +150,21 @@ public class ExPHandlerClient
 	{
 		if (Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().world.provider != null && Minecraft.getMinecraft().world.provider.getDimension() == 0)
 		{
-			if (!(Minecraft.getMinecraft().world.provider.getSkyRenderer() instanceof WorldSkyRenderer))
-			{
-                Minecraft.getMinecraft().world.provider.setSkyRenderer(WorldSkyRenderer.getInstance());
-                Minecraft.getMinecraft().world.provider.setWeatherRenderer(WorldWeatherRenderer.getInstance());
-			}
+		    if (SettingsClient.instance.enableCustomRain || SettingsClient.instance.enableCustomRain)
+            {
+                if (!(Minecraft.getMinecraft().world.provider.getSkyRenderer() instanceof WorldSkyRenderer))
+                {
+                    if (SettingsClient.instance.enableCustomSky)
+                    {
+                        Minecraft.getMinecraft().world.provider.setSkyRenderer(WorldSkyRenderer.getInstance());
+                    }
+
+                    if (SettingsClient.instance.enableCustomRain)
+                    {
+                        Minecraft.getMinecraft().world.provider.setWeatherRenderer(WorldWeatherRenderer.getInstance());
+                    }
+                }
+            }
 			
 			if (Minecraft.getMinecraft().world.isRaining())
 			{
@@ -170,7 +181,10 @@ public class ExPHandlerClient
 	@SubscribeEvent
 	public void onFogRender(EntityViewRenderEvent.FogDensity event)
 	{
-		event.setDensity(0);
-		event.setCanceled(true);
+	    if (SettingsClient.instance.disableFog)
+        {
+            event.setDensity(0);
+            event.setCanceled(true);
+        }
 	}
 }
