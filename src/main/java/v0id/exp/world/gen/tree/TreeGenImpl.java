@@ -9,6 +9,58 @@ import v0id.api.exp.world.gen.ITreeGenerator;
 
 public class TreeGenImpl
 {
+
+	public static int trunkGenOliveImpl(Pair<ITreeGenerator, BlockPos> p)
+    {
+        BlockPos initialPos = p.getRight();
+        TreeGenerator gen = (TreeGenerator)p.getKey();
+        int heightToGenerate = 5 + gen.worldGen.rand.nextInt(4);
+        int h = heightToGenerate + 1;
+        while (h-- > 0)
+        {
+            BlockPos pos = initialPos.up(h);
+            gen.worldGen.setBlockState(pos, gen.wood, 2);
+            gen.worldGen.setBlockState(pos.west(), gen.wood, 2);
+            gen.worldGen.setBlockState(pos.south(), gen.wood, 2);
+            gen.worldGen.setBlockState(pos.south().west(), gen.wood, 2);
+        }
+
+        return heightToGenerate;
+    }
+
+    public static void leavesGenOliveImpl(Pair<ITreeGenerator, BlockPos> p, int height)
+    {
+        BlockPos start = p.getRight().up(height + 3);
+        for (int i = 0; i < 6; ++i)
+        {
+            BlockPos at = start.down(i);
+            leavesGenOliveImplLayer(p.getKey(), p.getKey().genWorld(), at, i);
+        }
+    }
+
+    public static void leavesGenOliveImplLayer(ITreeGenerator gen, World w, BlockPos at, int layer)
+    {
+        for (int dx = -3; dx <= 3; ++dx)
+        {
+            for (int dz = -3; dz <= 3; ++dz)
+            {
+                int dist = Math.abs(dx) + Math.abs(dz);
+                if (dist <= layer)
+                {
+                    BlockPos offset = at.add(dx, 0, dz);
+                    BlockPos[] offsets = { offset, offset.west(), offset.south(), offset.south().west() };
+                    for (BlockPos blockPos : offsets)
+                    {
+                        if (w.getBlockState(blockPos).getBlock().canBeReplacedByLeaves(w.getBlockState(blockPos), w, blockPos))
+                        {
+                            w.setBlockState(blockPos, gen.getLeaves(), 2);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 	public static void leavesGenBirchImpl(Pair<ITreeGenerator, BlockPos> p, int height)
 	{
 		int len = 3 + p.getKey().genWorld().rand.nextInt(4);

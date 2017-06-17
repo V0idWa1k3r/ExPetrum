@@ -104,17 +104,25 @@ public class ExPBiome extends Biome implements IBiome, IBiomeRegistryEntry
 	@Override
 	public boolean canRain()
     {
-        World w;
-        if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
+        try
         {
-            w = VoidApi.proxy.getClientWorld();
-        }
-        else
-        {
-            w = FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld();
-        }
+            World w;
+            if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
+            {
+                w = VoidApi.proxy.getClientWorld();
+            }
+            else
+            {
+                w = FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld();
+            }
 
-		return IExPWorld.of(w).getCurrentSeason() != EnumSeason.WINTER;
+            return IExPWorld.of(w).getCurrentSeason() != EnumSeason.WINTER;
+        }
+        catch (Exception ex)
+        {
+            // Something accessed this method before world was created, most likely a mod of some kind.
+            return true;
+        }
     }
 
     @Override

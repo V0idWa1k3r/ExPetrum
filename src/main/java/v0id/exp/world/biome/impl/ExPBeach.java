@@ -19,6 +19,7 @@ public class ExPBeach extends ExPBiome
 		this.decorator.treesPerChunk = 3;
 		this.decorator.deadBushPerChunk = 0;
 		this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.PALM));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.BANANA));
 	}
 	
 	@Override

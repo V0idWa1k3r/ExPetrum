@@ -50,6 +50,21 @@ public class ExPWorldRegistry extends AbstractRegistry
 		TreeGenerators.generators.put(EnumTreeType.JACKWOOD, new TreeGenerator(EnumTreeType.JACKWOOD).defaultTrunk(5, 8).defaultLeaves());
 		TreeGenerators.generators.put(EnumTreeType.TSUGA, new TreeGenerator(EnumTreeType.TSUGA).defaultTrunk(8, 12).evergreenLeaves());
 		TreeGenerators.generators.put(EnumTreeType.KOELREUTERIA, new TreeGenerator(EnumTreeType.KOELREUTERIA).defaultTrunk(5, 8).defaultLeaves());
-	}
+        TreeGenerators.generators.put(EnumTreeType.APPLE, new TreeGenerator(EnumTreeType.APPLE).defaultTrunk(4, 7).defaultLeaves());
+        TreeGenerators.generators.put(EnumTreeType.OLIVE, new TreeGenerator(EnumTreeType.OLIVE).withTrunk(TreeGenImpl::trunkGenOliveImpl).withLeaves(TreeGenImpl::leavesGenOliveImpl));
+        TreeGenerators.generators.put(EnumTreeType.PEACH, new TreeGenerator(EnumTreeType.PEACH).defaultTrunk(6, 9).defaultLeaves());
+        TreeGenerators.generators.put(EnumTreeType.ORANGE, new TreeGenerator(EnumTreeType.ORANGE).defaultTrunk(4, 8).sphereLeaves());
+        TreeGenerators.generators.put(EnumTreeType.PEAR, new TreeGenerator(EnumTreeType.PEAR).defaultTrunk(3, 5).sphereLeaves());
+        TreeGenerators.generators.put(EnumTreeType.PLUM, new TreeGenerator(EnumTreeType.PLUM).defaultTrunk(4, 8).defaultLeaves());
+        TreeGenerators.generators.put(EnumTreeType.BANANA, new TreeGenerator(EnumTreeType.BANANA).defaultTrunk(5, 9).withLeaves(TreeGenImpl::leavesGenPalmImpl));
+        TreeGenerators.generators.put(EnumTreeType.LEMON, new TreeGenerator(EnumTreeType.LEMON).defaultTrunk(3, 5).defaultLeaves());
+        TreeGenerators.generators.put(EnumTreeType.APRICOT, new TreeGenerator(EnumTreeType.APRICOT).defaultTrunk(3, 5).defaultLeaves());
+        TreeGenerators.generators.put(EnumTreeType.WALNUT, new TreeGenerator(EnumTreeType.WALNUT).defaultTrunk(5, 9).defaultLeaves());
+        TreeGenerators.generators.put(EnumTreeType.CHERRY, new TreeGenerator(EnumTreeType.CHERRY).defaultTrunk(3, 5).defaultLeaves());
+        TreeGenerators.generators.put(EnumTreeType.POMEGRANATE, new TreeGenerator(EnumTreeType.POMEGRANATE).defaultTrunk(4, 6).defaultLeaves());
+        TreeGenerators.generators.put(EnumTreeType.GRAPEFRUIT, new TreeGenerator(EnumTreeType.GRAPEFRUIT).defaultTrunk(3, 5).defaultLeaves());
+        TreeGenerators.generators.put(EnumTreeType.AVOCADO, new TreeGenerator(EnumTreeType.AVOCADO).defaultTrunk(7, 12).defaultLeaves());
+        TreeGenerators.generators.put(EnumTreeType.CARAMBOLA, new TreeGenerator(EnumTreeType.CARAMBOLA).defaultTrunk(5, 8).defaultLeaves());
+    }
 	
 }

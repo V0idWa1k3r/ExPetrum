@@ -40,6 +40,13 @@ public class ExPPlains extends ExPBiome
         this.shrubsToGenerate.add(new ShrubEntry(2, EnumShrubType.KAPUKA));
         this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.LAURUS_NOBILIS));
         this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.RED_ROBIN));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.APPLE));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.ORANGE));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.PEAR));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.PLUM));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.APRICOT));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.CHERRY));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.POMEGRANATE));
 	}
 	
 	@Override

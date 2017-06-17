@@ -21,6 +21,8 @@ public class ExPDesert extends ExPBiome
         this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.ACACIA));
         this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.BAOBAB));
         this.treesToGenerate.add(new TreeEntry(10, EnumTreeType.TEAK));
+		this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.WALNUT));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.AVOCADO));
 	}
 	
 	@Override

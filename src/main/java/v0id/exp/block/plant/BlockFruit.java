@@ -21,6 +21,7 @@ import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import v0id.api.core.VoidApi;
 import v0id.api.exp.block.EnumFruit;
+import v0id.api.exp.block.EnumLeafState;
 import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPItems;
@@ -125,7 +126,10 @@ public class BlockFruit extends Block implements IInitializableBlock, IBlockRegi
         {
             if (above.getValue(ExPBlockProperties.TREE_TYPE) == state.getValue(ExPBlockProperties.FRUIT_TYPE).getAssociatedTreeType())
             {
-                return;
+                if (((BlockLeaf)above.getBlock()).getLeavesState(w, above, pos.up()) != EnumLeafState.DEAD)
+                {
+                    return;
+                }
             }
         }
 

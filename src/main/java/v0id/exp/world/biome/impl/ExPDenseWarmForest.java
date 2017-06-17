@@ -39,6 +39,15 @@ public class ExPDenseWarmForest extends ExPBiome
         this.shrubsToGenerate.add(new ShrubEntry(3, EnumShrubType.EUONYMUS_JAPONICUS));
         this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.ILEX));
         this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.MAHONIA_X_MEDIA));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.APPLE));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.OLIVE));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.ORANGE));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.LEMON));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.APRICOT));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.WALNUT));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.GRAPEFRUIT));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.AVOCADO));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.CARAMBOLA));
 	}
 	
 	@Override

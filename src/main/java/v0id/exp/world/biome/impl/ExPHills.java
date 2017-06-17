@@ -36,6 +36,11 @@ public class ExPHills extends ExPBiome
         this.shrubsToGenerate.add(new ShrubEntry(2, EnumShrubType.RED_ROBIN));
         this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.WHIN));
         this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.PRUNUS));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.PEACH));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.PEAR));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.PLUM));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.CHERRY));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.POMEGRANATE));
 	}
 	
 	@Override

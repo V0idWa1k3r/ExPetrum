@@ -1,7 +1,5 @@
 package v0id.exp.world.biome.impl;
 
-import java.util.Random;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -14,6 +12,8 @@ import v0id.api.exp.block.EnumTreeType;
 import v0id.exp.world.biome.ExPBiome;
 import v0id.exp.world.gen.ShrubEntry;
 import v0id.exp.world.gen.tree.TreeEntry;
+
+import java.util.Random;
 
 public class ExPLake extends ExPBiome
 {
@@ -36,6 +36,11 @@ public class ExPLake extends ExPBiome
 		this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.EUONYMUS_JAPONICUS));
 		this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.LAURUS_NOBILIS));
 		this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.RED_ROBIN));
+		this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.APPLE));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.OLIVE));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.CHERRY));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.POMEGRANATE));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.CARAMBOLA));
 	}
 	
 	@Override

@@ -35,6 +35,12 @@ public class ExPRareForest extends ExPBiome
         this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.EUONYMUS));
         this.shrubsToGenerate.add(new ShrubEntry(2, EnumShrubType.KAPUKA));
         this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.LAURUS_NOBILIS));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.APPLE));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.PEACH));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.ORANGE));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.PLUM));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.APRICOT));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.GRAPEFRUIT));
 	}
 	
 	@Override

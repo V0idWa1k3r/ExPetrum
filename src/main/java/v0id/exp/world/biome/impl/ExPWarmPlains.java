@@ -39,6 +39,11 @@ public class ExPWarmPlains extends ExPBiome
         this.shrubsToGenerate.add(new ShrubEntry(1, EnumShrubType.ILEX));
         this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.LAURUS_NOBILIS));
         this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.MAHONIA_X_MEDIA));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.BANANA));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.APRICOT));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.WALNUT));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.AVOCADO));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.CARAMBOLA));
 	}
 	
 	@Override

@@ -39,6 +39,9 @@ public class ExPDenseColdForest extends ExPBiome
         this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.ELAEAGNUS));
         this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.WHIN));
         this.shrubsToGenerate.add(new ShrubEntry(10, EnumShrubType.PRUNUS));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.APPLE));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.PEAR));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.CHERRY));
 	}
 	
 	@Override
