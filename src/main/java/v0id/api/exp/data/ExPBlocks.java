@@ -37,4 +37,5 @@ public class ExPBlocks
 	public static Block farmland;
 	public static Block[] berryBushes;
 	public static Block fruit;
+	public static Block genericShrubbery;
 }

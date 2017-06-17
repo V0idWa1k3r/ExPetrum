@@ -68,6 +68,7 @@ public class ExPBlocksRegistry extends AbstractRegistry
 		ExPBlocks.crop = new BlockCrop();
 		ExPBlocks.farmland = new BlockFarmland();
 		ExPBlocks.fruit = new BlockFruit();
+		ExPBlocks.genericShrubbery = new BlockGenericShrubbery();
 	}
 	
 	public ExPBlocksRegistry()

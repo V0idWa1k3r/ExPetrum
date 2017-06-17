@@ -1,0 +1,118 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"textures" : {
+            "grass" : "exp:blocks/plants/deco/misc/flower_white_grass",
+            "flower" : "exp:blocks/plants/deco/misc/flower_white"
+		},
+		"model" : "exp:flower"
+	},
+	"variants" : {
+		"normal": [{}],
+		"inventory" : [{}],
+        "color" : {
+            "white" : {
+                "textures" : {
+                    "grass" : "exp:blocks/plants/deco/misc/flower_white_grass",
+                    "flower" : "exp:blocks/plants/deco/misc/flower_white"
+                }
+            },
+            "orange" : {
+                "textures" : {
+                    "grass" : "exp:blocks/plants/deco/misc/flower_orange_grass",
+                    "flower" : "exp:blocks/plants/deco/misc/flower_orange"
+                }
+            },
+            "magenta" : {
+                "textures" : {
+                    "grass" : "exp:blocks/plants/deco/misc/flower_magenta_grass",
+                    "flower" : "exp:blocks/plants/deco/misc/flower_magenta"
+                }
+            },
+            "light_blue" : {
+                "textures" : {
+                    "grass" : "exp:blocks/plants/deco/misc/flower_light_blue_grass",
+                    "flower" : "exp:blocks/plants/deco/misc/flower_light_blue"
+                }
+            },
+            "yellow" : {
+                "textures" : {
+                    "grass" : "exp:blocks/plants/deco/misc/flower_yellow_grass",
+                    "flower" : "exp:blocks/plants/deco/misc/flower_yellow"
+                }
+            },
+            "lime" : {
+                "textures" : {
+                    "grass" : "exp:blocks/plants/deco/misc/flower_lime_grass",
+                    "flower" : "exp:blocks/plants/deco/misc/flower_lime"
+                }
+            },
+            "pink" : {
+                "textures" : {
+                    "grass" : "exp:blocks/plants/deco/misc/flower_pink_grass",
+                    "flower" : "exp:blocks/plants/deco/misc/flower_pink"
+                }
+            },
+            "gray" : {
+                "textures" : {
+                    "grass" : "exp:blocks/plants/deco/misc/flower_gray_grass",
+                    "flower" : "exp:blocks/plants/deco/misc/flower_gray"
+                }
+            },
+            "silver" : {
+                "textures" : {
+                    "grass" : "exp:blocks/plants/deco/misc/flower_silver_grass",
+                    "flower" : "exp:blocks/plants/deco/misc/flower_silver"
+                }
+            },
+            "cyan" : {
+                "textures" : {
+                    "grass" : "exp:blocks/plants/deco/misc/flower_cyan_grass",
+                    "flower" : "exp:blocks/plants/deco/misc/flower_cyan"
+                }
+            },
+            "purple" : {
+                "textures" : {
+                    "grass" : "exp:blocks/plants/deco/misc/flower_purple_grass",
+                    "flower" : "exp:blocks/plants/deco/misc/flower_purple"
+                }
+            },
+            "blue" : {
+                "textures" : {
+                    "grass" : "exp:blocks/plants/deco/misc/flower_blue_grass",
+                    "flower" : "exp:blocks/plants/deco/misc/flower_blue"
+                }
+            },
+            "brown" : {
+                "textures" : {
+                    "grass" : "exp:blocks/plants/deco/misc/flower_brown_grass",
+                    "flower" : "exp:blocks/plants/deco/misc/flower_brown"
+                }
+            },
+            "green" : {
+                "textures" : {
+                    "grass" : "exp:blocks/plants/deco/misc/flower_green_grass",
+                    "flower" : "exp:blocks/plants/deco/misc/flower_green"
+                }
+            },
+            "red" : {
+                "textures" : {
+                    "grass" : "exp:blocks/plants/deco/misc/flower_red_grass",
+                    "flower" : "exp:blocks/plants/deco/misc/flower_red"
+                }
+            },
+            "black" : {
+                "textures" : {
+                    "grass" : "exp:blocks/plants/deco/misc/flower_white_grass",
+                    "flower" : "exp:blocks/plants/deco/misc/flower_white"
+                }
+            },
+            "none" : {
+                "textures" : {
+                    "grass" : "exp:blocks/plants/deco/misc/flower_white_grass",
+                    "flower" : "exp:blocks/plants/deco/misc/flower_white"
+                }
+            }
+        }
+	}
+}

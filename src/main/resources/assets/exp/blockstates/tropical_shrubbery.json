@@ -1,0 +1,120 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"textures" : {
+            "stem" : "exp:blocks/plants/deco/misc/tropical_stem_0",
+            "bulb" : "exp:blocks/plants/deco/misc/tropical_bulb_0",
+            "bloom" : "exp:blocks/plants/deco/misc/tropical_bloom_white",
+            "leaf" : "exp:blocks/plants/deco/misc/tropical_leaf_0"
+		},
+		"model" : "exp:plant_tropical"
+	},
+	"variants" : {
+		"normal": [{}],
+		"inventory" : [{}],
+        "leaf" : {
+            "0" : {
+                "textures" : {
+                    "leaf" : "exp:blocks/plants/deco/misc/tropical_leaf_0"
+                }
+            },
+            "1" : {
+                "textures" : {
+                    "leaf" : "exp:blocks/plants/deco/misc/tropical_leaf_1"
+                }
+            },
+            "2" : {
+                "textures" : {
+                    "leaf" : "exp:blocks/plants/deco/misc/tropical_leaf_2"
+                }
+            }
+        },
+        "color" : {
+            "white" : {
+                "textures" : {
+                    "bloom" : "exp:blocks/plants/deco/misc/tropical_bloom_white"
+                }
+            },
+            "orange" : {
+                "textures" : {
+                    "bloom" : "exp:blocks/plants/deco/misc/tropical_bloom_orange"
+                }
+            },
+            "magenta" : {
+                "textures" : {
+                    "bloom" : "exp:blocks/plants/deco/misc/tropical_bloom_magenta"
+                }
+            },
+            "light_blue" : {
+                "textures" : {
+                    "bloom" : "exp:blocks/plants/deco/misc/tropical_bloom_light_blue"
+                }
+            },
+            "yellow" : {
+                "textures" : {
+                    "bloom" : "exp:blocks/plants/deco/misc/tropical_bloom_yellow"
+                }
+            },
+            "lime" : {
+                "textures" : {
+                    "bloom" : "exp:blocks/plants/deco/misc/tropical_bloom_lime"
+                }
+            },
+            "pink" : {
+                "textures" : {
+                    "bloom" : "exp:blocks/plants/deco/misc/tropical_bloom_pink"
+                }
+            },
+            "gray" : {
+                "textures" : {
+                    "bloom" : "exp:blocks/plants/deco/misc/tropical_bloom_gray"
+                }
+            },
+            "silver" : {
+                "textures" : {
+                    "bloom" : "exp:blocks/plants/deco/misc/tropical_bloom_silver"
+                }
+            },
+            "cyan" : {
+                "textures" : {
+                    "bloom" : "exp:blocks/plants/deco/misc/tropical_bloom_cyan"
+                }
+            },
+            "purple" : {
+                "textures" : {
+                    "bloom" : "exp:blocks/plants/deco/misc/tropical_bloom_purple"
+                }
+            },
+            "blue" : {
+                "textures" : {
+                    "bloom" : "exp:blocks/plants/deco/misc/tropical_bloom_blue"
+                }
+            },
+            "brown" : {
+                "textures" : {
+                    "bloom" : "exp:blocks/plants/deco/misc/tropical_bloom_brown"
+                }
+            },
+            "green" : {
+                "textures" : {
+                    "bloom" : "exp:blocks/plants/deco/misc/tropical_bloom_green"
+                }
+            },
+            "red" : {
+                "textures" : {
+                    "bloom" : "exp:blocks/plants/deco/misc/tropical_bloom_red"
+                }
+            },
+            "black" : {
+                "textures" : {
+                    "bloom" : "exp:blocks/plants/deco/misc/tropical_bloom_black"
+                }
+            },
+            "none" : {
+                "textures" : {
+                    "bloom" : "exp:blocks/plants/deco/misc/tropical_bloom_none"
+                }
+            }
+        }
+	}
+}

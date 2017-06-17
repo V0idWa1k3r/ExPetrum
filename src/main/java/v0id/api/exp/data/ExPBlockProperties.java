@@ -30,6 +30,7 @@ public class ExPBlockProperties
 	// Note that some values of this property are unused, use the CropData from EnumCrop obtained from a capability.
 	public static final PropertyInteger CROP_GROWTH_STAGE = PropertyInteger.create("stage", 0, 15);
 	public static final PropertyEnum<EnumCrop> CROP_TYPE = PropertyEnum.create("type", EnumCrop.class);
+    public static final PropertyEnum<EnumShrubberyType> SHRUBBERY_TYPE = PropertyEnum.create("type", EnumShrubberyType.class);
 	
 	// Currently not used
 	public static final PropertyEnum<EnumOre> ORE_TYPE = PropertyEnum.create("oretype", EnumOre.class);
