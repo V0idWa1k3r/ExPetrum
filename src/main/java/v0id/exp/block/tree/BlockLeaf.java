@@ -129,6 +129,17 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 					worldIn.setBlockState(pos, state.withProperty(ExPBlockProperties.LEAF_STATE, suggestion), 2);
 				}
 			}
+
+			if (state.getValue(ExPBlockProperties.TREE_TYPE).bearsFruit() && state.getValue(ExPBlockProperties.LEAF_STATE) != EnumLeafState.DEAD)
+            {
+                if (worldIn.isAirBlock(pos.down()))
+                {
+                    if (worldIn.rand.nextFloat() < 0.01F)
+                    {
+                        worldIn.setBlockState(pos.down(), ExPBlocks.fruit.getDefaultState().withProperty(ExPBlockProperties.FRUIT_TYPE, state.getValue(ExPBlockProperties.TREE_TYPE).getAssociatedFruit()));
+                    }
+                }
+            }
 		}
     }
 
