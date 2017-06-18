@@ -52,9 +52,10 @@ public class ExPBiome extends Biome implements IBiome, IBiomeRegistryEntry
 	public final List<ShrubEntry> shrubsToGenerate = Lists.newArrayList();
 	public final List<EnumCrop> cropsToGenerate = Lists.newArrayList();
 	
-	public ExPBiome(BiomeProperties properties, float... biomedata)
+	public ExPBiome(BiomeProperties properties, String name, float... biomedata)
 	{
 		super(properties);
+		this.name = name;
 		this.temperatureMultiplier = biomedata[0];
 		this.humidityMultiplier = biomedata[1];
 		this.temperatureBaseModifier = biomedata[2];
@@ -68,10 +69,12 @@ public class ExPBiome extends Biome implements IBiome, IBiomeRegistryEntry
 		this.LAVA = ExPBlocks.lava.getStateFromMeta(9);
 		this.SALT_ICE = ExPBlocks.ice.getDefaultState().withProperty(ExPBlockProperties.ICE_IS_SALT, true);
 		this.FRESH_ICE = ExPBlocks.ice.getDefaultState().withProperty(ExPBlockProperties.ICE_IS_SALT, false);
-		this.setRegistryName("exp", this.getBiomeName());
-		Stream.of(EnumCrop.values()).filter(c -> c != EnumCrop.DEAD && c.getData().foundIn.contains(this.getBiomeName().toLowerCase())).forEach(this.cropsToGenerate::add);
+		this.setRegistryName("exp", name);
+		Stream.of(EnumCrop.values()).filter(c -> c != EnumCrop.DEAD && c.getData().foundIn.contains(name.toLowerCase())).forEach(this.cropsToGenerate::add);
 		ExPHandlerRegistry.put(this);
 	}
+
+	public String name;
 	
 	public Optional<EnumTreeType> provideTreeToGenerate(Random rand)
 	{

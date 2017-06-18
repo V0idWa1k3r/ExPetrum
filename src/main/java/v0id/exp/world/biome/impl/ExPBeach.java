@@ -13,7 +13,7 @@ public class ExPBeach extends ExPBiome
 {
 	public ExPBeach(BiomeProperties properties, float... biomedata)
 	{
-		super(properties, biomedata);
+		super(properties, "beach", biomedata);
 		this.topBlock = Blocks.SAND.getDefaultState();
 		this.fillerBlock = Blocks.SAND.getDefaultState();
 		this.decorator.treesPerChunk = 3;

@@ -14,7 +14,7 @@ public class ExPDenseWarmForest extends ExPBiome
 {
 	public ExPDenseWarmForest(BiomeProperties properties, float... biomedata)
 	{
-		super(properties, biomedata);
+		super(properties, "densewarmforest", biomedata);
 		this.decorator.treesPerChunk = 20;
         this.decorator.grassPerChunk = 4;
         this.decorator.deadBushPerChunk = 6;

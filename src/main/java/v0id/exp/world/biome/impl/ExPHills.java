@@ -14,7 +14,7 @@ public class ExPHills extends ExPBiome
 {
 	public ExPHills(BiomeProperties properties, float... biomedata)
 	{
-		super(properties, biomedata);
+		super(properties, "hills", biomedata);
 		this.decorator.treesPerChunk = 1;
         this.decorator.extraTreeChance = 0.05F;
         this.decorator.grassPerChunk = 4;

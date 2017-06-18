@@ -13,7 +13,7 @@ public class ExPDesert extends ExPBiome
 {
 	public ExPDesert(BiomeProperties properties, float... biomedata)
 	{
-		super(properties, biomedata);
+		super(properties, "desert", biomedata);
 		this.decorator.treesPerChunk = 1;
 		this.decorator.deadBushPerChunk = 0;
 		this.topBlock = Blocks.SAND.getDefaultState();

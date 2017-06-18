@@ -19,7 +19,7 @@ public class ExPLake extends ExPBiome
 {
 	public ExPLake(BiomeProperties properties, float... biomedata)
 	{
-		super(properties, biomedata);
+		super(properties, "lake", biomedata);
 		this.decorator.treesPerChunk = 3;
 		this.decorator.grassPerChunk = 3;
 		this.decorator.deadBushPerChunk = 6;

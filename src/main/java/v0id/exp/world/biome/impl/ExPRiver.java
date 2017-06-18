@@ -10,7 +10,7 @@ public class ExPRiver extends ExPBiome
 {
 	public ExPRiver(BiomeProperties properties, float... biomedata)
 	{
-		super(properties, biomedata);
+		super(properties, "river", biomedata);
 	}
 	
 	@Override

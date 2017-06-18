@@ -14,7 +14,7 @@ public class ExPSavanna extends ExPBiome
 {
 	public ExPSavanna(BiomeProperties properties, float... biomedata)
 	{
-		super(properties, biomedata);
+		super(properties, "savanna", biomedata);
 		this.decorator.treesPerChunk = 1;
         this.decorator.extraTreeChance = 0.05F;
         this.decorator.grassPerChunk = 8;

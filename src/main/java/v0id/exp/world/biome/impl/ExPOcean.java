@@ -11,7 +11,7 @@ public class ExPOcean extends ExPBiome
 {
 	public ExPOcean(BiomeProperties properties, float... biomedata)
 	{
-		super(properties, biomedata);
+		super(properties, "ocean", biomedata);
 		this.decorator.deadBushPerChunk = 0;
 		this.topBlock = Blocks.SAND.getDefaultState();
 		this.fillerBlock = Blocks.SAND.getDefaultState();
