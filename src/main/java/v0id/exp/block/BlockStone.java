@@ -58,6 +58,7 @@ public class BlockStone extends Block implements IWeightProvider, IGravitySuscep
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
@@ -70,6 +71,7 @@ public class BlockStone extends Block implements IWeightProvider, IGravitySuscep
 		return state.getValue(ROCK_CLASS).ordinal();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos)
 	{
@@ -95,7 +97,7 @@ public class BlockStone extends Block implements IWeightProvider, IGravitySuscep
 	}
 
 	@Override
-	public boolean isReplaceableOreGen(IBlockState state, IBlockAccess world, BlockPos pos,	Predicate<IBlockState> target)
+	public boolean isReplaceableOreGen(IBlockState state, IBlockAccess world, BlockPos pos, @SuppressWarnings("Guava") Predicate<IBlockState> target)
 	{
 		return target.apply(Blocks.STONE.getDefaultState()) || super.isReplaceableOreGen(state, world, pos, target);
 	}
@@ -124,7 +126,8 @@ public class BlockStone extends Block implements IWeightProvider, IGravitySuscep
 		return 20;
 	}
 
-	@Override
+	@SuppressWarnings("deprecation")
+    @Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
 		super.neighborChanged(state, worldIn, pos, blockIn, fromPos);

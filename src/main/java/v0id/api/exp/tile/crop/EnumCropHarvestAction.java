@@ -12,5 +12,5 @@ public enum EnumCropHarvestAction
 	SETBACK_7,
 	SETBACK_8,
 	SETBACK_9,
-	SPECIAL;
+	SPECIAL
 }

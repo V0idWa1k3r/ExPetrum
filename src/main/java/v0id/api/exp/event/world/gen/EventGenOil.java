@@ -16,6 +16,7 @@ import java.util.Random;
  * @author V0idWa1k3r
  *
  */
+@SuppressWarnings("CanBeFinal")
 @Cancelable
 public class EventGenOil extends Event
 {
@@ -42,7 +43,7 @@ public class EventGenOil extends Event
 	@Nonnull
 	public WorldGenerator generator;
 
-	public EventGenOil(World w, BlockPos pos, Random rand, WorldGenerator generator)
+	public EventGenOil(World w, BlockPos pos, Random rand, @Nonnull WorldGenerator generator)
 	{
 		this.world = w;
 		this.pos = pos;

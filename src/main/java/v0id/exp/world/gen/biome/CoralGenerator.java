@@ -71,8 +71,8 @@ public class CoralGenerator extends WorldGenerator
 		return true;
 	}
 	
-	IBlockState coralState = ExPBlocks.coralRock.getDefaultState();
-	IBlockState coralPlantState = ExPBlocks.coralPlant.getDefaultState();
+	final IBlockState coralState = ExPBlocks.coralRock.getDefaultState();
+	final IBlockState coralPlantState = ExPBlocks.coralPlant.getDefaultState();
 	
 	public void genCoral(World w, BlockPos pos, int height, int depth)
 	{

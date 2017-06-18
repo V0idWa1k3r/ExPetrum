@@ -43,7 +43,7 @@ public class Slash extends SpecialAttack
 		player.world.playSound(player, player.getPosition(), SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 1, 1F);
 		Vec3d playerLook = player.getLookVec();
 		Vec3d playerPos = player.getPositionVector();
-		player.world.spawnParticle(EnumParticleTypes.SWEEP_ATTACK, playerPos.x + playerLook.x, playerPos.y + player.getEyeHeight() * 0.5F, playerPos.z + playerLook.z, 0, 0, 0, new int[0]);
+		player.world.spawnParticle(EnumParticleTypes.SWEEP_ATTACK, playerPos.x + playerLook.x, playerPos.y + player.getEyeHeight() * 0.5F, playerPos.z + playerLook.z, 0, 0, 0);
 		AxisAlignedBB aabb = new AxisAlignedBB(playerPos.addVector(-3, -1, -3), playerPos.addVector(3, 3, 3));
 		List<EntityLivingBase> lst = player.world.getEntitiesWithinAABB(EntityLivingBase.class, aabb, e -> e != player);
 		for (EntityLivingBase ent : lst)

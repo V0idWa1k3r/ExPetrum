@@ -85,8 +85,6 @@ public class PlayerHUDRenderer
 		ScaledResolution sRes = new ScaledResolution(Minecraft.getMinecraft());
 		EnumHandSide hand = p.getPrimaryHand().opposite();
 		float cX = sRes.getScaledWidth() / 2;
-		float xY = sRes.getScaledHeight() / 2;
-		
 		GlStateManager.enableAlpha();
 		GlStateManager.color(1, 1, 1, 1F);
 		vb.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
@@ -209,20 +207,15 @@ public class PlayerHUDRenderer
             ItemStack itemstack = entityplayer.getHeldItemOffhand();
             EnumHandSide enumhandside = entityplayer.getPrimaryHand().opposite();
             int i = sRes.getScaledWidth() / 2;
-            float f = 0;
-            int j = 182;
-            int k = 91;
-            
             GlStateManager.enableRescaleNormal();
             GlStateManager.enableBlend();
             GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
             RenderHelper.enableGUIStandardItemLighting();
-
             for (int l = 0; l < 9; ++l)
             {
                 int i1 = i - 90 + l * 20 + 3;
                 int j1 = sRes.getScaledHeight() - 16 - 9;
-                renderHotbarItem(i1, j1, partialTicks, entityplayer, (ItemStack)entityplayer.inventory.mainInventory.get(l));
+                renderHotbarItem(i1, j1, partialTicks, entityplayer, entityplayer.inventory.mainInventory.get(l));
             }
 
             if (!itemstack.isEmpty())
@@ -245,19 +238,8 @@ public class PlayerHUDRenderer
 
                 if (f1 < 1.0F)
                 {
-                    int i2 = sRes.getScaledHeight() - 20;
-                    int j2 = i + 91 + 6;
-
-                    if (enumhandside == EnumHandSide.RIGHT)
-                    {
-                        j2 = i - 91 - 22;
-                    }
-
                     Minecraft.getMinecraft().getTextureManager().bindTexture(Gui.ICONS);
-                    int k1 = (int)(f1 * 19.0F);
                     GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-                    //this.drawTexturedModalRect(j2, i2, 0, 94, 18, 18);
-                    //this.drawTexturedModalRect(j2, i2 + 18 - k1, 18, 112 - k1, 18, k1);
                 }
             }
 

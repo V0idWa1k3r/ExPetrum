@@ -19,7 +19,8 @@ public interface IGravitySusceptible
 		return !GravityHelper.isSupported(w, pos);
 	}
 	
-	default boolean fall(World w, IBlockState state, BlockPos pos, BlockPos trigger)
+	@SuppressWarnings("SameReturnValue")
+    default boolean fall(World w, IBlockState state, BlockPos pos, BlockPos trigger)
 	{
 		return false;
 	}
@@ -29,12 +30,14 @@ public interface IGravitySusceptible
 		
 	}
 	
-	default boolean destroysNonOpaqueBlocksOnImpact()
+	@SuppressWarnings("SameReturnValue")
+    default boolean destroysNonOpaqueBlocksOnImpact()
 	{
 		return true;
 	}
 	
-	default boolean breaksOnFall()
+	@SuppressWarnings("SameReturnValue")
+    default boolean breaksOnFall()
 	{
 		return false;
 	}

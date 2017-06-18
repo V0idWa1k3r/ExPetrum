@@ -1,17 +1,16 @@
 package v0id.api.exp.combat;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.INBTSerializable;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 public abstract class SpecialAttack
 {
@@ -68,7 +67,7 @@ public abstract class SpecialAttack
 	public void setSortName(String sortName)
 	{
 		this.sortName = sortName;
-		Collections.sort(sortedData, (SpecialAttack l, SpecialAttack r) -> l.getSortName().compareTo(r.getSortName()));
+		sortedData.sort(Comparator.comparing(SpecialAttack::getSortName));
 	}
 
 	public static class AttackWrapper implements INBTSerializable<NBTTagCompound>
@@ -122,7 +121,7 @@ public abstract class SpecialAttack
 	
 	// Client-side checks go in these. If all are met and canExecute is true then a packet is sent to the server so the server can check canExecute. If that is also true the attack is executed on both client and server.
 	@FunctionalInterface
-	public static interface IExecuteCondition
+	public interface IExecuteCondition
 	{
 		boolean isMet();
 	}

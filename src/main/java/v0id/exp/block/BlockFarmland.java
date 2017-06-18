@@ -128,6 +128,7 @@ public class BlockFarmland extends BlockContainer implements IInitializableBlock
 		return new TileFarmland();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
@@ -150,6 +151,7 @@ public class BlockFarmland extends BlockContainer implements IInitializableBlock
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{

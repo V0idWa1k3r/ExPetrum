@@ -12,7 +12,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 public class ExPCropCapability
 {
 	@CapabilityInject(IExPCrop.class)
-	public static Capability<IExPCrop> cropCap = null;
+	public static final Capability<IExPCrop> cropCap = null;
 	public static final ResourceLocation KEY = new ResourceLocation("exp", "cropdata");
 	
 	public static void register()

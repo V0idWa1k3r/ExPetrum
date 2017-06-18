@@ -11,6 +11,7 @@ import v0id.api.exp.world.IExPWorld;
  * @author V0idWa1k3r
  *
  */
+@SuppressWarnings("CanBeFinal")
 public class EventGenerateTemperatureTable extends Event
 {
 	/**

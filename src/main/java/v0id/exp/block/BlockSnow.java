@@ -1,10 +1,5 @@
 package v0id.exp.block;
 
-import static net.minecraft.block.BlockSnow.LAYERS;
-
-import java.util.Random;
-import java.util.stream.Stream;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -37,6 +32,11 @@ import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockWeighted;
 import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
+
+import java.util.Random;
+import java.util.stream.Stream;
+
+import static net.minecraft.block.BlockSnow.LAYERS;
 
 public class BlockSnow extends Block implements IGravitySusceptible, IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {
@@ -74,6 +74,7 @@ public class BlockSnow extends Block implements IGravitySusceptible, IInitializa
 		return 0;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
@@ -86,12 +87,15 @@ public class BlockSnow extends Block implements IGravitySusceptible, IInitializa
 		return state.getValue(LAYERS) - 1;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos)
 	{
 		return 1 + blockState.getValue(LAYERS);
 	}
 
+
+	@SuppressWarnings("deprecation")
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
@@ -128,6 +132,7 @@ public class BlockSnow extends Block implements IGravitySusceptible, IInitializa
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
@@ -135,19 +140,22 @@ public class BlockSnow extends Block implements IGravitySusceptible, IInitializa
 		this.onNeighborChange(worldIn, pos, fromPos);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isTopSolid(IBlockState state)
     {
         return state.getValue(LAYERS) == 8;
     }
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isOpaqueCube(IBlockState state)
     {
         return false;
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
 	public boolean isFullCube(IBlockState state)
     {
         return false;

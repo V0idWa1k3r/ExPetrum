@@ -1,9 +1,5 @@
 package v0id.exp.block.fluid;
 
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -29,6 +25,9 @@ import v0id.exp.block.item.ItemBlockWeighted;
 import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
 
+import javax.annotation.Nonnull;
+import java.util.Random;
+
 public class BlockFreshWater extends BlockFluidFinite implements IWater, IInitializableBlock, IBlockRegistryEntry, IItemRegistryEntry
 {
 	public BlockFreshWater()
@@ -44,7 +43,7 @@ public class BlockFreshWater extends BlockFluidFinite implements IWater, IInitia
 		this.setRegistryName(ExPRegistryNames.blockFreshWater);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-		this.setLightOpacity(Blocks.WATER.getLightOpacity(Blocks.WATER.getDefaultState()));
+		this.setLightOpacity(3);
 		this.setQuantaPerBlock(10);
 		this.setTickRandomly(true);
 		ExPHandlerRegistry.put(this);

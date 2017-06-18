@@ -16,7 +16,7 @@ public class WorldSkyRenderer extends IRenderHandler
 	private static final ResourceLocation SUN = new ResourceLocation("exp", "textures/skybox/sun.png");
 	private static final ResourceLocation MOON = new ResourceLocation("exp", "textures/skybox/moon.png");
 	public static WorldSkyRenderer instance;
-	public ResourceLocation[] daySkyboxes = new ResourceLocation[]{
+	public final ResourceLocation[] daySkyboxes = new ResourceLocation[]{
 		new ResourceLocation("exp", "textures/skybox/bluecloud_up.png"),
 		new ResourceLocation("exp", "textures/skybox/bluecloud_dn.png"),
 		new ResourceLocation("exp", "textures/skybox/bluecloud_ft.png"),
@@ -25,7 +25,7 @@ public class WorldSkyRenderer extends IRenderHandler
 		new ResourceLocation("exp", "textures/skybox/bluecloud_rt.png"),
 	};
 	
-	public ResourceLocation[] nightSkyboxes = new ResourceLocation[]{
+	public final ResourceLocation[] nightSkyboxes = new ResourceLocation[]{
 			new ResourceLocation("exp", "textures/skybox/nightstars_up.png"),
 			new ResourceLocation("exp", "textures/skybox/nightstars_dn.png"),
 			new ResourceLocation("exp", "textures/skybox/nightstars_ft.png"),
@@ -198,8 +198,8 @@ public class WorldSkyRenderer extends IRenderHandler
         int i = world.getMoonPhase();
         int k = i % 4;
         int i1 = i / 4 % 2;
-        float f22 = (float)(k + 0) / 4.0F;
-        float f23 = (float)(i1 + 0) / 4.0F;
+        float f22 = (float)(k) / 4.0F;
+        float f23 = (float)(i1) / 4.0F;
         float f24 = (float)(k + 1) / 4.0F;
         float f14 = (float)(i1 + 1) / 4.0F;
         BufferBuilder.begin(7, DefaultVertexFormats.POSITION_TEX);

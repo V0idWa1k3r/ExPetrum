@@ -45,7 +45,7 @@ public abstract class ItemExPWeapon extends ItemSword implements IExPTool
 	@Override
 	public Set<String> getToolClasses(ItemStack stack)
 	{
-		return Sets.newHashSet(new String[]{ this.getToolClass().getName() });
+		return Sets.newHashSet(this.getToolClass().getName());
 	}
 
 	@Override

@@ -27,15 +27,15 @@ public class ExPPlayer implements IExPPlayer
 	public EntityPlayer owner;
 	public float health;
 	public float maxHealth;
-	public Multimap<ModifierCollection, IModifier> modifiers = TreeMultimap.create();
+	public final Multimap<ModifierCollection, IModifier> modifiers = TreeMultimap.create();
 	public float calories;
-	public Map<Nutrient, Float> nutritionLevels = Maps.newEnumMap(Nutrient.class);
+	public final Map<FoodGroup, Float> nutritionLevels = Maps.newEnumMap(FoodGroup.class);
 	public float thirst;
 	public float maxThirst;
 	public float temperature;
-	public Map<BodyPart, Float> partsState = Maps.newEnumMap(BodyPart.class);
-	public Multimap<BodyPart, String> partsData = HashMultimap.create();
-	public List<IDisease> diseases = Lists.newArrayList();
+	public final Map<BodyPart, Float> partsState = Maps.newEnumMap(BodyPart.class);
+	public final Multimap<BodyPart, String> partsData = HashMultimap.create();
+	public final List<IDisease> diseases = Lists.newArrayList();
 	public boolean isFemale;
 	public EnumPlayerProgression stage = EnumPlayerProgression.STONE_AGE;
 	public int skippedTicks;
@@ -107,7 +107,7 @@ public class ExPPlayer implements IExPPlayer
 		if (this.nutritionLevels_isDirty)
 		{
 			NBTTagList lst = new NBTTagList();
-			for (Map.Entry<Nutrient, Float> nutEntry : this.nutritionLevels.entrySet())
+			for (Map.Entry<FoodGroup, Float> nutEntry : this.nutritionLevels.entrySet())
 			{
 				NBTTagFloat tag = new NBTTagFloat(nutEntry.getValue());
 				lst.appendTag(tag);
@@ -205,14 +205,14 @@ public class ExPPlayer implements IExPPlayer
 				try
 				{
 					NBTTagCompound tag = (NBTTagCompound) tagBase;
-					Class<IModifier> clazz = (Class<IModifier>) Class.forName(tag.getString("_clazz"));
+					@SuppressWarnings("unchecked")
+                    Class<IModifier> clazz = (Class<IModifier>) Class.forName(tag.getString("_clazz"));
 					IModifier instance = clazz.newInstance();
 					instance.deserializeNBT(tag);
 					this.modifiers.put(ModifierCollection.values()[tag.getByte("_collection")], instance);
 				}
-				catch (Exception ex)
+				catch (Exception ignored)
 				{
-					continue;
 				}
 			}
 		}
@@ -227,7 +227,7 @@ public class ExPPlayer implements IExPPlayer
 			NBTTagList lst = nbt.getTagList("nutritionLevels", NBT.TAG_FLOAT);
 			for (int i = 0; i < lst.tagCount(); ++i)
 			{
-				this.nutritionLevels.put(Nutrient.values()[i], lst.getFloatAt(i));
+				this.nutritionLevels.put(FoodGroup.values()[i], lst.getFloatAt(i));
 			}
 		}
 		
@@ -273,10 +273,9 @@ public class ExPPlayer implements IExPPlayer
 					disease.deserializeNBT(((NBTTagCompound)tag));
 					this.diseases.add(disease);
 				}
-				catch(Exception ex)
+				catch(Exception ignored)
 				{
-					continue;
-				}
+                }
 			}
 		}
 		
@@ -367,7 +366,7 @@ public class ExPPlayer implements IExPPlayer
 	@Override
 	public void setBaseMaxHealth(float newValue)
 	{
-		assert newValue > 0 : new IllegalArgumentException("Maximum health can't be 0 or negative!");
+		assert newValue > 0 : "Maximum health can't be 0 or negative!";
 		this.maxHealth_isDirty |= this.maxHealth != newValue;
 		this.serverIsDirty |= this.maxHealth_isDirty;
 		this.maxHealth = newValue;
@@ -377,8 +376,7 @@ public class ExPPlayer implements IExPPlayer
 	public void addModifier(IModifier mod, ModifierCollection collection)
 	{
 		this.modifiers.put(collection, mod);
-		this.modifiers_isDirty = true;
-		this.serverIsDirty |= this.modifiers_isDirty;
+		this.modifiers_isDirty = this.serverIsDirty = true;
 	}
 
 	@Override
@@ -394,7 +392,7 @@ public class ExPPlayer implements IExPPlayer
 	}
 
 	@Override
-	public float getNutritionLevel(Nutrient nutrient)
+	public float getNutritionLevel(FoodGroup nutrient)
 	{
 		return this.nutritionLevels.get(nutrient);
 	}
@@ -409,7 +407,7 @@ public class ExPPlayer implements IExPPlayer
 	}
 
 	@Override
-	public void setNutritionLevel(float newValue, Nutrient nutrient)
+	public void setNutritionLevel(float newValue, FoodGroup nutrient)
 	{
 		this.nutritionLevels_isDirty |= newValue != this.nutritionLevels.get(nutrient);
 		this.serverIsDirty |= this.nutritionLevels_isDirty;
@@ -589,7 +587,7 @@ public class ExPPlayer implements IExPPlayer
 	public static ExPPlayer createDefault()
 	{
 		ExPPlayer ret = new ExPPlayer();
-		for (Nutrient n : Nutrient.values())
+		for (FoodGroup n : FoodGroup.values())
 		{
 			ret.nutritionLevels.put(n, 100f);
 		}
@@ -604,7 +602,7 @@ public class ExPPlayer implements IExPPlayer
 			ret.partsData.put(part, "");
 		}
 		
-		for (Nutrient n : Nutrient.values())
+		for (FoodGroup n : FoodGroup.values())
 		{
 			ret.nutritionLevels.put(n, 100F);
 		}
@@ -653,7 +651,7 @@ public class ExPPlayer implements IExPPlayer
 			this.partsData.put(part, "");
 		}
 		
-		for (Nutrient n : Nutrient.values())
+		for (FoodGroup n : FoodGroup.values())
 		{
 			this.nutritionLevels.put(n, 100F);
 		}

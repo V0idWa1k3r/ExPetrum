@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.chunk.ChunkPrimer;
+import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -64,9 +65,9 @@ public class ExPBiome extends Biome implements IBiome, IBiomeRegistryEntry
 		this.spawnableCreatureList.clear();
 		this.spawnableMonsterList.clear();
 		this.spawnableWaterCreatureList.clear();
-		this.SALT_WATER = ExPBlocks.saltWater.getStateFromMeta(9);
-		this.FRESH_WATER = ExPBlocks.freshWater.getStateFromMeta(9);
-		this.LAVA = ExPBlocks.lava.getStateFromMeta(9);
+		this.SALT_WATER = ExPBlocks.saltWater.getDefaultState().withProperty(BlockFluidBase.LEVEL, 9);
+		this.FRESH_WATER = ExPBlocks.freshWater.getDefaultState().withProperty(BlockFluidBase.LEVEL, 9);
+		this.LAVA = ExPBlocks.lava.getDefaultState().withProperty(BlockFluidBase.LEVEL, 9);
 		this.SALT_ICE = ExPBlocks.ice.getDefaultState().withProperty(ExPBlockProperties.ICE_IS_SALT, true);
 		this.FRESH_ICE = ExPBlocks.ice.getDefaultState().withProperty(ExPBlockProperties.ICE_IS_SALT, false);
 		this.setRegistryName("exp", name);
@@ -74,7 +75,7 @@ public class ExPBiome extends Biome implements IBiome, IBiomeRegistryEntry
 		ExPHandlerRegistry.put(this);
 	}
 
-	public String name;
+	public final String name;
 	
 	public Optional<EnumTreeType> provideTreeToGenerate(Random rand)
 	{

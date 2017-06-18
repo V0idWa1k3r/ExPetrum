@@ -30,7 +30,7 @@ public class BlockLava extends BlockFluidFinite implements IInitializableBlock, 
 		this.setRegistryName(ExPRegistryNames.blockLava);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-		this.setLightOpacity(Blocks.LAVA.getLightOpacity(Blocks.LAVA.getDefaultState()));
+		this.setLightOpacity(3);
 		this.setLightLevel(1);
 		this.setQuantaPerBlock(10);
 		ExPHandlerRegistry.put(this);

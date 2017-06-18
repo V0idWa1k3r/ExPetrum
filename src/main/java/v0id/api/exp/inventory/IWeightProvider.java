@@ -1,14 +1,12 @@
 package v0id.api.exp.inventory;
 
-import java.util.Map;
-import java.util.Optional;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.collect.Maps;
-
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.Map;
+import java.util.Optional;
 
 public interface IWeightProvider
 {
@@ -16,14 +14,14 @@ public interface IWeightProvider
 	
 	Pair<Byte, Byte> provideVolume(ItemStack item);
 	
-	public static Map<Pair<String, Short>, Pair<Byte, Byte>> configVolumes = Maps.newHashMap();
+	Map<Pair<String, Short>, Pair<Byte, Byte>> configVolumes = Maps.newHashMap();
 	
-	public static void registerVolume(String registryName, short metadata, Pair<Byte, Byte> volume)
+	static void registerVolume(String registryName, short metadata, Pair<Byte, Byte> volume)
 	{
 		configVolumes.put(Pair.of(registryName, metadata), volume);
 	}
 	
-	public static Optional<Pair<Byte, Byte>> tryGetRegisteredVolume(ItemStack is)
+	static Optional<Pair<Byte, Byte>> tryGetRegisteredVolume(ItemStack is)
 	{
 		if (is.isEmpty())
 		{

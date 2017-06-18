@@ -70,7 +70,7 @@ public class BlockWaterLily extends BlockBush implements IWeightProvider, IIniti
 	@Override
 	protected boolean canSustainBush(IBlockState state)
 	{
-		return state.getBlock().getMaterial(state) == Material.WATER;
+		return state.getMaterial() == Material.WATER;
 	}
 
 	@Override
@@ -168,6 +168,7 @@ public class BlockWaterLily extends BlockBush implements IWeightProvider, IIniti
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{

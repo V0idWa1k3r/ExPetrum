@@ -11,11 +11,16 @@ import net.minecraft.inventory.Slot;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import v0id.api.core.logging.LogLevel;
 import v0id.api.exp.data.ExPMisc;
+import v0id.api.exp.data.ExPRegistryNames;
 import v0id.exp.client.fx.ParticleEngine;
+import v0id.exp.client.registry.ClientRegistry;
 import v0id.exp.client.render.gui.PlayerInventoryRenderer;
 import v0id.exp.client.render.hud.PlayerHUDRenderer;
 import v0id.exp.client.render.hud.SpecialAttackRenderer;
@@ -24,26 +29,33 @@ import v0id.exp.client.render.sky.WorldWeatherRenderer;
 import v0id.exp.combat.ClientCombatHandler;
 import v0id.exp.player.inventory.ManagedSlot;
 import v0id.exp.settings.impl.SettingsClient;
-import v0id.exp.util.WeatherUtils;
 
 import java.lang.reflect.Field;
 
+@SideOnly(Side.CLIENT)
+@Mod.EventBusSubscriber(modid = ExPRegistryNames.modid, value = Side.CLIENT)
 public class ExPHandlerClient
 {
     @SubscribeEvent
-    public void onWorldRenderLast(RenderWorldLastEvent event)
+	public static void onModelRegistry(ModelRegistryEvent event)
+    {
+        ClientRegistry.registerModels();
+    }
+
+    @SubscribeEvent
+    public static void onWorldRenderLast(RenderWorldLastEvent event)
     {
         ExPMisc.defaultParticleEngineImpl.renderTick(event.getPartialTicks());
     }
 
 	@SubscribeEvent
-	public void onWorldLoaded(WorldEvent.Load event)
+	public static void onWorldLoaded(WorldEvent.Load event)
 	{
         ParticleEngine.onWorldChanged();
 	}
 
 	@SubscribeEvent
-	public void onRenderHand(RenderHandEvent event)
+	public static void onRenderHand(RenderHandEvent event)
 	{
 		if (SpecialAttackRenderer.render(event.getPartialTicks()))
 		{
@@ -52,7 +64,7 @@ public class ExPHandlerClient
 	}
 	
 	@SubscribeEvent
-	public void onMouseStateChanged(MouseEvent event)
+	public static void onMouseStateChanged(MouseEvent event)
 	{
 		if (Minecraft.getMinecraft().player != null && Minecraft.getMinecraft().currentScreen == null && Minecraft.getMinecraft().player.getCooledAttackStrength(0.0F) == 1)
 		{
@@ -67,7 +79,7 @@ public class ExPHandlerClient
 	}
 	
 	@SubscribeEvent
-	public void onOpenGui(GuiScreenEvent.InitGuiEvent event)
+	public static void onOpenGui(GuiScreenEvent.InitGuiEvent event)
 	{
 		if (event.getGui() instanceof GuiContainer)
 		{
@@ -92,7 +104,7 @@ public class ExPHandlerClient
 	}
 	
 	@SubscribeEvent
-	public void onDrawGui(GuiScreenEvent.DrawScreenEvent.Pre event)
+	public static void onDrawGui(GuiScreenEvent.DrawScreenEvent.Pre event)
 	{
 		if (event.getGui() instanceof GuiContainer)
 		{
@@ -101,7 +113,7 @@ public class ExPHandlerClient
 	}
 	
 	@SubscribeEvent
-	public void onInitGui(GuiScreenEvent.InitGuiEvent event)
+	public static void onInitGui(GuiScreenEvent.InitGuiEvent event)
 	{
 		if (event.getGui() instanceof GuiCreateWorld)
 		{
@@ -129,7 +141,7 @@ public class ExPHandlerClient
 	}
 	
 	@SubscribeEvent
-	public void onHudRender(RenderGameOverlayEvent.Pre event)
+	public static void onHudRender(RenderGameOverlayEvent.Pre event)
 	{
 		if (event.getType() == ElementType.ALL)
 		{
@@ -146,7 +158,7 @@ public class ExPHandlerClient
 	}
 	
 	@SubscribeEvent
-	public void onClientTick(TickEvent.ClientTickEvent event)
+	public static void onClientTick(TickEvent.ClientTickEvent event)
 	{
 		if (Minecraft.getMinecraft().world != null && Minecraft.getMinecraft().world.provider != null && Minecraft.getMinecraft().world.provider.getDimension() == 0)
 		{
@@ -165,11 +177,6 @@ public class ExPHandlerClient
                     }
                 }
             }
-			
-			if (Minecraft.getMinecraft().world.isRaining())
-			{
-				WeatherUtils.handleClientTick(Minecraft.getMinecraft().player);
-			}
 		}
 
         if (Minecraft.getMinecraft().world != null && event.phase == TickEvent.Phase.START)
@@ -179,7 +186,7 @@ public class ExPHandlerClient
 	}
 	
 	@SubscribeEvent
-	public void onFogRender(EntityViewRenderEvent.FogDensity event)
+	public static void onFogRender(EntityViewRenderEvent.FogDensity event)
 	{
 	    if (SettingsClient.instance.disableFog)
         {

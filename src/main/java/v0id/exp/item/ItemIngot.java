@@ -40,9 +40,7 @@ public class ItemIngot extends Item implements IInitializableItem, IWeightProvid
 	
 	public void registerMetalOreDict(EnumMetal metal)
 	{
-		Stream.of(metal.getOreDictPostfix()).forEach(s ->{
-			OreDictionary.registerOre("ingot" + Character.toUpperCase(s.charAt(0)) + s.substring(1), new ItemStack(this, 1, metal.ordinal()));
-		});
+		Stream.of(metal.getOreDictPostfix()).forEach(s -> OreDictionary.registerOre("ingot" + Character.toUpperCase(s.charAt(0)) + s.substring(1), new ItemStack(this, 1, metal.ordinal())));
 	}
 
 	@Override

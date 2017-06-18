@@ -1,17 +1,15 @@
 package v0id.exp.player.inventory;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.collect.Maps;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.inventory.IWeightProvider;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 public class PlayerInventoryHelper
 {
@@ -22,7 +20,8 @@ public class PlayerInventoryHelper
 		return is.getItem() instanceof IWeightProvider ? ((IWeightProvider)is.getItem()).provideVolume(is) : IWeightProvider.tryGetRegisteredVolume(is).orElse(defaultVolume);
 	}
 	
-	public static Map<Pair<Integer, Integer>, Boolean> getSlotData(EntityPlayer player)
+	@SuppressWarnings("SuspiciousNameCombination")
+    public static Map<Pair<Integer, Integer>, Boolean> getSlotData(EntityPlayer player)
 	{
 		HashMap<Pair<Integer, Integer>, Boolean> ret = Maps.newHashMap();
 		for (int i = 9; i < 36; ++i)
@@ -50,7 +49,8 @@ public class PlayerInventoryHelper
 		return ret;
 	}
 	
-	public static int findFirstAvailableSlotFor(ItemStack is, Optional<Map<Pair<Integer, Integer>, Boolean>> data, EntityPlayer player)
+	@SuppressWarnings("SuspiciousNameCombination")
+    public static int findFirstAvailableSlotFor(ItemStack is, Optional<Map<Pair<Integer, Integer>, Boolean>> data, EntityPlayer player)
 	{
 		InventoryPlayer inventory = player.inventory;
 		for (int i = 0; i < inventory.getSizeInventory(); ++i)
@@ -76,7 +76,7 @@ public class PlayerInventoryHelper
 		
 		Map<Pair<Integer, Integer>, Boolean> lookup = data.orElseGet(() -> PlayerInventoryHelper.getSlotData(player));
 		Pair<Byte, Byte> volume = getVolume(is);
-		for (int i = 9; i < 36; ++i)
+		slotLoop: for (int i = 9; i < 36; ++i)
 		{
 			int x = (i - 9) % 9;
 			int y = (i - 9) / 9;
@@ -98,7 +98,7 @@ public class PlayerInventoryHelper
 					pos = Pair.of(dx, dy);
 					if (dx >= 9 || dy >= 3 || (lookup.containsKey(pos) && lookup.get(pos)))
 					{
-						continue;
+					    continue slotLoop;
 					}
 				}
 			}
@@ -151,12 +151,12 @@ public class PlayerInventoryHelper
 				}
 				else
 				{
-					lookup = new HashMap(lookup);
+					lookup = Maps.newHashMap(lookup);
 					for (int dx = x; dx < x + currentVolume.getLeft(); ++dx)
 					{
 						for (int dy = y; dy < y + currentVolume.getRight(); ++dy)
 						{
-							lookup.remove(Pair.<Integer, Integer>of(dx, dy));
+							lookup.remove(Pair.of(dx, dy));
 						}
 					}
 					

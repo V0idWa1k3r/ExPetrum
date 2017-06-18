@@ -1,26 +1,17 @@
 package v0id.exp.world.gen;
 
-import java.util.List;
-import java.util.Random;
-import java.util.function.Function;
-
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.commons.lang3.tuple.Triple;
-
 import com.google.common.collect.Lists;
-
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.gen.layer.GenLayer;
-import net.minecraft.world.gen.layer.GenLayerEdge;
-import net.minecraft.world.gen.layer.GenLayerFuzzyZoom;
-import net.minecraft.world.gen.layer.GenLayerIsland;
-import net.minecraft.world.gen.layer.GenLayerSmooth;
-import net.minecraft.world.gen.layer.GenLayerVoronoiZoom;
-import net.minecraft.world.gen.layer.GenLayerZoom;
-import net.minecraft.world.gen.layer.IntCache;
+import net.minecraft.world.gen.layer.*;
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
+
+import java.util.List;
+import java.util.Random;
+import java.util.function.Function;
 
 public class FeatureProvider
 {
@@ -62,9 +53,6 @@ public class FeatureProvider
         GenLayerZoom genlayerzoom1 = new GenLayerZoom(2002L, genlayeredge);
         genlayerzoom1 = new GenLayerZoom(2003L, genlayerzoom1);
         GenLayer genlayer4 = GenLayerZoom.magnify(1000L, genlayerzoom1, 0);
-        GenLayer lvt_7_1_ = GenLayerZoom.magnify(1000L, genlayer4, 0);
-        GenLayer lvt_9_1_ = GenLayerZoom.magnify(1000L, lvt_7_1_, 2);
-        GenLayer genlayer5 = GenLayerZoom.magnify(1000L, lvt_7_1_, 2);
         for (int k = 0; k < 3; ++k)
         {
         	genlayer4 = new GenLayerZoom((long)(1000 + k), genlayer4);
@@ -151,9 +139,9 @@ public class FeatureProvider
 	        {
 	            for (int j1 = 0; j1 < areaWidth; ++j1)
 	            {
-	                int k1 = aint[j1 + 0 + (i1 + 0) * k];
-	                int l1 = aint[j1 + 2 + (i1 + 0) * k];
-	                int i2 = aint[j1 + 0 + (i1 + 2) * k];
+	                int k1 = aint[j1 + i1 * k];
+	                int l1 = aint[j1 + 2 + i1 * k];
+	                int i2 = aint[j1 + (i1 + 2) * k];
 	                int j2 = aint[j1 + 2 + (i1 + 2) * k];
 	                int k2 = aint[j1 + 1 + (i1 + 1) * k];
 	                this.initChunkSeed((long)(j1 + areaX), (long)(i1 + areaY));
@@ -203,7 +191,7 @@ public class FeatureProvider
 	                        i3 = i2;
 	                    }
 
-	                    if (j2 != 0 && this.nextInt(l2++) == 0)
+	                    if (j2 != 0 && this.nextInt(l2) == 0)
 	                    {
 	                        i3 = j2;
 	                    }
@@ -259,10 +247,10 @@ public class FeatureProvider
 	public class Cache
 	{
 		public long lastCleanupTime;
-		public final Long2ObjectMap<Block> cacheMap = new Long2ObjectOpenHashMap(4096);
+		public final Long2ObjectMap<Block> cacheMap = new Long2ObjectOpenHashMap<>(4096);
 		public final List<Block> cache = Lists.newArrayList();
-		public FeatureProvider provider;
-		public Function<Pair<Triple<byte[], Integer, Integer>, Triple<Integer, Integer, Boolean>>, byte[]> bytesProvider;
+		public final FeatureProvider provider;
+		public final Function<Pair<Triple<byte[], Integer, Integer>, Triple<Integer, Integer, Boolean>>, byte[]> bytesProvider;
 
 		public Cache(FeatureProvider provider, Function<Pair<Triple<byte[], Integer, Integer>, Triple<Integer, Integer, Boolean>>, byte[]> bytesProvider)
 		{
@@ -327,8 +315,8 @@ public class FeatureProvider
 		public class Block
 		{
 			public byte[] bytes = new byte[256];
-			public int x;
-			public int z;
+			public final int x;
+			public final int z;
 			public long lastAccessTime;
 			
 			public Block(int x, int z)

@@ -1,10 +1,7 @@
 package v0id.exp.client.model;
 
-import java.util.List;
-
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -22,6 +19,8 @@ import net.minecraftforge.common.model.IModelState;
 import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.data.ExPBlockProperties;
 
+import java.util.List;
+
 public class ModelCattailBaked implements IBakedModel
 {
 	public static TextureAtlasSprite[] soilTextures;
@@ -32,10 +31,11 @@ public class ModelCattailBaked implements IBakedModel
 	final static int norm_south = 8323072;
 	final static int norm_west = 129;
 	final static int norm_east = 127;
-	public static List<List<List<BakedQuad>>> bakedQuads = Lists.newArrayList();
+	public static final List<List<List<BakedQuad>>> bakedQuads = Lists.newArrayList();
 	public static final ModelCattailBaked INSTANCE = new ModelCattailBaked();
 	
-	public static IBakedModel bake(IModelState state, VertexFormat format,	Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter)
+	@SuppressWarnings("SameReturnValue")
+    public static IBakedModel bake(IModelState state, VertexFormat format, @SuppressWarnings("Guava") Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter)
 	{
 		if (soilTextures == null)
 		{
@@ -179,7 +179,7 @@ public class ModelCattailBaked implements IBakedModel
 		dataMap.get(EnumFacing.EAST.ordinal() + 1).addAll(lstEast);
 	}
 
-	private static void bakeTextures(Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter)
+	private static void bakeTextures(@SuppressWarnings("Guava") Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter)
 	{
 		soilTextures = new TextureAtlasSprite[16];
 		for (int i = 0; i < EnumDirtClass.values().length; ++i)
@@ -221,6 +221,7 @@ public class ModelCattailBaked implements IBakedModel
 		return Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(Blocks.BEDROCK.getDefaultState()).getParticleTexture();
 	}
 
+	@Deprecated
 	@Override
 	public ItemCameraTransforms getItemCameraTransforms()
 	{

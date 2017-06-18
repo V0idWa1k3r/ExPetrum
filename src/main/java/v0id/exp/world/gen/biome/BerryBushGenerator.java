@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class BerryBushGenerator extends WorldGenerator
 {
-	public EnumShrubState stateToPlace;
+	public final EnumShrubState stateToPlace;
 
 	public BerryBushGenerator(EnumShrubState generateAs)
 	{

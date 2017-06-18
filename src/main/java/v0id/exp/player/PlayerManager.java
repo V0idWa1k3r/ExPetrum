@@ -24,8 +24,8 @@ import v0id.api.exp.data.ExPDamageMappings.DamageMapping;
 import v0id.api.exp.item.food.FoodManager;
 import v0id.api.exp.item.food.IExPFood;
 import v0id.api.exp.player.BodyPart;
+import v0id.api.exp.player.FoodGroup;
 import v0id.api.exp.player.IExPPlayer;
-import v0id.api.exp.player.Nutrient;
 
 import java.lang.reflect.Field;
 import java.util.EnumMap;
@@ -46,14 +46,12 @@ public class PlayerManager
 			return true;
 	    }
 	};
-	public static Field foodExhaustionLevelFld;
+	public static final Field foodExhaustionLevelFld = FoodStats.class.getDeclaredFields()[2];
 	
 	static
 	{
-		Class<FoodStats> foodStatsClazz = FoodStats.class;
 		try
 		{
-			foodExhaustionLevelFld = foodStatsClazz.getDeclaredFields()[2];
 			foodExhaustionLevelFld.setAccessible(true);
 		}
 		catch (Exception ex)
@@ -81,6 +79,7 @@ public class PlayerManager
 		}
 	}
 	
+	@SuppressWarnings("SameParameterValue")
 	public static void setExhaustion(EntityPlayer of, float f)
 	{
 		FoodStats stats = of.getFoodStats();
@@ -193,11 +192,11 @@ public class PlayerManager
 			}
 			
 			IExPFood food = (IExPFood) i;
-			applyFoodStats(player, data, food.getCalories(stack), food.getNutrients(stack));
+			applyFoodStats(player, data, food.getCalories(stack), food.getFoodGroup(stack));
 		}
 		else
 		{
-			Pair<Float, EnumMap<Nutrient, Float>> foodData = FoodManager.provideFoodStats(stack);
+			Pair<Float, EnumMap<FoodGroup, Float>> foodData = FoodManager.provideFoodStats(stack);
 			if (foodData != null)
 			{
 				applyFoodStats(player, data, foodData.getKey(), foodData.getRight());
@@ -205,10 +204,10 @@ public class PlayerManager
 		}
 	}
 	
-	public static void applyFoodStats(EntityPlayer player, IExPPlayer data, float calories, EnumMap<Nutrient, Float> nutrients)
+	public static void applyFoodStats(EntityPlayer player, IExPPlayer data, float calories, EnumMap<FoodGroup, Float> nutrients)
 	{
 		data.setCalories(Math.min(2000F, data.getCalories() + calories));
-		nutrients.forEach((Nutrient n, Float f) -> data.setNutritionLevel(Math.min(100, data.getNutritionLevel(n) + f), n));
+		nutrients.forEach((FoodGroup n, Float f) -> data.setNutritionLevel(Math.min(100, data.getNutritionLevel(n) + f), n));
 	}
 	
 	public static void handlePlayerPlaceBlock(EntityPlayer player, IExPPlayer data)
@@ -240,7 +239,7 @@ public class PlayerManager
 		{
 			data.setCalories(data.getCalories() - cRemoved);
 			float cCurrent = data.getCalories();
-			for (Nutrient n : Nutrient.values())
+			for (FoodGroup n : FoodGroup.values())
 			{
 				data.setNutritionLevel(Math.max(0, data.getNutritionLevel(n) - (cCurrent >= 500 ? 0.001F : 0.005F) * multiplier), n);
 			}
@@ -249,41 +248,8 @@ public class PlayerManager
 
 	public static void handleHealthRegen(IExPPlayer data, float multiplier)
 	{
-		float nutValueProteins = data.getNutritionLevel(Nutrient.PROTEIN);
-		float nutValueVita = data.getNutritionLevel(Nutrient.VITAMINS);
-		float nutValueMins = data.getNutritionLevel(Nutrient.MINERALS);
-		float hpRestored = 0;
-		if (nutValueProteins >= 1)
-		{
-			hpRestored += 10;
-			data.setNutritionLevel(nutValueProteins - 0.1F * multiplier, Nutrient.PROTEIN);
-			if (nutValueVita >= 1)
-			{
-				hpRestored += 5;
-				data.setNutritionLevel(nutValueVita - 0.01F * multiplier, Nutrient.VITAMINS);
-			}
-			
-			if (nutValueMins >= 1)
-			{
-				hpRestored += 3;
-				data.setNutritionLevel(nutValueMins - 0.01F * multiplier, Nutrient.MINERALS);
-			}
-		}
-		else
-		{
-			if (nutValueMins >= 1)
-			{
-				hpRestored += 5;
-				data.setNutritionLevel(nutValueMins - 0.08F * multiplier, Nutrient.MINERALS);
-			}
-			
-			if (nutValueVita >= 1)
-			{
-				hpRestored += 2;
-				data.setNutritionLevel(nutValueVita - 0.01F * multiplier, Nutrient.VITAMINS);
-			}
-		}
-		
+		// TODO better health regen mechanics!
+		float hpRestored = 10;
 		hpRestored /= multiplier;
 		if (hpRestored > 0)
 		{

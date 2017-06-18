@@ -1,12 +1,5 @@
 package v0id.api.exp.tile.crop;
 
-import java.util.EnumMap;
-import java.util.Optional;
-
-import javax.annotation.Nullable;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -19,15 +12,21 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.INBTSerializable;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.EnumSeason;
 import v0id.api.exp.world.TemperatureRange;
+
+import javax.annotation.Nullable;
+import java.util.EnumMap;
+import java.util.Optional;
 
 /**
  * Crop capability
  * @author V0idWa1k3r
  *
  */
+@SuppressWarnings("EmptyMethod")
 public interface IExPCrop extends INBTSerializable<NBTTagCompound>
 {
 	/**
@@ -127,7 +126,7 @@ public interface IExPCrop extends INBTSerializable<NBTTagCompound>
 	
 	/**
 	 * Gets the health of the crop
-	 * @return
+	 * @return - the health of the crop
 	 */
 	float getHealth();
 	
@@ -209,7 +208,7 @@ public interface IExPCrop extends INBTSerializable<NBTTagCompound>
 	/**
 	 * Checks if the given season is crop's harvest season
 	 * @param season - the season to check
-	 * @return
+	 * @return - true if current season passed is one of crop's harvest seasons false otherwise
 	 */
 	boolean isHarvestSeason(EnumSeason season);
 	
@@ -234,12 +233,12 @@ public interface IExPCrop extends INBTSerializable<NBTTagCompound>
 		return this.getHealth() <= 0 || this.getType() == EnumCrop.DEAD;
 	}
 	
-	public static IExPCrop of(TileEntity tile, EnumFacing facing)
+	static IExPCrop of(TileEntity tile, EnumFacing facing)
 	{
 		return tile.hasCapability(ExPCropCapability.cropCap, facing) ? tile.getCapability(ExPCropCapability.cropCap, facing) : null;
 	}
 	
-	public static IExPCrop of(TileEntity tile)
+	static IExPCrop of(TileEntity tile)
 	{
 		return of(tile, null);
 	}

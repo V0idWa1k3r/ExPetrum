@@ -1,14 +1,13 @@
 package v0id.api.exp.event.world.gen;
 
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.Cancelable;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import v0id.api.exp.world.gen.ITreeGenerator;
+
+import javax.annotation.Nonnull;
+import java.util.Random;
 
 /**
  * Fired when ExPetrum tries to generate a tree in the world. <br>
@@ -17,6 +16,7 @@ import v0id.api.exp.world.gen.ITreeGenerator;
  * @author V0idWa1k3r
  *
  */
+@SuppressWarnings("CanBeFinal")
 @Cancelable
 public class EventGenTree extends Event
 {
@@ -43,7 +43,7 @@ public class EventGenTree extends Event
 	@Nonnull
 	public ITreeGenerator generator;
 	
-	public EventGenTree(World w, BlockPos pos, Random rand, ITreeGenerator generator)
+	public EventGenTree(World w, BlockPos pos, Random rand, @Nonnull ITreeGenerator generator)
 	{
 		this.world = w;
 		this.pos = pos;

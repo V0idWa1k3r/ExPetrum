@@ -12,7 +12,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 public class ExPFarmlandCapability
 {
 	@CapabilityInject(IExPCrop.class)
-	public static Capability<IFarmland> farmlandCap = null;
+	public static final Capability<IFarmland> farmlandCap = null;
 	public static final ResourceLocation KEY = new ResourceLocation("exp", "farmlanddata");
 	
 	public static void register()

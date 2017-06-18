@@ -23,6 +23,7 @@ import v0id.exp.registry.*;
 import java.io.File;
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.nio.charset.StandardCharsets;
 import java.util.stream.Stream;
 
 @Mod(modid = "exp", useMetadata = true, dependencies = "required-after:voidapi;after:chiselsandbits;after:jei", version = "1.11.2-1.0.0.0")
@@ -32,7 +33,7 @@ public class ExPetrum
 	public static ExPetrum instance;
 	public static ModContainer containerOfSelf;
 	public static boolean isDevEnvironment;
-	public static File configDirectory;
+	public static final File configDirectory;
 	@SidedProxy(clientSide = "v0id.exp.proxy.ExPProxyClient", serverSide = "v0id.exp.proxy.ExPProxyServer")
 	public static IExPProxy proxy;
 	
@@ -58,7 +59,7 @@ public class ExPetrum
             // I wrote a C# program that did it for me :D
             try (InputStream is = ExPetrum.class.getResourceAsStream("/assets/exp/data/seasonsTemperatureRanges.json"))
             {
-                String s = IOUtils.toString(is);
+                String s = IOUtils.toString(is, StandardCharsets.UTF_8);
                 YearlyTemperatureRange.instance = new Gson().fromJson(s, YearlyTemperatureRange.class);
             }
         }

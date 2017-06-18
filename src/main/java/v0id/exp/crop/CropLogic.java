@@ -28,12 +28,12 @@ import v0id.exp.item.ItemFood;
 import v0id.exp.util.Helpers;
 
 import java.util.Map.Entry;
-import java.util.Random;
 import java.util.stream.Stream;
 
+@SuppressWarnings("RedundantCast")
 public class CropLogic
 {
-	public static NonNullList<ItemStack> createDrops(ExPCrop crop, Random rand)
+	public static NonNullList<ItemStack> createDrops(ExPCrop crop)
 	{
 		if (crop.isDead())
 		{
@@ -80,7 +80,7 @@ public class CropLogic
 		ItemFood item = (ItemFood) food.getItem();
 		int generation = crop.getGeneration();
 		Pair<Float, Float> dropWeight = crop.getType().getDropWeight();
-		float randomAmount = dropWeight.getLeft() + rand.nextFloat() * (dropWeight.getRight() - dropWeight.getLeft());
+		float randomAmount = dropWeight.getLeft() + v0id.api.core.VCStatics.rng.nextFloat() * (dropWeight.getRight() - dropWeight.getLeft());
 		randomAmount *= Math.min(2, 1 + (float) generation / 100);
 		randomAmount *= crop.getHealth() / crop.getType().getData().baseHealth;
 		item.setLastTickTime(food, IExPWorld.of(crop.getContainer().getWorld()).today());
@@ -90,12 +90,12 @@ public class CropLogic
 		TemperatureRange rangeHig = crop.getIdealTemperature();
 		float temperature = Helpers.getTemperatureAt(crop.getContainer().getWorld(), crop.getContainer().getPos());
 		float qualityMultiplier = rangeHig.isWithinRange(temperature) ? 1.0F : rangeMed.isWithinRange(temperature) ? 0.5F : rangeMin.isWithinRange(temperature) ? 0.25F : 0F;
-		EnumQuality quality = crop.isWild() ? EnumQuality.PLAIN : EnumQuality.values()[Math.min((int)((rand.nextFloat() * qualityMultiplier) * (EnumQuality.values().length - 1)), EnumQuality.values().length - 1)];
+		EnumQuality quality = crop.isWild() ? EnumQuality.PLAIN : EnumQuality.values()[Math.min((int)((v0id.api.core.VCStatics.rng.nextFloat() * qualityMultiplier) * (EnumQuality.values().length - 1)), EnumQuality.values().length - 1)];
 		quality.setForItem(food);
 		return NonNullList.withSize(1, food);
 	}
 	
-	public static ItemStack createSeeds(ExPCrop crop, Random rand)
+	public static ItemStack createSeeds(ExPCrop crop)
 	{
 		ItemStack seeds = new ItemStack(ExPItems.seeds, crop.isWild() ? 1 : 2, crop.getType().ordinal() - 1);
 		CropStats stats = new CropStats(crop.stats);
@@ -105,7 +105,7 @@ public class CropLogic
 		float randomChanceMultipleSeeds = Math.min(6, (float)crop.getGeneration() * 0.1F);
 		while (randomChanceMultipleSeeds > 0)
 		{
-			if (rand.nextDouble() * randomChanceMultipleSeeds < 0.5)
+			if (v0id.api.core.VCStatics.rng.nextDouble() * randomChanceMultipleSeeds < 0.5)
 			{
 				seeds.grow(1);
 			}
@@ -113,7 +113,7 @@ public class CropLogic
 			--randomChanceMultipleSeeds;
 		}
 		
-		if (rand.nextInt(35) < crop.getGeneration())
+		if (v0id.api.core.VCStatics.rng.nextInt(35) < crop.getGeneration())
 		{
 			TemperatureRange rangeMin = crop.getSurvivalTemperature();
 			TemperatureRange rangeMed = crop.getOptimalTemperature();
@@ -126,12 +126,12 @@ public class CropLogic
 			}
 		}
 		
-		if (rand.nextInt(100) < crop.getGeneration())
+		if (v0id.api.core.VCStatics.rng.nextInt(100) < crop.getGeneration())
 		{
 			stats.growthRate *= 1.1;
 		}
 		
-		if (rand.nextInt(20) < crop.getGeneration())
+		if (v0id.api.core.VCStatics.rng.nextInt(20) < crop.getGeneration())
 		{
 			stats.waterConsumption *= 0.94F;
 		}

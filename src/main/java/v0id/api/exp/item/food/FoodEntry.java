@@ -3,7 +3,7 @@ package v0id.api.exp.item.food;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.tuple.Pair;
-import v0id.api.exp.player.Nutrient;
+import v0id.api.exp.player.FoodGroup;
 
 import java.util.List;
 import java.util.Map;
@@ -14,7 +14,7 @@ public class FoodEntry
 	private final int id;
 	
 	// Per 100 grams
-	private Map<Nutrient, Float> nutrientData = Maps.newHashMap();
+	private Map<FoodGroup, Float> nutrientData = Maps.newHashMap();
 	private float caloriesRestored;
 	
 	// Volume in inventory
@@ -83,13 +83,13 @@ public class FoodEntry
 		return this;
 	}
 	
-	public FoodEntry withNutrient(Nutrient n, Float f)
+	public FoodEntry withFoodGroupData(FoodGroup n, Float f)
 	{
 		this.getNutrientData().put(n, f);
 		return this;
 	}
 	
-	public FoodEntry withNutrients(Map<Nutrient, Float> map)
+	public FoodEntry withFoodGroupData(Map<FoodGroup, Float> map)
 	{
 		this.setNutrientData(map);
 		return this;
@@ -116,12 +116,12 @@ public class FoodEntry
 		return this.id;
 	}
 
-	public Map<Nutrient, Float> getNutrientData()
+	public Map<FoodGroup, Float> getNutrientData()
 	{
 		return this.nutrientData;
 	}
 
-	public void setNutrientData(Map<Nutrient, Float> nutrientData)
+	public void setNutrientData(Map<FoodGroup, Float> nutrientData)
 	{
 		this.nutrientData = nutrientData;
 	}

@@ -1,12 +1,6 @@
 package v0id.exp.world.gen;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.Lists;
-
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import net.minecraft.crash.CrashReport;
@@ -26,6 +20,10 @@ import net.minecraft.world.gen.layer.IntCache;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.common.BiomeManager.BiomeEntry;
 import v0id.api.exp.data.ExPBiomes;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 public class WorldTypeExP extends WorldType
 {
@@ -61,9 +59,9 @@ public class WorldTypeExP extends WorldType
 	    /** The last time this BiomeCache was cleaned, in milliseconds. */
 	    private long lastCleanupTime;
 	    /** The map of keys to BiomeCacheBlocks. Keys are based on the chunk x, z coordinates as (x | z << 32). */
-	    private final Long2ObjectMap<BiomeCache.Block> cacheMap = new Long2ObjectOpenHashMap(4096);
+	    private final Long2ObjectMap<BiomeCache.Block> cacheMap = new Long2ObjectOpenHashMap<>(4096);
 	    /** The list of cached BiomeCacheBlocks */
-	    private final List<BiomeCache.Block> cache = Lists.<BiomeCache.Block>newArrayList();
+	    private final List<BiomeCache.Block> cache = Lists.newArrayList();
 
 	    public BiomeCacheExP(BiomeProvider chunkManagerIn)
 	    {
@@ -80,7 +78,7 @@ public class WorldTypeExP extends WorldType
 	        x = x >> 4;
 	        z = z >> 4;
 	        long i = (long)x & 4294967295L | ((long)z & 4294967295L) << 32;
-	        BiomeCache.Block biomecache$block = (BiomeCache.Block)this.cacheMap.get(i);
+	        BiomeCache.Block biomecache$block = this.cacheMap.get(i);
 
 	        if (biomecache$block == null)
 	        {
@@ -115,7 +113,7 @@ public class WorldTypeExP extends WorldType
 
 	            for (int k = 0; k < this.cache.size(); ++k)
 	            {
-	                BiomeCache.Block biomecache$block = (BiomeCache.Block)this.cache.get(k);
+	                BiomeCache.Block biomecache$block = this.cache.get(k);
 	                long l = i - biomecache$block.lastAccessTime;
 
 	                if (l > 3000L || l < 0L)
@@ -140,11 +138,11 @@ public class WorldTypeExP extends WorldType
 	    public class Block
 	    {
 	        /** The array of biome types stored in this BiomeCacheBlock. */
-	        public Biome[] biomes = new Biome[256];
+	        public final Biome[] biomes = new Biome[256];
 	        /** The x coordinate of the BiomeCacheBlock. */
-	        public int xPosition;
+	        public final int xPosition;
 	        /** The z coordinate of the BiomeCacheBlock. */
-	        public int zPosition;
+	        public final int zPosition;
 	        /** The last time this BiomeCacheBlock was accessed, in milliseconds. */
 	        public long lastAccessTime;
 
@@ -175,7 +173,7 @@ public class WorldTypeExP extends WorldType
 	    private final BiomeCacheExP biomeCache;
 	    /** A list of biomes that the player can spawn in. */
 	    private final List<Biome> biomesToSpawnIn;
-	    public static List<Biome> allowedBiomes = Lists.newArrayList();
+	    public static final List<Biome> allowedBiomes = Lists.newArrayList();
 	    public FeatureProvider featureProvider;
 	    
 	    protected BiomeProviderExP()
@@ -236,7 +234,7 @@ public class WorldTypeExP extends WorldType
 	    @Override
 		public Biome getBiome(BlockPos pos)
 	    {
-	        return this.getBiome(pos, (Biome)null);
+	        return this.getBiome(pos, null);
 	    }
 
 	    @Override
@@ -276,11 +274,11 @@ public class WorldTypeExP extends WorldType
 	        {
 	            CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Invalid Biome id");
 	            CrashReportCategory crashreportcategory = crashreport.makeCategory("RawBiomeBlock");
-	            crashreportcategory.addCrashSection("biomes[] size", Integer.valueOf(biomes.length));
-	            crashreportcategory.addCrashSection("x", Integer.valueOf(x));
-	            crashreportcategory.addCrashSection("z", Integer.valueOf(z));
-	            crashreportcategory.addCrashSection("w", Integer.valueOf(width));
-	            crashreportcategory.addCrashSection("h", Integer.valueOf(height));
+	            crashreportcategory.addCrashSection("biomes[] size", biomes.length);
+	            crashreportcategory.addCrashSection("x", x);
+	            crashreportcategory.addCrashSection("z", z);
+	            crashreportcategory.addCrashSection("w", width);
+	            crashreportcategory.addCrashSection("h", height);
 	            throw new ReportedException(crashreport);
 	        }
 	    }
@@ -405,7 +403,7 @@ public class WorldTypeExP extends WorldType
 	public class GenLayerBiomeMod extends GenLayer
 	{
 		@SuppressWarnings("unchecked")
-	    private java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> biomes = Lists.newArrayList();
+	    private final java.util.List<net.minecraftforge.common.BiomeManager.BiomeEntry> biomes = Lists.newArrayList();
 	    private final ChunkGeneratorSettings settings;
 
 	    public GenLayerBiomeMod(long p_i45560_1_, GenLayer p_i45560_3_, WorldType p_i45560_4_, ChunkGeneratorSettings p_i45560_5_)
@@ -466,7 +464,7 @@ public class WorldTypeExP extends WorldType
 	    {
 	        int totalWeight = net.minecraft.util.WeightedRandom.getTotalWeight(this.biomes);
 	        int weight = nextInt(totalWeight);
-	        return (net.minecraftforge.common.BiomeManager.BiomeEntry)net.minecraft.util.WeightedRandom.getRandomItem(this.biomes, weight);
+	        return net.minecraft.util.WeightedRandom.getRandomItem(this.biomes, weight);
 	    }
 	}
 }

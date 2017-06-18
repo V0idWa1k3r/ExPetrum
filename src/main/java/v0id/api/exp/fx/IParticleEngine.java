@@ -19,6 +19,7 @@ public interface IParticleEngine
 
     void tick();
 
+    @SuppressWarnings("SameReturnValue")
     default VertexFormat getDrawFormat()
     {
         return DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP;

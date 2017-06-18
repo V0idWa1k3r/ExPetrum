@@ -7,9 +7,9 @@ import v0id.api.exp.player.EnumPlayerProgression;
 @StaticStorage
 public class ExPTextures
 {
-	public static ResourceLocation[] PLAYER_HUD = new ResourceLocation[EnumPlayerProgression.values().length];
+	public static final ResourceLocation[] PLAYER_HUD = new ResourceLocation[EnumPlayerProgression.values().length];
 	
-	public static ResourceLocation WEATHER = new ResourceLocation(ExPRegistryNames.modid, "textures/misc/weather.png");
+	public static final ResourceLocation WEATHER = new ResourceLocation(ExPRegistryNames.modid, "textures/misc/weather.png");
 
 	public static final ResourceLocation PARTICLES = new ResourceLocation(ExPRegistryNames.modid, "textures/misc/particles.png");
 

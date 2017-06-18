@@ -11,7 +11,7 @@ import v0id.exp.crop.ExPFarmland;
 
 public class TileFarmland extends TileEntity
 {
-	public ExPFarmland farmlandState;
+	public final ExPFarmland farmlandState;
 	
 	public TileFarmland()
 	{
@@ -61,12 +61,12 @@ public class TileFarmland extends TileEntity
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing)
 	{
-		return capability == ExPFarmlandCapability.farmlandCap && (facing == EnumFacing.UP || facing == null) ? true : super.hasCapability(capability, facing);
+		return capability == ExPFarmlandCapability.farmlandCap && (facing == EnumFacing.UP || facing == null) || super.hasCapability(capability, facing);
 	}
 
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
 	{
-		return capability == ExPFarmlandCapability.farmlandCap && (facing == EnumFacing.UP || facing == null) ? (T) this.farmlandState : super.getCapability(capability, facing);
+		return capability == ExPFarmlandCapability.farmlandCap && (facing == EnumFacing.UP || facing == null) ? ExPFarmlandCapability.farmlandCap.cast(this.farmlandState) : super.getCapability(capability, facing);
 	}
 }

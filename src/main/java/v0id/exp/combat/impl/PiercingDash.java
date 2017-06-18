@@ -62,7 +62,7 @@ public class PiercingDash extends SpecialAttack
 		{
 			double randomMagnitude = player.world.rand.nextDouble();
 			Vec3d at = new Vec3d(pos.x + look.x * randomMagnitude, pos.y + player.getEyeHeight() - 0.25 + look.y * randomMagnitude, pos.z + look.z * randomMagnitude);
-			player.world.spawnParticle(EnumParticleTypes.CRIT, at.x, at.y, at.z, 0, 0, 0, new int[0]);
+			player.world.spawnParticle(EnumParticleTypes.CRIT, at.x, at.y, at.z, 0, 0, 0);
 		}
 	}
 

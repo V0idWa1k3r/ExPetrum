@@ -1,7 +1,5 @@
 package v0id.api.exp.gravity;
 
-import java.lang.reflect.Constructor;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityFallingBlock;
@@ -11,6 +9,8 @@ import net.minecraft.world.World;
 import v0id.api.core.logging.LogLevel;
 import v0id.api.exp.ExPApi;
 
+import java.lang.reflect.Constructor;
+
 public class GravityHelper
 {
 	public static Constructor<?> newGravFallingBlock;
@@ -18,12 +18,8 @@ public class GravityHelper
 	public static boolean isSupported(World world, BlockPos pos)
 	{
 		// If there is a full block under our block consider the block supported. 
-		if (world.getBlockState(pos.down()).isOpaqueCube() || world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP))
-		{
-			return true;
-		}
-		
-		return false;
+		return world.getBlockState(pos.down()).isOpaqueCube() || world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP);
+
 	}
 
 	public static void doFall(IBlockState fallingBlock, World w, BlockPos pos, BlockPos trigger)

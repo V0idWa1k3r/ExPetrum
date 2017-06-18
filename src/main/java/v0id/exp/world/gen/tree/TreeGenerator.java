@@ -48,6 +48,7 @@ public class TreeGenerator extends WorldGenerator implements ITreeGenerator
 		return ExPBlocks.leaves[this.treeType.ordinal() / 5].getDefaultState().withProperty(ExPBlockProperties.TREE_TYPE, this.treeType).withProperty(ExPBlockProperties.LEAF_STATE, leafState);
 	}
 	
+	@SuppressWarnings("UnusedReturnValue")
 	public TreeGenerator updateState()
 	{
 		this.wood = this.makeWood();

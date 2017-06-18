@@ -79,6 +79,36 @@ public class Calendar implements INBTSerializable<NBTTagLong>
 	{
 		return this.time / this.ticksPerHour;
 	}
+
+	public void setTicksPerDay(long ticksPerDay)
+	{
+		this.ticksPerDay = ticksPerDay;
+	}
+
+	public void setDaysPerMonth(long daysPerMonth)
+	{
+		this.daysPerMonth = daysPerMonth;
+	}
+
+	public void setMonthsPerYear(long monthsPerYear)
+	{
+		this.monthsPerYear = monthsPerYear;
+	}
+
+	public void setHoursPerDay(long hoursPerDay)
+	{
+		this.hoursPerDay = hoursPerDay;
+	}
+
+	public void setMinutesPerHour(long minutesPerHour)
+	{
+		this.minutesPerHour = minutesPerHour;
+	}
+
+	public void setSecondsPerMinute(long secondsPerMinute)
+	{
+		this.secondsPerMinute = secondsPerMinute;
+	}
 	
 	public byte getMinute()
 	{

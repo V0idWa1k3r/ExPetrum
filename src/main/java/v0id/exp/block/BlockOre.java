@@ -1,7 +1,6 @@
 package v0id.exp.block;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -25,11 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.block.property.EnumRockClass;
-import v0id.api.exp.data.ExPBlockProperties;
-import v0id.api.exp.data.ExPCreativeTabs;
-import v0id.api.exp.data.ExPOreDict;
-import v0id.api.exp.data.ExPRegistryNames;
-import v0id.api.exp.data.IOreDictEntry;
+import v0id.api.exp.data.*;
 import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockOre;
 import v0id.exp.handler.ExPHandlerRegistry;
@@ -42,7 +37,7 @@ import java.util.stream.Stream;
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
 import static v0id.api.exp.data.ExPBlockProperties.ROCK_CLASS;
 
-public class BlockOre extends Block implements ITileEntityProvider, IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
+public class BlockOre extends Block implements IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {
 	public static final float ORE_HARDNESS_MODIFIER = 2F;
 
@@ -85,6 +80,7 @@ public class BlockOre extends Block implements ITileEntityProvider, IInitializab
 		super.addInformation(stack, player, tooltip, advanced);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
@@ -97,6 +93,7 @@ public class BlockOre extends Block implements ITileEntityProvider, IInitializab
 		return state.getValue(ROCK_CLASS).ordinal();
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos)
 	{
@@ -134,6 +131,7 @@ public class BlockOre extends Block implements ITileEntityProvider, IInitializab
 		return state;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
@@ -141,24 +139,15 @@ public class BlockOre extends Block implements ITileEntityProvider, IInitializab
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta)
+	public TileEntity createTileEntity(World worldIn, IBlockState state)
 	{
 		return new TileOre();
 	}
-	
-	@Override
-	public boolean eventReceived(IBlockState state, World worldIn, BlockPos pos, int id, int param)
+
+    @Override
+    public boolean hasTileEntity(IBlockState state)
     {
-        super.eventReceived(state, worldIn, pos, id, param);
-        TileEntity tileentity = worldIn.getTileEntity(pos);
-        return tileentity == null ? false : tileentity.receiveClientEvent(id, param);
-    }
-	
-	@Override
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
-    {
-        super.breakBlock(worldIn, pos, state);
-        worldIn.removeTileEntity(pos);
+        return true;
     }
 	
 	@Override

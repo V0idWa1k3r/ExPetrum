@@ -14,7 +14,7 @@ import v0id.exp.crop.ExPCrop;
 
 public class TileCrop extends TileEntity
 {
-	public ExPCrop cropState;
+	public final ExPCrop cropState;
 	
 	public TileCrop()
 	{
@@ -64,13 +64,13 @@ public class TileCrop extends TileEntity
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing)
 	{
-		return capability == ExPCropCapability.cropCap ? true : super.hasCapability(capability, facing);
+		return capability == ExPCropCapability.cropCap || super.hasCapability(capability, facing);
 	}
 
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
 	{
-		return capability == ExPCropCapability.cropCap ? (T) this.cropState : super.getCapability(capability, facing);
+		return capability == ExPCropCapability.cropCap ? ExPCropCapability.cropCap.cast(this.cropState) : super.getCapability(capability, facing);
 	}
 
 	@Override

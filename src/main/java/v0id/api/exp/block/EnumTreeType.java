@@ -60,7 +60,7 @@ public enum EnumTreeType implements IStringSerializable
 		this(false);
 	}
 	
-	public static EnumTreeType[][] typesForIndex = new EnumTreeType[9][5];
+	public static final EnumTreeType[][] typesForIndex = new EnumTreeType[9][5];
 
 	private final boolean evergreen;
 

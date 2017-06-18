@@ -23,7 +23,6 @@ import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.*;
 import v0id.api.exp.gravity.GravityHelper;
 import v0id.api.exp.gravity.IGravitySusceptible;
@@ -43,6 +42,7 @@ public class BlockIce extends Block implements IInitializableBlock, IGravitySusc
 		this.initBlock();
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isOpaqueCube(IBlockState state)
     {
@@ -55,13 +55,14 @@ public class BlockIce extends Block implements IInitializableBlock, IGravitySusc
 		return Items.AIR;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	@SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {
         IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
         Block block = iblockstate.getBlock();
-        return block == this ? false : super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+        return block != this && super.shouldSideBeRendered(blockState, blockAccess, pos, side);
     }
 
 	@Override
@@ -70,6 +71,7 @@ public class BlockIce extends Block implements IInitializableBlock, IGravitySusc
 		return 5;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public EnumPushReaction getMobilityFlag(IBlockState state)
     {
@@ -91,6 +93,7 @@ public class BlockIce extends Block implements IInitializableBlock, IGravitySusc
 		ExPHandlerRegistry.put(this);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
@@ -126,6 +129,7 @@ public class BlockIce extends Block implements IInitializableBlock, IGravitySusc
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
@@ -161,7 +165,6 @@ public class BlockIce extends Block implements IInitializableBlock, IGravitySusc
 			if (this.canFall((World) world, world.getBlockState(pos), pos, neighbor) && world.getBlockState(pos.down()).getMaterial() != Material.WATER)
 			{
 				GravityHelper.doFall(world.getBlockState(pos), (World) world, pos, neighbor);
-				return;
 			}
 		}
 	}

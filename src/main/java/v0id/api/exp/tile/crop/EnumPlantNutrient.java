@@ -8,5 +8,5 @@ public enum EnumPlantNutrient
 	CALCIUM,
 	SULPHUR,
 	MAGNESIUM,
-	MICRONUTRIENTS;
+	MICRONUTRIENTS
 }

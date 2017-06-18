@@ -1,14 +1,6 @@
 package v0id.exp.client.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.vecmath.Matrix4f;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.collect.ImmutableList;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
@@ -20,6 +12,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.model.IPerspectiveAwareModel;
 import net.minecraftforge.client.model.obj.OBJModel.OBJBakedModel;
 import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
+import org.apache.commons.lang3.tuple.Pair;
+
+import javax.vecmath.Matrix4f;
+import java.util.ArrayList;
+import java.util.List;
 
 // I know this is hacky and wastes a tiny fraction of cpu cycles.
 // However this is the only non-ugly and non-copy-1000-lines-of-code-from-forge solution.
@@ -33,7 +30,7 @@ import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
 // #BlameForge :D I'm kidding, obviously
 public class ModelIngotBaked implements IPerspectiveAwareModel
 {
-	public OBJBakedModel model;
+	public final OBJBakedModel model;
 	
 	public ModelIngotBaked(OBJBakedModel mdl)
 	{
@@ -46,7 +43,7 @@ public class ModelIngotBaked implements IPerspectiveAwareModel
 		List<BakedQuad> wrappedQuads = this.model.getQuads(blockState, side, rand);
 		if (!wrappedQuads.isEmpty())
 		{
-			List<BakedQuad> ret = new ArrayList<BakedQuad>(wrappedQuads.size());
+			List<BakedQuad> ret = new ArrayList<>(wrappedQuads.size());
 			wrappedQuads.forEach(q -> ret.add(q instanceof UnpackedBakedQuad ? new WrappedQuad((UnpackedBakedQuad) q) : q));
 			return ImmutableList.copyOf(ret);
 		}
@@ -78,6 +75,7 @@ public class ModelIngotBaked implements IPerspectiveAwareModel
 		return this.model.getParticleTexture();
 	}
 
+	@Deprecated
 	@Override
 	public ItemCameraTransforms getItemCameraTransforms()
 	{

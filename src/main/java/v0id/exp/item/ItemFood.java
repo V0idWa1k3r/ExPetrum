@@ -26,8 +26,8 @@ import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.item.IContainerTickable;
 import v0id.api.exp.item.food.FoodEntry;
 import v0id.api.exp.item.food.IExPFood;
+import v0id.api.exp.player.FoodGroup;
 import v0id.api.exp.player.IExPPlayer;
-import v0id.api.exp.player.Nutrient;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.IExPWorld;
@@ -96,11 +96,11 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
     }
 
 	@Override
-	public EnumMap<Nutrient, Float> getNutrients(ItemStack stack)
+	public EnumMap<FoodGroup, Float> getFoodGroup(ItemStack stack)
 	{
-		EnumMap<Nutrient, Float> nutMap = new EnumMap(Nutrient.class);
+		EnumMap<FoodGroup, Float> nutMap = new EnumMap<>(FoodGroup.class);
 		float weightMul = this.getTotalWeight(stack) / 100;
-		this.getEntry(stack).getNutrientData().forEach((Nutrient n, Float f) -> nutMap.put(n, f * weightMul));
+		this.getEntry(stack).getNutrientData().forEach((FoodGroup n, Float f) -> nutMap.put(n, f * weightMul));
 		return nutMap;
 	}
 
@@ -158,7 +158,7 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
 	{
-		return this.canEat(playerIn, playerIn.getHeldItem(handIn)) ? super.onItemRightClick(worldIn, playerIn, handIn) : new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
+		return this.canEat(playerIn, playerIn.getHeldItem(handIn)) ? super.onItemRightClick(worldIn, playerIn, handIn) : new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
 	}
 
 	@Override
@@ -187,7 +187,7 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 		return p.getCalories() <= 1980;
 	}
 	
-	public boolean doEat(EntityPlayer player, ItemStack is)
+	public void doEat(EntityPlayer player, ItemStack is)
 	{
 		IExPPlayer p = IExPPlayer.of(player);
 		float missingCalories = 2000 - p.getCalories();
@@ -201,7 +201,7 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 		if (actual_weight <= 0)
 		{
 			is.setCount(0);
-			return false;
+			return;
 		}
 		
 		float caloriesConsumed = Math.min(100, missingCalories);
@@ -211,7 +211,7 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 		if (actual_weight - weightNeeded <= 0)
 		{
 			is.setCount(0);
-			return false;
+			return;
 		}
 		
 		this.setTotalWeight(is, weight - weightNeeded);
@@ -220,7 +220,6 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 		float rotValue = weight * this.getTotalRot(is);
 		float newRotValue = rotValue / (weight - weightNeeded);
 		this.setTotalRot(is, newRotValue);
-		return true;
 	}
 
 	@Override
@@ -261,7 +260,7 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 		}
 		
 		float rot_added = rot_real - rot_current;
-		rot_added *= this.getItemRotMultiplier(is) * this.getTemperatureMultiplier(Helpers.getTemperatureAt(w, at)) * callerMultiplier;
+		rot_added *= this.getItemRotMultiplier(is) * this.getTemperatureMultiplier(Helpers.getTemperatureAt(w, at)) * callerMultiplier * rot_multiplier;
 		if (rot_added > 0)
 		{
 			float rot = rot_current + rot_added;

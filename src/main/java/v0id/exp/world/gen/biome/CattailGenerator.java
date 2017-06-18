@@ -1,7 +1,5 @@
 package v0id.exp.world.gen.biome;
 
-import java.util.Random;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -10,6 +8,8 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import v0id.api.exp.block.IWater;
 import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
+
+import java.util.Random;
 
 public class CattailGenerator extends WorldGenerator
 {
@@ -28,7 +28,7 @@ public class CattailGenerator extends WorldGenerator
 			IBlockState above = worldIn.getBlockState(offset.up());
 			if (above.getMaterial() == Material.WATER && worldIn.isAirBlock(offset.up().up()))
 			{
-				boolean allow = above.getBlock() instanceof IWater ? !((IWater)above.getBlock()).isSalt(worldIn, offset.up()) : true;
+				boolean allow = !(above.getBlock() instanceof IWater) || !((IWater) above.getBlock()).isSalt(worldIn, offset.up());
 				if (allow)
 				{
 					worldIn.setBlockState(offset, ExPBlocks.cattail.getDefaultState().withProperty(ExPBlockProperties.DIRT_CLASS, at.getValue(ExPBlockProperties.DIRT_CLASS)), 2);

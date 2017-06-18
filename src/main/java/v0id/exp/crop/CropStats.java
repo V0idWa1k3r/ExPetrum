@@ -1,23 +1,21 @@
 package v0id.exp.crop;
 
-import java.util.EnumMap;
-import java.util.Optional;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.collect.Maps;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagLong;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.Constants.NBT;
+import net.minecraftforge.common.util.INBTSerializable;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.tile.crop.EnumPlantNutrient;
 import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.IExPWorld;
 import v0id.api.exp.world.TemperatureRange;
+
+import java.util.EnumMap;
+import java.util.Optional;
 
 /**
  * Stats that are bound to the crop tile entity and seeds
@@ -26,7 +24,7 @@ import v0id.api.exp.world.TemperatureRange;
  */
 public class CropStats implements INBTSerializable<NBTTagCompound>
 {
-	public TemperatureRange[] growthRanges = new TemperatureRange[3];
+	public final TemperatureRange[] growthRanges = new TemperatureRange[3];
 	public Pair<Float, Float> humidityGrowthRange = Pair.of(0F, 1F);
 	public int generation;
 	public boolean wild;
@@ -37,7 +35,7 @@ public class CropStats implements INBTSerializable<NBTTagCompound>
 	public float growthRate;
 	public float waterConsumption;
 	public float growth;
-	public EnumMap<EnumPlantNutrient, Float> nutrientConsumption = Maps.newEnumMap(EnumPlantNutrient.class);
+	public final EnumMap<EnumPlantNutrient, Float> nutrientConsumption = Maps.newEnumMap(EnumPlantNutrient.class);
 	
 	// Ensures that nothing is null
 	public CropStats()
@@ -60,7 +58,7 @@ public class CropStats implements INBTSerializable<NBTTagCompound>
 		this.wild = other.wild;
 		this.type = other.type;
 		this.plantedAt = new Calendar(other.plantedAt.getTime());
-		this.uprootedAt = Optional.ofNullable(other.uprootedAt.isPresent() ? new Calendar(other.uprootedAt.get().getTime()) : null);
+		this.uprootedAt = Optional.ofNullable(uprootedAt.map(calendar -> new Calendar(calendar.getTime())).orElse(null));
 		this.health = other.health;
 		this.growthRate = other.growthRate;
 		this.waterConsumption = other.waterConsumption;
@@ -82,7 +80,7 @@ public class CropStats implements INBTSerializable<NBTTagCompound>
 		this.growthRate = crop.getData().growthRate;
 		this.waterConsumption = crop.getData().waterConsumption;
 		this.growth = 0;
-		crop.getData().nutrientConsumption.forEach((EnumPlantNutrient nutrient, Float value) -> this.nutrientConsumption.put(nutrient, value));
+		crop.getData().nutrientConsumption.forEach(this.nutrientConsumption::put);
 	}
 	
 	public NBTTagCompound createItemNBT(World w)

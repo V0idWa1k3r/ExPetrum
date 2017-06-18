@@ -17,5 +17,5 @@ public enum EnumPlayerProgression
 	ELECTRICAL_AGE,		// Achieved by creating first electricity
 	MACHINE_AGE,		// Achieved by creating electrical processing structures
 	ROBOTICS_AGE,		// Achieved by creating your first robot
-	SPACE_AGE;			// Achieved by launching a satellite
+	SPACE_AGE			// Achieved by launching a satellite
 }

@@ -1,9 +1,5 @@
 package v0id.exp.block.plant;
 
-import java.util.Random;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -22,6 +18,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPMisc;
@@ -33,10 +30,12 @@ import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.handler.ExPHandlerRegistry;
 
+import java.util.Random;
+
 public class BlockCoralPlant extends Block implements IWeightProvider, IInitializableBlock, IBlockRegistryEntry, IItemRegistryEntry
 {
-	public static PropertyInteger TEXTURE_INDEX_ROCK = PropertyInteger.create("rtindex", 0, 5);
-	public static PropertyInteger TEXTURE_INDEX_PLANT = PropertyInteger.create("ptindex", 0, 15);
+	public static final PropertyInteger TEXTURE_INDEX_ROCK = PropertyInteger.create("rtindex", 0, 5);
+	public static final PropertyInteger TEXTURE_INDEX_PLANT = PropertyInteger.create("ptindex", 0, 15);
 	
 	public BlockCoralPlant()
 	{
@@ -84,6 +83,7 @@ public class BlockCoralPlant extends Block implements IWeightProvider, IInitiali
 		this.doPlacementChecks(world, pos);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
@@ -106,7 +106,6 @@ public class BlockCoralPlant extends Block implements IWeightProvider, IInitiali
 			if (w.isAirBlock(pos.down()) || !w.getBlockState(pos.down()).isSideSolid(w, pos.down(), EnumFacing.UP))
 			{
 				this.breakReplaceSelf(w, pos);
-				return;
 			}
 		}
 	}
@@ -148,6 +147,7 @@ public class BlockCoralPlant extends Block implements IWeightProvider, IInitiali
 		return state.withProperty(TEXTURE_INDEX_ROCK, ExPMisc.modelVariantRandom.nextInt(6)).withProperty(TEXTURE_INDEX_PLANT, ExPMisc.modelVariantRandom.nextInt(16));
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{

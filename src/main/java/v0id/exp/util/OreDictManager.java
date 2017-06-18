@@ -1,23 +1,20 @@
 package v0id.exp.util;
 
+import com.google.common.collect.Lists;
+import v0id.api.exp.data.IOreDictEntry;
+
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.List;
 import java.util.stream.Stream;
 
-import com.google.common.collect.Lists;
-
-import v0id.api.core.markers.StaticStorage;
-import v0id.api.exp.data.IOreDictEntry;
-
 public class OreDictManager
 {
-	public static List<Class<?>> registryEntries = Lists.newArrayList();
+	public static final List<Class<?>> registryEntries = Lists.newArrayList();
 	
 	public static void mapStorage(Class<?> clazz)
 	{
-		assert clazz.isAnnotationPresent(StaticStorage.class) : "Registry must be a static storage!";
 		registryEntries.add(clazz);
 	}
 	

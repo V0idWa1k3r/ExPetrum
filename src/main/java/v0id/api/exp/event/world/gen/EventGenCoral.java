@@ -1,14 +1,13 @@
 package v0id.api.exp.event.world.gen;
 
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.common.eventhandler.Cancelable;
 import net.minecraftforge.fml.common.eventhandler.Event;
+
+import javax.annotation.Nonnull;
+import java.util.Random;
 
 /**
  * Fired when ExPetrum tries to generate coral in the world. <br>
@@ -17,6 +16,7 @@ import net.minecraftforge.fml.common.eventhandler.Event;
  * @author V0idWa1k3r
  *
  */
+@SuppressWarnings("CanBeFinal")
 @Cancelable
 public class EventGenCoral extends Event
 {
@@ -43,7 +43,7 @@ public class EventGenCoral extends Event
 	@Nonnull
 	public WorldGenerator generator;
 	
-	public EventGenCoral(World w, BlockPos pos, Random rand, WorldGenerator generator)
+	public EventGenCoral(World w, BlockPos pos, Random rand, @Nonnull WorldGenerator generator)
 	{
 		this.world = w;
 		this.pos = pos;

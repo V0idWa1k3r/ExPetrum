@@ -1,9 +1,6 @@
 package v0id.exp.client.model;
 
-import java.util.Collection;
-
 import com.google.common.base.Function;
-
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
@@ -12,6 +9,8 @@ import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.obj.OBJModel;
 import net.minecraftforge.client.model.obj.OBJModel.OBJBakedModel;
 import net.minecraftforge.common.model.IModelState;
+
+import java.util.Collection;
 
 public class ModelIngot implements IModel
 {
@@ -35,7 +34,7 @@ public class ModelIngot implements IModel
 	}
 
 	@Override
-	public IBakedModel bake(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter)
+	public IBakedModel bake(IModelState state, VertexFormat format, @SuppressWarnings("Guava") Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter)
 	{
 		return new ModelIngotBaked((OBJBakedModel) this.model.bake(state, format, bakedTextureGetter));
 	}

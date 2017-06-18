@@ -31,6 +31,7 @@ public abstract class WritableSettings implements ISettingsManager
         this.init(this.getClass());
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public WritableSettings setFile(File f)
     {
         this.self = f;

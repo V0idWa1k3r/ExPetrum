@@ -1,11 +1,10 @@
 package v0id.api.exp.metal;
 
-import java.util.Arrays;
-import java.util.List;
-
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.collect.Lists;
+import java.util.Arrays;
+import java.util.List;
 
 public enum EnumMetal
 {
@@ -98,6 +97,7 @@ public enum EnumMetal
 	{
 		public static final List<Pair<EnumMetal, Pair<Float, Float>>> compositionData = Lists.newArrayList();
 		
+		@SafeVarargs
 		public AlloyComposition(Pair<EnumMetal, Pair<Float, Float>>...pairs)
 		{
 			compositionData.addAll(Arrays.asList(pairs));

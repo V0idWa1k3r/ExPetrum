@@ -12,9 +12,10 @@ import v0id.api.exp.fx.IParticle;
 /**
  * Created by V0idWa1k3r on 11-Jun-17.
  */
+@SuppressWarnings("CanBeFinal")
 public class Particle implements IParticle
 {
-    public World worldIn;
+    public final World worldIn;
     public float x, y, z;
     public float px, py, pz;
     public EnumParticle type;

@@ -1,15 +1,7 @@
 package v0id.exp.crop;
 
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -26,21 +18,22 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import v0id.api.core.VCStatics;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.core.network.PacketType;
 import v0id.api.core.network.VoidNetwork;
 import v0id.api.core.util.DimBlockPos;
 import v0id.api.exp.event.crop.CropEvent;
 import v0id.api.exp.event.crop.CropEvent.Harvest.Action;
 import v0id.api.exp.metal.EnumToolClass;
-import v0id.api.exp.tile.crop.EnumCrop;
-import v0id.api.exp.tile.crop.EnumCropBug;
-import v0id.api.exp.tile.crop.EnumCropHarvestAction;
-import v0id.api.exp.tile.crop.EnumPlantNutrient;
-import v0id.api.exp.tile.crop.IExPCrop;
+import v0id.api.exp.tile.crop.*;
 import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.EnumSeason;
 import v0id.api.exp.world.TemperatureRange;
+
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 
 public class ExPCrop implements IExPCrop
 {
@@ -117,19 +110,19 @@ public class ExPCrop implements IExPCrop
 	@Override
 	public boolean isWild()
 	{
-		return this.stats.type == EnumCrop.DEAD ? true : this.stats.wild;
+		return this.stats.type == EnumCrop.DEAD || this.stats.wild;
 	}
 
 	@Override
 	public NonNullList<ItemStack> getMatureDrops()
 	{
-		return CropLogic.createDrops(this, VCStatics.rng);
+		return CropLogic.createDrops(this);
 	}
 
 	@Override
 	public NonNullList<ItemStack> getSeedDrops()
 	{
-		return NonNullList.withSize(1, CropLogic.createSeeds(this, VCStatics.rng));
+		return NonNullList.withSize(1, CropLogic.createSeeds(this));
 	}
 
 	@Override
@@ -145,7 +138,7 @@ public class ExPCrop implements IExPCrop
 		selfBlockReference = Optional.ofNullable(selfBlockReference).orElse(harvestedIn.getBlockState(harvestedAt));
 		CropEvent.Harvest.KnifeCheck checkEvent = new CropEvent.Harvest.KnifeCheck(this, harvestedIn, harvestedAt, playerHarvestItem, isHarvestingWithRMB);
 		MinecraftForge.EVENT_BUS.post(checkEvent);
-		boolean isUsingKnife = checkEvent.getResult() == Result.DEFAULT ? playerHarvestItem.getItem().getToolClasses(playerHarvestItem).contains(EnumToolClass.KNIFE.getName()) : checkEvent.getResult() == Result.ALLOW ? true : false;
+		boolean isUsingKnife = checkEvent.getResult() == Result.DEFAULT ? playerHarvestItem.getItem().getToolClasses(playerHarvestItem).contains(EnumToolClass.KNIFE.getName()) : checkEvent.getResult() == Result.ALLOW;
 		List<ItemStack> dropsBase = Lists.newArrayList();
 		if (this.getGrowth() <= 1)
 		{
@@ -413,7 +406,7 @@ public class ExPCrop implements IExPCrop
 	@Override
 	public int getGrowthIndex()
 	{
-		return (int) (this.stats.type == EnumCrop.DEAD ? 0 : (int)(this.stats.growth * (this.stats.type.getData().growthStages - 1)));
+		return this.stats.type == EnumCrop.DEAD ? 0 : (int)(this.stats.growth * (this.stats.type.getData().growthStages - 1));
 	}
 
 	@Override
@@ -460,7 +453,7 @@ public class ExPCrop implements IExPCrop
 	@Override
 	public boolean isHarvestSeason(EnumSeason season)
 	{
-		return this.isDead() ? false : this.stats.type.getData().harvestSeason.contains(season);
+		return !this.isDead() && this.stats.type.getData().harvestSeason.contains(season);
 	}
 	
 	public void initDefaultsForStats(EnumCrop crop)

@@ -18,7 +18,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.exp.block.*;
-import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.*;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.world.IExPWorld;
@@ -100,7 +99,6 @@ public class BlockBerryBush extends BlockShrub
 		}
 		else
 		{
-			EnumShrubState sstate = this.getState();
 			EnumGrassState grassState = worldIn.getBlockState(pos.down()).getBlock() instanceof IGrass ? ((IGrass)worldIn.getBlockState(pos.down()).getBlock()).getState() : Helpers.getSuggestedGrassState(pos.down(), worldIn);
 			switch (grassState)
             {
@@ -182,7 +180,7 @@ public class BlockBerryBush extends BlockShrub
             if (!worldIn.isRemote)
             {
                 ItemStack held = playerIn.getHeldItem(hand);
-                int allowHarvest = 0;
+                int allowHarvest;
                 if (!held.isEmpty() && held.getItem() == ExPItems.basket)
                 {
                     held.damageItem(1, playerIn);

@@ -3,10 +3,11 @@ package v0id.exp.proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.fx.EnumParticle;
-import v0id.exp.client.ClientRegistry;
+import v0id.exp.client.registry.ClientRegistry;
 import v0id.exp.client.fx.ParticleEngine;
 import v0id.exp.combat.ClientCombatHandler;
 
@@ -15,6 +16,7 @@ public class ExPProxyClient implements IExPProxy
     static
     {
         ExPMisc.defaultParticleEngineImpl = new ParticleEngine();
+        ClientRegistry.instance = new ClientRegistry();
     }
 
 	@Override
@@ -32,7 +34,6 @@ public class ExPProxyClient implements IExPProxy
     @Override
     public void preInit(FMLPreInitializationEvent evt)
     {
-        ClientRegistry.instance = new ClientRegistry();
         ClientRegistry.instance.preInit(evt);
     }
 
@@ -40,5 +41,11 @@ public class ExPProxyClient implements IExPProxy
     public void init(FMLInitializationEvent evt)
     {
         ClientRegistry.instance.init(evt);
+    }
+
+    @Override
+    public void postInit(FMLPostInitializationEvent evt)
+    {
+        ClientRegistry.instance.postInit(evt);
     }
 }

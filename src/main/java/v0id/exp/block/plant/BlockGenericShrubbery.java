@@ -173,6 +173,7 @@ public class BlockGenericShrubbery extends BlockBush implements IInitializableBl
         return super.isAssociatedBlock(other) || other instanceof BlockTallGrass;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta)
     {
@@ -191,6 +192,7 @@ public class BlockGenericShrubbery extends BlockBush implements IInitializableBl
         return new BlockStateContainer.Builder(this).add(ExPBlockProperties.SHRUBBERY_TYPE).add(TROPIC_PLANT_LEAF).add(BLOOM_COLOR).build();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {

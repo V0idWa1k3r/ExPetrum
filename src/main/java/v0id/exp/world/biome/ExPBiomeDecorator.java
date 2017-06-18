@@ -139,8 +139,7 @@ public class ExPBiomeDecorator extends BiomeDecorator
 			int x = rand.nextInt(16) + 8;
 			int z = rand.nextInt(16) + 8;
 			BlockPos at = new BlockPos(x, 0, z);
-			WorldGenerator oilGen = genOil;
-			EventGenOil event = new EventGenOil(worldIn, at, rand, oilGen);
+			EventGenOil event = new EventGenOil(worldIn, at, rand, genOil);
 			if (MinecraftForge.TERRAIN_GEN_BUS.post(event))
 			{
 				return;
@@ -160,8 +159,7 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		int x = rand.nextInt(16) + 8;
 		int z = rand.nextInt(16) + 8;
 		BlockPos at = worldIn.getHeight(pos.add(x, 0, z));
-		WorldGenerator coralGen = this.genCoral;
-		EventGenCoral event = new EventGenCoral(worldIn, at, rand, coralGen);
+		EventGenCoral event = new EventGenCoral(worldIn, at, rand, genCoral);
 		if (MinecraftForge.TERRAIN_GEN_BUS.post(event))
 		{
 			return;
@@ -251,8 +249,7 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		int x = rand.nextInt(16) + 8;
 		int z = rand.nextInt(16) + 8;
 		BlockPos at = worldIn.getHeight(pos.add(x, 0, z));
-		WorldGenerator vegetationGen = genCattails;
-		EventGenVegetation event = new EventGenVegetation(worldIn, at, rand, vegetationGen, Type.CATTAIL);
+		EventGenVegetation event = new EventGenVegetation(worldIn, at, rand, genCattails, Type.CATTAIL);
 		if (MinecraftForge.TERRAIN_GEN_BUS.post(event))
 		{
 			return;
@@ -271,8 +268,7 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		int x = rand.nextInt(16) + 8;
 		int z = rand.nextInt(16) + 8;
 		BlockPos at = worldIn.getHeight(pos.add(x, 0, z));
-		WorldGenerator vegetationGen = genSeaweed;
-		EventGenVegetation event = new EventGenVegetation(worldIn, at, rand, vegetationGen, Type.SEAWEED);
+		EventGenVegetation event = new EventGenVegetation(worldIn, at, rand, genSeaweed, Type.SEAWEED);
 		if (MinecraftForge.TERRAIN_GEN_BUS.post(event))
 		{
 			return;
@@ -302,8 +298,7 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		int x = rand.nextInt(16) + 8;
 		int z = rand.nextInt(16) + 8;
 		BlockPos at = worldIn.getHeight(pos.add(x, 0, z));
-		WorldGenerator gen = genPebble;
-		EventGenPebble event = new EventGenPebble(worldIn, at, rand, gen);
+		EventGenPebble event = new EventGenPebble(worldIn, at, rand, genPebble);
 		if (MinecraftForge.TERRAIN_GEN_BUS.post(event))
 		{
 			return;
@@ -317,8 +312,7 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		int x = rand.nextInt(16) + 8;
 		int z = rand.nextInt(16) + 8;
 		BlockPos at = worldIn.getHeight(pos.add(x, 0, z));
-		WorldGenerator gen = genBoulders;
-		EventGenBoulder event = new EventGenBoulder(worldIn, at, rand, gen);
+		EventGenBoulder event = new EventGenBoulder(worldIn, at, rand, genBoulders);
 		if (MinecraftForge.TERRAIN_GEN_BUS.post(event))
 		{
 			return;
@@ -332,8 +326,7 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		int x = rand.nextInt(16) + 8;
 		int z = rand.nextInt(16) + 8;
 		BlockPos at = worldIn.getHeight(pos.add(x, 0, z));
-		WorldGenerator vegetationGen = genVegetation;
-		EventGenVegetation event = new EventGenVegetation(worldIn, at, rand, vegetationGen, Type.TALLGRASS);
+		EventGenVegetation event = new EventGenVegetation(worldIn, at, rand, genVegetation, Type.TALLGRASS);
 		if (MinecraftForge.TERRAIN_GEN_BUS.post(event))
 		{
 			return;
@@ -361,8 +354,7 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		{
 			return;
 		}
-		
-		int tries = 0;
+
 		while (random.nextBoolean())
 		{
 			int x = random.nextInt(16) + 8;

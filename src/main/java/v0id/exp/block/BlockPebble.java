@@ -3,8 +3,8 @@ package v0id.exp.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -84,6 +84,7 @@ public class BlockPebble extends Block implements IInitializableBlock, IOreHintR
 		return PathNodeType.OPEN;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
@@ -96,36 +97,42 @@ public class BlockPebble extends Block implements IInitializableBlock, IOreHintR
 		return state.getValue(ROCK_CLASS).ordinal();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
 		return this.getExtendedState(state, worldIn, pos);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
-		return this.PEBBLE_AABB;
+		return PEBBLE_AABB;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
 	{
-		return this.NULL_AABB;
+		return NULL_AABB;
 	}
 	
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
 	public boolean isFullCube(IBlockState state)
     {
         return false;
     }
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
@@ -154,7 +161,7 @@ public class BlockPebble extends Block implements IInitializableBlock, IOreHintR
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[]{ROCK_CLASS, MODEL_INDEX});
+		return new BlockStateContainer(this, ROCK_CLASS, MODEL_INDEX);
 	}
 
 	@Override
@@ -163,10 +170,11 @@ public class BlockPebble extends Block implements IInitializableBlock, IOreHintR
 		return EnumOffsetType.XZ;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side)
+	public BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos, EnumFacing face)
 	{
-		return false;
+		return BlockFaceShape.UNDEFINED;
 	}
 
 	@Override

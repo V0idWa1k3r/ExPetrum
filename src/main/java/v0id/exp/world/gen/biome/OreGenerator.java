@@ -1,14 +1,7 @@
 package v0id.exp.world.gen.biome;
 
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
-import org.apache.commons.lang3.tuple.Triple;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
@@ -18,6 +11,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import org.apache.commons.lang3.tuple.Triple;
 import v0id.api.core.logging.LogLevel;
 import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.block.IOreHintReplaceable;
@@ -27,9 +21,13 @@ import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPMisc;
 import v0id.exp.tile.TileOre;
 
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+
 public class OreGenerator extends WorldGenerator
 {
-	public EnumOre toGenerate;
+	public final EnumOre toGenerate;
 	
 	public OreGenerator(Random rand)
 	{
@@ -43,7 +41,6 @@ public class OreGenerator extends WorldGenerator
 		Chunk at = worldIn.getChunkFromBlockCoords(position);
 		boolean detectedRunaway = false;
 		int veinSize = 64 + rand.nextInt(512);
-		List<BlockPos> generatedOreAt = Lists.newArrayList();
 		Set<Triple<Integer, Integer, EnumRockClass>> generatedAtSet = Sets.newHashSet();
 		int yLevel = position.getY();
 		while ((yLevel - 5) * 12 * 12 < veinSize)
@@ -117,13 +114,11 @@ public class OreGenerator extends WorldGenerator
 				{
 					ExPMisc.modLogger.log(LogLevel.Debug, "Encountered an unknown stone block at %s!", orePos);
 					generatedResets += 2;
-					continue;
 				}
 			}
 			else
 			{
 				generatedResets += 2;
-				continue;
 			}
 		}
 		

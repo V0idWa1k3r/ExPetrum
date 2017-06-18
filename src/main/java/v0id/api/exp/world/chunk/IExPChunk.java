@@ -12,6 +12,7 @@ import java.util.Map;
 /**
  * Created by V0idWa1k3r on 16-Jun-17.
  */
+@SuppressWarnings("EmptyMethod")
 public interface IExPChunk extends INBTSerializable<NBTTagCompound>
 {
     Chunk getOwner();
@@ -36,7 +37,7 @@ public interface IExPChunk extends INBTSerializable<NBTTagCompound>
 
     void setTemperatureModifierAt(BlockPos pos, float f);
 
-    public static IExPChunk of(Chunk c)
+    static IExPChunk of(Chunk c)
     {
         return IExPWorld.of(c.getWorld()).getChunkDataAt(c.getPos());
     }

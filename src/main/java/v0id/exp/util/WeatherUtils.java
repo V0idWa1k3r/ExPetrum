@@ -1,9 +1,6 @@
 package v0id.exp.util;
 
-import java.util.Iterator;
-
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -12,6 +9,8 @@ import net.minecraft.world.chunk.Chunk;
 import v0id.api.exp.block.IWater;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.exp.block.BlockSnow;
+
+import java.util.Iterator;
 
 public class WeatherUtils
 {
@@ -85,11 +84,5 @@ public class WeatherUtils
 				}
 			}
 		}
-		
-	}
-	
-	public static void handleClientTick(EntityPlayer clientPlayer)
-	{
-		
 	}
 }

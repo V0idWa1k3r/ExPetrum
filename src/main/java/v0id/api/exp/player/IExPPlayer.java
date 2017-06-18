@@ -1,13 +1,12 @@
 package v0id.api.exp.player;
 
-import java.util.Collection;
-
 import com.google.common.collect.ImmutableCollection;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 import v0id.api.exp.combat.SpecialAttack;
+
+import java.util.Collection;
 
 public interface IExPPlayer extends INBTSerializable<NBTTagCompound>
 {
@@ -83,10 +82,10 @@ public interface IExPPlayer extends INBTSerializable<NBTTagCompound>
 	
 	/**
 	 * Getter for the specific nutrition level.
-	 * @param nutrient : the Nutrient to get the level of
+	 * @param group : the FoodGroup to get the level of
 	 * @return The level of a specific nutrient
 	 */
-	float getNutritionLevel(Nutrient nutrient);
+	float getNutritionLevel(FoodGroup group);
 	
 	/**
 	 * Setter for the player's calories (food)
@@ -97,9 +96,9 @@ public interface IExPPlayer extends INBTSerializable<NBTTagCompound>
 	/**
 	 * Setter for the specific nutrition level
 	 * @param newValue : the value to set
-	 * @param nutrient : the nutrient to set the level of
+	 * @param group : the group to set the level of
 	 */
-	void setNutritionLevel(float newValue, Nutrient nutrient);
+	void setNutritionLevel(float newValue, FoodGroup group);
 	
 	/**
 	 * Getter for player's thirst level.
@@ -245,7 +244,7 @@ public interface IExPPlayer extends INBTSerializable<NBTTagCompound>
 	 * @param p : the player to get the data of
 	 * @return The data attached to a specified player
 	 */
-	public static IExPPlayer of(EntityPlayer p)
+	static IExPPlayer of(EntityPlayer p)
 	{
 		return p.getCapability(ExPPlayerCapability.playerCap, null);
 	}

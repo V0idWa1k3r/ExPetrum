@@ -1,8 +1,5 @@
 package v0id.exp.combat.impl;
 
-import java.util.List;
-import java.util.WeakHashMap;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.passive.EntityTameable;
@@ -18,9 +15,12 @@ import v0id.api.exp.combat.SpecialAttack;
 import v0id.api.exp.combat.WeaponType;
 import v0id.api.exp.data.ExPRegistryNames;
 
+import java.util.List;
+import java.util.WeakHashMap;
+
 public class Spin extends SpecialAttack
 {
-	public static final WeakHashMap<EntityPlayer, Float> initialAngles = new WeakHashMap();
+	public static final WeakHashMap<EntityPlayer, Float> initialAngles = new WeakHashMap<>();
 	
 	public Spin()
 	{
@@ -35,7 +35,7 @@ public class Spin extends SpecialAttack
 		player.rotationYaw += 40;
 		Vec3d playerLook = player.getLookVec();
 		Vec3d playerPos = player.getPositionVector();
-		player.world.spawnParticle(EnumParticleTypes.SWEEP_ATTACK, playerPos.x + playerLook.x, playerPos.y + player.getEyeHeight() * 0.5F, playerPos.z + playerLook.z, 0, 0, 0, new int[0]);
+		player.world.spawnParticle(EnumParticleTypes.SWEEP_ATTACK, playerPos.x + playerLook.x, playerPos.y + player.getEyeHeight() * 0.5F, playerPos.z + playerLook.z, 0, 0, 0);
 		AxisAlignedBB aabb = new AxisAlignedBB(playerPos.addVector(-3, -1, -3), playerPos.addVector(3, 3, 3));
 		List<EntityLivingBase> lst = player.world.getEntitiesWithinAABB(EntityLivingBase.class, aabb, e -> e != player);
 		for (EntityLivingBase ent : lst)

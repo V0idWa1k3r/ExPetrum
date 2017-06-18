@@ -4,5 +4,5 @@ public enum EnumGrassState
 {
 	NORMAL,
 	DRY,
-	DEAD;
+	DEAD
 }

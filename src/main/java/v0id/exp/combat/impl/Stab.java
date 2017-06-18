@@ -40,7 +40,7 @@ public class Stab extends SpecialAttack
 			assumedToBeLookedAt.attackEntityFrom(DamageSource.causePlayerDamage(player), Math.max(1, (float) player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue() / 10));
 			player.world.playSound(player, player.getPosition(), SoundEvents.ENTITY_PLAYER_ATTACK_NODAMAGE, SoundCategory.PLAYERS, 1, 0.1F);
 			Vec3d targetPos = assumedToBeLookedAt.getPositionVector();
-			player.world.spawnParticle(EnumParticleTypes.CRIT, targetPos.x + player.world.rand.nextDouble() / 2 - player.world.rand.nextDouble() / 2, targetPos.y + assumedToBeLookedAt.getEyeHeight() + player.world.rand.nextDouble() / 2 - player.world.rand.nextDouble() / 2, targetPos.z + player.world.rand.nextDouble() / 2 - player.world.rand.nextDouble() / 2, 0, 0, 0, new int[0]);
+			player.world.spawnParticle(EnumParticleTypes.CRIT, targetPos.x + player.world.rand.nextDouble() / 2 - player.world.rand.nextDouble() / 2, targetPos.y + assumedToBeLookedAt.getEyeHeight() + player.world.rand.nextDouble() / 2 - player.world.rand.nextDouble() / 2, targetPos.z + player.world.rand.nextDouble() / 2 - player.world.rand.nextDouble() / 2, 0, 0, 0);
 			if (!player.world.isRemote)
 			{
 				ItemStack is = player.getHeldItemMainhand().isEmpty() ? player.getHeldItemOffhand() : player.getHeldItemMainhand();

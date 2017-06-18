@@ -1,6 +1,5 @@
 package v0id.exp.item;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -111,8 +110,7 @@ public class ItemSeeds extends Item implements IInitializableItem, IItemRegistry
 		{
 			return EnumActionResult.FAIL;
 		}
-		
-		IBlockState state = worldIn.getBlockState(pos);
+
 		TileEntity tile = worldIn.getTileEntity(pos);
 		if (tile != null && tile.hasCapability(ExPFarmlandCapability.farmlandCap, EnumFacing.UP))
 		{
@@ -148,7 +146,7 @@ public class ItemSeeds extends Item implements IInitializableItem, IItemRegistry
 
 	public static class CapabilityExPSeeds implements IExPSeed, ICapabilityProvider
 	{
-		public ItemStack container;
+		public final ItemStack container;
 		public CropStats data;
 		
 		public CapabilityExPSeeds()
@@ -222,7 +220,7 @@ public class ItemSeeds extends Item implements IInitializableItem, IItemRegistry
 		@Override
 		public boolean hasCapability(Capability<?> capability, EnumFacing facing)
 		{
-			return capability == ExPSeedsCapability.seedsCap ? true : false;
+			return capability == ExPSeedsCapability.seedsCap;
 		}
 
 		@Override
@@ -238,11 +236,6 @@ public class ItemSeeds extends Item implements IInitializableItem, IItemRegistry
 		
 		public CropStats getOrCreateStats()
 		{
-			if (!this.container.hasTagCompound() || !this.container.getTagCompound().hasKey("exp.seedData"))
-			{
-				EnumCrop crop = EnumCrop.values()[Math.min(this.container.getMetadata() + 1, EnumCrop.values().length - 1)];
-			}
-			
 			CropStats ret = new CropStats();
 			ret.createFromItemNBT(this.seedTag());
 			this.container.getTagCompound().setTag("exp.seedData", ret.createItemNBT(null));

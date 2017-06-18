@@ -124,6 +124,7 @@ public class ItemWateringCan extends ItemExPTool implements IWeightProvider, IIn
 		return 72000;
 	}
 
+	@SuppressWarnings("ConstantConditions")
 	@Override
 	public void onUsingTick(ItemStack stack, EntityLivingBase player, int count)
 	{
@@ -133,8 +134,6 @@ public class ItemWateringCan extends ItemExPTool implements IWeightProvider, IIn
 		}
 		
 		int tier = this.getStats(stack).getTier();
-		Vec3d start = player.getPositionVector().addVector(0F, player.getEyeHeight(), 0F);
-		Vec3d end = start.add(player.getLookVec().scale(5));
 		RayTraceResult rtr = this.rayTrace(player.world, (EntityPlayer) player, true);
 		if (rtr != null && rtr.typeOfHit == Type.BLOCK)
 		{
@@ -250,7 +249,7 @@ public class ItemWateringCan extends ItemExPTool implements IWeightProvider, IIn
 			((IAcceptsWaterCan)state.getBlock()).acceptWatering(player, w, pos, state, cap, is, tier);
 		}
 		
-		w.spawnParticle(EnumParticleTypes.WATER_SPLASH, pos.getX() + w.rand.nextFloat(), pos.getY() + 1, pos.getZ() + w.rand.nextFloat(), 0, 0, 0, new int[0]);
+		w.spawnParticle(EnumParticleTypes.WATER_SPLASH, pos.getX() + w.rand.nextFloat(), pos.getY() + 1, pos.getZ() + w.rand.nextFloat(), 0, 0, 0);
 	}
 
 	public void tryFillWithWater(EntityLivingBase player, int tier, BlockPos pos, World w, IBlockState blockHit, Fluid f, IFluidHandlerItem cap)
@@ -270,7 +269,7 @@ public class ItemWateringCan extends ItemExPTool implements IWeightProvider, IIn
 					}
 					else
 					{
-						w.setBlockState(pos, blockHit.withProperty(fluidBlock.LEVEL, quantaCurrent - 2), 3);
+						w.setBlockState(pos, blockHit.withProperty(BlockFluidBase.LEVEL, quantaCurrent - 2), 3);
 					}
 					
 					cap.fill(toFill, true);

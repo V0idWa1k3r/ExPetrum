@@ -1,9 +1,5 @@
 package v0id.api.exp.event.crop;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -14,6 +10,9 @@ import v0id.api.exp.tile.crop.EnumPlantNutrient;
 import v0id.api.exp.tile.crop.IExPCrop;
 import v0id.api.exp.tile.crop.IFarmland;
 import v0id.api.exp.world.ImmutableCalendar;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * Generic event for IExPCrop capability's different methods.
@@ -56,6 +55,7 @@ public class CropEvent extends Event
 	 * @author V0idWa1k3r
 	 *
 	 */
+	@SuppressWarnings("CanBeFinal")
 	@Cancelable
 	public static class Damage extends CropEvent
 	{
@@ -81,10 +81,10 @@ public class CropEvent extends Event
 	 */
 	public static class Harvest extends CropEvent
 	{
-		public static enum Action
+		public enum Action
 		{
 			HARVEST_DROPS,
-			HARVEST_SEEDS;
+			HARVEST_SEEDS
 		}
 		
 		/**
@@ -98,7 +98,7 @@ public class CropEvent extends Event
 		@Nullable
 		public final Action action;
 		
-		public Harvest(IExPCrop crop, World w, BlockPos at, boolean b, Action a)
+		public Harvest(IExPCrop crop, World w, BlockPos at, boolean b, @Nullable Action a)
 		{
 			super(crop, w, at);
 			this.rmb = b;
@@ -178,6 +178,7 @@ public class CropEvent extends Event
 		 * @author V0idWa1k3r
 		 *
 		 */
+		@SuppressWarnings("CanBeFinal")
 		@Cancelable
 		public static class PepperSetGrowth extends Harvest
 		{
@@ -201,6 +202,7 @@ public class CropEvent extends Event
 		 * @author V0idWa1k3r
 		 *
 		 */
+		@SuppressWarnings("CanBeFinal")
 		@Cancelable
 		public static class OnHarvest extends Harvest
 		{
@@ -227,6 +229,7 @@ public class CropEvent extends Event
 		 * @author V0idWa1k3r
 		 *
 		 */
+		@SuppressWarnings("CanBeFinal")
 		@HasResult
 		public static class HarvestAttempt extends Harvest
 		{
@@ -342,6 +345,7 @@ public class CropEvent extends Event
 			 * @author V0idWa1k3r
 			 *
 			 */
+			@SuppressWarnings("CanBeFinal")
 			@Cancelable
 			public static class WildGrowth extends Logic
 			{
@@ -365,6 +369,7 @@ public class CropEvent extends Event
 			 * @author V0idWa1k3r
 			 *
 			 */
+			@SuppressWarnings("CanBeFinal")
 			@Cancelable
 			public static class WaterConsumption extends Logic
 			{
@@ -444,6 +449,7 @@ public class CropEvent extends Event
 				 * @author V0idWa1k3r
 				 *
 				 */
+				@SuppressWarnings("CanBeFinal")
 				@HasResult
 				public static class Consume extends NutrientConsumption
 				{
@@ -494,6 +500,7 @@ public class CropEvent extends Event
 			 * @author V0idWa1k3r
 			 *
 			 */
+			@SuppressWarnings("CanBeFinal")
 			public static class GrowthRate extends Logic
 			{
 				public GrowthRate(IExPCrop crop, World w, BlockPos at, long l, ImmutableCalendar c, IFarmland farmland, float f)
@@ -522,6 +529,7 @@ public class CropEvent extends Event
 			 * @author V0idWa1k3r
 			 *
 			 */
+			@SuppressWarnings("CanBeFinal")
 			@Cancelable
 			public static class Growth extends Logic
 			{
@@ -551,6 +559,7 @@ public class CropEvent extends Event
 			 * @author V0idWa1k3r
 			 *
 			 */
+			@SuppressWarnings("CanBeFinal")
 			@Cancelable
 			public static class Heal extends Logic
 			{

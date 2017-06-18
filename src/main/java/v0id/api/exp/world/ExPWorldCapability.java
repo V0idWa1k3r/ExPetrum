@@ -12,7 +12,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 public class ExPWorldCapability
 {
 	@CapabilityInject(IExPWorld.class)
-	public static Capability<IExPWorld> worldCap = null;
+	public static final Capability<IExPWorld> worldCap = null;
 	public static final ResourceLocation KEY = new ResourceLocation("exp", "worlddata");
 	
 	public static void register()

@@ -15,8 +15,8 @@ import v0id.api.exp.data.ExPBlocks;
 
 public class ShrubGenerator extends WorldGenerator
 {
-	public EnumShrubType toGenerate;
-	public EnumShrubState stateToPlace;
+	public final EnumShrubType toGenerate;
+	public final EnumShrubState stateToPlace;
 	
 	public ShrubGenerator(EnumShrubType toGenerate, EnumShrubState generateAs)
 	{

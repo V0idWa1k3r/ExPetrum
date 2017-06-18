@@ -16,6 +16,7 @@ import java.util.Random;
  * @author V0idWa1k3r
  *
  */
+@SuppressWarnings("CanBeFinal")
 @Cancelable
 public class EventGenVegetation extends Event
 {
@@ -47,7 +48,7 @@ public class EventGenVegetation extends Event
 	 */
 	public final Type generationType;
 	
-	public EventGenVegetation(World w, BlockPos pos, Random rand, WorldGenerator generator, Type t)
+	public EventGenVegetation(World w, BlockPos pos, Random rand, @Nonnull WorldGenerator generator, Type t)
 	{
 		this.world = w;
 		this.pos = pos;
@@ -56,7 +57,7 @@ public class EventGenVegetation extends Event
 		this.generationType = t;
 	}
 	
-	public static enum Type
+	public enum Type
 	{
 		TALLGRASS,
 		FLOWER,

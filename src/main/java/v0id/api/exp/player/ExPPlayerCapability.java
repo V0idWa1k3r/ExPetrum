@@ -12,7 +12,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 public class ExPPlayerCapability
 {
 	@CapabilityInject(IExPPlayer.class)
-	public static Capability<IExPPlayer> playerCap = null;
+	public static final Capability<IExPPlayer> playerCap = null;
 	public static final ResourceLocation KEY = new ResourceLocation("exp", "playerdata");
 	
 	public static void register()

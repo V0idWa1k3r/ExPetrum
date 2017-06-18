@@ -3,7 +3,7 @@ package v0id.exp.block.plant;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -26,7 +26,6 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.exp.block.*;
-import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.*;
 import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
@@ -79,6 +78,7 @@ public class BlockShrub extends Block implements IInitializableBlock, IShrub, IP
 		return state.getValue(ExPBlockProperties.SHRUB_TYPE).ordinal() + EnumTreeType.values().length;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
@@ -97,24 +97,28 @@ public class BlockShrub extends Block implements IInitializableBlock, IShrub, IP
 		return state.getValue(ExPBlockProperties.SHRUB_TYPE).ordinal();
 	}
 
+    @SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
 		return this.getExtendedState(state, worldIn, pos);
 	}
 
+    @SuppressWarnings("deprecation")
 	@Override
 	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
-	
+
+    @SuppressWarnings("deprecation")
 	@Override
 	public boolean isFullCube(IBlockState state)
     {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
@@ -128,6 +132,7 @@ public class BlockShrub extends Block implements IInitializableBlock, IShrub, IP
 		this.performChecks(state, worldIn, pos);
 	}
 
+    @SuppressWarnings("deprecation")
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
@@ -155,8 +160,7 @@ public class BlockShrub extends Block implements IInitializableBlock, IShrub, IP
 			if (sstate != this.getState())
 			{
 				worldIn.setBlockState(pos, ExPBlocks.shrubs[sstate.ordinal()].getDefaultState().withProperty(ExPBlockProperties.SHRUB_TYPE, state.getValue(ExPBlockProperties.SHRUB_TYPE)));
-				return;
-			}
+            }
 		}
 		else
 		{
@@ -202,8 +206,7 @@ public class BlockShrub extends Block implements IInitializableBlock, IShrub, IP
 				case DEAD:
 				{
 					worldIn.setBlockState(pos, ExPBlocks.shrubs[EnumShrubState.DEAD.ordinal()].getDefaultState().withProperty(ExPBlockProperties.SHRUB_TYPE, state.getValue(ExPBlockProperties.SHRUB_TYPE)));
-					return;
-				}
+                }
 			}
 		}
 	}
@@ -233,13 +236,14 @@ public class BlockShrub extends Block implements IInitializableBlock, IShrub, IP
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[]{ ExPBlockProperties.SHRUB_TYPE, ExPBlockProperties.SHRUB_IS_TALL });
+		return new BlockStateContainer(this, ExPBlockProperties.SHRUB_TYPE, ExPBlockProperties.SHRUB_IS_TALL);
 	}
 
-	@Override
-	public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side)
-	{
-		return false;
+	@SuppressWarnings("deprecation")
+    @Override
+    public BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos, EnumFacing face)
+    {
+		return BlockFaceShape.UNDEFINED;
 	}
 
 	@Override

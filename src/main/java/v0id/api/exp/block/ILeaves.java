@@ -1,8 +1,5 @@
 package v0id.api.exp.block;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.util.math.BlockPos;
@@ -11,11 +8,14 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import v0id.api.core.VoidApi;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public interface ILeaves
 {
-	public static final int LEAVES_CHECK_RADIUS = 4;
+	int LEAVES_CHECK_RADIUS = 4;
 	
-	public static final ExecutorService pool = Executors.newFixedThreadPool(4);
+	ExecutorService pool = Executors.newFixedThreadPool(4);
 	
 	// of == blockstate to compare to
 	// state = this state
@@ -48,7 +48,7 @@ public interface ILeaves
 		pool.submit(() -> checkIsAttached(w, pos, this, state));
 	}
 	
-	public static void checkIsAttached(World w, BlockPos origin, ILeaves leaf, IBlockState leafState)
+	static void checkIsAttached(World w, BlockPos origin, ILeaves leaf, IBlockState leafState)
 	{
 		IThreadListener runOn = w.isRemote ? VoidApi.proxy.getClientListener() : (WorldServer)w;
 		

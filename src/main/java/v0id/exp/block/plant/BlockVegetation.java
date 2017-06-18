@@ -71,7 +71,8 @@ public class BlockVegetation extends BlockBush implements IInitializableBlock, I
 		ExPHandlerRegistry.put(this);
 	}
 	
-	@Override
+	@SuppressWarnings("deprecation")
+    @Override
 	public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos)
 	{
 		return worldIn.getBlockState(pos.down()) instanceof BlockFarmland ? 10 : super.getBlockHardness(blockState, worldIn, pos);
@@ -117,7 +118,8 @@ public class BlockVegetation extends BlockBush implements IInitializableBlock, I
 		return EnumPlantType.Plains;
 	}
 
-	@Override
+	@SuppressWarnings("deprecation")
+    @Override
 	public IBlockState getStateFromMeta(int meta)
 	{
 		return this.getDefaultState().withProperty(ExPBlockProperties.VEGETATION_GROWTH, meta);
@@ -151,7 +153,8 @@ public class BlockVegetation extends BlockBush implements IInitializableBlock, I
 		return BlockRenderLayer.CUTOUT;
 	}
 
-	@Override
+	@SuppressWarnings("deprecation")
+    @Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
 		return this.getExtendedState(state, worldIn, pos);
@@ -230,12 +233,12 @@ public class BlockVegetation extends BlockBush implements IInitializableBlock, I
 							}
 						}
 
-						if (world.rand.nextFloat() < 0.1F)
+						if (world.rand.nextFloat() < 0.01F)
                         {
                             int foundSelf = 0;
                             for (int dp = 0; dp < 9; ++dp)
                             {
-                                BlockPos checkAt = pos.add(dp % 3, 0, dp / 3);
+                                BlockPos checkAt = pos.add((dp % 3) - 1, 0, (dp / 3) - 1);
                                 if (world.getBlockState(checkAt).getBlock() instanceof BlockGenericShrubbery)
                                 {
                                     return;

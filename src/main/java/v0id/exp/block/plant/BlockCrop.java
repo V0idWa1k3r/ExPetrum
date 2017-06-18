@@ -1,13 +1,6 @@
 package v0id.exp.block.plant;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -21,12 +14,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumBlockRenderType;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -36,6 +24,7 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPRegistryNames;
@@ -50,7 +39,10 @@ import v0id.exp.block.item.ItemBlockWeighted;
 import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.tile.TileCrop;
 
-public class BlockCrop extends BlockContainer implements IInitializableBlock, IBlockRegistryEntry, IItemRegistryEntry, IPlantable
+import javax.annotation.Nullable;
+import java.util.Random;
+
+public class BlockCrop extends Block implements IInitializableBlock, IBlockRegistryEntry, IItemRegistryEntry, IPlantable
 {
 	public static final AxisAlignedBB SEEDS_AABB = new AxisAlignedBB(0, 0, 0, 1, 0.05, 1);
 	
@@ -60,6 +52,7 @@ public class BlockCrop extends BlockContainer implements IInitializableBlock, IB
 		this.initBlock();
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	@Nullable
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
@@ -74,22 +67,18 @@ public class BlockCrop extends BlockContainer implements IInitializableBlock, IB
         return BlockRenderLayer.CUTOUT;
     }
 	
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
 	public boolean isOpaqueCube(IBlockState state)
     {
         return false;
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
 	public boolean isFullCube(IBlockState state)
     {
         return false;
-    }
-    
-    @Override
-	public EnumBlockRenderType getRenderType(IBlockState state)
-    {
-        return EnumBlockRenderType.MODEL;
     }
 
 	@Override
@@ -119,6 +108,7 @@ public class BlockCrop extends BlockContainer implements IInitializableBlock, IB
 		ExPHandlerRegistry.put(this);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
@@ -137,6 +127,7 @@ public class BlockCrop extends BlockContainer implements IInitializableBlock, IB
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
@@ -161,7 +152,6 @@ public class BlockCrop extends BlockContainer implements IInitializableBlock, IB
 			if (world.isAirBlock(pos.down()) || !world.getBlockState(pos.down()).getBlock().canSustainPlant(world.getBlockState(pos.down()), world, pos.down(), EnumFacing.UP, this))
 			{
 				world.setBlockToAir(pos);
-				return;
 			}
 		}
 	}
@@ -178,12 +168,14 @@ public class BlockCrop extends BlockContainer implements IInitializableBlock, IB
 		return 0;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
 		return this.getDefaultState();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
@@ -249,12 +241,18 @@ public class BlockCrop extends BlockContainer implements IInitializableBlock, IB
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta)
+	public TileEntity createTileEntity(World worldIn, IBlockState state)
 	{
 		return new TileCrop();
 	}
 
-	@Override
+    @Override
+    public boolean hasTileEntity(IBlockState state)
+    {
+        return true;
+    }
+
+    @Override
 	public IBlockState getPlant(IBlockAccess world, BlockPos pos)
 	{
 		return this.getExtendedState(this.getDefaultState(), world, pos);
@@ -266,12 +264,13 @@ public class BlockCrop extends BlockContainer implements IInitializableBlock, IB
         return "scythe";
     }
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World worldIn, BlockPos pos)
 	{
 		// Axes are hardcoded to break blocks with a material of PLANT at their efficiency speed, need to fix that.
 		ItemStack stack = player.getHeldItemMainhand();
-		return !stack.isEmpty() && stack.getItem() instanceof ItemAxe ? super.getPlayerRelativeBlockHardness(state, player, worldIn, pos) / ((ItemAxe)stack.getItem()).getStrVsBlock(stack, state) : super.getPlayerRelativeBlockHardness(state, player, worldIn, pos);
+		return !stack.isEmpty() && stack.getItem() instanceof ItemAxe ? super.getPlayerRelativeBlockHardness(state, player, worldIn, pos) / stack.getItem().getStrVsBlock(stack, state) : super.getPlayerRelativeBlockHardness(state, player, worldIn, pos);
 	}
 
 	@Override

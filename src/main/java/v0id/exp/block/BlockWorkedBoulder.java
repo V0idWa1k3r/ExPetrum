@@ -1,9 +1,9 @@
 package v0id.exp.block;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -28,7 +28,6 @@ import v0id.api.core.network.PacketType;
 import v0id.api.core.network.VoidNetwork;
 import v0id.api.core.util.DimBlockPos;
 import v0id.api.exp.block.property.EnumRockClass;
-import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.*;
 import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockWithMetadata;
@@ -42,7 +41,7 @@ import java.util.stream.Stream;
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
 import static v0id.api.exp.data.ExPBlockProperties.ROCK_CLASS;
 
-public class BlockWorkedBoulder extends Block implements ITileEntityProvider, IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
+public class BlockWorkedBoulder extends Block implements IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
 {
 	public static final AxisAlignedBB BOULDER_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.6, 0.9);
 
@@ -81,6 +80,7 @@ public class BlockWorkedBoulder extends Block implements ITileEntityProvider, II
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
@@ -118,6 +118,7 @@ public class BlockWorkedBoulder extends Block implements ITileEntityProvider, II
 		return state;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
@@ -125,51 +126,47 @@ public class BlockWorkedBoulder extends Block implements ITileEntityProvider, II
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta)
+	public TileEntity createTileEntity(World worldIn, IBlockState state)
 	{
 		return new TileWorkedBoulder();
 	}
-	
-	@Override
-	public boolean eventReceived(IBlockState state, World worldIn, BlockPos pos, int id, int param)
-    {
-        super.eventReceived(state, worldIn, pos, id, param);
-        TileEntity tileentity = worldIn.getTileEntity(pos);
-        return tileentity == null ? false : tileentity.receiveClientEvent(id, param);
-    }
-	
-	@Override
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
-    {
-        super.breakBlock(worldIn, pos, state);
-        worldIn.removeTileEntity(pos);
-    }
-	
-	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-	{
-		return this.BOULDER_AABB;
-	}
 
 	@Override
+	public boolean hasTileEntity(IBlockState state)
+	{
+		return true;
+	}
+	
+	@SuppressWarnings("deprecation")
+    @Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+		return BOULDER_AABB;
+	}
+
+	@SuppressWarnings("deprecation")
+    @Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
 	{
 		return this.getBoundingBox(blockState, worldIn, pos);
 	}
 	
+    @SuppressWarnings("deprecation")
     @Override
 	public boolean isFullCube(IBlockState state)
     {
         return false;
     }
 
-	@Override
+	@SuppressWarnings("deprecation")
+    @Override
 	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
 	
-	@Override
+	@SuppressWarnings("deprecation")
+    @Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
 		if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP))
@@ -185,11 +182,12 @@ public class BlockWorkedBoulder extends Block implements ITileEntityProvider, II
 		return EnumOffsetType.XZ;
 	}
 
-	@Override
-	public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side)
-	{
-		return false;
-	}
+    @SuppressWarnings("deprecation")
+    @Override
+    public BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos, EnumFacing face)
+    {
+        return BlockFaceShape.UNDEFINED;
+    }
 	
 	@Override
 	public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor)

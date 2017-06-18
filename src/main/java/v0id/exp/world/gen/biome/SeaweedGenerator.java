@@ -1,7 +1,5 @@
 package v0id.exp.world.gen.biome;
 
-import java.util.Random;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -11,6 +9,8 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import v0id.api.exp.block.IWater;
 import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
+
+import java.util.Random;
 
 public class SeaweedGenerator extends WorldGenerator
 {
@@ -29,7 +29,7 @@ public class SeaweedGenerator extends WorldGenerator
 			IBlockState above = worldIn.getBlockState(offset.up());
 			if (above.getMaterial() == Material.WATER && at.getBlock().isAssociatedBlock(Blocks.SAND))
 			{
-				boolean allow = above.getBlock() instanceof IWater ? ((IWater)above.getBlock()).isSalt(worldIn, offset.up()) : true;
+				boolean allow = !(above.getBlock() instanceof IWater) || ((IWater) above.getBlock()).isSalt(worldIn, offset.up());
 				if (allow)
 				{
 					worldIn.setBlockState(offset, ExPBlocks.seaweed.getDefaultState().withProperty(ExPBlockProperties.ROCK_CLASS, at.getValue(ExPBlockProperties.ROCK_CLASS)), 2);

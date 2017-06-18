@@ -96,7 +96,7 @@ public class ItemPickaxe extends ItemExPTool implements IWeapon, IWeightProvider
 	@Override
 	public boolean canHarvestBlock(IBlockState blockIn)
     {
-		return blockIn.getMaterial() == Material.ROCK ? true : (blockIn.getMaterial() == Material.IRON ? true : blockIn.getMaterial() == Material.ANVIL) || super.canHarvestBlock(blockIn);
+		return blockIn.getMaterial() == Material.ROCK || ((blockIn.getMaterial() == Material.IRON || blockIn.getMaterial() == Material.ANVIL) || super.canHarvestBlock(blockIn));
     }
 
 	@Override

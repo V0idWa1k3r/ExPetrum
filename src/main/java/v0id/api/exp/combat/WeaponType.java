@@ -1,20 +1,14 @@
 package v0id.api.exp.combat;
 
+import com.google.common.collect.Lists;
+import net.minecraft.item.*;
+
 import java.util.Arrays;
 import java.util.List;
 
-import com.google.common.collect.Lists;
-
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemShears;
-import net.minecraft.item.ItemSpade;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-
 public class WeaponType
 {
-	public List<WeaponType> associatedTypes = Lists.newArrayList();
+	public final List<WeaponType> associatedTypes = Lists.newArrayList();
 	
 	public WeaponType()
 	{
@@ -28,7 +22,7 @@ public class WeaponType
 	
 	public boolean isAssociated(WeaponType type)
 	{
-		return type == this || this.associatedTypes.contains(type) ? true : this.associatedTypes.stream().anyMatch(t -> t.isAssociated(type));
+		return (type == this || this.associatedTypes.contains(type)) || this.associatedTypes.stream().anyMatch(t -> t.isAssociated(type));
 	}
 	
 	// Basic weapon types

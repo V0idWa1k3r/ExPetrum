@@ -1,12 +1,12 @@
 package v0id.exp.potion;
 
-import java.util.Collections;
-
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import v0id.api.exp.data.ExPRegistryNames;
+
+import java.util.Collections;
 
 public class PotionStunned extends Potion implements IInitializablePotion, IPotionRegistryEntry
 {
@@ -38,6 +38,7 @@ public class PotionStunned extends Potion implements IInitializablePotion, IPoti
 		return false;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public java.util.List<net.minecraft.item.ItemStack> getCurativeItems()
     {

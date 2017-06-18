@@ -1,9 +1,5 @@
 package v0id.exp.crop;
 
-import java.util.EnumMap;
-import java.util.Map.Entry;
-import java.util.stream.Stream;
-
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -19,10 +15,14 @@ import v0id.api.exp.tile.crop.EnumPlantNutrient;
 import v0id.api.exp.tile.crop.IFarmland;
 import v0id.api.exp.world.Calendar;
 
+import java.util.EnumMap;
+import java.util.Map.Entry;
+import java.util.stream.Stream;
+
 public class ExPFarmland implements IFarmland
 {
 	public TileEntity holder;
-	public EnumMap<EnumPlantNutrient, Float> nutrientData = new EnumMap(EnumPlantNutrient.class);
+	public final EnumMap<EnumPlantNutrient, Float> nutrientData = new EnumMap<>(EnumPlantNutrient.class);
 	public float moistureLevel;
 	public Calendar timeKeeper = new Calendar();
 	

@@ -1,13 +1,9 @@
 package v0id.exp.client.model;
 
-import java.util.Collection;
-import java.util.List;
-
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
-
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
@@ -16,6 +12,9 @@ import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.IModelCustomData;
 import net.minecraftforge.common.model.IModelState;
 import v0id.api.exp.block.property.EnumDirtClass;
+
+import java.util.Collection;
+import java.util.List;
 
 public class ModelCattail implements IModelCustomData
 {
@@ -37,17 +36,17 @@ public class ModelCattail implements IModelCustomData
 	@Override
 	public Collection<ResourceLocation> getDependencies()
 	{
-		return ImmutableSet.copyOf(this.dependencies);
+		return ImmutableSet.copyOf(dependencies);
 	}
 
 	@Override
 	public Collection<ResourceLocation> getTextures()
 	{
-		return ImmutableSet.copyOf(this.textures);
+		return ImmutableSet.copyOf(textures);
 	}
 
 	@Override
-	public IBakedModel bake(IModelState state, VertexFormat format,	Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter)
+	public IBakedModel bake(IModelState state, VertexFormat format, @SuppressWarnings("Guava") Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter)
 	{
 		return ModelCattailBaked.bake(state, format, bakedTextureGetter);
 	}

@@ -1,7 +1,5 @@
 package v0id.exp.client.render.hud;
 
-import java.util.Random;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
@@ -10,6 +8,8 @@ import net.minecraft.item.ItemStack;
 import v0id.api.exp.data.ExPWeaponAttacks;
 import v0id.api.exp.player.IExPPlayer;
 import v0id.exp.item.tool.ItemSpear;
+
+import java.util.Random;
 
 public class SpecialAttackRenderer
 {
@@ -31,7 +31,7 @@ public class SpecialAttackRenderer
 			{
 				int current = data.getCurrentSpecialAttack().executionTime;
 				float animationIndex = ((float)current - partialTicks) / data.getCurrentSpecialAttack().attackInstance.getExecutionTime();
-				float translateZIndex = 0;
+				float translateZIndex;
 				if (animationIndex >= 0.7)
 				{
 					translateZIndex = -(1 - animationIndex);

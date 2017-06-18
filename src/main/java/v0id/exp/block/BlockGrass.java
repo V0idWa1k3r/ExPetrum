@@ -72,7 +72,7 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 	@Override
 	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable)
 	{
-		return plantable instanceof BlockShrub ? true : this.getState() != EnumGrassState.DEAD && plantable.getPlantType(world, pos.up()) == EnumPlantType.Plains;
+		return plantable instanceof BlockShrub || this.getState() != EnumGrassState.DEAD && plantable.getPlantType(world, pos.up()) == EnumPlantType.Plains;
 	}
 
 	@Override
@@ -188,6 +188,7 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
@@ -219,7 +220,7 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 	}
 
 	@Override
-	public boolean isReplaceableOreGen(IBlockState state, IBlockAccess world, BlockPos pos,	Predicate<IBlockState> target)
+	public boolean isReplaceableOreGen(IBlockState state, IBlockAccess world, BlockPos pos, @SuppressWarnings("Guava") Predicate<IBlockState> target)
 	{
 		return target.apply(Blocks.GRASS.getDefaultState()) || super.isReplaceableOreGen(state, world, pos, target);
 	}
@@ -249,6 +250,7 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 		return 3;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{

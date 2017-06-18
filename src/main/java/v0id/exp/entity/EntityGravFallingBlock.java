@@ -1,10 +1,7 @@
 package v0id.exp.entity;
 
-import java.util.List;
-
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -25,11 +22,14 @@ import v0id.api.core.VoidApi;
 import v0id.api.core.settings.VCSettings;
 import v0id.api.exp.gravity.IGravitySusceptible;
 
+import java.util.List;
+
+@SuppressWarnings("Guava")
 public class EntityGravFallingBlock extends EntityFallingBlock
 {
 	public static final double COLLISION_Y_CONST = 0.009999999776482582D;
 	public IBlockState blockState;
-	public List<Entity> collidedWith = Lists.newArrayList();
+	public final List<Entity> collidedWith = Lists.newArrayList();
 	public static final DataParameter<Optional<IBlockState>> FALLING_BLOCK_SYNC = EntityDataManager.createKey(EntityGravFallingBlock.class, DataSerializers.OPTIONAL_BLOCK_STATE);
 	
 	public EntityGravFallingBlock(World worldIn)
@@ -67,6 +67,7 @@ public class EntityGravFallingBlock extends EntityFallingBlock
 		return this.blockState;
 	}
 
+	@SuppressWarnings("RedundantCast")
 	@Override
 	public void onUpdate()
     {

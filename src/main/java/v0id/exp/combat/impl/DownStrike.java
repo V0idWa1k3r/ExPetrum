@@ -56,7 +56,7 @@ public class DownStrike extends SpecialAttack
 			assumedToBeLookedAt.knockBack(player, 1, pos.x - targetPos.x, pos.z - targetPos.z);
 			for (int i = 0; i < 50; ++i)
 			{
-				player.world.spawnParticle(EnumParticleTypes.CRIT_MAGIC, targetPos.x + player.world.rand.nextDouble() - player.world.rand.nextDouble(), targetPos.z + assumedToBeLookedAt.getEyeHeight() + player.world.rand.nextDouble() - player.world.rand.nextDouble(), targetPos.z + player.world.rand.nextDouble() - player.world.rand.nextDouble(), 0, -0.1, 0, new int[0]);
+				player.world.spawnParticle(EnumParticleTypes.CRIT_MAGIC, targetPos.x + player.world.rand.nextDouble() - player.world.rand.nextDouble(), targetPos.z + assumedToBeLookedAt.getEyeHeight() + player.world.rand.nextDouble() - player.world.rand.nextDouble(), targetPos.z + player.world.rand.nextDouble() - player.world.rand.nextDouble(), 0, -0.1, 0);
 			}
 		}
 	}

@@ -81,7 +81,8 @@ public class EventFarmlandUpdate extends Event
 	 * @author V0idWa1k3r
 	 *
 	 */
-	public static class Logic extends EventFarmlandUpdate
+	@SuppressWarnings("CanBeFinal")
+    public static class Logic extends EventFarmlandUpdate
 	{
 		/**
 		 * Today reference. Immutable.
@@ -125,7 +126,8 @@ public class EventFarmlandUpdate extends Event
 		 * @author V0idWa1k3r
 		 *
 		 */
-		public static class WaterNutrientLogic extends Logic
+		@SuppressWarnings("CanBeFinal")
+        public static class WaterNutrientLogic extends Logic
 		{
 			/**
 			 * The amount of moisture the farmland is about to gain or loose with all checks applied. <br>

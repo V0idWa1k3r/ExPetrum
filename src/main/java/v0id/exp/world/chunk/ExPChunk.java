@@ -22,7 +22,7 @@ public class ExPChunk implements IExPChunk
     public final Chunk owner;
     public EnumOre dormantOre;
     public float dormantOreAmount;
-    public Map<BlockPos, Float> temperatureData = Maps.newHashMap();
+    public final Map<BlockPos, Float> temperatureData = Maps.newHashMap();
 
     public boolean dormantOre_IsDirty;
     public boolean dormantOreAmount_IsDirty;

@@ -16,7 +16,7 @@ public enum EnumToolStats implements IStringSerializable
 	STEEL(EnumMetal.STEEL, 3072, 7, 8, 1.0F, 7.0F, EnumPlayerProgression.STEEL_AGE, 4),
 	TOOL_STEEL(EnumMetal.TOOL_STEEL, 9216, 7, 8, 1.0F, 8.0F, EnumPlayerProgression.MACHINE_AGE, 5);
 	
-	private EnumToolStats(EnumMetal material, int durability, int harvestLevel, float damage, float weaponDamageMultiplier, float efficiency, EnumPlayerProgression associatedProgression, int tier)
+	EnumToolStats(EnumMetal material, int durability, int harvestLevel, float damage, float weaponDamageMultiplier, float efficiency, EnumPlayerProgression associatedProgression, int tier)
 	{
 		this.material = material;
 		this.durability = durability;

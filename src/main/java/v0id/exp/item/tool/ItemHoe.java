@@ -149,10 +149,5 @@ public class ItemHoe extends ItemExPTool implements IWeapon, IWeightProvider, II
 		
 		return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 	}
-	
-	@Override
-	public float getStrVsBlock(ItemStack stack, IBlockState state)
-    {
-        return super.getStrVsBlock(stack, state);
-    }
+
 }

@@ -1,8 +1,5 @@
 package v0id.exp.combat.impl;
 
-import java.util.List;
-import java.util.Optional;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,6 +14,9 @@ import v0id.api.exp.combat.SpecialAttack;
 import v0id.api.exp.combat.WeaponType;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.exp.util.Helpers;
+
+import java.util.List;
+import java.util.Optional;
 
 public class Behead extends SpecialAttack
 {
@@ -53,7 +53,7 @@ public class Behead extends SpecialAttack
 			assumedToBeLookedAt.attackEntityFrom(DamageSource.causePlayerDamage(player), (float) player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
 			player.world.playSound(player, player.getPosition(), SoundEvents.ENTITY_PLAYER_ATTACK_NODAMAGE, SoundCategory.PLAYERS, 1, 0.1F);
 			Vec3d targetPos = assumedToBeLookedAt.getPositionVector();
-			player.world.spawnParticle(EnumParticleTypes.SWEEP_ATTACK, targetPos.x, targetPos.y + assumedToBeLookedAt.getEyeHeight(), targetPos.z, 0, 0, 0, new int[0]);
+			player.world.spawnParticle(EnumParticleTypes.SWEEP_ATTACK, targetPos.x, targetPos.y + assumedToBeLookedAt.getEyeHeight(), targetPos.z, 0, 0, 0);
 			float chance = (1 - assumedToBeLookedAt.getHealth() / assumedToBeLookedAt.getMaxHealth());
 			if (!player.world.isRemote && player.world.rand.nextFloat() < chance / 10)
 			{

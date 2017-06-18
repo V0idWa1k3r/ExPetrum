@@ -14,7 +14,7 @@ public interface IFarmland extends INBTSerializable<NBTTagCompound>
 {
 	/**
 	 * Gets the tileentity this capability is bound to
-	 * @return
+	 * @return - the tileentity this capability is attached to
 	 */
 	TileEntity getContainer();
 	
@@ -60,12 +60,12 @@ public interface IFarmland extends INBTSerializable<NBTTagCompound>
 	 */
 	void setDirty();
 	
-	public static IFarmland of(TileEntity tile, EnumFacing facing)
+	static IFarmland of(TileEntity tile, EnumFacing facing)
 	{
 		return tile == null ? null : tile.hasCapability(ExPFarmlandCapability.farmlandCap, facing) ? tile.getCapability(ExPFarmlandCapability.farmlandCap, facing) : null;
 	}
 	
-	public static IFarmland of(TileEntity tile)
+	static IFarmland of(TileEntity tile)
 	{
 		return of(tile, null);
 	}

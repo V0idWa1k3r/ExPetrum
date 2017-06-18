@@ -1,15 +1,14 @@
 package v0id.api.exp.data;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
-
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.WeightedRandom.Item;
 import v0id.api.exp.player.BodyPart;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class ExPDamageMappings
 {
@@ -72,7 +71,7 @@ public class ExPDamageMappings
 	}
 	
 	@FunctionalInterface
-	public static interface IDamageHandler
+	public interface IDamageHandler
 	{
 		List<DamageMapping> provide(DamageSource src);
 	}

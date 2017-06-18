@@ -26,7 +26,7 @@ public class ExPWorld implements IExPWorld
 	public boolean clientIsDirty = true;
 	public boolean isRemote;
 	public World owner;
-	public Calendar dayTimeKeeper = new Calendar();
+	public final Calendar dayTimeKeeper = new Calendar();
 	
 	public long persistentTicks;
 	public Vec3d windDirection;

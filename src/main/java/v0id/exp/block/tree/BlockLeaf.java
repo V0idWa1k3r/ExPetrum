@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -30,7 +31,6 @@ import v0id.api.core.util.java.ColorRGB;
 import v0id.api.exp.block.EnumLeafState;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.ILeaves;
-import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.*;
 import v0id.api.exp.fx.EnumParticle;
 import v0id.api.exp.inventory.IWeightProvider;
@@ -149,6 +149,7 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 		return PathNodeType.OPEN;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta)
     {
@@ -228,6 +229,7 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 		super.randomDisplayTick(stateIn, worldIn, pos, rand);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isOpaqueCube(IBlockState state)
 	{
@@ -246,12 +248,14 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 		return super.isAssociatedBlock(other) || other instanceof BlockLeaves;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side)
+	public BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos, EnumFacing face)
 	{
-		return false;
+		return BlockFaceShape.UNDEFINED;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	@Nullable
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
@@ -266,7 +270,8 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
         entityIn.motionZ *= 0.4D;
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
 	public boolean isFullCube(IBlockState state)
     {
         return false;

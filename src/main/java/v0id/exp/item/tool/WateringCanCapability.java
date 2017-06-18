@@ -1,8 +1,5 @@
 package v0id.exp.item.tool;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -15,9 +12,12 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public class WateringCanCapability implements IFluidHandlerItem, ICapabilityProvider, IFluidTankProperties
 {
-	public ItemStack container;
+	public final ItemStack container;
 	public static final Fluid WATER = FluidRegistry.WATER;
 	
 	public WateringCanCapability(ItemStack is)
@@ -100,10 +100,9 @@ public class WateringCanCapability implements IFluidHandlerItem, ICapabilityProv
 		{
 			return null;
 		}
-		
-		int requested = maxDrain;
-		int current = this.getContents().amount;
-		int drained = Math.min(requested, current);
+
+        int current = this.getContents().amount;
+		int drained = Math.min(maxDrain, current);
 		FluidStack ret = this.getContents().copy();
 		ret.amount = drained;
 		if (doDrain)

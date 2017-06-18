@@ -5,5 +5,5 @@ public enum EnumShrubState
 	NORMAL,
 	BLOOMING,
 	AUTUMN,
-	DEAD;
+	DEAD
 }

@@ -76,6 +76,7 @@ public class BlockCattail extends Block implements IWeightProvider, IInitializab
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	{
@@ -101,6 +102,7 @@ public class BlockCattail extends Block implements IWeightProvider, IInitializab
 		this.doPlacementChecks(world, pos);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
@@ -141,8 +143,7 @@ public class BlockCattail extends Block implements IWeightProvider, IInitializab
 			if (w.getBlockState(pos.up()).getBlock() instanceof IWater && ((IWater)w.getBlockState(pos.up()).getBlock()).isSalt(w, pos.up()))
 			{
 				this.breakReplaceSelf(w, pos);
-				return;
-			}
+            }
 		}
 	}
 	

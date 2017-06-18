@@ -1,12 +1,8 @@
 package v0id.exp.util;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -25,6 +21,9 @@ import v0id.api.exp.block.ILeaves;
 import v0id.api.exp.world.EnumSeason;
 import v0id.api.exp.world.IBiome;
 import v0id.api.exp.world.IExPWorld;
+
+import java.util.List;
+import java.util.Optional;
 
 public class Helpers
 {
@@ -52,7 +51,7 @@ public class Helpers
 	{
 		AxisAlignedBB aabb = new AxisAlignedBB(pos, pos.add(new Vec3d(1, 1, 1))).grow(ray.x, ray.y, ray.z);
 		Vec3d checkVec = pos.add(ray);
-		List<T> l = w.getEntitiesWithinAABB(entityClazz, aabb, entityFilter.orElse(Predicates.alwaysTrue()));
+		@SuppressWarnings("Guava") List<T> l = w.getEntitiesWithinAABB(entityClazz, aabb, entityFilter.orElse(Predicates.alwaysTrue()));
 		List<T> ret = Lists.newArrayList();
 		for (T t : l)
 		{

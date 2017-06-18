@@ -1,15 +1,9 @@
 package v0id.exp.entity;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
-
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -36,9 +30,14 @@ import v0id.api.exp.block.ILeaves;
 import v0id.api.exp.block.ILog;
 import v0id.api.exp.data.ExPPackets;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 public class EntityFallingTree extends Entity
 {
-	public volatile ConcurrentHashMap<BlockPos, IBlockState> data = new ConcurrentHashMap();
+	public volatile Map<BlockPos, IBlockState> data = Maps.newConcurrentMap();
 	public volatile boolean isDataConstructed = false;
 	public boolean isDataSent = false;
 	public static final Gson gson = new Gson();
@@ -50,15 +49,16 @@ public class EntityFallingTree extends Entity
 	// Thus I remove the most costly ones from the function and move them to fields
 	// But then it is not thread safe!
 	// Solution: use ThreadLocal
-	private static ThreadLocal<BlockPos> p = new ThreadLocal();
-	private static ThreadLocal<IBlockState> stateAt = new ThreadLocal();
+	private static final ThreadLocal<BlockPos> p = new ThreadLocal<>();
+	private static final ThreadLocal<IBlockState> stateAt = new ThreadLocal<>();
 	
 	public boolean isFalling;
 	public float fallAngle;
 	public float fallProgress;
 	
-	public static DataParameter<Float> FALL_ANGLE = EntityDataManager.createKey(EntityFallingTree.class, DataSerializers.FLOAT);
-	public static DataParameter<Float> FALL_PROGRESS = EntityDataManager.createKey(EntityFallingTree.class, DataSerializers.FLOAT);
+	public static final DataParameter<Float> FALL_ANGLE = EntityDataManager.createKey(EntityFallingTree.class, DataSerializers.FLOAT);
+	public static final DataParameter<Float> FALL_PROGRESS = EntityDataManager.createKey(EntityFallingTree.class, DataSerializers.FLOAT);
+	public static final Object lock = new Object();
 	
 	public EntityFallingTree(World worldIn, BlockPos pos, EntityPlayer destroyer)
 	{
@@ -108,9 +108,9 @@ public class EntityFallingTree extends Entity
 	
 	public static void constructData(EntityFallingTree of, World w, BlockPos initialPos)
 	{
-		synchronized(of)
+		synchronized(lock)
 		{
-			ConcurrentHashMap<BlockPos, IBlockState> data = new ConcurrentHashMap();
+			Map<BlockPos, IBlockState> data = Maps.newConcurrentMap();
 			HashSet<BlockPos> scannedData = Sets.newHashSet();
 			data.put(initialPos, w.getBlockState(initialPos));
 			scannedData.add(initialPos);
@@ -222,10 +222,6 @@ public class EntityFallingTree extends Entity
 				}
 			}
 		}
-		else
-		{
-			return;
-		}
 	}
 
 	@Override
@@ -289,7 +285,8 @@ public class EntityFallingTree extends Entity
 		compound.setTag("data", lst);
 	}
 
-	@Override
+	@SuppressWarnings("RedundantCast")
+    @Override
 	public void onUpdate()
 	{
 		if (((VCSettings)(VoidApi.config.dataHolder)).recoveryMode)
@@ -348,14 +345,12 @@ public class EntityFallingTree extends Entity
 						mobs.forEach(e -> { e.attackEntityFrom(DamageSource.FALLING_BLOCK, 20); e.knockBack(this, 2, 1, 1); });
 					}
 				}
-				
-				IBlockState belowState = this.world.getBlockState(below);
+
 				if (!this.world.isAirBlock(below))
 				{
 					if (entry.getValue().getBlock() instanceof ILeaves)
 					{
 						toDelete.add(entry.getKey());
-						continue;
 					}
 					else
 					{
@@ -374,8 +369,7 @@ public class EntityFallingTree extends Entity
 							{
 								this.world.setBlockToAir(below);
 							}
-							
-							continue;
+
 						}
 					}
 				}
@@ -383,7 +377,7 @@ public class EntityFallingTree extends Entity
 			
 			for (BlockPos pos : toDelete)
 			{
-				this.data.remove(toDelete);
+				this.data.remove(pos);
 			}
 			
 			if (doFall && !this.world.isRemote)

@@ -17,7 +17,7 @@ public interface IParticleFactory
      * @param lifetime - the amount of ticks this particle will exist.
      * @param scale - the scale of this particle.
      * @param lmap - short array[2] that contains in the following order: lightmapx, lightmapy. Only has an effect if nolightmap flag is true.
-     * @return: The particle object constructed from the data passed.
+     * @return - The particle object constructed from the data passed.
      */
     IParticle createParticle(World w, float[] positionMotion, float[] color, byte flags, int lifetime, float scale, short[] lmap);
 }

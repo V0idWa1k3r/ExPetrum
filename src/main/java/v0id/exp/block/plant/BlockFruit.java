@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -81,6 +82,7 @@ public class BlockFruit extends Block implements IInitializableBlock, IBlockRegi
     }
 
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta)
     {
@@ -93,12 +95,14 @@ public class BlockFruit extends Block implements IInitializableBlock, IBlockRegi
         return state.getValue(ExPBlockProperties.FRUIT_TYPE).ordinal();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
         return Block.FULL_BLOCK_AABB;
     }
 
+    @SuppressWarnings("deprecation")
     @Nullable
     @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
@@ -113,6 +117,7 @@ public class BlockFruit extends Block implements IInitializableBlock, IBlockRegi
         this.checkGrowthConditions(worldIn, pos, state);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
@@ -174,10 +179,11 @@ public class BlockFruit extends Block implements IInitializableBlock, IBlockRegi
         return EnumOffsetType.XZ;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side)
+    public BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos, EnumFacing face)
     {
-        return false;
+        return BlockFaceShape.UNDEFINED;
     }
 
     @Override
@@ -186,12 +192,14 @@ public class BlockFruit extends Block implements IInitializableBlock, IBlockRegi
         return PathNodeType.OPEN;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean isFullCube(IBlockState state)
     {

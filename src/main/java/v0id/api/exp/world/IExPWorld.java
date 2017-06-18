@@ -105,7 +105,7 @@ public interface IExPWorld extends INBTSerializable<NBTTagCompound>
 	
 	/**
 	 * Gets the world object this world is associated with
-	 * @return
+	 * @return - the world this capability is attached to
 	 */
 	World getWorld();
 	
@@ -116,7 +116,7 @@ public interface IExPWorld extends INBTSerializable<NBTTagCompound>
 
 	IExPChunk getChunkDataAt(ChunkPos pos);
 	
-	public static IExPWorld of(World w)
+	static IExPWorld of(World w)
 	{
 		assert w != null : "Attempted to get data of NULL world!";
 		assert w.profiler != null : "World provider is null which should never happen!";

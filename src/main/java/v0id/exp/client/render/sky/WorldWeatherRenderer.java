@@ -69,7 +69,7 @@ public class WorldWeatherRenderer extends IRenderHandler
 				if (offsetXTex == 0.5)
 				{
 					float texOf = Math.max(2, 55 - wStr);
-					offsetYTex = rand.nextDouble() + (float)(world.getWorldTime() % texOf) / texOf + partialTicks / texOf;
+					offsetYTex = rand.nextDouble() + world.getWorldTime() % texOf / texOf + partialTicks / texOf;
 				}
 				
 				int j3 = world.getCombinedLight(renderedAt, 0);

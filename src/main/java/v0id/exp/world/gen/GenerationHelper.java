@@ -1,7 +1,5 @@
 package v0id.exp.world.gen;
 
-import java.util.Random;
-
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
@@ -9,9 +7,11 @@ import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.exp.world.gen.WorldTypeExP.BiomeProviderExP;
 
+import java.util.Random;
+
 public class GenerationHelper
 {
-	public static Random rand = new Random();
+	public static final Random rand = new Random();
 	public static long lastRememberedSeed;
 	public static Vec3i offsetStone;
 	public static Vec3i offsetDirt;

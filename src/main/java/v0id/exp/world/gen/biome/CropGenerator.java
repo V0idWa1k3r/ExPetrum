@@ -1,7 +1,5 @@
 package v0id.exp.world.gen.biome;
 
-import java.util.Random;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
@@ -16,9 +14,11 @@ import v0id.exp.crop.ExPCrop;
 import v0id.exp.tile.TileCrop;
 import v0id.exp.world.biome.ExPBiome;
 
+import java.util.Random;
+
 public class CropGenerator extends WorldGenerator
 {
-	public ExPBiome at;
+	public final ExPBiome at;
 	
 	public CropGenerator(ExPBiome b)
 	{

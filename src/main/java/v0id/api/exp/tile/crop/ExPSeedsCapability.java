@@ -12,7 +12,7 @@ import net.minecraftforge.common.capabilities.Capability.IStorage;
 public class ExPSeedsCapability
 {
 	@CapabilityInject(IExPSeed.class)
-	public static Capability<IExPSeed> seedsCap = null;
+	public static final Capability<IExPSeed> seedsCap = null;
 	public static final ResourceLocation KEY = new ResourceLocation("exp", "seeddata");
 	
 	public static void register()

@@ -1,12 +1,12 @@
 package v0id.exp.net;
 
-import java.util.UUID;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import v0id.api.core.VoidApi;
 import v0id.api.core.network.IPacketHandler;
 import v0id.exp.entity.EntityFallingTree;
+
+import java.util.UUID;
 
 public class PacketHandlerFallingTree implements IPacketHandler
 {
@@ -15,7 +15,7 @@ public class PacketHandlerFallingTree implements IPacketHandler
 	{
 		UUID id = UUID.fromString(data.getString("uuid"));
 		NBTTagCompound dataTag = data.getCompoundTag("dataTag");
-		Holder<EntityFallingTree> fallingTreeRef = new Holder();
+		Holder<EntityFallingTree> fallingTreeRef = new Holder<>();
 		for (int i = 0; i < VoidApi.proxy.getClientWorld().getLoadedEntityList().size(); ++i)
 		{
 			this.tryMatch(VoidApi.proxy.getClientWorld().getLoadedEntityList().get(i), fallingTreeRef, id);
