@@ -27,8 +27,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.exp.block.EnumGrassAmount;
 import v0id.api.exp.block.EnumGrassState;
+import v0id.api.exp.block.EnumShrubberyType;
 import v0id.api.exp.block.IGrass;
-import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.*;
 import v0id.exp.block.BlockFarmland;
 import v0id.exp.block.IBlockRegistryEntry;
@@ -229,6 +229,29 @@ public class BlockVegetation extends BlockBush implements IInitializableBlock, I
 								world.setBlockState(offset, this.getDefaultState());
 							}
 						}
+
+						if (world.rand.nextFloat() < 0.1F)
+                        {
+                            int foundSelf = 0;
+                            for (int dp = 0; dp < 9; ++dp)
+                            {
+                                BlockPos checkAt = pos.add(dp % 3, 0, dp / 3);
+                                if (world.getBlockState(checkAt).getBlock() instanceof BlockGenericShrubbery)
+                                {
+                                    return;
+                                }
+
+                                if (world.getBlockState(checkAt).getBlock() instanceof BlockVegetation)
+                                {
+                                    ++foundSelf;
+                                }
+                            }
+
+                            if (foundSelf > 3)
+                            {
+                                world.setBlockState(pos, ExPBlocks.genericShrubbery.getDefaultState().withProperty(ExPBlockProperties.SHRUBBERY_TYPE, EnumShrubberyType.chooseType(world.getBiome(pos), world.rand)));
+                            }
+                        }
 					}
 				}
 				else

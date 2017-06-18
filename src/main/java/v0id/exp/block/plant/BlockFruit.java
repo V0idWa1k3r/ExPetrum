@@ -10,6 +10,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNodeType;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -117,6 +118,12 @@ public class BlockFruit extends Block implements IInitializableBlock, IBlockRegi
     {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
         this.checkGrowthConditions(worldIn, pos, state);
+    }
+
+    @Override
+    public BlockRenderLayer getBlockLayer()
+    {
+        return BlockRenderLayer.CUTOUT;
     }
 
     public void checkGrowthConditions(World w, BlockPos pos, IBlockState state)

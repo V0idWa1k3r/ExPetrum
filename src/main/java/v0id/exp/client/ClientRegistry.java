@@ -391,6 +391,16 @@ public class ClientRegistry implements IInstanceProvider, ILifecycleListener
                     return new ModelResourceLocation("exp:flower_shrubbery", String.format("color=%s", state.getValue(BlockGenericShrubbery.BLOOM_COLOR).getName()));
                 }
 
+                case SMALL_SHRUB:
+                {
+                    return new ModelResourceLocation("exp:small_shrubbery", String.format("color=%s", state.getValue(BlockGenericShrubbery.BLOOM_COLOR).getName()));
+                }
+
+                case MUSHROOM:
+                {
+                    return new ModelResourceLocation("exp:mushroom_shrubbery", String.format("color=%s", state.getValue(BlockGenericShrubbery.BLOOM_COLOR).getName()));
+                }
+
                 default:
                 {
                     return new ModelResourceLocation(b.getRegistryName(), "normal");

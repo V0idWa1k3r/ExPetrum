@@ -1,0 +1,101 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"textures" : {
+            "cross" : "exp:blocks/plants/deco/misc/shrub_0",
+            "particle" : "#cross"
+		},
+		"model" : "tinted_cross"
+	},
+	"variants" : {
+		"normal": [{}],
+		"inventory" : [{}],
+        "color" : {
+            "white" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/shrub_0"
+                }
+            },
+            "orange" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/shrub_1"
+                }
+            },
+            "magenta" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/shrub_2"
+                }
+            },
+            "light_blue" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/shrub_3"
+                }
+            },
+            "yellow" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/shrub_4"
+                }
+            },
+            "lime" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/shrub_5"
+                }
+            },
+            "pink" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/shrub_6"
+                }
+            },
+            "gray" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/shrub_7"
+                }
+            },
+            "silver" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/shrub_8"
+                }
+            },
+            "cyan" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/shrub_0"
+                }
+            },
+            "purple" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/shrub_0"
+                }
+            },
+            "blue" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/shrub_0"
+                }
+            },
+            "brown" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/shrub_0"
+                }
+            },
+            "green" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/shrub_0"
+                }
+            },
+            "red" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/shrub_0"
+                }
+            },
+            "black" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/shrub_0"
+                }
+            },
+            "none" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/shrub_0"
+                }
+            }
+        }
+	}
+}

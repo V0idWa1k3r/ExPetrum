@@ -20,10 +20,13 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
+import v0id.api.exp.block.EnumGrassState;
 import v0id.api.exp.block.EnumShrubberyType;
+import v0id.api.exp.block.IGrass;
 import v0id.api.exp.data.*;
 import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
@@ -68,6 +71,7 @@ public class BlockGenericShrubbery extends BlockBush implements IInitializableBl
 
     public static final PropertyInteger TROPIC_PLANT_LEAF = PropertyInteger.create("leaf", 0, 2);
     public static final PropertyEnum<BloomColor> BLOOM_COLOR = PropertyEnum.create("color", BloomColor.class);
+
     public BlockGenericShrubbery()
     {
         super();
@@ -117,6 +121,32 @@ public class BlockGenericShrubbery extends BlockBush implements IInitializableBl
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
         return BlockVegetation.TALL_GRASS_AABB;
+    }
+
+    @Override
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+    {
+        super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
+        this.checkGrowth(worldIn, pos);
+    }
+
+    @Override
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    {
+        super.updateTick(worldIn, pos, state, rand);
+        this.checkGrowth(worldIn, pos);
+    }
+
+    public void checkGrowth(World world, BlockPos pos)
+    {
+        IBlockState stateBelow = world.getBlockState(pos.down());
+        if (stateBelow.getBlock() instanceof IGrass)
+        {
+            if (((IGrass)stateBelow.getBlock()).getState() != EnumGrassState.NORMAL)
+            {
+                world.setBlockToAir(pos);
+            }
+        }
     }
 
     @Override
@@ -175,6 +205,16 @@ public class BlockGenericShrubbery extends BlockBush implements IInitializableBl
             case FLOWER:
             {
                 return state.withProperty(BLOOM_COLOR, BloomColor.values()[ExPMisc.modelVariantRandom.nextInt(15)]);
+            }
+
+            case SMALL_SHRUB:
+            {
+                return state.withProperty(BLOOM_COLOR, BloomColor.values()[ExPMisc.modelVariantRandom.nextInt(9)]);
+            }
+
+            case MUSHROOM:
+            {
+                return state.withProperty(BLOOM_COLOR, BloomColor.values()[ExPMisc.modelVariantRandom.nextInt(16)]);
             }
 
             default:

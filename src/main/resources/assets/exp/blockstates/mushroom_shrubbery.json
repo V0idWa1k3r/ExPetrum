@@ -1,0 +1,101 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"textures" : {
+            "cross" : "exp:blocks/plants/deco/misc/mushroom_white",
+            "particle" : "#cross"
+		},
+		"model" : "cross"
+	},
+	"variants" : {
+		"normal": [{}],
+		"inventory" : [{}],
+        "color" : {
+            "white" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/mushroom_white"
+                }
+            },
+            "orange" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/mushroom_orange"
+                }
+            },
+            "magenta" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/mushroom_magenta"
+                }
+            },
+            "light_blue" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/mushroom_light_blue"
+                }
+            },
+            "yellow" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/mushroom_yellow"
+                }
+            },
+            "lime" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/mushroom_lime"
+                }
+            },
+            "pink" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/mushroom_pink"
+                }
+            },
+            "gray" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/mushroom_gray"
+                }
+            },
+            "silver" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/mushroom_silver"
+                }
+            },
+            "cyan" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/mushroom_cyan"
+                }
+            },
+            "purple" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/mushroom_purple"
+                }
+            },
+            "blue" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/mushroom_blue"
+                }
+            },
+            "brown" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/mushroom_brown"
+                }
+            },
+            "green" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/mushroom_green"
+                }
+            },
+            "red" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/mushroom_red"
+                }
+            },
+            "black" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/mushroom_black"
+                }
+            },
+            "none" : {
+                "textures" : {
+                    "cross" : "exp:blocks/plants/deco/misc/mushroom_none"
+                }
+            }
+        }
+	}
+}
