@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
 import net.minecraftforge.fml.relauncher.CoreModManager;
 import org.apache.commons.io.IOUtils;
 import v0id.api.core.logging.LogLevel;
@@ -19,6 +20,7 @@ import v0id.exp.crop.CropDataLoader;
 import v0id.exp.player.inventory.WeightDataLoader;
 import v0id.exp.proxy.IExPProxy;
 import v0id.exp.registry.*;
+import v0id.exp.util.EntityPackManager;
 
 import java.io.File;
 import java.io.InputStream;
@@ -114,6 +116,13 @@ public class ExPetrum
 		AbstractRegistry.registries.forEach(reg -> reg.postInit(evt));
 		ExPMisc.modLogger.log(LogLevel.Debug, "ExPetrum post initialized.");
 	}
+
+	@EventHandler
+	public void serverStopped(FMLServerStoppedEvent event)
+    {
+        EntityPackManager.saveAllPacksInfo(false);
+        EntityPackManager.cleanup();
+    }
 	
 	private void setDevEnvironment()
 	{

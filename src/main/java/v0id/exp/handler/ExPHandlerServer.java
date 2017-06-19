@@ -35,6 +35,7 @@ import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -54,6 +55,7 @@ import v0id.exp.player.ExPPlayer;
 import v0id.exp.player.PlayerManager;
 import v0id.exp.player.inventory.ManagedSlot;
 import v0id.exp.player.inventory.PlayerInventoryHelper;
+import v0id.exp.util.EntityPackManager;
 import v0id.exp.util.WeatherUtils;
 import v0id.exp.world.ExPWorld;
 import v0id.exp.world.gen.WorldTypeExP;
@@ -63,6 +65,12 @@ import java.util.Optional;
 
 public class ExPHandlerServer
 {
+    @SubscribeEvent
+	public void onWorldLoad(WorldEvent.Load event)
+    {
+        EntityPackManager.findOrCreateSaveDirectory(event);
+    }
+
 	@SubscribeEvent
 	public void onLivingJump(LivingJumpEvent event)
 	{
@@ -237,7 +245,7 @@ public class ExPHandlerServer
 				EntityPlayer player = (EntityPlayer) event.getEntity();
 				ContainerPlayer playerContainer = (ContainerPlayer) player.inventoryContainer;
 				Optional<ContainerPlayer> inventoryContainer = Optional.empty();
-				if (player.inventoryContainer instanceof ContainerPlayer)
+				if (player.inventoryContainer != null)
 				{
 					inventoryContainer = Optional.of((ContainerPlayer)player.inventoryContainer);
 				}
