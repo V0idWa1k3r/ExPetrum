@@ -82,7 +82,7 @@ public class ClientRegistry implements ILifecycleListener
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> 0x02661c, ExPBlocks.grass);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> 0x6a7223, ExPBlocks.grass_dry);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> 0x660000, ExPBlocks.grass_dead);
-        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> ColorizerGrass.getGrassColor(1, 0.5), ExPBlocks.waterLily);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> ColorizerGrass.getGrassColor(1, 0.5), ExPBlocks.waterLily, ExPBlocks.genericShrubbery);
         Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) ->
                 worldIn.getBlockState(pos.down()).getBlock() instanceof IGrass ? ((IGrass) worldIn.getBlockState(pos.down()).getBlock()).getGrassColor(worldIn.getBlockState(pos.down()), pos.down(), worldIn) : Helpers.getGrassColor(state, worldIn, pos, tintIndex), ExPBlocks.vegetation, ExPBlocks.genericShrubbery);
         Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) ->
@@ -156,6 +156,7 @@ public class ClientRegistry implements ILifecycleListener
         registerOreModels();
         registerBerryBushModels();
         registerShrubModels();
+        registerShrubberyModels();
 
         // State mappers
         registerCustomStateMappers();
@@ -200,6 +201,14 @@ public class ClientRegistry implements ILifecycleListener
     public static void registerShrubModels()
     {
         Arrays.stream(ExPBlocks.shrubs).forEach(shrub -> mkCustomModelResourceLocations(shrub, EnumShrubType.values().length, i -> "istall=false,type=" + EnumShrubType.values()[i].getName()));
+    }
+
+    public static void registerShrubberyModels()
+    {
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.genericShrubbery), 0, new ModelResourceLocation(new ResourceLocation("exp", "tropical_shrubbery"), "color=none,leaf=0"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.genericShrubbery), 1, new ModelResourceLocation(new ResourceLocation("exp", "flower_shrubbery"), "color=white"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.genericShrubbery), 2, new ModelResourceLocation(new ResourceLocation("exp", "small_shrubbery"), "color=white"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.genericShrubbery), 3, new ModelResourceLocation(new ResourceLocation("exp", "mushroom_shrubbery"), "color=red"));
     }
 
     public static void registerOreModels()
