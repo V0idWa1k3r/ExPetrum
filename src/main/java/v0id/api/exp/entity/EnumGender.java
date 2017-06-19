@@ -20,6 +20,6 @@ public enum EnumGender
 
     public boolean isOpposite(EnumGender other)
     {
-        return this.getOpposite() == other;
+        return this != other;
     }
 }
