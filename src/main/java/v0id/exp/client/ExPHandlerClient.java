@@ -29,6 +29,7 @@ import v0id.exp.client.render.sky.WorldWeatherRenderer;
 import v0id.exp.combat.ClientCombatHandler;
 import v0id.exp.player.inventory.ManagedSlot;
 import v0id.exp.settings.impl.SettingsClient;
+import v0id.exp.settings.impl.SettingsFlags;
 
 import java.lang.reflect.Field;
 
@@ -57,6 +58,11 @@ public class ExPHandlerClient
 	@SubscribeEvent
 	public static void onRenderHand(RenderHandEvent event)
 	{
+        if (!SettingsFlags.instance.enableNewCombat)
+        {
+            return;
+        }
+
 		if (SpecialAttackRenderer.render(event.getPartialTicks()))
 		{
 			event.setCanceled(true);
@@ -66,6 +72,11 @@ public class ExPHandlerClient
 	@SubscribeEvent
 	public static void onMouseStateChanged(MouseEvent event)
 	{
+	    if (!SettingsFlags.instance.enableNewCombat)
+        {
+            return;
+        }
+
 		if (Minecraft.getMinecraft().player != null && Minecraft.getMinecraft().currentScreen == null && Minecraft.getMinecraft().player.getCooledAttackStrength(0.0F) == 1)
 		{
 			if (event.isButtonstate())
@@ -83,6 +94,11 @@ public class ExPHandlerClient
 	{
 		if (event.getGui() instanceof GuiContainer)
 		{
+            if (!SettingsFlags.instance.enableCustomInventory)
+            {
+                return;
+            }
+
 			GuiContainer gc = (GuiContainer) event.getGui();
 			if ((gc instanceof GuiInventory || gc instanceof GuiContainerCreative) && Minecraft.getMinecraft().player.capabilities.isCreativeMode)
 			{
@@ -101,45 +117,51 @@ public class ExPHandlerClient
 				}
 			}
 		}
+
+        if (event.getGui() instanceof GuiCreateWorld)
+        {
+            if (!SettingsFlags.instance.enableInvasiveChanges)
+            {
+                return;
+            }
+
+            try
+            {
+                Field f = null;
+                Field[] allFlds = GuiCreateWorld.class.getDeclaredFields();
+                for (int i = allFlds.length - 1; i >= 0; --i)
+                {
+                    if (allFlds[i].getType() == Integer.TYPE)
+                    {
+                        f = allFlds[i];
+                        break;
+                    }
+                }
+
+                f.setAccessible(true);
+                f.set(event.getGui(), ExPMisc.worldTypeExP.getId());
+            }
+            catch (Exception ex)
+            {
+                ExPMisc.modLogger.log(LogLevel.Debug, "Could not reflect GuiCreateWorld!", ex);
+            }
+        }
 	}
 	
 	@SubscribeEvent
 	public static void onDrawGui(GuiScreenEvent.DrawScreenEvent.Pre event)
 	{
+        if (!SettingsFlags.instance.enableCustomInventory)
+        {
+            return;
+        }
+
 		if (event.getGui() instanceof GuiContainer)
 		{
 			PlayerInventoryRenderer.render(Minecraft.getMinecraft().player, event.getGui());
 		}
 	}
-	
-	@SubscribeEvent
-	public static void onInitGui(GuiScreenEvent.InitGuiEvent event)
-	{
-		if (event.getGui() instanceof GuiCreateWorld)
-		{
-			try
-			{
-				Field f = null;
-				Field[] allFlds = GuiCreateWorld.class.getDeclaredFields();
-				for (int i = allFlds.length - 1; i >= 0; --i)
-				{
-					if (allFlds[i].getType() == Integer.TYPE)
-					{
-						f = allFlds[i];
-						break;
-					}
-				}
-				
-				f.setAccessible(true);
-				f.set(event.getGui(), ExPMisc.worldTypeExP.getId());
-			}
-			catch (Exception ex)
-			{
-				ExPMisc.modLogger.log(LogLevel.Debug, "Could not reflect GuiCreateWorld!", ex);
-			}
-		}
-	}
-	
+
 	@SubscribeEvent
 	public static void onHudRender(RenderGameOverlayEvent.Pre event)
 	{

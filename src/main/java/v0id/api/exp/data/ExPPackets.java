@@ -11,4 +11,5 @@ public class ExPPackets
 	public static final PacketType WORLD_DATA = PacketType.obtain(modid, "worldData");
 	public static final PacketType SPECIAL_ATTACK = PacketType.obtain(modid, "specialAttack");
     public static final PacketType CHUNK_DATA = PacketType.obtain(modid, "chunkData");
+    public static final PacketType SETTINGS_SYNC = PacketType.obtain(modid, "settingsSync");
 }

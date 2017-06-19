@@ -4,6 +4,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
@@ -37,6 +38,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fluids.BlockFluidBase;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -55,6 +57,8 @@ import v0id.exp.player.ExPPlayer;
 import v0id.exp.player.PlayerManager;
 import v0id.exp.player.inventory.ManagedSlot;
 import v0id.exp.player.inventory.PlayerInventoryHelper;
+import v0id.exp.settings.SettingsManager;
+import v0id.exp.settings.impl.SettingsFlags;
 import v0id.exp.util.EntityPackManager;
 import v0id.exp.util.WeatherUtils;
 import v0id.exp.world.ExPWorld;
@@ -65,6 +69,23 @@ import java.util.Optional;
 
 public class ExPHandlerServer
 {
+    @SubscribeEvent
+    public void onClientLogIn(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event)
+    {
+        // Should be always true but mods can throw this event at any time...
+        if (event.player instanceof EntityPlayerMP)
+        {
+            if (FMLCommonHandler.instance().getMinecraftServerInstance().isDedicatedServer())
+            {
+                SettingsManager.restoreAllClientData();
+            }
+            else
+            {
+                SettingsManager.sendSettingsToClient((EntityPlayerMP) event.player);
+            }
+        }
+    }
+
     @SubscribeEvent
 	public void onWorldLoad(WorldEvent.Load event)
     {
@@ -170,6 +191,11 @@ public class ExPHandlerServer
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onTryPickupItem(EntityItemPickupEvent event)
 	{
+        if (!SettingsFlags.instance.enableCustomInventory)
+        {
+            return;
+        }
+
 		if (event.getItem() != null && !event.getItem().getItem().isEmpty() && !event.getItem().isDead && !event.getEntityPlayer().world.isRemote)
 		{
 			int i = PlayerInventoryHelper.findFirstAvailableSlotFor(event.getItem().getItem(), Optional.empty(), event.getEntityPlayer());
@@ -215,6 +241,11 @@ public class ExPHandlerServer
 	@SubscribeEvent
 	public void onContainerOpened(PlayerContainerEvent.Open event)
 	{
+        if (!SettingsFlags.instance.enableCustomInventory)
+        {
+            return;
+        }
+
 		try
 		{
 			Container c = event.getContainer();
@@ -240,38 +271,41 @@ public class ExPHandlerServer
 	{
 		if (event.getEntity() instanceof EntityPlayer)
 		{
-			try
-			{
-				EntityPlayer player = (EntityPlayer) event.getEntity();
-				ContainerPlayer playerContainer = (ContainerPlayer) player.inventoryContainer;
-				Optional<ContainerPlayer> inventoryContainer = Optional.empty();
-				if (player.inventoryContainer != null)
-				{
-					inventoryContainer = Optional.of((ContainerPlayer)player.inventoryContainer);
-				}
-				
-				for (int i = 9; i < 36; ++i)
-				{
-					Slot s = playerContainer.getSlot(i);
-					ManagedSlot wrapper = new ManagedSlot(s);
-					playerContainer.inventorySlots.remove(i);
-					playerContainer.inventorySlots.add(i, wrapper);
-					if (inventoryContainer.isPresent())
-					{
-						s = inventoryContainer.get().getSlot(i);
-						if (!(s instanceof ManagedSlot))
-						{
-							wrapper = new ManagedSlot(s);
-							inventoryContainer.get().inventorySlots.remove(i);
-							inventoryContainer.get().inventorySlots.add(i, wrapper);
-						}
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				ExPMisc.modLogger.log(LogLevel.Error, "ExPetrum was unable to initialize it's inventory system! This is most likely caused by another mod!", ex);
-			}
+            if (SettingsFlags.instance.enableCustomInventory)
+            {
+                try
+                {
+                    EntityPlayer player = (EntityPlayer) event.getEntity();
+                    ContainerPlayer playerContainer = (ContainerPlayer) player.inventoryContainer;
+                    Optional<ContainerPlayer> inventoryContainer = Optional.empty();
+                    if (player.inventoryContainer != null)
+                    {
+                        inventoryContainer = Optional.of((ContainerPlayer) player.inventoryContainer);
+                    }
+
+                    for (int i = 9; i < 36; ++i)
+                    {
+                        Slot s = playerContainer.getSlot(i);
+                        ManagedSlot wrapper = new ManagedSlot(s);
+                        playerContainer.inventorySlots.remove(i);
+                        playerContainer.inventorySlots.add(i, wrapper);
+                        if (inventoryContainer.isPresent())
+                        {
+                            s = inventoryContainer.get().getSlot(i);
+                            if (!(s instanceof ManagedSlot))
+                            {
+                                wrapper = new ManagedSlot(s);
+                                inventoryContainer.get().inventorySlots.remove(i);
+                                inventoryContainer.get().inventorySlots.add(i, wrapper);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ExPMisc.modLogger.log(LogLevel.Error, "ExPetrum was unable to initialize it's inventory system! This is most likely caused by another mod!", ex);
+                }
+            }
 		}
 	}
 	
