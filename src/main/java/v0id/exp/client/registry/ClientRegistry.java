@@ -19,6 +19,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.client.model.obj.OBJLoader;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -40,12 +41,15 @@ import v0id.api.exp.tile.crop.IFarmland;
 import v0id.exp.block.tree.BlockLeaf;
 import v0id.exp.block.tree.BlockLog;
 import v0id.exp.client.model.ModelLoaderExP;
+import v0id.exp.client.model.entity.ModelChicken;
+import v0id.exp.client.render.entity.RenderAnimal;
 import v0id.exp.client.render.entity.RenderFallingTree;
 import v0id.exp.client.render.entity.RenderThrownWeapon;
 import v0id.exp.crop.ExPFarmland;
 import v0id.exp.entity.EntityFallingTree;
 import v0id.exp.entity.EntityGravFallingBlock;
 import v0id.exp.entity.EntityThrownWeapon;
+import v0id.exp.entity.impl.Chicken;
 import v0id.exp.registry.ILifecycleListener;
 import v0id.exp.tile.TileFarmland;
 import v0id.exp.tile.TileOre;
@@ -71,6 +75,7 @@ public class ClientRegistry implements ILifecycleListener
         IFunctionalRenderFactory.registerEntityRenderingHandler(EntityGravFallingBlock.class, RenderFallingBlock::new);
         IFunctionalRenderFactory.registerEntityRenderingHandler(EntityFallingTree.class, RenderFallingTree::new);
         IFunctionalRenderFactory.registerEntityRenderingHandler(EntityThrownWeapon.class, RenderThrownWeapon::new);
+        RenderingRegistry.registerEntityRenderingHandler(Chicken.class, r -> new RenderAnimal(r, ModelChicken.instance = new ModelChicken(), 1F));
         this.initAttacksConditions();
     }
 

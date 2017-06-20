@@ -233,12 +233,12 @@ public class BlockVegetation extends BlockBush implements IInitializableBlock, I
 							}
 						}
 
-						if (world.rand.nextFloat() < 0.01F)
+						if (world.rand.nextFloat() < 0.001F)
                         {
                             int foundSelf = 0;
-                            for (int dp = 0; dp < 9; ++dp)
+                            for (int dp = 0; dp < 25; ++dp)
                             {
-                                BlockPos checkAt = pos.add((dp % 3) - 1, 0, (dp / 3) - 1);
+                                BlockPos checkAt = pos.add((dp % 5) - 2, 0, (dp / 5) - 2);
                                 if (world.getBlockState(checkAt).getBlock() instanceof BlockGenericShrubbery)
                                 {
                                     return;
@@ -250,7 +250,7 @@ public class BlockVegetation extends BlockBush implements IInitializableBlock, I
                                 }
                             }
 
-                            if (foundSelf > 3)
+                            if (foundSelf > 9)
                             {
                                 world.setBlockState(pos, ExPBlocks.genericShrubbery.getDefaultState().withProperty(ExPBlockProperties.SHRUBBERY_TYPE, EnumShrubberyType.chooseType(world.getBiome(pos), world.rand)));
                             }

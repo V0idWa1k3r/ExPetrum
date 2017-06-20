@@ -13,12 +13,16 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.input.Keyboard;
 import v0id.api.core.logging.LogLevel;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPRegistryNames;
+import v0id.exp.client.model.EntityModelDynamic;
+import v0id.exp.ExPetrum;
 import v0id.exp.client.fx.ParticleEngine;
 import v0id.exp.client.registry.ClientRegistry;
 import v0id.exp.client.render.gui.PlayerInventoryRenderer;
@@ -37,6 +41,18 @@ import java.lang.reflect.Field;
 @Mod.EventBusSubscriber(modid = ExPRegistryNames.modid, value = Side.CLIENT)
 public class ExPHandlerClient
 {
+    @SubscribeEvent
+    public static void onKeyboardEvent(InputEvent.KeyInputEvent event)
+    {
+        if (ExPetrum.isDevEnvironment)
+        {
+            if (Keyboard.isKeyDown(Keyboard.KEY_F3) && Keyboard.isKeyDown(Keyboard.KEY_R))
+            {
+                EntityModelDynamic.reloadAllModels();
+            }
+        }
+    }
+
     @SubscribeEvent
 	public static void onModelRegistry(ModelRegistryEvent event)
     {

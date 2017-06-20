@@ -72,7 +72,8 @@ public class ExPRegistryNames
 	public static final ResourceLocation
 		entityGravFallingBlock																				= new ResourceLocation(modid, "gravFallingBlock"),
 		entityFallingTree																					= new ResourceLocation(modid, "fallingTree"),
-		entityThrownWeapon																					= new ResourceLocation(modid, "thrownWeapon");
+		entityThrownWeapon																					= new ResourceLocation(modid, "thrownWeapon"),
+        entityChicken																					    = new ResourceLocation(modid, "chicken");
 	
 	public static final ResourceLocation
 		specialAttackPiercingDash																			= new ResourceLocation(modid, "piercingDash"),
