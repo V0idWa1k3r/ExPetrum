@@ -31,17 +31,15 @@ import v0id.api.exp.block.EnumShrubberyType;
 import v0id.api.exp.block.IGrass;
 import v0id.api.exp.data.*;
 import v0id.exp.block.BlockFarmland;
-import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
-import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWithMetadata;
-import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
 
 import java.util.Random;
 import java.util.stream.Stream;
 
-public class BlockVegetation extends BlockBush implements IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
+public class BlockVegetation extends BlockBush implements IInitializableBlock, IOreDictEntry, IItemBlockProvider
 {
 	// Not exposed, for internal use only(rendering the model)
 	// You do NOT need these! They are purely for rendering! They are not even saved with the meta!
@@ -60,7 +58,7 @@ public class BlockVegetation extends BlockBush implements IInitializableBlock, I
 	public void initBlock()
 	{
 		this.setHardness(0);
-		this.setRegistryName(ExPRegistryNames.blockVegetation);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockVegetation));
 		this.setResistance(0);
 		this.setSoundType(SoundType.PLANT);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
@@ -68,7 +66,6 @@ public class BlockVegetation extends BlockBush implements IInitializableBlock, I
 		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
 		this.setTickRandomly(true);
 		Blocks.FIRE.setFireInfo(this, 60, 100);
-		ExPHandlerRegistry.put(this);
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -281,11 +278,5 @@ public class BlockVegetation extends BlockBush implements IInitializableBlock, I
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
 		registry.register(new ItemBlockWithMetadata(this));
-	}
-
-	@Override
-	public void registerBlock(IForgeRegistry<Block> registry)
-	{
-		registry.register(this);
 	}
 }

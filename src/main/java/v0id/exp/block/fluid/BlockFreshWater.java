@@ -18,17 +18,15 @@ import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPFluids;
 import v0id.api.exp.data.ExPRegistryNames;
-import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
-import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWeighted;
-import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class BlockFreshWater extends BlockFluidFinite implements IWater, IInitializableBlock, IBlockRegistryEntry, IItemRegistryEntry
+public class BlockFreshWater extends BlockFluidFinite implements IWater, IInitializableBlock, IItemBlockProvider
 {
 	public BlockFreshWater()
 	{
@@ -40,13 +38,12 @@ public class BlockFreshWater extends BlockFluidFinite implements IWater, IInitia
 	public void initBlock()
 	{
 		this.setBlockUnbreakable();
-		this.setRegistryName(ExPRegistryNames.blockFreshWater);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockFreshWater));
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
 		this.setLightOpacity(3);
 		this.setQuantaPerBlock(10);
 		this.setTickRandomly(true);
-		ExPHandlerRegistry.put(this);
 	}
 	
 	@Override
@@ -275,11 +272,5 @@ public class BlockFreshWater extends BlockFluidFinite implements IWater, IInitia
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
 		registry.register(new ItemBlockWeighted(this));
-	}
-
-	@Override
-	public void registerBlock(IForgeRegistry<Block> registry)
-	{
-		registry.register(this);
 	}
 }

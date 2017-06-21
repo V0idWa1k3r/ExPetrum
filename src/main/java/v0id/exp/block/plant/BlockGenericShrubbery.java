@@ -28,11 +28,9 @@ import v0id.api.exp.block.EnumGrassState;
 import v0id.api.exp.block.EnumShrubberyType;
 import v0id.api.exp.block.IGrass;
 import v0id.api.exp.data.*;
-import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
-import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWithMetadata;
-import v0id.exp.handler.ExPHandlerRegistry;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -40,7 +38,7 @@ import java.util.Random;
 /**
  * Created by V0idWa1k3r on 17-Jun-17.
  */
-public class BlockGenericShrubbery extends BlockBush implements IInitializableBlock, IPlantable, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
+public class BlockGenericShrubbery extends BlockBush implements IInitializableBlock, IPlantable, IOreDictEntry, IItemBlockProvider
 {
     public enum BloomColor implements IStringSerializable
     {
@@ -88,7 +86,7 @@ public class BlockGenericShrubbery extends BlockBush implements IInitializableBl
     public void initBlock()
     {
         this.setHardness(1);
-        this.setRegistryName(ExPRegistryNames.blockGenericShrubbery);
+        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockGenericShrubbery));
         this.setResistance(1);
         this.setSoundType(SoundType.PLANT);
         this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
@@ -96,13 +94,6 @@ public class BlockGenericShrubbery extends BlockBush implements IInitializableBl
         this.setTickRandomly(true);
         Blocks.FIRE.setFireInfo(this, 60, 100);
         this.setDefaultState(this.blockState.getBaseState().withProperty(ExPBlockProperties.SHRUBBERY_TYPE, EnumShrubberyType.TROPICAL));
-        ExPHandlerRegistry.put(this);
-    }
-
-    @Override
-    public void registerBlock(IForgeRegistry<Block> registry)
-    {
-        registry.register(this);
     }
 
     @Override

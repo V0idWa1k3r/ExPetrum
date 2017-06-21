@@ -27,18 +27,16 @@ import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.exp.block.*;
 import v0id.api.exp.data.*;
-import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
-import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWithMetadata;
-import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
 
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
-public class BlockShrub extends Block implements IInitializableBlock, IShrub, IPlantable, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
+public class BlockShrub extends Block implements IInitializableBlock, IShrub, IPlantable, IOreDictEntry, IItemBlockProvider
 {
 	public static final AxisAlignedBB BASIC_AABB = new AxisAlignedBB(0.3, 0, 0.3, 0.7, 0.5, 0.7);
 	public static final AxisAlignedBB FULL_AABB = new AxisAlignedBB(0.3, 0, 0.3, 0.7, 0.5, 0.7);
@@ -55,7 +53,7 @@ public class BlockShrub extends Block implements IInitializableBlock, IShrub, IP
 	public void initBlock()
 	{
 		this.setHardness(1);
-		this.setRegistryName(this.shrubState == EnumShrubState.BLOOMING ? ExPRegistryNames.blockShrubBlooming : this.shrubState == EnumShrubState.AUTUMN ? ExPRegistryNames.blockShrubAutumn : this.shrubState == EnumShrubState.DEAD ? ExPRegistryNames.blockShrubDead : ExPRegistryNames.blockShrubNormal);
+		this.setRegistryName(ExPRegistryNames.asLocation(this.shrubState == EnumShrubState.BLOOMING ? ExPRegistryNames.blockShrubBlooming : this.shrubState == EnumShrubState.AUTUMN ? ExPRegistryNames.blockShrubAutumn : this.shrubState == EnumShrubState.DEAD ? ExPRegistryNames.blockShrubDead : ExPRegistryNames.blockShrubNormal));
 		this.setResistance(0);
 		this.setSoundType(SoundType.PLANT);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
@@ -63,7 +61,6 @@ public class BlockShrub extends Block implements IInitializableBlock, IShrub, IP
 		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
 		this.setTickRandomly(true);
 		Blocks.FIRE.setFireInfo(this, 60, 100);
-		ExPHandlerRegistry.put(this);
 	}
 
 	@Override
@@ -326,12 +323,6 @@ public class BlockShrub extends Block implements IInitializableBlock, IShrub, IP
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
 		registry.register(new ItemBlockWithMetadata(this));
-	}
-
-	@Override
-	public void registerBlock(IForgeRegistry<Block> registry)
-	{
-		registry.register(this);
 	}
 
 	@Override

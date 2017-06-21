@@ -21,7 +21,6 @@ import v0id.api.exp.block.*;
 import v0id.api.exp.data.*;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.world.IExPWorld;
-import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.item.ItemFood;
 import v0id.exp.util.Helpers;
 
@@ -39,7 +38,7 @@ public class BlockBerryBush extends BlockShrub
 	public void initBlock()
 	{
 		this.setHardness(1);
-		this.setRegistryName(this.shrubState == EnumShrubState.BLOOMING ? ExPRegistryNames.blockBerryBushBerries : this.shrubState == EnumShrubState.AUTUMN ? ExPRegistryNames.blockBerryBushAutumn : this.shrubState == EnumShrubState.DEAD ? ExPRegistryNames.blockBerryBushDead : ExPRegistryNames.blockBerryBushNormal);
+		this.setRegistryName(ExPRegistryNames.asLocation(this.shrubState == EnumShrubState.BLOOMING ? ExPRegistryNames.blockBerryBushBerries : this.shrubState == EnumShrubState.AUTUMN ? ExPRegistryNames.blockBerryBushAutumn : this.shrubState == EnumShrubState.DEAD ? ExPRegistryNames.blockBerryBushDead : ExPRegistryNames.blockBerryBushNormal));
 		this.setResistance(0);
 		this.setSoundType(SoundType.PLANT);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
@@ -47,7 +46,6 @@ public class BlockBerryBush extends BlockShrub
 		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
 		this.setTickRandomly(true);
 		Blocks.FIRE.setFireInfo(this, 60, 100);
-		ExPHandlerRegistry.put(this);
 	}
 
 	@Override

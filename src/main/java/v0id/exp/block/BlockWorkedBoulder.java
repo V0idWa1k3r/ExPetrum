@@ -29,9 +29,7 @@ import v0id.api.core.network.VoidNetwork;
 import v0id.api.core.util.DimBlockPos;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.data.*;
-import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockWithMetadata;
-import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.item.ItemRock;
 import v0id.exp.tile.TileWorkedBoulder;
 
@@ -41,7 +39,7 @@ import java.util.stream.Stream;
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
 import static v0id.api.exp.data.ExPBlockProperties.ROCK_CLASS;
 
-public class BlockWorkedBoulder extends Block implements IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
+public class BlockWorkedBoulder extends Block implements IInitializableBlock, IOreDictEntry, IItemBlockProvider
 {
 	public static final AxisAlignedBB BOULDER_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.6, 0.9);
 
@@ -55,13 +53,12 @@ public class BlockWorkedBoulder extends Block implements IInitializableBlock, IO
 	public void initBlock()
 	{
 		this.setHardness(4);
-		this.setRegistryName(ExPRegistryNames.blockBoulderWorked);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockBoulderWorked));
 		this.setResistance(2);
 		this.setSoundType(SoundType.STONE);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ROCK_CLASS, ANDESITE).withProperty(ExPBlockProperties.WORKED_BOULDER_INDEX, 0));
 		this.setCreativeTab(ExPCreativeTabs.tabUnderground);
-		ExPHandlerRegistry.put(this);
 	}
 	
 	@Override
@@ -280,11 +277,5 @@ public class BlockWorkedBoulder extends Block implements IInitializableBlock, IO
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
 		registry.register(new ItemBlockWithMetadata(this));
-	}
-
-	@Override
-	public void registerBlock(IForgeRegistry<Block> registry)
-	{
-		registry.register(this);
 	}
 }

@@ -258,7 +258,7 @@ public class ClientRegistry implements ILifecycleListener
     {
         for (int i = 0; i < 5; ++i)
         {
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(b), i * 3 + 1, new ModelResourceLocation(ExPRegistryNames.blockLog, "axis=y,ttype=" + EnumTreeType.values()[i + ((BlockLog) b).logIndex * 5].getName()));
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(b), i * 3 + 1, new ModelResourceLocation(ExPRegistryNames.asLocation(ExPRegistryNames.blockLog), "axis=y,ttype=" + EnumTreeType.values()[i + ((BlockLog) b).logIndex * 5].getName()));
         }
     }
 
@@ -267,7 +267,7 @@ public class ClientRegistry implements ILifecycleListener
         for (int i = 0; i < 15; ++i)
         {
             EnumLeafState els = EnumLeafState.values()[i % 3];
-            ResourceLocation rl = new ResourceLocation(ExPRegistryNames.blockLeaves.getResourceDomain(), ExPRegistryNames.blockLeaves.getResourcePath() + "_" + els.getName());
+            ResourceLocation rl =ExPRegistryNames.asLocation(ExPRegistryNames.blockLeaves + "_" + els.getName());
             ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(b), i, new ModelResourceLocation(rl, "ttype=" + EnumTreeType.values()[i / 3 + ((BlockLeaf) b).logIndex * 5].getName()));
         }
     }
@@ -289,7 +289,7 @@ public class ClientRegistry implements ILifecycleListener
                     IBlockState state = b.getStateFromMeta(i);
                     String enumName = state.getValue(ExPBlockProperties.TREE_TYPE).getName();
                     String modelLocation = "axis=" + Axis.values()[i % 3].getName() + ",ttype=" + enumName;
-                    ModelResourceLocation mrl = new ModelResourceLocation(ExPRegistryNames.blockLog, modelLocation);
+                    ModelResourceLocation mrl = new ModelResourceLocation(ExPRegistryNames.asLocation(ExPRegistryNames.blockLog), modelLocation);
                     ret.put(state, mrl);
                 }
 
@@ -311,7 +311,7 @@ public class ClientRegistry implements ILifecycleListener
                     EnumLeafState els = EnumLeafState.values()[i % 3];
                     String enumName = state.getValue(ExPBlockProperties.TREE_TYPE).getName();
                     String modelLocation = "ttype=" + enumName;
-                    ResourceLocation rl = new ResourceLocation(ExPRegistryNames.blockLeaves.getResourceDomain(), ExPRegistryNames.blockLeaves.getResourcePath() + "_" + els.getName());
+                    ResourceLocation rl = ExPRegistryNames.asLocation(ExPRegistryNames.blockLeaves + "_" + els.getName());
                     ModelResourceLocation mrl = new ModelResourceLocation(rl, modelLocation);
                     ret.put(state, mrl);
                 }

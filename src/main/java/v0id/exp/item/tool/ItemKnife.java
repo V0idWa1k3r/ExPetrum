@@ -1,10 +1,7 @@
 package v0id.exp.item.tool;
 
-import org.apache.commons.lang3.tuple.Pair;
-
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.IForgeRegistry;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.combat.EnumWeaponWeight;
 import v0id.api.exp.combat.IWeapon;
 import v0id.api.exp.combat.WeaponType;
@@ -13,12 +10,10 @@ import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.api.exp.metal.EnumToolClass;
-import v0id.exp.block.item.IItemRegistryEntry;
-import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.item.IInitializableItem;
 import v0id.exp.player.inventory.PlayerInventoryHelper;
 
-public class ItemKnife extends ItemExPWeapon implements IWeapon, IWeightProvider, IInitializableItem, IItemRegistryEntry, IOreDictEntry
+public class ItemKnife extends ItemExPWeapon implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry
 {
 	public ItemKnife()
 	{
@@ -34,19 +29,12 @@ public class ItemKnife extends ItemExPWeapon implements IWeapon, IWeightProvider
 	}
 
 	@Override
-	public void registerItem(IForgeRegistry<Item> registry)
-	{
-		registry.register(this);
-	}
-
-	@Override
 	public void initItem()
 	{
-		this.setRegistryName(ExPRegistryNames.itemKnife);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemKnife));
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabTools);
 		this.setHasSubtypes(true);
-		ExPHandlerRegistry.put(this);
 	}
 
 	@Override

@@ -28,9 +28,7 @@ import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.gravity.GravityHelper;
 import v0id.api.exp.gravity.IGravitySusceptible;
-import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockWeighted;
-import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
 
 import java.util.Random;
@@ -38,7 +36,7 @@ import java.util.stream.Stream;
 
 import static net.minecraft.block.BlockSnow.LAYERS;
 
-public class BlockSnow extends Block implements IGravitySusceptible, IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
+public class BlockSnow extends Block implements IGravitySusceptible, IInitializableBlock, IOreDictEntry, IItemBlockProvider
 {
 	protected static final AxisAlignedBB[] SNOW_AABB = new AxisAlignedBB[] {new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.25D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.375D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.75D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)};
 
@@ -59,13 +57,12 @@ public class BlockSnow extends Block implements IGravitySusceptible, IInitializa
 	{
 		this.setHardness(1);
 		this.setResistance(0);
-		this.setRegistryName(ExPRegistryNames.blockSnow);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockSnow));
 		this.setSoundType(SoundType.SNOW);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(LAYERS, 1));
 		this.setCreativeTab(ExPCreativeTabs.tabCommon);
 		this.setTickRandomly(true);
-		ExPHandlerRegistry.put(this);
 	}
 
 	@Override
@@ -221,11 +218,5 @@ public class BlockSnow extends Block implements IGravitySusceptible, IInitializa
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
 		GameRegistry.register(new ItemBlockWeighted(this));
-	}
-
-	@Override
-	public void registerBlock(IForgeRegistry<Block> registry)
-	{
-		GameRegistry.register(this);
 	}
 }

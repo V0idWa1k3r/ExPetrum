@@ -15,7 +15,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.core.logging.LogLevel;
@@ -27,16 +26,14 @@ import v0id.api.exp.inventory.IWeightProvider;
 import v0id.api.exp.tile.crop.*;
 import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.IExPWorld;
-import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.crop.CropStats;
 import v0id.exp.crop.ExPCrop;
-import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.tile.TileCrop;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
-public class ItemSeeds extends Item implements IInitializableItem, IItemRegistryEntry, IOreDictEntry, IWeightProvider
+public class ItemSeeds extends Item implements IInitializableItem, IOreDictEntry, IWeightProvider
 {
 	public ItemSeeds()
 	{
@@ -55,19 +52,12 @@ public class ItemSeeds extends Item implements IInitializableItem, IItemRegistry
 	}
 
 	@Override
-	public void registerItem(IForgeRegistry<Item> registry)
-	{
-		registry.register(this);
-	}
-
-	@Override
 	public void initItem()
 	{
-		this.setRegistryName(ExPRegistryNames.itemSeeds);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemSeeds));
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
 		this.setHasSubtypes(true);
-		ExPHandlerRegistry.put(this);
 	}
 
 	@Override

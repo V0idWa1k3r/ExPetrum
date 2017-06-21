@@ -32,17 +32,15 @@ import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.tile.crop.ExPCropCapability;
 import v0id.api.exp.tile.crop.ExPFarmlandCapability;
 import v0id.api.exp.tile.crop.IExPCrop;
-import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
-import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWeighted;
-import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.tile.TileCrop;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockCrop extends Block implements IInitializableBlock, IBlockRegistryEntry, IItemRegistryEntry, IPlantable
+public class BlockCrop extends Block implements IInitializableBlock, IItemBlockProvider, IPlantable
 {
 	public static final AxisAlignedBB SEEDS_AABB = new AxisAlignedBB(0, 0, 0, 1, 0.05, 1);
 	
@@ -88,24 +86,17 @@ public class BlockCrop extends Block implements IInitializableBlock, IBlockRegis
 	}
 
 	@Override
-	public void registerBlock(IForgeRegistry<Block> registry)
-	{
-		registry.register(this);
-	}
-
-	@Override
 	public void initBlock()
 	{
 		this.setHardness(4F);
 		this.setResistance(0);
-		this.setRegistryName(ExPRegistryNames.blockCrop);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockCrop));
 		this.setSoundType(SoundType.PLANT);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ExPBlockProperties.CROP_GROWTH_STAGE, 0).withProperty(ExPBlockProperties.CROP_TYPE, EnumCrop.DEAD));
 		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
 		this.setTickRandomly(true);
 		this.setHarvestLevel("scythe", 0);
-		ExPHandlerRegistry.put(this);
 	}
 	
 	@SuppressWarnings("deprecation")

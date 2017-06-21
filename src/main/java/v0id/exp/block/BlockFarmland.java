@@ -37,9 +37,7 @@ import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.gravity.IGravitySusceptible;
 import v0id.api.exp.tile.crop.ExPFarmlandCapability;
 import v0id.api.exp.tile.crop.IFarmland;
-import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockWithMetadata;
-import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.tile.TileFarmland;
 
 import java.util.Random;
@@ -47,7 +45,7 @@ import java.util.Random;
 import static v0id.api.exp.block.property.EnumDirtClass.ACRISOL;
 import static v0id.api.exp.data.ExPBlockProperties.DIRT_CLASS;
 
-public class BlockFarmland extends BlockContainer implements IInitializableBlock, IBlockRegistryEntry, IItemRegistryEntry, IGravitySusceptible, ICanGrowCrop, IGrass, IAcceptsWaterCan
+public class BlockFarmland extends BlockContainer implements IInitializableBlock, IItemBlockProvider, IGravitySusceptible, ICanGrowCrop, IGrass, IAcceptsWaterCan
 {
 	public BlockFarmland()
 	{
@@ -103,23 +101,16 @@ public class BlockFarmland extends BlockContainer implements IInitializableBlock
 	}
 
 	@Override
-	public void registerBlock(IForgeRegistry<Block> registry)
-	{
-		registry.register(this);
-	}
-
-	@Override
 	public void initBlock()
 	{
 		this.setHardness(3.5f);
-		this.setRegistryName(ExPRegistryNames.blockFarmland);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockFarmland));
 		this.setResistance(3);
 		this.setSoundType(SoundType.GROUND);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(DIRT_CLASS, ACRISOL));
 		this.setCreativeTab(ExPCreativeTabs.tabCommon);
 		this.setTickRandomly(true);
-		ExPHandlerRegistry.put(this);
 	}
 
 	@Override

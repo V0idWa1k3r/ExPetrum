@@ -25,9 +25,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.data.*;
-import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockOre;
-import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.tile.TileOre;
 
 import javax.annotation.Nullable;
@@ -37,7 +35,7 @@ import java.util.stream.Stream;
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
 import static v0id.api.exp.data.ExPBlockProperties.ROCK_CLASS;
 
-public class BlockOre extends Block implements IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
+public class BlockOre extends Block implements IInitializableBlock, IOreDictEntry, IItemBlockProvider
 {
 	public static final float ORE_HARDNESS_MODIFIER = 2F;
 
@@ -51,13 +49,12 @@ public class BlockOre extends Block implements IInitializableBlock, IOreDictEntr
 	public void initBlock()
 	{
 		this.setHardness(3);
-		this.setRegistryName(ExPRegistryNames.blockOre);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockOre));
 		this.setResistance(10);
 		this.setSoundType(SoundType.STONE);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ROCK_CLASS, ANDESITE).withProperty(ExPBlockProperties.ORE_TEXTURE_ID, 0));
 		this.setCreativeTab(ExPCreativeTabs.tabOres);
-		ExPHandlerRegistry.put(this);
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -160,11 +157,5 @@ public class BlockOre extends Block implements IInitializableBlock, IOreDictEntr
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
 		registry.register(new ItemBlockOre(this));
-	}
-
-	@Override
-	public void registerBlock(IForgeRegistry<Block> registry)
-	{
-		registry.register(this);	
 	}
 }

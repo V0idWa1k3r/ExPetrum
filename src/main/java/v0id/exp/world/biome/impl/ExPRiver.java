@@ -3,20 +3,19 @@ package v0id.exp.world.biome.impl;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.fml.common.registry.IForgeRegistry;
+import v0id.api.exp.data.ExPRegistryNames;
 import v0id.exp.world.biome.ExPBiome;
 
 public class ExPRiver extends ExPBiome
 {
 	public ExPRiver(BiomeProperties properties, float... biomedata)
 	{
-		super(properties, "river", biomedata);
+		super(properties, ExPRegistryNames.biomeRiver, biomedata);
 	}
 	
 	@Override
-	public void registerBiome(IForgeRegistry<Biome> registry)
+	public void registerTypes()
 	{
-		super.registerBiome(registry);
 		BiomeDictionary.addTypes(this, Type.RIVER);
 	}
 	

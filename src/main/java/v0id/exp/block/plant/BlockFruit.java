@@ -29,12 +29,10 @@ import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.world.IExPWorld;
-import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
-import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.block.tree.BlockLeaf;
-import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.item.ItemFood;
 
 import javax.annotation.Nullable;
@@ -45,7 +43,7 @@ import java.util.Random;
 /**
  * Created by V0idWa1k3r on 16-Jun-17.
  */
-public class BlockFruit extends Block implements IInitializableBlock, IBlockRegistryEntry, IItemRegistryEntry
+public class BlockFruit extends Block implements IInitializableBlock, IItemBlockProvider
 {
     public BlockFruit()
     {
@@ -58,7 +56,7 @@ public class BlockFruit extends Block implements IInitializableBlock, IBlockRegi
     {
         this.setHardness(1F);
         this.setResistance(0);
-        this.setRegistryName(ExPRegistryNames.blockFruit);
+        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockFruit));
         this.setSoundType(SoundType.WOOD);
         this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
         this.setDefaultState(this.blockState.getBaseState().withProperty(ExPBlockProperties.FRUIT_TYPE, EnumFruit.APPLE));
@@ -66,13 +64,6 @@ public class BlockFruit extends Block implements IInitializableBlock, IBlockRegi
         this.setTickRandomly(true);
         this.setHarvestLevel("knife", 0);
         this.setLightOpacity(0);
-        ExPHandlerRegistry.put(this);
-    }
-
-    @Override
-    public void registerBlock(IForgeRegistry<Block> registry)
-    {
-        registry.register(this);
     }
 
     @Override

@@ -34,10 +34,8 @@ import v0id.api.exp.data.*;
 import v0id.api.exp.gravity.GravityHelper;
 import v0id.api.exp.gravity.IGravitySusceptible;
 import v0id.api.exp.inventory.IWeightProvider;
-import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.block.plant.BlockShrub;
-import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
 
 import java.util.Random;
@@ -47,7 +45,7 @@ import java.util.stream.Stream;
 import static v0id.api.exp.block.property.EnumDirtClass.ACRISOL;
 import static v0id.api.exp.data.ExPBlockProperties.DIRT_CLASS;
 
-public class BlockGrass extends Block implements IWeightProvider, IGravitySusceptible, IGrass, IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
+public class BlockGrass extends Block implements IWeightProvider, IGravitySusceptible, IGrass, IInitializableBlock, IOreDictEntry, IItemBlockProvider
 {
 	public BlockGrass()
 	{
@@ -60,13 +58,12 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 	public void initBlock()
 	{
 		this.setHardness(3.5f);
-		this.setRegistryName(ExPRegistryNames.blockGrass);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockGrass));
 		this.setResistance(3);
 		this.setSoundType(SoundType.PLANT);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(DIRT_CLASS, ACRISOL));
 		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
-		ExPHandlerRegistry.put(this);
 	}
 	
 	@Override
@@ -319,13 +316,12 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 		public void initBlock()
 		{
 			this.setHardness(3.5f);
-			this.setRegistryName(ExPRegistryNames.blockGrass_dry);
+			this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockGrass_dry));
 			this.setResistance(3);
 			this.setSoundType(SoundType.PLANT);
 			this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 			this.setDefaultState(this.blockState.getBaseState().withProperty(DIRT_CLASS, ACRISOL));
 			this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
-			ExPHandlerRegistry.put(this);
 		}
 
 		@Override
@@ -346,13 +342,12 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 		public void initBlock()
 		{
 			this.setHardness(3.5f);
-			this.setRegistryName(ExPRegistryNames.blockGrass_dead);
+			this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockGrass_dead));
 			this.setResistance(3);
 			this.setSoundType(SoundType.PLANT);
 			this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 			this.setDefaultState(this.blockState.getBaseState().withProperty(DIRT_CLASS, ACRISOL));
 			this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
-			ExPHandlerRegistry.put(this);
 		}
 
 		@Override
@@ -382,11 +377,5 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
 		registry.register(new ItemBlockWithMetadata(this));
-	}
-
-	@Override
-	public void registerBlock(IForgeRegistry<Block> registry)
-	{
-		registry.register(this);
 	}
 }

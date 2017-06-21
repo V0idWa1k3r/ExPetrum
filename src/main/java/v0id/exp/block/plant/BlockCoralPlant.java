@@ -24,15 +24,13 @@ import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
-import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
-import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWithMetadata;
-import v0id.exp.handler.ExPHandlerRegistry;
 
 import java.util.Random;
 
-public class BlockCoralPlant extends Block implements IWeightProvider, IInitializableBlock, IBlockRegistryEntry, IItemRegistryEntry
+public class BlockCoralPlant extends Block implements IWeightProvider, IInitializableBlock, IItemBlockProvider
 {
 	public static final PropertyInteger TEXTURE_INDEX_ROCK = PropertyInteger.create("rtindex", 0, 5);
 	public static final PropertyInteger TEXTURE_INDEX_PLANT = PropertyInteger.create("ptindex", 0, 15);
@@ -47,14 +45,13 @@ public class BlockCoralPlant extends Block implements IWeightProvider, IInitiali
 	public void initBlock()
 	{
 		this.setHardness(1f);
-		this.setRegistryName(ExPRegistryNames.blockCoralPlant);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockCoralPlant));
 		this.setResistance(0);
 		this.setSoundType(SoundType.STONE);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TEXTURE_INDEX_ROCK, 0).withProperty(TEXTURE_INDEX_PLANT, 0));
 		this.setCreativeTab(ExPCreativeTabs.tabCommon);
 		this.setTickRandomly(true);
-		ExPHandlerRegistry.put(this);
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -158,11 +155,5 @@ public class BlockCoralPlant extends Block implements IWeightProvider, IInitiali
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
 		registry.register(new ItemBlockWithMetadata(this));
-	}
-
-	@Override
-	public void registerBlock(IForgeRegistry<Block> registry)
-	{
-		registry.register(this);
 	}
 }

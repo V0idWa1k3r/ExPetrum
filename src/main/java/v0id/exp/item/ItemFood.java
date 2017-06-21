@@ -5,7 +5,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagLong;
@@ -18,7 +17,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
-import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import v0id.api.core.util.I18n;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPRegistryNames;
@@ -31,15 +29,13 @@ import v0id.api.exp.player.IExPPlayer;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.IExPWorld;
-import v0id.exp.block.item.IItemRegistryEntry;
-import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
 
 import java.text.DecimalFormat;
 import java.util.EnumMap;
 import java.util.List;
 
-public class ItemFood extends net.minecraft.item.ItemFood implements IInitializableItem, IOreDictEntry, IItemRegistryEntry, IExPFood, IContainerTickable
+public class ItemFood extends net.minecraft.item.ItemFood implements IInitializableItem, IOreDictEntry, IExPFood, IContainerTickable
 {
 	public ItemFood()
 	{
@@ -111,12 +107,6 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 	}
 
 	@Override
-	public void registerItem(IForgeRegistry<Item> registry)
-	{
-		registry.register(this);
-	}
-
-	@Override
 	public void registerOreDictNames()
 	{
 		// TODO Auto-generated method stub
@@ -127,8 +117,7 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 	public void initItem()
 	{
 		this.setHasSubtypes(true);
-		ExPHandlerRegistry.put(this);
-		this.setRegistryName(ExPRegistryNames.itemFood);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemFood));
 		this.setMaxStackSize(1);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabFood);

@@ -49,6 +49,19 @@ public enum EnumTreeType implements IStringSerializable
     GRAPEFRUIT,
     AVOCADO,
     CARAMBOLA;
+
+    public static final EnumTreeType[][] typesForIndex = new EnumTreeType[9][5];
+
+	static
+	{
+        for (int i = 0; i < 9; ++i)
+        {
+            for (int j = 0; j < 5; ++j)
+            {
+                EnumTreeType.typesForIndex[i][j] = EnumTreeType.values()[i * 5 + j];
+            }
+        }
+	}
 	
 	EnumTreeType(boolean b)
 	{
@@ -59,8 +72,6 @@ public enum EnumTreeType implements IStringSerializable
 	{
 		this(false);
 	}
-	
-	public static final EnumTreeType[][] typesForIndex = new EnumTreeType[9][5];
 
 	private final boolean evergreen;
 

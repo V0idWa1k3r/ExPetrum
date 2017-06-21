@@ -1,5 +1,6 @@
 package v0id.exp.client;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiCreateWorld;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -19,6 +20,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 import v0id.api.core.logging.LogLevel;
+import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.exp.client.model.EntityModelDynamic;
@@ -56,6 +58,16 @@ public class ExPHandlerClient
     @SubscribeEvent
 	public static void onModelRegistry(ModelRegistryEvent event)
     {
+        // TODO remove this if forge fixes(changes) the ObjectHolder fields population.
+        if (ExPBlocks.logs[0] == null)
+        {
+            ExPBlocks.logs = new Block[]{ ExPBlocks.log0, ExPBlocks.log1, ExPBlocks.log2, ExPBlocks.log3, ExPBlocks.log4, ExPBlocks.log5, ExPBlocks.log6, ExPBlocks.log7, ExPBlocks.log8 };
+            ExPBlocks.logsDeco = new Block[]{ ExPBlocks.logDeco0, ExPBlocks.logDeco1, ExPBlocks.logDeco2, ExPBlocks.logDeco3, ExPBlocks.logDeco4, ExPBlocks.logDeco5, ExPBlocks.logDeco6, ExPBlocks.logDeco7, ExPBlocks.logDeco8 };
+            ExPBlocks.leaves = new Block[]{ ExPBlocks.leaf0, ExPBlocks.leaf1, ExPBlocks.leaf2, ExPBlocks.leaf3, ExPBlocks.leaf4, ExPBlocks.leaf5, ExPBlocks.leaf6, ExPBlocks.leaf7, ExPBlocks.leaf8 };
+            ExPBlocks.shrubs = new Block[]{ ExPBlocks.shrubNormal, ExPBlocks.shrubBlooming, ExPBlocks.shrubAutumn, ExPBlocks.shrubDead };
+            ExPBlocks.berryBushes = new Block[]{ ExPBlocks.berryBushNormal, ExPBlocks.berryBushBerries, ExPBlocks.berryBushAutumn, ExPBlocks.berryBushDead };
+        }
+
         ClientRegistry.registerModels();
     }
 

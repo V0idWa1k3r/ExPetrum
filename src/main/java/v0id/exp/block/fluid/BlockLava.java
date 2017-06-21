@@ -9,13 +9,11 @@ import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPFluids;
 import v0id.api.exp.data.ExPRegistryNames;
-import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
-import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWeighted;
-import v0id.exp.handler.ExPHandlerRegistry;
 
-public class BlockLava extends BlockFluidFinite implements IInitializableBlock, IBlockRegistryEntry, IItemRegistryEntry
+public class BlockLava extends BlockFluidFinite implements IInitializableBlock, IItemBlockProvider
 {
 	public BlockLava()
 	{
@@ -27,13 +25,12 @@ public class BlockLava extends BlockFluidFinite implements IInitializableBlock, 
 	public void initBlock()
 	{
 		this.setBlockUnbreakable();
-		this.setRegistryName(ExPRegistryNames.blockLava);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockLava));
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
 		this.setLightOpacity(3);
 		this.setLightLevel(1);
 		this.setQuantaPerBlock(10);
-		ExPHandlerRegistry.put(this);
 	}
 
 	@Override
@@ -46,11 +43,5 @@ public class BlockLava extends BlockFluidFinite implements IInitializableBlock, 
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
 		registry.register(new ItemBlockWeighted(this));
-	}
-
-	@Override
-	public void registerBlock(IForgeRegistry<Block> registry)
-	{
-		registry.register(this);
 	}
 }

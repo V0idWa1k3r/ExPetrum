@@ -1,7 +1,11 @@
 package v0id.exp.registry;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import v0id.api.exp.block.EnumShrubState;
-import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.exp.block.*;
 import v0id.exp.block.fluid.BlockFreshWater;
@@ -12,67 +16,103 @@ import v0id.exp.block.plant.*;
 import v0id.exp.block.tree.BlockLeaf;
 import v0id.exp.block.tree.BlockLog;
 
-import java.util.stream.Stream;
+import java.util.Arrays;
+import java.util.List;
 
 public class ExPBlocksRegistry extends AbstractRegistry
 {
-	static
-	{
-		ExPBlocks.rock = new BlockStone();
-		ExPBlocks.soil = new BlockSoil();
-		ExPBlocks.grass = new BlockGrass();
-		ExPBlocks.grass_dry = new BlockGrass.Dry();
-		ExPBlocks.grass_dead = new BlockGrass.Dead();
-		ExPBlocks.saltWater = new BlockSaltWater();
-		ExPBlocks.freshWater = new BlockFreshWater();
-		ExPBlocks.lava = new BlockLava();
-		ExPBlocks.waterLily = new BlockWaterLily();
-		ExPBlocks.cattail = new BlockCattail();
-		ExPBlocks.vegetation = new BlockVegetation();
-		ExPBlocks.sand = new BlockSand();
-		ExPBlocks.seaweed = new BlockSeaweed();
-		ExPBlocks.coralRock = new BlockCoralRock();
-		ExPBlocks.coralPlant = new BlockCoralPlant();
-		ExPBlocks.logs = new BlockLog[9];
-		ExPBlocks.logsDeco = new BlockLog[9];
-		ExPBlocks.leaves = new BlockLeaf[9];
-		for (int i = 0; i < 9; ++i)
-		{
-			for (int j = 0; j < 5; ++j)
-			{
-				EnumTreeType.typesForIndex[i][j] = EnumTreeType.values()[i * 5 + j];
-			}
-		}
-		
-		for (int i = 0; i < 9; ++i)
-		{
-			ExPBlocks.logs[i] = new BlockLog(i);
-			ExPBlocks.logsDeco[i] = new BlockLog.Decorative(i);
-			ExPBlocks.leaves[i] = new BlockLeaf(i);
-		}
-		
-		ExPBlocks.ore = new BlockOre();
-		ExPBlocks.pebble = new BlockPebble();
-		ExPBlocks.boulder = new BlockBoulder();
-		ExPBlocks.boulderOre = new BlockBoulderOre();
-		ExPBlocks.oil = new BlockOil();
-		ExPBlocks.shrubs = new BlockShrub[EnumShrubState.values().length];
-		ExPBlocks.berryBushes = new BlockBerryBush[EnumShrubState.values().length];
-		Stream.of(EnumShrubState.values()).forEach(s -> { 
-			ExPBlocks.shrubs[s.ordinal()] = new BlockShrub(s); ExPBlocks.berryBushes[s.ordinal()] = new BlockBerryBush(s); 
-		});
-		
-		ExPBlocks.snow = new BlockSnow();
-		ExPBlocks.ice = new BlockIce();
-		ExPBlocks.workedBoulder = new BlockWorkedBoulder();
-		ExPBlocks.crop = new BlockCrop();
-		ExPBlocks.farmland = new BlockFarmland();
-		ExPBlocks.fruit = new BlockFruit();
-		ExPBlocks.genericShrubbery = new BlockGenericShrubbery();
-	}
+	public static ExPBlocksRegistry instance;
+	public static List<Block> registryEntries;
 	
 	public ExPBlocksRegistry()
 	{
 		super();
+		instance = this;
 	}
+
+	public void registerBlocks(RegistryEvent.Register<Block> event)
+    {
+        IForgeRegistry<Block> registry = event.getRegistry();
+        registryEntries = Arrays.asList(
+                new BlockStone(),
+                new BlockSoil(),
+                new BlockGrass(),
+                new BlockGrass.Dry(),
+                new BlockGrass.Dead(),
+                new BlockSaltWater(),
+                new BlockFreshWater(),
+                new BlockLava(),
+                new BlockWaterLily(),
+                new BlockCattail(),
+                new BlockVegetation(),
+                new BlockSand(),
+                new BlockSeaweed(),
+                new BlockCoralRock(),
+                new BlockCoralPlant(),
+                new BlockLog(0),
+                new BlockLog(1),
+                new BlockLog(2),
+                new BlockLog(3),
+                new BlockLog(4),
+                new BlockLog(5),
+                new BlockLog(6),
+                new BlockLog(7),
+                new BlockLog(8),
+                new BlockLog.Decorative(0),
+                new BlockLog.Decorative(1),
+                new BlockLog.Decorative(2),
+                new BlockLog.Decorative(3),
+                new BlockLog.Decorative(4),
+                new BlockLog.Decorative(5),
+                new BlockLog.Decorative(6),
+                new BlockLog.Decorative(7),
+                new BlockLog.Decorative(8),
+                new BlockLeaf(0),
+                new BlockLeaf(1),
+                new BlockLeaf(2),
+                new BlockLeaf(3),
+                new BlockLeaf(4),
+                new BlockLeaf(5),
+                new BlockLeaf(6),
+                new BlockLeaf(7),
+                new BlockLeaf(8),
+                new BlockOre(),
+                new BlockPebble(),
+                new BlockBoulder(),
+                new BlockBoulderOre(),
+                new BlockOil(),
+                new BlockShrub(EnumShrubState.NORMAL),
+                new BlockShrub(EnumShrubState.BLOOMING),
+                new BlockShrub(EnumShrubState.AUTUMN),
+                new BlockShrub(EnumShrubState.DEAD),
+                new BlockBerryBush(EnumShrubState.NORMAL),
+                new BlockBerryBush(EnumShrubState.BLOOMING),
+                new BlockBerryBush(EnumShrubState.AUTUMN),
+                new BlockBerryBush(EnumShrubState.DEAD),
+                new BlockSnow(),
+                new BlockIce(),
+                new BlockWorkedBoulder(),
+                new BlockCrop(),
+                new BlockFarmland(),
+                new BlockFruit(),
+                new BlockGenericShrubbery()
+        );
+
+        registryEntries.forEach(registry::register);
+    }
+
+    public void registerItemBlocks(RegistryEvent.Register<Item> event)
+    {
+        registryEntries.stream().filter(e -> e instanceof IItemBlockProvider).map(e -> (IItemBlockProvider)e).forEach(e -> e.registerItem(event.getRegistry()));
+    }
+
+    @Override
+    public void init(FMLInitializationEvent evt)
+    {
+        ExPBlocks.logs = new Block[]{ ExPBlocks.log0, ExPBlocks.log1, ExPBlocks.log2, ExPBlocks.log3, ExPBlocks.log4, ExPBlocks.log5, ExPBlocks.log6, ExPBlocks.log7, ExPBlocks.log8 };
+        ExPBlocks.logsDeco = new Block[]{ ExPBlocks.logDeco0, ExPBlocks.logDeco1, ExPBlocks.logDeco2, ExPBlocks.logDeco3, ExPBlocks.logDeco4, ExPBlocks.logDeco5, ExPBlocks.logDeco6, ExPBlocks.logDeco7, ExPBlocks.logDeco8 };
+        ExPBlocks.leaves = new Block[]{ ExPBlocks.leaf0, ExPBlocks.leaf1, ExPBlocks.leaf2, ExPBlocks.leaf3, ExPBlocks.leaf4, ExPBlocks.leaf5, ExPBlocks.leaf6, ExPBlocks.leaf7, ExPBlocks.leaf8 };
+        ExPBlocks.shrubs = new Block[]{ ExPBlocks.shrubNormal, ExPBlocks.shrubBlooming, ExPBlocks.shrubAutumn, ExPBlocks.shrubDead };
+        ExPBlocks.berryBushes = new Block[]{ ExPBlocks.berryBushNormal, ExPBlocks.berryBushBerries, ExPBlocks.berryBushAutumn, ExPBlocks.berryBushDead };
+    }
 }

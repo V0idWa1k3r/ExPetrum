@@ -24,9 +24,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.exp.block.IOreHintReplaceable;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.data.*;
-import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockWithMetadata;
-import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.item.ItemRock;
 
 import java.util.Random;
@@ -36,7 +34,7 @@ import java.util.stream.Stream;
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
 import static v0id.api.exp.data.ExPBlockProperties.ROCK_CLASS;
 
-public class BlockBoulder extends Block implements IInitializableBlock, IOreHintReplaceable, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
+public class BlockBoulder extends Block implements IInitializableBlock, IOreHintReplaceable, IOreDictEntry, IItemBlockProvider
 {
 	public static final PropertyInteger MODEL_INDEX = PropertyInteger.create("amdl", 0, 3);
 	public static final AxisAlignedBB BOULDER_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.6, 0.9);
@@ -52,12 +50,11 @@ public class BlockBoulder extends Block implements IInitializableBlock, IOreHint
 	{
 		this.setHardness(3f);
 		this.setResistance(0);
-		this.setRegistryName(ExPRegistryNames.blockBoulder);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockBoulder));
 		this.setSoundType(SoundType.STONE);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ROCK_CLASS, ANDESITE).withProperty(MODEL_INDEX, 0));
 		this.setCreativeTab(ExPCreativeTabs.tabUnderground);
-		ExPHandlerRegistry.put(this);
 	}
 		
 	@Override
@@ -246,11 +243,5 @@ public class BlockBoulder extends Block implements IInitializableBlock, IOreHint
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
 		registry.register(new ItemBlockWithMetadata(this));
-	}
-
-	@Override
-	public void registerBlock(IForgeRegistry<Block> registry)
-	{
-		registry.register(this);
 	}
 }

@@ -1,6 +1,5 @@
 package v0id.exp.block.tree;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -29,12 +28,10 @@ import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.ILog;
 import v0id.api.exp.data.*;
 import v0id.api.exp.inventory.IWeightProvider;
-import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
-import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.entity.EntityFallingTree;
-import v0id.exp.handler.ExPHandlerRegistry;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -42,7 +39,7 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
-public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILog, IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
+public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILog, IInitializableBlock, IOreDictEntry, IItemBlockProvider
 {
 	public int logIndex = 0;
 	
@@ -64,7 +61,6 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(AXIS, Axis.Y).withProperty(ExPBlockProperties.TREE_TYPE, EnumTreeType.values()[this.logIndex * 5]));
 		Blocks.FIRE.setFireInfo(this, 5, 5);
-		ExPHandlerRegistry.put(this);
 	}
 	
 	@Override
@@ -153,7 +149,7 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 
 	public ResourceLocation createRegistryLocation()
 	{
-		return new ResourceLocation(ExPRegistryNames.blockLog.getResourceDomain(), ExPRegistryNames.blockLog.getResourcePath() + this.logIndex);
+		return ExPRegistryNames.asLocation(ExPRegistryNames.blockLog + this.logIndex);
 	}
 	
 	@Override
@@ -237,7 +233,7 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 		@Override
 		public ResourceLocation createRegistryLocation()
 		{
-			return new ResourceLocation(ExPRegistryNames.blockLogDeco.getResourceDomain(), ExPRegistryNames.blockLogDeco.getResourcePath() + this.logIndex);
+			return ExPRegistryNames.asLocation(ExPRegistryNames.blockLogDeco + this.logIndex);
 		}
 	}
 	
@@ -255,11 +251,5 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
 		registry.register(new ItemBlockWithMetadata(this));
-	}
-
-	@Override
-	public void registerBlock(IForgeRegistry<Block> registry)
-	{
-		registry.register(this);
 	}
 }

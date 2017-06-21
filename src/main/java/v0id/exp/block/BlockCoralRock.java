@@ -21,13 +21,11 @@ import v0id.api.exp.data.*;
 import v0id.api.exp.gravity.GravityHelper;
 import v0id.api.exp.gravity.IGravitySusceptible;
 import v0id.api.exp.inventory.IWeightProvider;
-import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockWithMetadata;
-import v0id.exp.handler.ExPHandlerRegistry;
 
 import java.util.stream.Stream;
 
-public class BlockCoralRock extends Block implements IWeightProvider, IGravitySusceptible, IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
+public class BlockCoralRock extends Block implements IWeightProvider, IGravitySusceptible, IInitializableBlock, IOreDictEntry, IItemBlockProvider
 {
 	public static final PropertyInteger TEXTURE_INDEX_ROCK = PropertyInteger.create("rtindex", 0, 5);
 	
@@ -114,13 +112,12 @@ public class BlockCoralRock extends Block implements IWeightProvider, IGravitySu
 	public void initBlock()
 	{
 		this.setHardness(8);
-		this.setRegistryName(ExPRegistryNames.blockCoralRock);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockCoralRock));
 		this.setResistance(10);
 		this.setSoundType(SoundType.STONE);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(TEXTURE_INDEX_ROCK, 0));
 		this.setCreativeTab(ExPCreativeTabs.tabCommon);
-		ExPHandlerRegistry.put(this);
 	}
 	
 	@Override
@@ -133,11 +130,5 @@ public class BlockCoralRock extends Block implements IWeightProvider, IGravitySu
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
 		registry.register(new ItemBlockWithMetadata(this));
-	}
-
-	@Override
-	public void registerBlock(IForgeRegistry<Block> registry)
-	{
-		registry.register(this);
 	}
 }

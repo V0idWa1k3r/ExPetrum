@@ -1,28 +1,67 @@
 package v0id.api.exp.data;
 
 import net.minecraft.item.Item;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import v0id.api.core.markers.StaticStorage;
 
 @StaticStorage
+@GameRegistry.ObjectHolder(ExPRegistryNames.modid)
 public class ExPItems
 {
-	public static Item rock;
-	public static Item stick;
-	public static Item toolHead;
-	public static Item seeds;
-	public static Item food;
-	public static Item ingot;
-	public static Item knife;
-	public static Item pickaxe;
-	public static Item axe;
-	public static Item shovel;
-	public static Item hoe;
-	public static Item sword;
-	public static Item scythe;
-	public static Item battleaxe;
-	public static Item hammer;
-	public static Item spear;
-	public static Item watering_can;
-	public static Item gardening_spade;
-    public static Item basket;
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemRock)
+	public static final Item rock = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemStick)
+	public static final Item stick = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemToolhead)
+	public static final Item toolHead = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemSeeds)
+	public static final Item seeds = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemFood)
+	public static final Item food = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemIngot)
+	public static final Item ingot = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemKnife)
+	public static final Item knife = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemPickaxe)
+	public static final Item pickaxe = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemAxe)
+	public static final Item axe = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemShovel)
+	public static final Item shovel = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemHoe)
+	public static final Item hoe = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemSword)
+	public static final Item sword = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemScythe)
+	public static final Item scythe = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemBattleaxe)
+	public static final Item battleaxe = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemHammer)
+	public static final Item hammer = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemSpear)
+	public static final Item spear = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemWateringCan)
+	public static final Item watering_can = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemGardeningSpade)
+	public static final Item gardening_spade = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemBasket)
+    public static final Item basket = null;
 }

@@ -30,9 +30,7 @@ import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.gravity.GravityHelper;
 import v0id.api.exp.gravity.IGravitySusceptible;
 import v0id.api.exp.inventory.IWeightProvider;
-import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockWithMetadata;
-import v0id.exp.handler.ExPHandlerRegistry;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
@@ -40,7 +38,7 @@ import java.util.stream.Stream;
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
 import static v0id.api.exp.data.ExPBlockProperties.ROCK_CLASS;
 
-public class BlockSand extends Block implements IWeightProvider, IGravitySusceptible, IInitializableBlock, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
+public class BlockSand extends Block implements IWeightProvider, IGravitySusceptible, IInitializableBlock, IOreDictEntry, IItemBlockProvider
 {
 	public BlockSand()
 	{
@@ -165,13 +163,12 @@ public class BlockSand extends Block implements IWeightProvider, IGravitySuscept
 	public void initBlock()
 	{
 		this.setHardness(2);
-		this.setRegistryName(ExPRegistryNames.blockSand);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockSand));
 		this.setResistance(5);
 		this.setSoundType(SoundType.SAND);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ROCK_CLASS, ANDESITE));
 		this.setCreativeTab(ExPCreativeTabs.tabCommon);
-		ExPHandlerRegistry.put(this);
 	}
 	
 	@Override
@@ -188,11 +185,5 @@ public class BlockSand extends Block implements IWeightProvider, IGravitySuscept
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
 		registry.register(new ItemBlockWithMetadata(this));
-	}
-
-	@Override
-	public void registerBlock(IForgeRegistry<Block> registry)
-	{
-		registry.register(this);
 	}
 }

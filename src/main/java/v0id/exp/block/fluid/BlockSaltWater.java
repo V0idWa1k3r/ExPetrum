@@ -1,6 +1,5 @@
 package v0id.exp.block.fluid;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -15,17 +14,15 @@ import net.minecraftforge.fluids.BlockFluidFinite;
 import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import v0id.api.exp.block.IWater;
 import v0id.api.exp.data.*;
-import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
-import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWeighted;
-import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class BlockSaltWater extends BlockFluidFinite implements IWater, IInitializableBlock, IBlockRegistryEntry, IItemRegistryEntry
+public class BlockSaltWater extends BlockFluidFinite implements IWater, IInitializableBlock, IItemBlockProvider
 {
 	public BlockSaltWater()
 	{
@@ -37,13 +34,12 @@ public class BlockSaltWater extends BlockFluidFinite implements IWater, IInitial
 	public void initBlock()
 	{
 		this.setBlockUnbreakable();
-		this.setRegistryName(ExPRegistryNames.blockSaltWater);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockSaltWater));
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
 		this.setLightOpacity(3);
 		this.setQuantaPerBlock(10);
 		this.setTickRandomly(true);
-		ExPHandlerRegistry.put(this);
 	}
 	
 	@Override
@@ -251,11 +247,5 @@ public class BlockSaltWater extends BlockFluidFinite implements IWater, IInitial
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
 		registry.register(new ItemBlockWeighted(this));
-	}
-
-	@Override
-	public void registerBlock(IForgeRegistry<Block> registry)
-	{
-		registry.register(this);
 	}
 }

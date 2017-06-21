@@ -25,11 +25,9 @@ import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
-import v0id.exp.block.IBlockRegistryEntry;
 import v0id.exp.block.IInitializableBlock;
-import v0id.exp.block.item.IItemRegistryEntry;
+import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWithMetadata;
-import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
 
 import java.util.Random;
@@ -37,7 +35,7 @@ import java.util.Random;
 import static v0id.api.exp.block.property.EnumDirtClass.ACRISOL;
 import static v0id.api.exp.data.ExPBlockProperties.DIRT_CLASS;
 
-public class BlockCattail extends Block implements IWeightProvider, IInitializableBlock, IBlockRegistryEntry, IItemRegistryEntry
+public class BlockCattail extends Block implements IWeightProvider, IInitializableBlock, IItemBlockProvider
 {
 	public BlockCattail()
 	{
@@ -49,14 +47,13 @@ public class BlockCattail extends Block implements IWeightProvider, IInitializab
 	public void initBlock()
 	{
 		this.setHardness(0.5f);
-		this.setRegistryName(ExPRegistryNames.blockCattail);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockCattail));
 		this.setResistance(0);
 		this.setSoundType(SoundType.PLANT);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(DIRT_CLASS, ACRISOL));
 		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
 		this.setTickRandomly(true);
-		ExPHandlerRegistry.put(this);
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -187,11 +184,5 @@ public class BlockCattail extends Block implements IWeightProvider, IInitializab
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
 		registry.register(new ItemBlockWithMetadata(this));
-	}
-
-	@Override
-	public void registerBlock(IForgeRegistry<Block> registry)
-	{
-		registry.register(this);
 	}
 }

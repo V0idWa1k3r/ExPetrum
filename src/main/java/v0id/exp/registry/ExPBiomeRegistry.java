@@ -1,53 +1,51 @@
 package v0id.exp.registry;
 
-import v0id.api.exp.data.ExPBiomes;
-import v0id.exp.world.biome.impl.ExPBeach;
-import v0id.exp.world.biome.impl.ExPColdForest;
-import v0id.exp.world.biome.impl.ExPColdPlains;
-import v0id.exp.world.biome.impl.ExPDenseColdForest;
-import v0id.exp.world.biome.impl.ExPDenseForest;
-import v0id.exp.world.biome.impl.ExPDenseWarmForest;
-import v0id.exp.world.biome.impl.ExPDesert;
-import v0id.exp.world.biome.impl.ExPForest;
-import v0id.exp.world.biome.impl.ExPHills;
-import v0id.exp.world.biome.impl.ExPJungle;
-import v0id.exp.world.biome.impl.ExPLake;
-import v0id.exp.world.biome.impl.ExPMountains;
-import v0id.exp.world.biome.impl.ExPOcean;
-import v0id.exp.world.biome.impl.ExPPlains;
-import v0id.exp.world.biome.impl.ExPRareForest;
-import v0id.exp.world.biome.impl.ExPRiver;
-import v0id.exp.world.biome.impl.ExPSavanna;
-import v0id.exp.world.biome.impl.ExPWarmForest;
-import v0id.exp.world.biome.impl.ExPWarmPlains;
+import net.minecraft.world.biome.Biome;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
+import v0id.exp.world.biome.IDictionariedBiome;
+import v0id.exp.world.biome.impl.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class ExPBiomeRegistry extends AbstractRegistry
 {
-	static 
-	{
-		ExPBiomes.river = ExPRiver.create();
-		ExPBiomes.ocean = ExPOcean.create();
-		ExPBiomes.beach = ExPBeach.create();
-		ExPBiomes.plains = ExPPlains.create();
-		ExPBiomes.forest = ExPForest.create();
-		ExPBiomes.mountains = ExPMountains.create();
-		ExPBiomes.cold_plains = ExPColdPlains.create();
-		ExPBiomes.cold_forest = ExPColdForest.create();
-		ExPBiomes.warm_plains = ExPWarmPlains.create();
-		ExPBiomes.warm_forest = ExPWarmForest.create();
-		ExPBiomes.dense_forest = ExPDenseForest.create();
-		ExPBiomes.dense_cold_forest = ExPDenseColdForest.create();
-		ExPBiomes.dense_warm_forest = ExPDenseWarmForest.create();
-		ExPBiomes.swampland = ExPLake.create();
-		ExPBiomes.jungle = ExPJungle.create();
-		ExPBiomes.desert = ExPDesert.create();
-		ExPBiomes.rare_forest = ExPRareForest.create();
-		ExPBiomes.hills = ExPHills.create();
-		ExPBiomes.savanna = ExPSavanna.create();
-	}
+	public static ExPBiomeRegistry instance;
+	public static List<Biome> registryEntries;
 	
 	public ExPBiomeRegistry()
 	{
 		super();
+		instance = this;
 	}
+
+	public void registerBiomes(RegistryEvent.Register<Biome> event)
+    {
+        IForgeRegistry<Biome> registry = event.getRegistry();
+        registryEntries = Arrays.asList(
+                ExPRiver.create(),
+                ExPOcean.create(),
+                ExPBeach.create(),
+                ExPPlains.create(),
+                ExPForest.create(),
+                ExPMountains.create(),
+                ExPColdPlains.create(),
+                ExPColdForest.create(),
+                ExPWarmPlains.create(),
+                ExPWarmForest.create(),
+                ExPDenseForest.create(),
+                ExPDenseColdForest.create(),
+                ExPDenseWarmForest.create(),
+                ExPLake.create(),
+                ExPJungle.create(),
+                ExPDesert.create(),
+                ExPRareForest.create(),
+                ExPHills.create(),
+                ExPSavanna.create()
+        );
+
+        registryEntries.forEach(registry::register);
+        registryEntries.stream().filter(e -> e instanceof IDictionariedBiome).map(e -> (IDictionariedBiome)e).forEach(IDictionariedBiome::registerTypes);
+    }
 }

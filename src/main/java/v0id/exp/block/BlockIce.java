@@ -26,15 +26,13 @@ import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.exp.data.*;
 import v0id.api.exp.gravity.GravityHelper;
 import v0id.api.exp.gravity.IGravitySusceptible;
-import v0id.exp.block.item.IItemRegistryEntry;
 import v0id.exp.block.item.ItemBlockWithMetadata;
-import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.util.Helpers;
 
 import java.util.Random;
 import java.util.stream.Stream;
 
-public class BlockIce extends Block implements IInitializableBlock, IGravitySusceptible, IOreDictEntry, IBlockRegistryEntry, IItemRegistryEntry
+public class BlockIce extends Block implements IInitializableBlock, IGravitySusceptible, IOreDictEntry, IItemBlockProvider
 {
 	public BlockIce()
 	{
@@ -84,13 +82,12 @@ public class BlockIce extends Block implements IInitializableBlock, IGravitySusc
 		this.setHardness(8);
 		this.setResistance(0);
 		this.slipperiness = 0.98F;
-		this.setRegistryName(ExPRegistryNames.blockIce);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockIce));
 		this.setSoundType(SoundType.GLASS);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ExPBlockProperties.ICE_IS_SALT, false));
 		this.setCreativeTab(ExPCreativeTabs.tabCommon);
 		this.setTickRandomly(true);
-		ExPHandlerRegistry.put(this);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -181,11 +178,5 @@ public class BlockIce extends Block implements IInitializableBlock, IGravitySusc
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
 		registry.register(new ItemBlockWithMetadata(this));
-	}
-
-	@Override
-	public void registerBlock(IForgeRegistry<Block> registry)
-	{
-		registry.register(this);
 	}
 }

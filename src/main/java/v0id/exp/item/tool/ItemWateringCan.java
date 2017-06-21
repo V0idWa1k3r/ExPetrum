@@ -6,7 +6,6 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
@@ -20,7 +19,6 @@ import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
-import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.core.VoidApi;
 import v0id.api.core.util.I18n;
@@ -32,13 +30,11 @@ import v0id.api.exp.inventory.IWeightProvider;
 import v0id.api.exp.metal.EnumToolClass;
 import v0id.api.exp.player.EnumPlayerProgression;
 import v0id.api.exp.player.IExPPlayer;
-import v0id.exp.block.item.IItemRegistryEntry;
-import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.item.IInitializableItem;
 
 import java.util.List;
 
-public class ItemWateringCan extends ItemExPTool implements IWeightProvider, IInitializableItem, IItemRegistryEntry, IOreDictEntry
+public class ItemWateringCan extends ItemExPTool implements IWeightProvider, IInitializableItem, IOreDictEntry
 {
 	public ItemWateringCan()
 	{
@@ -84,19 +80,12 @@ public class ItemWateringCan extends ItemExPTool implements IWeightProvider, IIn
 	}
 
 	@Override
-	public void registerItem(IForgeRegistry<Item> registry)
-	{
-		registry.register(this);
-	}
-
-	@Override
 	public void initItem()
 	{
-		this.setRegistryName(ExPRegistryNames.itemWateringCan);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemWateringCan));
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabTools);
 		this.setHasSubtypes(true);
-		ExPHandlerRegistry.put(this);
 	}
 
 	@Override

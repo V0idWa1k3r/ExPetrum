@@ -13,18 +13,17 @@ import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import v0id.api.core.VoidApi;
 import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
+import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.world.EnumSeason;
 import v0id.api.exp.world.IBiome;
 import v0id.api.exp.world.IExPWorld;
-import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.world.gen.GenerationHelper;
 import v0id.exp.world.gen.ShrubEntry;
 import v0id.exp.world.gen.tree.TreeEntry;
@@ -34,7 +33,7 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Stream;
 
-public class ExPBiome extends Biome implements IBiome, IBiomeRegistryEntry
+public class ExPBiome extends Biome implements IBiome, IDictionariedBiome
 {
 	public final float
 		temperatureMultiplier,
@@ -70,9 +69,8 @@ public class ExPBiome extends Biome implements IBiome, IBiomeRegistryEntry
 		this.LAVA = ExPBlocks.lava.getDefaultState().withProperty(BlockFluidBase.LEVEL, 9);
 		this.SALT_ICE = ExPBlocks.ice.getDefaultState().withProperty(ExPBlockProperties.ICE_IS_SALT, true);
 		this.FRESH_ICE = ExPBlocks.ice.getDefaultState().withProperty(ExPBlockProperties.ICE_IS_SALT, false);
-		this.setRegistryName("exp", name);
+		this.setRegistryName(ExPRegistryNames.asLocation(name));
 		Stream.of(EnumCrop.values()).filter(c -> c != EnumCrop.DEAD && c.getData().foundIn.contains(name.toLowerCase())).forEach(this.cropsToGenerate::add);
-		ExPHandlerRegistry.put(this);
 	}
 
 	public final String name;
@@ -298,8 +296,8 @@ public class ExPBiome extends Biome implements IBiome, IBiomeRegistryEntry
 	}
 
 	@Override
-	public void registerBiome(IForgeRegistry<Biome> registry)
+	public void registerTypes()
 	{
-		registry.register(this);
+
 	}
 }

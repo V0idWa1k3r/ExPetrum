@@ -1,15 +1,10 @@
 package v0id.exp.item.tool;
 
-import java.util.stream.Stream;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
@@ -18,28 +13,23 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.IForgeRegistry;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.core.logging.LogLevel;
 import v0id.api.exp.block.property.EnumDirtClass;
-import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.combat.EnumWeaponWeight;
 import v0id.api.exp.combat.IWeapon;
 import v0id.api.exp.combat.WeaponType;
-import v0id.api.exp.data.ExPBlocks;
-import v0id.api.exp.data.ExPCreativeTabs;
-import v0id.api.exp.data.ExPMisc;
-import v0id.api.exp.data.ExPRegistryNames;
-import v0id.api.exp.data.IOreDictEntry;
+import v0id.api.exp.data.*;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.api.exp.metal.EnumToolClass;
 import v0id.api.exp.tile.crop.EnumPlantNutrient;
 import v0id.api.exp.tile.crop.IFarmland;
-import v0id.exp.block.item.IItemRegistryEntry;
-import v0id.exp.handler.ExPHandlerRegistry;
 import v0id.exp.item.IInitializableItem;
 import v0id.exp.tile.TileFarmland;
 
-public class ItemShovel extends ItemExPTool implements IWeapon, IWeightProvider, IInitializableItem, IItemRegistryEntry, IOreDictEntry
+import java.util.stream.Stream;
+
+public class ItemShovel extends ItemExPTool implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry
 {
 	public ItemShovel()
 	{
@@ -55,19 +45,12 @@ public class ItemShovel extends ItemExPTool implements IWeapon, IWeightProvider,
 	}
 
 	@Override
-	public void registerItem(IForgeRegistry<Item> registry)
-	{
-		registry.register(this);
-	}
-
-	@Override
 	public void initItem()
 	{
-		this.setRegistryName(ExPRegistryNames.itemShovel);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemShovel));
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabTools);
 		this.setHasSubtypes(true);
-		ExPHandlerRegistry.put(this);
 	}
 
 	@Override

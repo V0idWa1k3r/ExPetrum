@@ -1,73 +1,97 @@
 package v0id.api.exp.data;
 
+import com.google.common.collect.Maps;
 import net.minecraft.util.ResourceLocation;
 import v0id.api.core.markers.StaticStorage;
+
+import java.util.Map;
 
 @StaticStorage
 public class ExPRegistryNames
 {
 	public static final String modid = "exp";
 	
-	public static final ResourceLocation
-		blockStone																							= new ResourceLocation(modid, "rock"),
-		blockSoil																							= new ResourceLocation(modid, "soil"),
-		blockGrass																							= new ResourceLocation(modid, "grass"),
-		blockGrass_dry																						= new ResourceLocation(modid, "grass_dry"),
-		blockGrass_dead																						= new ResourceLocation(modid, "grass_dead"),
-		blockSaltWater																						= new ResourceLocation(modid, "salt_water"),
-		blockFreshWater																						= new ResourceLocation(modid, "fresh_water"),
-		blockLava																							= new ResourceLocation(modid, "lava"),
-		blockWaterLily																						= new ResourceLocation(modid, "lilypad"),
-		blockCattail																						= new ResourceLocation(modid, "cattail"),
-		blockVegetation																						= new ResourceLocation(modid, "vegetation"),
-		blockSand																							= new ResourceLocation(modid, "sand"),
-		blockSeaweed																						= new ResourceLocation(modid, "seaweed"),
-		blockCoralRock																						= new ResourceLocation(modid, "coralrock"),
-		blockCoralPlant																						= new ResourceLocation(modid, "coralplant"),
-		blockLog																							= new ResourceLocation(modid, "log"),
-		blockLogDeco																						= new ResourceLocation(modid, "logDeco"),
-		blockLeaves																							= new ResourceLocation(modid, "leaves"),
-		blockOre																							= new ResourceLocation(modid, "ore"),
-		blockPebble																							= new ResourceLocation(modid, "pebble"),
-		blockBoulder																						= new ResourceLocation(modid, "boulder"),
-		blockBoulderOre																						= new ResourceLocation(modid, "boulder_ore"),
-		blockOil																							= new ResourceLocation(modid, "oil"),
-		blockShrubNormal																					= new ResourceLocation(modid, "shrub_normal"),
-		blockShrubBlooming																					= new ResourceLocation(modid, "shrub_blooming"),
-		blockShrubAutumn																					= new ResourceLocation(modid, "shrub_autumn"),
-		blockShrubDead																						= new ResourceLocation(modid, "shrub_dead"),
-		blockSnow																							= new ResourceLocation(modid, "snow"),
-		blockIce																							= new ResourceLocation(modid, "ice"),
-		blockBoulderWorked																					= new ResourceLocation(modid, "boulder_worked"),
-		blockCrop																							= new ResourceLocation(modid, "crop"),
-		blockFarmland																						= new ResourceLocation(modid, "farmland"),
-		blockBerryBushNormal																				= new ResourceLocation(modid, "berry_bush_normal"),
-		blockBerryBushBerries																				= new ResourceLocation(modid, "berry_bush_berries"),
-		blockBerryBushAutumn																				= new ResourceLocation(modid, "berry_bush_autumn"),
-		blockBerryBushDead																					= new ResourceLocation(modid, "berry_bush_dead"),
-        blockFruit																			        		= new ResourceLocation(modid, "fruit"),
-	    blockGenericShrubbery                                                                               = new ResourceLocation(modid, "generic_shrubbery");
+	public static final String
+		blockStone																							= "rock",
+		blockSoil																							= "soil",
+		blockGrass																							= "grass",
+		blockGrass_dry																						= "grass_dry",
+		blockGrass_dead																						= "grass_dead",
+		blockSaltWater																						= "salt_water",
+		blockFreshWater																						= "fresh_water",
+		blockLava																							= "lava",
+		blockWaterLily																						= "lilypad",
+		blockCattail																						= "cattail",
+		blockVegetation																						= "vegetation",
+		blockSand																							= "sand",
+		blockSeaweed																						= "seaweed",
+		blockCoralRock																						= "coralrock",
+		blockCoralPlant																						= "coralplant",
+		blockLog																							= "log",
+		blockLogDeco																						= "logDeco",
+		blockLeaves																							= "leaves",
+		blockOre																							= "ore",
+		blockPebble																							= "pebble",
+		blockBoulder																						= "boulder",
+		blockBoulderOre																						= "boulder_ore",
+		blockOil																							= "oil",
+		blockShrubNormal																					= "shrub_normal",
+		blockShrubBlooming																					= "shrub_blooming",
+		blockShrubAutumn																					= "shrub_autumn",
+		blockShrubDead																						= "shrub_dead",
+		blockSnow																							= "snow",
+		blockIce																							= "ice",
+		blockBoulderWorked																					= "boulder_worked",
+		blockCrop																							= "crop",
+		blockFarmland																						= "farmland",
+		blockBerryBushNormal																				= "berry_bush_normal",
+		blockBerryBushBerries																				= "berry_bush_berries",
+		blockBerryBushAutumn																				= "berry_bush_autumn",
+		blockBerryBushDead																					= "berry_bush_dead",
+        blockFruit																			        		= "fruit",
+	    blockGenericShrubbery                                                                               = "generic_shrubbery";
 
-	public static final ResourceLocation
-		itemRock																							= new ResourceLocation(modid, "item_rock"),
-		itemStick																							= new ResourceLocation(modid, "item_stick"),
-		itemToolhead																						= new ResourceLocation(modid, "item_toolhead"),
-		itemSeeds																							= new ResourceLocation(modid, "item_seeds"),
-		itemFood																							= new ResourceLocation(modid, "item_food"),
-		itemIngot																							= new ResourceLocation(modid, "item_ingot"),
-		itemKnife																							= new ResourceLocation(modid, "item_knife"),
-		itemPickaxe																							= new ResourceLocation(modid, "item_pickaxe"),
-		itemAxe																								= new ResourceLocation(modid, "item_axe"),
-		itemShovel																							= new ResourceLocation(modid, "item_shovel"),
-		itemHoe																								= new ResourceLocation(modid, "item_hoe"),
-		itemSword																							= new ResourceLocation(modid, "item_sword"),
-		itemScythe																							= new ResourceLocation(modid, "item_scythe"),
-		itemBattleaxe																						= new ResourceLocation(modid, "item_battleaxe"),
-		itemHammer																							= new ResourceLocation(modid, "item_hammer"),
-		itemSpear																							= new ResourceLocation(modid, "item_spear"),
-		itemWateringCan																						= new ResourceLocation(modid, "item_watering_can"),
-		itemGardeningSpade																					= new ResourceLocation(modid, "item_gardening_spade"),
-		itemBasket																							= new ResourceLocation(modid, "item_basket");
+	public static final String
+		itemRock																							= "item_rock",
+		itemStick																							= "item_stick",
+		itemToolhead																						= "item_toolhead",
+		itemSeeds																							= "item_seeds",
+		itemFood																							= "item_food",
+		itemIngot																							= "item_ingot",
+		itemKnife																							= "item_knife",
+		itemPickaxe																							= "item_pickaxe",
+		itemAxe																								= "item_axe",
+		itemShovel																							= "item_shovel",
+		itemHoe																								= "item_hoe",
+		itemSword																							= "item_sword",
+		itemScythe																							= "item_scythe",
+		itemBattleaxe																						= "item_battleaxe",
+		itemHammer																							= "item_hammer",
+		itemSpear																							= "item_spear",
+		itemWateringCan																						= "item_watering_can",
+		itemGardeningSpade																					= "item_gardening_spade",
+		itemBasket																							= "item_basket";
+
+	public static final String
+        biomeBeach                                                                                          = "beach",
+        biomeColdForest                                                                                     = "coldforest",
+        biomeColdPlains                                                                                     = "coldplains",
+        biomeDenseColdForest                                                                                = "densecoldforest",
+        biomeDenseForest                                                                                    = "denseforest",
+        biomeDenseWarmForest                                                                                = "densewarmforest",
+        biomeDesert                                                                                         = "desert",
+        biomeForest                                                                                         = "forest",
+        biomeHills                                                                                          = "hills",
+        biomeJungle                                                                                         = "jungle",
+        biomeLake                                                                                           = "lake",
+        biomeMountains                                                                                      = "mountains",
+        biomeOcean                                                                                          = "ocean",
+        biomePlains                                                                                         = "plains",
+        biomeRareForest                                                                                     = "rareforest",
+        biomeRiver                                                                                          = "river",
+        biomeSavanna                                                                                        = "savanna",
+        biomeWarmForest                                                                                     = "warmforest",
+        biomeWarmPlains                                                                                     = "warmplains";
 
 	public static final ResourceLocation
 		entityGravFallingBlock																				= new ResourceLocation(modid, "gravFallingBlock"),
@@ -85,12 +109,36 @@ public class ExPRegistryNames
 		specialAttackStab																					= new ResourceLocation(modid, "stab"),
 		specialAttackThrow																					= new ResourceLocation(modid, "entityThrow");
 	
-	public static final ResourceLocation
-		potionStunned																						= new ResourceLocation(modid, "stunned");
+	public static final String
+		potionStunned																						="stunned";
 	
 	public static final String
 		fluidSaltWater																						= "exp.salt_water",
 		fluidFreshWater																						= "water",
 		fluidLava																							= "exp.lava",
 		fluidOil																							= "oil";
+
+	private static final Map<String, ResourceLocation> cache = Maps.newHashMap();
+
+	public static ResourceLocation asLocation(String name)
+    {
+        return asLocation(name, true);
+    }
+
+    public static ResourceLocation asLocation(String name, boolean doCache)
+    {
+        if (doCache)
+        {
+            if (!cache.containsKey(name))
+            {
+                cache.put(name, new ResourceLocation(modid, name));
+            }
+
+            return cache.get(name);
+        }
+        else
+        {
+            return new ResourceLocation(modid, name);
+        }
+    }
 }
