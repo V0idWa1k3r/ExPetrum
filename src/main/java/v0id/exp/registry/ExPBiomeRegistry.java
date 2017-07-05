@@ -2,7 +2,7 @@ package v0id.exp.registry;
 
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.registry.IForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistry;
 import v0id.exp.world.biome.IDictionariedBiome;
 import v0id.exp.world.biome.impl.*;
 

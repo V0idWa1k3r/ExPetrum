@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformT
 import net.minecraft.client.renderer.block.model.ItemOverrideList;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.EnumFacing;
-import net.minecraftforge.client.model.IPerspectiveAwareModel;
+import net.minecraftforge.client.model.PerspectiveMapWrapper;
 import net.minecraftforge.client.model.obj.OBJModel.OBJBakedModel;
 import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
 import org.apache.commons.lang3.tuple.Pair;
@@ -28,11 +28,12 @@ import java.util.List;
 // Just not fixing it. 
 // I mean, more than a year has passed...
 // #BlameForge :D I'm kidding, obviously
-public class ModelIngotBaked implements IPerspectiveAwareModel
+public class ModelIngotBaked implements IBakedModel
 {
 	public final OBJBakedModel model;
-	
-	public ModelIngotBaked(OBJBakedModel mdl)
+	private ImmutableList<BakedQuad> hackedQuads;
+
+    public ModelIngotBaked(OBJBakedModel mdl)
 	{
 		this.model = mdl;
 	}
@@ -40,15 +41,18 @@ public class ModelIngotBaked implements IPerspectiveAwareModel
 	@Override
     public List<BakedQuad> getQuads(IBlockState blockState, EnumFacing side, long rand)
     {
-		List<BakedQuad> wrappedQuads = this.model.getQuads(blockState, side, rand);
-		if (!wrappedQuads.isEmpty())
-		{
-			List<BakedQuad> ret = new ArrayList<>(wrappedQuads.size());
-			wrappedQuads.forEach(q -> ret.add(q instanceof UnpackedBakedQuad ? new WrappedQuad((UnpackedBakedQuad) q) : q));
-			return ImmutableList.copyOf(ret);
-		}
+        if (this.hackedQuads == null)
+        {
+            List<BakedQuad> wrappedQuads = this.model.getQuads(blockState, side, rand);
+            if (!wrappedQuads.isEmpty())
+            {
+                List<BakedQuad> ret = new ArrayList<>(wrappedQuads.size());
+                wrappedQuads.forEach(q -> ret.add(q instanceof UnpackedBakedQuad ? new WrappedQuad((UnpackedBakedQuad) q) : q));
+                hackedQuads = ImmutableList.copyOf(ret);
+            }
+        }
 		
-		return wrappedQuads;
+		return this.hackedQuads;
     }
 
 	@Override
@@ -91,7 +95,7 @@ public class ModelIngotBaked implements IPerspectiveAwareModel
 	@Override
 	public Pair<? extends IBakedModel, Matrix4f> handlePerspective(TransformType cameraTransformType)
 	{
-		return IPerspectiveAwareModel.MapWrapper.handlePerspective(this, this.model.getState(), cameraTransformType);
+		return PerspectiveMapWrapper.handlePerspective(this, this.model.getState(), cameraTransformType);
 	}
 	
 	public static class WrappedQuad extends BakedQuad

@@ -19,7 +19,7 @@ public class ModelChicken extends EntityModelDynamic
         this.textureWidth = 64;
         ModelRenderer body = new ModelRenderer(this, "body");
         body.addBox(0, 0, 0, 4, 6, 10);
-        body.setRotationPoint(-2, 12, -5);
+        body.setRotationPoint(-2, 11.5F, -5);
         ModelRenderer wingL = new ModelRenderer(this, "wingL").setTextureOffset(28, 0);
         wingL.addBox(0, -0.5F, 0, 4, 1, 9);
         wingL.setRotationPoint(0, 0, 0);

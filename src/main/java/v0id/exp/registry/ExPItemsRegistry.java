@@ -2,7 +2,7 @@ package v0id.exp.registry;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.registry.IForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistry;
 import v0id.exp.item.*;
 import v0id.exp.item.tool.*;
 

@@ -1,6 +1,5 @@
 package v0id.exp.client.model;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -20,6 +19,7 @@ import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.data.ExPBlockProperties;
 
 import java.util.List;
+import java.util.function.Function;
 
 public class ModelCattailBaked implements IBakedModel
 {
@@ -35,7 +35,7 @@ public class ModelCattailBaked implements IBakedModel
 	public static final ModelCattailBaked INSTANCE = new ModelCattailBaked();
 	
 	@SuppressWarnings("SameReturnValue")
-    public static IBakedModel bake(IModelState state, VertexFormat format, @SuppressWarnings("Guava") Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter)
+    public static IBakedModel bake(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter)
 	{
 		if (soilTextures == null)
 		{

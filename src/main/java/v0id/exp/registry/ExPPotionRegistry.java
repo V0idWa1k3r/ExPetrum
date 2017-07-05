@@ -2,7 +2,7 @@ package v0id.exp.registry;
 
 import net.minecraft.potion.Potion;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.registry.IForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistry;
 import v0id.exp.potion.PotionStunned;
 
 import java.util.Collections;

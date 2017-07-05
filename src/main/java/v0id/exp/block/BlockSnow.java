@@ -19,9 +19,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.common.registry.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.IForgeRegistry;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
@@ -217,6 +216,6 @@ public class BlockSnow extends Block implements IGravitySusceptible, IInitializa
 	@Override
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
-		GameRegistry.register(new ItemBlockWeighted(this));
+		registry.register(new ItemBlockWeighted(this));
 	}
 }
