@@ -50,6 +50,10 @@ public class ModelIngotBaked implements IBakedModel
                 wrappedQuads.forEach(q -> ret.add(q instanceof UnpackedBakedQuad ? new WrappedQuad((UnpackedBakedQuad) q) : q));
                 hackedQuads = ImmutableList.copyOf(ret);
             }
+            else
+            {
+                return wrappedQuads;
+            }
         }
 		
 		return this.hackedQuads;
