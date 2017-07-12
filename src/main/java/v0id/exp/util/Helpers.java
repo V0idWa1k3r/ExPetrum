@@ -49,11 +49,10 @@ public class Helpers
 	
 	public static <T extends Entity>List<T> rayTraceEntities(World w, Vec3d pos, Vec3d ray, Optional<Predicate<T>> entityFilter, Class<T> entityClazz)
 	{
-		AxisAlignedBB aabb = new AxisAlignedBB(pos, pos.add(new Vec3d(1, 1, 1))).grow(ray.x, ray.y, ray.z);
+		AxisAlignedBB aabb = new AxisAlignedBB(pos, pos.add(new Vec3d(1, 1, 1))).expand(ray.x, ray.y, ray.z);
 		Vec3d checkVec = pos.add(ray);
-		@SuppressWarnings("Guava") List<T> l = w.getEntitiesWithinAABB(entityClazz, aabb, entityFilter.orElse(Predicates.alwaysTrue()));
 		List<T> ret = Lists.newArrayList();
-		for (T t : l)
+		for (T t : w.getEntitiesWithinAABB(entityClazz, aabb, entityFilter.orElse(Predicates.alwaysTrue())))
 		{
 			AxisAlignedBB entityBB = t.getEntityBoundingBox();
 			if (entityBB == null)
