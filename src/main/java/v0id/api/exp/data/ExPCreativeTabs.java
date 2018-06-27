@@ -12,4 +12,5 @@ public class ExPCreativeTabs
 	public static CreativeTabs tabTools;
 	public static CreativeTabs tabMetals;
 	public static CreativeTabs tabFood;
+	public static CreativeTabs tabMiscItems;
 }

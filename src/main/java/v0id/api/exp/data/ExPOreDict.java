@@ -1,9 +1,6 @@
 package v0id.api.exp.data;
 
-import java.util.stream.Stream;
-
 import org.apache.commons.lang3.ArrayUtils;
-
 import v0id.api.core.markers.StaticStorage;
 import v0id.api.exp.block.EnumBerry;
 import v0id.api.exp.block.EnumShrubType;
@@ -11,6 +8,8 @@ import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.tile.crop.EnumCrop;
+
+import java.util.stream.Stream;
 
 @StaticStorage
 public class ExPOreDict
@@ -33,7 +32,8 @@ public class ExPOreDict
 		blockVegetation																									= { "tallgrass" },
 		blockWaterLily																									= { "waterlily", "waterLily", "lilyPad" },
 		blockLog																										= { "logWood" },
-		blockLeaf																										= { "treeLeaves" };
+		blockLeaf																										= { "treeLeaves" },
+		blockFlint                                                                                                      = { "blockFlint" };
 	
 	public static final String[]
 		itemRock																										= { "itemRock" },

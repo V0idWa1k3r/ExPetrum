@@ -83,6 +83,15 @@ public class ExPCreativeTabsRegistry extends AbstractRegistry
 				return new ItemStack(ExPItems.food);
 			}
 		};
+
+		ExPCreativeTabs.tabMiscItems = new CreativeTabs(CreativeTabs.getNextID(), "exp.miscItems"){
+			@SideOnly(Side.CLIENT)
+			@Override
+			public ItemStack getTabIconItem()
+			{
+				return new ItemStack(ExPItems.generic);
+			}
+		};
 	}
 	
 	public ExPCreativeTabsRegistry()

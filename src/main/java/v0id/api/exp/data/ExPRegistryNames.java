@@ -49,7 +49,9 @@ public class ExPRegistryNames
 		blockBerryBushAutumn																				= "berry_bush_autumn",
 		blockBerryBushDead																					= "berry_bush_dead",
         blockFruit																			        		= "fruit",
-	    blockGenericShrubbery                                                                               = "generic_shrubbery";
+	    blockGenericShrubbery                                                                               = "generic_shrubbery",
+	    blockFlint                                                                                          = "flint",
+        blockClay                                                                                           = "clay";
 
 	public static final String
 		itemRock																							= "item_rock",
@@ -70,7 +72,10 @@ public class ExPRegistryNames
 		itemSpear																							= "item_spear",
 		itemWateringCan																						= "item_watering_can",
 		itemGardeningSpade																					= "item_gardening_spade",
-		itemBasket																							= "item_basket";
+		itemBasket																							= "item_basket",
+		itemSaw																								= "item_saw",
+        itemGeneric                                                                                         = "item_generic",
+        itemChisel                                                                                          = "item_chisel";
 
 	public static final String
         biomeBeach                                                                                          = "beach",
@@ -116,7 +121,8 @@ public class ExPRegistryNames
 		fluidSaltWater																						= "exp.salt_water",
 		fluidFreshWater																						= "water",
 		fluidLava																							= "exp.lava",
-		fluidOil																							= "oil";
+		fluidOil																							= "oil",
+        fluidClay                                                                                           = "clay";
 
 	private static final Map<String, ResourceLocation> cache = Maps.newHashMap();
 

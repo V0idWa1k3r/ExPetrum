@@ -203,4 +203,10 @@ public class ExPBlocks
 
 	@GameRegistry.ObjectHolder(ExPRegistryNames.blockGenericShrubbery)
 	public static final Block genericShrubbery = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockFlint)
+    public static final Block flint = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockClay)
+    public static final Block clay = null;
 }

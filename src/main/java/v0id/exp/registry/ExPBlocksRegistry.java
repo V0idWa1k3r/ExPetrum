@@ -8,10 +8,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import v0id.api.exp.block.EnumShrubState;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.exp.block.*;
-import v0id.exp.block.fluid.BlockFreshWater;
-import v0id.exp.block.fluid.BlockLava;
-import v0id.exp.block.fluid.BlockOil;
-import v0id.exp.block.fluid.BlockSaltWater;
+import v0id.exp.block.fluid.*;
 import v0id.exp.block.plant.*;
 import v0id.exp.block.tree.BlockLeaf;
 import v0id.exp.block.tree.BlockLog;
@@ -95,7 +92,9 @@ public class ExPBlocksRegistry extends AbstractRegistry
                 new BlockCrop(),
                 new BlockFarmland(),
                 new BlockFruit(),
-                new BlockGenericShrubbery()
+                new BlockGenericShrubbery(),
+                new BlockFlint(),
+                new BlockClay()
         );
 
         registryEntries.forEach(registry::register);

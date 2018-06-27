@@ -42,7 +42,10 @@ public class ExPItemsRegistry extends AbstractRegistry
                 new ItemSpear(),
                 new ItemWateringCan(),
                 new ItemGardeningSpade(),
-                new ItemBasket()
+                new ItemBasket(),
+                new ItemSaw(),
+                new ItemGeneric(),
+                new ItemChisel()
         );
 
         registryEntries.forEach(registry::register);

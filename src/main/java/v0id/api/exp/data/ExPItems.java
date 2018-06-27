@@ -35,6 +35,9 @@ public class ExPItems
     @GameRegistry.ObjectHolder(ExPRegistryNames.itemAxe)
 	public static final Item axe = null;
 
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemSaw)
+    public static final Item saw = null;
+
     @GameRegistry.ObjectHolder(ExPRegistryNames.itemShovel)
 	public static final Item shovel = null;
 
@@ -64,4 +67,10 @@ public class ExPItems
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.itemBasket)
     public static final Item basket = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemGeneric)
+    public static final Item generic = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemChisel)
+    public static final Item chisel = null;
 }
