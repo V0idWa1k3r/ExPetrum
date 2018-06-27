@@ -1,9 +1,12 @@
 package v0id.exp.item;
 
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.data.ExPCreativeTabs;
@@ -11,8 +14,9 @@ import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.api.exp.metal.EnumMetal;
-import v0id.exp.player.inventory.PlayerInventoryHelper;
 
+import javax.annotation.Nullable;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class ItemIngot extends Item implements IInitializableItem, IWeightProvider, IOreDictEntry
@@ -37,14 +41,13 @@ public class ItemIngot extends Item implements IInitializableItem, IWeightProvid
 	@Override
 	public float provideWeight(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return 0.1F;
 	}
 
 	@Override
 	public Pair<Byte, Byte> provideVolume(ItemStack item)
 	{
-		return PlayerInventoryHelper.defaultVolume;
+		return IWeightProvider.DEFAULT_VOLUME;
 	}
 
 	@Override
@@ -68,5 +71,12 @@ public class ItemIngot extends Item implements IInitializableItem, IWeightProvid
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabMetals);
 		this.setHasSubtypes(true);
+	}
+
+	@Override
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
+	{
+		super.addInformation(stack, worldIn, tooltip, flagIn);
+        tooltip.add(I18n.format("exp.item.ingot.desc.type." + EnumMetal.values()[stack.getMetadata()].name().toLowerCase()));
 	}
 }

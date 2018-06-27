@@ -27,15 +27,13 @@ public class ItemRock extends Item implements IInitializableItem, IWeightProvide
 	@Override
 	public float provideWeight(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return 0.1F;
 	}
 
 	@Override
 	public Pair<Byte, Byte> provideVolume(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		return Pair.of((byte)1, (byte)1);
+		return IWeightProvider.DEFAULT_VOLUME;
 	}
 
 	@Override

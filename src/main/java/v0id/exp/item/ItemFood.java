@@ -17,10 +17,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.core.util.I18n;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
+import v0id.api.exp.inventory.IWeightProvider;
 import v0id.api.exp.item.IContainerTickable;
 import v0id.api.exp.item.food.FoodEntry;
 import v0id.api.exp.item.food.IExPFood;
@@ -35,7 +37,7 @@ import java.text.DecimalFormat;
 import java.util.EnumMap;
 import java.util.List;
 
-public class ItemFood extends net.minecraft.item.ItemFood implements IInitializableItem, IOreDictEntry, IExPFood, IContainerTickable
+public class ItemFood extends net.minecraft.item.ItemFood implements IInitializableItem, IOreDictEntry, IExPFood, IContainerTickable, IWeightProvider
 {
 	public ItemFood()
 	{
@@ -56,7 +58,6 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 		DecimalFormat df = new DecimalFormat("#.#");
 		DecimalFormat df1 = new DecimalFormat("#,###");
 		tooltip.add(I18n.format("exp.txt.item.desc.rot", df.format((this.getTotalRot(stack) / this.getEntry(stack).getBaseHealth()) * 100)));
-		tooltip.add(I18n.format("exp.txt.item.desc.weight", df1.format(this.getTotalWeight(stack))));
 	}
 
 	@Override
@@ -486,5 +487,17 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 				return -1;
 			}
 		}
+	}
+
+	@Override
+	public float provideWeight(ItemStack item)
+	{
+		return this.getTotalWeight(item) / 1000;
+	}
+
+	@Override
+	public Pair<Byte, Byte> provideVolume(ItemStack item)
+	{
+		return IWeightProvider.DEFAULT_VOLUME;
 	}
 }
