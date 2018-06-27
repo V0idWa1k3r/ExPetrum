@@ -78,10 +78,16 @@ public class BlockVegetation extends BlockBush implements IInitializableBlock, I
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		return Items.AIR;
+		return rand.nextFloat() < 0.25F ? ExPItems.generic : Items.AIR;
 	}
 
-	@Override
+    @Override
+    public int damageDropped(IBlockState state)
+    {
+        return 1;
+    }
+
+    @Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
         return TALL_GRASS_AABB;

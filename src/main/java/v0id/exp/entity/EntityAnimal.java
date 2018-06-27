@@ -75,10 +75,6 @@ public abstract class EntityAnimal extends EntityCreature implements IAnimals, I
     {
         super.writeEntityToNBT(compound);
         compound.setTag("animalData", this.animalCapability.serializeNBT());
-        compound.setLong("age", this.getDataManager().get(PARAM_AGE));
-        compound.setBoolean("gender", this.getDataManager().get(PARAM_GENDER));
-        compound.setInteger("pregnancy", this.getDataManager().get(PARAM_PREGNANCY));
-        compound.setBoolean("domesticated", this.getDataManager().get(PARAM_DOMESTICATED));
     }
 
     @Override
@@ -86,10 +82,6 @@ public abstract class EntityAnimal extends EntityCreature implements IAnimals, I
     {
         super.readEntityFromNBT(compound);
         this.animalCapability.deserializeNBT(compound.getCompoundTag("animalData"));
-        this.getDataManager().set(PARAM_AGE, compound.getLong("age"));
-        this.getDataManager().set(PARAM_GENDER, compound.getBoolean("gender"));
-        this.getDataManager().set(PARAM_PREGNANCY, compound.getInteger("pregnancy"));
-        this.getDataManager().set(PARAM_DOMESTICATED, compound.getBoolean("domesticated"));
     }
 
     @Override
@@ -120,4 +112,11 @@ public abstract class EntityAnimal extends EntityCreature implements IAnimals, I
     public abstract ResourceLocation getGenderSpecificTextures(float partialTicks);
 
     public abstract float[] getFeatureColors(float partialTicks);
+
+    public abstract long getAdulthoodAge();
+
+    public float getRenderSize()
+    {
+        return this.animalCapability.getAge() < this.getAdulthoodAge() ? 0.1F + (this.animalCapability.getAge() / this.getAdulthoodAge()) * 0.9F : 1.0F;
+    }
 }

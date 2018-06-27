@@ -74,7 +74,7 @@ public class PlayerInventoryRenderer
 			Slot s = gInv.getSlotUnderMouse();
 			if (s != null && s.getSlotIndex() >= 9 && s.getSlotIndex() < 36 && s instanceof ManagedSlot)
 			{
-				Pair<Byte, Byte> volume = inventory.getItemStack().getItem() instanceof IWeightProvider ? ((IWeightProvider)inventory.getItemStack().getItem()).provideVolume(inventory.getItemStack()) : PlayerInventoryHelper.defaultVolume;
+				Pair<Byte, Byte> volume = inventory.getItemStack().getItem() instanceof IWeightProvider ? ((IWeightProvider)inventory.getItemStack().getItem()).provideVolume(inventory.getItemStack()) : IWeightProvider.DEFAULT_VOLUME;
 				int slotId = s.getSlotIndex();
 				int x = (slotId - 9) % 9;
 				int y = (slotId - 9) / 9;

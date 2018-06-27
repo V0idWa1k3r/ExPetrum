@@ -31,9 +31,9 @@ import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.block.property.EnumWaterLilyType;
 import v0id.api.exp.combat.condition.ExecuteConditionKeyBindings;
 import v0id.api.exp.data.*;
-import v0id.api.exp.item.EnumToolhead;
 import v0id.api.exp.item.food.FoodEntry;
 import v0id.api.exp.metal.EnumMetal;
+import v0id.api.exp.metal.EnumToolClass;
 import v0id.api.exp.metal.EnumToolStats;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.tile.crop.ExPFarmlandCapability;
@@ -50,6 +50,7 @@ import v0id.exp.entity.EntityFallingTree;
 import v0id.exp.entity.EntityGravFallingBlock;
 import v0id.exp.entity.EntityThrownWeapon;
 import v0id.exp.entity.impl.Chicken;
+import v0id.exp.item.ItemGeneric;
 import v0id.exp.registry.ILifecycleListener;
 import v0id.exp.tile.TileFarmland;
 import v0id.exp.tile.TileOre;
@@ -125,10 +126,11 @@ public class ClientRegistry implements ILifecycleListener
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.coralPlant), 0, new ModelResourceLocation(ExPBlocks.coralPlant.getRegistryName(), "ptindex=0,rtindex=0"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.snow), 0, new ModelResourceLocation(ExPBlocks.snow.getRegistryName(), "layers=1"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.crop), 0, new ModelResourceLocation("exp:crops/dead", "normal"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.flint), 0, new ModelResourceLocation(ExPBlocks.flint.getRegistryName(), "normal"));
 
         // Iteration-dependent models
         mkCustomModelResourceLocations(ExPItems.stick, EnumTreeType.values().length + EnumShrubType.values().length + EnumBerry.values().length, i -> "type=" + ExPOreDict.stickNames[i]);
-        mkCustomModelResourceLocations(ExPItems.toolHead, EnumToolhead.values().length, i -> "type=" + EnumToolhead.values()[i].getName());
+        mkCustomModelResourceLocations(ExPItems.toolHead, EnumToolClass.values().length * EnumToolStats.values().length, i -> "material=" + EnumToolStats.values()[i % EnumToolStats.values().length].name().toLowerCase() + ",type=" + EnumToolClass.values()[i / EnumToolStats.values().length].name().toLowerCase());
         mkCustomModelResourceLocations(ExPItems.seeds, EnumCrop.values().length - 1, i -> "crop=" + EnumCrop.values()[i + 1].getName());
         mkCustomModelResourceLocations(ExPItems.food, FoodEntry.allEntries.size(), i -> "type=" + FoodEntry.allEntries.get(i).getUnlocalizedName());
         mkCustomModelResourceLocations(ExPItems.ingot, EnumMetal.values().length, null);
@@ -150,6 +152,7 @@ public class ClientRegistry implements ILifecycleListener
         mkCustomModelResourceLocations(ExPBlocks.sand, 16, i -> "class=" + EnumRockClass.values()[i].getName());
         mkCustomModelResourceLocations(ExPBlocks.seaweed, 16, i -> "class=" + EnumRockClass.values()[i].getName());
         mkCustomModelResourceLocations(ExPBlocks.farmland, 16, i -> "class=" + EnumDirtClass.values()[i].getName());
+        mkCustomModelResourceLocations(ExPItems.generic, ItemGeneric.EnumGenericType.values().length, i -> "type=" + ItemGeneric.EnumGenericType.values()[i].getName());
 
         // Statically mapped item models
         registerStaticModel(ExPItems.basket, new ModelResourceLocation(ExPItems.basket.getRegistryName(), "inventory"));
@@ -241,11 +244,12 @@ public class ClientRegistry implements ILifecycleListener
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.freshWater), 0, new ModelResourceLocation(ExPBlocks.freshWater.getRegistryName(), "inventory"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.lava), 0, new ModelResourceLocation(ExPBlocks.lava.getRegistryName(), "inventory"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.oil), 0, new ModelResourceLocation(ExPBlocks.oil.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.clay), 0, new ModelResourceLocation(ExPBlocks.clay.getRegistryName(), "inventory"));
     }
 
     public static void registerToolModels()
     {
-        List<Item> toolsList = Arrays.asList(ExPItems.knife, ExPItems.pickaxe, ExPItems.axe, ExPItems.shovel, ExPItems.hoe, ExPItems.sword, ExPItems.scythe, ExPItems.battleaxe, ExPItems.hammer, ExPItems.spear, ExPItems.watering_can, ExPItems.gardening_spade);
+        List<Item> toolsList = Arrays.asList(ExPItems.knife, ExPItems.pickaxe, ExPItems.axe, ExPItems.shovel, ExPItems.hoe, ExPItems.sword, ExPItems.scythe, ExPItems.battleaxe, ExPItems.hammer, ExPItems.spear, ExPItems.watering_can, ExPItems.gardening_spade, ExPItems.saw, ExPItems.chisel);
         toolsList.forEach(tool -> ModelLoader.setCustomMeshDefinition(tool, stack -> new ModelResourceLocation(new ResourceLocation(tool.getRegistryName().getResourceDomain(), "tools/" + tool.getRegistryName().getResourcePath()), "material=" + EnumToolStats.values()[stack.getMetadata()].getName())));
         for (int i = 0; i < EnumToolStats.values().length; ++i)
         {
@@ -324,6 +328,7 @@ public class ClientRegistry implements ILifecycleListener
         ModelLoader.setCustomStateMapper(ExPBlocks.freshWater, new ExPStateMappers.StateMapperFluid(ExPBlocks.freshWater));
         ModelLoader.setCustomStateMapper(ExPBlocks.lava, new ExPStateMappers.StateMapperFluid(ExPBlocks.lava));
         ModelLoader.setCustomStateMapper(ExPBlocks.oil, new ExPStateMappers.StateMapperFluid(ExPBlocks.oil));
+        ModelLoader.setCustomStateMapper(ExPBlocks.clay, new ExPStateMappers.StateMapperFluid(ExPBlocks.clay));
         ModelLoader.setCustomStateMapper(ExPBlocks.cattail, new ExPStateMappers.StateMapperCattail());
         ModelLoader.setCustomStateMapper(ExPBlocks.crop, new ExPStateMappers.StateMapperCrop(ExPBlocks.crop));
         ModelLoader.setCustomStateMapper(ExPBlocks.genericShrubbery, new ExPStateMappers.StateMapperGenericShrubbery(ExPBlocks.genericShrubbery));

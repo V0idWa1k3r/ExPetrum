@@ -308,7 +308,7 @@ public class EntityFallingTree extends Entity
 			this.fallProgress = this.getDataManager().get(FALL_PROGRESS);
 		}
 		
-		if (this.ticksExisted >= 2)
+		if (this.ticksExisted >= 6)
 		{
 			if (this.fallProgress == 0)
 			{

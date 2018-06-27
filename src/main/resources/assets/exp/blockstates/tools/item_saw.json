@@ -1,0 +1,65 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "exp:handheld",
+		"gui3d" : true,
+		"textures" : {
+			"layer0" : "exp:items/tools/saw/stone"
+		}
+	},
+	"variants" : {
+		"inventory" : [{}],
+		"material" : {
+			"stone" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/saw/stone"
+				}
+			},
+			"copper" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/saw/copper"
+				}
+			},
+			"bronze" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/saw/bronze"
+				}
+			},
+			"bismuth_bronze" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/saw/bismuth_bronze"
+				}
+			},
+			"leaded_bronze" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/saw/leaded_bronze"
+				}
+			},
+			"manganese_bronze" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/saw/manganese_bronze"
+				}
+			},
+			"rose_alloy" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/saw/rose_alloy"
+				}
+			},
+			"iron" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/saw/iron"
+				}
+			},
+			"steel" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/saw/steel"
+				}
+			},
+			"tool_steel" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/saw/tool_steel"
+				}
+			}
+		}
+	}
+}

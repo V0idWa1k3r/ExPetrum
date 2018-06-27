@@ -13,6 +13,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing.Axis;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -167,7 +168,7 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 	@Override
 	public float provideWeight(ItemStack item)
 	{
-		return 0;
+		return 0.5F;
 	}
 
 	@Override
@@ -222,7 +223,13 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 			w.spawnEntity(item);
 		}
 	}
-	
+
+	@Override
+	public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World worldIn, BlockPos pos)
+	{
+		return player.getHeldItem(EnumHand.MAIN_HAND).getItem().canHarvestBlock(state) ? super.getPlayerRelativeBlockHardness(state, player, worldIn, pos) : -1F;
+	}
+
 	public static class Decorative extends BlockLog
 	{
 		public Decorative(int i)

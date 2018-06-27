@@ -13,12 +13,15 @@ import java.util.Optional;
 
 public class PlayerInventoryHelper
 {
-	public static final Pair<Byte, Byte> defaultVolume = Pair.of((byte) 1, (byte) 1);
-	
 	public static Pair<Byte, Byte> getVolume(ItemStack is)
 	{
-		return is.getItem() instanceof IWeightProvider ? ((IWeightProvider)is.getItem()).provideVolume(is) : IWeightProvider.tryGetRegisteredVolume(is).orElse(defaultVolume);
+		return is.getItem() instanceof IWeightProvider ? ((IWeightProvider)is.getItem()).provideVolume(is) : IWeightProvider.tryGetRegisteredVolume(is).orElse(IWeightProvider.DEFAULT_VOLUME);
 	}
+
+	public static float getWeight(ItemStack is)
+    {
+        return (is.getItem() instanceof IWeightProvider ? ((IWeightProvider)is.getItem()).provideWeight(is) : IWeightProvider.tryGetRegisteredWeight(is).orElse(0F)) * is.getCount();
+    }
 	
 	@SuppressWarnings("SuspiciousNameCombination")
     public static Map<Pair<Integer, Integer>, Boolean> getSlotData(EntityPlayer player)
@@ -32,7 +35,7 @@ public class PlayerInventoryHelper
 				int x = (i - 9) % 9;
 				int y = (i - 9) / 9;
 				ret.put(Pair.of(x, y), true);
-				if (getVolume(is) != defaultVolume)
+				if (getVolume(is) != IWeightProvider.DEFAULT_VOLUME)
 				{
 					Pair<Byte, Byte> volume = getVolume(is);
 					for (byte b = 0; b < volume.getLeft(); ++b)

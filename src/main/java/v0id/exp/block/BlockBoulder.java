@@ -9,6 +9,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -81,7 +82,7 @@ public class BlockBoulder extends Block implements IInitializableBlock, IOreHint
 		if (playerIn != null)
 		{
 			ItemStack held = playerIn.getHeldItem(hand);
-			if (!held.isEmpty() && held.getItem() instanceof ItemRock)
+			if (!held.isEmpty() && held.getItem() instanceof ItemRock || held.getItem() == Items.FLINT)
 			{
 				for (int i = 0; i < 16; ++i)
 				{
@@ -101,6 +102,11 @@ public class BlockBoulder extends Block implements IInitializableBlock, IOreHint
 						worldIn.playSound(null, pos, SoundEvents.BLOCK_ANVIL_STEP, SoundCategory.BLOCKS, 1, 2f);
 						if (worldIn.rand.nextBoolean() && worldIn.rand.nextBoolean())
 						{
+							if (held.getItem() == Items.FLINT && (worldIn.rand.nextBoolean() || worldIn.rand.nextBoolean()))
+							{
+								return true;
+							}
+
 							held.shrink(1);
 						}
 					}

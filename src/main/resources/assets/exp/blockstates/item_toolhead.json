@@ -1,49 +1,714 @@
 {
-	"forge_marker" : 1,
-	"defaults" : {
-		"model" : "exp:item_generated",
-		"transform": "forge:default-item",
-		"textures" : {
-			"layer0" : "exp:items/common/toolpart/stone_hammerhead"
-		}
-	},
-	"variants" : {
-		"type" : {
-			"hammer_stone" : {
-				"textures" : {
-					"layer0" : "exp:items/common/toolpart/stone_hammerhead"
-				}
-			},
-			"axe_stone" : {
-				"textures" : {
-					"layer0" : "exp:items/common/toolpart/stone_axehead"
-				}
-			},
-			"shovel_stone" : {
-				"textures" : {
-					"layer0" : "exp:items/common/toolpart/stone_shovelhead"
-				}
-			},
-			"spear_stone" : {
-				"textures" : {
-					"layer0" : "exp:items/common/toolpart/stone_spearhead"
-				}
-			},
-			"knife_stone" : {
-				"textures" : {
-					"layer0" : "exp:items/common/toolpart/stone_knifehead"
-				}
-			},
-			"chisel_stone" : {
-				"textures" : {
-					"layer0" : "exp:items/common/toolpart/stone_chiselhead"
-				}
-			},
-			"arrow_stone" : {
-				"textures" : {
-					"layer0" : "exp:items/common/toolpart/stone_arrowhead"
-				}
-			}
-		}
-	}
+    "forge_marker": 1,
+    "defaults": {
+        "model": "exp:item_generated",
+        "transform": "forge:default-item",
+        "textures": {
+            "layer0": ""
+        }
+    },
+    "variants": {
+        "material": {
+            "stone,type=pickaxe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/pickaxe/stone"
+                }
+            },
+            "stone,type=axe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/axe/stone"
+                }
+            },
+            "stone,type=shovel": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/shovel/stone"
+                }
+            },
+            "stone,type=hoe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/hoe/stone"
+                }
+            },
+            "stone,type=sword": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/sword/stone"
+                }
+            },
+            "stone,type=knife": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/knife/stone"
+                }
+            },
+            "stone,type=scythe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/scythe/stone"
+                }
+            },
+            "stone,type=battleaxe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/battleaxe/stone"
+                }
+            },
+            "stone,type=hammer": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/hammer/stone"
+                }
+            },
+            "stone,type=spear": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/spear/stone"
+                }
+            },
+            "stone,type=watering_can": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/watering_can/stone"
+                }
+            },
+            "stone,type=gardening_spade": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/gardening_spade/stone"
+                }
+            },
+            "stone,type=saw": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/saw/stone"
+                }
+            },
+            "stone,type=chisel": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/chisel/stone"
+                }
+            },
+            "copper,type=pickaxe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/pickaxe/copper"
+                }
+            },
+            "copper,type=axe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/axe/copper"
+                }
+            },
+            "copper,type=shovel": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/shovel/copper"
+                }
+            },
+            "copper,type=hoe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/hoe/copper"
+                }
+            },
+            "copper,type=sword": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/sword/copper"
+                }
+            },
+            "copper,type=knife": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/knife/copper"
+                }
+            },
+            "copper,type=scythe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/scythe/copper"
+                }
+            },
+            "copper,type=battleaxe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/battleaxe/copper"
+                }
+            },
+            "copper,type=hammer": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/hammer/copper"
+                }
+            },
+            "copper,type=spear": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/spear/copper"
+                }
+            },
+            "copper,type=watering_can": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/watering_can/copper"
+                }
+            },
+            "copper,type=gardening_spade": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/gardening_spade/copper"
+                }
+            },
+            "copper,type=saw": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/saw/copper"
+                }
+            },
+            "copper,type=chisel": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/chisel/copper"
+                }
+            },
+            "bronze,type=pickaxe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/pickaxe/bronze"
+                }
+            },
+            "bronze,type=axe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/axe/bronze"
+                }
+            },
+            "bronze,type=shovel": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/shovel/bronze"
+                }
+            },
+            "bronze,type=hoe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/hoe/bronze"
+                }
+            },
+            "bronze,type=sword": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/sword/bronze"
+                }
+            },
+            "bronze,type=knife": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/knife/bronze"
+                }
+            },
+            "bronze,type=scythe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/scythe/bronze"
+                }
+            },
+            "bronze,type=battleaxe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/battleaxe/bronze"
+                }
+            },
+            "bronze,type=hammer": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/hammer/bronze"
+                }
+            },
+            "bronze,type=spear": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/spear/bronze"
+                }
+            },
+            "bronze,type=watering_can": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/watering_can/bronze"
+                }
+            },
+            "bronze,type=gardening_spade": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/gardening_spade/bronze"
+                }
+            },
+            "bronze,type=saw": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/saw/bronze"
+                }
+            },
+            "bronze,type=chisel": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/chisel/bronze"
+                }
+            },
+            "bismuth_bronze,type=pickaxe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/pickaxe/bismuth_bronze"
+                }
+            },
+            "bismuth_bronze,type=axe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/axe/bismuth_bronze"
+                }
+            },
+            "bismuth_bronze,type=shovel": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/shovel/bismuth_bronze"
+                }
+            },
+            "bismuth_bronze,type=hoe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/hoe/bismuth_bronze"
+                }
+            },
+            "bismuth_bronze,type=sword": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/sword/bismuth_bronze"
+                }
+            },
+            "bismuth_bronze,type=knife": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/knife/bismuth_bronze"
+                }
+            },
+            "bismuth_bronze,type=scythe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/scythe/bismuth_bronze"
+                }
+            },
+            "bismuth_bronze,type=battleaxe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/battleaxe/bismuth_bronze"
+                }
+            },
+            "bismuth_bronze,type=hammer": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/hammer/bismuth_bronze"
+                }
+            },
+            "bismuth_bronze,type=spear": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/spear/bismuth_bronze"
+                }
+            },
+            "bismuth_bronze,type=watering_can": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/watering_can/bismuth_bronze"
+                }
+            },
+            "bismuth_bronze,type=gardening_spade": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/gardening_spade/bismuth_bronze"
+                }
+            },
+            "bismuth_bronze,type=saw": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/saw/bismuth_bronze"
+                }
+            },
+            "bismuth_bronze,type=chisel": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/chisel/bismuth_bronze"
+                }
+            },
+            "leaded_bronze,type=pickaxe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/pickaxe/leaded_bronze"
+                }
+            },
+            "leaded_bronze,type=axe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/axe/leaded_bronze"
+                }
+            },
+            "leaded_bronze,type=shovel": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/shovel/leaded_bronze"
+                }
+            },
+            "leaded_bronze,type=hoe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/hoe/leaded_bronze"
+                }
+            },
+            "leaded_bronze,type=sword": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/sword/leaded_bronze"
+                }
+            },
+            "leaded_bronze,type=knife": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/knife/leaded_bronze"
+                }
+            },
+            "leaded_bronze,type=scythe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/scythe/leaded_bronze"
+                }
+            },
+            "leaded_bronze,type=battleaxe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/battleaxe/leaded_bronze"
+                }
+            },
+            "leaded_bronze,type=hammer": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/hammer/leaded_bronze"
+                }
+            },
+            "leaded_bronze,type=spear": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/spear/leaded_bronze"
+                }
+            },
+            "leaded_bronze,type=watering_can": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/watering_can/leaded_bronze"
+                }
+            },
+            "leaded_bronze,type=gardening_spade": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/gardening_spade/leaded_bronze"
+                }
+            },
+            "leaded_bronze,type=saw": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/saw/leaded_bronze"
+                }
+            },
+            "leaded_bronze,type=chisel": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/chisel/leaded_bronze"
+                }
+            },
+            "manganese_bronze,type=pickaxe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/pickaxe/manganese_bronze"
+                }
+            },
+            "manganese_bronze,type=axe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/axe/manganese_bronze"
+                }
+            },
+            "manganese_bronze,type=shovel": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/shovel/manganese_bronze"
+                }
+            },
+            "manganese_bronze,type=hoe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/hoe/manganese_bronze"
+                }
+            },
+            "manganese_bronze,type=sword": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/sword/manganese_bronze"
+                }
+            },
+            "manganese_bronze,type=knife": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/knife/manganese_bronze"
+                }
+            },
+            "manganese_bronze,type=scythe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/scythe/manganese_bronze"
+                }
+            },
+            "manganese_bronze,type=battleaxe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/battleaxe/manganese_bronze"
+                }
+            },
+            "manganese_bronze,type=hammer": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/hammer/manganese_bronze"
+                }
+            },
+            "manganese_bronze,type=spear": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/spear/manganese_bronze"
+                }
+            },
+            "manganese_bronze,type=watering_can": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/watering_can/manganese_bronze"
+                }
+            },
+            "manganese_bronze,type=gardening_spade": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/gardening_spade/manganese_bronze"
+                }
+            },
+            "manganese_bronze,type=saw": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/saw/manganese_bronze"
+                }
+            },
+            "manganese_bronze,type=chisel": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/chisel/manganese_bronze"
+                }
+            },
+            "rose_alloy,type=pickaxe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/pickaxe/rose_alloy"
+                }
+            },
+            "rose_alloy,type=axe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/axe/rose_alloy"
+                }
+            },
+            "rose_alloy,type=shovel": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/shovel/rose_alloy"
+                }
+            },
+            "rose_alloy,type=hoe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/hoe/rose_alloy"
+                }
+            },
+            "rose_alloy,type=sword": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/sword/rose_alloy"
+                }
+            },
+            "rose_alloy,type=knife": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/knife/rose_alloy"
+                }
+            },
+            "rose_alloy,type=scythe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/scythe/rose_alloy"
+                }
+            },
+            "rose_alloy,type=battleaxe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/battleaxe/rose_alloy"
+                }
+            },
+            "rose_alloy,type=hammer": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/hammer/rose_alloy"
+                }
+            },
+            "rose_alloy,type=spear": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/spear/rose_alloy"
+                }
+            },
+            "rose_alloy,type=watering_can": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/watering_can/rose_alloy"
+                }
+            },
+            "rose_alloy,type=gardening_spade": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/gardening_spade/rose_alloy"
+                }
+            },
+            "rose_alloy,type=saw": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/saw/rose_alloy"
+                }
+            },
+            "rose_alloy,type=chisel": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/chisel/rose_alloy"
+                }
+            },
+            "iron,type=pickaxe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/pickaxe/iron"
+                }
+            },
+            "iron,type=axe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/axe/iron"
+                }
+            },
+            "iron,type=shovel": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/shovel/iron"
+                }
+            },
+            "iron,type=hoe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/hoe/iron"
+                }
+            },
+            "iron,type=sword": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/sword/iron"
+                }
+            },
+            "iron,type=knife": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/knife/iron"
+                }
+            },
+            "iron,type=scythe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/scythe/iron"
+                }
+            },
+            "iron,type=battleaxe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/battleaxe/iron"
+                }
+            },
+            "iron,type=hammer": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/hammer/iron"
+                }
+            },
+            "iron,type=spear": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/spear/iron"
+                }
+            },
+            "iron,type=watering_can": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/watering_can/iron"
+                }
+            },
+            "iron,type=gardening_spade": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/gardening_spade/iron"
+                }
+            },
+            "iron,type=saw": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/saw/iron"
+                }
+            },
+            "iron,type=chisel": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/chisel/iron"
+                }
+            },
+            "steel,type=pickaxe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/pickaxe/steel"
+                }
+            },
+            "steel,type=axe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/axe/steel"
+                }
+            },
+            "steel,type=shovel": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/shovel/steel"
+                }
+            },
+            "steel,type=hoe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/hoe/steel"
+                }
+            },
+            "steel,type=sword": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/sword/steel"
+                }
+            },
+            "steel,type=knife": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/knife/steel"
+                }
+            },
+            "steel,type=scythe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/scythe/steel"
+                }
+            },
+            "steel,type=battleaxe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/battleaxe/steel"
+                }
+            },
+            "steel,type=hammer": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/hammer/steel"
+                }
+            },
+            "steel,type=spear": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/spear/steel"
+                }
+            },
+            "steel,type=watering_can": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/watering_can/steel"
+                }
+            },
+            "steel,type=gardening_spade": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/gardening_spade/steel"
+                }
+            },
+            "steel,type=saw": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/saw/steel"
+                }
+            },
+            "steel,type=chisel": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/chisel/steel"
+                }
+            },
+            "tool_steel,type=pickaxe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/pickaxe/tool_steel"
+                }
+            },
+            "tool_steel,type=axe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/axe/tool_steel"
+                }
+            },
+            "tool_steel,type=shovel": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/shovel/tool_steel"
+                }
+            },
+            "tool_steel,type=hoe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/hoe/tool_steel"
+                }
+            },
+            "tool_steel,type=sword": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/sword/tool_steel"
+                }
+            },
+            "tool_steel,type=knife": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/knife/tool_steel"
+                }
+            },
+            "tool_steel,type=scythe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/scythe/tool_steel"
+                }
+            },
+            "tool_steel,type=battleaxe": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/battleaxe/tool_steel"
+                }
+            },
+            "tool_steel,type=hammer": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/hammer/tool_steel"
+                }
+            },
+            "tool_steel,type=spear": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/spear/tool_steel"
+                }
+            },
+            "tool_steel,type=watering_can": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/watering_can/tool_steel"
+                }
+            },
+            "tool_steel,type=gardening_spade": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/gardening_spade/tool_steel"
+                }
+            },
+            "tool_steel,type=saw": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/saw/tool_steel"
+                }
+            },
+            "tool_steel,type=chisel": {
+                "textures": {
+                    "layer0": "exp:items/common/toolpart/chisel/tool_steel"
+                }
+            }
+        }
+    }
 }

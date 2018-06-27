@@ -1,0 +1,10 @@
+{
+    "entries":[
+        {
+            "id": "minecraft:flint",
+            "metadata": -1,
+            "volume" : { "x" : 1, "y" : 1 },
+            "weight" : 50
+        }
+    ]
+}

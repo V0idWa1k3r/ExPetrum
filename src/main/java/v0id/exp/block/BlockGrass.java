@@ -225,20 +225,19 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 	@Override
 	public boolean isToolEffective(String type, IBlockState state)
 	{
-		return "spade".equals(type) || "shovel".equals("type");
+		return "spade".equals(type) || "shovel".equals(type);
 	}
 
 	@Override
 	public float provideWeight(ItemStack item)
 	{
-		return 0;
+		return 0.25F;
 	}
 
 	@Override
 	public Pair<Byte, Byte> provideVolume(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		return Pair.of((byte)1, (byte)1);
+		return Pair.of((byte)2, (byte)2);
 	}
 
 	@Override

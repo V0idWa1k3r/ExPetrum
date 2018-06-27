@@ -28,7 +28,7 @@ public class ItemThrow extends SpecialAttack
 	{
 		ItemStack is = player.getHeldItemMainhand().isEmpty() ? player.getHeldItemOffhand() : player.getHeldItemMainhand();
 		EntityThrownWeapon etw = new EntityThrownWeapon(player.getEntityWorld(), player, is.copy());
-		etw.setHeadingFromThrower(player, player.rotationPitch, player.rotationYaw, 0.0F, 1.5F, 1.0F);
+		etw.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, 1.5F, 1.0F);
 		if (!player.world.isRemote)
 		{
 			player.world.spawnEntity(etw);

@@ -1,12 +1,10 @@
 package v0id.exp.block.item;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.inventory.IWeightProvider;
-import v0id.exp.player.inventory.PlayerInventoryHelper;
 
 public class ItemBlockWeighted extends ItemBlock implements IWeightProvider
 {
@@ -25,6 +23,6 @@ public class ItemBlockWeighted extends ItemBlock implements IWeightProvider
 	@Override
 	public Pair<Byte, Byte> provideVolume(ItemStack item)
 	{
-		return this.getBlock() instanceof IWeightProvider ? ((IWeightProvider)this.getBlock()).provideVolume(item) : PlayerInventoryHelper.defaultVolume;
+		return this.getBlock() instanceof IWeightProvider ? ((IWeightProvider)this.getBlock()).provideVolume(item) : IWeightProvider.DEFAULT_VOLUME;
 	}
 }

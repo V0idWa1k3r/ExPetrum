@@ -1,25 +1,18 @@
 package v0id.exp.player.inventory;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.nio.charset.StandardCharsets;
-
+import com.google.common.io.Files;
+import com.google.gson.*;
+import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.tuple.Pair;
-
-import com.google.common.io.Files;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonSyntaxException;
-
-import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.core.logging.LogLevel;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.ExPetrum;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.charset.StandardCharsets;
 
 public class WeightDataLoader
 {
@@ -53,53 +46,57 @@ public class WeightDataLoader
 				FileOutputStream fos = new FileOutputStream(example);
 				IOUtils.write(out, fos, StandardCharsets.UTF_8);
 				IOUtils.closeQuietly(fos);
+				File vanilla = new File(dir, "vanilla.json");
+				vanilla.createNewFile();
+				fos = new FileOutputStream(vanilla);
+                IOUtils.write(IOUtils.toString(ExPetrum.class.getResourceAsStream("/assets/exp/data/vanilla.json"), StandardCharsets.UTF_8), fos, StandardCharsets.UTF_8);
+			    IOUtils.closeQuietly(fos);
 			}
-			else
-			{
-				for (File f : dir.listFiles(f -> f.getName().endsWith(".json")))
-				{
-					if (f.getName().equals("example.json"))
-					{
-						continue;
-					}
-					
-					try
-					{
-						String fileContents = Files.toString(f, StandardCharsets.UTF_8);
-						JsonParser parser = new JsonParser();
-						JsonObject data = parser.parse(fileContents).getAsJsonObject();
-						if (data.has("entries"))
-						{
-							JsonArray entries = data.get("entries").getAsJsonArray();
-							for (JsonElement e : entries)
-							{
-								if (!e.isJsonObject())
-								{
-									continue;
-								}
-								
-								JsonObject entry = e.getAsJsonObject();
-								String id = entry.get("id").getAsString();
-								short meta = entry.get("metadata").getAsShort();
-								meta = meta == -1 ? OreDictionary.WILDCARD_VALUE : meta;
-								float weight = entry.get("weight").getAsFloat();
-								JsonObject volume = entry.get("volume").getAsJsonObject();
-								Pair<Byte, Byte> vol = Pair.of(volume.get("x").getAsByte(), volume.get("y").getAsByte());
-								IWeightProvider.registerVolume(id, meta, vol);
-								ExPMisc.modLogger.log(LogLevel.Debug, "Registered %s with meta %d with volume %s and weight %s", id, meta, vol.toString(), Float.toString(weight));
-							}
-						}
-					}
-					catch (JsonSyntaxException jse)
-					{
-						ExPMisc.modLogger.log(LogLevel.Error, "%s contains JSON syntax errors!", jse, f.getAbsolutePath());
-					}
-					catch (JsonParseException jpe)
-					{
-						ExPMisc.modLogger.log(LogLevel.Error, "%s is not a valid JSON file!", jpe, f.getAbsolutePath());
-					}
-				}
-			}
+
+            for (File f : dir.listFiles(f -> f.getName().endsWith(".json")))
+            {
+                if (f.getName().equals("example.json"))
+                {
+                    continue;
+                }
+
+                try
+                {
+                    String fileContents = Files.toString(f, StandardCharsets.UTF_8);
+                    JsonParser parser = new JsonParser();
+                    JsonObject data = parser.parse(fileContents).getAsJsonObject();
+                    if (data.has("entries"))
+                    {
+                        JsonArray entries = data.get("entries").getAsJsonArray();
+                        for (JsonElement e : entries)
+                        {
+                            if (!e.isJsonObject())
+                            {
+                                continue;
+                            }
+
+                            JsonObject entry = e.getAsJsonObject();
+                            String id = entry.get("id").getAsString();
+                            short meta = entry.get("metadata").getAsShort();
+                            meta = meta == -1 ? OreDictionary.WILDCARD_VALUE : meta;
+                            float weight = entry.get("weight").getAsFloat() / 1000F;
+                            JsonObject volume = entry.get("volume").getAsJsonObject();
+                            Pair<Byte, Byte> vol = Pair.of(volume.get("x").getAsByte(), volume.get("y").getAsByte());
+                            IWeightProvider.registerVolume(id, meta, vol);
+                            IWeightProvider.registerWeight(id, meta, weight);
+                            ExPMisc.modLogger.log(LogLevel.Debug, "Registered %s with meta %d with volume %s and weight %s", id, meta, vol.toString(), Float.toString(weight));
+                        }
+                    }
+                }
+                catch (JsonSyntaxException jse)
+                {
+                    ExPMisc.modLogger.log(LogLevel.Error, "%s contains JSON syntax errors!", jse, f.getAbsolutePath());
+                }
+                catch (JsonParseException jpe)
+                {
+                    ExPMisc.modLogger.log(LogLevel.Error, "%s is not a valid JSON file!", jpe, f.getAbsolutePath());
+                }
+            }
 		}
 		catch (Exception ex)
 		{

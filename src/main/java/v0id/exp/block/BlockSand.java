@@ -109,13 +109,13 @@ public class BlockSand extends Block implements IWeightProvider, IGravitySuscept
 	@Override
 	public boolean isToolEffective(String type, IBlockState state)
 	{
-		return "spade".equals(type) || "shovel".equals("type");
+		return "spade".equals(type) || "shovel".equals(type);
 	}
 
 	@Override
 	public float provideWeight(ItemStack item)
 	{
-		return 0;
+		return 0.125F;
 	}
 
 	@Override

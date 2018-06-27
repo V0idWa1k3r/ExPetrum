@@ -104,7 +104,7 @@ public class BlockSoil extends Block implements IWeightProvider, IGravitySuscept
 	@Override
 	public float provideWeight(ItemStack item)
 	{
-		return 0;
+		return 0.25F;
 	}
 
 	@Override

@@ -1,0 +1,65 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "exp:handheld",
+		"gui3d" : true,
+		"textures" : {
+			"layer0" : "exp:items/tools/chisel/stone"
+		}
+	},
+	"variants" : {
+		"inventory" : [{}],
+		"material" : {
+			"stone" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/chisel/stone"
+				}
+			},
+			"copper" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/chisel/copper"
+				}
+			},
+			"bronze" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/chisel/bronze"
+				}
+			},
+			"bismuth_bronze" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/chisel/bismuth_bronze"
+				}
+			},
+			"leaded_bronze" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/chisel/leaded_bronze"
+				}
+			},
+			"manganese_bronze" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/chisel/manganese_bronze"
+				}
+			},
+			"rose_alloy" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/chisel/rose_alloy"
+				}
+			},
+			"iron" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/chisel/iron"
+				}
+			},
+			"steel" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/chisel/steel"
+				}
+			},
+			"tool_steel" : {
+				"textures" : {
+					"layer0" : "exp:items/tools/chisel/tool_steel"
+				}
+			}
+		}
+	}
+}

@@ -37,6 +37,10 @@ public class ExPAnimal implements IAnimal
     private float hunger;
     private float thirst;
     private boolean isSick;
+    private EnumGender effectiveGender;
+    private long effectiveAge;
+    private int effectivePregnancyTimer;
+    private boolean effectiveIsDomesticated;
 
     public ExPAnimal()
     {
@@ -63,7 +67,30 @@ public class ExPAnimal implements IAnimal
     @Override
     public void onTick()
     {
+        if (!this.getOwner().world.isRemote)
+        {
+            if (this.effectiveAge != this.getOwner().getDataManager().get(this.getAsProvider().getAgeParam()))
+            {
+                this.getOwner().getDataManager().set(this.getAsProvider().getAgeParam(), this.effectiveAge);
+            }
 
+            if ((this.effectiveGender == EnumGender.FEMALE) != this.getOwner().getDataManager().get(this.getAsProvider().getGenderParam()))
+            {
+                this.getOwner().getDataManager().set(this.getAsProvider().getGenderParam(), this.effectiveGender == EnumGender.FEMALE);
+            }
+
+            if (this.effectivePregnancyTimer != this.getOwner().getDataManager().get(this.getAsProvider().getPregnancyParam()))
+            {
+                this.getOwner().getDataManager().set(this.getAsProvider().getPregnancyParam(), this.effectivePregnancyTimer);
+            }
+
+            if (this.effectiveIsDomesticated != this.getOwner().getDataManager().get(this.getAsProvider().getDomesticatedParam()))
+            {
+                this.getOwner().getDataManager().set(this.getAsProvider().getDomesticatedParam(), this.effectiveIsDomesticated);
+            }
+
+            this.setAge(this.getAge() + 1);
+        }
     }
 
     @Override
@@ -75,7 +102,7 @@ public class ExPAnimal implements IAnimal
     @Override
     public void setGender(EnumGender newGender)
     {
-        this.owner.getDataManager().set(this.getAsProvider().getGenderParam(), this.getGender() == EnumGender.FEMALE);
+        this.effectiveGender = newGender;
     }
 
     @Override
@@ -87,7 +114,7 @@ public class ExPAnimal implements IAnimal
     @Override
     public void setAge(long newAge)
     {
-        this.owner.getDataManager().set(this.getAsProvider().getAgeParam(), newAge);
+        this.effectiveAge = newAge;
     }
 
     @Override
@@ -333,7 +360,10 @@ public class ExPAnimal implements IAnimal
         NBTTagList interactionList = new NBTTagList();
         this.interactionMemory.forEach((UUID uuid, Boolean b) -> interactionList.appendTag(NBTChain.startChain().withLong("keyMost", uuid.getMostSignificantBits()).withLong("keyLeast", uuid.getLeastSignificantBits()).withBool("value", b).endChain()));
         ret.setTag("interaction", interactionList);
-
+        ret.setBoolean("gender", this.effectiveGender == EnumGender.FEMALE);
+        ret.setLong("age", this.effectiveAge);
+        ret.setInteger("pregnancy", this.effectivePregnancyTimer);
+        ret.setBoolean("domesticated", this.effectiveIsDomesticated);
         return ret;
     }
 
@@ -375,6 +405,10 @@ public class ExPAnimal implements IAnimal
         this.isSick = nbt.getBoolean("isSick");
         StreamSupport.stream(nbt.getTagList("familiarity", Constants.NBT.TAG_COMPOUND).spliterator(), false).map(n -> (NBTTagCompound)n).forEach(tag -> this.familiarityLevels.put(new UUID(tag.getLong("keyMost"), tag.getLong("keyLeast")), tag.getFloat("value")));
         StreamSupport.stream(nbt.getTagList("interaction", Constants.NBT.TAG_COMPOUND).spliterator(), false).map(n -> (NBTTagCompound)n).forEach(tag -> this.interactionMemory.put(new UUID(tag.getLong("keyMost"), tag.getLong("keyLeast")), tag.getBoolean("value")));
+        this.effectiveGender = nbt.getBoolean("gender") ? EnumGender.FEMALE : EnumGender.MALE;
+        this.effectiveAge = nbt.getLong("age");
+        this.effectivePregnancyTimer = nbt.getInteger("pregnancy");
+        this.effectiveIsDomesticated = nbt.getBoolean("domesticated");
     }
 
     public static ExPAnimal createDefault()

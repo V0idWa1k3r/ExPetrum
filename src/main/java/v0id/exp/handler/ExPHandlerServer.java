@@ -208,7 +208,7 @@ public class ExPHandlerServer
 				if (i < Short.MAX_VALUE)
 				{
 					event.getEntityPlayer().inventory.setInventorySlotContents(i, event.getItem().getItem().copy());
-					net.minecraftforge.fml.common.FMLCommonHandler.instance().firePlayerItemPickupEvent(event.getEntityPlayer(), event.getItem());
+					net.minecraftforge.fml.common.FMLCommonHandler.instance().firePlayerItemPickupEvent(event.getEntityPlayer(), event.getItem(), event.getItem().getItem());
 					event.getEntityPlayer().onItemPickup(event.getItem(), event.getItem().getItem().getCount());
 					event.getEntityPlayer().addStat(StatList.getObjectsPickedUpStats(event.getItem().getItem().getItem()), event.getItem().getItem().getCount());
 					event.getItem().setDead();
@@ -222,7 +222,7 @@ public class ExPHandlerServer
 					int max = Math.min(toIncrement.getMaxStackSize(), s.map(slot -> slot.getItemStackLimit(toIncrement)).orElseGet(() -> event.getEntityPlayer().inventory.getInventoryStackLimit()));
 					int current = toIncrement.getCount();
 					final int added = Math.min(event.getItem().getItem().getCount(), max - current);
-					net.minecraftforge.fml.common.FMLCommonHandler.instance().firePlayerItemPickupEvent(event.getEntityPlayer(), event.getItem());
+					net.minecraftforge.fml.common.FMLCommonHandler.instance().firePlayerItemPickupEvent(event.getEntityPlayer(), event.getItem(), event.getItem().getItem());
 					event.getEntityPlayer().addStat(StatList.getObjectsPickedUpStats(event.getItem().getItem().getItem()), added);
 					event.getItem().getItem().shrink(added);
 					toIncrement.grow(added);

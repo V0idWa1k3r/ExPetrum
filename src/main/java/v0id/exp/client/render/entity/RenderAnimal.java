@@ -19,6 +19,7 @@ public class RenderAnimal extends RenderLiving<EntityAnimal>
     public RenderAnimal(RenderManager rendermanagerIn, ModelBase modelbaseIn, float shadowsizeIn)
     {
         super(rendermanagerIn, modelbaseIn, shadowsizeIn);
+        this.shadowSize = 0.5F;
         this.addLayer(new LayerColoredComponents(this));
         this.addLayer(new LayerGenderFeatures(this));
     }
@@ -28,6 +29,14 @@ public class RenderAnimal extends RenderLiving<EntityAnimal>
     protected ResourceLocation getEntityTexture(EntityAnimal entity)
     {
         return entity.getMainTexture(Minecraft.getMinecraft().getRenderPartialTicks());
+    }
+
+    @Override
+    protected void preRenderCallback(EntityAnimal entitylivingbaseIn, float partialTickTime)
+    {
+        super.preRenderCallback(entitylivingbaseIn, partialTickTime);
+        float s = entitylivingbaseIn.getRenderSize();
+        GlStateManager.scale(s, s, s);
     }
 
     public static class LayerGenderFeatures implements LayerRenderer<EntityAnimal>

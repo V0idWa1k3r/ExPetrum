@@ -50,7 +50,7 @@ public class BlockCoralRock extends Block implements IWeightProvider, IGravitySu
 	@Override
 	public float provideWeight(ItemStack item)
 	{
-		return 0;
+		return 0.25F;
 	}
 
 	@Override

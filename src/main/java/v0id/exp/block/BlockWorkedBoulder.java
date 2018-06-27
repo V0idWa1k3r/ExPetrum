@@ -29,8 +29,11 @@ import v0id.api.core.network.VoidNetwork;
 import v0id.api.core.util.DimBlockPos;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.data.*;
+import v0id.api.exp.metal.EnumToolClass;
+import v0id.api.exp.metal.EnumToolStats;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.item.ItemRock;
+import v0id.exp.item.ItemToolHead;
 import v0id.exp.tile.TileWorkedBoulder;
 
 import java.util.Random;
@@ -202,7 +205,7 @@ public class BlockWorkedBoulder extends Block implements IInitializableBlock, IO
 		if (playerIn != null)
 		{
 			ItemStack held = playerIn.getHeldItem(hand);
-			if (!held.isEmpty() && held.getItem() instanceof ItemRock)
+			if (!held.isEmpty() && held.getItem() instanceof ItemRock || held.getItem() == Items.FLINT)
 			{
 				for (int i = 0; i < 16; ++i)
 				{
@@ -236,6 +239,11 @@ public class BlockWorkedBoulder extends Block implements IInitializableBlock, IO
 						worldIn.playSound(null, pos, SoundEvents.BLOCK_ANVIL_STEP, SoundCategory.BLOCKS, 1, 2f);
 						if (worldIn.rand.nextBoolean() && worldIn.rand.nextBoolean())
 						{
+							if (held.getItem() == Items.FLINT && (worldIn.rand.nextBoolean() || worldIn.rand.nextBoolean()))
+                            {
+                                return true;
+                            }
+
 							held.shrink(1);
 						}
 					}
@@ -251,7 +259,11 @@ public class BlockWorkedBoulder extends Block implements IInitializableBlock, IO
 					ItemStack ret = ItemStack.EMPTY;
 					if (twb.workedIndex > 0)
 					{
-						ret = new ItemStack(ExPItems.toolHead, twb.workedIndex == 7 ? 3 : 1, twb.workedIndex - 1);
+					    EnumToolClass[] possibleClasses = new EnumToolClass[]{ EnumToolClass.HAMMER, EnumToolClass.AXE, EnumToolClass.SHOVEL, EnumToolClass.SPEAR, EnumToolClass.KNIFE, EnumToolClass.CHISEL, null };
+						if (possibleClasses[twb.workedIndex - 1] != null)
+                        {
+                            ret = ItemToolHead.createToolHead(possibleClasses[twb.workedIndex - 1], EnumToolStats.STONE);
+                        }
 					}
 					
 					if (!ret.isEmpty())

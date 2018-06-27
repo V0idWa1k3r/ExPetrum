@@ -136,16 +136,16 @@ public class ExPCrop implements IExPCrop
 		
 		harvestedAt = Optional.ofNullable(harvestedAt).orElse(this.getContainer().getPos());
 		selfBlockReference = Optional.ofNullable(selfBlockReference).orElse(harvestedIn.getBlockState(harvestedAt));
-		CropEvent.Harvest.KnifeCheck checkEvent = new CropEvent.Harvest.KnifeCheck(this, harvestedIn, harvestedAt, playerHarvestItem, isHarvestingWithRMB);
+		CropEvent.Harvest.GardeningSpadeCheck checkEvent = new CropEvent.Harvest.GardeningSpadeCheck(this, harvestedIn, harvestedAt, playerHarvestItem, isHarvestingWithRMB);
 		MinecraftForge.EVENT_BUS.post(checkEvent);
-		boolean isUsingKnife = checkEvent.getResult() == Result.DEFAULT ? playerHarvestItem.getItem().getToolClasses(playerHarvestItem).contains(EnumToolClass.KNIFE.getName()) : checkEvent.getResult() == Result.ALLOW;
+		boolean isUsingSpade = checkEvent.getResult() == Result.DEFAULT ? playerHarvestItem.getItem().getToolClasses(playerHarvestItem).contains(EnumToolClass.GARDENING_SPADE.getName()) : checkEvent.getResult() == Result.ALLOW;
 		List<ItemStack> dropsBase = Lists.newArrayList();
 		if (this.getGrowth() <= 1)
 		{
 			if (this.getType() == EnumCrop.PEPPER)
 			{
 				int stage = this.getGrowthIndex();
-				if (isUsingKnife && stage >= this.getType().getData().growthStages - 3)
+				if (isUsingSpade && stage >= this.getType().getData().growthStages - 3)
 				{
 					dropsBase.addAll(this.getSeedDrops());
 					MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.PopulateDropList(this, harvestedIn, harvestedAt, isHarvestingWithRMB, dropsBase, Action.HARVEST_SEEDS));
@@ -191,7 +191,7 @@ public class ExPCrop implements IExPCrop
 			{
 				if (this.getGrowth() == 1)
 				{
-					if (isUsingKnife)
+					if (isUsingSpade)
 					{
 						dropsBase.addAll(this.getSeedDrops());
 						MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.PopulateDropList(this, harvestedIn, harvestedAt, isHarvestingWithRMB, dropsBase, Action.HARVEST_SEEDS));

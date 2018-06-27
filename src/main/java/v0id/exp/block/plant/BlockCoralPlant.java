@@ -115,14 +115,13 @@ public class BlockCoralPlant extends Block implements IWeightProvider, IInitiali
 	@Override
 	public float provideWeight(ItemStack item)
 	{
-		return 0;
+		return 0.25F;
 	}
 
 	@Override
 	public Pair<Byte, Byte> provideVolume(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		return Pair.of((byte)1, (byte)1);
+		return Pair.of((byte)2, (byte)2);
 	}
 
 	@Override

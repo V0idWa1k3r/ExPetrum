@@ -123,7 +123,7 @@ public class CropEvent extends Event
 		}
 		
 		/**
-		 * Fired when crop needs to determine whether the player is harvesting it with a knife.
+		 * Fired when crop needs to determine whether the player is harvesting it with a gardening spade.
 		 * Fired at MinecraftForge.EVENT_BUS. <br>
 		 * This event is not cancelable. <br>
 		 * This event has a result. <br>
@@ -134,9 +134,9 @@ public class CropEvent extends Event
 		 *
 		 */
 		@HasResult
-		public static class KnifeCheck extends Harvest
+		public static class GardeningSpadeCheck extends Harvest
 		{
-			public KnifeCheck(IExPCrop crop, World w, BlockPos at, ItemStack checked, boolean b)
+			public GardeningSpadeCheck(IExPCrop crop, World w, BlockPos at, ItemStack checked, boolean b)
 			{
 				super(crop, w, at, b, Action.HARVEST_SEEDS);
 				this.checkedStack = checked;

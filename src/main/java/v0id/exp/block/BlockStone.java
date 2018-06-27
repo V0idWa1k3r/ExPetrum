@@ -109,7 +109,7 @@ public class BlockStone extends Block implements IWeightProvider, IGravitySuscep
 	@Override
 	public float provideWeight(ItemStack item)
 	{
-		return 0;
+		return 1;
 	}
 
 	@Override

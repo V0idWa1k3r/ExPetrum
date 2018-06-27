@@ -6,11 +6,14 @@ import net.minecraft.client.gui.GuiCreateWorld;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -18,14 +21,15 @@ import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.input.Keyboard;
 import v0id.api.core.logging.LogLevel;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPRegistryNames;
-import v0id.exp.client.model.EntityModelDynamic;
 import v0id.exp.ExPetrum;
 import v0id.exp.client.fx.ParticleEngine;
+import v0id.exp.client.model.EntityModelDynamic;
 import v0id.exp.client.registry.ClientRegistry;
 import v0id.exp.client.render.gui.PlayerInventoryRenderer;
 import v0id.exp.client.render.hud.PlayerHUDRenderer;
@@ -34,6 +38,7 @@ import v0id.exp.client.render.sky.WorldSkyRenderer;
 import v0id.exp.client.render.sky.WorldWeatherRenderer;
 import v0id.exp.combat.ClientCombatHandler;
 import v0id.exp.player.inventory.ManagedSlot;
+import v0id.exp.player.inventory.PlayerInventoryHelper;
 import v0id.exp.settings.impl.SettingsClient;
 import v0id.exp.settings.impl.SettingsFlags;
 
@@ -244,4 +249,15 @@ public class ExPHandlerClient
             event.setCanceled(true);
         }
 	}
+
+	@SubscribeEvent
+	public static void onTooltip(ItemTooltipEvent event)
+    {
+        ItemStack is = event.getItemStack();
+        Pair<Byte, Byte> volume = PlayerInventoryHelper.getVolume(is);
+        float weight = PlayerInventoryHelper.getWeight(is);
+        int vval = volume.getLeft() * volume.getRight();
+        int vindex = vval == 1 ? 0 : vval <= 4 ? 1 : vval <= 6 ? 2 : vval <= 9 ? 3 : 4;
+        event.getToolTip().add(I18n.format("exp.txt.weightvolume", (int)(weight * 1000), I18n.format("exp.txt.volume." + vindex)));
+    }
 }

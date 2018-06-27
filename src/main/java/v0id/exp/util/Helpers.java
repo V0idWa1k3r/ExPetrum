@@ -36,7 +36,7 @@ public class Helpers
 		double dist = Double.MAX_VALUE;
 		for (T t : entities)
 		{
-			double distance = t.getDistanceToEntity(to);
+			double distance = t.getDistance(to);
 			if (distance < dist)
 			{
 				dist = distance;

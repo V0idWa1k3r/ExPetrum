@@ -1,0 +1,15 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"textures" : {
+			"all" : "exp:items/misc/flint"
+		},
+		"transform": "forge:default-block",
+		"gui3d" : true,
+		"model" : "exp:flint"
+	},
+	"variants" : {
+		"normal": [{}],
+        "inventory": [{}]
+	}
+}

@@ -261,7 +261,7 @@ public class BlockCrop extends Block implements IInitializableBlock, IItemBlockP
 	{
 		// Axes are hardcoded to break blocks with a material of PLANT at their efficiency speed, need to fix that.
 		ItemStack stack = player.getHeldItemMainhand();
-		return !stack.isEmpty() && stack.getItem() instanceof ItemAxe ? super.getPlayerRelativeBlockHardness(state, player, worldIn, pos) / stack.getItem().getStrVsBlock(stack, state) : super.getPlayerRelativeBlockHardness(state, player, worldIn, pos);
+		return !stack.isEmpty() && stack.getItem() instanceof ItemAxe ? super.getPlayerRelativeBlockHardness(state, player, worldIn, pos) / stack.getItem().getDestroySpeed(stack, state) : super.getPlayerRelativeBlockHardness(state, player, worldIn, pos);
 	}
 
 	@Override
