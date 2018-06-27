@@ -29,11 +29,13 @@ public class ExPBiomeDecorator extends BiomeDecorator
 	public static boolean printedWarnings;
 	public static final VegetationGenerator genVegetation = new VegetationGenerator();
 	public static final PebbleGenerator genPebble = new PebbleGenerator();
+	public static final FlintGenerator genFlint = new FlintGenerator();
 	public static final BoulderGenerator genBoulders = new BoulderGenerator();
 	public static final CattailGenerator genCattails = new CattailGenerator();
 	public static final SeaweedGenerator genSeaweed = new SeaweedGenerator();
 	public static final CoralGenerator genCoral = new CoralGenerator();
 	public static final OilGenerator genOil = new OilGenerator();
+	public static final ClayLakesGenerator genClay = new ClayLakesGenerator();
 	
 	@Override
 	public void decorate(World worldIn, Random random, Biome biome, BlockPos pos)
@@ -42,12 +44,14 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		{
 			printWarnings();
 		}
-		
+
+		this.doClayPass(worldIn, random, biome, pos);
 		this.doTreePass(worldIn, random, biome, pos);
 		this.doVegetationPass(worldIn, random, biome, pos);
 		this.doShrubsPass(worldIn, random, biome, pos);
 		this.doBerryBushesPass(worldIn, random, biome, pos);
 		this.doPebblePass(worldIn, random, biome, pos);
+		this.doFlintPass(worldIn, random, biome, pos);
 		this.doBoulderPass(worldIn, random, biome, pos);
 		this.doOrePass(worldIn, random, biome, pos);
 		this.doCropsPass(worldIn, random, biome, pos);
@@ -84,7 +88,7 @@ public class ExPBiomeDecorator extends BiomeDecorator
         {
             if (rand.nextBoolean())
             {
-                this.beyyBushesPassGenerate(worldIn, rand, biome, pos);
+                this.berryBushesPassGenerate(worldIn, rand, biome, pos);
             }
         }
     }
@@ -112,7 +116,12 @@ public class ExPBiomeDecorator extends BiomeDecorator
 	{
 		this.pebblePassGenerate(worldIn, rand, biome, pos);
 	}
-	
+
+    public void doFlintPass(World worldIn, Random rand, Biome biome, BlockPos pos)
+    {
+        this.flintPassGenerate(worldIn, rand, biome, pos);
+    }
+
 	public void doBoulderPass(World worldIn, Random rand, Biome biome, BlockPos pos)
 	{
 		this.boulderPassGenerate(worldIn, rand, biome, pos);
@@ -130,6 +139,29 @@ public class ExPBiomeDecorator extends BiomeDecorator
 	{
 		this.oilPassGenerate(worldIn, rand, biome, pos);
 	}
+
+    public void doClayPass(World worldIn, Random rand, Biome biome, BlockPos pos)
+    {
+        this.clayPassGenerate(worldIn, rand, biome, pos);
+    }
+
+    public void clayPassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)
+    {
+        float chance = BiomeDictionary.hasType(biome, BiomeDictionary.Type.SANDY) ? 0.003F : BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) ? 0 : 0.03F;
+        if (rand.nextFloat() < chance)
+        {
+            int x = rand.nextInt(16) + 8;
+            int z = rand.nextInt(16) + 8;
+            BlockPos at = new BlockPos(x, worldIn.getHeight(pos.add(x, 0, z)).getY(), z);
+            EventGenClayLake event = new EventGenClayLake(worldIn, at, rand, genClay);
+            if (MinecraftForge.TERRAIN_GEN_BUS.post(event))
+            {
+                return;
+            }
+
+            event.generator.generate(worldIn, rand, pos.add(at));
+        }
+    }
 
 	public void oilPassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)
 	{
@@ -174,6 +206,11 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		{
 			return;
 		}
+
+		if (rand.nextFloat() > 0.2F)
+        {
+            return;
+        }
 		
 		int x = rand.nextInt(16) + 8;
 		int z = rand.nextInt(16) + 8;
@@ -217,7 +254,7 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		event.generator.generate(worldIn, rand, at);
 	}
 
-    public void beyyBushesPassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)
+    public void berryBushesPassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)
     {
         if (!(biome instanceof ExPBiome))
         {
@@ -304,6 +341,20 @@ public class ExPBiomeDecorator extends BiomeDecorator
 			return;
 		}
 		
+		event.generator.generate(worldIn, rand, at);
+	}
+
+	public void flintPassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)
+	{
+		int x = rand.nextInt(16) + 8;
+		int z = rand.nextInt(16) + 8;
+		BlockPos at = worldIn.getHeight(pos.add(x, 0, z));
+		EventGenFlint event = new EventGenFlint(worldIn, at, rand, genFlint);
+		if (MinecraftForge.TERRAIN_GEN_BUS.post(event))
+		{
+			return;
+		}
+
 		event.generator.generate(worldIn, rand, at);
 	}
 	
