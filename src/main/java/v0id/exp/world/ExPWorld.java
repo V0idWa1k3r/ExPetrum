@@ -7,7 +7,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.Constants.NBT;
-import v0id.api.core.logging.LogLevel;
+import v0id.core.logging.LogLevel;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.event.world.EventGenerateTemperatureTable;
 import v0id.api.exp.player.IExPPlayer;

@@ -8,7 +8,7 @@ import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
-import v0id.api.core.logging.LogLevel;
+import v0id.core.logging.LogLevel;
 import v0id.api.exp.block.EnumShrubState;
 import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;

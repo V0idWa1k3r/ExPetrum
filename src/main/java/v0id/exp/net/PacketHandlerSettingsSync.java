@@ -2,7 +2,7 @@ package v0id.exp.net;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.Constants;
-import v0id.api.core.network.IPacketHandler;
+import v0id.core.network.IPacketHandler;
 import v0id.exp.settings.SettingsManager;
 
 import java.util.stream.StreamSupport;

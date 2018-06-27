@@ -24,7 +24,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.commons.lang3.ArrayUtils;
-import v0id.api.core.util.IFunctionalRenderFactory;
+import v0id.core.util.IFunctionalRenderFactory;
 import v0id.api.exp.block.*;
 import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.block.property.EnumRockClass;

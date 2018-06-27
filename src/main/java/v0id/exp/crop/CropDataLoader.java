@@ -3,7 +3,7 @@ package v0id.exp.crop;
 import com.google.common.io.Files;
 import com.google.gson.*;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import v0id.api.core.logging.LogLevel;
+import v0id.core.logging.LogLevel;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.tile.crop.CropData;
 import v0id.api.exp.tile.crop.EnumCrop;

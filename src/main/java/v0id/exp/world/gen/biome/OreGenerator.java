@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import org.apache.commons.lang3.tuple.Triple;
-import v0id.api.core.logging.LogLevel;
+import v0id.core.logging.LogLevel;
 import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.block.IOreHintReplaceable;
 import v0id.api.exp.block.property.EnumRockClass;

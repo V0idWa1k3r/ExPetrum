@@ -3,8 +3,8 @@ package v0id.api.exp.data;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.util.EnumHelper;
-import v0id.api.core.logging.VoidLogger;
-import v0id.api.core.markers.StaticStorage;
+import v0id.core.logging.VoidLogger;
+import v0id.core.markers.StaticStorage;
 import v0id.api.exp.fx.IParticleEngine;
 import v0id.api.exp.settings.ISettingsManager;
 

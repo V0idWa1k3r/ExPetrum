@@ -9,7 +9,7 @@ import net.minecraft.nbt.NBTTagFloat;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.util.Constants.NBT;
-import v0id.api.core.util.nbt.NBTChain;
+import v0id.core.util.nbt.NBTChain;
 import v0id.api.exp.combat.SpecialAttack;
 import v0id.api.exp.combat.SpecialAttack.AttackWrapper;
 import v0id.api.exp.player.*;

@@ -3,9 +3,9 @@ package v0id.exp.net;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
-import v0id.api.core.VoidApi;
-import v0id.api.core.network.IPacketHandler;
-import v0id.api.core.util.MC;
+import v0id.core.VoidApi;
+import v0id.core.network.IPacketHandler;
+import v0id.core.util.MC;
 import v0id.exp.ExPetrum;
 import v0id.exp.combat.ServerCombatHandler;
 

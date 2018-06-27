@@ -1,6 +1,6 @@
 package v0id.api.exp.data;
 
-import v0id.api.core.network.PacketType;
+import v0id.core.network.PacketType;
 
 public class ExPPackets
 {

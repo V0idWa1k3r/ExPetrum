@@ -1,7 +1,7 @@
 package v0id.api.exp.fx;
 
 import net.minecraft.util.BlockRenderLayer;
-import v0id.api.core.util.java.Rectangle;
+import v0id.core.util.java.Rectangle;
 
 /**
  * Created by V0idWa1k3r on 11-Jun-17.

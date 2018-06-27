@@ -3,7 +3,7 @@ package v0id.exp.settings.impl;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import org.apache.commons.io.IOUtils;
-import v0id.api.core.logging.LogLevel;
+import v0id.core.logging.LogLevel;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.settings.ISettingsManager;
 

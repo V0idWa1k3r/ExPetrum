@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
-import v0id.api.core.VoidApi;
+import v0id.core.VoidApi;
 import v0id.api.exp.block.EnumFruit;
 import v0id.api.exp.block.EnumLeafState;
 import v0id.api.exp.data.ExPBlockProperties;

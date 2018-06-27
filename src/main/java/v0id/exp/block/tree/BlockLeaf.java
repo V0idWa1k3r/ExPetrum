@@ -27,7 +27,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.tuple.Pair;
-import v0id.api.core.util.java.ColorRGB;
+import v0id.core.util.java.ColorRGB;
 import v0id.api.exp.block.EnumLeafState;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.ILeaves;

@@ -8,7 +8,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.util.Constants;
-import v0id.api.core.util.nbt.NBTChain;
+import v0id.core.util.nbt.NBTChain;
 import v0id.api.exp.entity.*;
 import v0id.api.exp.player.FoodGroup;
 import v0id.api.exp.world.Calendar;

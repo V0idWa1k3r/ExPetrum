@@ -14,7 +14,7 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
-import v0id.api.core.VoidApi;
+import v0id.core.VoidApi;
 import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.data.ExPBlockProperties;

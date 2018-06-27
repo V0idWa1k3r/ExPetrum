@@ -5,7 +5,7 @@ import com.google.gson.*;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import v0id.api.core.logging.LogLevel;
+import v0id.core.logging.LogLevel;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.ExPetrum;

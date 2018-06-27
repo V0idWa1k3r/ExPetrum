@@ -1,19 +1,19 @@
 package v0id.exp.combat;
 
-import java.util.UUID;
-
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import v0id.api.core.logging.LogLevel;
-import v0id.api.core.network.VoidNetwork;
 import v0id.api.exp.combat.EnumWeaponWeight;
 import v0id.api.exp.combat.SpecialAttack;
 import v0id.api.exp.combat.WeaponType;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPPackets;
 import v0id.api.exp.player.IExPPlayer;
+import v0id.core.logging.LogLevel;
+import v0id.core.network.VoidNetwork;
+
+import java.util.UUID;
 
 public class ServerCombatHandler
 {

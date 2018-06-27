@@ -10,12 +10,13 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
 import net.minecraftforge.fml.relauncher.CoreModManager;
 import org.apache.commons.io.IOUtils;
-import v0id.api.core.logging.LogLevel;
-import v0id.api.core.logging.VoidLogger;
-import v0id.api.core.util.java.Reflector;
+import v0id.core.logging.LogLevel;
+import v0id.core.logging.VoidLogger;
+import v0id.core.util.java.Reflector;
 import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.world.YearlyTemperatureRange;
+import v0id.core.VoidApi;
 import v0id.exp.crop.CropDataLoader;
 import v0id.exp.player.inventory.WeightDataLoader;
 import v0id.exp.proxy.IExPProxy;
@@ -28,7 +29,7 @@ import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Stream;
 
-@Mod(modid = "exp", useMetadata = true, dependencies = "required-after:voidapi;after:chiselsandbits;after:jei", version = "1.11.2-1.0.0.0")
+@Mod(modid = "exp", useMetadata = true, dependencies = "after:chiselsandbits;after:jei", version = "1.11.2-1.0.0.0")
 public class ExPetrum
 {
 	@Mod.Instance("exp")
@@ -93,6 +94,7 @@ public class ExPetrum
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt)
 	{
+		VoidApi.getInstance().preInit(evt);
 		containerOfSelf = Loader.instance().activeModContainer();
 		this.setDevEnvironment();
 		ExPMisc.modLogger.log(LogLevel.Debug, "ExPetrum pre initializing.");

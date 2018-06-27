@@ -5,7 +5,7 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import v0id.api.core.util.java.Rectangle;
+import v0id.core.util.java.Rectangle;
 import v0id.api.exp.fx.EnumParticle;
 import v0id.api.exp.fx.IParticle;
 

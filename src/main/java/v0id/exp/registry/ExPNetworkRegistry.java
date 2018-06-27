@@ -1,6 +1,6 @@
 package v0id.exp.registry;
 
-import v0id.api.core.network.VoidNetwork;
+import v0id.core.network.VoidNetwork;
 import v0id.api.exp.data.ExPPackets;
 import v0id.exp.net.*;
 
