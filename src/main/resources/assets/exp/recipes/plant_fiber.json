@@ -1,0 +1,21 @@
+{
+    "result": {
+        "item": "exp:item_generic",
+        "data": 2
+    },
+    "type": "forge:ore_shapeless",
+    "ingredients": [
+        {
+            "item": "#TWINE"
+        },
+        {
+            "item": "#TWINE"
+        },
+        {
+            "item": "#TWINE"
+        },
+        {
+            "item": "#TWINE"
+        }
+    ]
+}
