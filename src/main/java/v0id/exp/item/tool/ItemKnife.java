@@ -11,7 +11,6 @@ import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.api.exp.metal.EnumToolClass;
 import v0id.exp.item.IInitializableItem;
-import v0id.exp.player.inventory.PlayerInventoryHelper;
 
 public class ItemKnife extends ItemExPWeapon implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry
 {
@@ -40,14 +39,13 @@ public class ItemKnife extends ItemExPWeapon implements IWeapon, IWeightProvider
 	@Override
 	public float provideWeight(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return this.getStats(item).getWeight() * this.getToolClass().getWeight();
 	}
 
 	@Override
 	public Pair<Byte, Byte> provideVolume(ItemStack item)
 	{
-		return PlayerInventoryHelper.defaultVolume;
+		return IWeightProvider.DEFAULT_VOLUME;
 	}
 
 	@Override

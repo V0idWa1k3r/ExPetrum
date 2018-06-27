@@ -41,8 +41,7 @@ public class ItemGardeningSpade extends ItemExPTool implements IWeapon, IWeightP
 	@Override
 	public float provideWeight(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return this.getStats(item).getWeight() * this.getToolClass().getWeight();
 	}
 
 	@Override
@@ -82,10 +81,10 @@ public class ItemGardeningSpade extends ItemExPTool implements IWeapon, IWeightP
 	}
 	
 	@Override
-	public float getStrVsBlock(ItemStack stack, IBlockState state)
+	public float getDestroySpeed(ItemStack stack, IBlockState state)
     {
         Material material = state.getMaterial();
-        float ret = material != Material.GRASS && material != Material.GROUND && material != Material.CRAFTED_SNOW && material != Material.SNOW && material != Material.SAND && material != Material.CLAY && material != Material.GOURD ? super.getStrVsBlock(stack, state) : this.getStats(stack).getEfficiency();
+        float ret = material != Material.GRASS && material != Material.GROUND && material != Material.CRAFTED_SNOW && material != Material.SNOW && material != Material.SAND && material != Material.CLAY && material != Material.GOURD ? super.getDestroySpeed(stack, state) : this.getStats(stack).getEfficiency();
     	return ret * 0.75F;
     }
 }

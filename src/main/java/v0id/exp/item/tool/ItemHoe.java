@@ -55,8 +55,7 @@ public class ItemHoe extends ItemExPTool implements IWeapon, IWeightProvider, II
 	@Override
 	public float provideWeight(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return this.getStats(item).getWeight() * this.getToolClass().getWeight();
 	}
 
 	@Override

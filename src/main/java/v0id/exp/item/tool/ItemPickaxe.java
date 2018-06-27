@@ -41,8 +41,7 @@ public class ItemPickaxe extends ItemExPTool implements IWeapon, IWeightProvider
 	@Override
 	public float provideWeight(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return this.getStats(item).getWeight() * this.getToolClass().getWeight();
 	}
 
 	@Override
@@ -88,9 +87,9 @@ public class ItemPickaxe extends ItemExPTool implements IWeapon, IWeightProvider
     }
 
 	@Override
-	public float getStrVsBlock(ItemStack stack, IBlockState state)
+	public float getDestroySpeed(ItemStack stack, IBlockState state)
     {
         Material material = state.getMaterial();
-        return material != Material.IRON && material != Material.ANVIL && material != Material.ROCK ? super.getStrVsBlock(stack, state) : this.getStats(stack).getEfficiency();
+        return material != Material.IRON && material != Material.ANVIL && material != Material.ROCK ? super.getDestroySpeed(stack, state) : this.getStats(stack).getEfficiency();
     }
 }

@@ -63,7 +63,7 @@ public class ItemWateringCan extends ItemExPTool implements IWeightProvider, IIn
 	@Override
 	public float provideWeight(ItemStack item)
 	{
-		return 0;
+		return this.getStats(item).getWeight() * this.getToolClass().getWeight();
 	}
 
 	@Override

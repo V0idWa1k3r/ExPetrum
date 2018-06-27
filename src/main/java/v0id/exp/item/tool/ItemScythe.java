@@ -41,8 +41,7 @@ public class ItemScythe extends ItemExPWeapon implements IWeapon, IWeightProvide
 	@Override
 	public float provideWeight(ItemStack item)
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return this.getStats(item).getWeight() * this.getToolClass().getWeight();
 	}
 
 	@Override
@@ -82,8 +81,8 @@ public class ItemScythe extends ItemExPWeapon implements IWeapon, IWeightProvide
 	}
 
 	@Override
-	public float getStrVsBlock(ItemStack stack, IBlockState state)
+	public float getDestroySpeed(ItemStack stack, IBlockState state)
     {
-        return state.getBlock() instanceof BlockCrop ? this.getStats(stack).getEfficiency() : super.getStrVsBlock(stack, state);
+        return state.getBlock() instanceof BlockCrop ? this.getStats(stack).getEfficiency() : super.getDestroySpeed(stack, state);
     }
 }
