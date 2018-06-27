@@ -2,7 +2,7 @@ package v0id.api.exp.data;
 
 import com.google.common.collect.Maps;
 import net.minecraft.util.ResourceLocation;
-import v0id.api.core.markers.StaticStorage;
+import v0id.core.markers.StaticStorage;
 
 import java.util.Map;
 
@@ -51,7 +51,10 @@ public class ExPRegistryNames
         blockFruit																			        		= "fruit",
 	    blockGenericShrubbery                                                                               = "generic_shrubbery",
 	    blockFlint                                                                                          = "flint",
-        blockClay                                                                                           = "clay";
+        blockClay                                                                                           = "clay",
+		blockDecoratedStoneTile																	            = "rock_decorated_tile",
+        blockDecoratedStoneBrick                                                                            = "rock_decorated_brick",
+        getBlockDecoratedStoneBrickSmall                                                                    = "rock_decorated_brick_small";
 
 	public static final String
 		itemRock																							= "item_rock",

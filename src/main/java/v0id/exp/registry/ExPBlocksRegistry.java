@@ -94,7 +94,10 @@ public class ExPBlocksRegistry extends AbstractRegistry
                 new BlockFruit(),
                 new BlockGenericShrubbery(),
                 new BlockFlint(),
-                new BlockClay()
+                new BlockClay(),
+                new BlockDecoratedStone(BlockDecoratedStone.EnumDecorationType.TILE),
+                new BlockDecoratedStone(BlockDecoratedStone.EnumDecorationType.BRICK),
+                new BlockDecoratedStone(BlockDecoratedStone.EnumDecorationType.SMALL_BRICK)
         );
 
         registryEntries.forEach(registry::register);

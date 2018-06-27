@@ -138,12 +138,14 @@ public class ClientRegistry implements ILifecycleListener
         mkCustomModelResourceLocations(ExPBlocks.boulder, 16, i -> "amdl=0,class=" + EnumRockClass.values()[i].getName());
         mkCustomModelResourceLocations(ExPBlocks.workedBoulder, 16, i -> "class=" + EnumRockClass.values()[i].getName() + ",workindex=0");
         mkCustomModelResourceLocations(ExPItems.rock, 16, i -> "class=" + EnumRockClass.values()[i].getName());
-        mkCustomModelResourceLocations(ExPItems.rock, 16, i -> "class=" + EnumRockClass.values()[i].getName());
         mkCustomModelResourceLocations(ExPBlocks.ice, 2, i -> "salt=" + (i == 1));
         mkCustomModelResourceLocations(ExPBlocks.vegetation, 4, i -> "inventory-" + i);
         mkCustomModelResourceLocations(ExPBlocks.waterLily, 10, i -> "blooming=" + (i >= 5) + ",type=" + EnumWaterLilyType.values()[i % 5].getName());
         mkCustomModelResourceLocations(ExPBlocks.fruit, 15, i -> "type=" + EnumFruit.values()[i].getName());
         mkCustomModelResourceLocations(ExPBlocks.rock, 16, i -> "class=" + EnumRockClass.values()[i].getName());
+        mkCustomModelResourceLocations(ExPBlocks.rockDeco0, 16, i -> "class=" + EnumRockClass.values()[i].getName());
+        mkCustomModelResourceLocations(ExPBlocks.rockDeco1, 16, i -> "class=" + EnumRockClass.values()[i].getName());
+        mkCustomModelResourceLocations(ExPBlocks.rockDeco2, 16, i -> "class=" + EnumRockClass.values()[i].getName());
         mkCustomModelResourceLocations(ExPBlocks.soil, 16, i -> "class=" + EnumDirtClass.values()[i].getName());
         mkCustomModelResourceLocations(ExPBlocks.grass, 16, i -> "class=" + EnumDirtClass.values()[i].getName());
         mkCustomModelResourceLocations(ExPBlocks.grass_dry, 16, i -> "class=" + EnumDirtClass.values()[i].getName());

@@ -1,0 +1,95 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"textures" : {
+			"all" : "exp:blocks/stone/small_brick/andesite"
+		},
+		"model" : "cube_all"
+	},
+	"variants" : {
+		"normal": [{}],
+		"inventory": [{}],
+		"class" : {
+			"andesite" : {
+				"textures" : {
+					"all" : "exp:blocks/stone/small_brick/andesite"
+				}
+			},
+			"basalt" : {
+				"textures" : {
+					"all" : "exp:blocks/stone/small_brick/basalt"
+				}
+			},
+			"chalk" : {
+				"textures" : {
+					"all" : "exp:blocks/stone/small_brick/chalk"
+				}
+			},
+			"chert" : {
+				"textures" : {
+					"all" : "exp:blocks/stone/small_brick/chert"
+				}
+			},
+			"claystone" : {
+				"textures" : {
+					"all" : "exp:blocks/stone/small_brick/claystone"
+				}
+			},
+			"dacite" : {
+				"textures" : {
+					"all" : "exp:blocks/stone/small_brick/dacite"
+				}
+			},
+			"diorite" : {
+				"textures" : {
+					"all" : "exp:blocks/stone/small_brick/diorite"
+				}
+			},
+			"gabbro" : {
+				"textures" : {
+					"all" : "exp:blocks/stone/small_brick/gabbro"
+				}
+			},
+			"gneiss" : {
+				"textures" : {
+					"all" : "exp:blocks/stone/small_brick/gneiss"
+				}
+			},
+			"granite" : {
+				"textures" : {
+					"all" : "exp:blocks/stone/small_brick/granite"
+				}
+			},
+			"limestone" : {
+				"textures" : {
+					"all" : "exp:blocks/stone/small_brick/limestone"
+				}
+			},
+			"marble" : {
+				"textures" : {
+					"all" : "exp:blocks/stone/small_brick/marble"
+				}
+			},
+			"quartzite" : {
+				"textures" : {
+					"all" : "exp:blocks/stone/small_brick/quartzite"
+				}
+			},
+			"sandstone" : {
+				"textures" : {
+					"all" : "exp:blocks/stone/small_brick/sandstone"
+				}
+			},
+			"schist" : {
+				"textures" : {
+					"all" : "exp:blocks/stone/small_brick/schist"
+				}
+			},
+			"slate" : {
+				"textures" : {
+					"all" : "exp:blocks/stone/small_brick/slate"
+				}
+			}
+		}
+	}
+}

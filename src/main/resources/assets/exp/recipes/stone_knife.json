@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "exp:item_knife",
+        "data": 0
+    },
+    "type": "forge:ore_shapeless",
+    "ingredients": [
+        {
+            "item": "exp:item_toolhead",
+            "data": 50
+        },
+        {
+            "item": "#FIBER"
+        },
+        {
+            "item": "#STICKWOOD"
+        }
+    ]
+}

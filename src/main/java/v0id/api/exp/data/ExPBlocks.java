@@ -2,7 +2,7 @@ package v0id.api.exp.data;
 
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import v0id.api.core.markers.StaticStorage;
+import v0id.core.markers.StaticStorage;
 
 @StaticStorage
 @GameRegistry.ObjectHolder(ExPRegistryNames.modid)
@@ -209,4 +209,13 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockClay)
     public static final Block clay = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockDecoratedStoneTile)
+    public static final Block rockDeco0 = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockDecoratedStoneBrick)
+    public static final Block rockDeco1 = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.getBlockDecoratedStoneBrickSmall)
+    public static final Block rockDeco2 = null;
 }

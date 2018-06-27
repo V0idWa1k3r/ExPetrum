@@ -1,7 +1,15 @@
 package v0id.exp.item.tool;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.apache.commons.lang3.tuple.Pair;
+import v0id.api.exp.block.IChiselable;
 import v0id.api.exp.combat.EnumWeaponWeight;
 import v0id.api.exp.combat.IWeapon;
 import v0id.api.exp.combat.WeaponType;
@@ -78,4 +86,44 @@ public class ItemChisel extends ItemExPWeapon implements IWeapon, IWeightProvide
 		return -1.5F;
 	}
 
+    @Override
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+    {
+        IBlockState at = worldIn.getBlockState(pos);
+        if (at.getBlock() instanceof IChiselable)
+        {
+            ItemStack hammer = ItemStack.EMPTY;
+            for (int i = 0; i < player.inventory.getSizeInventory(); ++i)
+            {
+                ItemStack stack = player.inventory.getStackInSlot(i);
+                if (stack.getItem() instanceof ItemHammer)
+                {
+                    hammer = stack;
+                    break;
+                }
+            }
+
+            if (hammer.isEmpty())
+            {
+                return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+            }
+
+            IBlockState to = ((IChiselable) at.getBlock()).chisel(at, worldIn, pos);
+            if (to != at)
+            {
+                for (int i = 0; i < 16; ++i)
+                {
+                    worldIn.spawnParticle(EnumParticleTypes.BLOCK_CRACK, pos.getX() + worldIn.rand.nextDouble(), pos.getY() + worldIn.rand.nextDouble(), pos.getZ() + worldIn.rand.nextDouble(), 0, 0, 0, Block.getStateId(at));
+                }
+
+                worldIn.playSound(null, pos, SoundEvents.BLOCK_ANVIL_FALL, SoundCategory.BLOCKS, 0.1F, 2.0f);
+                worldIn.setBlockState(pos, to, 3);
+                player.getHeldItem(hand).damageItem(1, player);
+                hammer.damageItem(1, player);
+                return EnumActionResult.SUCCESS;
+            }
+        }
+
+        return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+    }
 }

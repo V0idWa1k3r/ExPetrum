@@ -137,6 +137,9 @@ exp.txt.item.desc.water.leq75=It's mostly filled
 exp.txt.item.desc.water.100=It's full of water
 
 tile.exp.rock.name=Stone
+tile.exp.rock_decorated_tile.name=Stone (Tile)
+tile.exp.rock_decorated_brick.name=Stone (Brick)
+tile.exp.rock_decorated_brick_small.name=Stone (Small Brick)
 tile.exp.pebble.name=Pebbles
 tile.exp.boulder.name=Boulder
 tile.exp.boulder_worked.name=Worked Boulder

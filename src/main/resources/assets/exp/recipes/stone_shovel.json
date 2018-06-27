@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "exp:item_shovel",
+        "data": 0
+    },
+    "type": "forge:ore_shapeless",
+    "ingredients": [
+        {
+            "item": "exp:item_toolhead",
+            "data": 20
+        },
+        {
+            "item": "#FIBER"
+        },
+        {
+            "item": "#STICKWOOD"
+        }
+    ]
+}

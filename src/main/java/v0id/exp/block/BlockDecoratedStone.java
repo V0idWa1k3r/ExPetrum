@@ -8,7 +8,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,16 +16,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.block.IChiselable;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.data.*;
-import v0id.api.exp.gravity.GravityHelper;
-import v0id.api.exp.gravity.IGravitySusceptible;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 
@@ -36,11 +33,21 @@ import java.util.stream.Stream;
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
 import static v0id.api.exp.data.ExPBlockProperties.ROCK_CLASS;
 
-public class BlockStone extends Block implements IChiselable, IWeightProvider, IGravitySusceptible, IInitializableBlock, IOreDictEntry, IItemBlockProvider
+public class BlockDecoratedStone extends Block implements IChiselable, IWeightProvider, IInitializableBlock, IOreDictEntry, IItemBlockProvider
 {
-	public BlockStone()
+	public enum EnumDecorationType
+    {
+        TILE,
+        BRICK,
+        SMALL_BRICK
+    }
+
+    private EnumDecorationType type;
+
+	public BlockDecoratedStone(EnumDecorationType type)
 	{
 		super(Material.ROCK);
+		this.type = type;
 		this.initBlock();
 	}
 
@@ -117,45 +124,10 @@ public class BlockStone extends Block implements IChiselable, IWeightProvider, I
 	}
 
 	@Override
-	public int getFallDamage(Entity collidedWith, EntityFallingBlock self)
-	{
-		return 20;
-	}
-
-	@SuppressWarnings("deprecation")
-    @Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
-	{
-		super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
-		this.onNeighborChange(worldIn, pos, fromPos);
-	}
-
-	@Override
-	public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor)
-	{
-		super.onNeighborChange(world, pos, neighbor);
-		if (world instanceof World)
-		{
-			World w = (World) world;
-			if (this.canFall(w, world.getBlockState(pos), pos, neighbor) && w.rand.nextBoolean())
-			{
-				GravityHelper.doFall(world.getBlockState(pos), w, pos, neighbor);
-			}
-		}
-	}
-	
-	@Override
-	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
-	{
-		super.onBlockAdded(worldIn, pos, state);
-		this.onNeighborChange(worldIn, pos, pos);
-	}
-
-	@Override
 	public void initBlock()
 	{
 		this.setHardness(3);
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockStone));
+		this.setRegistryName(ExPRegistryNames.asLocation(this.type == EnumDecorationType.TILE ? ExPRegistryNames.blockDecoratedStoneTile : this.type == EnumDecorationType.BRICK ? ExPRegistryNames.blockDecoratedStoneBrick : ExPRegistryNames.getBlockDecoratedStoneBrickSmall));
 		this.setResistance(10);
 		this.setSoundType(SoundType.STONE);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
@@ -179,9 +151,9 @@ public class BlockStone extends Block implements IChiselable, IWeightProvider, I
 		registry.register(new ItemBlockWithMetadata(this));
 	}
 
-	@Override
-	public IBlockState chisel(IBlockState original, World world, BlockPos pos)
-	{
-		return ExPBlocks.rockDeco0.getDefaultState().withProperty(ROCK_CLASS, original.getValue(ROCK_CLASS));
-	}
+    @Override
+    public IBlockState chisel(IBlockState original, World world, BlockPos pos)
+    {
+        return this == ExPBlocks.rockDeco0 ? ExPBlocks.rockDeco1.getDefaultState().withProperty(ROCK_CLASS, original.getValue(ROCK_CLASS)) : this == ExPBlocks.rockDeco1 ? ExPBlocks.rockDeco2.getDefaultState().withProperty(ROCK_CLASS, original.getValue(ROCK_CLASS)) : original;
+    }
 }
