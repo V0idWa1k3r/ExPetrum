@@ -73,7 +73,7 @@ public class WorldTypeExP extends WorldType
 	     * Returns a biome cache block at location specified.
 	     */
 	    @Override
-		public BiomeCache.Block getBiomeCacheBlock(int x, int z)
+		public BiomeCache.Block getEntry(int x, int z)
 	    {
 	        x = x >> 4;
 	        z = z >> 4;
@@ -94,7 +94,7 @@ public class WorldTypeExP extends WorldType
 	    @Override
 		public Biome getBiome(int x, int z, Biome defaultValue)
 	    {
-	        Biome biome = this.getBiomeCacheBlock(x, z).getBiome(x, z);
+	        Biome biome = this.getEntry(x, z).getBiome(x, z);
 	        return biome == null ? defaultValue : biome;
 	    }
 
@@ -132,7 +132,7 @@ public class WorldTypeExP extends WorldType
 	    @Override
 		public Biome[] getCachedBiomes(int x, int z)
 	    {
-	        return this.getBiomeCacheBlock(x, z).biomes;
+	        return this.getEntry(x, z).biomes;
 	    }
 
 	    public class Block
