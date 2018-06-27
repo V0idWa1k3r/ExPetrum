@@ -2,7 +2,6 @@ package v0id.exp.world.gen.biome;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -36,10 +35,10 @@ public class CropGenerator extends WorldGenerator
 		}
 		
 		EnumCrop crop = this.at.cropsToGenerate.get(rand.nextInt(this.at.cropsToGenerate.size()));
-		for (int i = 0; i < 128; ++i)
+		for (int i = 0; i < 4 + rand.nextInt(4); ++i)
 		{
 			BlockPos offset = position.add(rand.nextInt(8) - rand.nextInt(8), 8, rand.nextInt(8) - rand.nextInt(8));
-			while (!worldIn.isSideSolid(offset.down(), EnumFacing.UP, false) && !worldIn.isBlockNormalCube(offset, false) && offset.getY() > 0)
+			while (!(worldIn.getBlockState(offset).getBlock().isAssociatedBlock(Blocks.GRASS)) && offset.getY() > 0)
 			{
 				offset = offset.down();
 			}
@@ -49,7 +48,7 @@ public class CropGenerator extends WorldGenerator
 				continue;
 			}
 			
-			if (!(worldIn.isAirBlock(offset.up()) || worldIn.getBlockState(offset.up()).getBlock().isAssociatedBlock(Blocks.TALLGRASS) || worldIn.getBlockState(offset.up()).getBlock() instanceof IOreHintReplaceable || worldIn.getBlockState(offset.up()).getBlock().isReplaceable(worldIn, offset.up())))
+			if (!worldIn.isAirBlock(offset.up()) && !worldIn.getBlockState(offset.up()).getBlock().isAssociatedBlock(Blocks.TALLGRASS) && !(worldIn.getBlockState(offset.up()).getBlock() instanceof IOreHintReplaceable) && !worldIn.getBlockState(offset.up()).getBlock().isReplaceable(worldIn, offset.up()))
 			{
 				continue;
 			}
