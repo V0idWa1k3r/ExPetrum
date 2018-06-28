@@ -1,6 +1,6 @@
 package v0id.api.exp.data;
 
-import v0id.api.core.markers.StaticStorage;
+import v0id.core.markers.StaticStorage;
 import v0id.api.exp.combat.SpecialAttack;
 
 @StaticStorage

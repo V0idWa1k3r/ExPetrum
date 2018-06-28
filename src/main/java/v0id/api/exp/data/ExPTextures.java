@@ -1,7 +1,7 @@
 package v0id.api.exp.data;
 
 import net.minecraft.util.ResourceLocation;
-import v0id.api.core.markers.StaticStorage;
+import v0id.core.markers.StaticStorage;
 import v0id.api.exp.player.EnumPlayerProgression;
 
 @StaticStorage
@@ -18,6 +18,8 @@ public class ExPTextures
             entityChickenWildColor                                                                             = new ResourceLocation(ExPRegistryNames.modid, "textures/entities/chicken/wild_overlay.png"),
             entityChickenWildMale                                                                              = new ResourceLocation(ExPRegistryNames.modid, "textures/entities/chicken/wild_male.png");
 
+	public static final ResourceLocation
+            guiCampfire                                                                                        = new ResourceLocation(ExPRegistryNames.modid, "textures/gui/campfire.png");
 
     static
 	{

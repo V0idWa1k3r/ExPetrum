@@ -6,7 +6,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.util.Constants;
-import v0id.api.core.util.nbt.NBTChain;
+import v0id.core.util.nbt.NBTChain;
 import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.world.chunk.IExPChunk;
 

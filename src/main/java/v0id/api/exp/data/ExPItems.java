@@ -2,7 +2,7 @@ package v0id.api.exp.data;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import v0id.api.core.markers.StaticStorage;
+import v0id.core.markers.StaticStorage;
 
 @StaticStorage
 @GameRegistry.ObjectHolder(ExPRegistryNames.modid)
@@ -73,4 +73,13 @@ public class ExPItems
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.itemChisel)
     public static final Item chisel = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemOre)
+    public static final Item ore = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemMoldTool)
+    public static final Item moldTool = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemMoldIngot)
+    public static final Item moldIngot = null;
 }

@@ -6,7 +6,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import v0id.api.core.VoidApi;
+import v0id.core.VoidApi;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

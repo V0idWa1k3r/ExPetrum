@@ -39,7 +39,7 @@ public class VoidApi
 	{
 		instance = this;
 		VCLoggers.loggerMod.log(LogLevel.Fine, "%s created.", VCConsts.modname);
-		Reflector.preloadClass("v0id.api.core.event.handler.VCEventHandler");
+		Reflector.preloadClass("v0id.core.event.handler.VCEventHandler");
 		VoidNetwork.networkManager = NetworkRegistry.INSTANCE.newSimpleChannel(VCConsts.modid + ".net");
 		VoidNetwork.networkManager.registerMessage(VoidNetHandler.class, Packet.class, 0, Side.CLIENT);
 		VoidNetwork.networkManager.registerMessage(VoidNetHandler.class, Packet.class, 0, Side.SERVER);

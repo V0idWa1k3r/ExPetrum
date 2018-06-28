@@ -1,7 +1,7 @@
 package v0id.api.exp.data;
 
 import org.apache.commons.lang3.ArrayUtils;
-import v0id.api.core.markers.StaticStorage;
+import v0id.core.markers.StaticStorage;
 import v0id.api.exp.block.EnumBerry;
 import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
@@ -36,7 +36,7 @@ public class ExPOreDict
 		blockFlint                                                                                                      = { "blockFlint" };
 	
 	public static final String[]
-		itemRock																										= { "itemRock" },
+		itemRock																										= { "itemRock", "rock" },
 		itemStick																										= { "stickWood" },
 		itemToolHeads																									= { "toolheadHammerStone", "toolheadAxeStone", "toolheadShovelStone", "toolheadSpearStone", "toolheadKnifeStone", "toolheadChiselStone", "toolheadArrowStone" },
 		itemSeeds																										= { "seeds", "seed" };
