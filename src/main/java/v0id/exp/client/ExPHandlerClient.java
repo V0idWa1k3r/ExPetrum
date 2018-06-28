@@ -21,6 +21,7 @@ import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.input.Keyboard;
 import v0id.core.logging.LogLevel;
@@ -41,6 +42,7 @@ import v0id.exp.player.inventory.ManagedSlot;
 import v0id.exp.player.inventory.PlayerInventoryHelper;
 import v0id.exp.settings.impl.SettingsClient;
 import v0id.exp.settings.impl.SettingsFlags;
+import v0id.exp.util.temperature.TemperatureUtils;
 
 import java.lang.reflect.Field;
 
@@ -259,5 +261,16 @@ public class ExPHandlerClient
         int vval = volume.getLeft() * volume.getRight();
         int vindex = vval == 1 ? 0 : vval <= 4 ? 1 : vval <= 6 ? 2 : vval <= 9 ? 3 : 4;
         event.getToolTip().add(I18n.format("exp.txt.weightvolume", (int)(weight * 1000), I18n.format("exp.txt.volume." + vindex)));
+        float temp = TemperatureUtils.getTemperature(is);
+        if (temp > 0)
+        {
+            event.getToolTip().add(I18n.format("exp.temp." + TemperatureUtils.getTemperatureIndex(temp)));
+        }
+
+        int[] ids = OreDictionary.getOreIDs(is);
+        for (int i : ids)
+        {
+            event.getToolTip().add(OreDictionary.getOreName(i));
+        }
     }
 }

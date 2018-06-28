@@ -21,6 +21,13 @@
         "name": "STICKWOOD"
     },
     {
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "rock"
+        },
+        "name": "ROCK"
+    },
+    {
         "ingredient": [
             {
                 "type": "forge:ore_dict",

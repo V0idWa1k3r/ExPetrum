@@ -1,0 +1,22 @@
+{
+    "result": {
+        "item": "exp:campfire",
+        "data": 0
+    },
+    "pattern": [
+        "TS",
+        "RR"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "T" : {
+            "item": "#TWINE"
+        },
+        "S" : {
+            "item": "#STICKWOOD"
+        },
+        "R" : {
+            "item": "#ROCK"
+        }
+    }
+}
