@@ -3,6 +3,7 @@ package v0id.exp.registry;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import v0id.api.exp.entity.ExPAnimalCapability;
 import v0id.api.exp.player.ExPPlayerCapability;
+import v0id.api.exp.tile.ExPTemperatureCapability;
 import v0id.api.exp.tile.crop.ExPCropCapability;
 import v0id.api.exp.tile.crop.ExPFarmlandCapability;
 import v0id.api.exp.tile.crop.ExPSeedsCapability;
@@ -25,5 +26,6 @@ public class ExPCapabilityRegistry extends AbstractRegistry
 		ExPFarmlandCapability.register();
 		ExPSeedsCapability.register();
         ExPAnimalCapability.register();
+		ExPTemperatureCapability.register();
 	}
 }
