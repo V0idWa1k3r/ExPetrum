@@ -1,0 +1,36 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "exp:item_generated",
+		"transform": "forge:default-item",
+		"textures" : {
+			"layer0" : "exp:items/common/rock/ore",
+            "layer1" : "exp:items/common/rock/ore_0"
+		}
+	},
+	"variants" : {
+		"inventory" : [{}],
+		"tindex": {
+            "-1" : {
+                "textures" : {
+                    "layer1" : "exp:items/common/rock/ore_0"
+                }
+            },
+            "0" : {
+                "textures" : {
+                    "layer1" : "exp:items/common/rock/ore_0"
+                }
+            },
+            "1" : {
+                "textures" : {
+                    "layer1" : "exp:items/common/rock/ore_1"
+                }
+            },
+            "2" : {
+                "textures" : {
+                    "layer1" : "exp:items/common/rock/ore_2"
+                }
+            }
+        }
+	}
+}

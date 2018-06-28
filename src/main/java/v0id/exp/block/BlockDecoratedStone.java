@@ -127,7 +127,7 @@ public class BlockDecoratedStone extends Block implements IChiselable, IWeightPr
 	public void initBlock()
 	{
 		this.setHardness(3);
-		this.setRegistryName(ExPRegistryNames.asLocation(this.type == EnumDecorationType.TILE ? ExPRegistryNames.blockDecoratedStoneTile : this.type == EnumDecorationType.BRICK ? ExPRegistryNames.blockDecoratedStoneBrick : ExPRegistryNames.getBlockDecoratedStoneBrickSmall));
+		this.setRegistryName(ExPRegistryNames.asLocation(this.type == EnumDecorationType.TILE ? ExPRegistryNames.blockDecoratedStoneTile : this.type == EnumDecorationType.BRICK ? ExPRegistryNames.blockDecoratedStoneBrick : ExPRegistryNames.blockDecoratedStoneBrickSmall));
 		this.setResistance(10);
 		this.setSoundType(SoundType.STONE);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));

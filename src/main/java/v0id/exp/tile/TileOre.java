@@ -1,10 +1,13 @@
 package v0id.exp.tile;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import v0id.api.exp.block.EnumOre;
+import v0id.api.exp.data.ExPItems;
+import v0id.exp.item.ItemGeneric;
 
 public class TileOre extends TileEntity
 {
@@ -54,4 +57,38 @@ public class TileOre extends TileEntity
 	{
 		this.deserializeNBT(tag);
 	}
+
+	public ItemStack createDrops()
+    {
+        int amount = this.amount / 10;
+        ItemStack ret = ItemStack.EMPTY;
+        switch (this.type)
+        {
+            case ANTHRACITE:
+            {
+                ret = new ItemStack(ExPItems.generic, amount, ItemGeneric.EnumGenericType.ANTHRACITE.ordinal());
+                break;
+            }
+
+            case BITUMINOUS_COAL:
+            {
+                ret = new ItemStack(ExPItems.generic, amount, ItemGeneric.EnumGenericType.BITUMINOUS_COAL.ordinal());
+                break;
+            }
+
+            case LIGNITE:
+            {
+                ret = new ItemStack(ExPItems.generic, amount, ItemGeneric.EnumGenericType.LIGNITE.ordinal());
+                break;
+            }
+
+            default:
+            {
+                ret = new ItemStack(ExPItems.ore, amount, this.type.ordinal());
+                break;
+            }
+        }
+
+        return ret;
+    }
 }

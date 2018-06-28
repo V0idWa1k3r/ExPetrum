@@ -9,6 +9,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -24,6 +25,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.exp.block.EnumOre;
+import v0id.api.exp.block.IChiselable;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.data.*;
 import v0id.exp.block.item.ItemBlockBoulderOre;
@@ -37,7 +39,7 @@ import java.util.stream.Stream;
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
 import static v0id.api.exp.data.ExPBlockProperties.ROCK_CLASS;
 
-public class BlockBoulderOre extends Block implements IInitializableBlock, IOreDictEntry, IItemBlockProvider
+public class BlockBoulderOre extends Block implements IInitializableBlock, IOreDictEntry, IItemBlockProvider, IChiselable
 {
     public static final AxisAlignedBB BOULDER_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.6, 0.9);
 
@@ -225,4 +227,21 @@ public class BlockBoulderOre extends Block implements IInitializableBlock, IOreD
 	{
 		registry.register(new ItemBlockBoulderOre(this));
 	}
+
+    @Override
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+    {
+        super.getDrops(drops, world, pos, state, fortune);
+        if (world.getTileEntity(pos) instanceof TileOre)
+        {
+            drops.add(((TileOre) world.getTileEntity(pos)).createDrops());
+        }
+    }
+
+    @Override
+    public IBlockState chisel(IBlockState original, World world, BlockPos pos)
+    {
+        this.dropBlockAsItem(world, pos, original, 0);
+        return Blocks.AIR.getDefaultState();
+    }
 }

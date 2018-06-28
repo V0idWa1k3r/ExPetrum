@@ -23,6 +23,26 @@
                 "textures" : {
                     "layer0" : "exp:items/misc/plant_fiber"
                 }
+            },
+			"lignite": {
+				"textures" : {
+					"layer0" : "exp:items/misc/lignite"
+				}
+			},
+			"bituminous_coal": {
+				"textures" : {
+					"layer0" : "exp:items/misc/bituminous_coal"
+				}
+			},
+			"anthracite": {
+				"textures" : {
+					"layer0" : "exp:items/misc/anthracite"
+				}
+			},
+            "ash": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/ash"
+                }
             }
 		}
 	}

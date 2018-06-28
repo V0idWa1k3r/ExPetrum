@@ -19,7 +19,11 @@ public class ItemGeneric extends Item implements IInitializableItem, IWeightProv
     {
         CLAY("clay", 0.05F, IWeightProvider.DEFAULT_VOLUME, "clay", "itemClay"),
         TWINE("twine", 0.001F, IWeightProvider.DEFAULT_VOLUME, "twine", "plantTwine"),
-        PLANT_FIBER("plant_fiber", 0.004F, IWeightProvider.DEFAULT_VOLUME, "fiber", "plantFiber");
+        PLANT_FIBER("plant_fiber", 0.004F, IWeightProvider.DEFAULT_VOLUME, "fiber", "plantFiber"),
+        LIGNITE("lignite", 0.05F, IWeightProvider.DEFAULT_VOLUME, "coal"),
+        BITUMINOUS_COAL("bituminous_coal", 0.05F, IWeightProvider.DEFAULT_VOLUME, "coal"),
+        ANTHRACITE("anthracite", 0.05F, IWeightProvider.DEFAULT_VOLUME, "coal"),
+        ASH("ash", 0F, IWeightProvider.DEFAULT_VOLUME, "ash", "dustAsh");
 
         EnumGenericType(String name, float weight, Pair<Byte, Byte> volume, String... oreDictNames)
         {
@@ -91,5 +95,12 @@ public class ItemGeneric extends Item implements IInitializableItem, IWeightProv
     public String getUnlocalizedName(ItemStack stack)
     {
         return super.getUnlocalizedName(stack) + "." + EnumGenericType.values()[stack.getMetadata()].getName();
+    }
+
+    @Override
+    public int getItemBurnTime(ItemStack itemStack)
+    {
+        EnumGenericType type = EnumGenericType.values()[itemStack.getMetadata()];
+        return type == EnumGenericType.LIGNITE ? 1000 : type == EnumGenericType.BITUMINOUS_COAL ? 1600 : type == EnumGenericType.ANTHRACITE ? 3200 : super.getItemBurnTime(itemStack);
     }
 }
