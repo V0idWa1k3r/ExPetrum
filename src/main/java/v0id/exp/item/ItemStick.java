@@ -67,10 +67,12 @@ public class ItemStick extends Item implements IInitializableItem, IWeightProvid
 	@Override
 	public void registerOreDictNames()
 	{
-		Stream.of(ExPOreDict.itemStick).forEach(s -> { 
-			OreDictionary.registerOre(s, new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE)); 
+		Stream.of(ExPOreDict.itemStick).forEach(s -> {
 			AtomicInteger i = new AtomicInteger(0);
-			Stream.of(ExPOreDict.stickNames).forEach(ss -> OreDictionary.registerOre(s + Character.toUpperCase(ss.charAt(0)) + ss.substring(1), new ItemStack(this, 1, i.getAndIncrement())));
+            Stream.of(ExPOreDict.stickNames).forEach(ss -> {
+                OreDictionary.registerOre(s, new ItemStack(this, 1, i.get()));
+                OreDictionary.registerOre(s + Character.toUpperCase(ss.charAt(0)) + ss.substring(1), new ItemStack(this, 1, i.getAndIncrement()));
+            });
 		});
 	}
 
@@ -78,5 +80,11 @@ public class ItemStick extends Item implements IInitializableItem, IWeightProvid
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
         return super.onItemRightClick(worldIn, playerIn, handIn);
+    }
+
+    @Override
+    public int getItemBurnTime(ItemStack itemStack)
+    {
+        return 100;
     }
 }

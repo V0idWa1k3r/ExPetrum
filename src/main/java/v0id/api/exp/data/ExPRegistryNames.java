@@ -54,7 +54,9 @@ public class ExPRegistryNames
         blockClay                                                                                           = "clay",
 		blockDecoratedStoneTile																	            = "rock_decorated_tile",
         blockDecoratedStoneBrick                                                                            = "rock_decorated_brick",
-        getBlockDecoratedStoneBrickSmall                                                                    = "rock_decorated_brick_small";
+        blockDecoratedStoneBrickSmall                                                                       = "rock_decorated_brick_small",
+        blockCampfire                                                                                       = "campfire",
+        blockPotteryStation                                                                                 = "pottery_station";
 
 	public static final String
 		itemRock																							= "item_rock",
@@ -78,7 +80,10 @@ public class ExPRegistryNames
 		itemBasket																							= "item_basket",
 		itemSaw																								= "item_saw",
         itemGeneric                                                                                         = "item_generic",
-        itemChisel                                                                                          = "item_chisel";
+        itemChisel                                                                                          = "item_chisel",
+		itemOre                                                                                             = "item_ore",
+        itemMoldTool                                                                                        = "item_tool_mold",
+        itemMoldIngot                                                                                       = "item_ingot_mold";
 
 	public static final String
         biomeBeach                                                                                          = "beach",

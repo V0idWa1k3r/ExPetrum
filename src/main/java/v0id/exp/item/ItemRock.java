@@ -59,10 +59,12 @@ public class ItemRock extends Item implements IInitializableItem, IWeightProvide
 	@Override
 	public void registerOreDictNames()
 	{
-		Stream.of(ExPOreDict.itemRock).forEach(s -> { 
-			OreDictionary.registerOre(s, new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE)); 
+		Stream.of(ExPOreDict.itemRock).forEach(s -> {
 			AtomicInteger i = new AtomicInteger(0);
-			Stream.of(ExPOreDict.rockNames).forEach(ss -> OreDictionary.registerOre(s + Character.toUpperCase(ss.charAt(0)) + ss.substring(1), new ItemStack(this, 1, i.getAndIncrement())));
-		});
+			Stream.of(ExPOreDict.rockNames).forEach(ss -> {
+                OreDictionary.registerOre(s, new ItemStack(this, 1, i.get()));
+                OreDictionary.registerOre(s + Character.toUpperCase(ss.charAt(0)) + ss.substring(1), new ItemStack(this, 1, i.getAndIncrement()));
+		    });
+        });
 	}
 }

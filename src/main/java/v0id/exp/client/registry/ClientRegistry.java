@@ -51,6 +51,7 @@ import v0id.exp.entity.EntityGravFallingBlock;
 import v0id.exp.entity.EntityThrownWeapon;
 import v0id.exp.entity.impl.Chicken;
 import v0id.exp.item.ItemGeneric;
+import v0id.exp.item.ItemMold;
 import v0id.exp.registry.ILifecycleListener;
 import v0id.exp.tile.TileFarmland;
 import v0id.exp.tile.TileOre;
@@ -107,6 +108,10 @@ public class ClientRegistry implements ILifecycleListener
                 worldIn.getTileEntity(pos) != null && worldIn.getTileEntity(pos) instanceof TileFarmland && worldIn.getTileEntity(pos).hasCapability(ExPFarmlandCapability.farmlandCap, EnumFacing.UP) ? ExPFarmland.getColor(IFarmland.of(worldIn.getTileEntity(pos), EnumFacing.UP)) : -1, ExPBlocks.farmland);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) ->
                 EnumMetal.values()[stack.getMetadata()].getColor(), ExPItems.ingot);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) ->
+                tintIndex == 1 ? EnumOre.values()[stack.getMetadata()].getColor() : -1, ExPItems.ore);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) ->
+                tintIndex == 1 ? EnumMetal.values()[stack.getMetadata() - 2].getColor() : -1, ExPItems.moldIngot);
     }
 
     @Override
@@ -127,6 +132,8 @@ public class ClientRegistry implements ILifecycleListener
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.snow), 0, new ModelResourceLocation(ExPBlocks.snow.getRegistryName(), "layers=1"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.crop), 0, new ModelResourceLocation("exp:crops/dead", "normal"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.flint), 0, new ModelResourceLocation(ExPBlocks.flint.getRegistryName(), "normal"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.campfire), 0, new ModelResourceLocation(ExPBlocks.campfire.getRegistryName(), "normal"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.potteryStation), 0, new ModelResourceLocation(ExPBlocks.potteryStation.getRegistryName(), "normal"));
 
         // Iteration-dependent models
         mkCustomModelResourceLocations(ExPItems.stick, EnumTreeType.values().length + EnumShrubType.values().length + EnumBerry.values().length, i -> "type=" + ExPOreDict.stickNames[i]);
@@ -155,6 +162,9 @@ public class ClientRegistry implements ILifecycleListener
         mkCustomModelResourceLocations(ExPBlocks.seaweed, 16, i -> "class=" + EnumRockClass.values()[i].getName());
         mkCustomModelResourceLocations(ExPBlocks.farmland, 16, i -> "class=" + EnumDirtClass.values()[i].getName());
         mkCustomModelResourceLocations(ExPItems.generic, ItemGeneric.EnumGenericType.values().length, i -> "type=" + ItemGeneric.EnumGenericType.values()[i].getName());
+        mkCustomModelResourceLocations(ExPItems.ore, EnumOre.values().length, i -> "tindex=" + Integer.toString(EnumOre.values()[i].getTextureIndex()));
+        mkCustomModelResourceLocations(ExPItems.moldTool, EnumToolClass.values().length * ItemMold.MoldType.values().length, i -> "state=" + ItemMold.MoldType.values()[i / EnumToolClass.values().length].name().toLowerCase() + ",tool=" + EnumToolClass.values()[i % EnumToolClass.values().length].name().toLowerCase());
+        mkCustomModelResourceLocations(ExPItems.moldIngot, 2 + EnumMetal.values().length, i -> "ingot=" + (i == 0 ? "clay" : i == 1 ? "ceramic" : EnumMetal.values()[i - 2].name().toLowerCase()));
 
         // Statically mapped item models
         registerStaticModel(ExPItems.basket, new ModelResourceLocation(ExPItems.basket.getRegistryName(), "inventory"));

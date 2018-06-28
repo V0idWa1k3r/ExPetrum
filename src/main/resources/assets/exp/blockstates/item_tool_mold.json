@@ -1,0 +1,224 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "exp:item_generated",
+		"transform": "forge:default-item",
+		"textures": {
+			"layer0": ""
+		}
+	},
+	"variants": {
+		"state": {
+			"clay,tool=pickaxe": {
+				"textures": {
+					"layer0": "exp:items/molds/clay_mold_pickaxe"
+				}
+			},
+			"clay,tool=axe": {
+				"textures": {
+					"layer0": "exp:items/molds/clay_mold_axe"
+				}
+			},
+			"clay,tool=shovel": {
+				"textures": {
+					"layer0": "exp:items/molds/clay_mold_shovel"
+				}
+			},
+			"clay,tool=hoe": {
+				"textures": {
+					"layer0": "exp:items/molds/clay_mold_hoe"
+				}
+			},
+			"clay,tool=sword": {
+				"textures": {
+					"layer0": "exp:items/molds/clay_mold_sword"
+				}
+			},
+			"clay,tool=knife": {
+				"textures": {
+					"layer0": "exp:items/molds/clay_mold_knife"
+				}
+			},
+			"clay,tool=scythe": {
+				"textures": {
+					"layer0": "exp:items/molds/clay_mold_scythe"
+				}
+			},
+			"clay,tool=battleaxe": {
+				"textures": {
+					"layer0": "exp:items/molds/clay_mold_battleaxe"
+				}
+			},
+			"clay,tool=hammer": {
+				"textures": {
+					"layer0": "exp:items/molds/clay_mold_hammer"
+				}
+			},
+			"clay,tool=spear": {
+				"textures": {
+					"layer0": "exp:items/molds/clay_mold_spear"
+				}
+			},
+			"clay,tool=watering_can": {
+				"textures": {
+					"layer0": "exp:items/molds/clay_mold_watering_can"
+				}
+			},
+			"clay,tool=gardening_spade": {
+				"textures": {
+					"layer0": "exp:items/molds/clay_mold_gardening_spade"
+				}
+			},
+			"clay,tool=saw": {
+				"textures": {
+					"layer0": "exp:items/molds/clay_mold_saw"
+				}
+			},
+			"clay,tool=chisel": {
+				"textures": {
+					"layer0": "exp:items/molds/clay_mold_chisel"
+				}
+			},
+			"ceramic,tool=pickaxe": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_pickaxe"
+				}
+			},
+			"ceramic,tool=axe": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_axe"
+				}
+			},
+			"ceramic,tool=shovel": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_shovel"
+				}
+			},
+			"ceramic,tool=hoe": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_hoe"
+				}
+			},
+			"ceramic,tool=sword": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_sword"
+				}
+			},
+			"ceramic,tool=knife": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_knife"
+				}
+			},
+			"ceramic,tool=scythe": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_scythe"
+				}
+			},
+			"ceramic,tool=battleaxe": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_battleaxe"
+				}
+			},
+			"ceramic,tool=hammer": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_hammer"
+				}
+			},
+			"ceramic,tool=spear": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_spear"
+				}
+			},
+			"ceramic,tool=watering_can": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_watering_can"
+				}
+			},
+			"ceramic,tool=gardening_spade": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_gardening_spade"
+				}
+			},
+			"ceramic,tool=saw": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_saw"
+				}
+			},
+			"ceramic,tool=chisel": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_chisel"
+				}
+			},
+			"full,tool=pickaxe": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_pickaxe_full"
+				}
+			},
+			"full,tool=axe": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_axe_full"
+				}
+			},
+			"full,tool=shovel": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_shovel_full"
+				}
+			},
+			"full,tool=hoe": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_hoe_full"
+				}
+			},
+			"full,tool=sword": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_sword_full"
+				}
+			},
+			"full,tool=knife": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_knife_full"
+				}
+			},
+			"full,tool=scythe": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_scythe_full"
+				}
+			},
+			"full,tool=battleaxe": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_battleaxe_full"
+				}
+			},
+			"full,tool=hammer": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_hammer_full"
+				}
+			},
+			"full,tool=spear": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_spear_full"
+				}
+			},
+			"full,tool=watering_can": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_watering_can_full"
+				}
+			},
+			"full,tool=gardening_spade": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_gardening_spade_full"
+				}
+			},
+			"full,tool=saw": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_saw_full"
+				}
+			},
+			"full,tool=chisel": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_chisel_full"
+				}
+			}
+		}
+	}
+}

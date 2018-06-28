@@ -1,0 +1,294 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "exp:item_generated",
+		"transform": "forge:default-item",
+		"textures": {
+			"layer0": ""
+		}
+	},
+	"variants": {
+		"ingot": {
+			"clay": {
+				"textures": {
+					"layer0": "exp:items/molds/clay_mold_ingot"
+				}
+			},
+			"ceramic": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot"
+				}
+			},
+			"tin": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"barium": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"copper": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"aluminium": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"chromium": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"cobalt": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"tantalum": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"magnesium": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"lead": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"gold": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"iron": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"titanium": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"molybdenum": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"nickel": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"manganese": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"tungsten": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"platinum": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"zinc": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"uranium": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"bismuth": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"silver": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"iridium": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"osmium": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"bronze": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"bismuth_bronze": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"high_leaded_bronze": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"brass": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"manganese_bronze": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"aluminum_bronze": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"sterling_silver": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"electrum": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"platinum_sterling": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"invar": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"cast_iron": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"pig_iron": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"steel": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"hsla_steel": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"stainless_steel": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"tool_steel": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"solder": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"alnico": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"duralumin": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"rose_alloy": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"nichrome": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
+			"vitallium": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			}
+		}
+	}
+}
