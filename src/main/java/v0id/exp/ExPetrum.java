@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.CoreModManager;
 import org.apache.commons.io.IOUtils;
 import v0id.core.logging.LogLevel;
@@ -18,6 +19,7 @@ import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.world.YearlyTemperatureRange;
 import v0id.core.VoidApi;
 import v0id.exp.crop.CropDataLoader;
+import v0id.exp.net.GuiHandler;
 import v0id.exp.player.inventory.WeightDataLoader;
 import v0id.exp.proxy.IExPProxy;
 import v0id.exp.registry.*;
@@ -89,12 +91,14 @@ public class ExPetrum
 		AbstractRegistry.create(ExPOreDictRegistry.class);
 		AbstractRegistry.create(ExPWeaponAttacksRegistry.class);
 		AbstractRegistry.create(ExPPotionRegistry.class);
+		AbstractRegistry.create(ExPRecipeRegistry.class);
 	}
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt)
 	{
 		VoidApi.getInstance().preInit(evt);
+		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 		containerOfSelf = Loader.instance().activeModContainer();
 		this.setDevEnvironment();
 		ExPMisc.modLogger.log(LogLevel.Debug, "ExPetrum pre initializing.");

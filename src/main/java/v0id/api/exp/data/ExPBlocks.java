@@ -216,6 +216,12 @@ public class ExPBlocks
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockDecoratedStoneBrick)
     public static final Block rockDeco1 = null;
 
-    @GameRegistry.ObjectHolder(ExPRegistryNames.getBlockDecoratedStoneBrickSmall)
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockDecoratedStoneBrickSmall)
     public static final Block rockDeco2 = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockCampfire)
+    public static final Block campfire = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockPotteryStation)
+    public static final Block potteryStation = null;
 }

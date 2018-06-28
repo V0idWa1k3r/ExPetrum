@@ -26,6 +26,7 @@ import v0id.api.exp.item.food.IExPFood;
 import v0id.api.exp.player.BodyPart;
 import v0id.api.exp.player.FoodGroup;
 import v0id.api.exp.player.IExPPlayer;
+import v0id.exp.util.temperature.TemperatureUtils;
 
 import java.lang.reflect.Field;
 import java.util.EnumMap;
@@ -113,6 +114,10 @@ public class PlayerManager
 			
 			handleHunger(player, data, skippedTicks);
 			handleThirst(player, data, skippedTicks);
+			for (int i = 0; i < player.inventory.getSizeInventory(); ++i)
+            {
+                TemperatureUtils.tickItem(player.inventory.getStackInSlot(i), true);
+            }
 		}
 	}
 	

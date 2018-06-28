@@ -7,8 +7,8 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.fx.EnumParticle;
-import v0id.exp.client.registry.ClientRegistry;
 import v0id.exp.client.fx.ParticleEngine;
+import v0id.exp.client.registry.ClientRegistry;
 import v0id.exp.combat.ClientCombatHandler;
 
 public class ExPProxyClient implements IExPProxy
