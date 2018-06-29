@@ -2,7 +2,7 @@ package v0id.api.exp.entity;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.datasync.DataParameter;
-import v0id.api.exp.player.FoodGroup;
+import v0id.api.exp.player.EnumFoodGroup;
 
 /**
  * Created by V0idWa1k3r on 19-Jun-17.
@@ -13,7 +13,7 @@ public interface IAnimalProvider
 {
     float getMaxFamiliarity();
 
-    FoodGroup[] getFavouriteFood();
+    EnumFoodGroup[] getFavouriteFood();
 
     DataParameter<Boolean> getGenderParam();
 

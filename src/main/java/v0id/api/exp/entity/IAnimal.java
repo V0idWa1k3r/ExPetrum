@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.util.INBTSerializable;
-import v0id.api.exp.player.FoodGroup;
+import v0id.api.exp.player.EnumFoodGroup;
 import v0id.api.exp.world.Calendar;
 
 import javax.annotation.Nonnull;
@@ -126,7 +126,7 @@ public interface IAnimal extends INBTSerializable<NBTTagCompound>
      * Gets the food groups this animal considers 'favourite'. Usually [VEGETABLE, GRAIN] for herbivores and [PROTEIN] for carnivores but some exceptions exist. This is defined in a particular entity's implementation and the client is aware of that definement.
      * @return - The array of food this entity will eat. Will always contain at least 1 entry!
      */
-    FoodGroup[] getFavouriteFood();
+    EnumFoodGroup[] getFavouriteFood();
 
     /**
      * Checks if the entity can be bred with other entity(they are of the same implementation, different genders, fertile and are not currently pregnant)

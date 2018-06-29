@@ -29,7 +29,7 @@ public class ExPPlayer implements IExPPlayer
 	public float maxHealth;
 	public final Multimap<ModifierCollection, IModifier> modifiers = TreeMultimap.create();
 	public float calories;
-	public final Map<FoodGroup, Float> nutritionLevels = Maps.newEnumMap(FoodGroup.class);
+	public final Map<EnumFoodGroup, Float> nutritionLevels = Maps.newEnumMap(EnumFoodGroup.class);
 	public float thirst;
 	public float maxThirst;
 	public float temperature;
@@ -107,7 +107,7 @@ public class ExPPlayer implements IExPPlayer
 		if (this.nutritionLevels_isDirty)
 		{
 			NBTTagList lst = new NBTTagList();
-			for (Map.Entry<FoodGroup, Float> nutEntry : this.nutritionLevels.entrySet())
+			for (Map.Entry<EnumFoodGroup, Float> nutEntry : this.nutritionLevels.entrySet())
 			{
 				NBTTagFloat tag = new NBTTagFloat(nutEntry.getValue());
 				lst.appendTag(tag);
@@ -227,7 +227,7 @@ public class ExPPlayer implements IExPPlayer
 			NBTTagList lst = nbt.getTagList("nutritionLevels", NBT.TAG_FLOAT);
 			for (int i = 0; i < lst.tagCount(); ++i)
 			{
-				this.nutritionLevels.put(FoodGroup.values()[i], lst.getFloatAt(i));
+				this.nutritionLevels.put(EnumFoodGroup.values()[i], lst.getFloatAt(i));
 			}
 		}
 		
@@ -392,7 +392,7 @@ public class ExPPlayer implements IExPPlayer
 	}
 
 	@Override
-	public float getNutritionLevel(FoodGroup nutrient)
+	public float getNutritionLevel(EnumFoodGroup nutrient)
 	{
 		return this.nutritionLevels.get(nutrient);
 	}
@@ -407,7 +407,7 @@ public class ExPPlayer implements IExPPlayer
 	}
 
 	@Override
-	public void setNutritionLevel(float newValue, FoodGroup nutrient)
+	public void setNutritionLevel(float newValue, EnumFoodGroup nutrient)
 	{
 		this.nutritionLevels_isDirty |= newValue != this.nutritionLevels.get(nutrient);
 		this.serverIsDirty |= this.nutritionLevels_isDirty;
@@ -587,7 +587,7 @@ public class ExPPlayer implements IExPPlayer
 	public static ExPPlayer createDefault()
 	{
 		ExPPlayer ret = new ExPPlayer();
-		for (FoodGroup n : FoodGroup.values())
+		for (EnumFoodGroup n : EnumFoodGroup.values())
 		{
 			ret.nutritionLevels.put(n, 100f);
 		}
@@ -602,7 +602,7 @@ public class ExPPlayer implements IExPPlayer
 			ret.partsData.put(part, "");
 		}
 		
-		for (FoodGroup n : FoodGroup.values())
+		for (EnumFoodGroup n : EnumFoodGroup.values())
 		{
 			ret.nutritionLevels.put(n, 100F);
 		}
@@ -651,7 +651,7 @@ public class ExPPlayer implements IExPPlayer
 			this.partsData.put(part, "");
 		}
 		
-		for (FoodGroup n : FoodGroup.values())
+		for (EnumFoodGroup n : EnumFoodGroup.values())
 		{
 			this.nutritionLevels.put(n, 100F);
 		}

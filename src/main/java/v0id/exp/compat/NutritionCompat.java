@@ -8,7 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.capabilities.Capability;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.item.food.FoodEntry;
-import v0id.api.exp.player.FoodGroup;
+import v0id.api.exp.player.EnumFoodGroup;
 import v0id.core.logging.LogLevel;
 
 import java.lang.reflect.Field;
@@ -37,7 +37,7 @@ public class NutritionCompat
         entry.getNutrientData().forEach((k, v) -> addNutrition(player, k, v * multiplier * calMultiplier));
     }
 
-    public static void addNutrition(EntityPlayer player, FoodGroup group, float value)
+    public static void addNutrition(EntityPlayer player, EnumFoodGroup group, float value)
     {
         try
         {

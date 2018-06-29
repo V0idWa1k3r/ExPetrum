@@ -27,7 +27,7 @@ import v0id.api.exp.inventory.IWeightProvider;
 import v0id.api.exp.item.IContainerTickable;
 import v0id.api.exp.item.food.FoodEntry;
 import v0id.api.exp.item.food.IExPFood;
-import v0id.api.exp.player.FoodGroup;
+import v0id.api.exp.player.EnumFoodGroup;
 import v0id.api.exp.player.IExPPlayer;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.world.Calendar;
@@ -109,11 +109,11 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
     }
 
 	@Override
-	public EnumMap<FoodGroup, Float> getFoodGroup(ItemStack stack)
+	public EnumMap<EnumFoodGroup, Float> getFoodGroup(ItemStack stack)
 	{
-		EnumMap<FoodGroup, Float> nutMap = new EnumMap<>(FoodGroup.class);
+		EnumMap<EnumFoodGroup, Float> nutMap = new EnumMap<>(EnumFoodGroup.class);
 		float weightMul = this.getTotalWeight(stack) / 100;
-		this.getEntry(stack).getNutrientData().forEach((FoodGroup n, Float f) -> nutMap.put(n, f * weightMul));
+		this.getEntry(stack).getNutrientData().forEach((EnumFoodGroup n, Float f) -> nutMap.put(n, f * weightMul));
 		return nutMap;
 	}
 

@@ -24,7 +24,7 @@ import v0id.api.exp.data.ExPDamageMappings.DamageMapping;
 import v0id.api.exp.item.food.FoodManager;
 import v0id.api.exp.item.food.IExPFood;
 import v0id.api.exp.player.BodyPart;
-import v0id.api.exp.player.FoodGroup;
+import v0id.api.exp.player.EnumFoodGroup;
 import v0id.api.exp.player.IExPPlayer;
 import v0id.exp.util.temperature.TemperatureUtils;
 
@@ -201,7 +201,7 @@ public class PlayerManager
 		}
 		else
 		{
-			Pair<Float, EnumMap<FoodGroup, Float>> foodData = FoodManager.provideFoodStats(stack);
+			Pair<Float, EnumMap<EnumFoodGroup, Float>> foodData = FoodManager.provideFoodStats(stack);
 			if (foodData != null)
 			{
 				applyFoodStats(player, data, foodData.getKey(), foodData.getRight());
@@ -209,10 +209,10 @@ public class PlayerManager
 		}
 	}
 	
-	public static void applyFoodStats(EntityPlayer player, IExPPlayer data, float calories, EnumMap<FoodGroup, Float> nutrients)
+	public static void applyFoodStats(EntityPlayer player, IExPPlayer data, float calories, EnumMap<EnumFoodGroup, Float> nutrients)
 	{
 		data.setCalories(Math.min(2000F, data.getCalories() + calories));
-		nutrients.forEach((FoodGroup n, Float f) -> data.setNutritionLevel(Math.min(100, data.getNutritionLevel(n) + f), n));
+		nutrients.forEach((EnumFoodGroup n, Float f) -> data.setNutritionLevel(Math.min(100, data.getNutritionLevel(n) + f), n));
 	}
 	
 	public static void handlePlayerPlaceBlock(EntityPlayer player, IExPPlayer data)
@@ -244,7 +244,7 @@ public class PlayerManager
 		{
 			data.setCalories(data.getCalories() - cRemoved);
 			float cCurrent = data.getCalories();
-			for (FoodGroup n : FoodGroup.values())
+			for (EnumFoodGroup n : EnumFoodGroup.values())
 			{
 				data.setNutritionLevel(Math.max(0, data.getNutritionLevel(n) - (cCurrent >= 500 ? 0.001F : 0.005F) * multiplier), n);
 			}

@@ -82,10 +82,10 @@ public interface IExPPlayer extends INBTSerializable<NBTTagCompound>
 	
 	/**
 	 * Getter for the specific nutrition level.
-	 * @param group : the FoodGroup to get the level of
+	 * @param group : the EnumFoodGroup to get the level of
 	 * @return The level of a specific nutrient
 	 */
-	float getNutritionLevel(FoodGroup group);
+	float getNutritionLevel(EnumFoodGroup group);
 	
 	/**
 	 * Setter for the player's calories (food)
@@ -98,7 +98,7 @@ public interface IExPPlayer extends INBTSerializable<NBTTagCompound>
 	 * @param newValue : the value to set
 	 * @param group : the group to set the level of
 	 */
-	void setNutritionLevel(float newValue, FoodGroup group);
+	void setNutritionLevel(float newValue, EnumFoodGroup group);
 	
 	/**
 	 * Getter for player's thirst level.

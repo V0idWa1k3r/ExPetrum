@@ -3,7 +3,7 @@ package v0id.api.exp.item.food;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.tuple.Pair;
-import v0id.api.exp.player.FoodGroup;
+import v0id.api.exp.player.EnumFoodGroup;
 
 import java.util.List;
 import java.util.Map;
@@ -14,7 +14,7 @@ public class FoodEntry
 	private final int id;
 	
 	// Per 100 grams
-	private Map<FoodGroup, Float> nutrientData = Maps.newHashMap();
+	private Map<EnumFoodGroup, Float> nutrientData = Maps.newHashMap();
 	private float caloriesRestored;
 	
 	// Volume in inventory
@@ -83,13 +83,13 @@ public class FoodEntry
 		return this;
 	}
 	
-	public FoodEntry withFoodGroupData(FoodGroup n, Float f)
+	public FoodEntry withFoodGroupData(EnumFoodGroup n, Float f)
 	{
 		this.getNutrientData().put(n, f);
 		return this;
 	}
 	
-	public FoodEntry withFoodGroupData(Map<FoodGroup, Float> map)
+	public FoodEntry withFoodGroupData(Map<EnumFoodGroup, Float> map)
 	{
 		this.setNutrientData(map);
 		return this;
@@ -101,7 +101,7 @@ public class FoodEntry
 		return this;
 	}
 
-	public FoodEntry withNutrition(FoodGroup category, float value)
+	public FoodEntry withNutrition(EnumFoodGroup category, float value)
     {
         this.nutrientData.put(category, value);
         return this;
@@ -122,12 +122,12 @@ public class FoodEntry
 		return this.id;
 	}
 
-	public Map<FoodGroup, Float> getNutrientData()
+	public Map<EnumFoodGroup, Float> getNutrientData()
 	{
 		return this.nutrientData;
 	}
 
-	public void setNutrientData(Map<FoodGroup, Float> nutrientData)
+	public void setNutrientData(Map<EnumFoodGroup, Float> nutrientData)
 	{
 		this.nutrientData = nutrientData;
 	}
@@ -198,62 +198,62 @@ public class FoodEntry
 	// Without it you would need 212 crops of barley growing CONSTANTLY to even allow bare SURVIVAL.
 	// Yeah. Really puts those huge crop fields in real life into perspective as I took all numbers from wiki.
 	public static final float BALANCE_MULTIPLIER = 8;
-	public static final FoodEntry BARLEY = new FoodEntry().withCalories(354 * BALANCE_MULTIPLIER).withName("barley").withNutrition(FoodGroup.GRAIN, 4);
-	public static final FoodEntry BEANS = new FoodEntry().withCalories(80 * BALANCE_MULTIPLIER).withName("beans").withNutrition(FoodGroup.VEGETABLE, 4);
-	public static final FoodEntry BEETROOT = new FoodEntry().withCalories(43 * BALANCE_MULTIPLIER).withName("beetroot").withNutrition(FoodGroup.VEGETABLE, 4);
-	public static final FoodEntry CABBAGE = new FoodEntry().withCalories(25 * BALANCE_MULTIPLIER).withName("cabbage").withNutrition(FoodGroup.VEGETABLE, 4);
-	public static final FoodEntry CARROT = new FoodEntry().withCalories(41 * BALANCE_MULTIPLIER).withName("carrot").withNutrition(FoodGroup.VEGETABLE, 4);
-	public static final FoodEntry CASSAVA = new FoodEntry().withCalories(160 * BALANCE_MULTIPLIER).withName("cassava").withNutrition(FoodGroup.VEGETABLE, 4);
-	public static final FoodEntry CORN = new FoodEntry().withCalories(86 * BALANCE_MULTIPLIER).withName("corn").withNutrition(FoodGroup.GRAIN, 4);
-	public static final FoodEntry CUCUMBER = new FoodEntry().withCalories(65 * BALANCE_MULTIPLIER).withName("cucumber").withNutrition(FoodGroup.VEGETABLE, 4);
-	public static final FoodEntry EGGPLANT = new FoodEntry().withCalories(25 * BALANCE_MULTIPLIER).withName("eggplant").withNutrition(FoodGroup.VEGETABLE, 4);
-	public static final FoodEntry GARLIC = new FoodEntry().withCalories(149 * BALANCE_MULTIPLIER).withName("garlic").withNutrition(FoodGroup.VEGETABLE, 2);
-	public static final FoodEntry LEEK = new FoodEntry().withCalories(255 * BALANCE_MULTIPLIER).withName("leek").withNutrition(FoodGroup.VEGETABLE, 2);
-	public static final FoodEntry LETTUCE = new FoodEntry().withCalories(13 * BALANCE_MULTIPLIER).withName("lettuce").withNutrition(FoodGroup.VEGETABLE, 4);
-	public static final FoodEntry MILLET = new FoodEntry().withCalories(378 * BALANCE_MULTIPLIER).withName("millet").withNutrition(FoodGroup.VEGETABLE, 4);
-	public static final FoodEntry OAT = new FoodEntry().withCalories(389 * BALANCE_MULTIPLIER).withName("oat").withNutrition(FoodGroup.GRAIN, 4);
-	public static final FoodEntry ONION = new FoodEntry().withCalories(40 * BALANCE_MULTIPLIER).withName("onion").withNutrition(FoodGroup.VEGETABLE, 4);
-	public static final FoodEntry PARSNIP = new FoodEntry().withCalories(75 * BALANCE_MULTIPLIER).withName("parsnip").withNutrition(FoodGroup.VEGETABLE, 4);
-	public static final FoodEntry PEAS = new FoodEntry().withCalories(81 * BALANCE_MULTIPLIER).withName("peas").withNutrition(FoodGroup.VEGETABLE, 4);
-	public static final FoodEntry PEPPER_GREEN = new FoodEntry().withCalories(20 * BALANCE_MULTIPLIER).withName("pepper_green").withNutrition(FoodGroup.VEGETABLE, 4);
-	public static final FoodEntry PEPPER_YELLOW = new FoodEntry().withCalories(20 * BALANCE_MULTIPLIER).withName("pepper_yellow").withNutrition(FoodGroup.VEGETABLE, 4);
-	public static final FoodEntry PEPPER_RED = new FoodEntry().withCalories(20 * BALANCE_MULTIPLIER).withName("pepper_red").withNutrition(FoodGroup.VEGETABLE, 4);
-	public static final FoodEntry POTATO = new FoodEntry().withCalories(77 * BALANCE_MULTIPLIER).withName("potato").withNutrition(FoodGroup.VEGETABLE, 4);
-	public static final FoodEntry PUMPKIN = new FoodEntry().withCalories(26 * BALANCE_MULTIPLIER).withName("pumpkin").withNutrition(FoodGroup.VEGETABLE, 4);
-	public static final FoodEntry RADISH = new FoodEntry().withCalories(16 * BALANCE_MULTIPLIER).withName("radish").withNutrition(FoodGroup.VEGETABLE, 4);
-	public static final FoodEntry RICE = new FoodEntry().withCalories(130 * BALANCE_MULTIPLIER).withName("rice").withNutrition(FoodGroup.GRAIN, 4);
-	public static final FoodEntry RYE = new FoodEntry().withCalories(324 * BALANCE_MULTIPLIER).withName("rye").withNutrition(FoodGroup.GRAIN, 4);
-	public static final FoodEntry SORGHUM = new FoodEntry().withCalories(329 * BALANCE_MULTIPLIER).withName("sorghum").withNutrition(FoodGroup.GRAIN, 4);
-	public static final FoodEntry SPINACH = new FoodEntry().withCalories(23 * BALANCE_MULTIPLIER).withName("spinach").withNutrition(FoodGroup.VEGETABLE, 4);
-	public static final FoodEntry SWEET_POTATO = new FoodEntry().withCalories(86 * BALANCE_MULTIPLIER).withName("sweet_potato").withNutrition(FoodGroup.VEGETABLE, 4);
-	public static final FoodEntry TOMATO = new FoodEntry().withCalories(18 * BALANCE_MULTIPLIER).withName("tomato").withNutrition(FoodGroup.VEGETABLE, 4);
-	public static final FoodEntry TURNIP = new FoodEntry().withCalories(20 * BALANCE_MULTIPLIER).withName("turnip").withNutrition(FoodGroup.VEGETABLE, 4);
-	public static final FoodEntry WHEAT = new FoodEntry().withCalories(327 * BALANCE_MULTIPLIER).withName("wheat").withNutrition(FoodGroup.GRAIN, 4);
-	public static final FoodEntry BLACKBERRY = new FoodEntry().withCalories(43 * BALANCE_MULTIPLIER).withName("blackberry").withNutrition(FoodGroup.VEGETABLE, 1);
-	public static final FoodEntry CLOUDBERRY = new FoodEntry().withCalories(51 * BALANCE_MULTIPLIER).withName("cloudberry").withNutrition(FoodGroup.VEGETABLE, 1);
-	public static final FoodEntry RASPBERRY = new FoodEntry().withCalories(51 * BALANCE_MULTIPLIER).withName("raspberry").withNutrition(FoodGroup.VEGETABLE, 1);
-	public static final FoodEntry BLUEBERRY = new FoodEntry().withCalories(57 * BALANCE_MULTIPLIER).withName("blueberry").withNutrition(FoodGroup.VEGETABLE, 1);
-	public static final FoodEntry CRANBERRY = new FoodEntry().withCalories(46 * BALANCE_MULTIPLIER).withName("cranberry").withNutrition(FoodGroup.VEGETABLE, 1);
-	public static final FoodEntry ELDERBERRY = new FoodEntry().withCalories(73 * BALANCE_MULTIPLIER).withName("elderberry").withNutrition(FoodGroup.VEGETABLE, 1);
-	public static final FoodEntry GOOSEBERRY = new FoodEntry().withCalories(44 * BALANCE_MULTIPLIER).withName("gooseberry").withNutrition(FoodGroup.VEGETABLE, 1);
-	public static final FoodEntry HACKBERRY = new FoodEntry().withCalories(54 * BALANCE_MULTIPLIER).withName("hackberry").withNutrition(FoodGroup.VEGETABLE, 1);
-	public static final FoodEntry STRAWBERRY = new FoodEntry().withCalories(33 * BALANCE_MULTIPLIER).withName("strawberry").withNutrition(FoodGroup.VEGETABLE, 1);
-	public static final FoodEntry WOLFBERRY = new FoodEntry().withCalories(37 * BALANCE_MULTIPLIER).withName("wolfberry").setPoisonous().withNutrition(FoodGroup.VEGETABLE, 1);
-	public static final FoodEntry SALMONBERRY = new FoodEntry().withCalories(47 * BALANCE_MULTIPLIER).withName("salmonberry").withNutrition(FoodGroup.VEGETABLE, 1);
-	public static final FoodEntry CROWBERRY = new FoodEntry().withCalories(43 * BALANCE_MULTIPLIER).withName("crowberry").withNutrition(FoodGroup.VEGETABLE, 1);
-    public static final FoodEntry APPLE = new FoodEntry().withCalories(52 * BALANCE_MULTIPLIER).withName("apple").withNutrition(FoodGroup.FRUIT, 4);
-    public static final FoodEntry OLIVE = new FoodEntry().withCalories(148 * BALANCE_MULTIPLIER).withName("olive").withNutrition(FoodGroup.FRUIT, 4);
-    public static final FoodEntry PEACH = new FoodEntry().withCalories(39 * BALANCE_MULTIPLIER).withName("peach").withNutrition(FoodGroup.FRUIT, 4);
-    public static final FoodEntry ORANGE = new FoodEntry().withCalories(47 * BALANCE_MULTIPLIER).withName("orange").withNutrition(FoodGroup.FRUIT, 4);
-    public static final FoodEntry PEAR = new FoodEntry().withCalories(57 * BALANCE_MULTIPLIER).withName("pear").withNutrition(FoodGroup.FRUIT, 4);
-    public static final FoodEntry PLUM = new FoodEntry().withCalories(46 * BALANCE_MULTIPLIER).withName("plum").withNutrition(FoodGroup.FRUIT, 4);
-    public static final FoodEntry BANANA = new FoodEntry().withCalories(89 * BALANCE_MULTIPLIER).withName("banana").withNutrition(FoodGroup.FRUIT, 4);
-    public static final FoodEntry LEMON = new FoodEntry().withCalories(29 * BALANCE_MULTIPLIER).withName("lemon").withNutrition(FoodGroup.FRUIT, 4);
-    public static final FoodEntry APRICOT = new FoodEntry().withCalories(48 * BALANCE_MULTIPLIER).withName("apricot").withNutrition(FoodGroup.FRUIT, 4);
-    public static final FoodEntry WALNUT = new FoodEntry().withCalories(654 * BALANCE_MULTIPLIER).withName("walnut").withNutrition(FoodGroup.FRUIT, 4);
-    public static final FoodEntry CHERRY = new FoodEntry().withCalories(63 * BALANCE_MULTIPLIER).withName("cherry").withNutrition(FoodGroup.FRUIT, 4);
-    public static final FoodEntry POMEGRANATE = new FoodEntry().withCalories(83 * BALANCE_MULTIPLIER).withName("pomegranate").withNutrition(FoodGroup.FRUIT, 4);
-    public static final FoodEntry GRAPEFRUIT = new FoodEntry().withCalories(33 * BALANCE_MULTIPLIER).withName("grapefruit").withNutrition(FoodGroup.FRUIT, 4);
-    public static final FoodEntry AVOCADO = new FoodEntry().withCalories(160 * BALANCE_MULTIPLIER).withName("avocado").withNutrition(FoodGroup.FRUIT, 4);
-    public static final FoodEntry CARAMBOLA = new FoodEntry().withCalories(31 * BALANCE_MULTIPLIER).withName("carambola").withNutrition(FoodGroup.FRUIT, 4);
+	public static final FoodEntry BARLEY = new FoodEntry().withCalories(354 * BALANCE_MULTIPLIER).withName("barley").withNutrition(EnumFoodGroup.GRAIN, 4);
+	public static final FoodEntry BEANS = new FoodEntry().withCalories(80 * BALANCE_MULTIPLIER).withName("beans").withNutrition(EnumFoodGroup.VEGETABLE, 4);
+	public static final FoodEntry BEETROOT = new FoodEntry().withCalories(43 * BALANCE_MULTIPLIER).withName("beetroot").withNutrition(EnumFoodGroup.VEGETABLE, 4);
+	public static final FoodEntry CABBAGE = new FoodEntry().withCalories(25 * BALANCE_MULTIPLIER).withName("cabbage").withNutrition(EnumFoodGroup.VEGETABLE, 4);
+	public static final FoodEntry CARROT = new FoodEntry().withCalories(41 * BALANCE_MULTIPLIER).withName("carrot").withNutrition(EnumFoodGroup.VEGETABLE, 4);
+	public static final FoodEntry CASSAVA = new FoodEntry().withCalories(160 * BALANCE_MULTIPLIER).withName("cassava").withNutrition(EnumFoodGroup.VEGETABLE, 4);
+	public static final FoodEntry CORN = new FoodEntry().withCalories(86 * BALANCE_MULTIPLIER).withName("corn").withNutrition(EnumFoodGroup.GRAIN, 4);
+	public static final FoodEntry CUCUMBER = new FoodEntry().withCalories(65 * BALANCE_MULTIPLIER).withName("cucumber").withNutrition(EnumFoodGroup.VEGETABLE, 4);
+	public static final FoodEntry EGGPLANT = new FoodEntry().withCalories(25 * BALANCE_MULTIPLIER).withName("eggplant").withNutrition(EnumFoodGroup.VEGETABLE, 4);
+	public static final FoodEntry GARLIC = new FoodEntry().withCalories(149 * BALANCE_MULTIPLIER).withName("garlic").withNutrition(EnumFoodGroup.VEGETABLE, 2);
+	public static final FoodEntry LEEK = new FoodEntry().withCalories(255 * BALANCE_MULTIPLIER).withName("leek").withNutrition(EnumFoodGroup.VEGETABLE, 2);
+	public static final FoodEntry LETTUCE = new FoodEntry().withCalories(13 * BALANCE_MULTIPLIER).withName("lettuce").withNutrition(EnumFoodGroup.VEGETABLE, 4);
+	public static final FoodEntry MILLET = new FoodEntry().withCalories(378 * BALANCE_MULTIPLIER).withName("millet").withNutrition(EnumFoodGroup.VEGETABLE, 4);
+	public static final FoodEntry OAT = new FoodEntry().withCalories(389 * BALANCE_MULTIPLIER).withName("oat").withNutrition(EnumFoodGroup.GRAIN, 4);
+	public static final FoodEntry ONION = new FoodEntry().withCalories(40 * BALANCE_MULTIPLIER).withName("onion").withNutrition(EnumFoodGroup.VEGETABLE, 4);
+	public static final FoodEntry PARSNIP = new FoodEntry().withCalories(75 * BALANCE_MULTIPLIER).withName("parsnip").withNutrition(EnumFoodGroup.VEGETABLE, 4);
+	public static final FoodEntry PEAS = new FoodEntry().withCalories(81 * BALANCE_MULTIPLIER).withName("peas").withNutrition(EnumFoodGroup.VEGETABLE, 4);
+	public static final FoodEntry PEPPER_GREEN = new FoodEntry().withCalories(20 * BALANCE_MULTIPLIER).withName("pepper_green").withNutrition(EnumFoodGroup.VEGETABLE, 4);
+	public static final FoodEntry PEPPER_YELLOW = new FoodEntry().withCalories(20 * BALANCE_MULTIPLIER).withName("pepper_yellow").withNutrition(EnumFoodGroup.VEGETABLE, 4);
+	public static final FoodEntry PEPPER_RED = new FoodEntry().withCalories(20 * BALANCE_MULTIPLIER).withName("pepper_red").withNutrition(EnumFoodGroup.VEGETABLE, 4);
+	public static final FoodEntry POTATO = new FoodEntry().withCalories(77 * BALANCE_MULTIPLIER).withName("potato").withNutrition(EnumFoodGroup.VEGETABLE, 4);
+	public static final FoodEntry PUMPKIN = new FoodEntry().withCalories(26 * BALANCE_MULTIPLIER).withName("pumpkin").withNutrition(EnumFoodGroup.VEGETABLE, 4);
+	public static final FoodEntry RADISH = new FoodEntry().withCalories(16 * BALANCE_MULTIPLIER).withName("radish").withNutrition(EnumFoodGroup.VEGETABLE, 4);
+	public static final FoodEntry RICE = new FoodEntry().withCalories(130 * BALANCE_MULTIPLIER).withName("rice").withNutrition(EnumFoodGroup.GRAIN, 4);
+	public static final FoodEntry RYE = new FoodEntry().withCalories(324 * BALANCE_MULTIPLIER).withName("rye").withNutrition(EnumFoodGroup.GRAIN, 4);
+	public static final FoodEntry SORGHUM = new FoodEntry().withCalories(329 * BALANCE_MULTIPLIER).withName("sorghum").withNutrition(EnumFoodGroup.GRAIN, 4);
+	public static final FoodEntry SPINACH = new FoodEntry().withCalories(23 * BALANCE_MULTIPLIER).withName("spinach").withNutrition(EnumFoodGroup.VEGETABLE, 4);
+	public static final FoodEntry SWEET_POTATO = new FoodEntry().withCalories(86 * BALANCE_MULTIPLIER).withName("sweet_potato").withNutrition(EnumFoodGroup.VEGETABLE, 4);
+	public static final FoodEntry TOMATO = new FoodEntry().withCalories(18 * BALANCE_MULTIPLIER).withName("tomato").withNutrition(EnumFoodGroup.VEGETABLE, 4);
+	public static final FoodEntry TURNIP = new FoodEntry().withCalories(20 * BALANCE_MULTIPLIER).withName("turnip").withNutrition(EnumFoodGroup.VEGETABLE, 4);
+	public static final FoodEntry WHEAT = new FoodEntry().withCalories(327 * BALANCE_MULTIPLIER).withName("wheat").withNutrition(EnumFoodGroup.GRAIN, 4);
+	public static final FoodEntry BLACKBERRY = new FoodEntry().withCalories(43 * BALANCE_MULTIPLIER).withName("blackberry").withNutrition(EnumFoodGroup.VEGETABLE, 1);
+	public static final FoodEntry CLOUDBERRY = new FoodEntry().withCalories(51 * BALANCE_MULTIPLIER).withName("cloudberry").withNutrition(EnumFoodGroup.VEGETABLE, 1);
+	public static final FoodEntry RASPBERRY = new FoodEntry().withCalories(51 * BALANCE_MULTIPLIER).withName("raspberry").withNutrition(EnumFoodGroup.VEGETABLE, 1);
+	public static final FoodEntry BLUEBERRY = new FoodEntry().withCalories(57 * BALANCE_MULTIPLIER).withName("blueberry").withNutrition(EnumFoodGroup.VEGETABLE, 1);
+	public static final FoodEntry CRANBERRY = new FoodEntry().withCalories(46 * BALANCE_MULTIPLIER).withName("cranberry").withNutrition(EnumFoodGroup.VEGETABLE, 1);
+	public static final FoodEntry ELDERBERRY = new FoodEntry().withCalories(73 * BALANCE_MULTIPLIER).withName("elderberry").withNutrition(EnumFoodGroup.VEGETABLE, 1);
+	public static final FoodEntry GOOSEBERRY = new FoodEntry().withCalories(44 * BALANCE_MULTIPLIER).withName("gooseberry").withNutrition(EnumFoodGroup.VEGETABLE, 1);
+	public static final FoodEntry HACKBERRY = new FoodEntry().withCalories(54 * BALANCE_MULTIPLIER).withName("hackberry").withNutrition(EnumFoodGroup.VEGETABLE, 1);
+	public static final FoodEntry STRAWBERRY = new FoodEntry().withCalories(33 * BALANCE_MULTIPLIER).withName("strawberry").withNutrition(EnumFoodGroup.VEGETABLE, 1);
+	public static final FoodEntry WOLFBERRY = new FoodEntry().withCalories(37 * BALANCE_MULTIPLIER).withName("wolfberry").setPoisonous().withNutrition(EnumFoodGroup.VEGETABLE, 1);
+	public static final FoodEntry SALMONBERRY = new FoodEntry().withCalories(47 * BALANCE_MULTIPLIER).withName("salmonberry").withNutrition(EnumFoodGroup.VEGETABLE, 1);
+	public static final FoodEntry CROWBERRY = new FoodEntry().withCalories(43 * BALANCE_MULTIPLIER).withName("crowberry").withNutrition(EnumFoodGroup.VEGETABLE, 1);
+    public static final FoodEntry APPLE = new FoodEntry().withCalories(52 * BALANCE_MULTIPLIER).withName("apple").withNutrition(EnumFoodGroup.FRUIT, 4);
+    public static final FoodEntry OLIVE = new FoodEntry().withCalories(148 * BALANCE_MULTIPLIER).withName("olive").withNutrition(EnumFoodGroup.FRUIT, 4);
+    public static final FoodEntry PEACH = new FoodEntry().withCalories(39 * BALANCE_MULTIPLIER).withName("peach").withNutrition(EnumFoodGroup.FRUIT, 4);
+    public static final FoodEntry ORANGE = new FoodEntry().withCalories(47 * BALANCE_MULTIPLIER).withName("orange").withNutrition(EnumFoodGroup.FRUIT, 4);
+    public static final FoodEntry PEAR = new FoodEntry().withCalories(57 * BALANCE_MULTIPLIER).withName("pear").withNutrition(EnumFoodGroup.FRUIT, 4);
+    public static final FoodEntry PLUM = new FoodEntry().withCalories(46 * BALANCE_MULTIPLIER).withName("plum").withNutrition(EnumFoodGroup.FRUIT, 4);
+    public static final FoodEntry BANANA = new FoodEntry().withCalories(89 * BALANCE_MULTIPLIER).withName("banana").withNutrition(EnumFoodGroup.FRUIT, 4);
+    public static final FoodEntry LEMON = new FoodEntry().withCalories(29 * BALANCE_MULTIPLIER).withName("lemon").withNutrition(EnumFoodGroup.FRUIT, 4);
+    public static final FoodEntry APRICOT = new FoodEntry().withCalories(48 * BALANCE_MULTIPLIER).withName("apricot").withNutrition(EnumFoodGroup.FRUIT, 4);
+    public static final FoodEntry WALNUT = new FoodEntry().withCalories(654 * BALANCE_MULTIPLIER).withName("walnut").withNutrition(EnumFoodGroup.FRUIT, 4);
+    public static final FoodEntry CHERRY = new FoodEntry().withCalories(63 * BALANCE_MULTIPLIER).withName("cherry").withNutrition(EnumFoodGroup.FRUIT, 4);
+    public static final FoodEntry POMEGRANATE = new FoodEntry().withCalories(83 * BALANCE_MULTIPLIER).withName("pomegranate").withNutrition(EnumFoodGroup.FRUIT, 4);
+    public static final FoodEntry GRAPEFRUIT = new FoodEntry().withCalories(33 * BALANCE_MULTIPLIER).withName("grapefruit").withNutrition(EnumFoodGroup.FRUIT, 4);
+    public static final FoodEntry AVOCADO = new FoodEntry().withCalories(160 * BALANCE_MULTIPLIER).withName("avocado").withNutrition(EnumFoodGroup.FRUIT, 4);
+    public static final FoodEntry CARAMBOLA = new FoodEntry().withCalories(31 * BALANCE_MULTIPLIER).withName("carambola").withNutrition(EnumFoodGroup.FRUIT, 4);
 }
