@@ -5,7 +5,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -91,10 +90,10 @@ public class BlockClay extends BlockFluidFinite implements IInitializableBlock, 
         return this.isCollidable();
     }
 
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+    @Override
+    public AxisAlignedBB getCollisionBoundingBox(@Nonnull IBlockState blockState, @Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos)
     {
-        super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
-        entityIn.setInWeb();
+        return this.getBoundingBox(blockState, worldIn, pos);
     }
 
     @Nonnull
