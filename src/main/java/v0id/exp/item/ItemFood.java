@@ -17,9 +17,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
+import net.minecraftforge.fml.common.Loader;
 import org.apache.commons.lang3.tuple.Pair;
-import v0id.core.util.I18n;
 import v0id.api.exp.data.ExPCreativeTabs;
+import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
@@ -31,18 +32,33 @@ import v0id.api.exp.player.IExPPlayer;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.IExPWorld;
+import v0id.core.logging.LogLevel;
+import v0id.core.util.I18n;
 import v0id.exp.util.Helpers;
 
+import java.lang.reflect.Method;
 import java.text.DecimalFormat;
 import java.util.EnumMap;
 import java.util.List;
 
 public class ItemFood extends net.minecraft.item.ItemFood implements IInitializableItem, IOreDictEntry, IExPFood, IContainerTickable, IWeightProvider
 {
+	private static Method nutritionCompat_eatFood;
 	public ItemFood()
 	{
 		super(0, false);
 		this.initItem();
+		if (Loader.isModLoaded("nutrition"))
+        {
+            try
+            {
+                nutritionCompat_eatFood = Class.forName("v0id.exp.compat.NutritionCompat").getMethod("eatFood", EntityPlayer.class, FoodEntry.class, float.class);
+            }
+            catch (Exception e)
+            {
+                ExPMisc.modLogger.log(LogLevel.Error, "ExP was unable to initialize Nutrition compatibility!", e);
+            }
+        }
 	}
 	
 	@Override
@@ -197,6 +213,18 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 		float caloriesConsumed = Math.min(100, missingCalories);
 		float weightNeeded = Math.min(caloriesConsumed / (entry.getCaloriesRestored() / 100), actual_weight);
 		caloriesConsumed = weightNeeded * (entry.getCaloriesRestored() / 100);
+		if (nutritionCompat_eatFood != null && !player.world.isRemote)
+        {
+            try
+            {
+                nutritionCompat_eatFood.invoke(null, player, entry, caloriesConsumed);
+            }
+            catch (Exception e)
+            {
+                ExPMisc.modLogger.log(LogLevel.Error, "ExP was unable to provide Nutrition compatibility report this to V0id!", e);
+            }
+        }
+
 		p.setCalories(p.getCalories() + caloriesConsumed);
 		if (actual_weight - weightNeeded <= 0)
 		{
