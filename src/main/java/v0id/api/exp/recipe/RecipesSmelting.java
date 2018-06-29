@@ -74,7 +74,7 @@ public class RecipesSmelting
         @Override
         public ItemStack getOutput()
         {
-            return null;
+            return this.output;
         }
 
         @Override
