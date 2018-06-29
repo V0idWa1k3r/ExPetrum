@@ -4,7 +4,9 @@ import com.google.common.collect.ImmutableList;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.Constants;
+import v0id.core.util.java.Gradient;
 
+import javax.vecmath.Vector3f;
 import java.util.List;
 
 public class TemperatureUtils
@@ -58,6 +60,22 @@ public class TemperatureUtils
                     new TemperatureValue(1700, 1800, 43),
                     new TemperatureValue(1800, Integer.MAX_VALUE, 44)
             ).build();
+
+    public static final Gradient TEMPERATURE_GRADIENT = new Gradient();
+
+    static
+    {
+        TEMPERATURE_GRADIENT.gradientFunc = Gradient.Linear;
+        TEMPERATURE_GRADIENT.add(50F, new Vector3f(0, 0, 1F));
+        TEMPERATURE_GRADIENT.add(200F, new Vector3f(0.68F, 0, 1F));
+        TEMPERATURE_GRADIENT.add(550F, new Vector3f(0.33F, 0.08F, 0));
+        TEMPERATURE_GRADIENT.add(550F, new Vector3f(0.33F, 0.08F, 0));
+        TEMPERATURE_GRADIENT.add(725F, new Vector3f(1, 0, 0));
+        TEMPERATURE_GRADIENT.add(875F, new Vector3f(1, 0.47F, 0));
+        TEMPERATURE_GRADIENT.add(875F, new Vector3f(1, 0.47F, 0));
+        TEMPERATURE_GRADIENT.add(1100F, new Vector3f(1, 1, 0));
+        TEMPERATURE_GRADIENT.add(1800F, new Vector3f(1, 1, 1));
+    }
 
     public static float getTemperature(ItemStack is)
     {

@@ -6,6 +6,10 @@ import net.minecraft.client.gui.GuiCreateWorld;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -24,10 +28,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.input.Keyboard;
-import v0id.core.logging.LogLevel;
+import org.lwjgl.opengl.GL11;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPRegistryNames;
+import v0id.core.logging.LogLevel;
+import v0id.core.util.java.Gradient;
 import v0id.exp.ExPetrum;
 import v0id.exp.client.fx.ParticleEngine;
 import v0id.exp.client.model.EntityModelDynamic;
@@ -38,12 +44,14 @@ import v0id.exp.client.render.hud.SpecialAttackRenderer;
 import v0id.exp.client.render.sky.WorldSkyRenderer;
 import v0id.exp.client.render.sky.WorldWeatherRenderer;
 import v0id.exp.combat.ClientCombatHandler;
+import v0id.exp.item.ItemFood;
 import v0id.exp.player.inventory.ManagedSlot;
 import v0id.exp.player.inventory.PlayerInventoryHelper;
 import v0id.exp.settings.impl.SettingsClient;
 import v0id.exp.settings.impl.SettingsFlags;
 import v0id.exp.util.temperature.TemperatureUtils;
 
+import javax.vecmath.Vector3f;
 import java.lang.reflect.Field;
 
 @SideOnly(Side.CLIENT)
@@ -195,6 +203,53 @@ public class ExPHandlerClient
 		{
 			PlayerInventoryRenderer.render(Minecraft.getMinecraft().player, event.getGui());
 		}
+
+        if (event.getGui() instanceof GuiContainer)
+        {
+            GlStateManager.disableTexture2D();
+            GlStateManager.color(1F, 1F, 1F, 1F);
+            BufferBuilder bb = Tessellator.getInstance().getBuffer();
+            GuiContainer container = (GuiContainer) event.getGui();
+            int i = container.getGuiLeft();
+            int j = container.getGuiTop();
+            bb.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
+            for (Slot s : container.inventorySlots.inventorySlots)
+            {
+                if (!s.getStack().isEmpty())
+                {
+                    float x = s.xPos;
+                    float y = s.yPos;
+                    if (s.getStack().getItem() instanceof ItemFood)
+                    {
+                        bb.pos(i + x + 2, j + y + 17, 1).color(0.2F, 0.2F, 0.2F, 1F).endVertex();
+                        bb.pos(i + x + 15, j + y + 17, 1).color(0.2F, 0.2F, 0.2F, 1F).endVertex();
+                        bb.pos(i + x + 15, j + y + 16, 1).color(0.2F, 0.2F, 0.2F, 1F).endVertex();
+                        bb.pos(i + x + 2, j + y + 16, 1).color(0.2F, 0.2F, 0.2F, 1F).endVertex();
+                        float val = PlayerInventoryHelper.getWeight(s.getStack()) / 10F;
+                        bb.pos(i + x + 2, j + y + 16, 1).color(0.9F, 1F, 1F, 1F).endVertex();
+                        bb.pos(i + x + 2 + 13 * val, j + y + 16, 1).color(1F, 1F, 1F, 1F).endVertex();
+                        bb.pos(i + x + 2 + 13 * val, j + y + 15, 1).color(1F, 1F, 1F, 1F).endVertex();
+                        bb.pos(i + x + 2, j + y + 15, 1).color(1F, 1F, 1F, 1F).endVertex();
+                    }
+
+                    if (TemperatureUtils.getTemperature(s.getStack()) > 0)
+                    {
+                        bb.pos(i + x + 0, j + y + 4, 1).color(0.2F, 0.2F, 0.2F, 1F).endVertex();
+                        bb.pos(i + x + 4, j + y + 4, 1).color(0.2F, 0.2F, 0.2F, 1F).endVertex();
+                        bb.pos(i + x + 4, j + y + 0, 1).color(0.2F, 0.2F, 0.2F, 1F).endVertex();
+                        bb.pos(i + x + 0, j + y + 0, 1).color(0.2F, 0.2F, 0.2F, 1F).endVertex();
+                        Vector3f c = TemperatureUtils.TEMPERATURE_GRADIENT.interpolate(Math.min(1800, TemperatureUtils.getTemperature(s.getStack())), Gradient.Linear);
+                        bb.pos(i + x + 1, j + y + 3, 1).color(c.x, c.y, c.z, 1F).endVertex();
+                        bb.pos(i + x + 3, j + y + 3, 1).color(c.x, c.y, c.z, 1F).endVertex();
+                        bb.pos(i + x + 3, j + y + 1, 1).color(c.x, c.y, c.z, 1F).endVertex();
+                        bb.pos(i + x + 1, j + y + 1, 1).color(c.x, c.y, c.z, 1F).endVertex();
+                    }
+                }
+            }
+
+            Tessellator.getInstance().draw();
+            GlStateManager.enableTexture2D();
+        }
 	}
 
 	@SubscribeEvent
