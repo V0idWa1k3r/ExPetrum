@@ -133,19 +133,6 @@ public class BlockCampfire extends Block implements IInitializableBlock, IItemBl
     @Override
     public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos)
     {
-        TileCampfire campfire = (TileCampfire) world.getTileEntity(pos);
-        if (campfire != null)
-        {
-            if (campfire.burnTimeLeft > 0)
-            {
-                return 11;
-            }
-            else
-            {
-                return super.getLightValue(state, world, pos);
-            }
-        }
-
         return super.getLightValue(state, world, pos);
     }
 

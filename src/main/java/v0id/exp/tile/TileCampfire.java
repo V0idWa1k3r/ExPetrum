@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import v0id.api.exp.item.IContainerTickable;
+import v0id.api.exp.recipe.RecipesSmelting;
 import v0id.api.exp.tile.ExPTemperatureCapability;
 import v0id.core.network.PacketType;
 import v0id.core.network.VoidNetwork;
@@ -26,6 +27,7 @@ public class TileCampfire extends TileEntity implements ITickable
 {
     public ItemStackHandler inventory_wood = new ItemStackHandler(3);
     public ItemStackHandler inventory_thing = new ItemStackHandler(1);
+
     public TemperatureHandler temperature_handler = new TemperatureHandler(610);
     public int burnTimeLeft = 0;
     public int maxBurnTime = 0;
@@ -55,6 +57,7 @@ public class TileCampfire extends TileEntity implements ITickable
             if (this.temperature_handler.getCurrentTemperature() >= t)
             {
                 TemperatureUtils.incrementTemperature(is, 0.5F);
+                RecipesSmelting.checkForSmelting(i -> this.inventory_thing.setStackInSlot(0, i), is, false, true);
             }
         }
 

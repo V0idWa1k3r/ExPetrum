@@ -1,0 +1,23 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "exp:pot",
+		"transform": "forge:default-block",
+		"textures" : {
+		}
+	},
+	"variants" : {
+		"inventory" : [{}],
+		"type": {
+            "pot": {
+                "model" : "exp:pot"
+            },
+            "jug": {
+                "model" : "exp:jug"
+            },
+            "bowl": {
+                "model" : "exp:plate"
+            }
+        }
+	}
+}

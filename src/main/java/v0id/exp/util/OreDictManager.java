@@ -1,6 +1,8 @@
 package v0id.exp.util;
 
 import com.google.common.collect.Lists;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import v0id.api.exp.data.IOreDictEntry;
 
 import java.lang.reflect.Array;
@@ -58,4 +60,16 @@ public class OreDictManager
 			ex.printStackTrace();
 		}
 	}
+
+	public static String[] getOreNames(ItemStack is)
+    {
+        int[] ids = OreDictionary.getOreIDs(is);
+        String[] ret = new String[ids.length];
+        for (int i = 0; i < ids.length; ++i)
+        {
+            ret[i] = OreDictionary.getOreName(ids[i]);
+        }
+
+        return ret;
+    }
 }

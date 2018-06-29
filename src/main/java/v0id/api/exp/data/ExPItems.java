@@ -82,4 +82,7 @@ public class ExPItems
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.itemMoldIngot)
     public static final Item moldIngot = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemPottery)
+    public static final Item pottery = null;
 }

@@ -19,7 +19,11 @@ public class ExPTextures
             entityChickenWildMale                                                                              = new ResourceLocation(ExPRegistryNames.modid, "textures/entities/chicken/wild_male.png");
 
 	public static final ResourceLocation
-            guiCampfire                                                                                        = new ResourceLocation(ExPRegistryNames.modid, "textures/gui/campfire.png");
+            guiCampfire                                                                                        	= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/campfire.png"),
+            guiInv4                                                                                       		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/inv_4.png"),
+            guiInv1                                                                         	               	= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/inv_1.png"),
+            guiBtns                                                                        	               		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/buttons.png"),
+            guiPotteryStation                                                                        	   		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/pottery_station.png");
 
     static
 	{

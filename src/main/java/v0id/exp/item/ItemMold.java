@@ -19,7 +19,7 @@ import java.util.List;
 
 public class ItemMold extends Item implements IInitializableItem, IWeightProvider
 {
-    public enum MoldType
+    public enum EnumMoldType
     {
         CLAY,
         CERAMIC,
@@ -73,7 +73,7 @@ public class ItemMold extends Item implements IInitializableItem, IWeightProvide
         }
         else
         {
-            for (int i = 0; i < EnumToolClass.values().length * MoldType.values().length; ++i)
+            for (int i = 0; i < EnumToolClass.values().length * EnumMoldType.values().length; ++i)
             {
                 items.add(new ItemStack(this, 1, i));
             }
@@ -88,7 +88,7 @@ public class ItemMold extends Item implements IInitializableItem, IWeightProvide
             return super.getUnlocalizedName(stack) + "." + (stack.getMetadata() == 0 ? "clay" : stack.getMetadata() == 1 ? "ceramic" : "full");
         }
 
-        return super.getUnlocalizedName(stack) + "." + MoldType.values()[stack.getMetadata() / EnumToolClass.values().length].name().toLowerCase() + "." + EnumToolClass.values()[stack.getMetadata() % EnumToolClass.values().length].name().toLowerCase();
+        return super.getUnlocalizedName(stack) + "." + EnumMoldType.values()[stack.getMetadata() / EnumToolClass.values().length].name().toLowerCase() + "." + EnumToolClass.values()[stack.getMetadata() % EnumToolClass.values().length].name().toLowerCase();
     }
 
     @Override

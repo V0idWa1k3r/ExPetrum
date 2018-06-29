@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import v0id.api.exp.data.ExPTextures;
 import v0id.api.exp.entity.EnumGender;
 import v0id.api.exp.entity.IAnimalStats;
-import v0id.api.exp.player.FoodGroup;
+import v0id.api.exp.player.EnumFoodGroup;
 import v0id.exp.entity.EntityAnimal;
 
 import javax.annotation.Nonnull;
@@ -89,9 +89,9 @@ public class Chicken extends EntityAnimal
     }
 
     @Override
-    public FoodGroup[] getFavouriteFood()
+    public EnumFoodGroup[] getFavouriteFood()
     {
-        return new FoodGroup[]{ FoodGroup.GRAIN };
+        return new EnumFoodGroup[]{ EnumFoodGroup.GRAIN };
     }
 
     @Override

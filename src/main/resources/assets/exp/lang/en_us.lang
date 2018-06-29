@@ -632,6 +632,13 @@ item.exp.item_tool_mold.full.chisel.name=Filled Chisel Mold
 item.exp.item_ingot_mold.clay.name=Clay Ingot Mold
 item.exp.item_ingot_mold.ceramic.name=Ceramic Ingot Mold
 item.exp.item_ingot_mold.full.name=Filled Ingot Mold
+item.exp.item_pottery.clay_pot.name=Clay Pot
+item.exp.item_pottery.clay_jug.name=Clay Jug
+item.exp.item_pottery.clay_bowl.name=Clay Bowl
+item.exp.item_pottery.ceramic_pot.name=Pot
+item.exp.item_pottery.ceramic_jug.name=Jug
+item.exp.item_pottery.ceramic_bowl.name=Ceramic Bowl
+item.exp.item_pottery.ceramic_jug_full.name=Full Jug
 
 exp.item.ingot.desc.type.tin=Tin
 exp.item.ingot.desc.type.barium=Barium

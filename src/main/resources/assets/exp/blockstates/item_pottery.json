@@ -1,0 +1,50 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "exp:item_generated",
+		"transform": "forge:default-item",
+		"textures" : {
+			"layer0" : "exp:items/pottery/clay_pot"
+		}
+	},
+	"variants" : {
+		"inventory" : [{}],
+		"type": {
+            "clay_pot": {
+                "textures" : {
+                    "layer0" : "exp:items/pottery/clay_pot"
+                }
+            },
+            "clay_jug": {
+                "textures" : {
+                    "layer0" : "exp:items/pottery/clay_jug"
+                }
+            },
+            "clay_bowl": {
+                "textures" : {
+                    "layer0" : "exp:items/pottery/clay_bowl"
+                }
+            },
+            "ceramic_pot": {
+                "textures" : {
+                    "layer0" : "exp:items/pottery/ceramic_pot"
+                }
+            },
+            "ceramic_jug": {
+                "textures" : {
+                    "layer0" : "exp:items/pottery/ceramic_jug"
+                }
+            },
+            "ceramic_bowl": {
+                "textures" : {
+                    "layer0" : "exp:items/pottery/ceramic_bowl"
+                }
+            },
+            "ceramic_jug_full": {
+                "textures" : {
+                    "layer0" : "exp:items/pottery/ceramic_jug_full"
+                }
+            }
+        }
+	}
+}

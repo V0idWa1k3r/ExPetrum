@@ -3,12 +3,13 @@ package v0id.api.exp.data;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
-import v0id.core.markers.StaticStorage;
 import v0id.api.exp.block.*;
 import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.block.property.EnumWaterLilyType;
 import v0id.api.exp.tile.crop.EnumCrop;
+import v0id.core.markers.StaticStorage;
+import v0id.exp.block.BlockPottery;
 
 @StaticStorage
 public class ExPBlockProperties
@@ -25,6 +26,7 @@ public class ExPBlockProperties
 	public static final PropertyInteger ORE_TEXTURE_ID = PropertyInteger.create("oretexture", 0, 2);
 	public static final PropertyEnum<EnumShrubType> SHRUB_TYPE = PropertyEnum.create("type", EnumShrubType.class);
 	public static final PropertyEnum<EnumBerry> BERRY_BUSH_TYPE = PropertyEnum.create("type", EnumBerry.class);
+	public static final PropertyEnum<BlockPottery.EnumPotteryType> POTTERY_TYPE = PropertyEnum.create("type", BlockPottery.EnumPotteryType.class);
 	public static final PropertyBool SHRUB_IS_TALL = PropertyBool.create("istall");
 	public static final PropertyBool ICE_IS_SALT = PropertyBool.create("salt");
 	public static final PropertyInteger WORKED_BOULDER_INDEX = PropertyInteger.create("workindex", 0, 7);

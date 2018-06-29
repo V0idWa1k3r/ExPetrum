@@ -10,7 +10,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.util.Constants;
 import v0id.core.util.nbt.NBTChain;
 import v0id.api.exp.entity.*;
-import v0id.api.exp.player.FoodGroup;
+import v0id.api.exp.player.EnumFoodGroup;
 import v0id.api.exp.world.Calendar;
 import v0id.exp.util.PackInfo;
 
@@ -198,7 +198,7 @@ public class ExPAnimal implements IAnimal
     }
 
     @Override
-    public FoodGroup[] getFavouriteFood()
+    public EnumFoodGroup[] getFavouriteFood()
     {
         return this.getAsProvider().getFavouriteFood();
     }

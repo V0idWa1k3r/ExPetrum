@@ -224,4 +224,7 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockPotteryStation)
     public static final Block potteryStation = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockPottery)
+    public static final Block pottery = null;
 }

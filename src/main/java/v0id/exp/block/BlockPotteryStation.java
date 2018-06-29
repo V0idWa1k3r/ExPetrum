@@ -23,6 +23,7 @@ import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.ExPetrum;
 import v0id.exp.block.item.ItemBlockWithMetadata;
+import v0id.exp.tile.TilePotteryStation;
 
 import javax.annotation.Nullable;
 
@@ -32,7 +33,6 @@ public class BlockPotteryStation extends Block implements IInitializableBlock, I
     {
         super(Material.CIRCUITS);
         this.initBlock();
-        this.setDefaultState(this.blockState.getBaseState().withProperty(ExPBlockProperties.POTTERYSTATION_HASCLAY, false));
     }
 
     @Override
@@ -62,6 +62,7 @@ public class BlockPotteryStation extends Block implements IInitializableBlock, I
         this.setSoundType(SoundType.STONE);
         this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
         this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(ExPBlockProperties.POTTERYSTATION_HASCLAY, false));
     }
 
     public void registerItem(IForgeRegistry<Item> registry)
@@ -125,14 +126,14 @@ public class BlockPotteryStation extends Block implements IInitializableBlock, I
     @Override
     public boolean hasTileEntity(IBlockState state)
     {
-        return false;
+        return true;
     }
 
     @Nullable
     @Override
     public TileEntity createTileEntity(World world, IBlockState state)
     {
-        return null;
+        return new TilePotteryStation();
     }
 
     @Override

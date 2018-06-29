@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "exp:pottery_station",
+        "data": 0
+    },
+    "pattern": [
+        "RS",
+        "RR"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "S" : {
+            "item": "#STICKWOOD"
+        },
+        "R" : {
+            "item": "#ROCK"
+        }
+    }
+}
