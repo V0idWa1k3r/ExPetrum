@@ -48,7 +48,37 @@
 				"textures" : {
 					"layer0" : "exp:items/misc/charcoal"
 				}
-			}
+			},
+			"kaolin": {
+				"textures" : {
+					"layer0" : "exp:items/misc/kaolin"
+				}
+			},
+            "kaolin_powder": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/kaolin_powder"
+                }
+            },
+            "kaolin_brick": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/kaolin_brick"
+                }
+            },
+            "fire_clay": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/fire_clay"
+                }
+            },
+            "fire_brick": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/fire_brick"
+                }
+            },
+            "flint_powder": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/flint_powder"
+                }
+            }
 		}
 	}
 }

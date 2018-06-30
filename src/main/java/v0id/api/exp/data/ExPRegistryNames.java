@@ -59,7 +59,8 @@ public class ExPRegistryNames
         blockPotteryStation                                                                                 = "pottery_station",
         blockPottery                                                                                        = "pottery",
 		blockLogPile                                                                                        = "log_pile",
-        blockCharcoal                                                                                       = "charcoal";
+        blockCharcoal                                                                                       = "charcoal",
+		blockKaolin																							= "kaolin";
 
 	public static final String
 		itemRock																							= "item_rock",

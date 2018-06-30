@@ -24,6 +24,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.commons.lang3.ArrayUtils;
+import v0id.api.exp.block.property.EnumKaolinType;
 import v0id.core.util.IFunctionalRenderFactory;
 import v0id.api.exp.block.*;
 import v0id.api.exp.block.property.EnumDirtClass;
@@ -136,7 +137,6 @@ public class ClientRegistry implements ILifecycleListener
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.campfire), 0, new ModelResourceLocation(ExPBlocks.campfire.getRegistryName(), "normal"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.potteryStation), 0, new ModelResourceLocation(ExPBlocks.potteryStation.getRegistryName(), "normal"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.charcoal), 0, new ModelResourceLocation(ExPBlocks.charcoal.getRegistryName(), "normal"));
-
         // Iteration-dependent models
         mkCustomModelResourceLocations(ExPItems.stick, EnumTreeType.values().length + EnumShrubType.values().length + EnumBerry.values().length, i -> "type=" + ExPOreDict.stickNames[i]);
         mkCustomModelResourceLocations(ExPItems.toolHead, EnumToolClass.values().length * EnumToolStats.values().length, i -> "material=" + EnumToolStats.values()[i % EnumToolStats.values().length].name().toLowerCase() + ",type=" + EnumToolClass.values()[i / EnumToolStats.values().length].name().toLowerCase());
@@ -168,6 +168,7 @@ public class ClientRegistry implements ILifecycleListener
         mkCustomModelResourceLocations(ExPItems.moldTool, EnumToolClass.values().length * ItemMold.EnumMoldType.values().length, i -> "state=" + ItemMold.EnumMoldType.values()[i / EnumToolClass.values().length].name().toLowerCase() + ",tool=" + EnumToolClass.values()[i % EnumToolClass.values().length].name().toLowerCase());
         mkCustomModelResourceLocations(ExPItems.moldIngot, 2 + EnumMetal.values().length, i -> "ingot=" + (i == 0 ? "clay" : i == 1 ? "ceramic" : EnumMetal.values()[i - 2].name().toLowerCase()));
         mkCustomModelResourceLocations(ExPItems.pottery, ItemPottery.EnumPotteryType.values().length, i -> "type=" + ItemPottery.EnumPotteryType.values()[i].name().toLowerCase());
+        mkCustomModelResourceLocations(ExPBlocks.kaolin, EnumKaolinType.values().length, i -> "type=" + EnumKaolinType.values()[i].getName());
 
         // Statically mapped item models
         registerStaticModel(ExPItems.basket, new ModelResourceLocation(ExPItems.basket.getRegistryName(), "inventory"));

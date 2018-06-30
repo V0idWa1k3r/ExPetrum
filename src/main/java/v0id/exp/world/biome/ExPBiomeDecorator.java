@@ -36,6 +36,7 @@ public class ExPBiomeDecorator extends BiomeDecorator
 	public static final CoralGenerator genCoral = new CoralGenerator();
 	public static final OilGenerator genOil = new OilGenerator();
 	public static final ClayLakesGenerator genClay = new ClayLakesGenerator();
+	public static final KaolinGenerator genKaolin = new KaolinGenerator();
 	
 	@Override
 	public void decorate(World worldIn, Random random, Biome biome, BlockPos pos)
@@ -46,6 +47,7 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		}
 
 		this.doClayPass(worldIn, random, biome, pos);
+		this.doKaolinPass(worldIn, random, biome, pos);
 		this.doTreePass(worldIn, random, biome, pos);
 		this.doVegetationPass(worldIn, random, biome, pos);
 		this.doShrubsPass(worldIn, random, biome, pos);
@@ -143,6 +145,28 @@ public class ExPBiomeDecorator extends BiomeDecorator
     public void doClayPass(World worldIn, Random rand, Biome biome, BlockPos pos)
     {
         this.clayPassGenerate(worldIn, rand, biome, pos);
+    }
+
+    public void doKaolinPass(World worldIn, Random rand, Biome biome, BlockPos pos)
+    {
+        this.kaolinPassGenerate(worldIn, rand, biome, pos);
+    }
+
+    public void kaolinPassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)
+    {
+        if (rand.nextFloat() < 0.01F)
+        {
+            int x = rand.nextInt(16) + 8;
+            int z = rand.nextInt(16) + 8;
+            BlockPos at = new BlockPos(x, worldIn.getHeight(pos.add(x, 0, z)).getY(), z);
+            EventGenKaolin event = new EventGenKaolin(worldIn, at, rand, genKaolin);
+            if (MinecraftForge.TERRAIN_GEN_BUS.post(event))
+            {
+                return;
+            }
+
+            event.generator.generate(worldIn, rand, pos.add(at));
+        }
     }
 
     public void clayPassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)

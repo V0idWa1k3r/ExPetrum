@@ -9,6 +9,41 @@
     {
         "ingredient": {
             "type": "forge:ore_dict",
+            "ore": "brickKaolin"
+        },
+        "name": "BRICKKAOLIN"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "brickFire"
+        },
+        "name": "BRICKFIRE"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "dustKaolin"
+        },
+        "name": "POWDERKAOLIN"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "dustFlint"
+        },
+        "name": "DUSTFLINT"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "clay"
+        },
+        "name": "CLAY"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
             "ore": "plantFiber"
         },
         "name": "PLANTFIBER"

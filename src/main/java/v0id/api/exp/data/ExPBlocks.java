@@ -233,4 +233,7 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockCharcoal)
     public static final Block charcoal = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockKaolin)
+    public static final Block kaolin = null;
 }

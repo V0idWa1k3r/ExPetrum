@@ -24,7 +24,13 @@ public class ItemGeneric extends Item implements IInitializableItem, IWeightProv
         BITUMINOUS_COAL("bituminous_coal", 0.05F, IWeightProvider.DEFAULT_VOLUME, "coal"),
         ANTHRACITE("anthracite", 0.05F, IWeightProvider.DEFAULT_VOLUME, "coal"),
         ASH("ash", 0F, IWeightProvider.DEFAULT_VOLUME, "ash", "dustAsh"),
-        CHARCOAL("charcoal", 0.02F, IWeightProvider.DEFAULT_VOLUME, "coal", "charcoal");
+        CHARCOAL("charcoal", 0.02F, IWeightProvider.DEFAULT_VOLUME, "coal", "charcoal"),
+        KAOLIN("kaolin", 0.1F, IWeightProvider.DEFAULT_VOLUME, "kaolin", "oreKaolin"),
+        KAOLIN_POWDER("kaolin_powder", 0.02F, IWeightProvider.DEFAULT_VOLUME, "powderKaolin", "dustKaolin"),
+        KAOLIN_BRICK("kaolin_brick", 0.1F, IWeightProvider.DEFAULT_VOLUME, "brickKaolin", "ingotKaolin"),
+        FIRE_CLAY("fire_clay", 0.15F, IWeightProvider.DEFAULT_VOLUME, "fireClay", "clayFire"),
+        FIRE_BRICK("fire_brick", 0.15F, IWeightProvider.DEFAULT_VOLUME, "fireBrick", "brickFire", "ingotFired"),
+        FLINT_POWDER("flint_powder", 0.01F, IWeightProvider.DEFAULT_VOLUME, "powderFlint", "dustFlint");
 
         EnumGenericType(String name, float weight, Pair<Byte, Byte> volume, String... oreDictNames)
         {

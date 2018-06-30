@@ -1,0 +1,16 @@
+{
+    "result": {
+        "item": "exp:kaolin",
+        "data": 1
+    },
+    "pattern": [
+        "##",
+        "##"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "#" : {
+            "item": "#BRICKKAOLIN"
+        }
+    }
+}

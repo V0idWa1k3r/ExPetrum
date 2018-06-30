@@ -1,0 +1,35 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "cube_all",
+		"textures" : {
+			"all" : "exp:blocks/stone/kaolin",
+			"particle" : "#all"
+		}
+	},
+	"variants": {
+		"normal": [{}],
+		"type": {
+            "rock": {
+                "textures" : {
+                    "all" : "exp:blocks/stone/kaolin"
+                }
+            },
+            "brick": {
+                "textures" : {
+                    "all" : "exp:blocks/stone/kaolin_brick"
+                }
+            },
+            "fire_brick": {
+                "textures" : {
+                    "all" : "exp:blocks/stone/fire_brick"
+                }
+            },
+            "flint_powder": {
+                "textures" : {
+                    "all" : "exp:blocks/stone/flint_powder"
+                }
+            }
+        }
+	}
+}

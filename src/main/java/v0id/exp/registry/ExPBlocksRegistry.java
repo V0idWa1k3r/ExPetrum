@@ -102,7 +102,8 @@ public class ExPBlocksRegistry extends AbstractRegistry
                 new BlockPotteryStation(),
                 new BlockPottery(),
                 new BlockLogPile(),
-                new BlockCharcoal()
+                new BlockCharcoal(),
+                new BlockKaolin()
         );
 
         registryEntries.forEach(registry::register);

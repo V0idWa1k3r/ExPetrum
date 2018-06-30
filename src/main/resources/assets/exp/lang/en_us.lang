@@ -208,7 +208,9 @@ tile.exp.clay.name=Clay
 tile.exp.campfire.name=Campfire
 tile.exp.pottery_station.name=Pottery Station
 tile.exp.charcoal.name=Charcoal Layer
-tile.exp.kaolin.name=Kaolin
+tile.exp.kaolin.rock.name=Kaolin
+tile.exp.kaolin.brick.name=Kaolin Bricks
+tile.exp.kaolin.fire_brick.name=Fired Bricks
 
 item.exp.item_ingot.name=Ingot
 
@@ -559,6 +561,12 @@ item.exp.item_generic.bituminous_coal.name=Bituminous Coal
 item.exp.item_generic.lignite.name=Lignite Coal
 item.exp.item_generic.ash.name=Ash
 item.exp.item_generic.charcoal.name=Charcoal
+item.exp.item_generic.kaolin.name=Kaolin Clay
+item.exp.item_generic.kaolin_powder.name=Kaolin Powder
+item.exp.item_generic.kaolin_brick.name=Kaolin Brick
+item.exp.item_generic.fire_clay.name=Fire Clay
+item.exp.item_generic.fire_brick.name=Fire Brick
+item.exp.item_generic.flint_powder.name=Flint Powder
 item.exp.item_ore.acanthite.name=Acanthite Ore
 item.exp.item_ore.barite.name=Barite Ore
 item.exp.item_ore.bauxite.name=Bauxite Ore

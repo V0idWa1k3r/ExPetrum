@@ -55,13 +55,13 @@ public enum EnumOre implements IStringSerializable
 	GOLD("Au", 1, 0xdab950, 20, EnumMetal.GOLD, 1064F),
 	
 	// Iron
-	HEMATITE("Fe2O3", 0, 0xa4584a, 60, EnumMetal.IRON, 1538F),
+	HEMATITE("Fe2O3", 0, 0xa4584a, 60, EnumMetal.ANY, 1538F),
 	
 	// Titanium
 	ILMENITE("FeTiO3", 1, 0x644530, 6, EnumMetal.TITANIUM, 1050F),
 	
 	// Iron
-	MAGNETITE("Fe3O4", 0, 0x422329, 50, EnumMetal.IRON, 1538F),
+	MAGNETITE("Fe3O4", 0, 0x422329, 50, EnumMetal.ANY, 1538F),
 	
 	// Copper
 	MALACHITE("Cu2CO3(OH)2", 0, 0x05a67a, 40, EnumMetal.COPPER, 600F),
