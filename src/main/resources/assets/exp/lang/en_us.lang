@@ -135,6 +135,7 @@ exp.txt.item.desc.water.leq25=There is some water
 exp.txt.item.desc.water.leq50=It's half way filled
 exp.txt.item.desc.water.leq75=It's mostly filled
 exp.txt.item.desc.water.100=It's full of water
+exp.txt.liquid=Liquid
 
 tile.exp.rock.name=Stone
 tile.exp.rock_decorated_tile.name=Stone (Tile)
@@ -685,6 +686,7 @@ exp.item.ingot.desc.type.duralumin=Duralumin
 exp.item.ingot.desc.type.rose_alloy=Rose Alloy
 exp.item.ingot.desc.type.nichrome=Nichrome
 exp.item.ingot.desc.type.vitallium=Vitallium
+exp.item.ingot.desc.type.any=Unknown Alloy
 
 exp.temp.-1=Cold
 exp.temp.0=Warm ☐☐☐☐

@@ -12,14 +12,12 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.ForgeRegistry;
 import v0id.api.exp.data.ExPItems;
-import v0id.api.exp.metal.EnumMetal;
 import v0id.api.exp.metal.EnumToolClass;
-import v0id.api.exp.metal.EnumToolStats;
 import v0id.api.exp.recipe.RecipesPottery;
 import v0id.api.exp.recipe.RecipesSmelting;
 import v0id.exp.item.ItemGeneric;
 import v0id.exp.item.ItemPottery;
-import v0id.exp.item.ItemToolHead;
+import v0id.exp.recipe.RecipeMold;
 
 public class ExPRecipeRegistry extends AbstractRegistry
 {
@@ -40,16 +38,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
     public void registerRecipes(RegistryEvent.Register<IRecipe> event)
     {
         final ResourceLocation mcloc = new ResourceLocation("minecraft:misc");
-        for (EnumMetal metal : EnumMetal.values())
-        {
-            event.getRegistry().register(new ShapelessOreRecipe(mcloc, new ItemStack(ExPItems.ingot, 1, metal.ordinal()), new ItemStack(ExPItems.moldIngot, 1, 2 + metal.ordinal())).setRegistryName("exp:recipe_hardcoded_ingot_" + metal.name().toLowerCase()));
-        }
-
-        for (EnumToolClass toolClass : EnumToolClass.values())
-        {
-            event.getRegistry().register(new ShapelessOreRecipe(mcloc, ItemToolHead.createToolHead(toolClass, EnumToolStats.COPPER), new ItemStack(ExPItems.moldTool, 1, EnumToolClass.values().length * 2 + toolClass.ordinal())).setRegistryName("exp:recipe_hardcoded_toolhead_" + toolClass.name().toLowerCase()));
-        }
-
+        event.getRegistry().register(new RecipeMold().setRegistryName("exp:recipe_hardcoded_mold"));
         ForgeRegistry<IRecipe> reg = (ForgeRegistry<IRecipe>) event.getRegistry();
         if (Loader.isModLoaded("chiselsandbits"))
         {

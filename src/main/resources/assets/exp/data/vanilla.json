@@ -5,6 +5,18 @@
             "metadata": -1,
             "volume" : { "x" : 1, "y" : 1 },
             "weight" : 50
+        },
+        {
+            "id": "minecraft:brick",
+            "metadata": 0,
+            "volume" : { "x" : 1, "y" : 1 },
+            "weight" : 100
+        },
+        {
+            "id": "minecraft:brick_block",
+            "metadata": 0,
+            "volume" : { "x" : 2, "y" : 2 },
+            "weight" : 400
         }
     ]
 }

@@ -25,6 +25,12 @@
 					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
 				}
 			},
+			"any": {
+				"textures": {
+					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",
+					"layer1": "exp:items/molds/ceramic_mold_ingot_overlay"
+				}
+			},
 			"barium": {
 				"textures": {
 					"layer0": "exp:items/molds/ceramic_mold_ingot_outer",

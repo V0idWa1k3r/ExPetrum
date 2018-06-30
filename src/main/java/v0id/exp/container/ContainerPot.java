@@ -12,15 +12,18 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import v0id.api.exp.item.IMold;
 
 import javax.annotation.Nonnull;
 
 public class ContainerPot extends Container
 {
     public ItemStack pot;
+    public int slots;
 
     public ContainerPot(InventoryPlayer inventoryPlayer, IItemHandler cap)
     {
+        slots = 4;
         this.addPotInventory(cap);
         this.addPlayerInventory(inventoryPlayer);
     }
@@ -28,6 +31,15 @@ public class ContainerPot extends Container
     public ContainerPot(InventoryPlayer playerInventory, ItemStack pot)
     {
         this.pot = pot;
+        if (this.pot.hasTagCompound() && this.pot.getTagCompound().hasKey("metals"))
+        {
+            slots = 1;
+        }
+        else
+        {
+            slots = 4;
+        }
+
         IItemHandler cap = pot.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, (EnumFacing) null);
         this.addPotInventory(cap);
         this.addPlayerInventory(playerInventory);
@@ -50,38 +62,55 @@ public class ContainerPot extends Container
 
     public void addPotInventory(IItemHandler cap)
     {
-        this.addSlotToContainer(new SlotItemHandler(cap, 0, 70, 27)
+        if (slots == 4)
         {
-            @Override
-            public boolean isItemValid(@Nonnull ItemStack stack)
+            this.addSlotToContainer(new SlotItemHandler(cap, 0, 70, 27)
             {
-                return super.isItemValid(stack) && !stack.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            }
-        });
+                @Override
+                public boolean isItemValid(@Nonnull ItemStack stack)
+                {
+                    return super.isItemValid(stack) && !stack.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+                }
+            });
 
-        this.addSlotToContainer(new SlotItemHandler(cap, 1, 88, 27){
-            @Override
-            public boolean isItemValid(@Nonnull ItemStack stack)
+            this.addSlotToContainer(new SlotItemHandler(cap, 1, 88, 27)
             {
-                return super.isItemValid(stack) && !stack.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            }
-        });
+                @Override
+                public boolean isItemValid(@Nonnull ItemStack stack)
+                {
+                    return super.isItemValid(stack) && !stack.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+                }
+            });
 
-        this.addSlotToContainer(new SlotItemHandler(cap, 2, 70, 45){
-            @Override
-            public boolean isItemValid(@Nonnull ItemStack stack)
+            this.addSlotToContainer(new SlotItemHandler(cap, 2, 70, 45)
             {
-                return super.isItemValid(stack) && !stack.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            }
-        });
+                @Override
+                public boolean isItemValid(@Nonnull ItemStack stack)
+                {
+                    return super.isItemValid(stack) && !stack.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+                }
+            });
 
-        this.addSlotToContainer(new SlotItemHandler(cap, 3, 88, 45){
-            @Override
-            public boolean isItemValid(@Nonnull ItemStack stack)
+            this.addSlotToContainer(new SlotItemHandler(cap, 3, 88, 45)
             {
-                return super.isItemValid(stack) && !stack.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            }
-        });
+                @Override
+                public boolean isItemValid(@Nonnull ItemStack stack)
+                {
+                    return super.isItemValid(stack) && !stack.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+                }
+            });
+        }
+        else
+        {
+            this.addSlotToContainer(new SlotItemHandler(cap, 0, 80, 34)
+            {
+                @Override
+                public boolean isItemValid(@Nonnull ItemStack stack)
+                {
+                    return stack.getItem() instanceof IMold && ((IMold) stack.getItem()).isMold(stack);
+                }
+            });
+        }
     }
 
     public void addPlayerInventory(InventoryPlayer playerInventory)
@@ -116,14 +145,14 @@ public class ContainerPot extends Container
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (index < 4)
+            if (index < slots)
             {
-                if (!this.mergeItemStack(itemstack1, 4, this.inventorySlots.size(), true))
+                if (!this.mergeItemStack(itemstack1, slots, this.inventorySlots.size(), true))
                 {
                     return ItemStack.EMPTY;
                 }
             }
-            else if (!this.mergeItemStack(itemstack1, 0, 4, false))
+            else if (!this.mergeItemStack(itemstack1, 0, slots, false))
             {
                 return ItemStack.EMPTY;
             }

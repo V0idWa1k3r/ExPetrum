@@ -14,6 +14,8 @@ import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
+import v0id.api.exp.item.IMeltableMetal;
+import v0id.api.exp.metal.EnumMetal;
 import v0id.api.exp.player.EnumPlayerProgression;
 import v0id.api.exp.player.IExPPlayer;
 import v0id.core.VoidApi;
@@ -22,7 +24,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class ItemOre extends Item implements IInitializableItem, IWeightProvider, IOreDictEntry
+public class ItemOre extends Item implements IInitializableItem, IWeightProvider, IOreDictEntry, IMeltableMetal
 {
     public ItemOre()
     {
@@ -96,5 +98,23 @@ public class ItemOre extends Item implements IInitializableItem, IWeightProvider
                 tooltip.add(EnumOre.values()[stack.getMetadata()].getFormula());
             }
         }
+    }
+
+    @Override
+    public EnumMetal getMetal(ItemStack is)
+    {
+        return EnumOre.values()[is.getMetadata()].getMeltsInto();
+    }
+
+    @Override
+    public float getMeltingTemperature(ItemStack is)
+    {
+        return EnumOre.values()[is.getMetadata()].getMeltingTemperature();
+    }
+
+    @Override
+    public int getMetalAmound(ItemStack is)
+    {
+        return 10 * is.getCount();
     }
 }

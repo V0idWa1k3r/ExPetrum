@@ -1,5 +1,6 @@
 package v0id.exp.item;
 
+import com.google.common.collect.Lists;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -18,6 +19,7 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
@@ -25,6 +27,10 @@ import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.api.exp.item.IContainerTickable;
+import v0id.api.exp.item.IMeltableMetal;
+import v0id.api.exp.item.IMold;
+import v0id.api.exp.metal.AlloyHelper;
+import v0id.api.exp.metal.EnumMetal;
 import v0id.api.exp.recipe.RecipesSmelting;
 import v0id.exp.ExPetrum;
 import v0id.exp.block.BlockPottery;
@@ -34,6 +40,7 @@ import v0id.exp.util.temperature.TemperatureUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class ItemPottery extends Item implements IInitializableItem, IWeightProvider, IContainerTickable
 {
@@ -116,6 +123,11 @@ public class ItemPottery extends Item implements IInitializableItem, IWeightProv
         EnumPotteryType type = EnumPotteryType.values()[is.getMetadata()];
         if (type == EnumPotteryType.CERAMIC_BOWL || type == EnumPotteryType.CERAMIC_JUG || type == EnumPotteryType.CERAMIC_POT)
         {
+            if (type == EnumPotteryType.CERAMIC_POT && is.hasTagCompound() && is.getTagCompound().hasKey("metals"))
+            {
+                return EnumActionResult.PASS;
+            }
+
             if (!worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos))
             {
                 pos = pos.offset(facing);
@@ -178,6 +190,43 @@ public class ItemPottery extends Item implements IInitializableItem, IWeightProv
         IItemHandler cap = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (cap != null)
         {
+            if (stack.hasTagCompound() && stack.getTagCompound().hasKey("metals") && cap.getStackInSlot(0).getItem() instanceof IMold)
+            {
+                String metalName = stack.getTagCompound().getCompoundTag("metals").getKeySet().toArray(new String[0])[0];
+                if (TemperatureUtils.getTemperature(stack) >= EnumMetal.valueOf(metalName.toUpperCase()).getMeltingTemperature() * 0.75F)
+                {
+                    ((IMold) cap.getStackInSlot(0).getItem()).tryFill(cap.getStackInSlot(0), (metal, value) ->
+                    {
+                        NBTTagCompound metals = stack.getTagCompound().getCompoundTag("metals");
+                        String name = metal.name().toLowerCase();
+                        if (metals.hasKey(name))
+                        {
+                            if (value >= metals.getFloat(name))
+                            {
+                                metals.removeTag(name);
+                                if (metals.hasNoTags())
+                                {
+                                    stack.getTagCompound().removeTag("metals");
+                                    if (stack.getTagCompound().hasNoTags())
+                                    {
+                                        stack.setTagCompound(null);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                metals.setFloat(name, metals.getFloat(name) - value);
+                            }
+                        }
+                    }, s ->
+                    {
+                        ((ItemStackHandler) cap).setStackInSlot(0, s);
+                        TemperatureUtils.setTemperature(s, TemperatureUtils.getTemperature(stack));
+                    }, EnumMetal.valueOf(metalName.toUpperCase()), stack.getTagCompound().getCompoundTag("metals").getFloat(metalName));
+                }
+            }
+
+            boolean melted = false;
             for (int i = 0; i < cap.getSlots(); ++i)
             {
                 final int lambdaCapture = i;
@@ -186,6 +235,34 @@ public class ItemPottery extends Item implements IInitializableItem, IWeightProv
                 if (TemperatureUtils.getTemperature(is) < TemperatureUtils.getTemperature(stack))
                 {
                     TemperatureUtils.incrementTemperature(is, 0.5F);
+                    if (is.getItem() instanceof IMeltableMetal)
+                    {
+                        EnumMetal metal = ((IMeltableMetal) is.getItem()).getMetal(is);
+                        float meltingPoint = ((IMeltableMetal) is.getItem()).getMeltingTemperature(is);
+                        if (TemperatureUtils.getTemperature(is) >= meltingPoint)
+                        {
+                            if (!stack.hasTagCompound())
+                            {
+                                stack.setTagCompound(new NBTTagCompound());
+                            }
+
+                            if (!stack.getTagCompound().hasKey("metals"))
+                            {
+                                stack.getTagCompound().setTag("metals", new NBTTagCompound());
+                            }
+
+                            stack.getTagCompound().getCompoundTag("metals").setFloat(metal.name().toLowerCase(), ((IMeltableMetal) is.getItem()).getMetalAmound(is) + (stack.getTagCompound().getCompoundTag("metals").hasKey(metal.name().toLowerCase()) ? stack.getTagCompound().getCompoundTag("metals").getFloat(metal.name().toLowerCase()) : 0));
+                            ((ItemStackHandler)cap).setStackInSlot(i, ItemStack.EMPTY);
+                            melted = true;
+                            continue;
+                        }
+                    }
+
+                    if (melted && stack.hasTagCompound() && stack.getTagCompound().hasKey("metals"))
+                    {
+                        checkForAlloys(stack);
+                    }
+
                     RecipesSmelting.checkForSmelting(itemstack -> ((ItemStackHandler)cap).setStackInSlot(lambdaCapture, itemstack), is, false, true);
                 }
                 else
@@ -193,6 +270,28 @@ public class ItemPottery extends Item implements IInitializableItem, IWeightProv
                     TemperatureUtils.tickItem(is, true);
                 }
             }
+        }
+    }
+
+    public void checkForAlloys(ItemStack is)
+    {
+        NBTTagCompound tag = is.getTagCompound().getCompoundTag("metals");
+        if (tag.getSize() > 1)
+        {
+            String[] keys = tag.getKeySet().toArray(new String[0]);
+            List<Pair<EnumMetal, Integer>> data = Lists.newArrayList();
+            for (String s : keys)
+            {
+                data.add(Pair.of(EnumMetal.valueOf(s.toUpperCase()), (int) tag.getFloat(s)));
+            }
+
+            EnumMetal metal = AlloyHelper.getAlloy(data.toArray(new Pair[0]));
+            for (String s : keys)
+            {
+                tag.removeTag(s);
+            }
+
+            tag.setFloat(ObjectUtils.firstNonNull(metal, EnumMetal.ANY).name().toLowerCase(), data.stream().mapToInt(Pair::getRight).sum());
         }
     }
 

@@ -13,13 +13,14 @@ import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
+import v0id.api.exp.item.IMeltableMetal;
 import v0id.api.exp.metal.EnumMetal;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class ItemIngot extends Item implements IInitializableItem, IWeightProvider, IOreDictEntry
+public class ItemIngot extends Item implements IInitializableItem, IWeightProvider, IOreDictEntry, IMeltableMetal
 {
 	public ItemIngot()
 	{
@@ -78,5 +79,23 @@ public class ItemIngot extends Item implements IInitializableItem, IWeightProvid
 	{
 		super.addInformation(stack, worldIn, tooltip, flagIn);
         tooltip.add(I18n.format("exp.item.ingot.desc.type." + EnumMetal.values()[stack.getMetadata()].name().toLowerCase()));
+	}
+
+	@Override
+	public EnumMetal getMetal(ItemStack is)
+	{
+		return EnumMetal.values()[is.getMetadata()];
+	}
+
+	@Override
+	public float getMeltingTemperature(ItemStack is)
+	{
+		return EnumMetal.values()[is.getMetadata()].getMeltingTemperature();
+	}
+
+	@Override
+	public int getMetalAmound(ItemStack is)
+	{
+		return 100 * is.getCount();
 	}
 }

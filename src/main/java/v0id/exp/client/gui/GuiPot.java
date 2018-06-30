@@ -29,7 +29,7 @@ public class GuiPot extends GuiContainer
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
     {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        Minecraft.getMinecraft().renderEngine.bindTexture(ExPTextures.guiInv4);
+        Minecraft.getMinecraft().renderEngine.bindTexture(((ContainerPot)this.inventorySlots).slots == 4 ? ExPTextures.guiInv4 : ExPTextures.guiInv1);
         int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
