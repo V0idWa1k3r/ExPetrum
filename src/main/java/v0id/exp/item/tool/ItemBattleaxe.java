@@ -1,5 +1,7 @@
 package v0id.exp.item.tool;
 
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.combat.EnumWeaponWeight;
@@ -78,4 +80,17 @@ public class ItemBattleaxe extends ItemExPWeapon implements IWeapon, IWeightProv
 		return -2.8F;
 	}
 
+    @Override
+    public float getDestroySpeed(ItemStack stack, IBlockState state)
+    {
+        Material material = state.getMaterial();
+        return material != Material.WOOD && material != Material.PLANTS && material != Material.VINE ? super.getDestroySpeed(stack, state) : this.getStats(stack).getEfficiency();
+    }
+
+	@Override
+	public boolean canHarvestBlock(IBlockState state, ItemStack stack)
+	{
+		Material material = state.getMaterial();
+		return material == Material.WOOD || material == Material.PLANTS || material == Material.VINE || super.canHarvestBlock(state, stack);
+	}
 }

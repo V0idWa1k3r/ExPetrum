@@ -86,4 +86,11 @@ public class ItemSaw extends ItemExPTool implements IWeapon, IWeightProvider, II
         Material material = state.getMaterial();
         return material != Material.WOOD ? super.getDestroySpeed(stack, state) : this.getStats(stack).getEfficiency();
     }
+
+	@Override
+	public boolean canHarvestBlock(IBlockState state, ItemStack stack)
+	{
+		Material material = state.getMaterial();
+		return material == Material.WOOD || super.canHarvestBlock(state, stack);
+	}
 }

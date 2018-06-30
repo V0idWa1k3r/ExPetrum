@@ -1,5 +1,6 @@
 package v0id.exp.item.tool;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import org.apache.commons.lang3.tuple.Pair;
@@ -83,6 +84,14 @@ public class ItemScythe extends ItemExPWeapon implements IWeapon, IWeightProvide
 	@Override
 	public float getDestroySpeed(ItemStack stack, IBlockState state)
     {
-        return state.getBlock() instanceof BlockCrop ? this.getStats(stack).getEfficiency() : super.getDestroySpeed(stack, state);
+        Material material = state.getMaterial();
+        return state.getBlock() instanceof BlockCrop || material == Material.PLANTS ? this.getStats(stack).getEfficiency() : super.getDestroySpeed(stack, state);
     }
+
+	@Override
+	public boolean canHarvestBlock(IBlockState state, ItemStack stack)
+	{
+		Material material = state.getMaterial();
+		return material == Material.PLANTS || super.canHarvestBlock(state, stack);
+	}
 }

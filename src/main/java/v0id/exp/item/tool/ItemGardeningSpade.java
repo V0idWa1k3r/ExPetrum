@@ -87,4 +87,11 @@ public class ItemGardeningSpade extends ItemExPTool implements IWeapon, IWeightP
         float ret = material != Material.GRASS && material != Material.GROUND && material != Material.CRAFTED_SNOW && material != Material.SNOW && material != Material.SAND && material != Material.CLAY && material != Material.GOURD ? super.getDestroySpeed(stack, state) : this.getStats(stack).getEfficiency();
     	return ret * 0.75F;
     }
+
+	@Override
+	public boolean canHarvestBlock(IBlockState state, ItemStack stack)
+	{
+		Material material = state.getMaterial();
+		return material == Material.GRASS || material == Material.GROUND || material == Material.CRAFTED_SNOW || material == Material.SNOW || material == Material.SAND || material == Material.CLAY || material == Material.GOURD || super.canHarvestBlock(state, stack);
+	}
 }

@@ -103,6 +103,13 @@ public class ItemShovel extends ItemExPTool implements IWeapon, IWeightProvider,
     }
 
 	@Override
+	public boolean canHarvestBlock(IBlockState state, ItemStack stack)
+	{
+		Material material = state.getMaterial();
+		return material == Material.GRASS || material == Material.GROUND || material == Material.CRAFTED_SNOW || material == Material.SNOW || material == Material.SAND || material == Material.CLAY || material == Material.GOURD || super.canHarvestBlock(state, stack);
+	}
+
+	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		IBlockState state = worldIn.getBlockState(pos);

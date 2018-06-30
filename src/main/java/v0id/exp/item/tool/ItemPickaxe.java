@@ -92,4 +92,11 @@ public class ItemPickaxe extends ItemExPTool implements IWeapon, IWeightProvider
         Material material = state.getMaterial();
         return material != Material.IRON && material != Material.ANVIL && material != Material.ROCK ? super.getDestroySpeed(stack, state) : this.getStats(stack).getEfficiency();
     }
+
+	@Override
+	public boolean canHarvestBlock(IBlockState state, ItemStack stack)
+	{
+		Material material = state.getMaterial();
+		return material == Material.IRON || material == Material.ANVIL || material == Material.ROCK || super.canHarvestBlock(state, stack);
+	}
 }
