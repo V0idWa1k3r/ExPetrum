@@ -227,4 +227,10 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockPottery)
     public static final Block pottery = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockLogPile)
+    public static final Block logPile = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockCharcoal)
+    public static final Block charcoal = null;
 }

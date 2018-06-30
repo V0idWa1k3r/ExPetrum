@@ -19,6 +19,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import v0id.api.exp.gravity.IGravitySusceptible;
+import v0id.api.exp.gravity.ISupport;
 
 import java.util.List;
 
@@ -124,17 +125,14 @@ public class EntityGravFallingBlock extends EntityFallingBlock
 		
 		if (!this.world.isRemote)
         {
-			
 			if (this.onGround)
 			{
 				BlockPos on = new BlockPos(this.posX, this.posY - COLLISION_Y_CONST, this.posZ);
 				IBlockState state = this.world.getBlockState(on);
-				
-				
 				if (this.blockState.getBlock() instanceof IGravitySusceptible) //Should always be true!
 				{
 					IGravitySusceptible gravityManager = ((IGravitySusceptible)this.blockState.getBlock());
-					if (gravityManager.destroysNonOpaqueBlocksOnImpact() && !state.isOpaqueCube())
+					if (gravityManager.destroysNonOpaqueBlocksOnImpact() && !state.isOpaqueCube() && !(state.getBlock() instanceof ISupport))
 					{
 						this.world.setBlockToAir(on);
 						// TODO destruction effects
@@ -145,6 +143,11 @@ public class EntityGravFallingBlock extends EntityFallingBlock
 						gravityManager.onFall(this.world, pos);
 						if (!gravityManager.breaksOnFall())
 						{
+						    if (this.world.getBlockState(pos).getBlock() instanceof ISupport)
+                            {
+                                pos = pos.up();
+                            }
+
 							this.world.setBlockState(pos, this.blockState);
 						}
 						

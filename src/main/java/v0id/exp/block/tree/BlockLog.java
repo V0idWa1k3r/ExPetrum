@@ -21,17 +21,17 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.commons.lang3.tuple.Pair;
-import v0id.core.VoidApi;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.ILog;
 import v0id.api.exp.data.*;
 import v0id.api.exp.inventory.IWeightProvider;
+import v0id.core.VoidApi;
 import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.IItemBlockProvider;
-import v0id.exp.block.item.ItemBlockWithMetadata;
+import v0id.exp.block.item.ItemBlockLog;
 import v0id.exp.entity.EntityFallingTree;
 
 import javax.annotation.Nullable;
@@ -227,7 +227,7 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 	@Override
 	public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World worldIn, BlockPos pos)
 	{
-		return player.getHeldItem(EnumHand.MAIN_HAND).getItem().canHarvestBlock(state) ? super.getPlayerRelativeBlockHardness(state, player, worldIn, pos) : -1F;
+		return player.getHeldItem(EnumHand.MAIN_HAND).getItem().canHarvestBlock(state, player.getHeldItem(EnumHand.MAIN_HAND)) ? super.getPlayerRelativeBlockHardness(state, player, worldIn, pos) : -1F;
 	}
 
 	public static class Decorative extends BlockLog
@@ -257,6 +257,6 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 	@Override
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
-		registry.register(new ItemBlockWithMetadata(this));
+		registry.register(new ItemBlockLog(this));
 	}
 }

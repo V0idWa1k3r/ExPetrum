@@ -100,7 +100,9 @@ public class ExPBlocksRegistry extends AbstractRegistry
                 new BlockDecoratedStone(BlockDecoratedStone.EnumDecorationType.SMALL_BRICK),
                 new BlockCampfire(),
                 new BlockPotteryStation(),
-                new BlockPottery()
+                new BlockPottery(),
+                new BlockLogPile(),
+                new BlockCharcoal()
         );
 
         registryEntries.forEach(registry::register);

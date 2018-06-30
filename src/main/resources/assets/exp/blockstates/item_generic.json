@@ -43,7 +43,12 @@
                 "textures" : {
                     "layer0" : "exp:items/misc/ash"
                 }
-            }
+            },
+			"charcoal": {
+				"textures" : {
+					"layer0" : "exp:items/misc/charcoal"
+				}
+			}
 		}
 	}
 }

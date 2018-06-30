@@ -29,7 +29,10 @@ public class ExPBlockProperties
 	public static final PropertyEnum<BlockPottery.EnumPotteryType> POTTERY_TYPE = PropertyEnum.create("type", BlockPottery.EnumPotteryType.class);
 	public static final PropertyBool SHRUB_IS_TALL = PropertyBool.create("istall");
 	public static final PropertyBool ICE_IS_SALT = PropertyBool.create("salt");
+	public static final PropertyBool LOGPILE_IS_ROTATED = PropertyBool.create("rotated");
 	public static final PropertyInteger WORKED_BOULDER_INDEX = PropertyInteger.create("workindex", 0, 7);
+	public static final PropertyInteger LOGPILE_COUNT = PropertyInteger.create("count", 1, 8);
+	public static final PropertyInteger CHARCOAL_COUNT = PropertyInteger.create("count", 1, 16);
 	// Note that some values of this property are unused, use the CropData from EnumCrop obtained from a capability.
 	public static final PropertyInteger CROP_GROWTH_STAGE = PropertyInteger.create("stage", 0, 15);
 	public static final PropertyEnum<EnumCrop> CROP_TYPE = PropertyEnum.create("type", EnumCrop.class);

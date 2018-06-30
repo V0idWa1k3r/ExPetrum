@@ -18,7 +18,7 @@ public class GravityHelper
 	public static boolean isSupported(World world, BlockPos pos)
 	{
 		// If there is a full block under our block consider the block supported. 
-		return world.getBlockState(pos.down()).isOpaqueCube() || world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP);
+		return world.getBlockState(pos.down()).getBlock() instanceof ISupport || world.getBlockState(pos.down()).isOpaqueCube() || world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP);
 
 	}
 

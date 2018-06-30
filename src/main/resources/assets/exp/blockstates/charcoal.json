@@ -1,0 +1,65 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"textures" : {
+			"all" : "exp:blocks/charcoal",
+            "particle": "exp:blocks/charcoal"
+		},
+		"transform": "forge:default-block",
+		"model" : "exp:cube_1"
+	},
+	"variants" : {
+		"normal": [{}],
+        "inventory": [{}],
+		"count": {
+            "16": {
+                "model" : "cube_all"
+            },
+            "15": {
+                "model" : "exp:cube_15"
+            },
+            "14": {
+                "model" : "exp:cube_14"
+            },
+            "13": {
+                "model" : "exp:cube_13"
+            },
+            "12": {
+                "model" : "exp:cube_12"
+            },
+            "11": {
+                "model" : "exp:cube_11"
+            },
+            "10": {
+                "model" : "exp:cube_10"
+            },
+            "9": {
+                "model" : "exp:cube_9"
+            },
+            "8": {
+                "model" : "exp:cube_8"
+            },
+            "7": {
+                "model" : "exp:cube_7"
+            },
+            "6": {
+                "model" : "exp:cube_6"
+            },
+            "5": {
+                "model" : "exp:cube_5"
+            },
+            "4": {
+                "model" : "exp:cube_4"
+            },
+            "3": {
+                "model" : "exp:cube_3"
+            },
+            "2": {
+                "model" : "exp:cube_2"
+            },
+            "1": {
+                "model" : "exp:cube_1"
+            }
+        }
+	}
+}

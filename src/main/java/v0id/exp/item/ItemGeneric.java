@@ -23,7 +23,8 @@ public class ItemGeneric extends Item implements IInitializableItem, IWeightProv
         LIGNITE("lignite", 0.05F, IWeightProvider.DEFAULT_VOLUME, "coal"),
         BITUMINOUS_COAL("bituminous_coal", 0.05F, IWeightProvider.DEFAULT_VOLUME, "coal"),
         ANTHRACITE("anthracite", 0.05F, IWeightProvider.DEFAULT_VOLUME, "coal"),
-        ASH("ash", 0F, IWeightProvider.DEFAULT_VOLUME, "ash", "dustAsh");
+        ASH("ash", 0F, IWeightProvider.DEFAULT_VOLUME, "ash", "dustAsh"),
+        CHARCOAL("charcoal", 0.02F, IWeightProvider.DEFAULT_VOLUME, "coal", "charcoal");
 
         EnumGenericType(String name, float weight, Pair<Byte, Byte> volume, String... oreDictNames)
         {
@@ -101,6 +102,6 @@ public class ItemGeneric extends Item implements IInitializableItem, IWeightProv
     public int getItemBurnTime(ItemStack itemStack)
     {
         EnumGenericType type = EnumGenericType.values()[itemStack.getMetadata()];
-        return type == EnumGenericType.LIGNITE ? 1000 : type == EnumGenericType.BITUMINOUS_COAL ? 1600 : type == EnumGenericType.ANTHRACITE ? 3200 : super.getItemBurnTime(itemStack);
+        return type == EnumGenericType.LIGNITE ? 1000 : type == EnumGenericType.BITUMINOUS_COAL || type == EnumGenericType.CHARCOAL ? 1600 : type == EnumGenericType.ANTHRACITE ? 3200 : super.getItemBurnTime(itemStack);
     }
 }

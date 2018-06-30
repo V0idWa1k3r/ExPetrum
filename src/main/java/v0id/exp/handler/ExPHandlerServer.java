@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerPlayer;
@@ -44,8 +45,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.relauncher.Side;
-import v0id.core.logging.LogLevel;
-import v0id.core.util.MC;
 import v0id.api.exp.block.IWater;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPPotions;
@@ -53,6 +52,8 @@ import v0id.api.exp.player.ExPPlayerCapability;
 import v0id.api.exp.player.IExPPlayer;
 import v0id.api.exp.world.ExPWorldCapability;
 import v0id.api.exp.world.IExPWorld;
+import v0id.core.logging.LogLevel;
+import v0id.core.util.MC;
 import v0id.exp.player.ExPPlayer;
 import v0id.exp.player.PlayerManager;
 import v0id.exp.player.inventory.ManagedSlot;
@@ -218,8 +219,7 @@ public class ExPHandlerServer
 				{
 					int slotID = i - Short.MAX_VALUE;
 					ItemStack toIncrement = event.getEntityPlayer().inventory.getStackInSlot(slotID);
-					Optional<Slot> s = Optional.ofNullable(event.getEntityPlayer().openContainer != null ? event.getEntityPlayer().openContainer.getSlot(slotID) : null);
-					int max = Math.min(toIncrement.getMaxStackSize(), s.map(slot -> slot.getItemStackLimit(toIncrement)).orElseGet(() -> event.getEntityPlayer().inventory.getInventoryStackLimit()));
+					int max = Math.min(toIncrement.getMaxStackSize(), event.getEntityPlayer().inventory.getInventoryStackLimit());
 					int current = toIncrement.getCount();
 					final int added = Math.min(event.getItem().getItem().getCount(), max - current);
 					net.minecraftforge.fml.common.FMLCommonHandler.instance().firePlayerItemPickupEvent(event.getEntityPlayer(), event.getItem(), event.getItem().getItem());
@@ -361,7 +361,7 @@ public class ExPHandlerServer
 	}
 	
 	@SubscribeEvent
-	public void onPlaceBlock(BlockEvent.BreakEvent event)
+	public void onPlaceBlock(BlockEvent.PlaceEvent event)
 	{
 		if (event.getPlayer() != null && !event.getWorld().isRemote)
 		{
@@ -370,6 +370,11 @@ public class ExPHandlerServer
 			{
 				PlayerManager.handlePlayerPlaceBlock(event.getPlayer(), data);
 			}
+
+			if (event.getPlacedBlock().getBlock() == Blocks.FURNACE)
+            {
+                event.setCanceled(true);
+            }
 		}
 	}
 	

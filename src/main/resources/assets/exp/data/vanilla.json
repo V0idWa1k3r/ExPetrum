@@ -17,6 +17,12 @@
             "metadata": 0,
             "volume" : { "x" : 2, "y" : 2 },
             "weight" : 400
+        },
+        {
+            "id": "minecraft:torch",
+            "metadata": 0,
+            "volume" : { "x" : 1, "y" : 1 },
+            "weight" : 10
         }
     ]
 }

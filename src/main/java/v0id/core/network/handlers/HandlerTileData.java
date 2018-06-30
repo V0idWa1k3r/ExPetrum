@@ -27,7 +27,7 @@ public class HandlerTileData implements IPacketHandler {
                         Optional.ofNullable(VoidApi.proxy.getClientWorld().getTileEntity(dbp.pos)).ifPresent(t -> t.deserializeNBT(tileData));
                     }
 
-					VoidApi.proxy.getClientWorld().markBlockRangeForRenderUpdate(dbp.pos.down().north().west(), dbp.pos.up().west().south());
+					VoidApi.proxy.getClientWorld().markBlockRangeForRenderUpdate(dbp.pos, dbp.pos);
 			});
 		}
 		else
