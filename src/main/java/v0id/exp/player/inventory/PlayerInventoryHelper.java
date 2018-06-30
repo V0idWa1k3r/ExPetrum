@@ -61,7 +61,7 @@ public class PlayerInventoryHelper
 			ItemStack stack = player.inventory.getStackInSlot(i);
 			if (ItemStack.areItemsEqual(stack, is) && ItemStack.areItemStackTagsEqual(stack, is))
 			{
-				int max = Math.min(player.openContainer != null ? player.openContainer.getSlot(i).getItemStackLimit(stack) : inventory.getInventoryStackLimit(), stack.getMaxStackSize());
+				int max = Math.min(inventory.getInventoryStackLimit(), stack.getMaxStackSize());
 				if (stack.getCount() < max)
 				{
 					return Short.MAX_VALUE + i;
