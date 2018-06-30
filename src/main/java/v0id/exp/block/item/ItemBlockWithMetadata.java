@@ -15,4 +15,9 @@ public class ItemBlockWithMetadata extends ItemBlockWeighted
     {
         return damage;
     }
+
+    public Block getBlock()
+    {
+        return this.block;
+    }
 }
