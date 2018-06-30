@@ -39,7 +39,22 @@ public class ExPOreDict
 		itemRock																										= { "itemRock", "rock" },
 		itemStick																										= { "stickWood" },
 		itemToolHeads																									= { "toolheadHammerStone", "toolheadAxeStone", "toolheadShovelStone", "toolheadSpearStone", "toolheadKnifeStone", "toolheadChiselStone", "toolheadArrowStone" },
-		itemSeeds																										= { "seeds", "seed" };
+		itemSeeds																										= { "seeds", "seed" },
+		itemAxe                                                                                                         = { "axe" },
+        itemBasket                                                                                                      = { "basket" },
+        itemBattleaxe                                                                                                   = { "battleaxe", "axe" },
+        itemChisel                                                                                                      = { "chisel" },
+        itemGardeningSpade                                                                                              = { "gardeningSpade" },
+        itemHammer                                                                                                      = { "hammer" },
+        itemHoe                                                                                                         = { "hoe" },
+        itemKnife                                                                                                       = { "knife" },
+        itemPickaxe                                                                                                     = { "pickaxe" },
+        itemSaw                                                                                                         = { "saw" },
+        itemScythe                                                                                                      = { "scythe" },
+        itemShovel                                                                                                      = { "shovel", "spade" },
+        itemSpear                                                                                                       = { "spear" },
+        itemSword                                                                                                       = { "sword" },
+        itemWateringCan                                                                                                 = { "wateringCan" };
 	
 	public static final String[] rockNames = Stream.of(EnumRockClass.values()).map(EnumRockClass::getName).toArray(String[]::new);
 	public static final String[] soilNames = Stream.of(EnumDirtClass.values()).map(EnumDirtClass::getName).toArray(String[]::new);

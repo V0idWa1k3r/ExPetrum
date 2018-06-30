@@ -19,7 +19,10 @@ import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
+import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.tuple.Pair;
+import v0id.api.exp.data.ExPOreDict;
+import v0id.api.exp.metal.EnumToolStats;
 import v0id.core.VoidApi;
 import v0id.core.util.I18n;
 import v0id.api.exp.block.IAcceptsWaterCan;
@@ -32,6 +35,7 @@ import v0id.api.exp.player.EnumPlayerProgression;
 import v0id.api.exp.player.IExPPlayer;
 import v0id.exp.item.IInitializableItem;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ItemWateringCan extends ItemExPTool implements IWeightProvider, IInitializableItem, IOreDictEntry
@@ -75,8 +79,11 @@ public class ItemWateringCan extends ItemExPTool implements IWeightProvider, IIn
 	@Override
 	public void registerOreDictNames()
 	{
-		// TODO Auto-generated method stub
-		
+		Arrays.stream(EnumToolStats.values()).forEach(mat -> Arrays.stream(ExPOreDict.itemWateringCan).forEach(name ->
+		{
+			OreDictionary.registerOre(name, new ItemStack(this, 1, mat.ordinal()));
+			OreDictionary.registerOre(name + Character.toUpperCase(mat.name().charAt(0)) + mat.name().toLowerCase().substring(1), new ItemStack(this, 1, mat.ordinal()));
+		}));
 	}
 
 	@Override

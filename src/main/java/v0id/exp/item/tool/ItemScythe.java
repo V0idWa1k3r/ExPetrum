@@ -3,17 +3,22 @@ package v0id.exp.item.tool;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.combat.EnumWeaponWeight;
 import v0id.api.exp.combat.IWeapon;
 import v0id.api.exp.combat.WeaponType;
 import v0id.api.exp.data.ExPCreativeTabs;
+import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.api.exp.metal.EnumToolClass;
+import v0id.api.exp.metal.EnumToolStats;
 import v0id.exp.block.plant.BlockCrop;
 import v0id.exp.item.IInitializableItem;
+
+import java.util.Arrays;
 
 public class ItemScythe extends ItemExPWeapon implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry
 {
@@ -23,12 +28,15 @@ public class ItemScythe extends ItemExPWeapon implements IWeapon, IWeightProvide
 		this.initItem();
 	}
 
-	@Override
-	public void registerOreDictNames()
-	{
-		// TODO Auto-generated method stub
-
-	}
+    @Override
+    public void registerOreDictNames()
+    {
+        Arrays.stream(EnumToolStats.values()).forEach(mat -> Arrays.stream(ExPOreDict.itemScythe).forEach(name ->
+        {
+            OreDictionary.registerOre(name, new ItemStack(this, 1, mat.ordinal()));
+            OreDictionary.registerOre(name + Character.toUpperCase(mat.name().charAt(0)) + mat.name().toLowerCase().substring(1), new ItemStack(this, 1, mat.ordinal()));
+        }));
+    }
 
 	@Override
 	public void initItem()

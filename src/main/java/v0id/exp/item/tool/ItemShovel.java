@@ -13,7 +13,9 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.tuple.Pair;
+import v0id.api.exp.metal.EnumToolStats;
 import v0id.core.logging.LogLevel;
 import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.combat.EnumWeaponWeight;
@@ -27,6 +29,7 @@ import v0id.api.exp.tile.crop.IFarmland;
 import v0id.exp.item.IInitializableItem;
 import v0id.exp.tile.TileFarmland;
 
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 public class ItemShovel extends ItemExPTool implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry
@@ -37,12 +40,15 @@ public class ItemShovel extends ItemExPTool implements IWeapon, IWeightProvider,
 		this.initItem();
 	}
 
-	@Override
-	public void registerOreDictNames()
-	{
-		// TODO Auto-generated method stub
-
-	}
+    @Override
+    public void registerOreDictNames()
+    {
+        Arrays.stream(EnumToolStats.values()).forEach(mat -> Arrays.stream(ExPOreDict.itemShovel).forEach(name ->
+        {
+            OreDictionary.registerOre(name, new ItemStack(this, 1, mat.ordinal()));
+            OreDictionary.registerOre(name + Character.toUpperCase(mat.name().charAt(0)) + mat.name().toLowerCase().substring(1), new ItemStack(this, 1, mat.ordinal()));
+        }));
+    }
 
 	@Override
 	public void initItem()

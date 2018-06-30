@@ -2,12 +2,16 @@ package v0id.exp.item.tool;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.data.ExPCreativeTabs;
+import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.item.IInitializableItem;
+
+import java.util.Arrays;
 
 /**
  * Created by V0idWa1k3r on 11-Jun-17.
@@ -23,7 +27,7 @@ public class ItemBasket extends Item implements IInitializableItem, IOreDictEntr
     @Override
     public void registerOreDictNames()
     {
-
+        Arrays.stream(ExPOreDict.itemBasket).forEach(name -> OreDictionary.registerOre(name, this));
     }
 
     @Override
