@@ -9,6 +9,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -30,6 +31,7 @@ import v0id.exp.tile.TileOre;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Stream;
 
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
@@ -157,5 +159,21 @@ public class BlockOre extends Block implements IInitializableBlock, IOreDictEntr
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
 		registry.register(new ItemBlockOre(this));
+	}
+
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune)
+    {
+        return Items.AIR;
+    }
+
+    @Override
+	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+	{
+		super.getDrops(drops, world, pos, state, fortune);
+		if (world.getTileEntity(pos) instanceof TileOre)
+		{
+			drops.add(((TileOre) world.getTileEntity(pos)).createDrops());
+		}
 	}
 }
