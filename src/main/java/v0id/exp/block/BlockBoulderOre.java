@@ -10,6 +10,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -232,16 +233,17 @@ public class BlockBoulderOre extends Block implements IInitializableBlock, IOreD
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
     {
         super.getDrops(drops, world, pos, state, fortune);
-        if (world.getTileEntity(pos) instanceof TileOre)
-        {
-            drops.add(((TileOre) world.getTileEntity(pos)).createDrops());
-        }
     }
 
     @Override
     public IBlockState chisel(IBlockState original, World world, BlockPos pos)
     {
         this.dropBlockAsItem(world, pos, original, 0);
+        if (world.getTileEntity(pos) instanceof TileOre)
+        {
+            InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), ((TileOre) world.getTileEntity(pos)).createDrops());
+        }
+
         return Blocks.AIR.getDefaultState();
     }
 }
