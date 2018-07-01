@@ -1,5 +1,6 @@
 package v0id.exp.net;
 
+import net.minecraft.client.gui.inventory.GuiCrafting;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -13,6 +14,7 @@ import v0id.exp.client.gui.GuiCampfire;
 import v0id.exp.client.gui.GuiPot;
 import v0id.exp.client.gui.GuiPotteryStation;
 import v0id.exp.container.ContainerCampfire;
+import v0id.exp.container.ContainerCraftingTable;
 import v0id.exp.container.ContainerPot;
 import v0id.exp.container.ContainerPotteryStation;
 import v0id.exp.tile.TileCampfire;
@@ -29,6 +31,11 @@ public class GuiHandler implements IGuiHandler
         TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
         switch (ID)
         {
+            case -1:
+            {
+                return new GuiCrafting(player.inventory, world, new BlockPos(x, y, z));
+            }
+
             case 0:
             {
                 return new GuiCampfire(player.inventory, (TileCampfire) tile);
@@ -54,9 +61,12 @@ public class GuiHandler implements IGuiHandler
             {
                 return new GuiPot(player.inventory, tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null));
             }
-        }
 
-        return null;
+            default:
+            {
+                return null;
+            }
+        }
     }
 
     @Nullable
@@ -66,6 +76,11 @@ public class GuiHandler implements IGuiHandler
         TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
         switch (ID)
         {
+            case -1:
+            {
+                return new ContainerCraftingTable(player.inventory, world, new BlockPos(x, y, z));
+            }
+
             case 0:
             {
                 return new ContainerCampfire(player.inventory, (TileCampfire) tile);
@@ -91,8 +106,11 @@ public class GuiHandler implements IGuiHandler
             {
                 return new ContainerPot(player.inventory, tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null));
             }
-        }
 
-        return null;
+            default:
+            {
+                return null;
+            }
+        }
     }
 }

@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "exp:crafting_table2",
+    "data": 9
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "#": {
+      "item": "exp:planks2",
+      "data": 9
+    }
+  }
+}

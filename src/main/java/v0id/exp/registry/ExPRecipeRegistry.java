@@ -55,7 +55,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
             event.getRegistry().register(new ShapelessOreRecipe(mcloc, new ItemStack(chiselIron, 1, 0), new ItemStack(ExPItems.chisel, 1, 7)).setRegistryName("exp:recipe_hardcoded_compat_cnb_chisel_iron"));
         }
 
-        String[] toRemove = new String[]{ "minecraft:torch", "minecraft:workbench", "minecraft:crafting_table" };
+        String[] toRemove = new String[]{ "minecraft:torch", "minecraft:crafting_table" };
         for (String loc : toRemove)
         {
             reg.remove(new ResourceLocation(loc));

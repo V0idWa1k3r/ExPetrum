@@ -84,6 +84,7 @@ public class ExPHandlerClient
             ExPBlocks.shrubs = new Block[]{ ExPBlocks.shrubNormal, ExPBlocks.shrubBlooming, ExPBlocks.shrubAutumn, ExPBlocks.shrubDead };
             ExPBlocks.berryBushes = new Block[]{ ExPBlocks.berryBushNormal, ExPBlocks.berryBushBerries, ExPBlocks.berryBushAutumn, ExPBlocks.berryBushDead };
             ExPBlocks.planks = new Block[]{ ExPBlocks.planks0, ExPBlocks.planks1, ExPBlocks.planks2 };
+            ExPBlocks.craftingTables = new Block[]{ ExPBlocks.craftingTable0, ExPBlocks.craftingTable1, ExPBlocks.craftingTable2 };
         }
 
         ClientRegistry.registerModels();

@@ -257,6 +257,9 @@ tile.exp.planks2.pomegranate.name=Pomegranate Planks
 tile.exp.planks2.grapefruit.name=Grapefruit Planks
 tile.exp.planks2.avocado.name=Avocado Planks
 tile.exp.planks2.carambola.name=Carambola Planks
+tile.exp.crafting_table0.name=Crafting Table
+tile.exp.crafting_table1.name=Crafting Table
+tile.exp.crafting_table2.name=Crafting Table
 
 item.exp.item_ingot.name=Ingot
 

@@ -1,0 +1,244 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"textures" : {
+			"all" : "exp:blocks/wood/plank/generic",
+			"overlay" : "exp:blocks/wood/crafting_table_side",
+			"top" : "exp:blocks/wood/crafting_table_top",
+            "particle": "exp:blocks/wood/crafting_table_top"
+		},
+		"model" : "exp:grass",
+		"transform": "forge:default-block"
+	},
+	"variants": {
+        "normal": [{}],
+		"ttype" : {
+			"kalopanax" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/kalopanax"
+				}
+			},
+			"birch" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/birch"
+				}
+			},
+			"acacia" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/acacia"
+				}
+			},
+			"chestnut" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/chestnut"
+				}
+			},
+			"oak" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/oak"
+				}
+			},
+			"hickory" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/hickory"
+				}
+			},
+			"baobab" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/baobab"
+				}
+			},
+			"kapok" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/kapok"
+				}
+			},
+			"eucalyptus" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/eucalyptus"
+				}
+			},
+			"ash" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/ash"
+				}
+			},
+			"willow" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/willow"
+				}
+			},
+			"maple" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/maple"
+				}
+			},
+			"redwood" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/redwood"
+				}
+			},
+			"fir" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/fir"
+				}
+			},
+			"cedar" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/cedar"
+				}
+			},
+			"spruce" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/spruce"
+				}
+			},
+			"pine" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/pine"
+				}
+			},
+			"elm" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/elm"
+				}
+			},
+			"palm" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/palm"
+				}
+			},
+			"teak" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/teak"
+				}
+			},
+			"aspen" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/aspen"
+				}
+			},
+			"rowan" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/rowan"
+				}
+			},
+			"mangrove" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/mangrove"
+				}
+			},
+			"tupelo" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/tupelo"
+				}
+			},
+			"parrotia" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/parrotia"
+				}
+			},
+			"sweetgum" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/sweetgum"
+				}
+			},
+			"jackwood" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/jackwood"
+				}
+			},
+			"tsuga" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/tsuga"
+				}
+			},
+			"viburnum" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/viburnum"
+				}
+			},
+			"koelreuteria" : {
+				"textures" : {
+					"all" : "exp:blocks/wood/plank/koelreuteria"
+				}
+			},
+			"apple" : {
+                "textures" : {
+                    "all" : "exp:blocks/wood/plank/apple"
+                }
+            },
+            "apricot" : {
+                "textures" : {
+                    "all" : "exp:blocks/wood/plank/apricot"
+                }
+            },
+            "olive" : {
+                "textures" : {
+                    "all" : "exp:blocks/wood/plank/olive"
+                }
+            },
+            "peach" : {
+                "textures" : {
+                    "all" : "exp:blocks/wood/plank/peach"
+                }
+            },
+            "orange" : {
+                "textures" : {
+                    "all" : "exp:blocks/wood/plank/orange"
+                }
+            },
+            "pear" : {
+                "textures" : {
+                    "all" : "exp:blocks/wood/plank/pear"
+                }
+            },
+            "plum" : {
+                "textures" : {
+                    "all" : "exp:blocks/wood/plank/plum"
+                }
+            },
+            "banana" : {
+                "textures" : {
+                    "all" : "exp:blocks/wood/plank/banana"
+                }
+            },
+            "lemon" : {
+                "textures" : {
+                    "all" : "exp:blocks/wood/plank/lemon"
+                }
+            },
+            "walnut" : {
+                "textures" : {
+                    "all" : "exp:blocks/wood/plank/walnut"
+                }
+            },
+            "cherry" : {
+                "textures" : {
+                    "all" : "exp:blocks/wood/plank/cherry"
+                }
+            },
+            "pomegranate" : {
+                "textures" : {
+                    "all" : "exp:blocks/wood/plank/pomegranate"
+                }
+            },
+            "grapefruit" : {
+                "textures" : {
+                    "all" : "exp:blocks/wood/plank/grapefruit"
+                }
+            },
+            "avocado" : {
+                "textures" : {
+                    "all" : "exp:blocks/wood/plank/avocado"
+                }
+            },
+            "carambola" : {
+                "textures" : {
+                    "all" : "exp:blocks/wood/plank/carambola"
+                }
+            }
+		}
+    }
+	
+}
