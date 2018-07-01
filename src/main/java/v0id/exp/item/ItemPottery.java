@@ -5,32 +5,38 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
+import net.minecraftforge.fluids.BlockFluidFinite;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import v0id.api.exp.data.ExPBlockProperties;
-import v0id.api.exp.data.ExPBlocks;
-import v0id.api.exp.data.ExPCreativeTabs;
-import v0id.api.exp.data.ExPRegistryNames;
+import v0id.api.exp.data.*;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.api.exp.item.IContainerTickable;
 import v0id.api.exp.item.IMeltableMetal;
 import v0id.api.exp.item.IMold;
 import v0id.api.exp.metal.AlloyHelper;
 import v0id.api.exp.metal.EnumMetal;
+import v0id.api.exp.player.IExPPlayer;
 import v0id.api.exp.recipe.RecipesSmelting;
 import v0id.exp.ExPetrum;
 import v0id.exp.block.BlockPottery;
@@ -173,8 +179,91 @@ public class ItemPottery extends Item implements IInitializableItem, IWeightProv
             playerIn.openGui(ExPetrum.instance, 2, worldIn, 0, 0, 0);
             return new ActionResult<>(EnumActionResult.SUCCESS, is);
         }
+        else
+        {
+            if (is.getMetadata() == EnumPotteryType.CERAMIC_JUG.ordinal())
+            {
+                RayTraceResult rtr = this.rayTrace(playerIn.world, playerIn, true);
+                if (rtr != null && rtr.typeOfHit == RayTraceResult.Type.BLOCK)
+                {
+                    BlockPos pos = rtr.getBlockPos();
+                    World w = playerIn.getEntityWorld();
+                    IBlockState blockHit = w.getBlockState(pos);
+                    Fluid f = FluidRegistry.lookupFluidForBlock(blockHit.getBlock());
+                    if (f == null && blockHit.getBlock() instanceof IFluidBlock)
+                    {
+                        f = ((IFluidBlock) blockHit.getBlock()).getFluid();
+                    }
+
+                    if (f == FluidRegistry.WATER)
+                    {
+                        f = ExPFluids.freshWater;
+                    }
+
+                    if (f == ExPFluids.freshWater)
+                    {
+                        if (blockHit.getBlock() instanceof BlockFluidFinite)
+                        {
+                            int current = blockHit.getValue(BlockFluidFinite.LEVEL);
+                            if (current <= 1)
+                            {
+                                w.setBlockToAir(pos);
+                            }
+                            else
+                            {
+                                w.setBlockState(pos, blockHit.withProperty(BlockFluidFinite.LEVEL, current - 1));
+                            }
+                        }
+                        else
+                        {
+                            w.setBlockToAir(pos);
+                        }
+
+                        is.setItemDamage(EnumPotteryType.CERAMIC_JUG_FULL.ordinal());
+                        playerIn.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
+                        return ActionResult.newResult(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+                    }
+                }
+            }
+            else
+            {
+                if (is.getMetadata() == EnumPotteryType.CERAMIC_JUG_FULL.ordinal())
+                {
+                    playerIn.setActiveHand(handIn);
+                    return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, is);
+                }
+            }
+        }
 
         return super.onItemRightClick(worldIn, playerIn, handIn);
+    }
+
+    @Override
+    public EnumAction getItemUseAction(ItemStack stack)
+    {
+        return stack.getMetadata() == EnumPotteryType.CERAMIC_JUG_FULL.ordinal() ? EnumAction.DRINK : super.getItemUseAction(stack);
+    }
+
+    @Override
+    public int getMaxItemUseDuration(ItemStack stack)
+    {
+        return stack.getMetadata() == EnumPotteryType.CERAMIC_JUG_FULL.ordinal() ? 40 : super.getMaxItemUseDuration(stack);
+    }
+
+    @Override
+    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
+    {
+        if (stack.getMetadata() == EnumPotteryType.CERAMIC_JUG_FULL.ordinal() && entityLiving instanceof EntityPlayer)
+        {
+            IExPPlayer player = IExPPlayer.of((EntityPlayer) entityLiving);
+            if (player != null && !worldIn.isRemote)
+            {
+                player.setThirst(player.getThirst() + 1000, true);
+                stack.setItemDamage(EnumPotteryType.CERAMIC_JUG.ordinal());
+            }
+        }
+
+        return super.onItemUseFinish(stack, worldIn, entityLiving);
     }
 
     @Override
