@@ -39,6 +39,7 @@ import v0id.api.exp.metal.EnumToolStats;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.tile.crop.ExPFarmlandCapability;
 import v0id.api.exp.tile.crop.IFarmland;
+import v0id.exp.block.BlockPlanks;
 import v0id.exp.block.tree.BlockLeaf;
 import v0id.exp.block.tree.BlockLog;
 import v0id.exp.client.model.ModelLoaderExP;
@@ -252,6 +253,7 @@ public class ClientRegistry implements ILifecycleListener
         Arrays.asList(ExPBlocks.logs).forEach(ClientRegistry::registerLogItemModel);
         Arrays.asList(ExPBlocks.logsDeco).forEach(ClientRegistry::registerLogItemModel);
         Arrays.asList(ExPBlocks.leaves).forEach(ClientRegistry::registerLeafItemModel);
+        Arrays.asList(ExPBlocks.planks).forEach(ClientRegistry::registerPlankItemModel);
     }
 
     public static void registerFluidModels()
@@ -279,6 +281,14 @@ public class ClientRegistry implements ILifecycleListener
         for (int i = 0; i < 5; ++i)
         {
             ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(b), i * 3 + 1, new ModelResourceLocation(ExPRegistryNames.asLocation(ExPRegistryNames.blockLog), "axis=y,ttype=" + EnumTreeType.values()[i + ((BlockLog) b).logIndex * 5].getName()));
+        }
+    }
+
+    public static void registerPlankItemModel(Block b)
+    {
+        for (int i = 0; i < 15; ++i)
+        {
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(b), i, new ModelResourceLocation(ExPRegistryNames.asLocation(ExPRegistryNames.blockPlanks), "ttype=" + EnumTreeType.values()[i + ((BlockPlanks) b).logIndex * 15].getName()));
         }
     }
 
@@ -332,6 +342,26 @@ public class ClientRegistry implements ILifecycleListener
                     String enumName = state.getValue(ExPBlockProperties.TREE_TYPE).getName();
                     String modelLocation = "ttype=" + enumName;
                     ResourceLocation rl = ExPRegistryNames.asLocation(ExPRegistryNames.blockLeaves + "_" + els.getName());
+                    ModelResourceLocation mrl = new ModelResourceLocation(rl, modelLocation);
+                    ret.put(state, mrl);
+                }
+
+                return ret;
+            });
+        }
+
+        lst.clear();
+        lst.addAll(Arrays.asList(ExPBlocks.planks));
+        for (Block b : lst)
+        {
+            ModelLoader.setCustomStateMapper(b, blockIn ->
+            {
+                Map<IBlockState, ModelResourceLocation> ret = Maps.newLinkedHashMap();
+                for (int i = 0; i < 15; ++i)
+                {
+                    IBlockState state = b.getStateFromMeta(i);
+                    String modelLocation = "ttype=" + state.getValue(ExPBlockProperties.TREE_TYPE).getName();
+                    ResourceLocation rl = ExPRegistryNames.asLocation(ExPRegistryNames.blockPlanks);
                     ModelResourceLocation mrl = new ModelResourceLocation(rl, modelLocation);
                     ret.put(state, mrl);
                 }

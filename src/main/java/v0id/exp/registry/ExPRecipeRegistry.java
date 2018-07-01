@@ -19,6 +19,7 @@ import v0id.api.exp.recipe.RecipesSmelting;
 import v0id.exp.item.ItemGeneric;
 import v0id.exp.item.ItemPottery;
 import v0id.exp.recipe.RecipeMold;
+import v0id.exp.recipe.RecipePlanks;
 
 public class ExPRecipeRegistry extends AbstractRegistry
 {
@@ -40,6 +41,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
     {
         final ResourceLocation mcloc = new ResourceLocation("minecraft:misc");
         event.getRegistry().register(new RecipeMold().setRegistryName("exp:recipe_hardcoded_mold"));
+        event.getRegistry().register(new RecipePlanks().setRegistryName("exp:recipe_hardcoded_planks"));
         ForgeRegistry<IRecipe> reg = (ForgeRegistry<IRecipe>) event.getRegistry();
         if (Loader.isModLoaded("chiselsandbits"))
         {
@@ -53,7 +55,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
             event.getRegistry().register(new ShapelessOreRecipe(mcloc, new ItemStack(chiselIron, 1, 0), new ItemStack(ExPItems.chisel, 1, 7)).setRegistryName("exp:recipe_hardcoded_compat_cnb_chisel_iron"));
         }
 
-        String[] toRemove = new String[]{ "minecraft:torch" };
+        String[] toRemove = new String[]{ "minecraft:torch", "minecraft:workbench", "minecraft:crafting_table" };
         for (String loc : toRemove)
         {
             reg.remove(new ResourceLocation(loc));

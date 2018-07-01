@@ -236,4 +236,26 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockKaolin)
     public static final Block kaolin = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockPlanks + "0")
+    public static final Block planks0 = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockPlanks + "1")
+    public static final Block planks1 = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockPlanks + "2")
+    public static final Block planks2 = null;
+
+    public static Block[] planks = new Block[3];
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockCraftingTable + "0")
+    public static final Block craftingTable0 = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockCraftingTable + "1")
+    public static final Block craftingTable1 = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockCraftingTable + "2")
+    public static final Block craftingTable2 = null;
+
+    public static Block[] craftingTables = new Block[3];
 }

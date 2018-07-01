@@ -13,6 +13,14 @@
         },
         "name": "BRICKKAOLIN"
     },
+   
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "saw"
+        },
+        "name": "SAW"
+    },
     {
         "ingredient": {
             "type": "forge:ore_dict",

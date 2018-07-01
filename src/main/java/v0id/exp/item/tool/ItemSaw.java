@@ -30,11 +30,7 @@ public class ItemSaw extends ItemExPTool implements IWeapon, IWeightProvider, II
     @Override
     public void registerOreDictNames()
     {
-        Arrays.stream(EnumToolStats.values()).forEach(mat -> Arrays.stream(ExPOreDict.itemSaw).forEach(name ->
-        {
-            OreDictionary.registerOre(name, new ItemStack(this, 1, mat.ordinal()));
-            OreDictionary.registerOre(name + Character.toUpperCase(mat.name().charAt(0)) + mat.name().toLowerCase().substring(1), new ItemStack(this, 1, mat.ordinal()));
-        }));
+        Arrays.stream(EnumToolStats.values()).forEach(mat -> Arrays.stream(ExPOreDict.itemSaw).forEach(name -> OreDictionary.registerOre(name, new ItemStack(this, 1, mat.ordinal()))));
     }
 
 	@Override
@@ -101,4 +97,23 @@ public class ItemSaw extends ItemExPTool implements IWeapon, IWeightProvider, II
 		Material material = state.getMaterial();
 		return material == Material.WOOD || super.canHarvestBlock(state, stack);
 	}
+
+    @Override
+    public boolean hasContainerItem(ItemStack stack)
+    {
+        return true;
+    }
+
+    @Override
+    public ItemStack getContainerItem(ItemStack itemStack)
+    {
+        ItemStack ret = itemStack.copy();
+        ret.setItemDamage(ret.getItemDamage() + 1);
+        if (ret.getItemDamage() >= ret.getMaxDamage())
+        {
+            return ItemStack.EMPTY;
+        }
+
+        return ret;
+    }
 }

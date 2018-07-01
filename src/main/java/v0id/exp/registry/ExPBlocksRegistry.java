@@ -103,7 +103,10 @@ public class ExPBlocksRegistry extends AbstractRegistry
                 new BlockPottery(),
                 new BlockLogPile(),
                 new BlockCharcoal(),
-                new BlockKaolin()
+                new BlockKaolin(),
+                new BlockPlanks(0),
+                new BlockPlanks(1),
+                new BlockPlanks(2)
         );
 
         registryEntries.forEach(registry::register);
@@ -122,5 +125,6 @@ public class ExPBlocksRegistry extends AbstractRegistry
         ExPBlocks.leaves = new Block[]{ ExPBlocks.leaf0, ExPBlocks.leaf1, ExPBlocks.leaf2, ExPBlocks.leaf3, ExPBlocks.leaf4, ExPBlocks.leaf5, ExPBlocks.leaf6, ExPBlocks.leaf7, ExPBlocks.leaf8 };
         ExPBlocks.shrubs = new Block[]{ ExPBlocks.shrubNormal, ExPBlocks.shrubBlooming, ExPBlocks.shrubAutumn, ExPBlocks.shrubDead };
         ExPBlocks.berryBushes = new Block[]{ ExPBlocks.berryBushNormal, ExPBlocks.berryBushBerries, ExPBlocks.berryBushAutumn, ExPBlocks.berryBushDead };
+        ExPBlocks.planks = new Block[]{ ExPBlocks.planks0, ExPBlocks.planks1, ExPBlocks.planks2 };
     }
 }

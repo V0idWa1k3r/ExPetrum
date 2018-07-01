@@ -33,7 +33,9 @@ public class ExPOreDict
 		blockWaterLily																									= { "waterlily", "waterLily", "lilyPad" },
 		blockLog																										= { "logWood" },
 		blockLeaf																										= { "treeLeaves" },
-		blockFlint                                                                                                      = { "blockFlint" };
+		blockFlint                                                                                                      = { "blockFlint" },
+        blockPlanks                                                                                                     = { "planks", "plank", "planksWood", "plankWood" },
+		blockCraftingTable                                                                                              = { "craftingTable", "workbench" };
 	
 	public static final String[]
 		itemRock																										= { "itemRock", "rock" },

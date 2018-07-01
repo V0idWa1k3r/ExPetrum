@@ -37,7 +37,6 @@ import v0id.exp.entity.EntityFallingTree;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILog, IInitializableBlock, IOreDictEntry, IItemBlockProvider
@@ -248,9 +247,12 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 	public void registerOreDictNames()
 	{
 		Stream.of(ExPOreDict.blockLog).forEach(s -> { 
-			OreDictionary.registerOre(s, new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE)); 
-			AtomicInteger i = new AtomicInteger(1);
-			ExPBlockProperties.TREE_TYPE.getAllowedValues().stream().map(EnumTreeType::getName).forEach(ss -> OreDictionary.registerOre(s + Character.toUpperCase(ss.charAt(0)) + ss.substring(1), new ItemStack(this, 1, i.getAndAdd(3))));
+			OreDictionary.registerOre(s, new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE));
+			for (int i = 0; i < 5; ++i)
+            {
+                EnumTreeType tt = EnumTreeType.values()[i + this.logIndex * 5];
+                OreDictionary.registerOre(s + Character.toUpperCase(tt.name().charAt(0)) + tt.name().toLowerCase().substring(1), new ItemStack(this, 1, 1 + i * 3));
+            }
 		});
 	}
 
