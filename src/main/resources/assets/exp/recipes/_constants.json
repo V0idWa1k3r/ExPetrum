@@ -41,10 +41,48 @@
     },
    
     {
-        "ingredient": {
-            "type": "forge:ore_dict",
-            "ore": "saw"
-        },
+        "ingredient": [
+            {
+                "item": "exp:item_saw",
+                "data": 0
+            },
+            {
+                "item": "exp:item_saw",
+                "data": 1
+            },
+            {
+                "item": "exp:item_saw",
+                "data": 2
+            },
+            {
+                "item": "exp:item_saw",
+                "data": 3
+            },
+            {
+                "item": "exp:item_saw",
+                "data": 4
+            },
+            {
+                "item": "exp:item_saw",
+                "data": 5
+            },
+            {
+                "item": "exp:item_saw",
+                "data": 6
+            },
+            {
+                "item": "exp:item_saw",
+                "data": 7
+            },
+            {
+                "item": "exp:item_saw",
+                "data": 8
+            },
+            {
+                "item": "exp:item_saw",
+                "data": 9
+            }
+        ],
         "name": "SAW"
     },
     {
@@ -53,6 +91,13 @@
             "ore": "brickFire"
         },
         "name": "BRICKFIRE"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "planksWood"
+        },
+        "name": "PLANKS"
     },
     {
         "ingredient": {

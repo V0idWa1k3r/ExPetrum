@@ -177,6 +177,7 @@ public class ClientRegistry implements ILifecycleListener
         mkCustomModelResourceLocations(ExPItems.pottery, ItemPottery.EnumPotteryType.values().length, i -> "type=" + ItemPottery.EnumPotteryType.values()[i].name().toLowerCase());
         mkCustomModelResourceLocations(ExPBlocks.kaolin, EnumKaolinType.values().length, i -> "type=" + EnumKaolinType.values()[i].getName());
         mkCustomModelResourceLocations(ExPBlocks.crate, EnumTreeType.values().length, i -> "ttype=" + EnumTreeType.values()[i].getName());
+        mkCustomModelResourceLocations(ExPItems.woodenBucket, 3, i -> "fluid=" + (i == 0 ? "none" : i == 1 ? "water" : "salt"));
 
         // Statically mapped item models
         registerStaticModel(ExPItems.basket, new ModelResourceLocation(ExPItems.basket.getRegistryName(), "inventory"));

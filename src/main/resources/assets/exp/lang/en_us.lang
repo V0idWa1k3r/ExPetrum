@@ -708,6 +708,9 @@ item.exp.item_pottery.ceramic_jug.name=Jug
 item.exp.item_pottery.ceramic_bowl.name=Ceramic Bowl
 item.exp.item_pottery.ceramic_jug_full.name=Full Jug
 item.exp.item_fire_starter.name=Fire Starter
+item.exp.item_wooden_bucket.0.name=Wooden Bucket
+item.exp.item_wooden_bucket.1.name=Wooden Bucket With Fresh Water
+item.exp.item_wooden_bucket.2.name=Wooden Bucket With Salt Water
 
 exp.item.ingot.desc.type.tin=Tin
 exp.item.ingot.desc.type.barium=Barium

@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "exp:item_wooden_bucket",
+    "data": 0
+  },
+  "pattern": [
+    "#S#",
+    "###"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "#": {
+      "item": "#PLANKS"
+    },
+    "S": {
+        "item": "#SAW"
+    }
+  }
+}
