@@ -15,6 +15,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -45,6 +46,7 @@ import v0id.exp.client.render.sky.WorldSkyRenderer;
 import v0id.exp.client.render.sky.WorldWeatherRenderer;
 import v0id.exp.combat.ClientCombatHandler;
 import v0id.exp.item.ItemFood;
+import v0id.exp.item.tool.IExPTool;
 import v0id.exp.player.inventory.ManagedSlot;
 import v0id.exp.player.inventory.PlayerInventoryHelper;
 import v0id.exp.settings.impl.SettingsClient;
@@ -81,6 +83,7 @@ public class ExPHandlerClient
             ExPBlocks.leaves = new Block[]{ ExPBlocks.leaf0, ExPBlocks.leaf1, ExPBlocks.leaf2, ExPBlocks.leaf3, ExPBlocks.leaf4, ExPBlocks.leaf5, ExPBlocks.leaf6, ExPBlocks.leaf7, ExPBlocks.leaf8 };
             ExPBlocks.shrubs = new Block[]{ ExPBlocks.shrubNormal, ExPBlocks.shrubBlooming, ExPBlocks.shrubAutumn, ExPBlocks.shrubDead };
             ExPBlocks.berryBushes = new Block[]{ ExPBlocks.berryBushNormal, ExPBlocks.berryBushBerries, ExPBlocks.berryBushAutumn, ExPBlocks.berryBushDead };
+            ExPBlocks.planks = new Block[]{ ExPBlocks.planks0, ExPBlocks.planks1, ExPBlocks.planks2 };
         }
 
         ClientRegistry.registerModels();
@@ -322,10 +325,18 @@ public class ExPHandlerClient
             event.getToolTip().add(I18n.format("exp.temp." + TemperatureUtils.getTemperatureIndex(temp)));
         }
 
-        int[] ids = OreDictionary.getOreIDs(is);
-        for (int i : ids)
+        if (is.getItem() instanceof ItemTool && !(is.getItem() instanceof IExPTool))
         {
-            event.getToolTip().add(OreDictionary.getOreName(i));
+            event.getToolTip().add(I18n.format("exp.txt.toolDisabled"));
+        }
+
+        if (event.getFlags().isAdvanced())
+        {
+            int[] ids = OreDictionary.getOreIDs(is);
+            for (int i : ids)
+            {
+                event.getToolTip().add(OreDictionary.getOreName(i));
+            }
         }
     }
 }
