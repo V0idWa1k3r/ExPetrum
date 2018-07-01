@@ -31,6 +31,7 @@ public class TileCampfire extends TileEntity implements ITickable
     public TemperatureHandler temperature_handler = new TemperatureHandler(610);
     public int burnTimeLeft = 0;
     public int maxBurnTime = 0;
+    public boolean litUp = false;
 
     @Override
     public void update()
@@ -64,18 +65,26 @@ public class TileCampfire extends TileEntity implements ITickable
         int prevBurnTime = this.burnTimeLeft;
         if (--this.burnTimeLeft <= 0)
         {
-            for (int i = 0; i < this.inventory_wood.getSlots(); ++i)
+            if (this.litUp)
             {
-                ItemStack is = this.inventory_wood.getStackInSlot(i);
-                int burnTime = TileEntityFurnace.getItemBurnTime(is);
-                if (burnTime > 0)
+                for (int i = 0; i < this.inventory_wood.getSlots(); ++i)
                 {
-                    this.burnTimeLeft = burnTime;
-                    this.maxBurnTime = burnTime;
-                    is.shrink(1);
-                    break;
+                    ItemStack is = this.inventory_wood.getStackInSlot(i);
+                    int burnTime = TileEntityFurnace.getItemBurnTime(is);
+                    if (burnTime > 0)
+                    {
+                        this.burnTimeLeft = burnTime;
+                        this.maxBurnTime = burnTime;
+                        is.shrink(1);
+                        break;
+                    }
                 }
             }
+        }
+
+        if (this.temperature_handler.getCurrentTemperature() <= 200 && this.burnTimeLeft <= 0)
+        {
+            this.litUp = false;
         }
 
         if ((prevBurnTime <= 0 && this.burnTimeLeft > 0) || (prevBurnTime > 0 && this.burnTimeLeft == 0))
@@ -136,6 +145,7 @@ public class TileCampfire extends TileEntity implements ITickable
         this.inventory_wood.deserializeNBT(compound.getCompoundTag("wood"));
         this.inventory_thing.deserializeNBT(compound.getCompoundTag("thing"));
         this.temperature_handler.deserializeNBT(compound.getCompoundTag("temp"));
+        this.litUp = compound.getBoolean("lit");
     }
 
     @Override
@@ -147,6 +157,7 @@ public class TileCampfire extends TileEntity implements ITickable
         ret.setTag("wood", this.inventory_wood.serializeNBT());
         ret.setTag("thing", this.inventory_thing.serializeNBT());
         ret.setTag("temp", this.temperature_handler.serializeNBT());
+        ret.setBoolean("lit", this.litUp);
         return ret;
     }
 

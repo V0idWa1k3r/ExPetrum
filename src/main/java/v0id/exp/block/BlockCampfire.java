@@ -15,6 +15,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.data.ExPCreativeTabs;
@@ -23,6 +24,7 @@ import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.ExPetrum;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.tile.TileCampfire;
+import v0id.exp.util.Helpers;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -122,18 +124,12 @@ public class BlockCampfire extends Block implements IInitializableBlock, IItemBl
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {
         TileCampfire campfire = (TileCampfire) worldIn.getTileEntity(pos);
-        if (campfire != null && campfire.burnTimeLeft > 0)
+        if (campfire != null && campfire.litUp)
         {
             worldIn.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5F + (Math.random() - Math.random()) / 3F, pos.getY() + 0.1F, pos.getZ() + 0.5F + (Math.random() - Math.random()) / 3F, 0, 0.05F, 0);
         }
 
         super.randomDisplayTick(stateIn, worldIn, pos, rand);
-    }
-
-    @Override
-    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos)
-    {
-        return super.getLightValue(state, world, pos);
     }
 
     @Override
@@ -146,5 +142,18 @@ public class BlockCampfire extends Block implements IInitializableBlock, IItemBl
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return Pair.of((byte)2, (byte)2);
+    }
+
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    {
+        TileEntity tileentity = worldIn.getTileEntity(pos);
+        if (tileentity != null)
+        {
+            Helpers.dropInventoryItems(worldIn, pos, tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP));
+            Helpers.dropInventoryItems(worldIn, pos, tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH));
+            worldIn.updateComparatorOutputLevel(pos, this);
+        }
+
+        super.breakBlock(worldIn, pos, state);
     }
 }
