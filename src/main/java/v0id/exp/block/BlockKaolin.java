@@ -8,10 +8,12 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityFallingBlock;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -110,6 +112,11 @@ public class BlockKaolin extends Block implements IInitializableBlock, IGravityS
         this.onNeighborChange(worldIn, pos, pos);
     }
 
+    @Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
+    {
+        return new ItemStack(this, 1, state.getValue(KAOLIN_TYPE).ordinal());
+    }
 
     @Override
     public String getUnlocalizedName(ItemStack is)
