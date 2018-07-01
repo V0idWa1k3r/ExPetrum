@@ -15,6 +15,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.data.ExPBlockProperties;
@@ -24,6 +25,7 @@ import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.ExPetrum;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.tile.TilePotteryStation;
+import v0id.exp.util.Helpers;
 
 import javax.annotation.Nullable;
 
@@ -146,5 +148,17 @@ public class BlockPotteryStation extends Block implements IInitializableBlock, I
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return Pair.of((byte)2, (byte)2);
+    }
+
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    {
+        TileEntity tileentity = worldIn.getTileEntity(pos);
+        if (tileentity != null)
+        {
+            Helpers.dropInventoryItems(worldIn, pos, tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null));
+            worldIn.updateComparatorOutputLevel(pos, this);
+        }
+
+        super.breakBlock(worldIn, pos, state);
     }
 }
