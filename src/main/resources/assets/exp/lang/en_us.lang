@@ -701,6 +701,7 @@ item.exp.item_pottery.ceramic_pot.name=Pot
 item.exp.item_pottery.ceramic_jug.name=Jug
 item.exp.item_pottery.ceramic_bowl.name=Ceramic Bowl
 item.exp.item_pottery.ceramic_jug_full.name=Full Jug
+item.exp.item_fire_starter.name=Fire Starter
 
 exp.item.ingot.desc.type.tin=Tin
 exp.item.ingot.desc.type.barium=Barium

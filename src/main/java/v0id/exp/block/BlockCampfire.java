@@ -6,12 +6,14 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -21,6 +23,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
+import v0id.api.exp.item.IFireProvider;
 import v0id.exp.ExPetrum;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.tile.TileCampfire;
@@ -101,6 +104,19 @@ public class BlockCampfire extends Block implements IInitializableBlock, IItemBl
         if (worldIn.isRemote)
         {
             return true;
+        }
+
+        TileCampfire tile = (TileCampfire) worldIn.getTileEntity(pos);
+        if (!tile.litUp)
+        {
+            if (playerIn.getHeldItem(hand).getItem() instanceof IFireProvider)
+            {
+                tile.litUp = true;
+                tile.markDirty();
+                ((IFireProvider) playerIn.getHeldItem(hand).getItem()).damageItem(playerIn.getHeldItem(hand), playerIn, 1);
+                worldIn.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, worldIn.rand.nextFloat() * 0.4F + 0.8F);
+                return true;
+            }
         }
 
         playerIn.openGui(ExPetrum.instance, 0, worldIn, pos.getX(), pos.getY(), pos.getZ());

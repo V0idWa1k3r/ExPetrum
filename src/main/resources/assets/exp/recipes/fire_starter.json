@@ -1,0 +1,15 @@
+{
+    "result": {
+        "item": "exp:item_fire_starter",
+        "data": 0
+    },
+    "type": "forge:ore_shapeless",
+    "ingredients": [
+        {
+            "item": "#FLINT"
+        },
+        {
+            "item": "#FLINT"
+        }
+    ]
+}

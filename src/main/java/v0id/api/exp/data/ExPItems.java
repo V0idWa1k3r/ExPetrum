@@ -85,4 +85,7 @@ public class ExPItems
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.itemPottery)
     public static final Item pottery = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemFireStarter)
+    public static final Item fireStarter = null;
 }

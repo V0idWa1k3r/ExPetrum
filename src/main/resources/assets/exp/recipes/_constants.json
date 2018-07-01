@@ -7,6 +7,19 @@
         "name": "TWINE"
     },
     {
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "flint"
+            },
+            {
+                "type": "forge:ore_dict",
+                "ore": "gemFlint"
+            }
+        ],
+        "name": "FLINT"
+    },
+    {
         "ingredient": {
             "type": "forge:ore_dict",
             "ore": "brickKaolin"

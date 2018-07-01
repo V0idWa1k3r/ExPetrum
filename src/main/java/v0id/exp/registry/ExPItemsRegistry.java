@@ -49,7 +49,8 @@ public class ExPItemsRegistry extends AbstractRegistry
                 new ItemOre(),
                 new ItemMold(false),
                 new ItemMold(true),
-                new ItemPottery()
+                new ItemPottery(),
+                new ItemFireStarter()
         );
 
         registryEntries.forEach(registry::register);

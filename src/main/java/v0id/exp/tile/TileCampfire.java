@@ -17,6 +17,7 @@ import v0id.api.exp.recipe.RecipesSmelting;
 import v0id.api.exp.tile.ExPTemperatureCapability;
 import v0id.core.network.PacketType;
 import v0id.core.network.VoidNetwork;
+import v0id.core.util.DimBlockPos;
 import v0id.exp.util.temperature.TemperatureHandler;
 import v0id.exp.util.temperature.TemperatureUtils;
 
@@ -32,6 +33,19 @@ public class TileCampfire extends TileEntity implements ITickable
     public int burnTimeLeft = 0;
     public int maxBurnTime = 0;
     public boolean litUp = false;
+
+    @Override
+    public void markDirty()
+    {
+        super.markDirty();
+        if (this.world != null && !this.world.isRemote)
+        {
+            NBTTagCompound sent = new NBTTagCompound();
+            sent.setTag("tileData", this.serializeNBT());
+            sent.setTag("blockPosData", new DimBlockPos(this.getPos(), this.getWorld().provider.getDimension()).serializeNBT());
+            VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), this.pos.getX(), this.pos.getY(), this.pos.getZ(), 64));
+        }
+    }
 
     @Override
     public void update()
@@ -82,9 +96,10 @@ public class TileCampfire extends TileEntity implements ITickable
             }
         }
 
-        if (this.temperature_handler.getCurrentTemperature() <= 200 && this.burnTimeLeft <= 0)
+        if (this.temperature_handler.getCurrentTemperature() <= 200 && this.burnTimeLeft <= 0 && this.litUp)
         {
             this.litUp = false;
+            this.markDirty();
         }
 
         if ((prevBurnTime <= 0 && this.burnTimeLeft > 0) || (prevBurnTime > 0 && this.burnTimeLeft == 0))
