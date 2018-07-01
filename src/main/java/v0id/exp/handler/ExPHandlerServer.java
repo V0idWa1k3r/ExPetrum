@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -54,6 +55,7 @@ import v0id.api.exp.world.ExPWorldCapability;
 import v0id.api.exp.world.IExPWorld;
 import v0id.core.logging.LogLevel;
 import v0id.core.util.MC;
+import v0id.exp.item.tool.IExPTool;
 import v0id.exp.player.ExPPlayer;
 import v0id.exp.player.PlayerManager;
 import v0id.exp.player.inventory.ManagedSlot;
@@ -170,7 +172,7 @@ public class ExPHandlerServer
 	{
 		if (event.getEntityPlayer() != null)
 		{
-			if (event.getEntityPlayer().isPotionActive(ExPPotions.stunned))
+			if (event.getEntityPlayer().isPotionActive(ExPPotions.stunned) || !(event.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IExPTool))
 			{
 				event.setCanceled(true);
 			}
