@@ -11,7 +11,7 @@ public enum EnumMetal
 	// Pure metals
 	TIN(0xadadad, false, null, 231, "tin"),
 	BARIUM(0x4e5661, false, null, 727, "barium"),
-	COPPER(0xc2431a, true, null, 600, "copper"),
+	COPPER(0xc2431a, true, null, 1080, "copper"),
 	ALUMINIUM(0x9fa6b0, false, null, 660, "aluminium", "aluminum"),
 	CHROMIUM(0x7c8e92, false, null, 1907, "chromium"),
 	COBALT(0x5c5b6b, false, null, 1495, "cobalt"),

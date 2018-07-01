@@ -17,6 +17,7 @@ import v0id.api.exp.metal.EnumToolClass;
 import v0id.api.exp.recipe.RecipesPottery;
 import v0id.api.exp.recipe.RecipesSmelting;
 import v0id.exp.item.ItemGeneric;
+import v0id.exp.item.ItemIngot;
 import v0id.exp.item.ItemPottery;
 import v0id.exp.recipe.RecipeMold;
 import v0id.exp.recipe.RecipePlanks;
@@ -78,6 +79,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
         RecipesSmelting.addRecipe(new RecipesSmelting.RecipeSmelting(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.KAOLIN.ordinal()), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.KAOLIN_BRICK.ordinal()), 570F));
         RecipesSmelting.addRecipe(new RecipesSmelting.RecipeSmelting(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.FIRE_CLAY.ordinal()), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.FIRE_BRICK.ordinal()), 600F));
         RecipesSmelting.addRecipe(new RecipesSmelting.RecipeOreSmelting(new ItemStack(Blocks.TORCH, 1, 0), "stickWood", 200F));
+        RecipesSmelting.addRecipe(new RecipeSmeltingIngot());
         for (EnumToolClass tool : EnumToolClass.values())
         {
             RecipesSmelting.addRecipe(new RecipesSmelting.RecipeSmelting(new ItemStack(ExPItems.moldTool, 1, tool.ordinal()), new ItemStack(ExPItems.moldTool, 1, tool.ordinal() + EnumToolClass.values().length), 540F));
@@ -88,5 +90,27 @@ public class ExPRecipeRegistry extends AbstractRegistry
     public void postInit(FMLPostInitializationEvent evt)
     {
         RecipesSmelting.sort();
+    }
+
+    private static class RecipeSmeltingIngot implements RecipesSmelting.IRecipeSmelting
+    {
+        @Override
+        public boolean matches(ItemStack is, float temperature)
+        {
+            return is.getItem() instanceof ItemIngot && temperature >= ((ItemIngot) is.getItem()).getMeltingTemperature(is);
+
+        }
+
+        @Override
+        public ItemStack getOutput()
+        {
+            return ItemStack.EMPTY;
+        }
+
+        @Override
+        public float getTemperature()
+        {
+            return 0;
+        }
     }
 }

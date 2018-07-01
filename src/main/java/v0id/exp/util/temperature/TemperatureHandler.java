@@ -23,7 +23,7 @@ public class TemperatureHandler implements ITemperatureHandler
 
     public float clampTemperature(float temp)
     {
-        return Math.max(0, Math.min(temp, this.maxTemperature));
+        return Math.max(0, Math.min(temp, this.getMaxTemperature()));
     }
 
     @Override
@@ -41,6 +41,12 @@ public class TemperatureHandler implements ITemperatureHandler
             this.currentTemperature = tNew;
         }
 
+        return true;
+    }
+
+    public boolean setTemperatureBypassMax(float value)
+    {
+        this.currentTemperature = Math.max(0, value);
         return true;
     }
 

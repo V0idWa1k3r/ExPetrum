@@ -10,22 +10,28 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.SlotItemHandler;
-import v0id.exp.tile.TileCampfire;
+import v0id.exp.tile.TileForge;
 
-public class ContainerCampfire extends Container
+public class ContainerForge extends Container
 {
-    public TileCampfire tile;
+    public TileForge tile;
     public float temperature;
     public int burnTime;
     public int burnTimeMax;
 
-    public ContainerCampfire(InventoryPlayer playerInventory, TileCampfire campfire)
+    public ContainerForge(InventoryPlayer playerInventory, TileForge forge)
     {
-        this.tile = campfire;
-        this.addSlotToContainer(new SlotItemHandler(campfire.inventory_thing, 0, 80, 19));
-        this.addSlotToContainer(new SlotItemHandler(campfire.inventory_wood, 0, 62, 54));
-        this.addSlotToContainer(new SlotItemHandler(campfire.inventory_wood, 1, 80, 54));
-        this.addSlotToContainer(new SlotItemHandler(campfire.inventory_wood, 2, 98, 54));
+        this.tile = forge;
+        this.addSlotToContainer(new SlotItemHandler(forge.inventory, 0, 44, 8));
+        this.addSlotToContainer(new SlotItemHandler(forge.inventory, 1, 62, 26));
+        this.addSlotToContainer(new SlotItemHandler(forge.inventory, 2, 80, 26));
+        this.addSlotToContainer(new SlotItemHandler(forge.inventory, 3, 98, 26));
+        this.addSlotToContainer(new SlotItemHandler(forge.inventory, 4, 116, 8));
+        this.addSlotToContainer(new SlotItemHandler(forge.inventory, 5, 44, 44));
+        this.addSlotToContainer(new SlotItemHandler(forge.inventory, 6, 62, 62));
+        this.addSlotToContainer(new SlotItemHandler(forge.inventory, 7, 80, 62));
+        this.addSlotToContainer(new SlotItemHandler(forge.inventory, 8, 98, 62));
+        this.addSlotToContainer(new SlotItemHandler(forge.inventory, 9, 116, 44));
         this.addPlayerInventory(playerInventory);
     }
 
@@ -113,36 +119,29 @@ public class ContainerCampfire extends Container
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (index != 0 && index != 1 && index != 2 && index != 3)
+            if (index < 10)
             {
                 if (TileEntityFurnace.isItemFuel(itemstack1))
                 {
-                    if (!this.mergeItemStack(itemstack1, 1, 4, false))
+                    if (!this.mergeItemStack(itemstack1, 5, 10, false))
                     {
                         return ItemStack.EMPTY;
                     }
                 }
                 else
                 {
-                    if (!this.mergeItemStack(itemstack1, 0, 1, false))
+                    if (!this.mergeItemStack(itemstack1, 0, 5, false))
                     {
                         return ItemStack.EMPTY;
                     }
                 }
 
-                if (index < 31)
-                {
-                    if (!this.mergeItemStack(itemstack1, 31, 40, false))
-                    {
-                        return ItemStack.EMPTY;
-                    }
-                }
-                else if (index < 40 && !this.mergeItemStack(itemstack1, 4, 31, false))
+                if (!this.mergeItemStack(itemstack1, 37, 46, false))
                 {
                     return ItemStack.EMPTY;
                 }
             }
-            else if (!this.mergeItemStack(itemstack1, 4, 40, false))
+            else if (!this.mergeItemStack(itemstack1, 10, 46, false))
             {
                 return ItemStack.EMPTY;
             }

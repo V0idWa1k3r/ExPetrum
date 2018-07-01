@@ -24,7 +24,8 @@ public class ExPTextures
             guiInv4                                                                                       		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/inv_4.png"),
             guiInv1                                                                         	               	= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/inv_1.png"),
             guiBtns                                                                        	               		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/buttons.png"),
-            guiPotteryStation                                                                        	   		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/pottery_station.png");
+            guiPotteryStation                                                                        	   		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/pottery_station.png"),
+            guiForge                                                                        	  		 		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/forge.png");
 
     static
 	{

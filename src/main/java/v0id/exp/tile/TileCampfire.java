@@ -34,10 +34,8 @@ public class TileCampfire extends TileEntity implements ITickable
     public int maxBurnTime = 0;
     public boolean litUp = false;
 
-    @Override
-    public void markDirty()
+    public void sendUpdatePacket()
     {
-        super.markDirty();
         if (this.world != null && !this.world.isRemote)
         {
             NBTTagCompound sent = new NBTTagCompound();
@@ -76,7 +74,6 @@ public class TileCampfire extends TileEntity implements ITickable
             }
         }
 
-        int prevBurnTime = this.burnTimeLeft;
         if (--this.burnTimeLeft <= 0)
         {
             if (this.litUp)
@@ -99,15 +96,11 @@ public class TileCampfire extends TileEntity implements ITickable
         if (this.temperature_handler.getCurrentTemperature() <= 200 && this.burnTimeLeft <= 0 && this.litUp)
         {
             this.litUp = false;
-            this.markDirty();
-        }
-
-        if ((prevBurnTime <= 0 && this.burnTimeLeft > 0) || (prevBurnTime > 0 && this.burnTimeLeft == 0))
-        {
-            VoidNetwork.sendDataToAllAround(PacketType.TileData, this.serializeNBT(), new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), this.pos.getX(), this.pos.getY(), this.pos.getZ(), 64));
+            this.sendUpdatePacket();
         }
 
         this.temperature_handler.incrementTemperature(this.burnTimeLeft > 0 ? 0.5F : -0.5F, false);
+        this.markDirty();
     }
 
     public Iterable<ItemStack> getAllItems()

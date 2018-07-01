@@ -108,7 +108,7 @@ public class ItemMold extends Item implements IInitializableItem, IWeightProvide
 
         if (!this.isIngot && stack.getMetadata() >= EnumToolClass.values().length * 2)
         {
-            if (TemperatureUtils.getTemperature(stack) >= EnumMetal.COPPER.getMeltingTemperature() * 0.75F)
+            if (TemperatureUtils.getTemperature(stack) >= EnumMetal.COPPER.getMeltingTemperature())
             {
                 tooltip.add(I18n.format("exp.txt.liquid"));
             }
@@ -163,11 +163,11 @@ public class ItemMold extends Item implements IInitializableItem, IWeightProvide
     {
         if (this.isIngot)
         {
-            return TemperatureUtils.getTemperature(self) >= EnumMetal.values()[self.getMetadata() - 2].getMeltingTemperature() * 0.75F;
+            return TemperatureUtils.getTemperature(self) >= EnumMetal.values()[self.getMetadata() - 2].getMeltingTemperature();
         }
         else
         {
-            return TemperatureUtils.getTemperature(self) >= EnumMetal.COPPER.getMeltingTemperature() * 0.75F;
+            return TemperatureUtils.getTemperature(self) >= EnumMetal.COPPER.getMeltingTemperature();
         }
     }
 

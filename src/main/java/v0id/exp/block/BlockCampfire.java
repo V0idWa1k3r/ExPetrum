@@ -112,7 +112,7 @@ public class BlockCampfire extends Block implements IInitializableBlock, IItemBl
             if (playerIn.getHeldItem(hand).getItem() instanceof IFireProvider)
             {
                 tile.litUp = true;
-                tile.markDirty();
+                tile.sendUpdatePacket();
                 ((IFireProvider) playerIn.getHeldItem(hand).getItem()).damageItem(playerIn.getHeldItem(hand), playerIn, 1);
                 worldIn.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, worldIn.rand.nextFloat() * 0.4F + 0.8F);
                 return true;

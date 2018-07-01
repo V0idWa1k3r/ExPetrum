@@ -10,13 +10,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import v0id.api.exp.data.ExPItems;
-import v0id.exp.client.gui.GuiCampfire;
-import v0id.exp.client.gui.GuiCrate;
-import v0id.exp.client.gui.GuiPot;
-import v0id.exp.client.gui.GuiPotteryStation;
+import v0id.exp.client.gui.*;
 import v0id.exp.container.*;
 import v0id.exp.tile.TileCampfire;
 import v0id.exp.tile.TileCrate;
+import v0id.exp.tile.TileForge;
 import v0id.exp.tile.TilePotteryStation;
 
 import javax.annotation.Nullable;
@@ -64,6 +62,11 @@ public class GuiHandler implements IGuiHandler
             case 4:
             {
                 return new GuiCrate(player.inventory, (TileCrate) tile);
+            }
+
+            case 5:
+            {
+                return new GuiForge(player.inventory, (TileForge) tile);
             }
 
             default:
@@ -114,6 +117,11 @@ public class GuiHandler implements IGuiHandler
             case 4:
             {
                 return new ContainerCrate(player.inventory, (TileCrate) tile);
+            }
+
+            case 5:
+            {
+                return new ContainerForge(player.inventory, (TileForge) tile);
             }
 
             default:

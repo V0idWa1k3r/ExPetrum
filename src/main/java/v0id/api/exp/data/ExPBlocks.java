@@ -261,4 +261,7 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockCrate)
     public static final Block crate = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockForge)
+    public static final Block forge = null;
 }

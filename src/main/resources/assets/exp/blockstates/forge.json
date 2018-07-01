@@ -1,0 +1,24 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"transform": "forge:default-block",
+		"gui3d" : true,
+		"model" : "exp:forge"
+	},
+	"variants" : {
+		"normal": [{}],
+        "inventory": [{}],
+        "active": {
+            "true": {
+                "textures" : {
+                    "0": "exp:blocks/forge"
+                }
+            },
+            "false": {
+                "textures" : {
+                    "0": "exp:blocks/coal_block"
+                }
+            }
+        }
+	}
+}

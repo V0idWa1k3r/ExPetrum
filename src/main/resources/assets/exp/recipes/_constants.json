@@ -20,6 +20,19 @@
         "name": "FLINT"
     },
     {
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "coal"
+            },
+            {
+                "type": "forge:ore_dict",
+                "ore": "gemCoal"
+            }
+        ],
+        "name": "COAL"
+    },
+    {
         "ingredient": {
             "type": "forge:ore_dict",
             "ore": "brickKaolin"

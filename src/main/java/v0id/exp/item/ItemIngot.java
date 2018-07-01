@@ -9,12 +9,14 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.logging.log4j.util.Strings;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.api.exp.item.IMeltableMetal;
 import v0id.api.exp.metal.EnumMetal;
+import v0id.exp.util.temperature.TemperatureUtils;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -79,6 +81,28 @@ public class ItemIngot extends Item implements IInitializableItem, IWeightProvid
 	{
 		super.addInformation(stack, worldIn, tooltip, flagIn);
         tooltip.add(I18n.format("exp.item.ingot.desc.type." + EnumMetal.values()[stack.getMetadata()].name().toLowerCase()));
+        String s = Strings.EMPTY;
+        float currentT = TemperatureUtils.getTemperature(stack);
+        float meltingT = this.getMeltingTemperature(stack);
+        if (currentT >= meltingT * 0.7F)
+        {
+            s += I18n.format("exp.txt.canWork");
+        }
+
+        if (currentT >= meltingT * 0.85F)
+        {
+            s += I18n.format("exp.sym.line") + I18n.format("exp.txt.canWeld");
+        }
+
+        if (currentT >= meltingT * 0.92F)
+        {
+            s += I18n.format("exp.sym.line") + I18n.format("exp.txt.danger");
+        }
+
+        if (!s.isEmpty())
+        {
+            tooltip.add(s);
+        }
 	}
 
 	@Override
