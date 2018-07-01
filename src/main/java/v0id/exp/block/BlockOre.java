@@ -10,6 +10,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -168,12 +169,13 @@ public class BlockOre extends Block implements IInitializableBlock, IOreDictEntr
     }
 
     @Override
-	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
-	{
-		super.getDrops(drops, world, pos, state, fortune);
-		if (world.getTileEntity(pos) instanceof TileOre)
-		{
-			drops.add(((TileOre) world.getTileEntity(pos)).createDrops());
-		}
-	}
+    public void breakBlock(World world, BlockPos pos, IBlockState state)
+    {
+        if (world.getTileEntity(pos) instanceof TileOre)
+        {
+            InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), ((TileOre) world.getTileEntity(pos)).createDrops());
+        }
+
+        super.breakBlock(world, pos, state);
+    }
 }
