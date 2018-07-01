@@ -138,8 +138,8 @@ exp.txt.item.desc.water.100=It's full of water
 exp.txt.liquid=Liquid
 exp.txt.toolDisabled=§4This tool has been disabled by ExPetrum! It can only be used for crafting!
 exp.txt.canWork=§fCan Work
-exp.txt.canWeld=§fCan Weld
-exp.txt.danger=§f!Danger!
+exp.txt.canWeld= §fCan Weld
+exp.txt.danger= §f!Danger!
 exp.sym.line= ⏐
 
 tile.exp.rock.name=Stone
@@ -266,6 +266,7 @@ tile.exp.crafting_table1.name=Crafting Table
 tile.exp.crafting_table2.name=Crafting Table
 tile.exp.crate.name=Wooden Crate
 tile.exp.forge.name=Forge Core
+tile.exp.cobblestone.name=Cobblestone
 
 item.exp.item_ingot.name=Ingot
 

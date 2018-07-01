@@ -64,7 +64,8 @@ public class ExPRegistryNames
         blockPlanks                                                                                         = "planks",
         blockCraftingTable                                                                                  = "crafting_table",
 		blockCrate																							= "crate",
-        blockForge                                                                                          = "forge";
+        blockForge                                                                                          = "forge",
+        blockCobblestone                                                                                    = "cobblestone";
 
 	public static final String
 		itemRock																							= "item_rock",
@@ -93,7 +94,8 @@ public class ExPRegistryNames
         itemMoldTool                                                                                        = "item_tool_mold",
         itemMoldIngot                                                                                       = "item_ingot_mold",
 		itemPottery                                                                                         = "item_pottery",
-        itemFireStarter                                                                                     = "item_fire_starter";
+        itemFireStarter                                                                                     = "item_fire_starter",
+        itemWoodenBucket                                                                                    = "item_wooden_bucket";
 
 	public static final String
         biomeBeach                                                                                          = "beach",

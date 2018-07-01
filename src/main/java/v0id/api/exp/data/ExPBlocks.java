@@ -264,4 +264,7 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockForge)
     public static final Block forge = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockCobblestone)
+    public static final Block cobblestone = null;
 }

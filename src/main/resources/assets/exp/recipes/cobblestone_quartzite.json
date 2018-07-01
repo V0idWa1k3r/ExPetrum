@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "exp:cobblestone",
+    "data": 13
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "#": {
+      "item": "exp:item_rock",
+      "data": 13
+    }
+  }
+}

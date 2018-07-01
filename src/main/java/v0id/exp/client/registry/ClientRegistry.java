@@ -161,6 +161,7 @@ public class ClientRegistry implements ILifecycleListener
         mkCustomModelResourceLocations(ExPBlocks.rockDeco0, 16, i -> "class=" + EnumRockClass.values()[i].getName());
         mkCustomModelResourceLocations(ExPBlocks.rockDeco1, 16, i -> "class=" + EnumRockClass.values()[i].getName());
         mkCustomModelResourceLocations(ExPBlocks.rockDeco2, 16, i -> "class=" + EnumRockClass.values()[i].getName());
+        mkCustomModelResourceLocations(ExPBlocks.cobblestone, 16, i -> "class=" + EnumRockClass.values()[i].getName());
         mkCustomModelResourceLocations(ExPBlocks.soil, 16, i -> "class=" + EnumDirtClass.values()[i].getName());
         mkCustomModelResourceLocations(ExPBlocks.grass, 16, i -> "class=" + EnumDirtClass.values()[i].getName());
         mkCustomModelResourceLocations(ExPBlocks.grass_dry, 16, i -> "class=" + EnumDirtClass.values()[i].getName());
