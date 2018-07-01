@@ -54,7 +54,7 @@ public class BlockSnow extends Block implements IGravitySusceptible, IInitializa
 	@Override
 	public void initBlock()
 	{
-		this.setHardness(1);
+		this.setHardness(0.1F);
 		this.setResistance(0);
 		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockSnow));
 		this.setSoundType(SoundType.SNOW);
@@ -62,6 +62,12 @@ public class BlockSnow extends Block implements IGravitySusceptible, IInitializa
 		this.setDefaultState(this.blockState.getBaseState().withProperty(LAYERS, 1));
 		this.setCreativeTab(ExPCreativeTabs.tabCommon);
 		this.setTickRandomly(true);
+	}
+
+	@Override
+	public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World worldIn, BlockPos pos)
+	{
+		return super.getPlayerRelativeBlockHardness(state, player, worldIn, pos) * (9 - state.getValue(LAYERS));
 	}
 
 	@Override
