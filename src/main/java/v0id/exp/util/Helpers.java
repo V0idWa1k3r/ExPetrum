@@ -5,12 +5,15 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.items.IItemHandler;
 import v0id.core.VoidApi;
 import v0id.core.util.java.ColorHEX;
 import v0id.core.util.java.ColorHSV;
@@ -29,6 +32,23 @@ public class Helpers
 {
 	public static final double TIME_TO_DEGREE_CONST = 0.01275;
 	public static final int DAYNIGHT_LENGTH = 24000;
+
+	public static void dropInventoryItems(World world, BlockPos pos, IItemHandler cap)
+    {
+        if (cap == null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < cap.getSlots(); ++i)
+        {
+            ItemStack itemstack = cap.getStackInSlot(i);
+            if (!itemstack.isEmpty())
+            {
+                InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), itemstack);
+            }
+        }
+    }
 
 	public static <T extends Entity> T getClosest(List<T> entities, Entity to)
 	{

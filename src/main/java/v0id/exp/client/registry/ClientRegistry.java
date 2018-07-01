@@ -48,6 +48,7 @@ import v0id.exp.client.model.entity.ModelChicken;
 import v0id.exp.client.render.entity.RenderAnimal;
 import v0id.exp.client.render.entity.RenderFallingTree;
 import v0id.exp.client.render.entity.RenderThrownWeapon;
+import v0id.exp.client.render.tile.TESRCrate;
 import v0id.exp.crop.ExPFarmland;
 import v0id.exp.entity.EntityFallingTree;
 import v0id.exp.entity.EntityGravFallingBlock;
@@ -57,6 +58,7 @@ import v0id.exp.item.ItemGeneric;
 import v0id.exp.item.ItemMold;
 import v0id.exp.item.ItemPottery;
 import v0id.exp.registry.ILifecycleListener;
+import v0id.exp.tile.TileCrate;
 import v0id.exp.tile.TileFarmland;
 import v0id.exp.tile.TileOre;
 import v0id.exp.util.Helpers;
@@ -82,6 +84,7 @@ public class ClientRegistry implements ILifecycleListener
         IFunctionalRenderFactory.registerEntityRenderingHandler(EntityFallingTree.class, RenderFallingTree::new);
         IFunctionalRenderFactory.registerEntityRenderingHandler(EntityThrownWeapon.class, RenderThrownWeapon::new);
         RenderingRegistry.registerEntityRenderingHandler(Chicken.class, r -> new RenderAnimal(r, ModelChicken.instance = new ModelChicken(), 1F));
+        net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileCrate.class, new TESRCrate());
         this.initAttacksConditions();
     }
 
@@ -171,9 +174,11 @@ public class ClientRegistry implements ILifecycleListener
         mkCustomModelResourceLocations(ExPItems.moldIngot, 2 + EnumMetal.values().length, i -> "ingot=" + (i == 0 ? "clay" : i == 1 ? "ceramic" : EnumMetal.values()[i - 2].name().toLowerCase()));
         mkCustomModelResourceLocations(ExPItems.pottery, ItemPottery.EnumPotteryType.values().length, i -> "type=" + ItemPottery.EnumPotteryType.values()[i].name().toLowerCase());
         mkCustomModelResourceLocations(ExPBlocks.kaolin, EnumKaolinType.values().length, i -> "type=" + EnumKaolinType.values()[i].getName());
+        mkCustomModelResourceLocations(ExPBlocks.crate, EnumTreeType.values().length, i -> "ttype=" + EnumTreeType.values()[i].getName());
 
         // Statically mapped item models
         registerStaticModel(ExPItems.basket, new ModelResourceLocation(ExPItems.basket.getRegistryName(), "inventory"));
+        registerStaticModel(ExPItems.fireStarter, new ModelResourceLocation(ExPItems.fireStarter.getRegistryName(), "inventory"));
 
         // Other models
         registerToolModels();

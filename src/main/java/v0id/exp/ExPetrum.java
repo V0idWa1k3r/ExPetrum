@@ -19,7 +19,7 @@ import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.world.YearlyTemperatureRange;
 import v0id.core.VoidApi;
 import v0id.exp.crop.CropDataLoader;
-import v0id.exp.net.GuiHandler;
+import v0id.exp.handler.GuiHandler;
 import v0id.exp.player.inventory.WeightDataLoader;
 import v0id.exp.proxy.IExPProxy;
 import v0id.exp.registry.*;

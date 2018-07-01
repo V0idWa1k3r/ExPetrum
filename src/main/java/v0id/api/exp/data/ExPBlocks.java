@@ -258,4 +258,7 @@ public class ExPBlocks
     public static final Block craftingTable2 = null;
 
     public static Block[] craftingTables = new Block[3];
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockCrate)
+    public static final Block crate = null;
 }

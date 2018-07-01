@@ -20,6 +20,7 @@ public class ExPTextures
 
 	public static final ResourceLocation
             guiCampfire                                                                                        	= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/campfire.png"),
+            guiInv9                                                                                       		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/inv_9.png"),
             guiInv4                                                                                       		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/inv_4.png"),
             guiInv1                                                                         	               	= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/inv_1.png"),
             guiBtns                                                                        	               		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/buttons.png"),

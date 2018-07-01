@@ -1,0 +1,18 @@
+{
+  "result": {
+    "item": "exp:crate",
+    "data": 4
+  },
+  "pattern": [
+    "###",
+    "# #",
+    "###"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "#": {
+      "item": "exp:planks0",
+      "data": 4
+    }
+  }
+}

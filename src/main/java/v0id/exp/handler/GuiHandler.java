@@ -1,4 +1,4 @@
-package v0id.exp.net;
+package v0id.exp.handler;
 
 import net.minecraft.client.gui.inventory.GuiCrafting;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,13 +11,12 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import v0id.api.exp.data.ExPItems;
 import v0id.exp.client.gui.GuiCampfire;
+import v0id.exp.client.gui.GuiCrate;
 import v0id.exp.client.gui.GuiPot;
 import v0id.exp.client.gui.GuiPotteryStation;
-import v0id.exp.container.ContainerCampfire;
-import v0id.exp.container.ContainerCraftingTable;
-import v0id.exp.container.ContainerPot;
-import v0id.exp.container.ContainerPotteryStation;
+import v0id.exp.container.*;
 import v0id.exp.tile.TileCampfire;
+import v0id.exp.tile.TileCrate;
 import v0id.exp.tile.TilePotteryStation;
 
 import javax.annotation.Nullable;
@@ -60,6 +59,11 @@ public class GuiHandler implements IGuiHandler
             case 3:
             {
                 return new GuiPot(player.inventory, tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null));
+            }
+
+            case 4:
+            {
+                return new GuiCrate(player.inventory, (TileCrate) tile);
             }
 
             default:
@@ -105,6 +109,11 @@ public class GuiHandler implements IGuiHandler
             case 3:
             {
                 return new ContainerPot(player.inventory, tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null));
+            }
+
+            case 4:
+            {
+                return new ContainerCrate(player.inventory, (TileCrate) tile);
             }
 
             default:
