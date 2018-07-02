@@ -284,7 +284,7 @@ public class ExPWorld implements IExPWorld
 			
 			if (this.rainTicksRemaining <= 0)
 			{
-				this.accumulatedHumidity += this.getWorld().rand.nextFloat() / 24000;
+				this.accumulatedHumidity += this.getWorld().rand.nextFloat() / 48000;
 				this.accumulatedHumidity_isDirty = this.persistentTicks % 100 == 0;
 				this.serverIsDirty |= this.accumulatedHumidity_isDirty;
 			}
