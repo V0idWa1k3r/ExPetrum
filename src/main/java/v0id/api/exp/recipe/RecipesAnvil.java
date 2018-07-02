@@ -89,7 +89,7 @@ public class RecipesAnvil
         @Override
         public boolean matchesForInterface(ItemStack in, int i)
         {
-            return  this.tierReq <= i && in.isItemEqual(this.itemIn);
+            return this.tierReq <= i && in.isItemEqual(this.itemIn);
         }
 
         @Override
@@ -101,7 +101,9 @@ public class RecipesAnvil
         @Override
         public ItemStack getResult(ItemStack in)
         {
-            return this.itemOut;
+            ItemStack ret = this.itemOut.copy();
+            TemperatureUtils.setTemperature(ret, TemperatureUtils.getTemperature(in));
+            return ret;
         }
 
         @Override
