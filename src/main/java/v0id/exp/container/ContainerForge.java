@@ -119,7 +119,7 @@ public class ContainerForge extends Container
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (index < 10)
+            if (index >= 10)
             {
                 if (TileEntityFurnace.isItemFuel(itemstack1))
                 {
@@ -136,7 +136,14 @@ public class ContainerForge extends Container
                     }
                 }
 
-                if (!this.mergeItemStack(itemstack1, 37, 46, false))
+                if (index < 37)
+                {
+                    if (!this.mergeItemStack(itemstack1, 37, 46, false))
+                    {
+                        return ItemStack.EMPTY;
+                    }
+                }
+                else if (index < 40 && !this.mergeItemStack(itemstack1, 10, 37, false))
                 {
                     return ItemStack.EMPTY;
                 }
