@@ -218,6 +218,14 @@ public class AnvilMinigame
         }
     };
 
+    public static void ensureAllCardsAreRegistered()
+    {
+        if (Card.allCards.size() == 0)
+        {
+            throw new IllegalStateException("Impossible exception - ExPetrum registered no cards!");
+        }
+    }
+
     public static class Card
     {
         public static final List<Card> allCards = Lists.newArrayList();

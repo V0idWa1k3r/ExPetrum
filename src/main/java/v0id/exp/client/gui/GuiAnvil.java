@@ -127,6 +127,7 @@ public class GuiAnvil extends GuiContainer
         ItemStack is = this.anvil.inventory.getStackInSlot(3);
         if (!is.isEmpty() && is.hasTagCompound() && is.getTagCompound().hasKey("exp:smithing"))
         {
+            AnvilMinigame.ensureAllCardsAreRegistered();
             AnvilMinigame.Card[] ret = new AnvilMinigame.Card[is.getTagCompound().getCompoundTag("exp:smithing").getByte("cards")];
             for (int i = 0; i < ret.length; ++i)
             {
@@ -214,12 +215,11 @@ public class GuiAnvil extends GuiContainer
 
                 Minecraft.getMinecraft().renderEngine.bindTexture(ExPTextures.guiAnvil);
                 this.drawTexturedModalRect(i + 82, j + 70, 176, 76, 8, 8);
-                this.drawTexturedModalRect(i + 102, j + 64, 176, 84, 8, 8);
+                this.drawTexturedModalRect(i + 102, j + 65, 176, 84, 8, 8);
                 this.drawTexturedModalRect(i + 102, j + 74, 176, 92, 8, 8);
                 fr.drawString(Integer.toString(this.getHeat()), i + 90, j + 70, 0xffffff);
-                fr.drawString(Integer.toString(this.getIntegrity()) + "/100", i + 110, j + 64, 0xffffff);
+                fr.drawString(Integer.toString(this.getIntegrity()) + "/100", i + 110, j + 65, 0xffffff);
                 fr.drawString(Integer.toString(this.getProgress()) + "/" + Integer.toString(this.getCurrentRecipe().getProgressRequired(this.anvil.inventory.getStackInSlot(3))), i + 110, j + 74, 0xffffff);
-
                 fr.setUnicodeFlag(unicode);
             }
             else
