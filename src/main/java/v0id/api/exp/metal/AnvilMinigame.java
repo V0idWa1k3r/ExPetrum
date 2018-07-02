@@ -279,6 +279,10 @@ public class AnvilMinigame
             this.ensureTagExists(ingot);
             NBTTagCompound tag = ingot.getTagCompound().getCompoundTag("exp:smithing");
             tag.setInteger("integrity", tag.getInteger("integrity") + by);
+            if (tag.getInteger("integrity") <= 0)
+            {
+                ingot.shrink(1);
+            }
         }
 
         public void changeLostIntegrity(ItemStack ingot, int by)
