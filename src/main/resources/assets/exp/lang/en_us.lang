@@ -268,6 +268,7 @@ tile.exp.crate.name=Wooden Crate
 tile.exp.forge.name=Forge Core
 tile.exp.cobblestone.name=Cobblestone
 tile.exp.quern.name=Quern
+tile.exp.trough.name=Trough
 
 item.exp.item_ingot.name=Ingot
 

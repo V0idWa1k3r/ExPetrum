@@ -46,7 +46,7 @@ public class ItemWoodenBucket extends Item implements IWeightProvider, IInitiali
     @Override
     public float provideWeight(ItemStack item)
     {
-        return item.getMetadata() == 0 ? 0.4F : 0.4F + this.getWater(item) * 1000;
+        return item.getMetadata() == 0 ? 0.4F : 0.4F + this.getWater(item);
     }
 
     @Override

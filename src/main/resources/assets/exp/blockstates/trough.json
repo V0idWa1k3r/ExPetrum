@@ -1,0 +1,47 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"transform": "forge:default-block",
+		"gui3d" : true,
+		"model" : "exp:trough_empty"
+	},
+	"variants" : {
+		"normal": [{}],
+        "inventory": [{}],
+		"water": {
+            "0": {
+                "model" : "exp:trough_empty"
+            },
+            "1": {
+                "model" : "exp:trough_1"
+            },
+            "2": {
+                "model" : "exp:trough_2"
+            },
+            "3": {
+                "model" : "exp:trough_3"
+            },
+            "4": {
+                "model" : "exp:trough_4"
+            },
+            "5": {
+                "model" : "exp:trough_5"
+            },
+            "6": {
+                "model" : "exp:trough_6"
+            },
+            "7": {
+                "model" : "exp:trough_7"
+            },
+            "8": {
+                "model" : "exp:trough_8"
+            },
+            "9": {
+                "model" : "exp:trough_9"
+            },
+            "10": {
+                "model" : "exp:trough_10"
+            }
+        }
+	}
+}

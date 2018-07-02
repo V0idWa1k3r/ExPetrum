@@ -1,0 +1,20 @@
+{
+    "result": {
+        "item": "exp:trough",
+        "data": 0
+    },
+    "pattern": [
+        "P P",
+        "PPP",
+        "S S"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "S" : {
+            "item": "#STICKWOOD"
+        },
+        "P" : {
+            "item": "#PLANKS"
+        }
+    }
+}

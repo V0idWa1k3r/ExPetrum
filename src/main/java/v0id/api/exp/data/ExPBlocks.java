@@ -270,4 +270,7 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockQuern)
     public static final Block quern = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockTrough)
+    public static final Block trough = null;
 }
