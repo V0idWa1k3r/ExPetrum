@@ -140,7 +140,7 @@ public class TileForge extends TileEntity implements ITickable
         at = at.up();
         if (this.world.isAirBlock(at) && this.world.getBlockState(at.south()).isOpaqueCube() && this.world.getBlockState(at.north()).isOpaqueCube() && this.world.getBlockState(at.east()).isOpaqueCube() && this.world.getBlockState(at.west()).isOpaqueCube())
         {
-            this.additionalMaxT += 10;
+            this.additionalMaxT += 25;
             this.checkAdditionalTRecursive(at, ++iteration);
         }
     }
