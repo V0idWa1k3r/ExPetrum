@@ -8,6 +8,8 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -15,6 +17,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -31,6 +34,7 @@ import v0id.exp.tile.TileCrate;
 import v0id.exp.util.Helpers;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockCrate extends Block implements IInitializableBlock, IItemBlockProvider, IWeightProvider
 {
@@ -147,6 +151,18 @@ public class BlockCrate extends Block implements IInitializableBlock, IItemBlock
         }
     }
 
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune)
+    {
+        return Items.AIR;
+    }
+
+    @Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
+    {
+        return new ItemStack(this, 1, ((TileCrate)world.getTileEntity(pos)).type.ordinal());
+    }
+
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
         TileEntity tileentity = worldIn.getTileEntity(pos);
@@ -154,6 +170,7 @@ public class BlockCrate extends Block implements IInitializableBlock, IItemBlock
         {
             Helpers.dropInventoryItems(worldIn, pos, tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null));
             worldIn.updateComparatorOutputLevel(pos, this);
+            InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(this, 1, ((TileCrate)tileentity).type.ordinal()));
         }
 
         super.breakBlock(worldIn, pos, state);
