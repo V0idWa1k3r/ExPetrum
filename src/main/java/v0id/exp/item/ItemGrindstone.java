@@ -1,4 +1,4 @@
-package v0id.exp.item.tool;
+package v0id.exp.item;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -9,16 +9,15 @@ import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
-import v0id.exp.item.IInitializableItem;
 
 import java.util.Arrays;
 
 /**
  * Created by V0idWa1k3r on 11-Jun-17.
  */
-public class ItemBasket extends Item implements IInitializableItem, IOreDictEntry, IWeightProvider
+public class ItemGrindstone extends Item implements IInitializableItem, IOreDictEntry, IWeightProvider
 {
-    public ItemBasket()
+    public ItemGrindstone()
     {
         super();
         this.initItem();
@@ -27,13 +26,13 @@ public class ItemBasket extends Item implements IInitializableItem, IOreDictEntr
     @Override
     public void registerOreDictNames()
     {
-        Arrays.stream(ExPOreDict.itemBasket).forEach(name -> OreDictionary.registerOre(name, this));
+        Arrays.stream(ExPOreDict.itemGrindstone).forEach(name -> OreDictionary.registerOre(name, this));
     }
 
     @Override
     public void initItem()
     {
-        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemBasket));
+        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemGrindstone));
         this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
         this.setCreativeTab(ExPCreativeTabs.tabTools);
         this.setHasSubtypes(true);
@@ -44,12 +43,12 @@ public class ItemBasket extends Item implements IInitializableItem, IOreDictEntr
     @Override
     public float provideWeight(ItemStack item)
     {
-        return 0;
+        return 1F;
     }
 
     @Override
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
-        return Pair.of((byte)2, (byte)2);
+        return IWeightProvider.DEFAULT_VOLUME;
     }
 }

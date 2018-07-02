@@ -166,8 +166,12 @@ public class BlockStone extends Block implements IChiselable, IWeightProvider, I
 	@Override
 	public void registerOreDictNames()
 	{
-		Stream.of(ExPOreDict.blockStone).forEach(s -> { 
-			OreDictionary.registerOre(s, new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE)); 
+		Stream.of(ExPOreDict.blockStone).forEach(s -> {
+			for (EnumRockClass c : EnumRockClass.values())
+			{
+				OreDictionary.registerOre(s, new ItemStack(this, 1, c.ordinal()));
+			}
+
 			AtomicInteger i = new AtomicInteger(0);
 			Stream.of(ExPOreDict.rockNames).forEach(ss -> OreDictionary.registerOre(s + Character.toUpperCase(ss.charAt(0)) + ss.substring(1), new ItemStack(this, 1, i.getAndIncrement())));
 		});

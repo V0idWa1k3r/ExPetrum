@@ -1,4 +1,4 @@
-package v0id.exp.client.render;
+package v0id.core.client;
 
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -6,11 +6,16 @@ import net.minecraft.util.EnumFacing;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
+import v0id.core.client.model.WavefrontObject;
 
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class RenderUtils
 {
+    /*
+     * Normally I would have done all this in a vertex shader...
+     */
     public static Vector4f mulVecByMatrix(Vector4f vec, Matrix4f mat)
     {
         float x = vec.getX() * mat.m00 + vec.getY() * mat.m10 + vec.getZ() * mat.m20 + vec.getW() * mat.m30;
@@ -60,5 +65,23 @@ public class RenderUtils
         buffer.pos(pos.getX() + top_back_right.getX(), pos.getY() + top_back_right.getY(), pos.getZ() + top_back_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(east.getMinU(), east.getMinV()).lightmap(lightmap[0], lightmap[1]).endVertex();
         buffer.pos(pos.getX() + btm_back_right.getX(), pos.getY() + btm_back_right.getY(), pos.getZ() + btm_back_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(east.getMinU(), east.getMaxV()).lightmap(lightmap[0], lightmap[1]).endVertex();
         buffer.pos(pos.getX() + btm_front_right.getX(), pos.getY() + btm_front_right.getY(), pos.getZ() + btm_front_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(east.getMaxU(), east.getMaxV()).lightmap(lightmap[0], lightmap[1]).endVertex();
+    }
+
+    public static void renderObj(BufferBuilder buffer, WavefrontObject model, Vector3f pos, Matrix4f transform, float[] color, int[] lightmap, Supplier<TextureAtlasSprite> textureGetter)
+    {
+        TextureAtlasSprite tex = textureGetter.get();
+        for (WavefrontObject.Vertex vertex : model.getVertices())
+        {
+            Vector4f loc = mulVecByMatrix(new Vector4f(vertex.position.getX(), vertex.position.getY(), vertex.position.getZ(), 1), transform);
+            float minU = tex.getMinU();
+            float maxU = tex.getMaxU();
+            float minV = tex.getMinV();
+            float maxV = tex.getMaxV();
+            float diffU = maxU - minU;
+            float diffV = maxV - minV;
+            float u = minU + vertex.uvset.getX() * diffU;
+            float v = minV + (1 - vertex.uvset.getY()) * diffV;
+            buffer.pos(pos.getX() + loc.getX(), pos.getY() + loc.getY(), pos.getZ() + loc.getZ()).color(color[0], color[1], color[2], color[3]).tex(u, v).lightmap(lightmap[0], lightmap[1]).endVertex();
+        }
     }
 }

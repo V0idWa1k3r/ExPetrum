@@ -91,4 +91,7 @@ public class ExPItems
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.itemWoodenBucket)
     public static final Item woodenBucket = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemGrindstone)
+    public static final Item grindstone = null;
 }

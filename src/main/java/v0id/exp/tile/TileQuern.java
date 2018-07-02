@@ -1,5 +1,6 @@
 package v0id.exp.tile;
 
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -8,31 +9,82 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import v0id.api.exp.item.IContainerTickable;
+import v0id.api.exp.recipe.RecipesQuern;
+import v0id.core.network.PacketType;
+import v0id.core.network.VoidNetwork;
+import v0id.core.util.DimBlockPos;
 import v0id.exp.util.temperature.TemperatureUtils;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TilePotteryStation extends TileEntity implements ITickable
+public class TileQuern extends TileEntity implements ITickable
 {
-    public ItemStackHandler inventory = new ItemStackHandler(1)
+    public ItemStackHandler inventory = new ItemStackHandler(3)
     {
         @Override
-        protected int getStackLimit(int slot, @Nonnull ItemStack stack)
+        protected void onContentsChanged(int slot)
         {
-            return 8;
+            super.onContentsChanged(slot);
+            if (slot == 0)
+            {
+                TileQuern.this.sendUpdatePacket();
+            }
         }
     };
+
+    public int rotationIndex;
+
+    public void sendUpdatePacket()
+    {
+        if (this.world != null && !this.world.isRemote)
+        {
+            NBTTagCompound sent = new NBTTagCompound();
+            sent.setTag("tileData", this.serializeNBT());
+            sent.setTag("blockPosData", new DimBlockPos(this.getPos(), this.getWorld().provider.getDimension()).serializeNBT());
+            VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), this.pos.getX(), this.pos.getY(), this.pos.getZ(), 64));
+        }
+    }
 
     @Override
     public void update()
     {
+        if (this.rotationIndex > 0)
+        {
+            --this.rotationIndex;
+        }
+
         if (this.world.isRemote)
         {
             return;
+        }
+
+        if (this.rotationIndex == 1)
+        {
+            RecipesQuern.IRecipeQuern recipe = RecipesQuern.getRecipe(this.inventory.getStackInSlot(1));
+            if (recipe != null)
+            {
+                ItemStack out = recipe.getOut(this.inventory.getStackInSlot(1));
+                this.inventory.getStackInSlot(1).shrink(1);
+                if (this.inventory.getStackInSlot(2).isItemEqual(out) && this.inventory.getStackInSlot(2).getCount() <= this.inventory.getStackInSlot(2).getMaxStackSize() + out.getCount())
+                {
+                    this.inventory.getStackInSlot(2).grow(out.getCount());
+                }
+                else
+                {
+                    if (this.inventory.getStackInSlot(2).isEmpty())
+                    {
+                        this.inventory.setStackInSlot(2, out.copy());
+                    }
+                    else
+                    {
+                        InventoryHelper.spawnItemStack(this.world, this.pos.getX(), this.pos.getY(), this.pos.getZ(), out.copy());
+                    }
+                }
+            }
         }
 
         for (int i = 0; i < this.inventory.getSlots(); ++i)
@@ -75,6 +127,7 @@ public class TilePotteryStation extends TileEntity implements ITickable
     {
         super.readFromNBT(compound);
         this.inventory.deserializeNBT(compound.getCompoundTag("inventory"));
+        this.rotationIndex = compound.getByte("rotationIndex");
     }
 
     @Override
@@ -82,6 +135,7 @@ public class TilePotteryStation extends TileEntity implements ITickable
     {
         NBTTagCompound ret = super.writeToNBT(compound);
         ret.setTag("inventory", this.inventory.serializeNBT());
+        ret.setByte("rotationIndex", (byte)this.rotationIndex);
         return ret;
     }
 

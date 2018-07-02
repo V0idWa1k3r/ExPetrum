@@ -1,0 +1,20 @@
+{
+    "result": {
+        "item": "exp:item_grindstone",
+        "data": 0
+    },
+    "pattern": [
+        " R ",
+        "RSR",
+        " R "
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "S" : {
+            "item": "#STICKWOOD"
+        },
+        "R" : {
+            "item": "#ROCK"
+        }
+    }
+}

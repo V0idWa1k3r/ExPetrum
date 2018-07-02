@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "exp:quern",
+        "data": 0
+    },
+    "pattern": [
+        "RRR",
+        "SSS"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "S" : {
+            "item": "#STONE"
+        },
+        "R" : {
+            "item": "#ROCK"
+        }
+    }
+}

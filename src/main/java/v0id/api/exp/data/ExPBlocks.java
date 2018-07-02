@@ -267,4 +267,7 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockCobblestone)
     public static final Block cobblestone = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockQuern)
+    public static final Block quern = null;
 }

@@ -25,6 +25,8 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.commons.lang3.ArrayUtils;
 import v0id.api.exp.block.property.EnumKaolinType;
+import v0id.core.client.model.WavefrontObject;
+import v0id.core.logging.LogLevel;
 import v0id.core.util.IFunctionalRenderFactory;
 import v0id.api.exp.block.*;
 import v0id.api.exp.block.property.EnumDirtClass;
@@ -49,6 +51,7 @@ import v0id.exp.client.render.entity.RenderAnimal;
 import v0id.exp.client.render.entity.RenderFallingTree;
 import v0id.exp.client.render.entity.RenderThrownWeapon;
 import v0id.exp.client.render.tile.TESRCrate;
+import v0id.exp.client.render.tile.TESRQuern;
 import v0id.exp.crop.ExPFarmland;
 import v0id.exp.entity.EntityFallingTree;
 import v0id.exp.entity.EntityGravFallingBlock;
@@ -61,8 +64,10 @@ import v0id.exp.registry.ILifecycleListener;
 import v0id.exp.tile.TileCrate;
 import v0id.exp.tile.TileFarmland;
 import v0id.exp.tile.TileOre;
+import v0id.exp.tile.TileQuern;
 import v0id.exp.util.Helpers;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -85,6 +90,8 @@ public class ClientRegistry implements ILifecycleListener
         IFunctionalRenderFactory.registerEntityRenderingHandler(EntityThrownWeapon.class, RenderThrownWeapon::new);
         RenderingRegistry.registerEntityRenderingHandler(Chicken.class, r -> new RenderAnimal(r, ModelChicken.instance = new ModelChicken(), 1F));
         net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileCrate.class, new TESRCrate());
+        net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileQuern.class, new TESRQuern());
+        this.loadAdditionalData();
         this.initAttacksConditions();
     }
 
@@ -143,6 +150,7 @@ public class ClientRegistry implements ILifecycleListener
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.potteryStation), 0, new ModelResourceLocation(ExPBlocks.potteryStation.getRegistryName(), "normal"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.charcoal), 0, new ModelResourceLocation(ExPBlocks.charcoal.getRegistryName(), "normal"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.forge), 0, new ModelResourceLocation(ExPBlocks.forge.getRegistryName(), "active=false"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.quern), 0, new ModelResourceLocation(ExPBlocks.quern.getRegistryName(), "normal"));
         // Iteration-dependent models
         mkCustomModelResourceLocations(ExPItems.stick, EnumTreeType.values().length + EnumShrubType.values().length + EnumBerry.values().length, i -> "type=" + ExPOreDict.stickNames[i]);
         mkCustomModelResourceLocations(ExPItems.toolHead, EnumToolClass.values().length * EnumToolStats.values().length, i -> "material=" + EnumToolStats.values()[i % EnumToolStats.values().length].name().toLowerCase() + ",type=" + EnumToolClass.values()[i / EnumToolStats.values().length].name().toLowerCase());
@@ -182,6 +190,7 @@ public class ClientRegistry implements ILifecycleListener
         // Statically mapped item models
         registerStaticModel(ExPItems.basket, new ModelResourceLocation(ExPItems.basket.getRegistryName(), "inventory"));
         registerStaticModel(ExPItems.fireStarter, new ModelResourceLocation(ExPItems.fireStarter.getRegistryName(), "inventory"));
+        registerStaticModel(ExPItems.grindstone, new ModelResourceLocation(ExPItems.grindstone.getRegistryName(), "inventory"));
 
         // Other models
         registerToolModels();
@@ -194,6 +203,19 @@ public class ClientRegistry implements ILifecycleListener
 
         // State mappers
         registerCustomStateMappers();
+    }
+
+    public void loadAdditionalData()
+    {
+        TESRQuern.quernTopModel = new WavefrontObject();
+        try
+        {
+            TESRQuern.quernTopModel.load(Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation("exp", "models/block/quern_top.obj")).getInputStream());
+        }
+        catch (IOException e)
+        {
+            ExPMisc.modLogger.log(LogLevel.Error, "ExPetrum was unable to load a quern model!", e);
+        }
     }
 
     public static void mkCustomModelResourceLocations(Block block, int amount, Function<Integer, String> ptrFunc)

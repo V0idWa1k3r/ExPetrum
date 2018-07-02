@@ -58,8 +58,6 @@ public class ContainerCrate extends Container
         --this.crate.currentPlayers;
     }
 
-
-
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
     {
         ItemStack itemstack = ItemStack.EMPTY;
@@ -70,14 +68,14 @@ public class ContainerCrate extends Container
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (index < 1)
+            if (index < this.crate.inventory.getSlots())
             {
-                if (!this.mergeItemStack(itemstack1, 9, this.inventorySlots.size(), true))
+                if (!this.mergeItemStack(itemstack1, this.crate.inventory.getSlots(), this.inventorySlots.size(), true))
                 {
                     return ItemStack.EMPTY;
                 }
             }
-            else if (!this.mergeItemStack(itemstack1, 0, 9, false))
+            else if (!this.mergeItemStack(itemstack1, 0, this.crate.inventory.getSlots(), false))
             {
                 return ItemStack.EMPTY;
             }

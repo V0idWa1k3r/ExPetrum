@@ -3,16 +3,13 @@ package v0id.exp.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -22,18 +19,16 @@ import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
-import v0id.api.exp.item.IFireProvider;
 import v0id.exp.ExPetrum;
 import v0id.exp.block.item.ItemBlockWithMetadata;
-import v0id.exp.tile.TileForge;
+import v0id.exp.item.ItemGrindstone;
+import v0id.exp.tile.TileQuern;
 
 import javax.annotation.Nullable;
 
-import static v0id.api.exp.data.ExPBlockProperties.FORGE_ISLIT;
-
-public class BlockForge extends Block implements IWeightProvider, IInitializableBlock, IItemBlockProvider
+public class BlockQuern extends Block implements IWeightProvider, IInitializableBlock, IItemBlockProvider
 {
-    public BlockForge()
+    public BlockQuern()
     {
         super(Material.ROCK);
         this.initBlock();
@@ -42,7 +37,7 @@ public class BlockForge extends Block implements IWeightProvider, IInitializable
     @Override
     public float provideWeight(ItemStack item)
     {
-        return 5F;
+        return 6F;
     }
 
     @Override
@@ -56,30 +51,9 @@ public class BlockForge extends Block implements IWeightProvider, IInitializable
     {
         this.setHardness(3.0F);
         this.setResistance(10.0F);
-        this.setRegistryName(ExPRegistryNames.blockForge);
+        this.setRegistryName(ExPRegistryNames.blockQuern);
         this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
         this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FORGE_ISLIT, false));
-        this.setLightOpacity(0);
-    }
-
-    @Override
-    protected BlockStateContainer createBlockState()
-    {
-        return new BlockStateContainer(this, FORGE_ISLIT);
-    }
-
-    @Override
-    public int getMetaFromState(IBlockState state)
-    {
-        return 0;
-    }
-
-    @Override
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
-    {
-        TileForge forge = (TileForge)worldIn.getTileEntity(pos);
-        return super.getActualState(state, worldIn, pos).withProperty(FORGE_ISLIT, forge != null && forge.isLit);
     }
 
     @Override
@@ -95,20 +69,25 @@ public class BlockForge extends Block implements IWeightProvider, IInitializable
             return true;
         }
 
-        TileForge tile = (TileForge) worldIn.getTileEntity(pos);
-        if (!tile.isLit)
+        TileQuern tile = (TileQuern) worldIn.getTileEntity(pos);
+        if (hitY >= 0.5F && tile.inventory.getStackInSlot(0).getItem() instanceof ItemGrindstone && !tile.inventory.getStackInSlot(0).isEmpty())
         {
-            if (playerIn.getHeldItem(hand).getItem() instanceof IFireProvider)
+            if (tile.rotationIndex == 0)
             {
-                tile.isLit = true;
+                tile.rotationIndex = 90;
+                tile.inventory.getStackInSlot(0).setItemDamage(tile.inventory.getStackInSlot(0).getItemDamage() + 1);
+                if (tile.inventory.getStackInSlot(0).getItemDamage() >= tile.inventory.getStackInSlot(0).getMaxDamage())
+                {
+                    tile.inventory.setStackInSlot(0, ItemStack.EMPTY);
+                }
+
                 tile.sendUpdatePacket();
-                ((IFireProvider) playerIn.getHeldItem(hand).getItem()).damageItem(playerIn.getHeldItem(hand), playerIn, 1);
-                worldIn.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, worldIn.rand.nextFloat() * 0.4F + 0.8F);
-                return true;
             }
+
+            return true;
         }
 
-        playerIn.openGui(ExPetrum.instance, 5, worldIn, pos.getX(), pos.getY(), pos.getZ());
+        playerIn.openGui(ExPetrum.instance, 6, worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
 
@@ -122,7 +101,7 @@ public class BlockForge extends Block implements IWeightProvider, IInitializable
     @Override
     public TileEntity createTileEntity(World world, IBlockState state)
     {
-        return new TileForge();
+        return new TileQuern();
     }
 
     @SuppressWarnings("deprecation")
@@ -150,6 +129,6 @@ public class BlockForge extends Block implements IWeightProvider, IInitializable
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
-        return new AxisAlignedBB(0, 0, 0, 1, 0.875F, 1);
+        return new AxisAlignedBB(0, 0, 0, 1, 0.5F, 1);
     }
 }

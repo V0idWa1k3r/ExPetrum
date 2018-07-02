@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraftforge.client.model.animation.FastTESR;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
-import v0id.exp.client.render.RenderUtils;
+import v0id.core.client.RenderUtils;
 import v0id.exp.tile.TileCrate;
 
 

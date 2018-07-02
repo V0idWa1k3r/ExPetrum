@@ -267,6 +267,7 @@ tile.exp.crafting_table2.name=Crafting Table
 tile.exp.crate.name=Wooden Crate
 tile.exp.forge.name=Forge Core
 tile.exp.cobblestone.name=Cobblestone
+tile.exp.quern.name=Quern
 
 item.exp.item_ingot.name=Ingot
 
@@ -711,6 +712,7 @@ item.exp.item_fire_starter.name=Fire Starter
 item.exp.item_wooden_bucket.0.name=Wooden Bucket
 item.exp.item_wooden_bucket.1.name=Wooden Bucket With Fresh Water
 item.exp.item_wooden_bucket.2.name=Wooden Bucket With Salt Water
+item.exp.item_grindstone.name=Grindstone
 
 exp.item.ingot.desc.type.tin=Tin
 exp.item.ingot.desc.type.barium=Barium

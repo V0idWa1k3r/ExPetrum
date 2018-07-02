@@ -16,6 +16,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -44,6 +45,7 @@ import v0id.exp.client.render.hud.PlayerHUDRenderer;
 import v0id.exp.client.render.hud.SpecialAttackRenderer;
 import v0id.exp.client.render.sky.WorldSkyRenderer;
 import v0id.exp.client.render.sky.WorldWeatherRenderer;
+import v0id.exp.client.render.tile.TESRQuern;
 import v0id.exp.combat.ClientCombatHandler;
 import v0id.exp.item.ItemFood;
 import v0id.exp.item.tool.IExPTool;
@@ -339,5 +341,18 @@ public class ExPHandlerClient
                 event.getToolTip().add(OreDictionary.getOreName(i));
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void onTextureStitch(TextureStitchEvent.Pre event)
+    {
+        event.getMap().registerSprite(new ResourceLocation("exp", "blocks/fluid/clay"));
+        event.getMap().registerSprite(new ResourceLocation("exp", "blocks/fluid/lava_flow"));
+        event.getMap().registerSprite(new ResourceLocation("exp", "blocks/fluid/lava_still"));
+        event.getMap().registerSprite(new ResourceLocation("exp", "blocks/fluid/oil_flow"));
+        event.getMap().registerSprite(new ResourceLocation("exp", "blocks/fluid/oil_still"));
+        event.getMap().registerSprite(new ResourceLocation("exp", "blocks/fluid/water_flow"));
+        event.getMap().registerSprite(new ResourceLocation("exp", "blocks/fluid/water_still"));
+        TESRQuern.quernTopTexture = event.getMap().registerSprite(new ResourceLocation("exp", "blocks/quern_top"));
     }
 }

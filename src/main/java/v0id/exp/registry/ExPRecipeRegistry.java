@@ -12,9 +12,11 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.ForgeRegistry;
+import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.metal.EnumToolClass;
 import v0id.api.exp.recipe.RecipesPottery;
+import v0id.api.exp.recipe.RecipesQuern;
 import v0id.api.exp.recipe.RecipesSmelting;
 import v0id.exp.item.ItemGeneric;
 import v0id.exp.item.ItemIngot;
@@ -84,6 +86,10 @@ public class ExPRecipeRegistry extends AbstractRegistry
         {
             RecipesSmelting.addRecipe(new RecipesSmelting.RecipeSmelting(new ItemStack(ExPItems.moldTool, 1, tool.ordinal()), new ItemStack(ExPItems.moldTool, 1, tool.ordinal() + EnumToolClass.values().length), 540F));
         }
+
+        RecipesQuern.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.KAOLIN.ordinal()), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.KAOLIN_POWDER.ordinal()));
+        RecipesQuern.addRecipe(new ItemStack(Items.FLINT, 1, 0), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.FLINT_POWDER.ordinal()));
+        RecipesQuern.addRecipe(new ItemStack(ExPItems.ore, 1, EnumOre.CINNABAR.ordinal()), new ItemStack(Items.REDSTONE, 8, 0));
     }
 
     @Override

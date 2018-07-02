@@ -12,10 +12,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import v0id.api.exp.data.ExPItems;
 import v0id.exp.client.gui.*;
 import v0id.exp.container.*;
-import v0id.exp.tile.TileCampfire;
-import v0id.exp.tile.TileCrate;
-import v0id.exp.tile.TileForge;
-import v0id.exp.tile.TilePotteryStation;
+import v0id.exp.tile.*;
 
 import javax.annotation.Nullable;
 
@@ -67,6 +64,11 @@ public class GuiHandler implements IGuiHandler
             case 5:
             {
                 return new GuiForge(player.inventory, (TileForge) tile);
+            }
+
+            case 6:
+            {
+                return new GuiQuern(player.inventory, (TileQuern) tile);
             }
 
             default:
@@ -122,6 +124,11 @@ public class GuiHandler implements IGuiHandler
             case 5:
             {
                 return new ContainerForge(player.inventory, (TileForge) tile);
+            }
+
+            case 6:
+            {
+                return new ContainerQuern(player.inventory, (TileQuern) tile);
             }
 
             default:
