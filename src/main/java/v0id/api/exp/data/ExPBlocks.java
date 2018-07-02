@@ -273,4 +273,7 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockTrough)
     public static final Block trough = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockAnvil)
+    public static final Block anvil = null;
 }

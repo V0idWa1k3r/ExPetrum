@@ -26,7 +26,9 @@ public class ExPTextures
             guiBtns                                                                        	               		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/buttons.png"),
             guiPotteryStation                                                                        	   		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/pottery_station.png"),
             guiForge                                                                        	  		 		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/forge.png"),
-            guiQuern                                                                        	  		 		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/quern.png");
+            guiQuern                                                                        	  		 		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/quern.png"),
+            guiAnvil                                                                        	  		 		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/anvil.png"),
+            guiNone	                                                                        	  		 		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/none.png");
 
     static
 	{

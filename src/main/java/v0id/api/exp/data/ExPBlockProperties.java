@@ -29,6 +29,7 @@ public class ExPBlockProperties
 	public static final PropertyEnum<EnumBerry> BERRY_BUSH_TYPE = PropertyEnum.create("type", EnumBerry.class);
 	public static final PropertyEnum<BlockPottery.EnumPotteryType> POTTERY_TYPE = PropertyEnum.create("type", BlockPottery.EnumPotteryType.class);
 	public static final PropertyEnum<EnumKaolinType> KAOLIN_TYPE = PropertyEnum.create("type", EnumKaolinType.class);
+	public static final PropertyEnum<EnumAnvilMaterial> ANVIL_MATERIAL = PropertyEnum.create("material", EnumAnvilMaterial.class);
 	public static final PropertyBool SHRUB_IS_TALL = PropertyBool.create("istall");
 	public static final PropertyBool ICE_IS_SALT = PropertyBool.create("salt");
 	public static final PropertyBool LOGPILE_IS_ROTATED = PropertyBool.create("rotated");

@@ -85,7 +85,7 @@ public class GuiPotteryStation extends GuiContainer
             this.currentPuzzle.click(mouseX, mouseY, mouseButton);
             if (this.currentPuzzle.complete)
             {
-                PacketHandlerCraftPottery.sendSyncPacket(this.currentRecipe, this.potteryStation);
+                PacketHandlerCraftPottery.sendCraftingPacket(this.currentRecipe, this.potteryStation);
             }
         }
     }
@@ -205,7 +205,6 @@ public class GuiPotteryStation extends GuiContainer
 
             Tessellator.getInstance().draw();
             GlStateManager.enableTexture2D();
-
             Minecraft.getMinecraft().renderEngine.bindTexture(this.location);
             buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
             for (PuzzlePiece piece : pieces)

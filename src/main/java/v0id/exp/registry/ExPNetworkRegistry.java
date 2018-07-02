@@ -14,6 +14,9 @@ public class ExPNetworkRegistry extends AbstractRegistry
 		VoidNetwork.registerHandler(ExPPackets.SPECIAL_ATTACK, new PacketHandlerSpecialAttack());
         VoidNetwork.registerHandler(ExPPackets.SETTINGS_SYNC, new PacketHandlerSettingsSync());
         VoidNetwork.registerHandler(ExPPackets.CRAFT_POTTERY, new PacketHandlerCraftPottery());
+        VoidNetwork.registerHandler(ExPPackets.ANVIL_RECIPE, new PacketHandlerAnvilRecipe());
+        VoidNetwork.registerHandler(ExPPackets.CARD_CLICK, new PacketHandlerCardClick());
+        VoidNetwork.registerHandler(ExPPackets.ANVIL_WELD, new PacketHandlerWeld());
 	}
 	
 	public ExPNetworkRegistry()

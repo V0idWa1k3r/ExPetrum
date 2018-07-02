@@ -114,7 +114,8 @@ public class ExPBlocksRegistry extends AbstractRegistry
                 new BlockForge(),
                 new BlockCobblestone(),
                 new BlockQuern(),
-                new BlockTrough()
+                new BlockTrough(),
+                new BlockAnvil()
         );
 
         registryEntries.forEach(registry::register);

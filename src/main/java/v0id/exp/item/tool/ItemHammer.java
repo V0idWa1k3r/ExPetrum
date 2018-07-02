@@ -11,13 +11,14 @@ import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
+import v0id.api.exp.item.IHammer;
 import v0id.api.exp.metal.EnumToolClass;
 import v0id.api.exp.metal.EnumToolStats;
 import v0id.exp.item.IInitializableItem;
 
 import java.util.Arrays;
 
-public class ItemHammer extends ItemExPTool implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry
+public class ItemHammer extends ItemExPTool implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry, IHammer
 {
 	public ItemHammer()
 	{

@@ -58,6 +58,7 @@ import v0id.exp.entity.EntityGravFallingBlock;
 import v0id.exp.entity.EntityThrownWeapon;
 import v0id.exp.entity.impl.Chicken;
 import v0id.exp.item.ItemGeneric;
+import v0id.exp.item.ItemMetalGeneric;
 import v0id.exp.item.ItemMold;
 import v0id.exp.item.ItemPottery;
 import v0id.exp.registry.ILifecycleListener;
@@ -113,6 +114,7 @@ public class ClientRegistry implements ILifecycleListener
         Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(Helpers::getLeafColor, ExPBlocks.leaves);
         Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) ->
                 worldIn.getTileEntity(pos) instanceof TileOre ? ((TileOre) worldIn.getTileEntity(pos)).type.getColor() : -1, ExPBlocks.ore, ExPBlocks.boulderOre);
+        Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) -> state.getValue(ExPBlockProperties.ANVIL_MATERIAL).getColor(), ExPBlocks.anvil);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> ColorizerGrass.getGrassColor(1, 0.5), ExPBlocks.vegetation);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> ColorizerGrass.getGrassColor(1, 0.5), ArrayUtils.addAll(ExPBlocks.shrubs, ExPBlocks.berryBushes));
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> ((ILeaves) Block.getBlockFromItem(stack.getItem())).getLeavesColorForMeta(stack.getMetadata()), ExPBlocks.leaves);
@@ -126,6 +128,9 @@ public class ClientRegistry implements ILifecycleListener
                 tintIndex == 1 ? EnumOre.values()[stack.getMetadata()].getColor() : -1, ExPItems.ore);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) ->
                 tintIndex == 1 ? EnumMetal.values()[stack.getMetadata() - 2].getColor() : -1, ExPItems.moldIngot);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) ->
+                EnumAnvilMaterial.values()[stack.getMetadata()].getColor(), Item.getItemFromBlock(ExPBlocks.anvil));
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> EnumMetal.values()[stack.getMetadata() % EnumMetal.values().length].getColor(), ExPItems.metalGeneric);
     }
 
     @Override
@@ -187,6 +192,8 @@ public class ClientRegistry implements ILifecycleListener
         mkCustomModelResourceLocations(ExPBlocks.crate, EnumTreeType.values().length, i -> "ttype=" + EnumTreeType.values()[i].getName());
         mkCustomModelResourceLocations(ExPItems.woodenBucket, 3, i -> "fluid=" + (i == 0 ? "none" : i == 1 ? "water" : "salt"));
         mkCustomModelResourceLocations(ExPBlocks.trough, 11, i -> "water=" + i);
+        mkCustomModelResourceLocations(ExPBlocks.anvil, EnumAnvilMaterial.values().length, i -> "inventory");
+        mkCustomModelResourceLocations(ExPItems.metalGeneric, EnumMetal.values().length * ItemMetalGeneric.EnumGenericType.values().length, i -> "type=" + ItemMetalGeneric.EnumGenericType.values()[i / EnumMetal.values().length].name().toLowerCase());
 
         // Statically mapped item models
         registerStaticModel(ExPItems.basket, new ModelResourceLocation(ExPItems.basket.getRegistryName(), "inventory"));

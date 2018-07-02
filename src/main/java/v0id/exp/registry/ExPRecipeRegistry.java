@@ -14,13 +14,18 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.ForgeRegistry;
 import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.data.ExPItems;
+import v0id.api.exp.item.IMeltableMetal;
+import v0id.api.exp.metal.EnumAnvilRequirement;
+import v0id.api.exp.metal.EnumMetal;
 import v0id.api.exp.metal.EnumToolClass;
+import v0id.api.exp.metal.EnumToolStats;
+import v0id.api.exp.recipe.RecipesAnvil;
 import v0id.api.exp.recipe.RecipesPottery;
 import v0id.api.exp.recipe.RecipesQuern;
 import v0id.api.exp.recipe.RecipesSmelting;
 import v0id.exp.item.ItemGeneric;
-import v0id.exp.item.ItemIngot;
 import v0id.exp.item.ItemPottery;
+import v0id.exp.item.ItemToolHead;
 import v0id.exp.recipe.RecipeMold;
 import v0id.exp.recipe.RecipePlanks;
 
@@ -81,7 +86,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
         RecipesSmelting.addRecipe(new RecipesSmelting.RecipeSmelting(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.KAOLIN.ordinal()), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.KAOLIN_BRICK.ordinal()), 570F));
         RecipesSmelting.addRecipe(new RecipesSmelting.RecipeSmelting(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.FIRE_CLAY.ordinal()), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.FIRE_BRICK.ordinal()), 600F));
         RecipesSmelting.addRecipe(new RecipesSmelting.RecipeOreSmelting(new ItemStack(Blocks.TORCH, 1, 0), "stickWood", 200F));
-        RecipesSmelting.addRecipe(new RecipeSmeltingIngot());
+        RecipesSmelting.addRecipe(new RecipeSmeltingMeltable());
         for (EnumToolClass tool : EnumToolClass.values())
         {
             RecipesSmelting.addRecipe(new RecipesSmelting.RecipeSmelting(new ItemStack(ExPItems.moldTool, 1, tool.ordinal()), new ItemStack(ExPItems.moldTool, 1, tool.ordinal() + EnumToolClass.values().length), 540F));
@@ -90,6 +95,29 @@ public class ExPRecipeRegistry extends AbstractRegistry
         RecipesQuern.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.KAOLIN.ordinal()), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.KAOLIN_POWDER.ordinal()));
         RecipesQuern.addRecipe(new ItemStack(Items.FLINT, 1, 0), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.FLINT_POWDER.ordinal()));
         RecipesQuern.addRecipe(new ItemStack(ExPItems.ore, 1, EnumOre.CINNABAR.ordinal()), new ItemStack(Items.REDSTONE, 8, 0));
+        RecipesQuern.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.CHARCOAL.ordinal()), new ItemStack(ExPItems.generic, 8, ItemGeneric.EnumGenericType.FLUX.ordinal()));
+        for (EnumMetal metal : EnumMetal.values())
+        {
+            RecipesAnvil.addWeldingRecipe(new ItemStack(ExPItems.ingot, 1, metal.ordinal()), new ItemStack(ExPItems.ingot, 1, metal.ordinal()), (int)(metal.getMeltingTemperature() * 0.85F), (int)(metal.getMeltingTemperature() * 0.85F), new ItemStack(ExPItems.metalGeneric, 1, metal.ordinal()), metal.getRequiredAnvilTier() - 1);
+            RecipesAnvil.addRecipe(new ItemStack(ExPItems.ingot, 1, metal.ordinal()), (int)(metal.getMeltingTemperature() * 0.75F), new ItemStack(ExPItems.metalGeneric, 1, metal.ordinal() + EnumMetal.values().length), 30, metal.getRequiredAnvilTier());
+            RecipesAnvil.addRecipe(new ItemStack(ExPItems.metalGeneric, 1, metal.ordinal()), (int)(metal.getMeltingTemperature() * 0.75F), new ItemStack(ExPItems.metalGeneric, 1, metal.ordinal() + EnumMetal.values().length * 2), 40, metal.getRequiredAnvilTier());
+        }
+
+        for (EnumToolStats material : EnumToolStats.values())
+        {
+            if (material == EnumToolStats.STONE)
+            {
+                continue;
+            }
+
+            for (EnumToolClass toolClass : EnumToolClass.values())
+            {
+                ItemStack head = ItemToolHead.createToolHead(toolClass, material);
+                Item itemMaterial = toolClass.getAnvilMaterial() == EnumAnvilRequirement.INGOT ? ExPItems.ingot : ExPItems.metalGeneric;
+                int metaMaterial = material.getMaterial().ordinal() + EnumMetal.values().length * (toolClass.getAnvilMaterial().ordinal());
+                RecipesAnvil.addRecipe(new ItemStack(itemMaterial, 1, metaMaterial), (int)(material.getMaterial().getMeltingTemperature() * 0.75F), head, toolClass.getProgressReq(), material.getMaterial().getRequiredAnvilTier());
+            }
+        }
     }
 
     @Override
@@ -98,12 +126,12 @@ public class ExPRecipeRegistry extends AbstractRegistry
         RecipesSmelting.sort();
     }
 
-    private static class RecipeSmeltingIngot implements RecipesSmelting.IRecipeSmelting
+    private static class RecipeSmeltingMeltable implements RecipesSmelting.IRecipeSmelting
     {
         @Override
         public boolean matches(ItemStack is, float temperature)
         {
-            return is.getItem() instanceof ItemIngot && temperature >= ((ItemIngot) is.getItem()).getMeltingTemperature(is);
+            return is.getItem() instanceof IMeltableMetal && temperature >= ((IMeltableMetal) is.getItem()).getMeltingTemperature(is);
 
         }
 

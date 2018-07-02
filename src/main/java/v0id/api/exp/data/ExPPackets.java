@@ -13,4 +13,7 @@ public class ExPPackets
     public static final PacketType CHUNK_DATA = PacketType.obtain(modid, "chunkData");
     public static final PacketType SETTINGS_SYNC = PacketType.obtain(modid, "settingsSync");
     public static final PacketType CRAFT_POTTERY = PacketType.obtain(modid, "craftPottery");
+    public static final PacketType CARD_CLICK = PacketType.obtain(modid, "cardClick");
+    public static final PacketType ANVIL_RECIPE = PacketType.obtain(modid, "anvilRecipe");
+    public static final PacketType ANVIL_WELD = PacketType.obtain(modid, "anvilWeld");
 }

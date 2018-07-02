@@ -71,6 +71,11 @@ public class GuiHandler implements IGuiHandler
                 return new GuiQuern(player.inventory, (TileQuern) tile);
             }
 
+            case 7:
+            {
+                return new GuiAnvil(player.inventory, (TileAnvil) tile);
+            }
+
             default:
             {
                 return null;
@@ -129,6 +134,11 @@ public class GuiHandler implements IGuiHandler
             case 6:
             {
                 return new ContainerQuern(player.inventory, (TileQuern) tile);
+            }
+
+            case 7:
+            {
+                return new ContainerAnvil(player.inventory, (TileAnvil) tile);
             }
 
             default:

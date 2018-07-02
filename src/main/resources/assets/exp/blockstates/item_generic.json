@@ -78,7 +78,12 @@
                 "textures" : {
                     "layer0" : "exp:items/misc/flint_powder"
                 }
-            }
+            },
+			"flux": {
+				"textures" : {
+					"layer0" : "exp:items/misc/flux"
+				}
+			}
 		}
 	}
 }

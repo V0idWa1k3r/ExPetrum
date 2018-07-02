@@ -94,4 +94,7 @@ public class ExPItems
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.itemGrindstone)
     public static final Item grindstone = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemMetalGeneric)
+    public static final Item metalGeneric = null;
 }

@@ -30,7 +30,8 @@ public class ItemGeneric extends Item implements IInitializableItem, IWeightProv
         KAOLIN_BRICK("kaolin_brick", 0.1F, IWeightProvider.DEFAULT_VOLUME, "brickKaolin", "ingotKaolin"),
         FIRE_CLAY("fire_clay", 0.15F, IWeightProvider.DEFAULT_VOLUME, "fireClay", "clayFire"),
         FIRE_BRICK("fire_brick", 0.15F, IWeightProvider.DEFAULT_VOLUME, "fireBrick", "brickFire", "ingotFired"),
-        FLINT_POWDER("flint_powder", 0.01F, IWeightProvider.DEFAULT_VOLUME, "powderFlint", "dustFlint");
+        FLINT_POWDER("flint_powder", 0.01F, IWeightProvider.DEFAULT_VOLUME, "powderFlint", "dustFlint"),
+        FLUX("flux", 0.01F, IWeightProvider.DEFAULT_VOLUME, "flux");
 
         EnumGenericType(String name, float weight, Pair<Byte, Byte> volume, String... oreDictNames)
         {

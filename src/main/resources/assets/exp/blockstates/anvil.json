@@ -1,0 +1,52 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"textures" : {
+		},
+		"transform": "forge:default-block",
+		"gui3d" : true,
+		"model" : "exp:anvil"
+	},
+	"variants" : {
+		"normal": [{}],
+        "inventory": [{}],
+		"material": {
+			"stone": {
+                "dummy" : "dummy"
+            },
+            "copper": {
+                "dummy" : "dummy"
+            },
+            "bronze": {
+                "dummy" : "dummy"
+            },
+            "bismuth_bronze": {
+                "dummy" : "dummy"
+            },
+            "high_leaded_bronze": {
+                "dummy" : "dummy"
+            },
+            "manganese_bronze": {
+                "dummy" : "dummy"
+            },
+            "aluminum_bronze": {
+                "dummy" : "dummy"
+            },
+            "iron": {
+                "dummy" : "dummy"
+            },
+            "steel": {
+                "dummy" : "dummy"
+            },
+            "stainless_steel": {
+                "dummy" : "dummy"
+            },
+            "hsla_steel": {
+                "dummy" : "dummy"
+            },
+            "tool_steel": {
+                "dummy" : "dummy"
+            }
+		}
+	}
+}
