@@ -8,6 +8,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.EntityEntry;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.exp.registry.*;
 
@@ -43,5 +44,11 @@ public class ExPHandlerRegistry
 	public static void onPotionsRegistry(RegistryEvent.Register<Potion> event)
 	{
 		ExPPotionRegistry.instance.registerPotions(event);
+	}
+
+	@SubscribeEvent
+	public static void onEntitiesRegistry(RegistryEvent.Register<EntityEntry> event)
+	{
+		ExPEntityRegistry.instance.registerEntities(event);
 	}
 }

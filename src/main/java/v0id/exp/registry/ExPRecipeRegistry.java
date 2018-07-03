@@ -15,6 +15,7 @@ import net.minecraftforge.registries.ForgeRegistry;
 import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.item.IMeltableMetal;
+import v0id.api.exp.item.food.FoodEntry;
 import v0id.api.exp.metal.EnumAnvilRequirement;
 import v0id.api.exp.metal.EnumMetal;
 import v0id.api.exp.metal.EnumToolClass;
@@ -23,6 +24,7 @@ import v0id.api.exp.recipe.RecipesAnvil;
 import v0id.api.exp.recipe.RecipesPottery;
 import v0id.api.exp.recipe.RecipesQuern;
 import v0id.api.exp.recipe.RecipesSmelting;
+import v0id.exp.item.ItemFood;
 import v0id.exp.item.ItemGeneric;
 import v0id.exp.item.ItemPottery;
 import v0id.exp.item.ItemToolHead;
@@ -87,6 +89,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
         RecipesSmelting.addRecipe(new RecipesSmelting.RecipeSmelting(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.FIRE_CLAY.ordinal()), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.FIRE_BRICK.ordinal()), 600F));
         RecipesSmelting.addRecipe(new RecipesSmelting.RecipeOreSmelting(new ItemStack(Blocks.TORCH, 1, 0), "stickWood", 200F));
         RecipesSmelting.addRecipe(new RecipeSmeltingMeltable());
+        RecipesSmelting.addRecipe(new RecipeSmeltingFood(FoodEntry.CHICKEN_RAW, FoodEntry.CHICKEN_COOKED, 200));
         for (EnumToolClass tool : EnumToolClass.values())
         {
             RecipesSmelting.addRecipe(new RecipesSmelting.RecipeSmelting(new ItemStack(ExPItems.moldTool, 1, tool.ordinal()), new ItemStack(ExPItems.moldTool, 1, tool.ordinal() + EnumToolClass.values().length), 540F));
@@ -128,6 +131,44 @@ public class ExPRecipeRegistry extends AbstractRegistry
         RecipesSmelting.sort();
     }
 
+    private static class RecipeSmeltingFood implements RecipesSmelting.IRecipeSmelting
+    {
+        private final FoodEntry entryIn;
+        private final FoodEntry entryOut;
+        private final int t;
+
+        public RecipeSmeltingFood(FoodEntry entryIn, FoodEntry entryOut, int i)
+        {
+            this.entryIn = entryIn;
+            this.entryOut = entryOut;
+            this.t = i;
+        }
+
+        @Override
+        public boolean matches(ItemStack is, float temperature)
+        {
+            return temperature >= this.t && is.getItem() instanceof ItemFood && is.getMetadata() == this.entryIn.getId();
+        }
+
+        @Override
+        public ItemStack getOutput(ItemStack is)
+        {
+            ItemStack ret = new ItemStack(ExPItems.food, 1, entryOut.getId());
+            ItemFood food = (ItemFood) ExPItems.food;
+            food.setLastTickTime(ret, food.getLastTickTime(is));
+            food.setTotalRot(ret, food.getTotalRot(is));
+            food.setTotalWeight(ret, food.getTotalWeight(is));
+            food.setItemRotMultiplier(ret, food.getItemRotMultiplier(is) * 0.5F);
+            return ret;
+        }
+
+        @Override
+        public float getTemperature()
+        {
+            return this.t;
+        }
+    }
+
     private static class RecipeSmeltingMeltable implements RecipesSmelting.IRecipeSmelting
     {
         @Override
@@ -138,7 +179,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
         }
 
         @Override
-        public ItemStack getOutput()
+        public ItemStack getOutput(ItemStack is)
         {
             return ItemStack.EMPTY;
         }

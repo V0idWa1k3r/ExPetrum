@@ -1,9 +1,9 @@
 package v0id.exp.registry;
 
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import v0id.api.exp.data.ExPRegistryNames;
-import v0id.exp.ExPetrum;
 import v0id.exp.entity.EntityFallingTree;
 import v0id.exp.entity.EntityGravFallingBlock;
 import v0id.exp.entity.EntityThrownWeapon;
@@ -11,18 +11,21 @@ import v0id.exp.entity.impl.Chicken;
 
 public class ExPEntityRegistry extends AbstractRegistry
 {
-	public ExPEntityRegistry()
-	{
-		super();
-	}
+    public static ExPEntityRegistry instance;
 
-	@Override
-	public void preInit(FMLPreInitializationEvent evt)
-	{
-		EntityRegistry.registerModEntity(ExPRegistryNames.entityGravFallingBlock, EntityGravFallingBlock.class, ExPRegistryNames.entityGravFallingBlock.toString().replace(':', '.'), 0, ExPetrum.instance, 32, 1, true);
-		EntityRegistry.registerModEntity(ExPRegistryNames.entityFallingTree, EntityFallingTree.class, ExPRegistryNames.entityFallingTree.toString().replace(':', '.'), 1, ExPetrum.instance, 32, 1, true);
-		EntityRegistry.registerModEntity(ExPRegistryNames.entityThrownWeapon, EntityThrownWeapon.class, ExPRegistryNames.entityThrownWeapon.toString().replace(':', '.'), 2, ExPetrum.instance, 32, 1, true);
-        EntityRegistry.registerModEntity(ExPRegistryNames.entityChicken, Chicken.class, ExPRegistryNames.entityChicken.toString().replace(':', '.'), 3, ExPetrum.instance, 64, 1, true, 0xffffff, 0xff0000);
-        super.preInit(evt);
-	}
+    public ExPEntityRegistry()
+    {
+        super();
+        instance = this;
+    }
+
+	public void registerEntities(RegistryEvent.Register<EntityEntry> event)
+    {
+        event.getRegistry().registerAll(
+                EntityEntryBuilder.create().entity(EntityGravFallingBlock.class).name(ExPRegistryNames.entityGravFallingBlock.toString().replace(':', '.')).id(ExPRegistryNames.entityGravFallingBlock, 0).tracker(32, 1, true).build(),
+                EntityEntryBuilder.create().entity(EntityFallingTree.class).name(ExPRegistryNames.entityFallingTree.toString().replace(':', '.')).id(ExPRegistryNames.entityFallingTree, 1).tracker(32, 1, true).build(),
+                EntityEntryBuilder.create().entity(EntityThrownWeapon.class).name(ExPRegistryNames.entityThrownWeapon.toString().replace(':', '.')).id(ExPRegistryNames.entityThrownWeapon, 2).tracker(32, 1, true).build(),
+                EntityEntryBuilder.create().entity(Chicken.class).name(ExPRegistryNames.entityChicken.toString().replace(':', '.')).id(ExPRegistryNames.entityChicken, 3).tracker(64, 1, true).egg(0xffffff, 0xff0000).build()
+        );
+    }
 }

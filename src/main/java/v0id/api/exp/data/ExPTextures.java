@@ -31,7 +31,8 @@ public class ExPTextures
             guiQuern                                                                        	  		 		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/quern.png"),
             guiAnvil                                                                        	  		 		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/anvil.png"),
             guiNone	                                                                        	  		 		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/none.png"),
-            guiCrucible                                                                        	  		 		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/crucible.png");
+            guiCrucible                                                                        	  		 		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/crucible.png"),
+            guiInv9Sq                                                                        	  		 		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/inv_9_sq.png");
 
     static
 	{

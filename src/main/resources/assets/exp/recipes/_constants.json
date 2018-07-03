@@ -16,6 +16,13 @@
     {
         "ingredient": {
             "type": "forge:ore_dict",
+            "ore": "hay"
+        },
+        "name": "HAY"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
             "ore": "clumpCopper"
         },
         "name": "METALCLUMPCOPPER"

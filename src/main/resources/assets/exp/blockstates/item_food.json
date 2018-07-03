@@ -299,7 +299,22 @@
                 "textures" : {
                     "layer0" : "exp:items/plant/fruit/walnut"
                 }
-            }
+            },
+			"egg" : {
+				"textures" : {
+					"layer0" : "exp:items/produce/egg"
+				}
+			},
+			"chicken_raw" : {
+				"textures" : {
+					"layer0" : "exp:items/produce/chicken_raw"
+				}
+			},
+			"chicken_cooked" : {
+				"textures" : {
+					"layer0" : "exp:items/produce/chicken_cooked"
+				}
+			}
 		}
 	}
 }

@@ -113,7 +113,7 @@ public class BlockPlanks extends Block implements IWeightProvider, IOreDictEntry
     public int getMetaFromState(IBlockState state)
     {
         int ordinal = state.getValue(TREE_TYPE).ordinal();
-        if (ordinal * 15 < this.logIndex * 15 || ordinal * 15 >= this.logIndex * 15)
+        if (ordinal < this.logIndex * 15 || ordinal >= (this.logIndex + 1) * 15)
         {
             return 0;
         }

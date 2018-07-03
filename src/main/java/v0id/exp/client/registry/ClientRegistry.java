@@ -166,6 +166,8 @@ public class ClientRegistry implements ILifecycleListener
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.forge), 0, new ModelResourceLocation(ExPBlocks.forge.getRegistryName(), "active=false"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.quern), 0, new ModelResourceLocation(ExPBlocks.quern.getRegistryName(), "normal"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.crucible), 0, new ModelResourceLocation(ExPBlocks.crucible.getRegistryName(), "normal"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.hay), 0, new ModelResourceLocation(ExPBlocks.hay.getRegistryName(), "normal"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.nestingBox), 0, new ModelResourceLocation(ExPBlocks.nestingBox.getRegistryName(), "normal"));
         // Iteration-dependent models
         mkCustomModelResourceLocations(ExPItems.stick, EnumTreeType.values().length + EnumShrubType.values().length + EnumBerry.values().length, i -> "type=" + ExPOreDict.stickNames[i]);
         mkCustomModelResourceLocations(ExPItems.toolHead, EnumToolClass.values().length * EnumToolStats.values().length, i -> "material=" + EnumToolStats.values()[i % EnumToolStats.values().length].name().toLowerCase() + ",type=" + EnumToolClass.values()[i / EnumToolStats.values().length].name().toLowerCase());

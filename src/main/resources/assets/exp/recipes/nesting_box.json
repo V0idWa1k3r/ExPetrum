@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "exp:nesting_box",
+    "data": 0
+  },
+  "pattern": [
+    "HHH",
+    "###"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "#": {
+      "item": "#PLANKS"
+    },
+    "H": {
+        "item": "#HAY"
+    }
+  }
+}

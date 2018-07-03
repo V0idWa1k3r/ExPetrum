@@ -173,11 +173,11 @@ public class TileAnvil extends TileEntity implements ITickable
     {
         ItemStack ingot = this.inventory.getStackInSlot(3);
         int heat = ingot.hasTagCompound() && ingot.getTagCompound().hasKey("exp:smithing") ? ingot.getTagCompound().getCompoundTag("exp:smithing").getInteger("heat") : 0;
+        AnvilMinigame.ensureAllCardsAreRegistered();
         int totalWeight = AnvilMinigame.Card.allCards.stream().mapToInt(c -> c.getWeight(heat)).sum();
         NBTTagCompound tag = ingot.getTagCompound().getCompoundTag("exp:smithing");
         int cards = 2 + this.world.rand.nextInt(2);
         tag.setByte("cards", (byte) cards);
-        AnvilMinigame.ensureAllCardsAreRegistered();
         for (int i = 0; i < cards; ++i)
         {
             int weight = this.world.rand.nextInt(totalWeight);

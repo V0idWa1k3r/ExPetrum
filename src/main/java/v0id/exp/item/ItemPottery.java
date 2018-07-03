@@ -282,7 +282,7 @@ public class ItemPottery extends Item implements IInitializableItem, IWeightProv
             if (stack.hasTagCompound() && stack.getTagCompound().hasKey("metals") && cap.getStackInSlot(0).getItem() instanceof IMold)
             {
                 String metalName = stack.getTagCompound().getCompoundTag("metals").getKeySet().toArray(new String[0])[0];
-                if (TemperatureUtils.getTemperature(stack) >= EnumMetal.valueOf(metalName.toUpperCase()).getMeltingTemperature() * 0.75F)
+                if (TemperatureUtils.getTemperature(stack) >= EnumMetal.valueOf(metalName.toUpperCase()).getMeltingTemperature() * 0.5F)
                 {
                     ((IMold) cap.getStackInSlot(0).getItem()).tryFill(cap.getStackInSlot(0), (metal, value) ->
                     {

@@ -6,6 +6,7 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.data.ExPRegistryNames;
+import v0id.exp.entity.impl.Chicken;
 import v0id.exp.world.biome.ExPBiome;
 import v0id.exp.world.gen.ShrubEntry;
 import v0id.exp.world.gen.tree.TreeEntry;
@@ -49,7 +50,8 @@ public class ExPForest extends ExPBiome
         this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.CHERRY));
         this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.POMEGRANATE));
         this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.GRAPEFRUIT));
-	}
+        this.spawnableCreatureList.add(new SpawnListEntry(Chicken.class, 10, 4, 16));
+    }
 	
 	@Override
 	public void registerTypes()

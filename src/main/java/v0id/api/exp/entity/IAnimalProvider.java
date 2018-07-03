@@ -23,6 +23,8 @@ public interface IAnimalProvider
 
     DataParameter<Boolean> getDomesticatedParam();
 
+    DataParameter<Float> getFamiliarityParam();
+
     long getRandomPregnancyTicks();
 
     IAnimalStats getOrCreateStats();
@@ -30,4 +32,6 @@ public interface IAnimalProvider
     void setStats(IAnimalStats newStats) throws IllegalArgumentException;
 
     void processInteraction(EntityPlayer interactor);
+
+    void handleElapsedTicks(long elapsed);
 }

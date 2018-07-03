@@ -256,4 +256,7 @@ public class FoodEntry
     public static final FoodEntry GRAPEFRUIT = new FoodEntry().withCalories(33 * BALANCE_MULTIPLIER).withName("grapefruit").withNutrition(EnumFoodGroup.FRUIT, 4);
     public static final FoodEntry AVOCADO = new FoodEntry().withCalories(160 * BALANCE_MULTIPLIER).withName("avocado").withNutrition(EnumFoodGroup.FRUIT, 4);
     public static final FoodEntry CARAMBOLA = new FoodEntry().withCalories(31 * BALANCE_MULTIPLIER).withName("carambola").withNutrition(EnumFoodGroup.FRUIT, 4);
+    public static final FoodEntry EGG = new FoodEntry().withCalories(155 * BALANCE_MULTIPLIER).withName("egg").withNutrition(EnumFoodGroup.PROTEIN, 4);
+    public static final FoodEntry CHICKEN_RAW = new FoodEntry().withCalories(100 * BALANCE_MULTIPLIER).withName("chicken_raw").withNutrition(EnumFoodGroup.PROTEIN, 4);
+    public static final FoodEntry CHICKEN_COOKED = new FoodEntry().withCalories(239 * BALANCE_MULTIPLIER).withName("chicken_cooked").withNutrition(EnumFoodGroup.PROTEIN, 4);
 }

@@ -81,6 +81,11 @@ public class GuiHandler implements IGuiHandler
                 return new GuiCrucible(player.inventory, (TileCrucible) tile);
             }
 
+            case 9:
+            {
+                return new GuiNestingBox(player.inventory, (TileNestingBox) tile);
+            }
+
             default:
             {
                 return null;
@@ -149,6 +154,11 @@ public class GuiHandler implements IGuiHandler
             case 8:
             {
                 return new ContainerCrucible(player.inventory, (TileCrucible) tile);
+            }
+
+            case 9:
+            {
+                return new ContainerNestingBox(player.inventory, (TileNestingBox) tile);
             }
 
             default:

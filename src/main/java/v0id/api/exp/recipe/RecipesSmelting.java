@@ -30,7 +30,7 @@ public class RecipesSmelting
         {
             if (rec.matches(item, temp))
             {
-                ItemStack is = rec.getOutput().copy();
+                ItemStack is = rec.getOutput(item).copy();
                 TemperatureUtils.setTemperature(is, temp);
                 if (shrinkStack)
                 {
@@ -46,7 +46,7 @@ public class RecipesSmelting
                     }
                 }
 
-                itemStackSetter.accept(rec.getOutput().copy());
+                itemStackSetter.accept(rec.getOutput(item).copy());
                 return;
             }
         }
@@ -72,7 +72,7 @@ public class RecipesSmelting
         }
 
         @Override
-        public ItemStack getOutput()
+        public ItemStack getOutput(ItemStack is)
         {
             return this.output;
         }
@@ -104,7 +104,7 @@ public class RecipesSmelting
         }
 
         @Override
-        public ItemStack getOutput()
+        public ItemStack getOutput(ItemStack is)
         {
             return this.itemOut;
         }
@@ -120,7 +120,7 @@ public class RecipesSmelting
     {
         boolean matches(ItemStack is, float temperature);
 
-        ItemStack getOutput();
+        ItemStack getOutput(ItemStack is);
 
         float getTemperature();
     }

@@ -88,7 +88,12 @@
 				"textures" : {
 					"layer0" : "exp:items/misc/copper_coated_fire_brick"
 				}
-			}
+			},
+            "hay": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/hay"
+                }
+            }
 		}
 	}
 }

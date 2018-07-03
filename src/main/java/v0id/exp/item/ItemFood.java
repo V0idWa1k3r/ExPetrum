@@ -23,6 +23,7 @@ import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
+import v0id.api.exp.entity.EnumGender;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.api.exp.item.IContainerTickable;
 import v0id.api.exp.item.food.FoodEntry;
@@ -34,6 +35,8 @@ import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.IExPWorld;
 import v0id.core.logging.LogLevel;
 import v0id.core.util.I18n;
+import v0id.exp.entity.impl.Chicken;
+import v0id.exp.tile.TileNestingBox;
 import v0id.exp.util.Helpers;
 
 import java.lang.reflect.Method;
@@ -74,6 +77,10 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 		DecimalFormat df = new DecimalFormat("#.#");
 		DecimalFormat df1 = new DecimalFormat("#,###");
 		tooltip.add(I18n.format("exp.txt.item.desc.rot", df.format((this.getTotalRot(stack) / this.getEntry(stack).getBaseHealth()) * 100)));
+	    if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("fertilized"))
+        {
+            tooltip.add(I18n.format("exp.txt.fertilized"));
+        }
 	}
 
 	@Override
@@ -362,6 +369,26 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 		{
 			this.checkRot(is, w, pos, 1);
 		}
+
+		if (container instanceof TileNestingBox && is.hasTagCompound() && is.getTagCompound().getBoolean("fertilized"))
+        {
+            is.getTagCompound().setInteger("birthProgress", is.getTagCompound().getInteger("birthProgress") + 1);
+            if (is.getTagCompound().getInteger("birthProgress") >= 3 * IExPWorld.of(w).today().ticksPerDay)
+            {
+                Chicken.ChickenStats cStats = new Chicken.ChickenStats();
+                cStats.deserializeNBT(is.getTagCompound().getCompoundTag("statsOffspring"));
+                Chicken c = new Chicken(w);
+                c.setPosition(pos.getX() + 0.5F, pos.getY() + 0.3F, pos.getZ() + 0.5F);
+                c.animalCapability.setAge(0);
+                c.animalCapability.setGender(w.rand.nextBoolean() ? EnumGender.FEMALE : EnumGender.MALE);
+                c.animalCapability.setStats(cStats);
+                c.animalCapability.setFamiliarity(0);
+                c.animalCapability.setLastTickTime(IExPWorld.of(w).today().getTime());
+                c.animalCapability.setHome(pos);
+                w.spawnEntity(c);
+                is.shrink(1);
+            }
+        }
 	}
 	
 	public static int getMetadataFromCrop(EnumCrop crop)

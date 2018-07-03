@@ -13,6 +13,7 @@ import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
+import v0id.api.exp.item.IScythe;
 import v0id.api.exp.metal.EnumToolClass;
 import v0id.api.exp.metal.EnumToolStats;
 import v0id.exp.block.plant.BlockCrop;
@@ -20,7 +21,7 @@ import v0id.exp.item.IInitializableItem;
 
 import java.util.Arrays;
 
-public class ItemScythe extends ItemExPWeapon implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry
+public class ItemScythe extends ItemExPWeapon implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry, IScythe
 {
 	public ItemScythe()
 	{

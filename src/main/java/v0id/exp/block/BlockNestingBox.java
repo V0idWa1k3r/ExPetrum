@@ -1,10 +1,8 @@
 package v0id.exp.block;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -24,25 +22,23 @@ import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.ExPetrum;
 import v0id.exp.block.item.ItemBlockWithMetadata;
-import v0id.exp.tile.TileCrucible;
+import v0id.exp.tile.TileNestingBox;
 import v0id.exp.util.Helpers;
 
 import javax.annotation.Nullable;
 
-import static v0id.api.exp.data.ExPBlockProperties.CRUCIBLE_HASMETAL;
-
-public class BlockCrucible extends Block implements IWeightProvider, IInitializableBlock, IItemBlockProvider
+public class BlockNestingBox extends Block implements IWeightProvider, IInitializableBlock, IItemBlockProvider
 {
-    public BlockCrucible()
+    public BlockNestingBox()
     {
-        super(Material.ROCK);
+        super(Material.WOOD);
         this.initBlock();
     }
 
     @Override
     public float provideWeight(ItemStack item)
     {
-        return 20F;
+        return 0.5F;
     }
 
     @Override
@@ -54,33 +50,12 @@ public class BlockCrucible extends Block implements IWeightProvider, IInitializa
     @Override
     public void initBlock()
     {
-        this.setHardness(3.0F);
-        this.setResistance(10.0F);
-        this.setRegistryName(ExPRegistryNames.blockCrucible);
-        this.setSoundType(SoundType.METAL);
+        this.setHardness(1.0F);
+        this.setResistance(3);
+        this.setRegistryName(ExPRegistryNames.blockNestingBox);
         this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
         this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(CRUCIBLE_HASMETAL, false));
         this.setLightOpacity(0);
-    }
-
-    @Override
-    protected BlockStateContainer createBlockState()
-    {
-        return new BlockStateContainer(this, CRUCIBLE_HASMETAL);
-    }
-
-    @Override
-    public int getMetaFromState(IBlockState state)
-    {
-        return 0;
-    }
-
-    @Override
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
-    {
-        TileCrucible crucible = (TileCrucible) worldIn.getTileEntity(pos);
-        return super.getActualState(state, worldIn, pos).withProperty(CRUCIBLE_HASMETAL, crucible != null && !crucible.metalMap.isEmpty());
     }
 
     @Override
@@ -96,7 +71,7 @@ public class BlockCrucible extends Block implements IWeightProvider, IInitializa
             return true;
         }
 
-        playerIn.openGui(ExPetrum.instance, 8, worldIn, pos.getX(), pos.getY(), pos.getZ());
+        playerIn.openGui(ExPetrum.instance, 9, worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
 
@@ -110,7 +85,7 @@ public class BlockCrucible extends Block implements IWeightProvider, IInitializa
     @Override
     public TileEntity createTileEntity(World world, IBlockState state)
     {
-        return new TileCrucible();
+        return new TileNestingBox();
     }
 
     @SuppressWarnings("deprecation")
@@ -134,10 +109,11 @@ public class BlockCrucible extends Block implements IWeightProvider, IInitializa
         return BlockFaceShape.UNDEFINED;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
-        return new AxisAlignedBB(0.125F, 0, 0.125F, 0.875F, 0.75F, 0.875F);
+        return new AxisAlignedBB(0, 0, 0, 1, 0.1875F, 1);
     }
 
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)

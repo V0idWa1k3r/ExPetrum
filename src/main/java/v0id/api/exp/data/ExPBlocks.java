@@ -279,4 +279,10 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockCrucible)
     public static final Block crucible = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockHay)
+    public static final Block hay = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockNestingBox)
+    public static final Block nestingBox = null;
 }

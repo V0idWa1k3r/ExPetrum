@@ -8,12 +8,16 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -30,12 +34,15 @@ import v0id.api.exp.block.EnumGrassState;
 import v0id.api.exp.block.EnumShrubberyType;
 import v0id.api.exp.block.IGrass;
 import v0id.api.exp.data.*;
+import v0id.api.exp.item.IScythe;
 import v0id.exp.block.BlockFarmland;
 import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWithMetadata;
+import v0id.exp.item.ItemGeneric;
 import v0id.exp.util.Helpers;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -284,5 +291,15 @@ public class BlockVegetation extends BlockBush implements IInitializableBlock, I
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
 		registry.register(new ItemBlockWithMetadata(this));
+	}
+
+	@Override
+	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack)
+	{
+		super.harvestBlock(worldIn, player, pos, state, te, stack);
+		if (player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IScythe)
+        {
+            InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.HAY.ordinal()));
+        }
 	}
 }

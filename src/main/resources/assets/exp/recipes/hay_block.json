@@ -1,0 +1,16 @@
+{
+    "result": {
+        "item": "exp:hay",
+        "data": 0
+    },
+    "pattern": [
+        "##",
+        "##"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "#" : {
+            "item": "#HAY"
+        }
+    }
+}

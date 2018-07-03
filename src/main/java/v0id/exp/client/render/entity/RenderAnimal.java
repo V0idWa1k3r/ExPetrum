@@ -39,6 +39,13 @@ public class RenderAnimal extends RenderLiving<EntityAnimal>
         GlStateManager.scale(s, s, s);
     }
 
+    @Override
+    public void doRender(EntityAnimal entity, double x, double y, double z, float entityYaw, float partialTicks)
+    {
+        super.doRender(entity, x, y, z, entityYaw, partialTicks);
+
+    }
+
     public static class LayerGenderFeatures implements LayerRenderer<EntityAnimal>
     {
         public final RenderAnimal renderer;

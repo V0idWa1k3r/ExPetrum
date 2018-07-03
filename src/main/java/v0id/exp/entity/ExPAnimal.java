@@ -1,6 +1,5 @@
 package v0id.exp.entity;
 
-import com.google.common.collect.Maps;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -8,19 +7,17 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.util.Constants;
-import v0id.core.util.nbt.NBTChain;
 import v0id.api.exp.entity.*;
 import v0id.api.exp.player.EnumFoodGroup;
 import v0id.api.exp.world.Calendar;
+import v0id.api.exp.world.IExPWorld;
 import v0id.exp.util.PackInfo;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Arrays;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.StreamSupport;
 
 /**
  * Created by V0idWa1k3r on 19-Jun-17.
@@ -29,8 +26,6 @@ public class ExPAnimal implements IAnimal
 {
     private EntityLivingBase owner;
     private Calendar calendar = new Calendar();
-    private final Map<UUID, Float> familiarityLevels = Maps.newHashMap();
-    private final Map<UUID, Boolean> interactionMemory = Maps.newHashMap();
     private BlockPos home;
     private UUID packID;
     private IAnimalStats[] offspringStats;
@@ -41,6 +36,7 @@ public class ExPAnimal implements IAnimal
     private long effectiveAge;
     private int effectivePregnancyTimer;
     private boolean effectiveIsDomesticated;
+    private float familiarity;
 
     public ExPAnimal()
     {
@@ -89,7 +85,22 @@ public class ExPAnimal implements IAnimal
                 this.getOwner().getDataManager().set(this.getAsProvider().getDomesticatedParam(), this.effectiveIsDomesticated);
             }
 
-            this.setAge(this.getAge() + 1);
+            if (this.familiarity != this.getOwner().getDataManager().get(this.getAsProvider().getFamiliarityParam()))
+            {
+                this.getOwner().getDataManager().set(this.getAsProvider().getFamiliarityParam(), this.familiarity);
+            }
+
+            if (this.calendar.getTime() == 0)
+            {
+                this.calendar.setTime(IExPWorld.of(this.owner.world).today().getTime());
+            }
+            else
+            {
+                long ticksElapsed = IExPWorld.of(this.owner.world).today().getTime() - this.calendar.getTime();
+                this.getAsProvider().handleElapsedTicks(ticksElapsed);
+                this.setAge(this.getAge() + ticksElapsed);
+                this.calendar.setTime(this.calendar.getTime() + ticksElapsed);
+            }
         }
     }
 
@@ -142,9 +153,9 @@ public class ExPAnimal implements IAnimal
     }
 
     @Override
-    public float getFamiliarity(@Nonnull EntityPlayer of)
+    public float getFamiliarity()
     {
-        return this.familiarityLevels.getOrDefault(of.getPersistentID(), 0F);
+        return this.owner.getDataManager().get(this.getAsProvider().getFamiliarityParam());
     }
 
     @Override
@@ -154,10 +165,10 @@ public class ExPAnimal implements IAnimal
     }
 
     @Override
-    public void setFamiliarity(EntityPlayer of, float newFamiliarity)
+    public void setFamiliarity(float newFamiliarity)
     {
         newFamiliarity = MathHelper.clamp(newFamiliarity, -100F, this.getMaxFamiliarity());
-        this.familiarityLevels.put(of.getPersistentID(), newFamiliarity);
+        this.familiarity = newFamiliarity;
     }
 
     @Override
@@ -294,14 +305,13 @@ public class ExPAnimal implements IAnimal
     @Override
     public boolean wasInteractedWith(@Nonnull EntityPlayer player)
     {
-        return this.interactionMemory.getOrDefault(player.getPersistentID(), false);
+        return false;
     }
 
     @Override
     public void interact(EntityPlayer player)
     {
         this.getAsProvider().processInteraction(player);
-        this.interactionMemory.put(player.getPersistentID(), true);
     }
 
     @Override
@@ -355,11 +365,7 @@ public class ExPAnimal implements IAnimal
         }
 
         NBTTagList familiarityList = new NBTTagList();
-        this.familiarityLevels.forEach((UUID uuid, Float f) -> familiarityList.appendTag(NBTChain.startChain().withLong("keyMost", uuid.getMostSignificantBits()).withLong("keyLeast", uuid.getLeastSignificantBits()).withFloat("value", f).endChain()));
-        ret.setTag("familiarity", familiarityList);
-        NBTTagList interactionList = new NBTTagList();
-        this.interactionMemory.forEach((UUID uuid, Boolean b) -> interactionList.appendTag(NBTChain.startChain().withLong("keyMost", uuid.getMostSignificantBits()).withLong("keyLeast", uuid.getLeastSignificantBits()).withBool("value", b).endChain()));
-        ret.setTag("interaction", interactionList);
+        ret.setFloat("familiarity", this.familiarity);
         ret.setBoolean("gender", this.effectiveGender == EnumGender.FEMALE);
         ret.setLong("age", this.effectiveAge);
         ret.setInteger("pregnancy", this.effectivePregnancyTimer);
@@ -403,8 +409,7 @@ public class ExPAnimal implements IAnimal
         this.hunger = nbt.getFloat("hunger");
         this.thirst = nbt.getFloat("thirst");
         this.isSick = nbt.getBoolean("isSick");
-        StreamSupport.stream(nbt.getTagList("familiarity", Constants.NBT.TAG_COMPOUND).spliterator(), false).map(n -> (NBTTagCompound)n).forEach(tag -> this.familiarityLevels.put(new UUID(tag.getLong("keyMost"), tag.getLong("keyLeast")), tag.getFloat("value")));
-        StreamSupport.stream(nbt.getTagList("interaction", Constants.NBT.TAG_COMPOUND).spliterator(), false).map(n -> (NBTTagCompound)n).forEach(tag -> this.interactionMemory.put(new UUID(tag.getLong("keyMost"), tag.getLong("keyLeast")), tag.getBoolean("value")));
+        this.familiarity = nbt.getFloat("familiarity");
         this.effectiveGender = nbt.getBoolean("gender") ? EnumGender.FEMALE : EnumGender.MALE;
         this.effectiveAge = nbt.getLong("age");
         this.effectivePregnancyTimer = nbt.getInteger("pregnancy");

@@ -78,11 +78,10 @@ public interface IAnimal extends INBTSerializable<NBTTagCompound>
     boolean isDirty();
 
     /**
-     * Gets the individual familiarity(reputation) level this entity has towards a certain player. This has nothing to do with pack's reputation of the player though both methods are used together in most cases. This value is synced to the appropriate client(the client is aware of the familiarity levels towards itself but not other clients).
-     * @param of : the player to set the familiarity of
+     * Gets the individual familiarity(reputation) level this entity has towards players. This has nothing to do with pack's reputation of the player though both methods are used together in most cases. This value is synced to the appropriate client(the client is aware of the familiarity levels towards itself but not other clients).
      * @return - the current level of familiarity this entity has with the player [-100 - 100]
      */
-    float getFamiliarity(@Nonnull EntityPlayer of);
+    float getFamiliarity();
 
     /**
      * Gets the max familiarity level this entity can have towards players. This value is defined in specific entity's implementation and is usually 100 for domesticated animals.
@@ -91,11 +90,10 @@ public interface IAnimal extends INBTSerializable<NBTTagCompound>
     float getMaxFamiliarity();
 
     /**
-     * Sets the familiarity levels towards a specified player. This is clamped in [-100 - {@link #getMaxFamiliarity()} max] bounds.
-     * @param of : the player to set the familiarity of.
+     * Sets the familiarity levels towards players. This is clamped in [-100 - {@link #getMaxFamiliarity()} max] bounds.
      * @param newFamiliarity : the new value.
      */
-    void setFamiliarity(EntityPlayer of, float newFamiliarity);
+    void setFamiliarity(float newFamiliarity);
 
     /**
      * Gets the position this animal considers 'home' and will be coming to periodically. For wild animals it is their nest/current migration point. For domesticated animals this is the place they slept at last night. For animals that are not domesticated but belong to player's pack it is player's last known position.
