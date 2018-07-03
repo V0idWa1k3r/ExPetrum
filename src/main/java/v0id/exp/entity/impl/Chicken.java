@@ -255,6 +255,10 @@ public class Chicken extends EntityAnimal
                     }
                 }
             }
+            else
+            {
+                this.nestingBoxPos = null;
+            }
         }
     }
 
