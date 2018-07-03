@@ -49,6 +49,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import v0id.api.exp.block.IWater;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPPotions;
+import v0id.api.exp.metal.EnumToolStats;
 import v0id.api.exp.player.ExPPlayerCapability;
 import v0id.api.exp.player.IExPPlayer;
 import v0id.api.exp.world.ExPWorldCapability;
@@ -556,4 +557,17 @@ public class ExPHandlerServer
 			}
 		};
 	}
+
+	@SubscribeEvent
+	public void onCrafted(net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent event)
+    {
+        if (event.player instanceof EntityPlayerMP)
+        {
+            if (event.crafting.getItem() instanceof IExPTool)
+            {
+                EnumToolStats stats = ((IExPTool) event.crafting.getItem()).getStats(event.crafting);
+                IExPPlayer.of(event.player).triggerStage(stats.getAssociatedProgression());
+            }
+        }
+    }
 }

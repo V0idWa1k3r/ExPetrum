@@ -18,6 +18,8 @@ public class ExPTextures
             entityChickenWildColor                                                                             = new ResourceLocation(ExPRegistryNames.modid, "textures/entities/chicken/wild_overlay.png"),
             entityChickenWildMale                                                                              = new ResourceLocation(ExPRegistryNames.modid, "textures/entities/chicken/wild_male.png");
 
+	public static final ResourceLocation[] AGES = new ResourceLocation[EnumPlayerProgression.values().length];
+
 	public static final ResourceLocation
             guiCampfire                                                                                        	= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/campfire.png"),
             guiInv9                                                                                       		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/inv_9.png"),
@@ -35,6 +37,7 @@ public class ExPTextures
 		int i = 0;
 		for (EnumPlayerProgression progression : EnumPlayerProgression.values())
 		{
+		    AGES[i] = new ResourceLocation(ExPRegistryNames.modid, String.format("textures/ui/age_%s.png", progression.name().toLowerCase()));
 			PLAYER_HUD[i++] = new ResourceLocation(ExPRegistryNames.modid, String.format("textures/ui/player_%s.png", progression.name().toLowerCase()));
 		}
 	}

@@ -177,6 +177,7 @@ public class TileAnvil extends TileEntity implements ITickable
         NBTTagCompound tag = ingot.getTagCompound().getCompoundTag("exp:smithing");
         int cards = 2 + this.world.rand.nextInt(2);
         tag.setByte("cards", (byte) cards);
+        AnvilMinigame.ensureAllCardsAreRegistered();
         for (int i = 0; i < cards; ++i)
         {
             int weight = this.world.rand.nextInt(totalWeight);

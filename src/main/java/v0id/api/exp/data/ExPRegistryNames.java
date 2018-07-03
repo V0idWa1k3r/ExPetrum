@@ -149,6 +149,9 @@ public class ExPRegistryNames
 		fluidOil																							= "oil",
         fluidClay                                                                                           = "clay";
 
+	public static final String
+        soundNewAge                                                                                         = "sound_new_age";
+
 	private static final Map<String, ResourceLocation> cache = Maps.newHashMap();
 
 	public static ResourceLocation asLocation(String name)

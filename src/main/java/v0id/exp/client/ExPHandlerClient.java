@@ -17,8 +17,10 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -90,6 +92,12 @@ public class ExPHandlerClient
         }
 
         ClientRegistry.registerModels();
+    }
+
+    @SubscribeEvent
+    public static void onSoundRegistry(RegistryEvent.Register<SoundEvent> event)
+    {
+        ClientRegistry.registerSounds(event);
     }
 
     @SubscribeEvent
@@ -300,6 +308,7 @@ public class ExPHandlerClient
         if (Minecraft.getMinecraft().world != null && event.phase == TickEvent.Phase.START)
         {
             ExPMisc.defaultParticleEngineImpl.tick();
+            PlayerHUDRenderer.tick();
         }
 	}
 	

@@ -17,8 +17,9 @@ public class ExPNetworkRegistry extends AbstractRegistry
         VoidNetwork.registerHandler(ExPPackets.ANVIL_RECIPE, new PacketHandlerAnvilRecipe());
         VoidNetwork.registerHandler(ExPPackets.CARD_CLICK, new PacketHandlerCardClick());
         VoidNetwork.registerHandler(ExPPackets.ANVIL_WELD, new PacketHandlerWeld());
+        VoidNetwork.registerHandler(ExPPackets.NEW_AGE, new PacketHandlerNewAge());
 	}
-	
+
 	public ExPNetworkRegistry()
 	{
 		super();

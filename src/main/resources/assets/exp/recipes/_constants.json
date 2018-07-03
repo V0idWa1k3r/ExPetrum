@@ -14,6 +14,83 @@
         "name": "STONE"
     },
     {
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "clumpCopper"
+        },
+        "name": "METALCLUMPCOPPER"
+    },
+    {
+        "ingredient": {
+            "item": "exp:item_metal_generic",
+            "data": 23
+        },
+        "name": "METALCLUMPBRONZE"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "clumpBronzeBismuth"
+        },
+        "name": "METALCLUMPBISMUTHBRONZE"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "clumpBronzeLead"
+        },
+        "name": "METALCLUMPLEADEDBRONZE"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "clumpBronzeManganese"
+        },
+        "name": "METALCLUMPMANGANESEBRONZE"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "clumpBronzeAluminum"
+        },
+        "name": "METALCLUMPALUMINMBRONZE"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "clumpIron"
+        },
+        "name": "METALCLUMPIRON"
+    },
+    {
+        "ingredient": {
+            "item": "exp:item_metal_generic",
+            "data": 35
+        },
+        "name": "METALCLUMPSTEEL"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "clumpSteelHSLA"
+        },
+        "name": "METALCLUMPHSLASTEEL"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "clumpSteelStainless"
+        },
+        "name": "METALCLUMPSTAINLESSSTEEL"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "clumpSteelTool"
+        },
+        "name": "METALCLUMPTOOLSTEEL"
+    },
+    {
         "ingredient": [
             {
                 "type": "forge:ore_dict",

@@ -142,6 +142,7 @@ exp.txt.canWeld= §fCan Weld
 exp.txt.danger= §f!Danger!
 exp.sym.line= ⏐
 exp.txt.weld=Weld
+exp.txt.newAge=New Age Achieved!
 
 exp.bend.name=Bend
 exp.bend.desc=+10 Prog|-5 Int

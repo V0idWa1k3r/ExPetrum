@@ -1,0 +1,17 @@
+{
+    "result": {
+        "item": "exp:anvil",
+        "data": 11
+    },
+    "pattern": [
+        "###",
+        " # ",
+        "###"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "#" : {
+            "item": "#METALCLUMPTOOLSTEEL"
+        }
+    }
+}

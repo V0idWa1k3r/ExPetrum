@@ -1,0 +1,12 @@
+{
+    "sound_new_age": {
+        "category": "master",
+        "sounds": 
+        [
+            {
+                "name": "exp:new_age",
+                "stream": false
+            }
+        ]
+    }
+}

@@ -16,4 +16,5 @@ public class ExPPackets
     public static final PacketType CARD_CLICK = PacketType.obtain(modid, "cardClick");
     public static final PacketType ANVIL_RECIPE = PacketType.obtain(modid, "anvilRecipe");
     public static final PacketType ANVIL_WELD = PacketType.obtain(modid, "anvilWeld");
+    public static final PacketType NEW_AGE = PacketType.obtain(modid, "newAge");
 }

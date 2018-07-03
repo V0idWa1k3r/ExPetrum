@@ -1,14 +1,13 @@
 package v0id.exp.client.render.hud;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,7 +17,10 @@ import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.lwjgl.opengl.GL11;
+import v0id.api.exp.data.ExPSounds;
 import v0id.api.exp.data.ExPTextures;
+import v0id.api.exp.player.EnumPlayerProgression;
 import v0id.api.exp.player.IExPPlayer;
 import v0id.api.exp.world.IExPWorld;
 import v0id.exp.util.Helpers;
@@ -71,6 +73,8 @@ public class PlayerHUDRenderer
 	public static final float wHUEnd = 0.25F;
 	public static final float heatDeathTemp = 41.5F;
 	public static final float freezeDeathTemp = 31F;
+	public static int newAgeTicks;
+	public static EnumPlayerProgression newAgeType = EnumPlayerProgression.STONE_AGE;
 	
 	public static void render(float partialTicks)
 	{
@@ -94,10 +98,10 @@ public class PlayerHUDRenderer
 		vb.pos(cX - 96, sRes.getScaledHeight() - 34, 0).tex(0, 0).endVertex();
 		int selectedIndex = p.inventory.currentItem;
 		float sX = cX - 79 + 20 * selectedIndex;
-		vb.pos(sX - 18, sRes.getScaledHeight(), 0).tex(0, selectionVEnd).endVertex();
-		vb.pos(sX + 18, sRes.getScaledHeight(), 0).tex(selectionUEnd, selectionVEnd).endVertex();
-		vb.pos(sX + 18, sRes.getScaledHeight() - 36, 0).tex(selectionUEnd, selectionVStart).endVertex();
-		vb.pos(sX - 18, sRes.getScaledHeight() - 36, 0).tex(0, selectionVStart).endVertex();
+		vb.pos(sX - 18, sRes.getScaledHeight() + 1, 0).tex(0, selectionVEnd).endVertex();
+		vb.pos(sX + 18, sRes.getScaledHeight() + 1, 0).tex(selectionUEnd, selectionVEnd).endVertex();
+		vb.pos(sX + 18, sRes.getScaledHeight() - 35, 0).tex(selectionUEnd, selectionVStart).endVertex();
+		vb.pos(sX - 18, sRes.getScaledHeight() - 35, 0).tex(0, selectionVStart).endVertex();
 		sX = cX - (hand == EnumHandSide.LEFT ? 120 : -120);
 		vb.pos(sX - 18, sRes.getScaledHeight(), 0).tex(offhandUStart, selectionVEnd).endVertex();
 		vb.pos(sX + 18, sRes.getScaledHeight(), 0).tex(offhandUEnd, selectionVEnd).endVertex();
@@ -193,9 +197,64 @@ public class PlayerHUDRenderer
 		int moistureTextWidth = Minecraft.getMinecraft().fontRenderer.getStringWidth(moistureText);
 		Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(moistureText, sRes.getScaledWidth() - 16 - moistureTextWidth, sRes.getScaledHeight() - 32, 0xffffff);
 		Minecraft.getMinecraft().mcProfiler.endSection();
+        Minecraft.getMinecraft().mcProfiler.startSection("newAgeNot");
+        Minecraft.getMinecraft().fontRenderer.setUnicodeFlag(false);
+        renderNewAgePopup(partialTicks, sRes);
+        Minecraft.getMinecraft().mcProfiler.endSection();
 		Minecraft.getMinecraft().fontRenderer.setUnicodeFlag(unicode);
 		Minecraft.getMinecraft().mcProfiler.endSection();
 		Minecraft.getMinecraft().mcProfiler.endSection();
+	}
+
+	public static void tick()
+    {
+        --newAgeTicks;
+    }
+
+	public static void beginNewAge(EnumPlayerProgression age)
+    {
+        newAgeType = age;
+        newAgeTicks = 560;
+        Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(ExPSounds.newAge, 1.0F));
+    }
+
+	private static void renderNewAgePopup(float partialTicks, ScaledResolution sRes)
+	{
+	    if (newAgeType != null && newAgeTicks >= 0)
+        {
+            GlStateManager.enableAlpha();
+            GlStateManager.enableBlend();
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+            Minecraft.getMinecraft().renderEngine.bindTexture(ExPTextures.AGES[newAgeType.ordinal()]);
+            BufferBuilder bb = Tessellator.getInstance().getBuffer();
+            bb.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
+            float[] c = new float[]{1, 1, 1, newAgeTicks > 500 ? (60 - (newAgeTicks - 500)) / 60F : newAgeTicks < 60 && newAgeTicks >= 0 ? newAgeTicks / 60F : 1};
+            bb.pos(sRes.getScaledWidth() / 2 - 100, sRes.getScaledHeight() / 2 - 100, 0).tex(0, 0).color(c[0], c[1], c[2], c[3]).endVertex();
+            bb.pos(sRes.getScaledWidth() / 2 - 100, sRes.getScaledHeight() / 2 + 100, 0).tex(0, 1).color(c[0], c[1], c[2], c[3]).endVertex();
+            bb.pos(sRes.getScaledWidth() / 2 + 100, sRes.getScaledHeight() / 2 + 100, 0).tex(1, 1).color(c[0], c[1], c[2], c[3]).endVertex();
+            bb.pos(sRes.getScaledWidth() / 2 + 100, sRes.getScaledHeight() / 2 - 100, 0).tex(1, 0).color(c[0], c[1], c[2], c[3]).endVertex();
+            Tessellator.getInstance().draw();
+            String ageName = newAgeType.name().replace('_', ' ');
+            if (newAgeTicks < 200)
+            {
+                GlStateManager.pushMatrix();
+                GlStateManager.scale(3F, 3F, 3F);
+                Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(ageName, (int) ((sRes.getScaledWidth() / 2 - Minecraft.getMinecraft().fontRenderer.getStringWidth(ageName) / 2 * 3) * 0.333333333F), (int) ((sRes.getScaledHeight() / 2 + 110) * 0.333333333F), 0xFFFFFF);
+                GlStateManager.popMatrix();
+                GlStateManager.disableBlend();
+                GlStateManager.disableAlpha();
+            }
+
+            if (newAgeTicks < 300)
+            {
+                GlStateManager.pushMatrix();
+                GlStateManager.scale(2F, 2F, 2F);
+                Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(I18n.format("exp.txt.newAge"), (int) ((sRes.getScaledWidth() / 2 - Minecraft.getMinecraft().fontRenderer.getStringWidth(ageName)) * 0.5F), (int) ((sRes.getScaledHeight() / 2 - 120 + Math.sin(Math.toRadians((newAgeTicks % 30) * 12 - partialTicks * 12)) * 10) * 0.5F), 0xFFFFFF);
+                GlStateManager.popMatrix();
+                GlStateManager.disableBlend();
+                GlStateManager.disableAlpha();
+            }
+        }
 	}
 	
 	private static void renderHotbar(float partialTicks, ScaledResolution sRes)

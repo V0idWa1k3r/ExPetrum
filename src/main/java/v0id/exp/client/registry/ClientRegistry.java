@@ -13,12 +13,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.client.model.obj.OBJLoader;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -137,6 +139,13 @@ public class ClientRegistry implements ILifecycleListener
     public void postInit(FMLPostInitializationEvent evt)
     {
 
+    }
+
+    public static void registerSounds(RegistryEvent.Register<SoundEvent> event)
+    {
+        event.getRegistry().registerAll(
+                new SoundEvent(ExPRegistryNames.asLocation(ExPRegistryNames.soundNewAge)).setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.soundNewAge))
+        );
     }
 
     public static void registerModels()

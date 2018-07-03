@@ -13,6 +13,8 @@ import v0id.core.util.nbt.NBTChain;
 import v0id.api.exp.combat.SpecialAttack;
 import v0id.api.exp.combat.SpecialAttack.AttackWrapper;
 import v0id.api.exp.player.*;
+import v0id.exp.ExPetrum;
+import v0id.exp.net.PacketHandlerNewAge;
 import v0id.exp.net.PacketHandlerPlayerData;
 
 import java.util.Collection;
@@ -627,11 +629,19 @@ public class ExPPlayer implements IExPPlayer
 	@Override
 	public void triggerStage(EnumPlayerProgression progression)
 	{
-		if (progression.ordinal() - this.stage.ordinal() == 1)
-		{
-			this.serverIsDirty = this.stage_isDirty = true;
-			this.stage = progression;
-		}
+		if (this.owner.world.isRemote)
+        {
+            ExPetrum.proxy.handleNewAge(progression);
+        }
+        else
+        {
+            if (progression.ordinal() - this.stage.ordinal() == 1)
+            {
+                this.serverIsDirty = this.stage_isDirty = true;
+                this.stage = progression;
+                PacketHandlerNewAge.sendNewAge((EntityPlayerMP) this.owner, progression);
+            }
+        }
 	}
 
 	@Override
