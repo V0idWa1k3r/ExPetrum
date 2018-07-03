@@ -36,7 +36,9 @@ public enum EnumMetal implements IStringSerializable
 	
 	// Alloys
 	BRONZE(0x977035, true, new AlloyComposition(Pair.of(COPPER, Pair.of(0.8F, 0.9F)), Pair.of(TIN, Pair.of(0.1F, 0.2F))), 950, 1, "bronze"),
-	BISMUTH_BRONZE(0xa9998a, true, new AlloyComposition(Pair.of(COPPER, Pair.of(0.85F, 0.9F)), Pair.of(TIN, Pair.of(0.05F, 0.1F)), Pair.of(ZINC, Pair.of(0F, 0.1F)), Pair.of(BISMUTH, Pair.of(0.01F, 0.05F))), 950, 1, "bronze", "bronzeBismuth"),
+
+	// Unrealistic alloy composition! However if a realistic one is used then the payer has no reason to go for this alloy instead of regular bronze...
+	BISMUTH_BRONZE(0xa9998a, true, new AlloyComposition(Pair.of(COPPER, Pair.of(0.75F, 0.8F)), Pair.of(ZINC, Pair.of(0.1F, 0.15F)), Pair.of(BISMUTH, Pair.of(0.05F, 0.1F))), 950, 1, "bronze", "bronzeBismuth"),
 	HIGH_LEADED_BRONZE(0x5a413a, true, new AlloyComposition(Pair.of(COPPER, Pair.of(0.7F, 0.8F)), Pair.of(TIN, Pair.of(0.05F, 0.15F)), Pair.of(LEAD, Pair.of(0.15F, 0.25F))), 950, 1, "bronze", "bronzeLead", "bronzeHighLead"),
 	BRASS(0x9b835d, false, new AlloyComposition(Pair.of(COPPER, Pair.of(0.6F, 0.7F)), Pair.of(ZINC, Pair.of(0.3F, 0.4F))), 900, 1, "brass"),
 	MANGANESE_BRONZE(0xd4bfa4, true, new AlloyComposition(Pair.of(COPPER, Pair.of(0.55F, 0.65F)), Pair.of(ZINC, Pair.of(0.25F, 0.4F)), Pair.of(MANGANESE, Pair.of(0.01F, 0.05F))), 950, 1, "bronze", "bronzeManganese"),

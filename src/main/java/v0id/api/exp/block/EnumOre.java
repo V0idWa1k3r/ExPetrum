@@ -82,7 +82,7 @@ public enum EnumOre implements IStringSerializable
 	SPERRYLITE("PtAs2", 0, 0x4c4239, 10, EnumMetal.PLATINUM, 2041F),
 	
 	// Zinc
-	SPHALERITE("ZnS", 0, 0x190a0d, 30, EnumMetal.ZINC, 1850F),
+	SPHALERITE("ZnS", 0, 0x190a0d, 30, EnumMetal.ZINC, 1020F),
 	
 	// Uranium
 	URANINITE("UO2", 1, 0x000000, 10, EnumMetal.URANIUM, 1132F),

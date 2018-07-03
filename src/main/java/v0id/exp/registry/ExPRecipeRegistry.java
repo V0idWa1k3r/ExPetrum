@@ -103,6 +103,8 @@ public class ExPRecipeRegistry extends AbstractRegistry
             RecipesAnvil.addRecipe(new ItemStack(ExPItems.metalGeneric, 1, metal.ordinal()), (int)(metal.getMeltingTemperature() * 0.75F), new ItemStack(ExPItems.metalGeneric, 1, metal.ordinal() + EnumMetal.values().length * 2), 40, metal.getRequiredAnvilTier());
         }
 
+        RecipesAnvil.addWeldingRecipe(new ItemStack(ExPItems.ingot, 1, EnumMetal.COPPER.ordinal()), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.FIRE_BRICK.ordinal()), (int)(EnumMetal.COPPER.getMeltingTemperature() * 0.85F), 0, new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.COPPER_COATED_FIRE_BRICK.ordinal()), 0);
+        RecipesAnvil.addWeldingRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.FIRE_BRICK.ordinal()), new ItemStack(ExPItems.ingot, 1, EnumMetal.COPPER.ordinal()), 0, (int)(EnumMetal.COPPER.getMeltingTemperature() * 0.85F), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.COPPER_COATED_FIRE_BRICK.ordinal()), 0);
         for (EnumToolStats material : EnumToolStats.values())
         {
             if (material == EnumToolStats.STONE)

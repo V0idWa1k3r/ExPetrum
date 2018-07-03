@@ -276,4 +276,7 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockAnvil)
     public static final Block anvil = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockCrucible)
+    public static final Block crucible = null;
 }

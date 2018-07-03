@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 
 public interface IMold
 {
-    void tryFill(ItemStack self, BiConsumer<EnumMetal, Float> reductor, Consumer<ItemStack> resultSetter, EnumMetal metal, float value);
+    boolean tryFill(ItemStack self, BiConsumer<EnumMetal, Float> reductor, Consumer<ItemStack> resultSetter, EnumMetal metal, float value);
 
     boolean isMold(ItemStack self);
 

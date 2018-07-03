@@ -83,6 +83,11 @@
 				"textures" : {
 					"layer0" : "exp:items/misc/flux"
 				}
+			},
+			"copper_coated_fire_brick": {
+				"textures" : {
+					"layer0" : "exp:items/misc/copper_coated_fire_brick"
+				}
 			}
 		}
 	}

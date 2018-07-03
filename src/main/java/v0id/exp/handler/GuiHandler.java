@@ -76,6 +76,11 @@ public class GuiHandler implements IGuiHandler
                 return new GuiAnvil(player.inventory, (TileAnvil) tile);
             }
 
+            case 8:
+            {
+                return new GuiCrucible(player.inventory, (TileCrucible) tile);
+            }
+
             default:
             {
                 return null;
@@ -139,6 +144,11 @@ public class GuiHandler implements IGuiHandler
             case 7:
             {
                 return new ContainerAnvil(player.inventory, (TileAnvil) tile);
+            }
+
+            case 8:
+            {
+                return new ContainerCrucible(player.inventory, (TileCrucible) tile);
             }
 
             default:

@@ -68,7 +68,8 @@ public class ExPRegistryNames
         blockCobblestone                                                                                    = "cobblestone",
 		blockQuern                                                                                          = "quern",
         blockTrough                                                                                         = "trough",
-        blockAnvil                                                                                          = "anvil";
+        blockAnvil                                                                                          = "anvil",
+        blockCrucible                                                                                       = "crucible";
 
 	public static final String
 		itemRock																							= "item_rock",

@@ -41,6 +41,11 @@ public class ItemMold extends Item implements IInitializableItem, IWeightProvide
         this.initItem();
     }
 
+    public boolean isIngot()
+    {
+        return isIngot;
+    }
+
     @Override
     public float provideWeight(ItemStack item)
     {
@@ -103,7 +108,7 @@ public class ItemMold extends Item implements IInitializableItem, IWeightProvide
         super.addInformation(stack, worldIn, tooltip, flagIn);
         if (this.isIngot && stack.getMetadata() > 1)
         {
-            tooltip.add((TemperatureUtils.getTemperature(stack) >= EnumMetal.values()[stack.getMetadata() - 2].getMeltingTemperature() * 0.75F ? I18n.format("exp.txt.liquid") + " " : "") + I18n.format("exp.item.ingot.desc.type." + EnumMetal.values()[stack.getMetadata() - 2].name().toLowerCase()));
+            tooltip.add((this.isLiquid(stack) ? I18n.format("exp.txt.liquid") + " " : "") + I18n.format("exp.item.ingot.desc.type." + EnumMetal.values()[stack.getMetadata() - 2].name().toLowerCase()));
         }
 
         if (!this.isIngot && stack.getMetadata() >= EnumToolClass.values().length * 2)
@@ -116,7 +121,7 @@ public class ItemMold extends Item implements IInitializableItem, IWeightProvide
     }
 
     @Override
-    public void tryFill(ItemStack self, BiConsumer<EnumMetal, Float> reductor, Consumer<ItemStack> resultSetter, EnumMetal metal, float value)
+    public boolean tryFill(ItemStack self, BiConsumer<EnumMetal, Float> reductor, Consumer<ItemStack> resultSetter, EnumMetal metal, float value)
     {
         if (value >= 100)
         {
@@ -126,6 +131,7 @@ public class ItemMold extends Item implements IInitializableItem, IWeightProvide
                 {
                     reductor.accept(metal, 100F);
                     resultSetter.accept(new ItemStack(this, 1, 2 + metal.ordinal()));
+                    return true;
                 }
             }
             else
@@ -134,9 +140,12 @@ public class ItemMold extends Item implements IInitializableItem, IWeightProvide
                 {
                     reductor.accept(metal, 100F);
                     resultSetter.accept(new ItemStack(this, 1, self.getMetadata() + EnumToolClass.values().length));
+                    return true;
                 }
             }
         }
+
+        return false;
     }
 
     @Override

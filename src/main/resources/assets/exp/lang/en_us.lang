@@ -311,6 +311,7 @@ tile.exp.anvil.steel.name=Steel Anvil
 tile.exp.anvil.stainless_steel.name=Stainless Steel Anvil
 tile.exp.anvil.hsla_steel.name=HSLA Steel Anvil
 tile.exp.anvil.tool_steel.name=Tool Steel Anvil
+tile.exp.crucible.name=Crucible
 
 item.exp.item_ingot.name=Ingot
 
@@ -668,6 +669,7 @@ item.exp.item_generic.fire_clay.name=Fire Clay
 item.exp.item_generic.fire_brick.name=Fire Brick
 item.exp.item_generic.flint_powder.name=Flint Powder
 item.exp.item_generic.flux.name=Metallurgic Charcoal Flux
+item.exp.item_generic.copper_coated_fire_brick.name=Copper Coated Fire Brick
 item.exp.item_ore.acanthite.name=Acanthite Ore
 item.exp.item_ore.barite.name=Barite Ore
 item.exp.item_ore.bauxite.name=Bauxite Ore
