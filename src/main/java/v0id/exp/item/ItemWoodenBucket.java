@@ -46,7 +46,7 @@ public class ItemWoodenBucket extends Item implements IWeightProvider, IInitiali
     @Override
     public float provideWeight(ItemStack item)
     {
-        return item.getMetadata() == 0 ? 0.4F : 0.4F + this.getWater(item);
+        return item.getMetadata() == 0 ? 0.4F : 0.4F + this.getWater(item) / 10F;
     }
 
     @Override
@@ -93,13 +93,13 @@ public class ItemWoodenBucket extends Item implements IWeightProvider, IInitiali
         }
         else
         {
-            item.setItemDamage(fluid == ExPFluids.freshWater ? 1 : fluid == ExPFluids.saltWater ? 2 : 3);
+            item.setItemDamage(fluid == ExPFluids.freshWater || fluid == FluidRegistry.WATER ? 1 : fluid == ExPFluids.saltWater ? 2 : 3);
         }
     }
 
     public Fluid getStoredFluid(ItemStack item)
     {
-        return item.getMetadata() == 0 ? null : item.getMetadata() == 1 ? ExPFluids.freshWater : item.getMetadata() == 2 ? ExPFluids.saltWater : ExPFluids.milk;
+        return item.getMetadata() == 0 ? null : item.getMetadata() == 1 ? FluidRegistry.WATER : item.getMetadata() == 2 ? ExPFluids.saltWater : ExPFluids.milk;
     }
 
     @Override
@@ -122,7 +122,13 @@ public class ItemWoodenBucket extends Item implements IWeightProvider, IInitiali
 
         for (int i = 0; i < 4; ++i)
         {
-            items.add(new ItemStack(this, 1, i));
+            ItemStack is = new ItemStack(this, 1, i);
+            if (i != 0)
+            {
+                this.setWater(is, 10);
+            }
+
+            items.add(is);
         }
     }
 
@@ -143,12 +149,7 @@ public class ItemWoodenBucket extends Item implements IWeightProvider, IInitiali
                 f = ((IFluidBlock)blockHit.getBlock()).getFluid();
             }
 
-            if (f == FluidRegistry.WATER)
-            {
-                f = ExPFluids.freshWater;
-            }
-
-            if ((f1 == null || f == f1) && (f == ExPFluids.freshWater || f == ExPFluids.saltWater))
+            if ((f1 == null || f == f1) && (f == FluidRegistry.WATER || f == ExPFluids.saltWater))
             {
                 int levelFluid = blockHit.getValue(BlockFluidFinite.LEVEL) + 1;
                 int levelCurrent = this.getWater(is);
@@ -188,7 +189,7 @@ public class ItemWoodenBucket extends Item implements IWeightProvider, IInitiali
     {
         ItemStack is = player.getHeldItem(hand);
         Fluid f = this.getStoredFluid(is);
-        if (f != null && worldIn.isAirBlock(pos.offset(facing)) && (f == ExPFluids.freshWater || f == ExPFluids.saltWater))
+        if (f != null && worldIn.isAirBlock(pos.offset(facing)) && (f == FluidRegistry.WATER || f == ExPFluids.saltWater))
         {
             Block b = is.getMetadata() == 1 ? ExPBlocks.freshWater : ExPBlocks.saltWater;
             worldIn.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1F, 1F);

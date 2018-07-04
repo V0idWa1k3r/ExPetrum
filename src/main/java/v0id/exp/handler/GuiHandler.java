@@ -86,6 +86,11 @@ public class GuiHandler implements IGuiHandler
                 return new GuiNestingBox(player.inventory, (TileNestingBox) tile);
             }
 
+            case 10:
+            {
+                return new GuiBarrel(player.inventory, (TileBarrel) tile);
+            }
+
             default:
             {
                 return null;
@@ -159,6 +164,11 @@ public class GuiHandler implements IGuiHandler
             case 9:
             {
                 return new ContainerNestingBox(player.inventory, (TileNestingBox) tile);
+            }
+
+            case 10:
+            {
+                return new ContainerBarrel(player.inventory, (TileBarrel) tile);
             }
 
             default:

@@ -103,6 +103,31 @@
                 "textures" : {
                     "layer0" : "exp:items/misc/wool"
                 }
+            },
+			"copper_rim": {
+				"textures" : {
+					"layer0" : "exp:items/misc/copper_rim"
+				}
+			},
+            "soaked_hide": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/soaked_hide"
+                }
+            },
+            "prepared_hide": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/prepared_hide"
+                }
+            },
+            "leather": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/leather"
+                }
+            },
+            "leather_straps": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/leather_straps"
+                }
             }
 		}
 	}

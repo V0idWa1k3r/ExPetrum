@@ -285,4 +285,7 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockNestingBox)
     public static final Block nestingBox = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockBarrel)
+    public static final Block barrel = null;
 }

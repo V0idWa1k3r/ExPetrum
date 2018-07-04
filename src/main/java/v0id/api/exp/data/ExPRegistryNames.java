@@ -71,7 +71,8 @@ public class ExPRegistryNames
         blockAnvil                                                                                          = "anvil",
         blockCrucible                                                                                       = "crucible",
         blockHay                                                                                            = "hay",
-        blockNestingBox                                                                                     = "nesting_box";
+        blockNestingBox                                                                                     = "nesting_box",
+		blockBarrel                                                                                         = "barrel";
 
 	public static final String
 		itemRock																							= "item_rock",
@@ -154,7 +155,8 @@ public class ExPRegistryNames
 		fluidLava																							= "exp.lava",
 		fluidOil																							= "oil",
         fluidClay                                                                                           = "clay",
-        fluidMilk                                                                                           = "milk";
+        fluidMilk                                                                                           = "milk",
+        fluidTannin                                                                                         = "tannin";
 
 	public static final String
         soundNewAge                                                                                         = "sound_new_age";

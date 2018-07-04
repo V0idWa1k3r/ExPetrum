@@ -119,6 +119,10 @@ exp.block.ore.desc.richness.0=Richness: Poor
 exp.block.ore.desc.richness.1=Richness: Normal
 exp.block.ore.desc.richness.2=Richness: Rich
 
+fluid.tile.water=Water
+fluid.milk=Milk
+fluid.tannin=Tannin
+
 tile.exp.ore.name=Ore
 
 exp.txt.weightvolume=⚖ %d Gram   ⊞ %s
@@ -152,6 +156,7 @@ exp.txt.fertilized=§6Fertilized
 exp.txt.animalFull=This animal doesn't want any food now.
 exp.txt.pregnant=This animal is pregnant.
 exp.txt.notAllowed=The animal doesn't trust you enough to do that.
+exp.txt.mb=%dmb
 
 exp.bend.name=Bend
 exp.bend.desc=+10 Prog|-5 Int
@@ -323,6 +328,7 @@ tile.exp.anvil.tool_steel.name=Tool Steel Anvil
 tile.exp.crucible.name=Crucible
 tile.exp.hay.name=Hay Block
 tile.exp.nesting_box.name=Nesting Box
+tile.exp.barrel.name=Wooden Barrel
 
 item.exp.item_ingot.name=Ingot
 
@@ -693,6 +699,11 @@ item.exp.item_generic.copper_coated_fire_brick.name=Copper Coated Fire Brick
 item.exp.item_generic.hay.name=Hay
 item.exp.item_generic.hide.name=Hide
 item.exp.item_generic.wool.name=Wool
+item.exp.item_generic.copper_rim.name=Copper Rim
+item.exp.item_generic.soaked_hide.name=Soaked Hide
+item.exp.item_generic.prepared_hide.name=Prepared Hide
+item.exp.item_generic.leather.name=Leather
+item.exp.item_generic.leather_straps.name=Leather Straps
 item.exp.item_ore.acanthite.name=Acanthite Ore
 item.exp.item_ore.barite.name=Barite Ore
 item.exp.item_ore.bauxite.name=Bauxite Ore

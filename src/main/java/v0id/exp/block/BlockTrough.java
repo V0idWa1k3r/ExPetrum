@@ -15,10 +15,10 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.data.ExPCreativeTabs;
-import v0id.api.exp.data.ExPFluids;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.block.item.ItemBlockWithMetadata;
@@ -101,7 +101,7 @@ public class BlockTrough extends Block implements IInitializableBlock, IItemBloc
         if (is.getItem() instanceof ItemWoodenBucket && !worldIn.isRemote)
         {
             ItemWoodenBucket wb = (ItemWoodenBucket) is.getItem();
-            if (wb.getStoredFluid(is) == ExPFluids.freshWater)
+            if (wb.getStoredFluid(is) == FluidRegistry.WATER)
             {
                 int current = state.getValue(TROUGH_WATER);
                 int has = wb.getWater(is);

@@ -7,12 +7,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.ForgeRegistry;
 import v0id.api.exp.block.EnumOre;
+import v0id.api.exp.data.ExPFluids;
 import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.item.IMeltableMetal;
 import v0id.api.exp.item.food.FoodEntry;
@@ -20,10 +23,7 @@ import v0id.api.exp.metal.EnumAnvilRequirement;
 import v0id.api.exp.metal.EnumMetal;
 import v0id.api.exp.metal.EnumToolClass;
 import v0id.api.exp.metal.EnumToolStats;
-import v0id.api.exp.recipe.RecipesAnvil;
-import v0id.api.exp.recipe.RecipesPottery;
-import v0id.api.exp.recipe.RecipesQuern;
-import v0id.api.exp.recipe.RecipesSmelting;
+import v0id.api.exp.recipe.*;
 import v0id.exp.item.ItemFood;
 import v0id.exp.item.ItemGeneric;
 import v0id.exp.item.ItemPottery;
@@ -112,6 +112,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
 
         RecipesAnvil.addWeldingRecipe(new ItemStack(ExPItems.ingot, 1, EnumMetal.COPPER.ordinal()), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.FIRE_BRICK.ordinal()), (int)(EnumMetal.COPPER.getMeltingTemperature() * 0.85F), 0, new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.COPPER_COATED_FIRE_BRICK.ordinal()), 0);
         RecipesAnvil.addWeldingRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.FIRE_BRICK.ordinal()), new ItemStack(ExPItems.ingot, 1, EnumMetal.COPPER.ordinal()), 0, (int)(EnumMetal.COPPER.getMeltingTemperature() * 0.85F), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.COPPER_COATED_FIRE_BRICK.ordinal()), 0);
+        RecipesAnvil.addRecipe(new ItemStack(ExPItems.ingot, 1, EnumMetal.COPPER.ordinal()), (int)(EnumMetal.COPPER.getMeltingTemperature() * 0.75F), new ItemStack(ExPItems.generic, 2, ItemGeneric.EnumGenericType.COPPER_RIM.ordinal()), 40, 0);
         for (EnumToolStats material : EnumToolStats.values())
         {
             if (material == EnumToolStats.STONE)
@@ -127,6 +128,10 @@ public class ExPRecipeRegistry extends AbstractRegistry
                 RecipesAnvil.addRecipe(new ItemStack(itemMaterial, 1, metaMaterial), (int)(material.getMaterial().getMeltingTemperature() * 0.75F), head, toolClass.getProgressReq(), material.getMaterial().getRequiredAnvilTier());
             }
         }
+
+        RecipesBarrel.addRecipe(new RecipesBarrel.RecipeBarrelFluid(new ItemStack(ExPItems.generic, 16, ItemGeneric.EnumGenericType.TWINE.ordinal()), FluidRegistry.WATER, new FluidStack(ExPFluids.tannin, 1), 24000, true));
+        RecipesBarrel.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.HIDE.ordinal()), new FluidStack(FluidRegistry.WATER, 100), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.SOAKED_HIDE.ordinal()), 6000);
+        RecipesBarrel.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.PREPARED_HIDE.ordinal()), new FluidStack(ExPFluids.tannin, 50), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.LEATHER.ordinal()), 6000);
     }
 
     @Override

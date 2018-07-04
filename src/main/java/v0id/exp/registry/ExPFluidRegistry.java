@@ -41,6 +41,9 @@ public class ExPFluidRegistry extends AbstractRegistry
 
 		ExPFluids.milk = new Fluid(ExPRegistryNames.fluidMilk, new ResourceLocation("exp", "blocks/fluid/milk"), new ResourceLocation("exp", "blocks/fluid/milk"))
 				.setDensity(1000).setViscosity(3000);
+
+		ExPFluids.tannin = new Fluid(ExPRegistryNames.fluidTannin, new ResourceLocation("exp", "blocks/fluid/tannin"), new ResourceLocation("exp", "blocks/fluid/tannin"))
+				.setDensity(1000).setViscosity(1000);
 		
 	}
 	
@@ -58,5 +61,7 @@ public class ExPFluidRegistry extends AbstractRegistry
 		FluidRegistry.registerFluid(ExPFluids.lava);
 		FluidRegistry.registerFluid(ExPFluids.oil);
 		FluidRegistry.registerFluid(ExPFluids.clay);
+		FluidRegistry.registerFluid(ExPFluids.milk);
+		FluidRegistry.registerFluid(ExPFluids.tannin);
 	}
 }
