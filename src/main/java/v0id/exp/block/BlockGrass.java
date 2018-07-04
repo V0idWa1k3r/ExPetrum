@@ -135,7 +135,7 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 				{
 					if(rand.nextDouble() <= growthRateModifier)
 					{
-						worldIn.setBlockState(pos, ExPBlocks.grass_dry.getDefaultState().withProperty(DIRT_CLASS, state.getValue(DIRT_CLASS)), 2);
+						worldIn.setBlockState(pos, ExPBlocks.grass.getDefaultState().withProperty(DIRT_CLASS, state.getValue(DIRT_CLASS)), 2);
 						// TODO grass growing effects
 					}
 					
