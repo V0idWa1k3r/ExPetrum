@@ -215,4 +215,10 @@ public abstract class EntityAnimal extends EntityCreature implements IAnimals, I
     {
         return this.animalCapability.getAge() < this.getAdulthoodAge() ? 0.1F + ((float)this.animalCapability.getAge() / this.getAdulthoodAge()) * 0.9F : 1.0F;
     }
+
+    @Override
+    protected boolean canDespawn()
+    {
+        return false;
+    }
 }
