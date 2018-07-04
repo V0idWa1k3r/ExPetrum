@@ -120,7 +120,7 @@ public class BlockSnow extends Block implements IGravitySusceptible, IInitializa
 	public void tryMelt(World world, BlockPos pos, IBlockState state, Random rand)
 	{
 		float temp = Helpers.getTemperatureAt(world, pos);
-		if (temp > 0 && rand.nextFloat() < temp / 10 && world.isAirBlock(pos.up()))
+		if (temp > 0 && rand.nextFloat() < temp / 10)
 		{
 			world.setBlockToAir(pos);
 		}

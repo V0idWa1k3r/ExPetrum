@@ -57,6 +57,7 @@ import v0id.exp.client.render.entity.RenderFallingTree;
 import v0id.exp.client.render.entity.RenderThrownWeapon;
 import v0id.exp.client.render.tile.TESRCrate;
 import v0id.exp.client.render.tile.TESRQuern;
+import v0id.exp.client.render.tile.TESRScrapingRack;
 import v0id.exp.crop.ExPFarmland;
 import v0id.exp.entity.EntityFallingTree;
 import v0id.exp.entity.EntityGravFallingBlock;
@@ -70,10 +71,7 @@ import v0id.exp.item.ItemMetalGeneric;
 import v0id.exp.item.ItemMold;
 import v0id.exp.item.ItemPottery;
 import v0id.exp.registry.ILifecycleListener;
-import v0id.exp.tile.TileCrate;
-import v0id.exp.tile.TileFarmland;
-import v0id.exp.tile.TileOre;
-import v0id.exp.tile.TileQuern;
+import v0id.exp.tile.*;
 import v0id.exp.util.Helpers;
 
 import java.io.IOException;
@@ -103,6 +101,7 @@ public class ClientRegistry implements ILifecycleListener
         RenderingRegistry.registerEntityRenderingHandler(Pig.class, r -> new RenderAnimal(r, ModelPig.instance = new ModelPig(), 1F));
         net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileCrate.class, new TESRCrate());
         net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileQuern.class, new TESRQuern());
+        net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileScrapingRack.class, new TESRScrapingRack());
         this.loadAdditionalData();
         this.initAttacksConditions();
     }
@@ -178,6 +177,7 @@ public class ClientRegistry implements ILifecycleListener
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.hay), 0, new ModelResourceLocation(ExPBlocks.hay.getRegistryName(), "normal"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.nestingBox), 0, new ModelResourceLocation(ExPBlocks.nestingBox.getRegistryName(), "normal"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.barrel), 0, new ModelResourceLocation(ExPBlocks.barrel.getRegistryName(), "normal"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.scrapingRack), 0, new ModelResourceLocation(ExPBlocks.scrapingRack.getRegistryName(), "normal"));
         // Iteration-dependent models
         mkCustomModelResourceLocations(ExPItems.stick, EnumTreeType.values().length + EnumShrubType.values().length + EnumBerry.values().length, i -> "type=" + ExPOreDict.stickNames[i]);
         mkCustomModelResourceLocations(ExPItems.toolHead, EnumToolClass.values().length * EnumToolStats.values().length, i -> "material=" + EnumToolStats.values()[i % EnumToolStats.values().length].name().toLowerCase() + ",type=" + EnumToolClass.values()[i / EnumToolStats.values().length].name().toLowerCase());

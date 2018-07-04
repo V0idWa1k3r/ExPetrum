@@ -82,6 +82,12 @@ public class RecipesBarrel
         {
             return this.fluidOut.getUnlocalizedName();
         }
+
+        @Override
+        public void consumeItem(ItemStack is)
+        {
+            is.shrink(this.itemIn.getCount());
+        }
     }
 
     public static class RecipeBarrel implements IRecipeBarrel
@@ -128,6 +134,12 @@ public class RecipesBarrel
         {
             return this.itemOut.getUnlocalizedName() + ".name";
         }
+
+        @Override
+        public void consumeItem(ItemStack is)
+        {
+            is.shrink(this.itemIn.getCount());
+        }
     }
 
     public interface IRecipeBarrel
@@ -141,5 +153,7 @@ public class RecipesBarrel
         void consumeFluid(IFluidHandler handler, ItemStack is);
 
         String getRecipeName(ItemStack is);
+
+        void consumeItem(ItemStack is);
     }
 }

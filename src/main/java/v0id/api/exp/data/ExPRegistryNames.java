@@ -72,7 +72,8 @@ public class ExPRegistryNames
         blockCrucible                                                                                       = "crucible",
         blockHay                                                                                            = "hay",
         blockNestingBox                                                                                     = "nesting_box",
-		blockBarrel                                                                                         = "barrel";
+		blockBarrel                                                                                         = "barrel",
+        blockScrapingRack                                                                                   = "scraping_rack";
 
 	public static final String
 		itemRock																							= "item_rock",

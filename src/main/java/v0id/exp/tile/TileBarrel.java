@@ -134,7 +134,7 @@ public class TileBarrel extends TileEntity implements ITickable
                             }
 
                             this.currentRecipe.consumeFluid(this.fluidInventory, is);
-                            is.shrink(1);
+                            this.currentRecipe.consumeItem(is);
                             this.sendUpdatePacket();
                             if (!this.currentRecipe.matches(this.fluidInventory.getFluid(), is))
                             {

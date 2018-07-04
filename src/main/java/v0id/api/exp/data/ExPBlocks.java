@@ -288,4 +288,7 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockBarrel)
     public static final Block barrel = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockScrapingRack)
+    public static final Block scrapingRack = null;
 }

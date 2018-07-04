@@ -329,6 +329,7 @@ tile.exp.crucible.name=Crucible
 tile.exp.hay.name=Hay Block
 tile.exp.nesting_box.name=Nesting Box
 tile.exp.barrel.name=Wooden Barrel
+tile.exp.scraping_rack.name=Scraping Rack
 
 item.exp.item_ingot.name=Ingot
 
