@@ -122,15 +122,7 @@ public class BlockSnow extends Block implements IGravitySusceptible, IInitializa
 		float temp = Helpers.getTemperatureAt(world, pos);
 		if (temp > 0 && rand.nextFloat() < temp / 10 && world.isAirBlock(pos.up()))
 		{
-			int layerCurrent = state.getValue(LAYERS);
-			if (layerCurrent == 1)
-			{
-				world.setBlockToAir(pos);
-			}
-			else
-			{
-				world.setBlockState(pos, state.withProperty(LAYERS, layerCurrent - 1));
-			}
+			world.setBlockToAir(pos);
 		}
 	}
 
