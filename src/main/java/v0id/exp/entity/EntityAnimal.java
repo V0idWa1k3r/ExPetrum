@@ -213,6 +213,6 @@ public abstract class EntityAnimal extends EntityCreature implements IAnimals, I
 
     public float getRenderSize()
     {
-        return this.animalCapability.getAge() < this.getAdulthoodAge() ? 0.1F + (this.animalCapability.getAge() / this.getAdulthoodAge()) * 0.9F : 1.0F;
+        return this.animalCapability.getAge() < this.getAdulthoodAge() ? 0.1F + ((float)this.animalCapability.getAge() / this.getAdulthoodAge()) * 0.9F : 1.0F;
     }
 }
