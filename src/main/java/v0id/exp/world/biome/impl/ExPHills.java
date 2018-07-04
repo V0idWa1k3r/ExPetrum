@@ -7,6 +7,7 @@ import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.exp.entity.impl.Cow;
+import v0id.exp.entity.impl.Sheep;
 import v0id.exp.world.biome.ExPBiome;
 import v0id.exp.world.gen.ShrubEntry;
 import v0id.exp.world.gen.tree.TreeEntry;
@@ -43,6 +44,7 @@ public class ExPHills extends ExPBiome
         this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.CHERRY));
         this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.POMEGRANATE));
         this.spawnableCreatureList.add(new SpawnListEntry(Cow.class, 10, 2, 4));
+        this.spawnableCreatureList.add(new SpawnListEntry(Sheep.class, 10, 2, 4));
 	}
 	
 	@Override

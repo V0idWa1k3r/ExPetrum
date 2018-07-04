@@ -34,7 +34,8 @@ public class ItemGeneric extends Item implements IInitializableItem, IWeightProv
         FLUX("flux", 0.01F, IWeightProvider.DEFAULT_VOLUME, "flux"),
         COPPER_COATED_FIRE_BRICK("copper_coated_fire_brick", 0.3F, IWeightProvider.DEFAULT_VOLUME),
         HAY("hay", 0F, IWeightProvider.DEFAULT_VOLUME, "hay", "itemHay"),
-        HIDE("hide", 2F, IWeightProvider.DEFAULT_VOLUME, "hide");
+        HIDE("hide", 2F, IWeightProvider.DEFAULT_VOLUME, "hide"),
+        WOOL("wool", 0.5F, IWeightProvider.DEFAULT_VOLUME, "rawWool", "woolRaw");
 
         EnumGenericType(String name, float weight, Pair<Byte, Byte> volume, String... oreDictNames)
         {

@@ -131,7 +131,8 @@ public class ExPRegistryNames
 		entityFallingTree																					= new ResourceLocation(modid, "fallingTree"),
 		entityThrownWeapon																					= new ResourceLocation(modid, "thrownWeapon"),
         entityChicken																					    = new ResourceLocation(modid, "chicken"),
-        entityCow																						    = new ResourceLocation(modid, "cow");
+        entityCow																						    = new ResourceLocation(modid, "cow"),
+        entitySheep																						    = new ResourceLocation(modid, "sheep");
 
 	public static final ResourceLocation
 		specialAttackPiercingDash																			= new ResourceLocation(modid, "piercingDash"),

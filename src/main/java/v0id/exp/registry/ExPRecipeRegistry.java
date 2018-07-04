@@ -91,6 +91,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
         RecipesSmelting.addRecipe(new RecipeSmeltingMeltable());
         RecipesSmelting.addRecipe(new RecipeSmeltingFood(FoodEntry.CHICKEN_RAW, FoodEntry.CHICKEN_COOKED, 200));
         RecipesSmelting.addRecipe(new RecipeSmeltingFood(FoodEntry.BEEF_RAW, FoodEntry.BEEF_COOKED, 200));
+        RecipesSmelting.addRecipe(new RecipeSmeltingFood(FoodEntry.LAMB_RAW, FoodEntry.LAMB_RAW, 200));
         for (EnumToolClass tool : EnumToolClass.values())
         {
             RecipesSmelting.addRecipe(new RecipesSmelting.RecipeSmelting(new ItemStack(ExPItems.moldTool, 1, tool.ordinal()), new ItemStack(ExPItems.moldTool, 1, tool.ordinal() + EnumToolClass.values().length), 540F));

@@ -9,6 +9,9 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -17,11 +20,11 @@ import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
-import v0id.api.exp.data.ExPFluids;
 import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.data.ExPTextures;
 import v0id.api.exp.entity.EnumGender;
 import v0id.api.exp.entity.IAnimalStats;
+import v0id.api.exp.item.IShears;
 import v0id.api.exp.item.food.FoodEntry;
 import v0id.api.exp.player.EnumFoodGroup;
 import v0id.api.exp.world.Calendar;
@@ -30,21 +33,27 @@ import v0id.exp.entity.EntityAnimal;
 import v0id.exp.entity.ExPAITempt;
 import v0id.exp.item.ItemFood;
 import v0id.exp.item.ItemGeneric;
-import v0id.exp.item.ItemWoodenBucket;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.security.InvalidParameterException;
 import java.util.List;
 
-public class Cow extends EntityAnimal
+public class Sheep extends EntityAnimal
 {
-    private CowStats stats;
-    private int milkTimer;
+    public static final DataParameter<Integer> PARAM_WOOL_TICKS = EntityDataManager.createKey(Sheep.class, DataSerializers.VARINT);
+    private SheepStats stats;
 
-    public Cow(World worldIn)
+    public Sheep(World worldIn)
     {
         super(worldIn);
+    }
+
+    @Override
+    protected void entityInit()
+    {
+        super.entityInit();
+        this.getDataManager().register(PARAM_WOOL_TICKS, 0);
     }
 
     @Override
@@ -70,19 +79,19 @@ public class Cow extends EntityAnimal
     @Override
     public ResourceLocation getMainTexture(float partialTicks)
     {
-        return ExPTextures.entityCowGeneric;
+        return ExPTextures.entitySheepGeneric;
     }
 
     @Override
     public ResourceLocation getColorableFeaturesTexture(float partialTicks)
     {
-        return ExPTextures.entityCowColor;
+        return ExPTextures.entitySheepColor;
     }
 
     @Override
     public ResourceLocation getGenderSpecificTextures(float partialTicks)
     {
-        return this.animalCapability.getGender() == EnumGender.FEMALE ? ExPTextures.entityCowFemale : ExPTextures.entityCowMale;
+        return this.animalCapability.getGender() == EnumGender.MALE ? ExPTextures.entitySheepMale : null;
     }
 
     @Override
@@ -125,7 +134,7 @@ public class Cow extends EntityAnimal
     @Override
     public void giveBirth(IAnimalStats stats)
     {
-        Cow c = new Cow(this.world);
+        Sheep c = new Sheep(this.world);
         c.animalCapability.setHome(this.getPosition());
         c.animalCapability.setLastTickTime(IExPWorld.of(this.world).today().getTime());
         c.animalCapability.setFamiliarity(0);
@@ -144,7 +153,7 @@ public class Cow extends EntityAnimal
     {
         if (this.stats == null)
         {
-            this.stats = new CowStats();
+            this.stats = new SheepStats();
         }
 
         return this.stats;
@@ -153,9 +162,9 @@ public class Cow extends EntityAnimal
     @Override
     public void setStats(IAnimalStats newStats) throws IllegalArgumentException
     {
-        if (newStats instanceof CowStats)
+        if (newStats instanceof SheepStats)
         {
-            this.stats = (CowStats) newStats;
+            this.stats = (SheepStats) newStats;
         }
         else
         {
@@ -166,22 +175,17 @@ public class Cow extends EntityAnimal
     @Override
     public void processInteraction(EntityPlayer interactor)
     {
-        if (!this.processDefaultInteraction(interactor) && !this.world.isRemote)
+        if (!this.processDefaultInteraction(interactor) && !this.world.isRemote && this.getDataManager().get(PARAM_WOOL_TICKS) <= 0)
         {
             ItemStack is = interactor.getHeldItem(EnumHand.MAIN_HAND);
-            if (this.milkTimer <= 0 && is.getItem() instanceof ItemWoodenBucket && (is.getMetadata() == 0 || is.getMetadata() == 3) && this.animalCapability.getGender() == EnumGender.FEMALE)
+            if (is.getItem() instanceof IShears)
             {
-                if (this.animalCapability.getFamiliarity() >= 75F)
+                if (this.animalCapability.getFamiliarity() >= 75)
                 {
-                    ItemWoodenBucket bucket = (ItemWoodenBucket) is.getItem();
-                    int currentFluid = bucket.getWater(is);
-                    if (currentFluid < 10)
-                    {
-                        this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_COW_MILK, SoundCategory.NEUTRAL, 1.0F, 1.0F);
-                        bucket.setWaterType(is, ExPFluids.milk);
-                        bucket.setWater(is, currentFluid + 1);
-                        this.milkTimer = (int) IExPWorld.of(this.world).today().ticksPerDay;
-                    }
+                    this.dropItem(new ItemStack(ExPItems.generic, ((IShears) is.getItem()).getWoolAmount(this, is), ItemGeneric.EnumGenericType.WOOL.ordinal()));
+                    this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.NEUTRAL, 1, 1);
+                    is.damageItem(1, interactor);
+                    this.getDataManager().set(PARAM_WOOL_TICKS, (int) IExPWorld.of(this.world).today().ticksPerDay * 10);
                 }
                 else
                 {
@@ -195,11 +199,14 @@ public class Cow extends EntityAnimal
     public void handleElapsedTicks(long elapsed)
     {
         this.interactionTimer -= elapsed;
-        this.milkTimer -= elapsed;
+        if (!this.world.isRemote)
+        {
+            this.getDataManager().set(PARAM_WOOL_TICKS, Math.max(0, this.getDataManager().get(PARAM_WOOL_TICKS) - (int)elapsed));
+        }
         if (this.world.rand.nextFloat() < 0.03F && this.animalCapability.getAge() % 200 == 0 && this.animalCapability.getGender() == EnumGender.FEMALE && !this.animalCapability.isPregnant() && this.animalCapability.getFamiliarity() >= 10)
         {
-            List<Cow> cows = this.world.getEntitiesWithinAABB(Cow.class, new AxisAlignedBB(this.posX - 12, this.posY - 2, this.posZ - 12, this.posX + 12, this.posY + 2, this.posZ + 12));
-            for (Cow c : cows)
+            List<Sheep> sheep = this.world.getEntitiesWithinAABB(Sheep.class, new AxisAlignedBB(this.posX - 12, this.posY - 2, this.posZ - 12, this.posX + 12, this.posY + 2, this.posZ + 12));
+            for (Sheep c : sheep)
             {
                 if (c.animalCapability.getGender() == EnumGender.MALE)
                 {
@@ -220,34 +227,34 @@ public class Cow extends EntityAnimal
         super.dropLoot(wasRecentlyHit, lootingModifier, source);
         long age = this.animalCapability.getAge();
         this.dropItem(new ItemStack(Items.BONE, 6 + this.world.rand.nextInt(14), 0));
-        ItemStack beef = new ItemStack(ExPItems.food, 1, FoodEntry.BEEF_RAW.getId());
-        ItemFood food = (ItemFood)beef.getItem();
-        food.setTotalWeight(beef, age < this.getAdulthoodAge() ? 100 + this.world.rand.nextInt(100) : 1500 + this.world.rand.nextInt(3000));
-        food.setTotalRot(beef, 0);
-        food.setLastTickTime(beef, new Calendar(IExPWorld.of(this.world).today().getTime()));
-        int hides = age < this.getAdulthoodAge() / 2 ? 1 : age < this.getAdulthoodAge() ? 3 : 8;
+        ItemStack lamb = new ItemStack(ExPItems.food, 1, FoodEntry.LAMB_RAW.getId());
+        ItemFood food = (ItemFood)lamb.getItem();
+        food.setTotalWeight(lamb, age < this.getAdulthoodAge() ? 100 + this.world.rand.nextInt(100) : 900 + this.world.rand.nextInt(1200));
+        food.setTotalRot(lamb, 0);
+        food.setLastTickTime(lamb, new Calendar(IExPWorld.of(this.world).today().getTime()));
+        int hides = age < this.getAdulthoodAge() / 2 ? 1 : age < this.getAdulthoodAge() ? 2 : 5;
         this.dropItem(new ItemStack(ExPItems.generic, hides + this.world.rand.nextInt(hides), ItemGeneric.EnumGenericType.HIDE.ordinal()));
-        this.dropItem(beef);
+        this.dropItem(lamb);
     }
 
     protected SoundEvent getAmbientSound()
     {
-        return SoundEvents.ENTITY_COW_AMBIENT;
+        return SoundEvents.ENTITY_SHEEP_AMBIENT;
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn)
     {
-        return SoundEvents.ENTITY_COW_HURT;
+        return SoundEvents.ENTITY_SHEEP_HURT;
     }
 
     protected SoundEvent getDeathSound()
     {
-        return SoundEvents.ENTITY_COW_DEATH;
+        return SoundEvents.ENTITY_SHEEP_DEATH;
     }
 
     protected void playStepSound(BlockPos pos, Block blockIn)
     {
-        this.playSound(SoundEvents.ENTITY_COW_STEP, 0.15F, 1.0F);
+        this.playSound(SoundEvents.ENTITY_SHEEP_STEP, 0.15F, 1.0F);
     }
 
     @Nullable
@@ -263,22 +270,22 @@ public class Cow extends EntityAnimal
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
-        compound.setInteger("milkTimer", this.milkTimer);
+        compound.setInteger("woolTimer", this.getDataManager().get(PARAM_WOOL_TICKS));
     }
 
     @Override
     public void readEntityFromNBT(NBTTagCompound compound)
     {
         super.readEntityFromNBT(compound);
-        this.milkTimer = compound.getInteger("milkTimer");
+        this.getDataManager().set(PARAM_WOOL_TICKS, compound.getInteger("woolTimer"));
     }
 
-    public static class CowStats implements IAnimalStats
+    public static class SheepStats implements IAnimalStats
     {
         @Override
         public IAnimalStats mix(@Nonnull IAnimalStats other) throws InvalidParameterException
         {
-            return new CowStats();
+            return new SheepStats();
         }
 
         @Override

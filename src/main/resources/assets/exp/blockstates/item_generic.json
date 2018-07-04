@@ -98,7 +98,12 @@
 				"textures" : {
 					"layer0" : "exp:items/misc/hide"
 				}
-			}
+			},
+            "wool": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/wool"
+                }
+            }
 		}
 	}
 }

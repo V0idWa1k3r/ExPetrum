@@ -1,5 +1,6 @@
 package v0id.exp.item.tool;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.tuple.Pair;
@@ -11,13 +12,14 @@ import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
+import v0id.api.exp.item.IShears;
 import v0id.api.exp.metal.EnumToolClass;
 import v0id.api.exp.metal.EnumToolStats;
 import v0id.exp.item.IInitializableItem;
 
 import java.util.Arrays;
 
-public class ItemKnife extends ItemExPWeapon implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry
+public class ItemKnife extends ItemExPWeapon implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry, IShears
 {
 	public ItemKnife()
 	{
@@ -86,4 +88,9 @@ public class ItemKnife extends ItemExPWeapon implements IWeapon, IWeightProvider
 		return -1.5F;
 	}
 
+	@Override
+	public int getWoolAmount(EntityLivingBase sheep, ItemStack shears)
+	{
+		return 1;
+	}
 }

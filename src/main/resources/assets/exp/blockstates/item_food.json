@@ -324,7 +324,17 @@
 				"textures" : {
 					"layer0" : "exp:items/produce/beef_cooked"
 				}
-			}
+			},
+            "lamb_raw" : {
+                "textures" : {
+                    "layer0" : "exp:items/produce/lamb_raw"
+                }
+            },
+            "lamb_cooked" : {
+                "textures" : {
+                    "layer0" : "exp:items/produce/lamb_cooked"
+                }
+            }
 		}
 	}
 }

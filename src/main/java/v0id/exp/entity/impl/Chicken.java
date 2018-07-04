@@ -171,7 +171,7 @@ public class Chicken extends EntityAnimal
     {
         this.eggTimer += elapsed;
         this.interactionTimer -= elapsed;
-        if (this.eggTimer >= ((ChickenStats)this.getOrCreateStats()).eggTimer)
+        if (this.eggTimer >= ((ChickenStats)this.getOrCreateStats()).eggTimer && this.animalCapability.getAge() >= this.getAdulthoodAge())
         {
             this.eggTimer = 0;
             this.makeEgg();

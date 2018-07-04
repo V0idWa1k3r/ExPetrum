@@ -261,4 +261,6 @@ public class FoodEntry
     public static final FoodEntry CHICKEN_COOKED = new FoodEntry().withCalories(239 * BALANCE_MULTIPLIER).withName("chicken_cooked").withNutrition(EnumFoodGroup.PROTEIN, 4);
     public static final FoodEntry BEEF_RAW = new FoodEntry().withCalories(110 * BALANCE_MULTIPLIER).withName("beef_raw").withNutrition(EnumFoodGroup.PROTEIN, 4);
     public static final FoodEntry BEEF_COOKED = new FoodEntry().withCalories(250 * BALANCE_MULTIPLIER).withName("beef_cooked").withNutrition(EnumFoodGroup.PROTEIN, 4);
+	public static final FoodEntry LAMB_RAW = new FoodEntry().withCalories(160 * BALANCE_MULTIPLIER).withName("lamb_raw").withNutrition(EnumFoodGroup.PROTEIN, 4);
+	public static final FoodEntry LAMB_COOKED = new FoodEntry().withCalories(294 * BALANCE_MULTIPLIER).withName("lamb_cooked").withNutrition(EnumFoodGroup.PROTEIN, 4);
 }

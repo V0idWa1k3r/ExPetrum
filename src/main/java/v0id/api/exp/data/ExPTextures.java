@@ -20,7 +20,10 @@ public class ExPTextures
 			entityCowGeneric                                                                                    = new ResourceLocation(ExPRegistryNames.modid, "textures/entities/cow/all.png"),
 			entityCowColor                                                                                      = new ResourceLocation(ExPRegistryNames.modid, "textures/entities/cow/overlay.png"),
 			entityCowMale                                                                                       = new ResourceLocation(ExPRegistryNames.modid, "textures/entities/cow/male.png"),
-			entityCowFemale                                                                                     = new ResourceLocation(ExPRegistryNames.modid, "textures/entities/cow/female.png");
+			entityCowFemale                                                                                     = new ResourceLocation(ExPRegistryNames.modid, "textures/entities/cow/female.png"),
+			entitySheepGeneric                                                                                  = new ResourceLocation(ExPRegistryNames.modid, "textures/entities/sheep/all.png"),
+			entitySheepColor                                                                                    = new ResourceLocation(ExPRegistryNames.modid, "textures/entities/sheep/overlay.png"),
+			entitySheepMale                                                                                     = new ResourceLocation(ExPRegistryNames.modid, "textures/entities/sheep/male.png");
 
 	public static final ResourceLocation[] AGES = new ResourceLocation[EnumPlayerProgression.values().length];
 
