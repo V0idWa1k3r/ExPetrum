@@ -28,7 +28,7 @@ public class ExPAnimal implements IAnimal
     private Calendar calendar = new Calendar();
     private BlockPos home;
     private UUID packID;
-    private IAnimalStats[] offspringStats;
+    private IAnimalStats[] offspringStats = new IAnimalStats[0];
     private float hunger;
     private float thirst;
     private boolean isSick;
@@ -421,7 +421,7 @@ public class ExPAnimal implements IAnimal
                 NBTTagCompound tag = offspringList.getCompoundTagAt(i);
                 try
                 {
-                    this.offspringStats[i] = (IAnimalStats) Class.forName(tag.getString("class")).newInstance();
+                    this.offspringStats[i] = this.getAsProvider().createNewStats();
                     this.offspringStats[i].deserializeNBT(tag);
                 }
                 catch (Exception ignored)

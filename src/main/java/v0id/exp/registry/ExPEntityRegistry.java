@@ -9,6 +9,7 @@ import v0id.exp.entity.EntityGravFallingBlock;
 import v0id.exp.entity.EntityThrownWeapon;
 import v0id.exp.entity.impl.Chicken;
 import v0id.exp.entity.impl.Cow;
+import v0id.exp.entity.impl.Pig;
 import v0id.exp.entity.impl.Sheep;
 
 public class ExPEntityRegistry extends AbstractRegistry
@@ -29,7 +30,8 @@ public class ExPEntityRegistry extends AbstractRegistry
                 EntityEntryBuilder.create().entity(EntityThrownWeapon.class).name(ExPRegistryNames.entityThrownWeapon.toString().replace(':', '.')).id(ExPRegistryNames.entityThrownWeapon, 2).tracker(32, 1, true).build(),
                 EntityEntryBuilder.create().entity(Chicken.class).name(ExPRegistryNames.entityChicken.toString().replace(':', '.')).id(ExPRegistryNames.entityChicken, 3).tracker(64, 1, true).egg(0xffffff, 0xff0000).build(),
                 EntityEntryBuilder.create().entity(Cow.class).name(ExPRegistryNames.entityCow.toString().replace(':', '.')).id(ExPRegistryNames.entityCow, 4).tracker(64, 1, true).egg(0xffffff, 0x331100).build(),
-                EntityEntryBuilder.create().entity(Sheep.class).name(ExPRegistryNames.entitySheep.toString().replace(':', '.')).id(ExPRegistryNames.entitySheep, 5).tracker(64, 1, true).egg(0xffffff, 0x888888).build()
+                EntityEntryBuilder.create().entity(Sheep.class).name(ExPRegistryNames.entitySheep.toString().replace(':', '.')).id(ExPRegistryNames.entitySheep, 5).tracker(64, 1, true).egg(0xffffff, 0x888888).build(),
+                EntityEntryBuilder.create().entity(Pig.class).name(ExPRegistryNames.entityPig.toString().replace(':', '.')).id(ExPRegistryNames.entityPig, 6).tracker(64, 1, true).egg(0xffffff, 0xaa0000).build()
         );
     }
 }

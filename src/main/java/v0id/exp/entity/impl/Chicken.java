@@ -148,6 +148,12 @@ public class Chicken extends EntityAnimal
     }
 
     @Override
+    public IAnimalStats createNewStats()
+    {
+        return new ChickenStats();
+    }
+
+    @Override
     public void setStats(IAnimalStats newStats) throws IllegalArgumentException
     {
         if (newStats instanceof ChickenStats)
@@ -277,6 +283,12 @@ public class Chicken extends EntityAnimal
     protected SoundEvent getDeathSound()
     {
         return SoundEvents.ENTITY_CHICKEN_DEATH;
+    }
+
+    @Override
+    protected float getSoundPitch()
+    {
+        return this.animalCapability.getAge() < this.getAdulthoodAge() ? 2 - this.animalCapability.getAge() / this.getAdulthoodAge() : super.getSoundPitch();
     }
 
     protected void playStepSound(BlockPos pos, Block blockIn)

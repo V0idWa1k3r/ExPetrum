@@ -33,6 +33,8 @@ public interface IAnimalProvider
 
     IAnimalStats getOrCreateStats();
 
+    IAnimalStats createNewStats();
+
     void setStats(IAnimalStats newStats) throws IllegalArgumentException;
 
     void processInteraction(EntityPlayer interactor);

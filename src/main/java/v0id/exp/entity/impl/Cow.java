@@ -151,6 +151,12 @@ public class Cow extends EntityAnimal
     }
 
     @Override
+    public IAnimalStats createNewStats()
+    {
+        return new CowStats();
+    }
+
+    @Override
     public void setStats(IAnimalStats newStats) throws IllegalArgumentException
     {
         if (newStats instanceof CowStats)
@@ -243,6 +249,12 @@ public class Cow extends EntityAnimal
     protected SoundEvent getDeathSound()
     {
         return SoundEvents.ENTITY_COW_DEATH;
+    }
+
+    @Override
+    protected float getSoundPitch()
+    {
+        return this.animalCapability.getAge() < this.getAdulthoodAge() ? 2 - this.animalCapability.getAge() / this.getAdulthoodAge() : super.getSoundPitch();
     }
 
     protected void playStepSound(BlockPos pos, Block blockIn)
