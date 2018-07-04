@@ -130,7 +130,51 @@
         },
         "name": "BRICKKAOLIN"
     },
-   
+    {
+        "ingredient": [
+            {
+                "item": "exp:item_knife",
+                "data": 0
+            },
+            {
+                "item": "exp:item_knife",
+                "data": 1
+            },
+            {
+                "item": "exp:item_knife",
+                "data": 2
+            },
+            {
+                "item": "exp:item_knife",
+                "data": 3
+            },
+            {
+                "item": "exp:item_knife",
+                "data": 4
+            },
+            {
+                "item": "exp:item_knife",
+                "data": 5
+            },
+            {
+                "item": "exp:item_knife",
+                "data": 6
+            },
+            {
+                "item": "exp:item_knife",
+                "data": 7
+            },
+            {
+                "item": "exp:item_knife",
+                "data": 8
+            },
+            {
+                "item": "exp:item_knife",
+                "data": 9
+            }
+        ],
+        "name": "KNIFE"
+    },
     {
         "ingredient": [
             {
@@ -189,6 +233,13 @@
             "ore": "planksWood"
         },
         "name": "PLANKS"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "strapsLeather"
+        },
+        "name": "LEATHERSTRAP"
     },
     {
         "ingredient": {

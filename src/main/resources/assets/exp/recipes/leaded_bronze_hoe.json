@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "exp:item_hoe",
+    "data": 4
+  },
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "exp:item_toolhead",
+      "data": 34
+    },
+    {
+      "item": "#STICKWOOD"
+    },
+    {
+      "item": "#LEATHERSTRAP"
+    }
+  ]
+}

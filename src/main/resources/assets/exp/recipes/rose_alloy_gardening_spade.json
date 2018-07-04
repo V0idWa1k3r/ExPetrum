@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "exp:item_gardening_spade",
+    "data": 6
+  },
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "exp:item_toolhead",
+      "data": 116
+    },
+    {
+      "item": "#STICKWOOD"
+    },
+    {
+      "item": "#LEATHERSTRAP"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+    "result": {
+        "item": "exp:item_generic",
+        "data": 23,
+        "count": 2
+    },
+    "type": "forge:ore_shapeless",
+    "ingredients": [
+        {
+            "item": "exp:item_generic",
+            "data": 22
+        },
+        {
+            "item": "#KNIFE"
+        }
+    ]
+}

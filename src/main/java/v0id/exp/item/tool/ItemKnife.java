@@ -94,4 +94,23 @@ public class ItemKnife extends ItemExPWeapon implements IWeapon, IWeightProvider
 	{
 		return 1;
 	}
+
+    @Override
+    public boolean hasContainerItem(ItemStack stack)
+    {
+        return true;
+    }
+
+    @Override
+	public ItemStack getContainerItem(ItemStack itemStack)
+	{
+		ItemStack ret = itemStack.copy();
+		ret.setItemDamage(ret.getItemDamage() + 1);
+		if (ret.getItemDamage() >= ret.getMaxDamage())
+		{
+			return ItemStack.EMPTY;
+		}
+
+		return ret;
+	}
 }
