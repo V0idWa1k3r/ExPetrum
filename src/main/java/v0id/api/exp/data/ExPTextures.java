@@ -14,9 +14,13 @@ public class ExPTextures
 	public static final ResourceLocation PARTICLES = new ResourceLocation(ExPRegistryNames.modid, "textures/misc/particles.png");
 
 	public static final ResourceLocation
-            entityChickenWildGeneric                                                                           = new ResourceLocation(ExPRegistryNames.modid, "textures/entities/chicken/wild_all.png"),
-            entityChickenWildColor                                                                             = new ResourceLocation(ExPRegistryNames.modid, "textures/entities/chicken/wild_overlay.png"),
-            entityChickenWildMale                                                                              = new ResourceLocation(ExPRegistryNames.modid, "textures/entities/chicken/wild_male.png");
+            entityChickenWildGeneric                                                                            = new ResourceLocation(ExPRegistryNames.modid, "textures/entities/chicken/wild_all.png"),
+            entityChickenWildColor                                                                              = new ResourceLocation(ExPRegistryNames.modid, "textures/entities/chicken/wild_overlay.png"),
+            entityChickenWildMale                                                                               = new ResourceLocation(ExPRegistryNames.modid, "textures/entities/chicken/wild_male.png"),
+			entityCowGeneric                                                                                    = new ResourceLocation(ExPRegistryNames.modid, "textures/entities/cow/all.png"),
+			entityCowColor                                                                                      = new ResourceLocation(ExPRegistryNames.modid, "textures/entities/cow/overlay.png"),
+			entityCowMale                                                                                       = new ResourceLocation(ExPRegistryNames.modid, "textures/entities/cow/male.png"),
+			entityCowFemale                                                                                     = new ResourceLocation(ExPRegistryNames.modid, "textures/entities/cow/female.png");
 
 	public static final ResourceLocation[] AGES = new ResourceLocation[EnumPlayerProgression.values().length];
 

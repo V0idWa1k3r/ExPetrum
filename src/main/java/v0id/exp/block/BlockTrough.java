@@ -177,6 +177,7 @@ public class BlockTrough extends Block implements IInitializableBlock, IItemBloc
         return state.getValue(TROUGH_WATER);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta)
     {

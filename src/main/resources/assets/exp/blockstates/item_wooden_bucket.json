@@ -24,6 +24,11 @@
                 "textures" : {
                     "layer0" : "exp:items/misc/wooden_bucket_full_salt"
                 }
+            },
+            "milk": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/wooden_bucket_full_milk"
+                }
             }
         }
 	}

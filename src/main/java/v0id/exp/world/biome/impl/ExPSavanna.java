@@ -7,6 +7,7 @@ import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.exp.entity.impl.Chicken;
+import v0id.exp.entity.impl.Cow;
 import v0id.exp.world.biome.ExPBiome;
 import v0id.exp.world.gen.ShrubEntry;
 import v0id.exp.world.gen.tree.TreeEntry;
@@ -37,6 +38,7 @@ public class ExPSavanna extends ExPBiome
         this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.AVOCADO));
         this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.CARAMBOLA));
         this.spawnableCreatureList.add(new SpawnListEntry(Chicken.class, 10, 4, 16));
+        this.spawnableCreatureList.add(new SpawnListEntry(Cow.class, 10, 2, 4));
     }
 	
 	@Override

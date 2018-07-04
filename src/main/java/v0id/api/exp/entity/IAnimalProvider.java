@@ -27,6 +27,10 @@ public interface IAnimalProvider
 
     long getRandomPregnancyTicks();
 
+    int getOffspringAmount();
+
+    void giveBirth(IAnimalStats stats);
+
     IAnimalStats getOrCreateStats();
 
     void setStats(IAnimalStats newStats) throws IllegalArgumentException;

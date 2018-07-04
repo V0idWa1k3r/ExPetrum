@@ -84,22 +84,22 @@ public class ItemWoodenBucket extends Item implements IWeightProvider, IInitiali
         }
     }
 
-    public void setWaterType(ItemStack item, Boolean bool)
+    public void setWaterType(ItemStack item, Fluid fluid)
     {
-        if (bool == null)
+        if (fluid == null)
         {
             item.setItemDamage(0);
             this.setWater(item, 0);
         }
         else
         {
-            item.setItemDamage(bool ? 1 : 2);
+            item.setItemDamage(fluid == ExPFluids.freshWater ? 1 : fluid == ExPFluids.saltWater ? 2 : 3);
         }
     }
 
     public Fluid getStoredFluid(ItemStack item)
     {
-        return item.getMetadata() == 0 ? null : item.getMetadata() == 1 ? ExPFluids.freshWater : ExPFluids.saltWater;
+        return item.getMetadata() == 0 ? null : item.getMetadata() == 1 ? ExPFluids.freshWater : item.getMetadata() == 2 ? ExPFluids.saltWater : ExPFluids.milk;
     }
 
     @Override
@@ -120,7 +120,7 @@ public class ItemWoodenBucket extends Item implements IWeightProvider, IInitiali
             return;
         }
 
-        for (int i = 0; i < 3; ++i)
+        for (int i = 0; i < 4; ++i)
         {
             items.add(new ItemStack(this, 1, i));
         }
@@ -155,7 +155,7 @@ public class ItemWoodenBucket extends Item implements IWeightProvider, IInitiali
                 int levelAdded = levelCurrent + levelFluid > 10 ? 10 - levelCurrent : levelFluid;
                 if (f1 == null)
                 {
-                    this.setWaterType(is, f == ExPFluids.freshWater);
+                    this.setWaterType(is, f);
                     this.setWater(is, levelAdded);
                 }
                 else
@@ -188,7 +188,7 @@ public class ItemWoodenBucket extends Item implements IWeightProvider, IInitiali
     {
         ItemStack is = player.getHeldItem(hand);
         Fluid f = this.getStoredFluid(is);
-        if (f != null && worldIn.isAirBlock(pos.offset(facing)))
+        if (f != null && worldIn.isAirBlock(pos.offset(facing)) && (f == ExPFluids.freshWater || f == ExPFluids.saltWater))
         {
             Block b = is.getMetadata() == 1 ? ExPBlocks.freshWater : ExPBlocks.saltWater;
             worldIn.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1F, 1F);

@@ -84,7 +84,7 @@ public class RenderAnimal extends RenderLiving<EntityAnimal>
         @Override
         public void doRenderLayer(EntityAnimal entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale)
         {
-            if (entitylivingbaseIn.getFeatureColors(partialTicks) != null)
+            if (entitylivingbaseIn.getFeatureColors(partialTicks) != null && entitylivingbaseIn.getColorableFeaturesTexture(partialTicks) != null)
             {
                 float[] colors = entitylivingbaseIn.getFeatureColors(partialTicks);
                 GlStateManager.color(colors[0], colors[1], colors[2], colors.length > 3 ? colors[3] : 1F);

@@ -314,6 +314,16 @@
 				"textures" : {
 					"layer0" : "exp:items/produce/chicken_cooked"
 				}
+			},
+			"beef_raw" : {
+				"textures" : {
+					"layer0" : "exp:items/produce/beef_raw"
+				}
+			},
+			"beef_cooked" : {
+				"textures" : {
+					"layer0" : "exp:items/produce/beef_cooked"
+				}
 			}
 		}
 	}

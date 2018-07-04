@@ -93,7 +93,12 @@
                 "textures" : {
                     "layer0" : "exp:items/misc/hay"
                 }
-            }
+            },
+			"hide": {
+				"textures" : {
+					"layer0" : "exp:items/misc/hide"
+				}
+			}
 		}
 	}
 }

@@ -5,21 +5,19 @@ import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
-import org.apache.commons.lang3.ArrayUtils;
 import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.data.ExPTextures;
 import v0id.api.exp.entity.EnumGender;
@@ -30,6 +28,7 @@ import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.IExPWorld;
 import v0id.exp.block.BlockNestingBox;
 import v0id.exp.entity.EntityAnimal;
+import v0id.exp.entity.ExPAITempt;
 import v0id.exp.item.ItemFood;
 import v0id.exp.tile.TileNestingBox;
 
@@ -37,7 +36,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.security.InvalidParameterException;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by V0idWa1k3r on 20-Jun-17.
@@ -46,7 +44,6 @@ public class Chicken extends EntityAnimal
 {
     private ChickenStats stats;
     private int eggTimer;
-    private int interactionTimer;
     private BlockPos nestingBoxPos;
 
     public Chicken(World worldIn)
@@ -61,9 +58,10 @@ public class Chicken extends EntityAnimal
         super.initEntityAI();
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
-        this.tasks.addTask(2, new EntityAIWanderAvoidWater(this, 1.0D));
-        this.tasks.addTask(3, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-        this.tasks.addTask(4, new EntityAILookIdle(this));
+        this.tasks.addTask(2, new ExPAITempt(this, 1, false, EnumFoodGroup.GRAIN));
+        this.tasks.addTask(3, new EntityAIWanderAvoidWater(this, 1.0D));
+        this.tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        this.tasks.addTask(5, new EntityAILookIdle(this));
     }
 
     protected void applyEntityAttributes()
@@ -128,6 +126,17 @@ public class Chicken extends EntityAnimal
     }
 
     @Override
+    public int getOffspringAmount()
+    {
+        return 1;
+    }
+
+    @Override
+    public void giveBirth(IAnimalStats stats)
+    {
+    }
+
+    @Override
     public IAnimalStats getOrCreateStats()
     {
         if (this.stats == null)
@@ -154,51 +163,7 @@ public class Chicken extends EntityAnimal
     @Override
     public void processInteraction(EntityPlayer interactor)
     {
-        if (interactor.isSneaking())
-        {
-            int familiarityLevel = (int)(this.animalCapability.getFamiliarity() / 25F);
-            if (interactor instanceof EntityPlayerMP)
-            {
-                interactor.sendMessage(new TextComponentTranslation("exp.txt.familiarity." + familiarityLevel).setStyle(new Style().setColor(TextFormatting.GRAY).setItalic(true)));
-            }
-        }
-        else
-        {
-            if (!this.world.isRemote)
-            {
-                ItemStack is = interactor.getHeldItem(EnumHand.MAIN_HAND);
-                if (is.getItem() instanceof ItemFood)
-                {
-                    if (this.interactionTimer > 0)
-                    {
-                        interactor.sendMessage(new TextComponentTranslation("exp.txt.animalFull").setStyle(new Style().setColor(TextFormatting.GRAY).setItalic(true)));
-                        return;
-                    }
-
-                    ItemFood food = (ItemFood) is.getItem();
-                    for (Map.Entry<EnumFoodGroup, Float> entry : food.getEntry(is).getNutrientData().entrySet())
-                    {
-                        if (ArrayUtils.contains(this.getFavouriteFood(), entry.getKey()))
-                        {
-                            float foodAmt = food.getTotalWeight(is) - food.getTotalRot(is);
-                            if (foodAmt >= 100)
-                            {
-                                food.setTotalWeight(is, food.getTotalWeight(is) - 100);
-                                if (foodAmt == 100)
-                                {
-                                    is.shrink(1);
-                                }
-
-                                this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.NEUTRAL, 1.0F, 1.0F);
-                                this.animalCapability.setFamiliarity(this.animalCapability.getFamiliarity() + 10F);
-                                this.interactionTimer = 6000;
-                                return;
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        this.processDefaultInteraction(interactor);
     }
 
     @Override
@@ -276,7 +241,6 @@ public class Chicken extends EntityAnimal
     {
         super.writeEntityToNBT(compound);
         compound.setInteger("eggTimer", this.eggTimer);
-        compound.setInteger("interactionTimer", this.interactionTimer);
         if (this.nestingBoxPos != null)
         {
             compound.setInteger("nbX", this.nestingBoxPos.getX());
@@ -290,7 +254,6 @@ public class Chicken extends EntityAnimal
     {
         super.readEntityFromNBT(compound);
         this.eggTimer = compound.getInteger("eggTimer");
-        this.interactionTimer = compound.getInteger("interactionTimer");
         if (compound.hasKey("nbX"))
         {
             this.nestingBoxPos = new BlockPos(compound.getInteger("nbX"), compound.getInteger("nbY"), compound.getInteger("nbZ"));
@@ -327,6 +290,7 @@ public class Chicken extends EntityAnimal
         super.dropLoot(wasRecentlyHit, lootingModifier, source);
         long age = this.animalCapability.getAge();
         this.dropItem(new ItemStack(Items.FEATHER, 4 + this.world.rand.nextInt(5), 0));
+        this.dropItem(new ItemStack(Items.BONE, 2 + this.world.rand.nextInt(8), 0));
         ItemStack chicken = new ItemStack(ExPItems.food, 1, FoodEntry.CHICKEN_RAW.getId());
         ItemFood food = (ItemFood)chicken.getItem();
         food.setTotalWeight(chicken, age < this.getAdulthoodAge() ? 100 + this.world.rand.nextInt(100) : 500 + this.world.rand.nextInt(1500));

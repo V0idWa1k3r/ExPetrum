@@ -130,8 +130,9 @@ public class ExPRegistryNames
 		entityGravFallingBlock																				= new ResourceLocation(modid, "gravFallingBlock"),
 		entityFallingTree																					= new ResourceLocation(modid, "fallingTree"),
 		entityThrownWeapon																					= new ResourceLocation(modid, "thrownWeapon"),
-        entityChicken																					    = new ResourceLocation(modid, "chicken");
-	
+        entityChicken																					    = new ResourceLocation(modid, "chicken"),
+        entityCow																						    = new ResourceLocation(modid, "cow");
+
 	public static final ResourceLocation
 		specialAttackPiercingDash																			= new ResourceLocation(modid, "piercingDash"),
 		specialAttackSlash																					= new ResourceLocation(modid, "slash"),
@@ -150,7 +151,8 @@ public class ExPRegistryNames
 		fluidFreshWater																						= "water",
 		fluidLava																							= "exp.lava",
 		fluidOil																							= "oil",
-        fluidClay                                                                                           = "clay";
+        fluidClay                                                                                           = "clay",
+        fluidMilk                                                                                           = "milk";
 
 	public static final String
         soundNewAge                                                                                         = "sound_new_age";

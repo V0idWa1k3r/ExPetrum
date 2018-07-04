@@ -373,7 +373,7 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 		if (container instanceof TileNestingBox && is.hasTagCompound() && is.getTagCompound().getBoolean("fertilized"))
         {
             is.getTagCompound().setInteger("birthProgress", is.getTagCompound().getInteger("birthProgress") + 1);
-            if (is.getTagCompound().getInteger("birthProgress") >= 3 * IExPWorld.of(w).today().ticksPerDay)
+            if (is.getTagCompound().getInteger("birthProgress") >= 3 * IExPWorld.of(w).today().ticksPerDay && !w.isRemote)
             {
                 Chicken.ChickenStats cStats = new Chicken.ChickenStats();
                 cStats.deserializeNBT(is.getTagCompound().getCompoundTag("statsOffspring"));

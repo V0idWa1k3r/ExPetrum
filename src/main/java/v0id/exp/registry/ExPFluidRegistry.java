@@ -38,6 +38,9 @@ public class ExPFluidRegistry extends AbstractRegistry
 
 		ExPFluids.clay = new Fluid(ExPRegistryNames.fluidClay, new ResourceLocation("exp", "blocks/fluid/clay"), new ResourceLocation("exp", "blocks/fluid/clay"))
             .setDensity(1746).setViscosity(20000);
+
+		ExPFluids.milk = new Fluid(ExPRegistryNames.fluidMilk, new ResourceLocation("exp", "blocks/fluid/milk"), new ResourceLocation("exp", "blocks/fluid/milk"))
+				.setDensity(1000).setViscosity(3000);
 		
 	}
 	

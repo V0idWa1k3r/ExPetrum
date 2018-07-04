@@ -103,6 +103,7 @@ public class BlockPlanks extends Block implements IWeightProvider, IOreDictEntry
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta)
     {
@@ -119,6 +120,12 @@ public class BlockPlanks extends Block implements IWeightProvider, IOreDictEntry
         }
 
         return ordinal % 15;
+    }
+
+    @Override
+    public int damageDropped(IBlockState state)
+    {
+        return state.getValue(TREE_TYPE).ordinal() % 15;
     }
 
     @Override

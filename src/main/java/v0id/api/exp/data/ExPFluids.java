@@ -9,4 +9,5 @@ public class ExPFluids
 	public static Fluid lava;
 	public static Fluid oil;
 	public static Fluid clay;
+	public static Fluid milk;
 }

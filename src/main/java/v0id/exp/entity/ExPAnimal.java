@@ -99,6 +99,15 @@ public class ExPAnimal implements IAnimal
                 long ticksElapsed = IExPWorld.of(this.owner.world).today().getTime() - this.calendar.getTime();
                 this.getAsProvider().handleElapsedTicks(ticksElapsed);
                 this.setAge(this.getAge() + ticksElapsed);
+                if (this.getPregnancyTicksLeft() > 0)
+                {
+                    this.effectivePregnancyTimer -= ticksElapsed;
+                    if (this.effectivePregnancyTimer <= 0)
+                    {
+                        this.giveBirth();
+                    }
+                }
+
                 this.calendar.setTime(this.calendar.getTime() + ticksElapsed);
             }
         }
@@ -232,7 +241,18 @@ public class ExPAnimal implements IAnimal
     @Override
     public void breed(EntityLivingBase other)
     {
-        // TODO breeding!
+        if (other.getClass().isAssignableFrom(this.owner.getClass()) && !this.isPregnant() && this.getGender() == EnumGender.FEMALE)
+        {
+            IAnimalProvider provider = (IAnimalProvider) other;
+            int i = this.getAsProvider().getOffspringAmount();
+            this.offspringStats = new IAnimalStats[i];
+            for (int j = 0; j < i; ++j)
+            {
+                this.offspringStats[j] = this.getStats().mix(provider.getOrCreateStats());
+            }
+
+            this.setPregnant(other);
+        }
     }
 
     @Override
@@ -251,7 +271,7 @@ public class ExPAnimal implements IAnimal
     @Override
     public void setPregnant(EntityLivingBase partner)
     {
-        // TODO breeding!
+        this.effectivePregnancyTimer = (int) this.getAsProvider().getRandomPregnancyTicks();
     }
 
     @Override
@@ -275,7 +295,12 @@ public class ExPAnimal implements IAnimal
     @Override
     public void giveBirth()
     {
-        // TODO breeding!
+        for (IAnimalStats stats : this.getOffspringStats())
+        {
+            this.getAsProvider().giveBirth(stats);
+        }
+
+        this.offspringStats = new IAnimalStats[0];
     }
 
     @Override

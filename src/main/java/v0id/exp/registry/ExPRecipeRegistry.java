@@ -65,7 +65,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
             event.getRegistry().register(new ShapelessOreRecipe(mcloc, new ItemStack(chiselIron, 1, 0), new ItemStack(ExPItems.chisel, 1, 7)).setRegistryName("exp:recipe_hardcoded_compat_cnb_chisel_iron"));
         }
 
-        String[] toRemove = new String[]{ "minecraft:torch", "minecraft:crafting_table", "minecraft:chest" };
+        String[] toRemove = new String[]{ "minecraft:torch", "minecraft:crafting_table", "minecraft:chest", "minecraft:bone_meal_from_bone" };
         for (String loc : toRemove)
         {
             reg.remove(new ResourceLocation(loc));
@@ -90,6 +90,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
         RecipesSmelting.addRecipe(new RecipesSmelting.RecipeOreSmelting(new ItemStack(Blocks.TORCH, 1, 0), "stickWood", 200F));
         RecipesSmelting.addRecipe(new RecipeSmeltingMeltable());
         RecipesSmelting.addRecipe(new RecipeSmeltingFood(FoodEntry.CHICKEN_RAW, FoodEntry.CHICKEN_COOKED, 200));
+        RecipesSmelting.addRecipe(new RecipeSmeltingFood(FoodEntry.BEEF_RAW, FoodEntry.BEEF_COOKED, 200));
         for (EnumToolClass tool : EnumToolClass.values())
         {
             RecipesSmelting.addRecipe(new RecipesSmelting.RecipeSmelting(new ItemStack(ExPItems.moldTool, 1, tool.ordinal()), new ItemStack(ExPItems.moldTool, 1, tool.ordinal() + EnumToolClass.values().length), 540F));
@@ -99,6 +100,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
         RecipesQuern.addRecipe(new ItemStack(Items.FLINT, 1, 0), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.FLINT_POWDER.ordinal()));
         RecipesQuern.addRecipe(new ItemStack(ExPItems.ore, 1, EnumOre.CINNABAR.ordinal()), new ItemStack(Items.REDSTONE, 8, 0));
         RecipesQuern.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.CHARCOAL.ordinal()), new ItemStack(ExPItems.generic, 8, ItemGeneric.EnumGenericType.FLUX.ordinal()));
+        RecipesQuern.addRecipe(new ItemStack(Items.BONE, 1, 0), new ItemStack(Items.DYE, 4, 15));
         for (EnumMetal metal : EnumMetal.values())
         {
             RecipesAnvil.addWeldingRecipe(new ItemStack(ExPItems.ingot, 1, metal.ordinal()), new ItemStack(ExPItems.ingot, 1, metal.ordinal()), (int)(metal.getMeltingTemperature() * 0.85F), (int)(metal.getMeltingTemperature() * 0.85F), new ItemStack(ExPItems.metalGeneric, 1, metal.ordinal()), metal.getRequiredAnvilTier() - 1);
