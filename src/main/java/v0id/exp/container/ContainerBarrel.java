@@ -5,9 +5,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.SlotItemHandler;
-import v0id.exp.item.ItemWoodenBucket;
 import v0id.exp.tile.TileBarrel;
 
 import javax.annotation.Nonnull;
@@ -65,21 +63,11 @@ public class ContainerBarrel extends Container
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (index > 2)
+            if (index > 1)
             {
-                if (itemstack1.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null) || itemstack1.getItem() instanceof ItemWoodenBucket)
+                if (!this.mergeItemStack(itemstack1, 0, 1, false))
                 {
-                    if (!this.mergeItemStack(itemstack1, 0, 1, false))
-                    {
-                        return ItemStack.EMPTY;
-                    }
-                }
-                else
-                {
-                    if (!this.mergeItemStack(itemstack1, 1, 2, false))
-                    {
-                        return ItemStack.EMPTY;
-                    }
+                    return ItemStack.EMPTY;
                 }
 
                 if (index < 29)

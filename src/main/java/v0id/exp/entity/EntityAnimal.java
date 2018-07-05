@@ -1,6 +1,8 @@
 package v0id.exp.entity;
 
-import net.minecraft.entity.EntityCreature;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -12,6 +14,8 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -32,7 +36,7 @@ import java.util.Map;
 /**
  * Created by V0idWa1k3r on 19-Jun-17.
  */
-public abstract class EntityAnimal extends EntityCreature implements IAnimals, IAnimalProvider
+public abstract class EntityAnimal extends net.minecraft.entity.passive.EntityAnimal implements IAnimals, IAnimalProvider
 {
     public static final DataParameter<Boolean> PARAM_GENDER = EntityDataManager.createKey(EntityAnimal.class, DataSerializers.BOOLEAN);
     public static final DataParameter<Long> PARAM_AGE = EntityDataManager.createKey(EntityAnimal.class, DataSerializerLong.LONG);
@@ -217,8 +221,98 @@ public abstract class EntityAnimal extends EntityCreature implements IAnimals, I
     }
 
     @Override
-    protected boolean canDespawn()
+    public boolean getCanSpawnHere()
+    {
+        int i = MathHelper.floor(this.posX);
+        int j = MathHelper.floor(this.getEntityBoundingBox().minY);
+        int k = MathHelper.floor(this.posZ);
+        BlockPos blockpos = new BlockPos(i, j, k);
+        IBlockState iblockstate = this.world.getBlockState((new BlockPos(this)).down());
+        return this.world.getLight(blockpos) > 8 && iblockstate.canEntitySpawn(this) && this.getBlockPathWeight(new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ)) >= 0.0F;
+    }
+
+    @Override
+    public boolean isBreedingItem(ItemStack stack)
     {
         return false;
+    }
+
+    @Override
+    public void setInLove(@Nullable EntityPlayer player)
+    {
+    }
+
+    @Override
+    @Nullable
+    public EntityPlayerMP getLoveCause()
+    {
+        return null;
+    }
+
+    @Override
+    public boolean isInLove()
+    {
+        return false;
+    }
+
+    @Override
+    public void resetInLove()
+    {
+    }
+
+    @Override
+    public boolean canMateWith(net.minecraft.entity.passive.EntityAnimal otherAnimal)
+    {
+        return false;
+    }
+
+    @Nullable
+    @Override
+    public EntityAgeable createChild(EntityAgeable ageable)
+    {
+        return null;
+    }
+
+    @Override
+    protected boolean holdingSpawnEggOfClass(ItemStack stack, Class<? extends Entity> entityClass)
+    {
+        return false;
+    }
+
+    @Override
+    public int getGrowingAge()
+    {
+        return 1;
+    }
+
+    @Override
+    public void ageUp(int growthSeconds, boolean updateForcedAge)
+    {
+    }
+
+    @Override
+    public void addGrowth(int growth)
+    {
+    }
+
+    @Override
+    public void setGrowingAge(int age)
+    {
+    }
+
+    @Override
+    protected void onGrowingAdult()
+    {
+    }
+
+    @Override
+    public boolean isChild()
+    {
+        return false;
+    }
+
+    @Override
+    public void setScaleForAge(boolean child)
+    {
     }
 }
