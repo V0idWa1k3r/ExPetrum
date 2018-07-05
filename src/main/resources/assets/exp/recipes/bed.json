@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "minecraft:bed",
+        "data": 0
+    },
+    "pattern": [
+        "CCC",
+        "PPP"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "C" : {
+            "item": "#WOOL"
+        },
+        "P" : {
+            "item": "#PLANKS"
+        }
+    }
+}

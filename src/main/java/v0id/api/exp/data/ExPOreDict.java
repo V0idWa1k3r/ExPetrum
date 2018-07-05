@@ -60,8 +60,9 @@ public class ExPOreDict
         itemWateringCan                                                                                                 = { "wateringCan" },
         itemFireStarter                                                                                                 = { "fire_starter" },
         itemWoodenBucket                                                                                                = { "bucketWater" },
-		itemGrindstone																									= { "grindstone" };
-	
+		itemGrindstone																									= { "grindstone" },
+		itemWoolCard																									= { "cardWool", "woolCard" };
+
 	public static final String[] rockNames = Stream.of(EnumRockClass.values()).map(EnumRockClass::getName).toArray(String[]::new);
 	public static final String[] soilNames = Stream.of(EnumDirtClass.values()).map(EnumDirtClass::getName).toArray(String[]::new);
 	public static final String[] treeNames = Stream.of(EnumTreeType.values()).map(EnumTreeType::getName).toArray(String[]::new);

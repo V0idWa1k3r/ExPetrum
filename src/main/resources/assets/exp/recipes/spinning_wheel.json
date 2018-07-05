@@ -1,0 +1,20 @@
+{
+    "result": {
+        "item": "exp:spinning_wheel",
+        "data": 0
+    },
+    "pattern": [
+        "SP ",
+        "PPP",
+        "S S"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "P" : {
+            "item": "#PLANKS"
+        },
+        "S" : {
+            "item": "#STICKWOOD"
+        }
+    }
+}

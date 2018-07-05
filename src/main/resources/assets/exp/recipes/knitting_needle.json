@@ -1,0 +1,15 @@
+{
+  "result": {
+    "item": "exp:item_generic",
+    "data": 29
+  },
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "#STICKWOOD"
+    },
+    {
+      "item": "#KNIFE"
+    }
+  ]
+}

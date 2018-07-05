@@ -53,7 +53,8 @@ public class ExPItemsRegistry extends AbstractRegistry
                 new ItemFireStarter(),
                 new ItemWoodenBucket(),
                 new ItemGrindstone(),
-                new ItemMetalGeneric()
+                new ItemMetalGeneric(),
+                new ItemWoolCard()
         );
 
         registryEntries.forEach(registry::register);

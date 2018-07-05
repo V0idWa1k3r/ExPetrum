@@ -65,7 +65,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
             event.getRegistry().register(new ShapelessOreRecipe(mcloc, new ItemStack(chiselIron, 1, 0), new ItemStack(ExPItems.chisel, 1, 7)).setRegistryName("exp:recipe_hardcoded_compat_cnb_chisel_iron"));
         }
 
-        String[] toRemove = new String[]{ "minecraft:torch", "minecraft:crafting_table", "minecraft:chest", "minecraft:bone_meal_from_bone" };
+        String[] toRemove = new String[]{ "minecraft:torch", "minecraft:crafting_table", "minecraft:chest", "minecraft:bone_meal_from_bone", "minecraft:string_to_wool", "minecraft:fishing_rod", "minecraft:bow", "minecraft:leather_helmet", "minecraft:leather_chestplate", "minecraft:leather_leggings", "minecraft:leather_boots" };
         for (String loc : toRemove)
         {
             reg.remove(new ResourceLocation(loc));
@@ -113,6 +113,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
         RecipesAnvil.addWeldingRecipe(new ItemStack(ExPItems.ingot, 1, EnumMetal.COPPER.ordinal()), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.FIRE_BRICK.ordinal()), (int)(EnumMetal.COPPER.getMeltingTemperature() * 0.85F), 0, new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.COPPER_COATED_FIRE_BRICK.ordinal()), 0);
         RecipesAnvil.addWeldingRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.FIRE_BRICK.ordinal()), new ItemStack(ExPItems.ingot, 1, EnumMetal.COPPER.ordinal()), 0, (int)(EnumMetal.COPPER.getMeltingTemperature() * 0.85F), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.COPPER_COATED_FIRE_BRICK.ordinal()), 0);
         RecipesAnvil.addRecipe(new ItemStack(ExPItems.ingot, 1, EnumMetal.COPPER.ordinal()), (int)(EnumMetal.COPPER.getMeltingTemperature() * 0.75F), new ItemStack(ExPItems.generic, 2, ItemGeneric.EnumGenericType.COPPER_RIM.ordinal()), 40, 0);
+        RecipesAnvil.addRecipe(new ItemStack(ExPItems.ingot, 1, EnumMetal.COPPER.ordinal()), (int)(EnumMetal.COPPER.getMeltingTemperature() * 0.75F), new ItemStack(ExPItems.generic, 12, ItemGeneric.EnumGenericType.COPPER_PINS.ordinal()), 20, 0);
         for (EnumToolStats material : EnumToolStats.values())
         {
             if (material == EnumToolStats.STONE)
@@ -131,7 +132,8 @@ public class ExPRecipeRegistry extends AbstractRegistry
 
         RecipesBarrel.addRecipe(new RecipesBarrel.RecipeBarrelFluid(new ItemStack(ExPItems.generic, 16, ItemGeneric.EnumGenericType.TWINE.ordinal()), FluidRegistry.WATER, new FluidStack(ExPFluids.tannin, 1), 24000, true));
         RecipesBarrel.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.HIDE.ordinal()), new FluidStack(FluidRegistry.WATER, 100), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.SOAKED_HIDE.ordinal()), 6000);
-        RecipesBarrel.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.PREPARED_HIDE.ordinal()), new FluidStack(ExPFluids.tannin, 50), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.LEATHER.ordinal()), 6000);
+        RecipesBarrel.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.PREPARED_HIDE.ordinal()), new FluidStack(ExPFluids.tannin, 50), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.LEATHER.ordinal()), 12000);
+        RecipesBarrel.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.WOOL.ordinal()), new FluidStack(FluidRegistry.WATER, 100), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.SOAKED_WOOL.ordinal()), 6000);
     }
 
     @Override

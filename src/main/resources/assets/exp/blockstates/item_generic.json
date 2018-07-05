@@ -128,6 +128,36 @@
                 "textures" : {
                     "layer0" : "exp:items/misc/leather_straps"
                 }
+            },
+            "soaked_wool": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/soaked_wool"
+                }
+            },
+            "copper_pins": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/copper_pins"
+                }
+            },
+            "carded_wool": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/carded_wool"
+                }
+            },
+            "wool_yarn": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/wool_yarn"
+                }
+            },
+            "woven_cloth": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/woven_cloth"
+                }
+            },
+            "knitting_needle": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/knitting_needle"
+                }
             }
 		}
 	}

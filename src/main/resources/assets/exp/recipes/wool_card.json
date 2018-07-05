@@ -1,0 +1,27 @@
+{
+  "result": {
+    "item": "exp:item_wool_card",
+    "data": 0
+  },
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "exp:item_generic",
+      "data": 25
+    },
+    {
+      "item": "exp:item_generic",
+      "data": 25
+    },
+    {
+      "item": "exp:item_generic",
+      "data": 25
+    },
+    {
+      "item": "#STICKWOOD"
+    },
+    {
+      "item": "#PLANKS"
+    }
+  ]
+}

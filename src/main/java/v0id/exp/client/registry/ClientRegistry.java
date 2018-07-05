@@ -55,10 +55,7 @@ import v0id.exp.client.model.entity.ModelSheep;
 import v0id.exp.client.render.entity.RenderAnimal;
 import v0id.exp.client.render.entity.RenderFallingTree;
 import v0id.exp.client.render.entity.RenderThrownWeapon;
-import v0id.exp.client.render.tile.TESRBellows;
-import v0id.exp.client.render.tile.TESRCrate;
-import v0id.exp.client.render.tile.TESRQuern;
-import v0id.exp.client.render.tile.TESRScrapingRack;
+import v0id.exp.client.render.tile.*;
 import v0id.exp.crop.ExPFarmland;
 import v0id.exp.entity.EntityFallingTree;
 import v0id.exp.entity.EntityGravFallingBlock;
@@ -104,6 +101,7 @@ public class ClientRegistry implements ILifecycleListener
         net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileQuern.class, new TESRQuern());
         net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileScrapingRack.class, new TESRScrapingRack());
         net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileBellows.class, new TESRBellows());
+        net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileSpinningWheel.class, new TESRSpinningWheel());
         this.loadAdditionalData();
         this.initAttacksConditions();
     }
@@ -181,6 +179,7 @@ public class ClientRegistry implements ILifecycleListener
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.barrel), 0, new ModelResourceLocation(ExPBlocks.barrel.getRegistryName(), "normal"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.scrapingRack), 0, new ModelResourceLocation(ExPBlocks.scrapingRack.getRegistryName(), "normal"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.bellows), 0, new ModelResourceLocation(ExPBlocks.bellows.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.spinningWheel), 0, new ModelResourceLocation(ExPBlocks.spinningWheel.getRegistryName(), "normal"));
         // Iteration-dependent models
         mkCustomModelResourceLocations(ExPItems.stick, EnumTreeType.values().length + EnumShrubType.values().length + EnumBerry.values().length, i -> "type=" + ExPOreDict.stickNames[i]);
         mkCustomModelResourceLocations(ExPItems.toolHead, EnumToolClass.values().length * EnumToolStats.values().length, i -> "material=" + EnumToolStats.values()[i % EnumToolStats.values().length].name().toLowerCase() + ",type=" + EnumToolClass.values()[i / EnumToolStats.values().length].name().toLowerCase());
@@ -224,6 +223,7 @@ public class ClientRegistry implements ILifecycleListener
         registerStaticModel(ExPItems.basket, new ModelResourceLocation(ExPItems.basket.getRegistryName(), "inventory"));
         registerStaticModel(ExPItems.fireStarter, new ModelResourceLocation(ExPItems.fireStarter.getRegistryName(), "inventory"));
         registerStaticModel(ExPItems.grindstone, new ModelResourceLocation(ExPItems.grindstone.getRegistryName(), "inventory"));
+        registerStaticModel(ExPItems.woolCard, new ModelResourceLocation(ExPItems.woolCard.getRegistryName(), "inventory"));
 
         // Other models
         registerToolModels();
@@ -241,9 +241,11 @@ public class ClientRegistry implements ILifecycleListener
     public void loadAdditionalData()
     {
         TESRQuern.quernTopModel = new WavefrontObject();
+        TESRSpinningWheel.model = new WavefrontObject();
         try
         {
             TESRQuern.quernTopModel.load(Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation("exp", "models/block/quern_top.obj")).getInputStream());
+            TESRSpinningWheel.model.load(Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation("exp", "models/block/spinning_wheel.obj")).getInputStream());
         }
         catch (IOException e)
         {

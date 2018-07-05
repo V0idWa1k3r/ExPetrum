@@ -251,6 +251,13 @@
     {
         "ingredient": {
             "type": "forge:ore_dict",
+            "ore": "wool"
+        },
+        "name": "WOOL"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
             "ore": "ingotCopper"
         },
         "name": "INGOTCOPPER"

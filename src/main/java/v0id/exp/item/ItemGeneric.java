@@ -40,7 +40,13 @@ public class ItemGeneric extends Item implements IInitializableItem, IWeightProv
         SOAKED_HIDE("soaked_hide", 3F, IWeightProvider.DEFAULT_VOLUME, "hideSoaked"),
         PREPARED_HIDE("prepared_hide", 2F, IWeightProvider.DEFAULT_VOLUME, "hidePrepared"),
         LEATHER("leather", 2F, IWeightProvider.DEFAULT_VOLUME, "leather"),
-        LEATHER_STRAPS("leather_straps", 1F, IWeightProvider.DEFAULT_VOLUME, "strapsLeather");
+        LEATHER_STRAPS("leather_straps", 1F, IWeightProvider.DEFAULT_VOLUME, "strapsLeather"),
+        SOAKED_WOOL("soaked_wool", 0.8F, IWeightProvider.DEFAULT_VOLUME, "woolSoaked"),
+        COPPER_PINS("copper_pins", 0.01F, IWeightProvider.DEFAULT_VOLUME, "pinsCopper"),
+        CARDED_WOOL("carded_wool", 0.2F, IWeightProvider.DEFAULT_VOLUME, "woolCarded"),
+        WOOL_YARN("wool_yarn", 0.1F, IWeightProvider.DEFAULT_VOLUME, "string", "yarn", "yarnWool", "fiber"),
+        WOVEN_CLOTH("woven_cloth", 0.4F, IWeightProvider.DEFAULT_VOLUME, "wool", "woolWhite", "cloth"),
+        KNITTING_NEEDLE("knitting_needle", 0.05F, IWeightProvider.DEFAULT_VOLUME, "knittingNeedle");
 
         EnumGenericType(String name, float weight, Pair<Byte, Byte> volume, String... oreDictNames)
         {

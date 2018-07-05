@@ -1,0 +1,18 @@
+{
+  "result": {
+    "item": "exp:item_generic",
+    "data": 26,
+    "count": 2
+  },
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "exp:item_wool_card",
+      "data": 32767
+    },
+    {
+      "item": "exp:item_generic",
+      "data": 24
+    }
+  ]
+}

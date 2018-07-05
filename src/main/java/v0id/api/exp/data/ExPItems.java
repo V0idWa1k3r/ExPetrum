@@ -97,4 +97,7 @@ public class ExPItems
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.itemMetalGeneric)
     public static final Item metalGeneric = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemWoolCard)
+    public static final Item woolCard = null;
 }

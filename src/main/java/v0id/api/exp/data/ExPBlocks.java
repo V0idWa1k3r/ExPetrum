@@ -294,4 +294,7 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockBellows)
     public static final Block bellows = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockSpinningWheel)
+    public static final Block spinningWheel = null;
 }
