@@ -55,6 +55,7 @@ import v0id.exp.client.model.entity.ModelSheep;
 import v0id.exp.client.render.entity.RenderAnimal;
 import v0id.exp.client.render.entity.RenderFallingTree;
 import v0id.exp.client.render.entity.RenderThrownWeapon;
+import v0id.exp.client.render.tile.TESRBellows;
 import v0id.exp.client.render.tile.TESRCrate;
 import v0id.exp.client.render.tile.TESRQuern;
 import v0id.exp.client.render.tile.TESRScrapingRack;
@@ -102,6 +103,7 @@ public class ClientRegistry implements ILifecycleListener
         net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileCrate.class, new TESRCrate());
         net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileQuern.class, new TESRQuern());
         net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileScrapingRack.class, new TESRScrapingRack());
+        net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileBellows.class, new TESRBellows());
         this.loadAdditionalData();
         this.initAttacksConditions();
     }
@@ -178,6 +180,7 @@ public class ClientRegistry implements ILifecycleListener
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.nestingBox), 0, new ModelResourceLocation(ExPBlocks.nestingBox.getRegistryName(), "normal"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.barrel), 0, new ModelResourceLocation(ExPBlocks.barrel.getRegistryName(), "normal"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.scrapingRack), 0, new ModelResourceLocation(ExPBlocks.scrapingRack.getRegistryName(), "normal"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.bellows), 0, new ModelResourceLocation(ExPBlocks.bellows.getRegistryName(), "inventory"));
         // Iteration-dependent models
         mkCustomModelResourceLocations(ExPItems.stick, EnumTreeType.values().length + EnumShrubType.values().length + EnumBerry.values().length, i -> "type=" + ExPOreDict.stickNames[i]);
         mkCustomModelResourceLocations(ExPItems.toolHead, EnumToolClass.values().length * EnumToolStats.values().length, i -> "material=" + EnumToolStats.values()[i % EnumToolStats.values().length].name().toLowerCase() + ",type=" + EnumToolClass.values()[i / EnumToolStats.values().length].name().toLowerCase());

@@ -20,6 +20,7 @@ import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.item.IContainerTickable;
 import v0id.api.exp.recipe.RecipesSmelting;
 import v0id.api.exp.tile.ExPTemperatureCapability;
+import v0id.api.exp.tile.ITemperatureHolder;
 import v0id.core.network.PacketType;
 import v0id.core.network.VoidNetwork;
 import v0id.core.util.DimBlockPos;
@@ -29,7 +30,7 @@ import v0id.exp.util.temperature.TemperatureUtils;
 import javax.annotation.Nullable;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class TileForge extends TileEntity implements ITickable
+public class TileForge extends TileEntity implements ITickable, ITemperatureHolder
 {
     public boolean isLit;
     public int burnTimeLeft;
@@ -37,6 +38,7 @@ public class TileForge extends TileEntity implements ITickable
     public boolean isStructureCorrect;
     public int structureCheckCounter;
     public float additionalMaxT;
+    public float bellowsAdditionalT;
     public boolean firstTick = true;
     public ItemStackHandler inventory = new ItemStackHandler(10);
     public TemperatureHandler temperature_handler = new TemperatureHandler(1000)
@@ -44,7 +46,7 @@ public class TileForge extends TileEntity implements ITickable
         @Override
         public float getMaxTemperature()
         {
-            return super.getMaxTemperature() + TileForge.this.additionalMaxT;
+            return super.getMaxTemperature() + TileForge.this.additionalMaxT + TileForge.this.bellowsAdditionalT;
         }
     };
 
@@ -120,6 +122,7 @@ public class TileForge extends TileEntity implements ITickable
             }
         }
 
+        this.bellowsAdditionalT = Math.max(0, this.bellowsAdditionalT - 0.2F);
         if (this.temperature_handler.getCurrentTemperature() <= 200 && this.burnTimeLeft <= 0 && this.isLit)
         {
             this.isLit = false;
@@ -202,6 +205,7 @@ public class TileForge extends TileEntity implements ITickable
         this.inventory.deserializeNBT(compound.getCompoundTag("inventory"));
         this.temperature_handler.deserializeNBT(compound.getCompoundTag("temp"));
         this.isLit = compound.getBoolean("lit");
+        this.bellowsAdditionalT = compound.getFloat("bellowsT");
     }
 
     @Override
@@ -213,6 +217,7 @@ public class TileForge extends TileEntity implements ITickable
         ret.setTag("inventory", this.inventory.serializeNBT());
         ret.setTag("temp", this.temperature_handler.serializeNBT());
         ret.setBoolean("lit", this.isLit);
+        ret.setFloat("bellowsT", this.bellowsAdditionalT);
         return ret;
     }
 
@@ -227,5 +232,11 @@ public class TileForge extends TileEntity implements ITickable
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing)
     {
         return capability == ExPTemperatureCapability.cap ? ExPTemperatureCapability.cap.cast(this.temperature_handler) : capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.inventory) : super.getCapability(capability, facing);
+    }
+
+    @Override
+    public void acceptBellows(EnumFacing side)
+    {
+        this.bellowsAdditionalT = Math.min(500, this.bellowsAdditionalT + 100);
     }
 }

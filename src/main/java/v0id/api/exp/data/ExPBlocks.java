@@ -291,4 +291,7 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockScrapingRack)
     public static final Block scrapingRack = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockBellows)
+    public static final Block bellows = null;
 }

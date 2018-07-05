@@ -73,7 +73,8 @@ public class ExPRegistryNames
         blockHay                                                                                            = "hay",
         blockNestingBox                                                                                     = "nesting_box",
 		blockBarrel                                                                                         = "barrel",
-        blockScrapingRack                                                                                   = "scraping_rack";
+        blockScrapingRack                                                                                   = "scraping_rack",
+		blockBellows																						= "bellows";
 
 	public static final String
 		itemRock																							= "item_rock",

@@ -1,0 +1,23 @@
+{
+    "result": {
+        "item": "exp:bellows",
+        "data": 0
+    },
+    "pattern": [
+        "PL ",
+        "LLI",
+        "PPP"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "I" : {
+            "item": "#INGOTCOPPER"
+        },
+        "L" : {
+            "item": "#LEATHER"
+        },
+        "P" : {
+            "item": "#PLANKS"
+        }
+    }
+}

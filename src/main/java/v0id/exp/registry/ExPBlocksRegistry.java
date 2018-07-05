@@ -120,7 +120,8 @@ public class ExPBlocksRegistry extends AbstractRegistry
                 new BlockHay(),
                 new BlockNestingBox(),
                 new BlockBarrel(),
-                new BlockScrapingRack()
+                new BlockScrapingRack(),
+                new BlockBellows()
         );
 
         registryEntries.forEach(registry::register);

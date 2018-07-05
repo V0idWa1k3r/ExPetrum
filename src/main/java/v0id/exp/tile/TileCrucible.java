@@ -20,6 +20,7 @@ import v0id.api.exp.metal.EnumMetal;
 import v0id.api.exp.recipe.RecipesSmelting;
 import v0id.api.exp.tile.ExPTemperatureCapability;
 import v0id.api.exp.tile.ITemperatureHandler;
+import v0id.api.exp.tile.ITemperatureHolder;
 import v0id.core.network.PacketType;
 import v0id.core.network.VoidNetwork;
 import v0id.core.util.DimBlockPos;
@@ -31,7 +32,7 @@ import javax.annotation.Nullable;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class TileCrucible extends TileEntity implements ITickable
+public class TileCrucible extends TileEntity implements ITickable, ITemperatureHolder
 {
     public Map<EnumMetal, Float> metalMap = new EnumMap<>(EnumMetal.class);
     public ItemStackHandler inventory = new ItemStackHandler(2)
@@ -262,5 +263,14 @@ public class TileCrucible extends TileEntity implements ITickable
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing)
     {
         return capability == ExPTemperatureCapability.cap ? ExPTemperatureCapability.cap.cast(this.temperature_handler) : capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.inventory) : super.getCapability(capability, facing);
+    }
+
+    @Override
+    public void acceptBellows(EnumFacing side)
+    {
+        if (this.world.getTileEntity(this.pos.down()) instanceof ITemperatureHolder)
+        {
+            ((ITemperatureHolder)this.world.getTileEntity(this.pos.down())).acceptBellows(side);
+        }
     }
 }
