@@ -2,10 +2,12 @@ package v0id.exp.registry;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -14,9 +16,11 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.ForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.data.ExPFluids;
 import v0id.api.exp.data.ExPItems;
+import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.item.IMeltableMetal;
 import v0id.api.exp.item.food.FoodEntry;
 import v0id.api.exp.metal.EnumAnvilRequirement;
@@ -24,10 +28,8 @@ import v0id.api.exp.metal.EnumMetal;
 import v0id.api.exp.metal.EnumToolClass;
 import v0id.api.exp.metal.EnumToolStats;
 import v0id.api.exp.recipe.*;
-import v0id.exp.item.ItemFood;
-import v0id.exp.item.ItemGeneric;
-import v0id.exp.item.ItemPottery;
-import v0id.exp.item.ItemToolHead;
+import v0id.core.logging.LogLevel;
+import v0id.exp.item.*;
 import v0id.exp.recipe.RecipeMold;
 import v0id.exp.recipe.RecipePlanks;
 
@@ -66,9 +68,15 @@ public class ExPRecipeRegistry extends AbstractRegistry
         }
 
         String[] toRemove = new String[]{ "minecraft:torch", "minecraft:crafting_table", "minecraft:chest", "minecraft:bone_meal_from_bone", "minecraft:string_to_wool", "minecraft:fishing_rod", "minecraft:bow", "minecraft:leather_helmet", "minecraft:leather_chestplate", "minecraft:leather_leggings", "minecraft:leather_boots" };
+        ExPMisc.modLogger.log(LogLevel.Fine, "A fair warning.");
+        ExPMisc.modLogger.log(LogLevel.Fine, "Forge is about to spew a bunch of \"Dangerous alternative prefix\" warnings.");
+        ExPMisc.modLogger.log(LogLevel.Fine, "No, ExPetrum isn't broken.");
+        ExPMisc.modLogger.log(LogLevel.Fine, "It simply overrides vanilla recipes to a dummy implementation to effectively remove them from the game.");
+        ExPMisc.modLogger.log(LogLevel.Fine, "Thanks for reading. Have a nice day.");
         for (String loc : toRemove)
         {
             reg.remove(new ResourceLocation(loc));
+            reg.register(new DummyRecipe().setRegistryName(loc));
         }
 
         RecipesPottery.addRecipe(new ItemStack(ExPItems.pottery, 1, ItemPottery.EnumPotteryType.CLAY_POT.ordinal()), 3, new ResourceLocation("exp", "textures/items/pottery/clay_pot.png"));
@@ -114,6 +122,8 @@ public class ExPRecipeRegistry extends AbstractRegistry
         RecipesAnvil.addWeldingRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.FIRE_BRICK.ordinal()), new ItemStack(ExPItems.ingot, 1, EnumMetal.COPPER.ordinal()), 0, (int)(EnumMetal.COPPER.getMeltingTemperature() * 0.85F), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.COPPER_COATED_FIRE_BRICK.ordinal()), 0);
         RecipesAnvil.addRecipe(new ItemStack(ExPItems.ingot, 1, EnumMetal.COPPER.ordinal()), (int)(EnumMetal.COPPER.getMeltingTemperature() * 0.75F), new ItemStack(ExPItems.generic, 2, ItemGeneric.EnumGenericType.COPPER_RIM.ordinal()), 40, 0);
         RecipesAnvil.addRecipe(new ItemStack(ExPItems.ingot, 1, EnumMetal.COPPER.ordinal()), (int)(EnumMetal.COPPER.getMeltingTemperature() * 0.75F), new ItemStack(ExPItems.generic, 12, ItemGeneric.EnumGenericType.COPPER_PINS.ordinal()), 20, 0);
+        RecipesAnvil.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.IRON_BLOOM.ordinal()), (int)(EnumMetal.IRON.getMeltingTemperature() * 0.5F), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.REFINED_IRON_BLOOM.ordinal()), 100, 1);
+        RecipesAnvil.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.REFINED_IRON_BLOOM.ordinal()), (int)(EnumMetal.IRON.getMeltingTemperature() * 0.5F), new ItemStack(ExPItems.ingot, 1, EnumMetal.IRON.ordinal()), 160, 1);
         for (EnumToolStats material : EnumToolStats.values())
         {
             if (material == EnumToolStats.STONE)
@@ -128,6 +138,11 @@ public class ExPRecipeRegistry extends AbstractRegistry
                 int metaMaterial = material.getMaterial().ordinal() + EnumMetal.values().length * (toolClass.getAnvilMaterial().ordinal());
                 RecipesAnvil.addRecipe(new ItemStack(itemMaterial, 1, metaMaterial), (int)(material.getMaterial().getMeltingTemperature() * 0.75F), head, toolClass.getProgressReq(), material.getMaterial().getRequiredAnvilTier());
             }
+
+            if (ItemTuyere.items.containsKey(material))
+            {
+                RecipesAnvil.addRecipe(new ItemStack(ExPItems.metalGeneric, 1, material.getMaterial().ordinal() + EnumMetal.values().length * 2), (int)(material.getMaterial().getMeltingTemperature() * 0.75F), new ItemStack(ItemTuyere.items.get(material), 1, 0), 200, material.getMaterial().getRequiredAnvilTier());
+            }
         }
 
         RecipesBarrel.addRecipe(new RecipesBarrel.RecipeBarrelFluid(new ItemStack(ExPItems.generic, 16, ItemGeneric.EnumGenericType.TWINE.ordinal()), FluidRegistry.WATER, new FluidStack(ExPFluids.tannin, 1), 24000, true));
@@ -140,6 +155,33 @@ public class ExPRecipeRegistry extends AbstractRegistry
     public void postInit(FMLPostInitializationEvent evt)
     {
         RecipesSmelting.sort();
+    }
+
+    private static class DummyRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe
+    {
+        @Override
+        public boolean matches(InventoryCrafting inv, World worldIn)
+        {
+            return false;
+        }
+
+        @Override
+        public ItemStack getCraftingResult(InventoryCrafting inv)
+        {
+            return ItemStack.EMPTY;
+        }
+
+        @Override
+        public boolean canFit(int width, int height)
+        {
+            return false;
+        }
+
+        @Override
+        public ItemStack getRecipeOutput()
+        {
+            return ItemStack.EMPTY;
+        }
     }
 
     private static class RecipeSmeltingFood implements RecipesSmelting.IRecipeSmelting

@@ -1,0 +1,21 @@
+{
+    "result": {
+        "item": "exp:bloomery",
+        "data": 0
+    },
+    "pattern": [
+        "BBB",
+        "S S",
+        "BBB"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "B" : {
+            "item": "exp:kaolin",
+            "data": 2
+        },
+        "S" : {
+            "item": "#SHEETDOUBLEBRONZE"
+        }
+    }
+}

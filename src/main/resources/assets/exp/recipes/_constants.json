@@ -256,6 +256,19 @@
         "name": "WOOL"
     },
     {
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "doubleSheetBronze"
+            },
+            {
+                "type": "forge:ore_dict",
+                "ore": "doublePlateBronze"
+            }
+        ],
+        "name": "SHEETDOUBLEBRONZE"
+    },
+    {
         "ingredient": {
             "type": "forge:ore_dict",
             "ore": "ingotCopper"

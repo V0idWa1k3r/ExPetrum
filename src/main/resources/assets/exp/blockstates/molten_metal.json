@@ -1,0 +1,34 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "cube_all",
+		"textures" : {
+			"particle" : "exp:blocks/crucible_metal",
+			"all" : "exp:blocks/crucible_metal"
+		}
+	},
+	"variants" : {
+		"normal": [{}],
+		"inventory": [{}],
+		"state": {
+			"normal": {
+                "textures" : {
+                    "particle" : "exp:blocks/crucible_metal",
+                    "all" : "exp:blocks/crucible_metal"
+                }
+            },
+            "invalid": {
+                "textures" : {
+                    "particle" : "exp:blocks/crucible_metal",
+                    "all" : "exp:blocks/crucible_metal"
+                }
+            },
+            "solid": {
+                "textures" : {
+                    "particle" : "exp:blocks/solid_metal",
+                    "all" : "exp:blocks/solid_metal"
+                }
+            }
+		}
+	}
+}

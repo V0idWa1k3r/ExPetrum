@@ -332,6 +332,8 @@ tile.exp.barrel.name=Wooden Barrel
 tile.exp.scraping_rack.name=Scraping Rack
 tile.exp.bellows.name=Bellows
 tile.exp.spinning_wheel.name=Spinning Wheel
+tile.exp.molten_metal.name=Molten Metal
+tile.exp.bloomery.name=Bloomery
 
 item.exp.item_ingot.name=Ingot
 
@@ -713,6 +715,8 @@ item.exp.item_generic.carded_wool.name=Carded Wool
 item.exp.item_generic.wool_yarn.name=Wool Yarn
 item.exp.item_generic.woven_cloth.name=Woven Cloth
 item.exp.item_generic.knitting_needle.name=Wooden Needle
+item.exp.item_generic.iron_bloom.name=Raw Iron Bloom
+item.exp.item_generic.refined_iron_bloom.name=Refined Iron Bloom
 item.exp.item_ore.acanthite.name=Acanthite Ore
 item.exp.item_ore.barite.name=Barite Ore
 item.exp.item_ore.bauxite.name=Bauxite Ore
@@ -942,6 +946,14 @@ item.exp.item_metal_generic.double_sheet.nichrome.name=Nichrome Double Sheet
 item.exp.item_metal_generic.double_sheet.vitallium.name=Vitallium Double Sheet
 item.exp.item_metal_generic.double_sheet.any.name=Unknown Alloy Double Sheet
 item.exp.item_wool_card.name=Wool Card
+item.exp.item_tuyere_bronze.name=Bronze Tuyere
+item.exp.item_tuyere_bismuth_bronze.name=Bismuth Bronze Tuyere
+item.exp.item_tuyere_leaded_bronze.name=Leaded Bronze Tuyere
+item.exp.item_tuyere_manganese_bronze.name=Manganese Bronze Tuyere
+item.exp.item_tuyere_rose_alloy.name=Rose Alloy Tuyere
+item.exp.item_tuyere_iron.name=Iron Tuyere
+item.exp.item_tuyere_steel.name=Steel Tuyere
+item.exp.item_tuyere_tool_steel.name=Tool Steel Tuyere
 
 exp.item.ingot.desc.type.tin=Tin
 exp.item.ingot.desc.type.barium=Barium

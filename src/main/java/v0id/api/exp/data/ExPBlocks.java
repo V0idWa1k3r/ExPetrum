@@ -297,4 +297,10 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockSpinningWheel)
     public static final Block spinningWheel = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockMoltenMetal)
+    public static final Block moltenMetal = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockBloomery)
+    public static final Block bloomery = null;
 }

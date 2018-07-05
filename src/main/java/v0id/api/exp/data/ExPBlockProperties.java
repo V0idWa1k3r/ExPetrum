@@ -35,6 +35,7 @@ public class ExPBlockProperties
 	public static final PropertyBool LOGPILE_IS_ROTATED = PropertyBool.create("rotated");
 	public static final PropertyBool FORGE_ISLIT = PropertyBool.create("active");
 	public static final PropertyBool CRUCIBLE_HASMETAL = PropertyBool.create("has_metal");
+	public static final PropertyBool BLOOMERY_ISLIT = PropertyBool.create("active");
 	public static final PropertyInteger WORKED_BOULDER_INDEX = PropertyInteger.create("workindex", 0, 7);
 	public static final PropertyInteger LOGPILE_COUNT = PropertyInteger.create("count", 1, 8);
 	public static final PropertyInteger CHARCOAL_COUNT = PropertyInteger.create("count", 1, 16);
@@ -43,7 +44,8 @@ public class ExPBlockProperties
 	public static final PropertyInteger CROP_GROWTH_STAGE = PropertyInteger.create("stage", 0, 15);
 	public static final PropertyEnum<EnumCrop> CROP_TYPE = PropertyEnum.create("type", EnumCrop.class);
     public static final PropertyEnum<EnumShrubberyType> SHRUBBERY_TYPE = PropertyEnum.create("type", EnumShrubberyType.class);
-	
+    public static final PropertyEnum<EnumMoltenMetalState> MOLTEN_METAL_STATE = PropertyEnum.create("state", EnumMoltenMetalState.class);
+
 	// Currently not used
 	public static final PropertyEnum<EnumOre> ORE_TYPE = PropertyEnum.create("oretype", EnumOre.class);
     public static final PropertyEnum<EnumGrassAmount> VEGETATION_LEVEL = PropertyEnum.create("level", EnumGrassAmount.class);

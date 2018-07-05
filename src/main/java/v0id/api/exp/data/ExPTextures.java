@@ -44,7 +44,8 @@ public class ExPTextures
             guiNone	                                                                        	  		 		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/none.png"),
             guiCrucible                                                                        	  		 		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/crucible.png"),
             guiInv9Sq                                                                        	  		 		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/inv_9_sq.png"),
-            guiBarrel                                                                        	  		 		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/barrel.png");
+            guiBarrel                                                                        	  		 		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/barrel.png"),
+            guiBloomery                                                                        	  		 		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/bloomery.png");
 
     static
 	{

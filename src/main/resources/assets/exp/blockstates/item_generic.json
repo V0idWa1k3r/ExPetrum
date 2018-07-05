@@ -158,6 +158,16 @@
                 "textures" : {
                     "layer0" : "exp:items/misc/knitting_needle"
                 }
+            },
+            "iron_bloom": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/iron_bloom"
+                }
+            },
+            "refined_iron_bloom": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/refined_iron_bloom"
+                }
             }
 		}
 	}

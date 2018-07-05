@@ -75,7 +75,9 @@ public class ExPRegistryNames
 		blockBarrel                                                                                         = "barrel",
         blockScrapingRack                                                                                   = "scraping_rack",
 		blockBellows																						= "bellows",
-        blockSpinningWheel                                                                                  = "spinning_wheel";
+        blockSpinningWheel                                                                                  = "spinning_wheel",
+        blockMoltenMetal                                                                                    = "molten_metal",
+        blockBloomery                                                                                       = "bloomery";
 
 	public static final String
 		itemRock																							= "item_rock",
@@ -108,7 +110,8 @@ public class ExPRegistryNames
         itemWoodenBucket                                                                                    = "item_wooden_bucket",
         itemGrindstone                                                                                      = "item_grindstone",
         itemMetalGeneric                                                                                    = "item_metal_generic",
-        itemWoolCard                                                                                        = "item_wool_card";
+        itemWoolCard                                                                                        = "item_wool_card",
+        itemTuyere                                                                                          = "item_tuyere";
 
 	public static final String
         biomeBeach                                                                                          = "beach",

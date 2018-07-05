@@ -64,10 +64,7 @@ import v0id.exp.entity.impl.Chicken;
 import v0id.exp.entity.impl.Cow;
 import v0id.exp.entity.impl.Pig;
 import v0id.exp.entity.impl.Sheep;
-import v0id.exp.item.ItemGeneric;
-import v0id.exp.item.ItemMetalGeneric;
-import v0id.exp.item.ItemMold;
-import v0id.exp.item.ItemPottery;
+import v0id.exp.item.*;
 import v0id.exp.registry.ILifecycleListener;
 import v0id.exp.tile.*;
 import v0id.exp.util.Helpers;
@@ -180,6 +177,7 @@ public class ClientRegistry implements ILifecycleListener
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.scrapingRack), 0, new ModelResourceLocation(ExPBlocks.scrapingRack.getRegistryName(), "normal"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.bellows), 0, new ModelResourceLocation(ExPBlocks.bellows.getRegistryName(), "inventory"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.spinningWheel), 0, new ModelResourceLocation(ExPBlocks.spinningWheel.getRegistryName(), "normal"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.bloomery), 0, new ModelResourceLocation(ExPBlocks.bloomery.getRegistryName(), "normal"));
         // Iteration-dependent models
         mkCustomModelResourceLocations(ExPItems.stick, EnumTreeType.values().length + EnumShrubType.values().length + EnumBerry.values().length, i -> "type=" + ExPOreDict.stickNames[i]);
         mkCustomModelResourceLocations(ExPItems.toolHead, EnumToolClass.values().length * EnumToolStats.values().length, i -> "material=" + EnumToolStats.values()[i % EnumToolStats.values().length].name().toLowerCase() + ",type=" + EnumToolClass.values()[i / EnumToolStats.values().length].name().toLowerCase());
@@ -218,6 +216,7 @@ public class ClientRegistry implements ILifecycleListener
         mkCustomModelResourceLocations(ExPBlocks.trough, 11, i -> "water=" + i);
         mkCustomModelResourceLocations(ExPBlocks.anvil, EnumAnvilMaterial.values().length, i -> "inventory");
         mkCustomModelResourceLocations(ExPItems.metalGeneric, EnumMetal.values().length * ItemMetalGeneric.EnumGenericType.values().length, i -> "type=" + ItemMetalGeneric.EnumGenericType.values()[i / EnumMetal.values().length].name().toLowerCase());
+        mkCustomModelResourceLocations(ExPBlocks.moltenMetal, EnumMoltenMetalState.values().length, i -> "state=" + EnumMoltenMetalState.values()[i].getName());
 
         // Statically mapped item models
         registerStaticModel(ExPItems.basket, new ModelResourceLocation(ExPItems.basket.getRegistryName(), "inventory"));
@@ -340,6 +339,12 @@ public class ClientRegistry implements ILifecycleListener
         {
             Integer lambdaCaptureInt = i;
             toolsList.forEach(tool -> ModelLoader.registerItemVariants(tool, new ModelResourceLocation(new ResourceLocation(tool.getRegistryName().getResourceDomain(), "tools/" + tool.getRegistryName().getResourcePath()), "material=" + EnumToolStats.values()[lambdaCaptureInt].getName())));
+            if (ItemTuyere.items.containsKey(EnumToolStats.values()[i]))
+            {
+                ModelResourceLocation mloc = new ModelResourceLocation(new ResourceLocation(ExPRegistryNames.modid, "tools/" + ExPRegistryNames.itemTuyere), "material=" + EnumToolStats.values()[i].getName());
+                ModelLoader.setCustomMeshDefinition(ItemTuyere.items.get(EnumToolStats.values()[i]), is -> mloc);
+                ModelLoader.registerItemVariants(ItemTuyere.items.get(EnumToolStats.values()[i]), mloc);
+            }
         }
     }
 
