@@ -168,6 +168,11 @@
                 "textures" : {
                     "layer0" : "exp:items/misc/refined_iron_bloom"
                 }
+            },
+            "treated_stick": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/treated_stick"
+                }
             }
 		}
 	}

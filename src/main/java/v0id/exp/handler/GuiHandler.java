@@ -96,6 +96,11 @@ public class GuiHandler implements IGuiHandler
                 return new GuiBloomery(player.inventory, (TileBloomery) tile);
             }
 
+            case 12:
+            {
+                return new GuiPress(player.inventory, (TileFruitPress) tile);
+            }
+
             default:
             {
                 return null;
@@ -179,6 +184,11 @@ public class GuiHandler implements IGuiHandler
             case 11:
             {
                 return new ContainerBloomery(player.inventory, (TileBloomery) tile);
+            }
+
+            case 12:
+            {
+                return new ContainerPress(player.inventory, (TileFruitPress) tile);
             }
 
             default:

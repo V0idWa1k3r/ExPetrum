@@ -269,6 +269,19 @@
         "name": "SHEETDOUBLEBRONZE"
     },
     {
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "doubleSheetCopper"
+            },
+            {
+                "type": "forge:ore_dict",
+                "ore": "doublePlateCopper"
+            }
+        ],
+        "name": "SHEETDOUBLECOPPER"
+    },
+    {
         "ingredient": {
             "type": "forge:ore_dict",
             "ore": "ingotCopper"

@@ -48,7 +48,8 @@ public class ItemGeneric extends Item implements IInitializableItem, IWeightProv
         WOVEN_CLOTH("woven_cloth", 0.4F, IWeightProvider.DEFAULT_VOLUME, "wool", "woolWhite", "cloth"),
         KNITTING_NEEDLE("knitting_needle", 0.05F, IWeightProvider.DEFAULT_VOLUME, "knittingNeedle"),
         IRON_BLOOM("iron_bloom", 1F, IWeightProvider.DEFAULT_VOLUME, "bloomIron"),
-        REFINED_IRON_BLOOM("refined_iron_bloom", 0.5F, IWeightProvider.DEFAULT_VOLUME, "bloomIronRefined");
+        REFINED_IRON_BLOOM("refined_iron_bloom", 0.5F, IWeightProvider.DEFAULT_VOLUME, "bloomIronRefined"),
+        TREATED_STICK("treated_stick", 0.01F, IWeightProvider.DEFAULT_VOLUME, "stickWood", "stickTreated", "stickTreatedWood", "stickWoodTreated");
 
         EnumGenericType(String name, float weight, Pair<Byte, Byte> volume, String... oreDictNames)
         {

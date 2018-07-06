@@ -46,11 +46,11 @@ public class ModelPig extends EntityModelDynamic
         head.addChild(head1);
         ModelRenderer tuskl = new ModelRenderer(this, "tuskl").setTextureOffset(48, 0);
         tuskl.addBox(0, 0, 0, 1, 2, 1);
-        tuskl.setRotationPoint(-0.5F, 2, -0.5F);
+        tuskl.setRotationPoint(-0.5F, 2, 0.5F);
         head1.addChild(tuskl);
         ModelRenderer tuskr = new ModelRenderer(this, "tuskl").setTextureOffset(48, 0);
         tuskr.addBox(0, 0, 0, 1, 2, 1);
-        tuskr.setRotationPoint(2.5F, 2, -0.5F);
+        tuskr.setRotationPoint(2.5F, 2, 0.5F);
         head1.addChild(tuskr);
         ModelRenderer udder = new ModelRenderer(this, "udder").setTextureOffset(40, 10);
         udder.addBox(0, 0, 0, 6, 1, 6);

@@ -1,0 +1,43 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"textures" : {
+		},
+		"transform": "forge:default-block",
+		"gui3d" : true,
+		"model" : "exp:press_0"
+	},
+	"variants" : {
+		"normal": [{}],
+        "inventory": [{}],
+		"value": {
+			"0": {
+                "model" : "exp:press_0"
+            },
+            "1": {
+                "model" : "exp:press_1"
+            },
+            "2": {
+                "model" : "exp:press_2"
+            },
+            "3": {
+                "model" : "exp:press_3"
+            },
+            "4": {
+                "model" : "exp:press_4"
+            },
+            "5": {
+                "model" : "exp:press_5"
+            },
+            "6": {
+                "model" : "exp:press_6"
+            },
+            "7": {
+                "model" : "exp:press_7"
+            },
+            "8": {
+                "model" : "exp:press_8"
+            }
+		}
+	}
+}

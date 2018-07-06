@@ -63,6 +63,11 @@ public class RecipeFoodCombine extends IForgeRegistryEntry.Impl<IRecipe> impleme
             }
         }
 
+        if (food.isEmpty())
+        {
+            return ItemStack.EMPTY;
+        }
+
         ItemFood ifood = (ItemFood) food.getItem();
         ifood.setTotalWeight(food, Math.min(10000, amount));
         ifood.setTotalRot(food, Math.min(((ItemFood)food.getItem()).getEntry(food).getBaseHealth(), rot));

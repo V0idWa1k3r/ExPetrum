@@ -77,7 +77,8 @@ public class ExPRegistryNames
 		blockBellows																						= "bellows",
         blockSpinningWheel                                                                                  = "spinning_wheel",
         blockMoltenMetal                                                                                    = "molten_metal",
-        blockBloomery                                                                                       = "bloomery";
+        blockBloomery                                                                                       = "bloomery",
+		blockFruitPress                                                                                     = "fruit_press";
 
 	public static final String
 		itemRock																							= "item_rock",
@@ -163,7 +164,10 @@ public class ExPRegistryNames
 		fluidOil																							= "oil",
         fluidClay                                                                                           = "clay",
         fluidMilk                                                                                           = "milk",
-        fluidTannin                                                                                         = "tannin";
+        fluidTannin                                                                                         = "tannin",
+        fluidOliveOil                                                                                       = "olive_oil",
+        fluidWalnutOil                                                                                      = "walnut_oil",
+        fluidJuice                                                                                          = "fruit_juice";
 
 	public static final String
         soundNewAge                                                                                         = "sound_new_age";

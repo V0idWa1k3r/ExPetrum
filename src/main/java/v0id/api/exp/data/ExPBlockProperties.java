@@ -40,6 +40,7 @@ public class ExPBlockProperties
 	public static final PropertyInteger LOGPILE_COUNT = PropertyInteger.create("count", 1, 8);
 	public static final PropertyInteger CHARCOAL_COUNT = PropertyInteger.create("count", 1, 16);
 	public static final PropertyInteger TROUGH_WATER = PropertyInteger.create("water", 0, 10);
+	public static final PropertyInteger PRESS_VALUE = PropertyInteger.create("value", 0, 8);
 	// Note that some values of this property are unused, use the CropData from EnumCrop obtained from a capability.
 	public static final PropertyInteger CROP_GROWTH_STAGE = PropertyInteger.create("stage", 0, 15);
 	public static final PropertyEnum<EnumCrop> CROP_TYPE = PropertyEnum.create("type", EnumCrop.class);

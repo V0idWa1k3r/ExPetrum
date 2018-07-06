@@ -303,4 +303,7 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockBloomery)
     public static final Block bloomery = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockFruitPress)
+    public static final Block fruitPress = null;
 }

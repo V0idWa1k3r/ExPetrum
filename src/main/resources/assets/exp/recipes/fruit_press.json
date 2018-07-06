@@ -1,0 +1,20 @@
+{
+    "result": {
+        "item": "exp:fruit_press",
+        "data": 0
+    },
+    "pattern": [
+        "P P",
+        "PCP",
+        " P "
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "P" : {
+            "item": "#PLANKS"
+        },
+        "C" : {
+            "item": "#SHEETDOUBLECOPPER"
+        }
+    }
+}

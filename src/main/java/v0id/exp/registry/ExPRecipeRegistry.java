@@ -9,8 +9,10 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -163,12 +165,105 @@ public class ExPRecipeRegistry extends AbstractRegistry
         RecipesBarrel.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.HIDE.ordinal()), new FluidStack(FluidRegistry.WATER, 100), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.SOAKED_HIDE.ordinal()), 6000);
         RecipesBarrel.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.PREPARED_HIDE.ordinal()), new FluidStack(ExPFluids.tannin, 50), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.LEATHER.ordinal()), 12000);
         RecipesBarrel.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.WOOL.ordinal()), new FluidStack(FluidRegistry.WATER, 100), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.SOAKED_WOOL.ordinal()), 6000);
+        RecipesBarrel.addRecipe(new RecipeBarrelTreatedStick(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.TREATED_STICK.ordinal()), new FluidStack(ExPFluids.oliveOil, 200), 12000));
+        RecipesBarrel.addRecipe(new RecipeBarrelTreatedStick(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.TREATED_STICK.ordinal()), new FluidStack(ExPFluids.walnutOil, 500), 12000));
+
+        RecipesPress.addRecipe(new RecipePressFood(ExPFluids.oliveOil, FoodEntry.OLIVE));
+        RecipesPress.addRecipe(new RecipePressFood(ExPFluids.walnutOil, FoodEntry.WALNUT));
+        RecipesPress.addRecipe(new RecipePressFood(ExPFluids.juice, FoodEntry.APPLE));
+        RecipesPress.addRecipe(new RecipePressFood(ExPFluids.juice, FoodEntry.PEACH));
+        RecipesPress.addRecipe(new RecipePressFood(ExPFluids.juice, FoodEntry.ORANGE));
+        RecipesPress.addRecipe(new RecipePressFood(ExPFluids.juice, FoodEntry.PEAR));
+        RecipesPress.addRecipe(new RecipePressFood(ExPFluids.juice, FoodEntry.PLUM));
+        RecipesPress.addRecipe(new RecipePressFood(ExPFluids.juice, FoodEntry.BANANA));
+        RecipesPress.addRecipe(new RecipePressFood(ExPFluids.juice, FoodEntry.LEMON));
+        RecipesPress.addRecipe(new RecipePressFood(ExPFluids.juice, FoodEntry.APRICOT));
+        RecipesPress.addRecipe(new RecipePressFood(ExPFluids.juice, FoodEntry.CHERRY));
+        RecipesPress.addRecipe(new RecipePressFood(ExPFluids.juice, FoodEntry.POMEGRANATE));
+        RecipesPress.addRecipe(new RecipePressFood(ExPFluids.juice, FoodEntry.GRAPEFRUIT));
+        RecipesPress.addRecipe(new RecipePressFood(ExPFluids.juice, FoodEntry.AVOCADO));
+        RecipesPress.addRecipe(new RecipePressFood(ExPFluids.juice, FoodEntry.CARAMBOLA));
     }
 
     @Override
     public void postInit(FMLPostInitializationEvent evt)
     {
         RecipesSmelting.sort();
+    }
+
+    private static class RecipeBarrelTreatedStick implements RecipesBarrel.IRecipeBarrel
+    {
+        private final ItemStack itemOut;
+        private final FluidStack fluidIn;
+        private final int timeReq;
+
+        public RecipeBarrelTreatedStick(ItemStack itemOut, FluidStack fluidIn, int timeReq)
+        {
+            this.itemOut = itemOut;
+            this.fluidIn = fluidIn;
+            this.timeReq = timeReq;
+        }
+
+        @Override
+        public boolean matches(FluidStack fs, ItemStack is)
+        {
+            return fs.isFluidEqual(fluidIn) && is.getItem() instanceof ItemStick;
+        }
+
+        @Override
+        public int getProgressRequired(ItemStack is)
+        {
+            return this.timeReq;
+        }
+
+        @Override
+        public ItemStack getResult(ItemStack is)
+        {
+            return this.itemOut.copy();
+        }
+
+        @Override
+        public void consumeFluid(IFluidHandler handler, ItemStack is)
+        {
+            handler.drain(this.fluidIn, true);
+        }
+
+        @Override
+        public String getRecipeName(ItemStack is)
+        {
+            return this.itemOut.getUnlocalizedName() + ".name";
+        }
+
+        @Override
+        public void consumeItem(ItemStack is)
+        {
+            is.shrink(1);
+        }
+    }
+
+    private static class RecipePressFood implements RecipesPress.IRecipePress
+    {
+        private final Fluid fluidOut;
+        private final FoodEntry foodEntry;
+
+        public RecipePressFood(Fluid fluidOut, FoodEntry foodEntry)
+        {
+            this.fluidOut = fluidOut;
+            this.foodEntry = foodEntry;
+        }
+
+        @Override
+        public boolean matches(ItemStack is)
+        {
+            return is.getItem() instanceof ItemFood && is.getMetadata() == this.foodEntry.getId();
+        }
+
+        @Override
+        public FluidStack getOutput(ItemStack is)
+        {
+            int amount = (int) ((ItemFood)is.getItem()).getTotalWeight(is);
+            return new FluidStack(this.fluidOut, amount);
+        }
     }
 
     private static class DummyRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe

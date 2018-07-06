@@ -7,6 +7,7 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -184,11 +185,12 @@ public class Sheep extends EntityAnimal
         if (!this.processDefaultInteraction(interactor) && !this.world.isRemote && this.getDataManager().get(PARAM_WOOL_TICKS) <= 0)
         {
             ItemStack is = interactor.getHeldItem(EnumHand.MAIN_HAND);
-            if (is.getItem() instanceof IShears)
+            if (is.getItem() instanceof IShears || is.getItem() instanceof ItemShears)
             {
                 if (this.animalCapability.getFamiliarity() >= 75)
                 {
-                    this.dropItem(new ItemStack(ExPItems.generic, ((IShears) is.getItem()).getWoolAmount(this, is), ItemGeneric.EnumGenericType.WOOL.ordinal()));
+                    int amt = is.getItem() instanceof IShears ? ((IShears) is.getItem()).getWoolAmount(this, is) : 2;
+                    this.dropItem(new ItemStack(ExPItems.generic, amt, ItemGeneric.EnumGenericType.WOOL.ordinal()));
                     this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.NEUTRAL, 1, 1);
                     is.damageItem(1, interactor);
                     this.getDataManager().set(PARAM_WOOL_TICKS, (int) IExPWorld.of(this.world).today().ticksPerDay * 10);

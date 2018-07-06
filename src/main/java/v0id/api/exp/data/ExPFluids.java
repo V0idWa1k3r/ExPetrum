@@ -11,4 +11,7 @@ public class ExPFluids
 	public static Fluid clay;
 	public static Fluid milk;
 	public static Fluid tannin;
+	public static Fluid oliveOil;
+	public static Fluid walnutOil;
+	public static Fluid juice;
 }
