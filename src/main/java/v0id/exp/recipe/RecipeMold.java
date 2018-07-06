@@ -3,54 +3,32 @@ package v0id.exp.recipe;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.registries.IForgeRegistryEntry;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 import v0id.api.exp.item.IMold;
 
-public class RecipeMold extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe
-{
-    @Override
-    public boolean matches(InventoryCrafting inv, World worldIn)
-    {
-        boolean hasMold = false;
-        for (int i = 0; i < inv.getWidth() * inv.getHeight(); ++i)
-        {
-            ItemStack is = inv.getStackInSlot(i);
-            if (!is.isEmpty())
-            {
-                if (hasMold)
-                {
-                    return false;
-                }
-                else
-                {
-                    if (is.getItem() instanceof IMold)
-                    {
-                        hasMold = true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-            }
-        }
+import javax.annotation.Nonnull;
 
-        return hasMold;
+public class RecipeMold extends ShapelessOreRecipe implements IRecipe
+{
+    public RecipeMold(@Nonnull ItemStack result, Object... input)
+    {
+        super(new ResourceLocation("minecraft:misc"), result, input);
     }
 
     @Override
-    public ItemStack getCraftingResult(InventoryCrafting inv)
+    public boolean matches(InventoryCrafting inv, World worldIn)
     {
         ItemStack mold = ItemStack.EMPTY;
         for (int i = 0; i < inv.getWidth() * inv.getHeight(); ++i)
         {
             ItemStack is = inv.getStackInSlot(i);
-            if (!is.isEmpty())
+            if (!is.isEmpty() && is.getItem() instanceof IMold)
             {
                 if (!mold.isEmpty())
                 {
-                    return ItemStack.EMPTY;
+                    return false;
                 }
                 else
                 {
@@ -60,30 +38,12 @@ public class RecipeMold extends IForgeRegistryEntry.Impl<IRecipe> implements IRe
                     }
                     else
                     {
-                        return ItemStack.EMPTY;
+                        return false;
                     }
                 }
             }
         }
 
-        return ((IMold)mold.getItem()).isLiquid(mold) ? ItemStack.EMPTY : ((IMold)mold.getItem()).getResult(mold);
-    }
-
-    @Override
-    public boolean canFit(int width, int height)
-    {
-        return width * height >= 1;
-    }
-
-    @Override
-    public ItemStack getRecipeOutput()
-    {
-        return ItemStack.EMPTY;
-    }
-
-    @Override
-    public boolean isDynamic()
-    {
-        return true;
+        return super.matches(inv, worldIn) && !((IMold)mold.getItem()).isLiquid(mold);
     }
 }

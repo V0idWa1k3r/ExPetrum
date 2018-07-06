@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "exp:chest",
+    "data": 9
+  },
+  "pattern": [
+    "###",
+    "#L#",
+    "###"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "#": {
+      "item": "exp:planks0",
+      "data": 9
+    },
+    "L": {
+      "item": "exp:item_generic",
+      "data": 33
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "exp:planks1",
+    "data": 7,
+    "count": 2
+  },
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "exp:logDeco4",
+      "data": 7
+    },
+    {
+      "item": "#SAW"
+    }
+  ]
+}

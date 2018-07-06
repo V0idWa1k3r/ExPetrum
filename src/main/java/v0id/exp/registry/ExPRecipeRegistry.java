@@ -36,7 +36,6 @@ import v0id.core.logging.LogLevel;
 import v0id.exp.item.*;
 import v0id.exp.recipe.RecipeFoodCombine;
 import v0id.exp.recipe.RecipeMold;
-import v0id.exp.recipe.RecipePlanks;
 
 public class ExPRecipeRegistry extends AbstractRegistry
 {
@@ -57,8 +56,16 @@ public class ExPRecipeRegistry extends AbstractRegistry
     public void registerRecipes(RegistryEvent.Register<IRecipe> event)
     {
         final ResourceLocation mcloc = new ResourceLocation("minecraft:misc");
-        event.getRegistry().register(new RecipeMold().setRegistryName("exp:recipe_hardcoded_mold"));
-        event.getRegistry().register(new RecipePlanks().setRegistryName("exp:recipe_hardcoded_planks"));
+        for (EnumMetal metal : EnumMetal.values())
+        {
+            event.getRegistry().register(new RecipeMold(new ItemStack(ExPItems.ingot, 1, metal.ordinal()), new ItemStack(ExPItems.moldIngot, 1, 2 + metal.ordinal())).setRegistryName("exp:recipe_hardcoded_mold_ingot_" + metal.getName()));
+        }
+
+        for (EnumToolClass tool : EnumToolClass.values())
+        {
+            event.getRegistry().register(new RecipeMold(ItemToolHead.createToolHead(tool, EnumToolStats.COPPER), new ItemStack(ExPItems.moldTool, 1, ItemMold.EnumMoldType.FULL.ordinal() * EnumToolClass.values().length + tool.ordinal())).setRegistryName("exp:recipe_hardcoded_mold_toolhead_" + tool.name().toLowerCase()));
+        }
+
         event.getRegistry().register(new RecipeFoodCombine().setRegistryName("exp:recipe_hardcoded_food"));
         ForgeRegistry<IRecipe> reg = (ForgeRegistry<IRecipe>) event.getRegistry();
         if (Loader.isModLoaded("chiselsandbits"))

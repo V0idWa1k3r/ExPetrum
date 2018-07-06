@@ -1,0 +1,17 @@
+{
+    "result": {
+        "item": "minecraft:wooden_door",
+        "data": 0
+    },
+    "pattern": [
+        "PP",
+        "PP",
+        "PP"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "P" : {
+            "item": "#PLANKS"
+        }
+    }
+}

@@ -173,6 +173,11 @@
                 "textures" : {
                     "layer0" : "exp:items/misc/treated_stick"
                 }
+            },
+            "lock": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/lock"
+                }
             }
 		}
 	}

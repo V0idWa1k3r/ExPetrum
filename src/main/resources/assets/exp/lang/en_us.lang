@@ -338,6 +338,7 @@ tile.exp.spinning_wheel.name=Spinning Wheel
 tile.exp.molten_metal.name=Molten Metal
 tile.exp.bloomery.name=Bloomery
 tile.exp.fruit_press.name=Fruit Press
+tile.exp.chest.name=Chest
 
 item.exp.item_ingot.name=Ingot
 
@@ -722,6 +723,7 @@ item.exp.item_generic.knitting_needle.name=Wooden Needle
 item.exp.item_generic.iron_bloom.name=Raw Iron Bloom
 item.exp.item_generic.refined_iron_bloom.name=Refined Iron Bloom
 item.exp.item_generic.treated_stick.name=Treated Stick
+item.exp.item_generic.lock.name=Iron Lock
 item.exp.item_ore.acanthite.name=Acanthite Ore
 item.exp.item_ore.barite.name=Barite Ore
 item.exp.item_ore.bauxite.name=Bauxite Ore
