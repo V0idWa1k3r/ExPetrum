@@ -71,6 +71,26 @@ public class RecipesBarrel
         }
 
         @Override
+        public ItemStack getInput()
+        {
+            return this.itemIn;
+        }
+
+        @Override
+        public FluidStack getInputFluid()
+        {
+            return new FluidStack(this.fluidIn, 10000);
+        }
+
+        @Override
+        public FluidStack getOutputFluid(ItemStack is)
+        {
+            FluidStack copy = this.fluidOut.copy();
+            copy.amount = 10000;
+            return this.constructFluid ? copy : this.fluidOut.copy();
+        }
+
+        @Override
         public void consumeFluid(IFluidHandler handler, ItemStack is)
         {
             FluidStack fs = handler.drain(Integer.MAX_VALUE, true);
@@ -124,6 +144,28 @@ public class RecipesBarrel
         }
 
         @Override
+        public ItemStack getInput()
+        {
+            return this.itemIn;
+        }
+
+        @Override
+        public FluidStack getInputFluid()
+        {
+            FluidStack copy = this.fluidIn.copy();
+            copy.amount = 10000;
+            return copy;
+        }
+
+        @Override
+        public FluidStack getOutputFluid(ItemStack is)
+        {
+            FluidStack copy = this.fluidIn.copy();
+            copy.amount = 10000 - this.fluidIn.amount;
+            return copy;
+        }
+
+        @Override
         public void consumeFluid(IFluidHandler handler, ItemStack is)
         {
             handler.drain(this.fluidIn.amount, true);
@@ -149,6 +191,12 @@ public class RecipesBarrel
         int getProgressRequired(ItemStack is);
 
         ItemStack getResult(ItemStack is);
+
+        ItemStack getInput();
+
+        FluidStack getInputFluid();
+
+        FluidStack getOutputFluid(ItemStack is);
 
         void consumeFluid(IFluidHandler handler, ItemStack is);
 

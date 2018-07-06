@@ -160,6 +160,27 @@ exp.txt.animalFull=This animal doesn't want any food now.
 exp.txt.pregnant=This animal is pregnant.
 exp.txt.notAllowed=The animal doesn't trust you enough to do that.
 exp.txt.mb=%dmb
+exp.txt.temperature=%d℃
+exp.txt.progress=%d Prog.
+exp.txt.anvilTier=Req. Anvil Tier:
+exp.txt.anvil.tier.-1=Stone
+exp.txt.anvil.tier.0=Copper
+exp.txt.anvil.tier.1=Bronze
+exp.txt.anvil.tier.2=Iron
+exp.txt.anvil.tier.3=Steel
+exp.txt.anvil.tier.4=Tool/HSLA Steel
+
+exp.jei.category.smelting=Smelting
+exp.jei.category.pottery=Pottery
+exp.jei.category.anvilWeld=Welding
+exp.jei.category.anvil=Smithing
+exp.jei.category.alloying=Alloying
+exp.jei.category.quern=Quern
+exp.jei.category.scrapingRack=Scraping Rack
+exp.jei.category.spinningWheel=Spinning Wheel
+exp.jei.category.bloomery=Bloomery
+exp.jei.category.barrel=Barrel
+exp.jei.category.press=Fruit Press
 
 exp.bend.name=Bend
 exp.bend.desc=+10 Prog|-5 Int

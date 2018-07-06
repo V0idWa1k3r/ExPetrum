@@ -107,6 +107,12 @@ public class RecipesAnvil
         }
 
         @Override
+        public ItemStack getInput()
+        {
+            return this.itemIn;
+        }
+
+        @Override
         public int getProgressRequired(ItemStack in)
         {
             return this.progress;
@@ -116,6 +122,12 @@ public class RecipesAnvil
         public int getRequiredTier()
         {
             return this.tierReq;
+        }
+
+        @Override
+        public int getRequiredTemperature()
+        {
+            return this.temperature;
         }
     }
 
@@ -143,10 +155,14 @@ public class RecipesAnvil
 
         ItemStack getResult(ItemStack in);
 
+        ItemStack getInput();
+
         int getID();
 
         int getProgressRequired(ItemStack in);
 
         int getRequiredTier();
+
+        int getRequiredTemperature();
     }
 }

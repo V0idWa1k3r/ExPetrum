@@ -16,6 +16,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.ForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -36,6 +37,9 @@ import v0id.core.logging.LogLevel;
 import v0id.exp.item.*;
 import v0id.exp.recipe.RecipeFoodCombine;
 import v0id.exp.recipe.RecipeMold;
+
+import java.util.Collections;
+import java.util.List;
 
 public class ExPRecipeRegistry extends AbstractRegistry
 {
@@ -231,6 +235,28 @@ public class ExPRecipeRegistry extends AbstractRegistry
         }
 
         @Override
+        public ItemStack getInput()
+        {
+            return new ItemStack(ExPItems.stick, 1, OreDictionary.WILDCARD_VALUE);
+        }
+
+        @Override
+        public FluidStack getInputFluid()
+        {
+            FluidStack copy = this.fluidIn.copy();
+            copy.amount = 10000;
+            return copy;
+        }
+
+        @Override
+        public FluidStack getOutputFluid(ItemStack is)
+        {
+            FluidStack copy = this.fluidIn.copy();
+            copy.amount = 10000 - this.fluidIn.amount;
+            return copy;
+        }
+
+        @Override
         public void consumeFluid(IFluidHandler handler, ItemStack is)
         {
             handler.drain(this.fluidIn, true);
@@ -269,8 +295,14 @@ public class ExPRecipeRegistry extends AbstractRegistry
         @Override
         public FluidStack getOutput(ItemStack is)
         {
-            int amount = (int) ((ItemFood)is.getItem()).getTotalWeight(is);
+            int amount = is.isEmpty() ? 10000 : (int) ((ItemFood)is.getItem()).getTotalWeight(is);
             return new FluidStack(this.fluidOut, amount);
+        }
+
+        @Override
+        public ItemStack getInput()
+        {
+            return new ItemStack(ExPItems.food, 1, this.foodEntry.getId());
         }
     }
 
@@ -333,6 +365,12 @@ public class ExPRecipeRegistry extends AbstractRegistry
         }
 
         @Override
+        public List<ItemStack> getInput(ItemStack is)
+        {
+            return Collections.singletonList(new ItemStack(ExPItems.food, 1, this.entryIn.getId()));
+        }
+
+        @Override
         public float getTemperature()
         {
             return this.t;
@@ -352,6 +390,12 @@ public class ExPRecipeRegistry extends AbstractRegistry
         public ItemStack getOutput(ItemStack is)
         {
             return ItemStack.EMPTY;
+        }
+
+        @Override
+        public List<ItemStack> getInput(ItemStack is)
+        {
+            return Collections.EMPTY_LIST;
         }
 
         @Override

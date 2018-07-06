@@ -37,6 +37,12 @@ public class RecipesPress
         {
             return this.fsOut.copy();
         }
+
+        @Override
+        public ItemStack getInput()
+        {
+            return this.itemIn;
+        }
     }
 
     public interface IRecipePress
@@ -44,5 +50,7 @@ public class RecipesPress
         boolean matches(ItemStack is);
 
         FluidStack getOutput(ItemStack is);
+
+        ItemStack getInput();
     }
 }

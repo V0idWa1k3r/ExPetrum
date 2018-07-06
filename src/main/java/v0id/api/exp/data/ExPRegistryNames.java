@@ -173,6 +173,19 @@ public class ExPRegistryNames
 	public static final String
         soundNewAge                                                                                         = "sound_new_age";
 
+	public static final String
+        jeiCategorySmelting                                                                                 = "smelting",
+        jeiCategoryPottery                                                                                  = "pottery",
+        jeiCategoryAnvilWeld                                                                                = "anvil_weld",
+        jeiCategoryAnvil                                                                                    = "anvil_smith",
+        jeiCategoryAlloying                                                                                 = "alloying",
+        jeiCategoryQuern                                                                                    = "quern",
+        jeiCategoryBarrel                                                                                   = "barrel",
+        jeiCategoryPress                                                                                    = "press",
+        jeiCategoryScrapingRack                                                                             = "scraping_rack",
+        jeiCategorySpinningWheel                                                                            = "spinning_wheel",
+        jeiCategoryBloomery                                                                                 = "bloomery";
+
 	private static final Map<String, ResourceLocation> cache = Maps.newHashMap();
 
 	public static ResourceLocation asLocation(String name)

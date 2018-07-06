@@ -37,6 +37,8 @@ public class RecipesQuern
         boolean matches(ItemStack in);
 
         ItemStack getOut(ItemStack in);
+
+        ItemStack getIn();
     }
 
     public static class RecipeQuern implements IRecipeQuern
@@ -60,6 +62,12 @@ public class RecipesQuern
         public ItemStack getOut(ItemStack in)
         {
             return this.itemOut;
+        }
+
+        @Override
+        public ItemStack getIn()
+        {
+            return this.itemIn;
         }
     }
 }

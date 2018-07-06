@@ -2,10 +2,12 @@ package v0id.api.exp.recipe;
 
 import com.google.common.collect.Lists;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import v0id.exp.util.OreDictManager;
 import v0id.exp.util.temperature.TemperatureUtils;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -78,6 +80,12 @@ public class RecipesSmelting
         }
 
         @Override
+        public List<ItemStack> getInput(ItemStack is)
+        {
+            return OreDictionary.getOres(this.ore);
+        }
+
+        @Override
         public float getTemperature()
         {
             return this.temperature;
@@ -110,6 +118,12 @@ public class RecipesSmelting
         }
 
         @Override
+        public List<ItemStack> getInput(ItemStack is)
+        {
+            return Collections.singletonList(this.itemIn);
+        }
+
+        @Override
         public float getTemperature()
         {
             return this.temperature;
@@ -121,6 +135,8 @@ public class RecipesSmelting
         boolean matches(ItemStack is, float temperature);
 
         ItemStack getOutput(ItemStack is);
+
+        List<ItemStack> getInput(ItemStack is);
 
         float getTemperature();
     }
