@@ -18,6 +18,8 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.ForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import v0id.api.exp.block.EnumOre;
+import v0id.api.exp.block.property.EnumRockClass;
+import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPFluids;
 import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.data.ExPMisc;
@@ -106,11 +108,21 @@ public class ExPRecipeRegistry extends AbstractRegistry
             RecipesSmelting.addRecipe(new RecipesSmelting.RecipeSmelting(new ItemStack(ExPItems.moldTool, 1, tool.ordinal()), new ItemStack(ExPItems.moldTool, 1, tool.ordinal() + EnumToolClass.values().length), 540F));
         }
 
+        for (EnumRockClass rock : EnumRockClass.values())
+        {
+            RecipesSmelting.addRecipe(new RecipesSmelting.RecipeSmelting(new ItemStack(ExPBlocks.sand, 1, rock.ordinal()), new ItemStack(Blocks.GLASS), 600F));
+        }
+
         RecipesQuern.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.KAOLIN.ordinal()), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.KAOLIN_POWDER.ordinal()));
         RecipesQuern.addRecipe(new ItemStack(Items.FLINT, 1, 0), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.FLINT_POWDER.ordinal()));
         RecipesQuern.addRecipe(new ItemStack(ExPItems.ore, 1, EnumOre.CINNABAR.ordinal()), new ItemStack(Items.REDSTONE, 8, 0));
         RecipesQuern.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.CHARCOAL.ordinal()), new ItemStack(ExPItems.generic, 8, ItemGeneric.EnumGenericType.FLUX.ordinal()));
         RecipesQuern.addRecipe(new ItemStack(Items.BONE, 1, 0), new ItemStack(Items.DYE, 4, 15));
+        for (EnumRockClass rock : EnumRockClass.values())
+        {
+            RecipesQuern.addRecipe(new ItemStack(ExPBlocks.rock, 1, rock.ordinal()), new ItemStack(ExPBlocks.sand, 1, rock.ordinal()));
+        }
+
         for (EnumMetal metal : EnumMetal.values())
         {
             RecipesAnvil.addWeldingRecipe(new ItemStack(ExPItems.ingot, 1, metal.ordinal()), new ItemStack(ExPItems.ingot, 1, metal.ordinal()), (int)(metal.getMeltingTemperature() * 0.85F), (int)(metal.getMeltingTemperature() * 0.85F), new ItemStack(ExPItems.metalGeneric, 1, metal.ordinal()), metal.getRequiredAnvilTier() - 1);
