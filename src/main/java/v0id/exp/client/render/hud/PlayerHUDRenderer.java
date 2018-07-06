@@ -90,6 +90,8 @@ public class PlayerHUDRenderer
 		EnumHandSide hand = p.getPrimaryHand().opposite();
 		float cX = sRes.getScaledWidth() / 2;
 		GlStateManager.enableAlpha();
+		GlStateManager.enableBlend();
+		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 		GlStateManager.color(1, 1, 1, 1F);
 		vb.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
 		vb.pos(cX - 96, sRes.getScaledHeight(), 0).tex(0, hotbarVEnd).endVertex();
@@ -147,6 +149,7 @@ public class PlayerHUDRenderer
 		vb.pos(sRes.getScaledWidth() - 16, sRes.getScaledHeight() - 36, 0).tex(wHUStart, wHVStart).endVertex();
 		Tessellator.getInstance().draw();
 		GlStateManager.disableAlpha();
+		GlStateManager.disableBlend();
 		Minecraft.getMinecraft().mcProfiler.endSection();
 		Minecraft.getMinecraft().mcProfiler.startSection("hotbar");
 		renderHotbar(partialTicks, sRes);
@@ -214,7 +217,7 @@ public class PlayerHUDRenderer
 	public static void beginNewAge(EnumPlayerProgression age)
     {
         newAgeType = age;
-        newAgeTicks = 560;
+        newAgeTicks = 200;
         Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(ExPSounds.newAge, 1.0F));
     }
 
@@ -228,14 +231,14 @@ public class PlayerHUDRenderer
             Minecraft.getMinecraft().renderEngine.bindTexture(ExPTextures.AGES[newAgeType.ordinal()]);
             BufferBuilder bb = Tessellator.getInstance().getBuffer();
             bb.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
-            float[] c = new float[]{1, 1, 1, newAgeTicks > 500 ? (60 - (newAgeTicks - 500)) / 60F : newAgeTicks < 60 && newAgeTicks >= 0 ? newAgeTicks / 60F : 1};
+            float[] c = new float[]{1, 1, 1, newAgeTicks > 180 ? (20 - (newAgeTicks - 180)) / 20F : newAgeTicks < 20 && newAgeTicks >= 0 ? newAgeTicks / 20F : 1};
             bb.pos(sRes.getScaledWidth() / 2 - 100, sRes.getScaledHeight() / 2 - 100, 0).tex(0, 0).color(c[0], c[1], c[2], c[3]).endVertex();
             bb.pos(sRes.getScaledWidth() / 2 - 100, sRes.getScaledHeight() / 2 + 100, 0).tex(0, 1).color(c[0], c[1], c[2], c[3]).endVertex();
             bb.pos(sRes.getScaledWidth() / 2 + 100, sRes.getScaledHeight() / 2 + 100, 0).tex(1, 1).color(c[0], c[1], c[2], c[3]).endVertex();
             bb.pos(sRes.getScaledWidth() / 2 + 100, sRes.getScaledHeight() / 2 - 100, 0).tex(1, 0).color(c[0], c[1], c[2], c[3]).endVertex();
             Tessellator.getInstance().draw();
             String ageName = newAgeType.name().replace('_', ' ');
-            if (newAgeTicks < 200)
+            if (newAgeTicks < 100)
             {
                 GlStateManager.pushMatrix();
                 GlStateManager.scale(3F, 3F, 3F);
@@ -245,7 +248,7 @@ public class PlayerHUDRenderer
                 GlStateManager.disableAlpha();
             }
 
-            if (newAgeTicks < 300)
+            if (newAgeTicks < 150)
             {
                 GlStateManager.pushMatrix();
                 GlStateManager.scale(2F, 2F, 2F);

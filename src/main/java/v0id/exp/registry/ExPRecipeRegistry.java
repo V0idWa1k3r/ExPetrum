@@ -73,7 +73,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
             event.getRegistry().register(new ShapelessOreRecipe(mcloc, new ItemStack(chiselIron, 1, 0), new ItemStack(ExPItems.chisel, 1, 7)).setRegistryName("exp:recipe_hardcoded_compat_cnb_chisel_iron"));
         }
 
-        String[] toRemove = new String[]{ "minecraft:torch", "minecraft:crafting_table", "minecraft:chest", "minecraft:bone_meal_from_bone", "minecraft:string_to_wool", "minecraft:fishing_rod", "minecraft:bow", "minecraft:leather_helmet", "minecraft:leather_chestplate", "minecraft:leather_leggings", "minecraft:leather_boots" };
+        String[] toRemove = new String[]{ "minecraft:torch", "minecraft:crafting_table", "minecraft:chest", "minecraft:bone_meal_from_bone", "minecraft:string_to_wool", "minecraft:fishing_rod", "minecraft:bow", "minecraft:leather_helmet", "minecraft:leather_chestplate", "minecraft:leather_leggings", "minecraft:leather_boots", "minecraft:iron_block", "minecraft:gold_block" };
         ExPMisc.modLogger.log(LogLevel.Fine, "A fair warning.");
         ExPMisc.modLogger.log(LogLevel.Fine, "Forge is about to spew a bunch of \"Dangerous alternative prefix\" warnings.");
         ExPMisc.modLogger.log(LogLevel.Fine, "No, ExPetrum isn't broken.");
@@ -207,7 +207,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
         @Override
         public boolean matches(FluidStack fs, ItemStack is)
         {
-            return fs.isFluidEqual(fluidIn) && is.getItem() instanceof ItemStick;
+            return fs != null && fs.isFluidEqual(fluidIn) && is.getItem() instanceof ItemStick;
         }
 
         @Override

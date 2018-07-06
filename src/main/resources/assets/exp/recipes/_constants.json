@@ -326,6 +326,13 @@
     {
         "ingredient": {
             "type": "forge:ore_dict",
+            "ore": "stickWoodTreated"
+        },
+        "name": "STICKTREATED"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
             "ore": "rock"
         },
         "name": "ROCK"

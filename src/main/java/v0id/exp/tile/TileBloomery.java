@@ -11,7 +11,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import v0id.api.exp.block.EnumMoltenMetalState;
 import v0id.api.exp.block.EnumOre;
@@ -28,6 +30,8 @@ import v0id.exp.item.ItemGeneric;
 import v0id.exp.item.ItemOre;
 import v0id.exp.util.temperature.TemperatureHandler;
 import v0id.exp.util.temperature.TemperatureUtils;
+
+import javax.annotation.Nullable;
 
 public class TileBloomery extends TileEntity implements ITickable
 {
@@ -297,5 +301,18 @@ public class TileBloomery extends TileEntity implements ITickable
         ret.setTag("inventory", this.inventory.serializeNBT());
         ret.setTag("temperatureHandler", this.temperatureHandler.serializeNBT());
         return ret;
+    }
+
+    @Override
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing)
+    {
+        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
+    }
+
+    @Nullable
+    @Override
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing)
+    {
+        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.inventory) : super.getCapability(capability, facing);
     }
 }

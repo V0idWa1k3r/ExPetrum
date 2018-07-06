@@ -1,0 +1,16 @@
+{
+    "result": {
+        "item": "exp:item_knife",
+        "data": 7
+    },
+    "type": "forge:ore_shapeless",
+    "ingredients": [
+        {
+            "item": "exp:item_toolhead",
+            "data": 57
+        },
+        {
+            "item": "#STICKTREATED"
+        }
+    ]
+}
