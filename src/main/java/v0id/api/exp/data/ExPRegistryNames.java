@@ -78,7 +78,8 @@ public class ExPRegistryNames
         blockSpinningWheel                                                                                  = "spinning_wheel",
         blockMoltenMetal                                                                                    = "molten_metal",
         blockBloomery                                                                                       = "bloomery",
-		blockFruitPress                                                                                     = "fruit_press";
+		blockFruitPress                                                                                     = "fruit_press",
+        blockChest                                                                                          = "chest";
 
 	public static final String
 		itemRock																							= "item_rock",

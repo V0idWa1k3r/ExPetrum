@@ -99,6 +99,7 @@ public class ClientRegistry implements ILifecycleListener
         net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileScrapingRack.class, new TESRScrapingRack());
         net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileBellows.class, new TESRBellows());
         net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileSpinningWheel.class, new TESRSpinningWheel());
+        net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileChest.class, new TESRChest());
         this.loadAdditionalData();
         this.initAttacksConditions();
     }
@@ -218,6 +219,7 @@ public class ClientRegistry implements ILifecycleListener
         mkCustomModelResourceLocations(ExPBlocks.anvil, EnumAnvilMaterial.values().length, i -> "inventory");
         mkCustomModelResourceLocations(ExPItems.metalGeneric, EnumMetal.values().length * ItemMetalGeneric.EnumGenericType.values().length, i -> "type=" + ItemMetalGeneric.EnumGenericType.values()[i / EnumMetal.values().length].name().toLowerCase());
         mkCustomModelResourceLocations(ExPBlocks.moltenMetal, EnumMoltenMetalState.values().length, i -> "state=" + EnumMoltenMetalState.values()[i].getName());
+        mkCustomModelResourceLocations(ExPBlocks.chest, EnumTreeType.values().length, i -> "facing=north,ttype=" + EnumTreeType.values()[i].getName());
 
         // Statically mapped item models
         registerStaticModel(ExPItems.basket, new ModelResourceLocation(ExPItems.basket.getRegistryName(), "inventory"));

@@ -125,7 +125,8 @@ public class ExPBlocksRegistry extends AbstractRegistry
                 new BlockSpinningWheel(),
                 new BlockMoltenMetal(),
                 new BlockBloomery(),
-                new BlockPress()
+                new BlockPress(),
+                new BlockChest()
         );
 
         registryEntries.forEach(registry::register);
