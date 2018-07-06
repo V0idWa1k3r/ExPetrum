@@ -38,6 +38,7 @@ public class ExPMountains extends ExPBiome
 		this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.PEACH));
         this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.PLUM));
         this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.CHERRY));
+		this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.OLIVE));
 		this.spawnableCreatureList.add(new SpawnListEntry(Sheep.class, 10, 2, 4));
 	}
 

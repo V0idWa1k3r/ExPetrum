@@ -46,6 +46,7 @@ public class ExPColdPlains extends ExPBiome
         this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.PEACH));
         this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.PEAR));
         this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.CHERRY));
+        this.treesToGenerate.add(new TreeEntry(1, EnumTreeType.OLIVE));
         this.spawnableCreatureList.add(new SpawnListEntry(Cow.class, 10, 2, 4));
         this.spawnableCreatureList.add(new SpawnListEntry(Sheep.class, 10, 2, 4));
         this.spawnableCreatureList.add(new SpawnListEntry(Pig.class, 10, 2, 4));
