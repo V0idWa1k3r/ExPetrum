@@ -32,6 +32,7 @@ import v0id.api.exp.metal.EnumToolStats;
 import v0id.api.exp.recipe.*;
 import v0id.core.logging.LogLevel;
 import v0id.exp.item.*;
+import v0id.exp.recipe.RecipeFoodCombine;
 import v0id.exp.recipe.RecipeMold;
 import v0id.exp.recipe.RecipePlanks;
 
@@ -56,6 +57,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
         final ResourceLocation mcloc = new ResourceLocation("minecraft:misc");
         event.getRegistry().register(new RecipeMold().setRegistryName("exp:recipe_hardcoded_mold"));
         event.getRegistry().register(new RecipePlanks().setRegistryName("exp:recipe_hardcoded_planks"));
+        event.getRegistry().register(new RecipeFoodCombine().setRegistryName("exp:recipe_hardcoded_food"));
         ForgeRegistry<IRecipe> reg = (ForgeRegistry<IRecipe>) event.getRegistry();
         if (Loader.isModLoaded("chiselsandbits"))
         {
