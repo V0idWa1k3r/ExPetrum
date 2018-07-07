@@ -6,23 +6,28 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.data.ExPCreativeTabs;
+import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.ExPetrum;
 import v0id.exp.block.item.ItemBlockWithMetadata;
+import v0id.exp.item.ItemPottery;
 import v0id.exp.tile.TileBarrel;
 import v0id.exp.util.Helpers;
 
@@ -73,7 +78,20 @@ public class BlockBarrel extends Block implements IWeightProvider, IInitializabl
             return true;
         }
 
-        ((TileBarrel)worldIn.getTileEntity(pos)).sendUpdatePacket();
+        TileBarrel barrel = (TileBarrel) worldIn.getTileEntity(pos);
+        ItemStack is = playerIn.getHeldItem(hand);
+        if (is.getItem() instanceof ItemPottery && is.getMetadata() == ItemPottery.EnumPotteryType.CERAMIC_JUG.ordinal())
+        {
+            if (barrel.fluidInventory.getFluid().getFluid() == FluidRegistry.WATER && barrel.fluidInventory.getFluid().amount >= 100)
+            {
+                barrel.fluidInventory.drain(100, true);
+                playerIn.setHeldItem(hand, new ItemStack(ExPItems.pottery, 1, ItemPottery.EnumPotteryType.CERAMIC_JUG_FULL.ordinal()));
+                worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 2.0F);
+                return true;
+            }
+        }
+
+        barrel.sendUpdatePacket();
         playerIn.openGui(ExPetrum.instance, 10, worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
