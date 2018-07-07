@@ -20,4 +20,4 @@ _ _ _
 
 ## Discord
 
-ExPetrum now has a ![discord server](https://discord.gg/WTzJ3sJ)! Join it to keep up with the development progress or just chat with other interested people.
+ExPetrum now has a [discord server](https://discord.gg/WTzJ3sJ)! Join it to keep up with the development progress or just chat with other interested people.
