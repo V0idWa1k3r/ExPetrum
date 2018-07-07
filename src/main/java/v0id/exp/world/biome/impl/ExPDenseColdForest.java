@@ -9,6 +9,7 @@ import v0id.api.exp.data.ExPRegistryNames;
 import v0id.exp.entity.impl.Cow;
 import v0id.exp.entity.impl.Pig;
 import v0id.exp.entity.impl.Sheep;
+import v0id.exp.entity.impl.Wolf;
 import v0id.exp.world.biome.ExPBiome;
 import v0id.exp.world.gen.ShrubEntry;
 import v0id.exp.world.gen.tree.TreeEntry;
@@ -49,6 +50,7 @@ public class ExPDenseColdForest extends ExPBiome
         this.spawnableCreatureList.add(new SpawnListEntry(Cow.class, 10, 2, 4));
         this.spawnableCreatureList.add(new SpawnListEntry(Sheep.class, 10, 2, 4));
         this.spawnableCreatureList.add(new SpawnListEntry(Pig.class, 10, 2, 4));
+        this.spawnableMonsterList.add(new SpawnListEntry(Wolf.class, 10, 2, 4));
 	}
 	
 	@Override
