@@ -1,0 +1,63 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"textures" : {
+            "0": "exp:blocks/wood/plank/generic"
+		},
+		"transform": "forge:default-block",
+		"model" : "exp:shaft"
+	},
+	"variants" : {
+		"normal": [{}],
+        "inventory": [{}],
+		"axis": {
+            "x": {
+                "dummy": "dummy"
+            },
+            "y": {
+                "dummy": "dummy"
+            },
+            "z": {
+                "dummy": "dummy"
+            }
+        },
+        "type": {
+            "wood": {
+                "textures" : {
+                    "0": "exp:blocks/wood/plank/generic",
+                    "particle": "exp:blocks/wood/plank/generic"
+                }
+            },
+            "copper": {
+                "textures" : {
+                    "0": "exp:blocks/crucible",
+                    "particle": "exp:blocks/crucible"
+                }
+            },
+            "bronze": {
+                "textures" : {
+                    "0": "exp:blocks/bronze_plates",
+                    "particle": "exp:blocks/bronze_plates"
+                }
+            },
+            "iron": {
+                "textures" : {
+                    "0": "exp:blocks/iron_plates",
+                    "particle": "exp:blocks/iron_plates"
+                }
+            },
+            "steel": {
+                "textures" : {
+                    "0": "exp:blocks/steel_plates",
+                    "particle": "exp:blocks/steel_plates"
+                }
+            },
+            "hsla": {
+                "textures" : {
+                    "0": "exp:blocks/hsla_plates",
+                    "particle": "exp:blocks/hsla_plates"
+                }
+            }
+        }
+	}
+}

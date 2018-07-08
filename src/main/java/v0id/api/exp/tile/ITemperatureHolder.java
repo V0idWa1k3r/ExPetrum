@@ -4,5 +4,5 @@ import net.minecraft.util.EnumFacing;
 
 public interface ITemperatureHolder
 {
-    void acceptBellows(EnumFacing side);
+    void acceptBellows(EnumFacing side, boolean mechanical);
 }

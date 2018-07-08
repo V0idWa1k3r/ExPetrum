@@ -309,4 +309,22 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockChest)
     public static final Block chest = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockShaft)
+    public static final Block shaft = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockGearbox)
+    public static final Block gearbox = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockWaterWheel)
+    public static final Block waterWheel = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockStructure)
+    public static final Block structure = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockSplitterGearbox)
+    public static final Block splitterGearbox = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockMechanicalQuern)
+    public static final Block mechanicalQuern = null;
 }

@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "exp:shaft",
+        "data": 2,
+        "count": 3
+    },
+    "pattern": [
+        "IPI"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "I" : {
+            "item": "#INGOTBRONZE"
+        },
+        "P" : {
+            "item": "#SHEETBRONZE"
+        }
+    }
+}

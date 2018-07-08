@@ -98,7 +98,7 @@ public class Wolf extends EntityMob
         super.onLivingUpdate();
         if (this.world.getWorldTime() % 24000 == 12000)
         {
-            this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_WOLF_HOWL, SoundCategory.HOSTILE, 10.0F, 0.1F);
+            this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_WOLF_HOWL, SoundCategory.HOSTILE, 1.0F, 1F);
         }
 
         if (this.world.getWorldTime() % 24000 < 12000 && !this.world.isRemote)

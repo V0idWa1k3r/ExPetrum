@@ -1,0 +1,26 @@
+{
+    "result": {
+        "item": "exp:item_generic",
+        "data": 38
+    },
+    "pattern": [
+        "S S",
+        "MLM",
+        "S S"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "S" : {
+            "item": "exp:item_generic",
+            "data": 35
+        },
+        "M" : {
+            "item": "exp:item_generic",
+            "data": 36
+        },
+        "L" : {
+            "item": "exp:item_generic",
+            "data": 37
+        }
+    }
+}

@@ -360,6 +360,11 @@ tile.exp.molten_metal.name=Molten Metal
 tile.exp.bloomery.name=Bloomery
 tile.exp.fruit_press.name=Fruit Press
 tile.exp.chest.name=Chest
+tile.exp.shaft.name=Shaft
+tile.exp.gearbox.name=Gearbox
+tile.exp.water_wheel.name=Water Wheel
+tile.exp.splitter_gearbox.name=Splitter Gearbox
+tile.exp.mechanical_quern.name=Mechanical Quern
 
 item.exp.item_ingot.name=Ingot
 
@@ -745,6 +750,12 @@ item.exp.item_generic.iron_bloom.name=Raw Iron Bloom
 item.exp.item_generic.refined_iron_bloom.name=Refined Iron Bloom
 item.exp.item_generic.treated_stick.name=Treated Stick
 item.exp.item_generic.lock.name=Iron Lock
+item.exp.item_generic.nails.name=Iron Nails
+item.exp.item_generic.small_gear.name=Small Iron Gear
+item.exp.item_generic.medium_gear.name=Medium Iron Gear
+item.exp.item_generic.large_gear.name=Large Iron Gear
+item.exp.item_generic.gear_assembly.name=Iron Gear Assembly
+item.exp.item_generic.water_wheel_blade.name=Water Wheel Blade
 item.exp.item_ore.acanthite.name=Acanthite Ore
 item.exp.item_ore.barite.name=Barite Ore
 item.exp.item_ore.bauxite.name=Bauxite Ore

@@ -1,0 +1,85 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"textures" : {
+            "up": "exp:blocks/wood/crate/generic",
+            "down": "exp:blocks/wood/crate/generic",
+            "west": "exp:blocks/wood/crate/generic",
+            "east": "exp:blocks/wood/crate/generic",
+            "south": "exp:blocks/wood/crate/generic",
+            "north": "exp:blocks/wood/crate/generic",
+            "particle": "exp:blocks/wood/crate/generic"
+		},
+		"transform": "forge:default-block",
+		"gui3d" : true,
+		"model" : "minecraft:cube"
+	},
+	"variants" : {
+		"normal": [{}],
+        "inventory": [{}],
+		"facing": {
+            "north": {
+                "textures" : {
+                    "north": "exp:blocks/gearbox_out"
+                }
+            },
+            "south": {
+                "textures" : {
+                    "south": "exp:blocks/gearbox_out"
+                }
+            },
+            "east": {
+                "textures" : {
+                    "east": "exp:blocks/gearbox_out"
+                }
+            },
+            "west": {
+                "textures" : {
+                    "west": "exp:blocks/gearbox_out"
+                }
+            },
+            "up":{
+                "textures" : {
+                    "up": "exp:blocks/gearbox_out"
+                }
+            },
+            "down":{
+                "textures" : {
+                    "down": "exp:blocks/gearbox_out"
+                }
+            }
+        },
+        "input": {
+            "north": {
+                "textures" : {
+                    "north": "exp:blocks/gearbox_in"
+                }
+            },
+            "south": {
+                "textures" : {
+                    "south": "exp:blocks/gearbox_in"
+                }
+            },
+            "east": {
+                "textures" : {
+                    "east": "exp:blocks/gearbox_in"
+                }
+            },
+            "west": {
+                "textures" : {
+                    "west": "exp:blocks/gearbox_in"
+                }
+            },
+            "up": {
+                "textures" : {
+                    "up": "exp:blocks/gearbox_in"
+                }
+            },
+            "down": {
+                "textures" : {
+                    "down": "exp:blocks/gearbox_in"
+                }
+            }
+        }
+	}
+}

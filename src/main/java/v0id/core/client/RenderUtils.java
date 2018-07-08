@@ -77,8 +77,8 @@ public class RenderUtils
             float maxU = tex.getMaxU();
             float minV = tex.getMinV();
             float maxV = tex.getMaxV();
-            float diffU = maxU - minU;
-            float diffV = maxV - minV;
+            float diffU = (maxU - minU) % 1;
+            float diffV = (maxV - minV) % 1;
             float u = minU + vertex.uvset.getX() * diffU;
             float v = minV + (1 - vertex.uvset.getY()) * diffV;
             buffer.pos(pos.getX() + loc.getX(), pos.getY() + loc.getY(), pos.getZ() + loc.getZ()).color(color[0], color[1], color[2], color[3]).tex(u, v).lightmap(lightmap[0], lightmap[1]).endVertex();

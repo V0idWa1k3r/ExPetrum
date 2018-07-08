@@ -50,12 +50,14 @@ import v0id.api.exp.block.IWater;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPPotions;
 import v0id.api.exp.metal.EnumToolStats;
+import v0id.api.exp.player.EnumPlayerProgression;
 import v0id.api.exp.player.ExPPlayerCapability;
 import v0id.api.exp.player.IExPPlayer;
 import v0id.api.exp.world.ExPWorldCapability;
 import v0id.api.exp.world.IExPWorld;
 import v0id.core.logging.LogLevel;
 import v0id.core.util.MC;
+import v0id.exp.block.item.ItemBlockGearbox;
 import v0id.exp.item.tool.IExPTool;
 import v0id.exp.player.ExPPlayer;
 import v0id.exp.player.PlayerManager;
@@ -568,6 +570,11 @@ public class ExPHandlerServer
                 EnumToolStats stats = ((IExPTool) event.crafting.getItem()).getStats(event.crafting);
                 IExPPlayer.of(event.player).triggerStage(stats.getAssociatedProgression());
             }
+
+            if (event.crafting.getItem() instanceof ItemBlockGearbox)
+			{
+                IExPPlayer.of(event.player).triggerStage(EnumPlayerProgression.EARLY_ROTARY_AGE);
+			}
         }
     }
 }

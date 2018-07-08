@@ -1,0 +1,27 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"textures" : {
+			"#material" : "exp:blocks/wood/plank/generic"
+		},
+		"model" : "exp:water_wheel_item.obj",
+		"transform": "forge:default-block"
+	},
+	"variants": {
+		"normal": [{}],
+		"facing": {
+            "east": {
+                "dummy": "dummy"
+            },
+            "west": {
+                "dummy": "dummy"
+            },
+            "south": {
+                "dummy": "dummy"
+            },
+            "north": {
+                "dummy": "dummy"
+            }
+        }
+	}
+}

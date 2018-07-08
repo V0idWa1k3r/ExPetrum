@@ -235,8 +235,8 @@ public class TileForge extends TileEntity implements ITickable, ITemperatureHold
     }
 
     @Override
-    public void acceptBellows(EnumFacing side)
+    public void acceptBellows(EnumFacing side, boolean b)
     {
-        this.bellowsAdditionalT = Math.min(500, this.bellowsAdditionalT + 100);
+        this.bellowsAdditionalT = Math.min(b ? 750 : 500, this.bellowsAdditionalT + (b ? 250 : 100));
     }
 }

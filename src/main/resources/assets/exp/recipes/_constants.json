@@ -282,11 +282,104 @@
         "name": "SHEETDOUBLECOPPER"
     },
     {
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "sheetCopper"
+            },
+            {
+                "type": "forge:ore_dict",
+                "ore": "plateCopper"
+            }
+        ],
+        "name": "SHEETCOPPER"
+    },
+    {
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "sheetBronze"
+            },
+            {
+                "type": "forge:ore_dict",
+                "ore": "plateBronze"
+            }
+        ],
+        "name": "SHEETBRONZE"
+    },
+    {
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "sheetIron"
+            },
+            {
+                "type": "forge:ore_dict",
+                "ore": "plateIron"
+            }
+        ],
+        "name": "SHEETIRON"
+    },
+    {
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "sheetSteel"
+            },
+            {
+                "type": "forge:ore_dict",
+                "ore": "plateSteel"
+            }
+        ],
+        "name": "SHEETSTEEL"
+    },
+    {
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "sheetSteelHSLA"
+            },
+            {
+                "type": "forge:ore_dict",
+                "ore": "plateSteelHSLA"
+            }
+        ],
+        "name": "SHEETHSLA"
+    },
+    {
         "ingredient": {
             "type": "forge:ore_dict",
             "ore": "ingotCopper"
         },
         "name": "INGOTCOPPER"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "ingotBronze"
+        },
+        "name": "INGOTBRONZE"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "ingotIron"
+        },
+        "name": "INGOTIRON"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "ingotSteel"
+        },
+        "name": "INGOTSTEEL"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "ingotSteelHSLA"
+        },
+        "name": "INGOTHSLA"
     },
     {
         "ingredient": {

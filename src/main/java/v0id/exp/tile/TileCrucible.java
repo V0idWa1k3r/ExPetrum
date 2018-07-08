@@ -266,11 +266,11 @@ public class TileCrucible extends TileEntity implements ITickable, ITemperatureH
     }
 
     @Override
-    public void acceptBellows(EnumFacing side)
+    public void acceptBellows(EnumFacing side, boolean b)
     {
         if (this.world.getTileEntity(this.pos.down()) instanceof ITemperatureHolder)
         {
-            ((ITemperatureHolder)this.world.getTileEntity(this.pos.down())).acceptBellows(side);
+            ((ITemperatureHolder)this.world.getTileEntity(this.pos.down())).acceptBellows(side, b);
         }
     }
 }

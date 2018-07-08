@@ -1,0 +1,19 @@
+{
+    "result": {
+        "item": "exp:shaft",
+        "data": 4,
+        "count": 3
+    },
+    "pattern": [
+        "IPI"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "I" : {
+            "item": "#INGOTSTEEL"
+        },
+        "P" : {
+            "item": "#SHEETSTEEL"
+        }
+    }
+}

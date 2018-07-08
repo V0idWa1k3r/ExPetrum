@@ -183,4 +183,10 @@ public class TileScrapingRack extends TileEntity implements ITickable
     {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.inventory) : super.getCapability(capability, facing);
     }
+
+    @Override
+    public boolean hasFastRenderer()
+    {
+        return true;
+    }
 }

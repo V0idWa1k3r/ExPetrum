@@ -47,7 +47,8 @@ public class ExPTextures
             guiBarrel                                                                        	  		 		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/barrel.png"),
             guiBloomery                                                                        	  		 		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/bloomery.png"),
             guiInv18                                                                       	  			 		= new ResourceLocation(ExPRegistryNames.modid, "textures/gui/inv_18.png"),
-			guiJEI                                                                                              = new ResourceLocation(ExPRegistryNames.modid, "textures/gui/jei/guis.png");
+			guiJEI                                                                                              = new ResourceLocation(ExPRegistryNames.modid, "textures/gui/jei/guis.png"),
+			guiMechanicalQuern                                                                                  = new ResourceLocation(ExPRegistryNames.modid, "textures/gui/mechanical_quern.png");
 
     static
 	{

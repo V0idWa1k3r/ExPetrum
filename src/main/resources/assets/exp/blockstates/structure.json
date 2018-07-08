@@ -1,0 +1,12 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"textures" : {
+		},
+		"model" : "minecraft:cube_all",
+		"transform": "forge:default-block"
+	},
+	"variants": {
+        "normal": [{ "model" : "exp:chest_block" }]
+    }
+}

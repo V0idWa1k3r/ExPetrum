@@ -178,6 +178,36 @@
                 "textures" : {
                     "layer0" : "exp:items/misc/lock"
                 }
+            },
+            "nails": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/nails"
+                }
+            },
+            "small_gear": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/small_gear"
+                }
+            },
+            "medium_gear": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/medium_gear"
+                }
+            },
+            "large_gear": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/large_gear"
+                }
+            },
+            "gear_assembly": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/gear_assembly"
+                }
+            },
+            "water_wheel_blade": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/water_wheel_blade"
+                }
             }
 		}
 	}

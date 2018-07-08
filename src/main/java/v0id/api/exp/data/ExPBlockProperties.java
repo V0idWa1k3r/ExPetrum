@@ -3,6 +3,7 @@ package v0id.api.exp.data;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.util.EnumFacing;
 import v0id.api.exp.block.*;
 import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.block.property.EnumKaolinType;
@@ -46,6 +47,10 @@ public class ExPBlockProperties
 	public static final PropertyEnum<EnumCrop> CROP_TYPE = PropertyEnum.create("type", EnumCrop.class);
     public static final PropertyEnum<EnumShrubberyType> SHRUBBERY_TYPE = PropertyEnum.create("type", EnumShrubberyType.class);
     public static final PropertyEnum<EnumMoltenMetalState> MOLTEN_METAL_STATE = PropertyEnum.create("state", EnumMoltenMetalState.class);
+    public static final PropertyEnum<EnumShaftMaterial> SHAFT_MATERIAL = PropertyEnum.create("type", EnumShaftMaterial.class);
+    public static final PropertyEnum<EnumFacing> GEARBOX_INPUT = PropertyEnum.create("input", EnumFacing.class);
+    public static final PropertyEnum<EnumFacing> GEARBOX_OUT0 = PropertyEnum.create("out_0", EnumFacing.class);
+    public static final PropertyEnum<EnumFacing> GEARBOX_OUT1 = PropertyEnum.create("out_1", EnumFacing.class);
 
 	// Currently not used
 	public static final PropertyEnum<EnumOre> ORE_TYPE = PropertyEnum.create("oretype", EnumOre.class);

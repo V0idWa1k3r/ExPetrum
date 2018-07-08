@@ -152,6 +152,10 @@ public class ExPRecipeRegistry extends AbstractRegistry
         RecipesAnvil.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.IRON_BLOOM.ordinal()), (int)(EnumMetal.IRON.getMeltingTemperature() * 0.5F), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.REFINED_IRON_BLOOM.ordinal()), 100, 1);
         RecipesAnvil.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.REFINED_IRON_BLOOM.ordinal()), (int)(EnumMetal.IRON.getMeltingTemperature() * 0.5F), new ItemStack(ExPItems.ingot, 1, EnumMetal.IRON.ordinal()), 160, 1);
         RecipesAnvil.addRecipe(new ItemStack(ExPItems.ingot, 1, EnumMetal.IRON.ordinal()), (int)(EnumMetal.IRON.getMeltingTemperature() * 0.75F), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.LOCK.ordinal()), 120, 2);
+        RecipesAnvil.addRecipe(new ItemStack(ExPItems.ingot, 1, EnumMetal.IRON.ordinal()), (int)(EnumMetal.IRON.getMeltingTemperature() * 0.75F), new ItemStack(ExPItems.generic, 24, ItemGeneric.EnumGenericType.NAILS.ordinal()), 40, 2);
+        RecipesAnvil.addRecipe(new ItemStack(ExPItems.ingot, 1, EnumMetal.IRON.ordinal()), (int)(EnumMetal.IRON.getMeltingTemperature() * 0.75F), new ItemStack(ExPItems.generic, 6, ItemGeneric.EnumGenericType.SMALL_GEAR.ordinal()), 80, 2);
+        RecipesAnvil.addRecipe(new ItemStack(ExPItems.ingot, 1, EnumMetal.IRON.ordinal()), (int)(EnumMetal.IRON.getMeltingTemperature() * 0.75F), new ItemStack(ExPItems.generic, 3, ItemGeneric.EnumGenericType.MEDIUM_GEAR.ordinal()), 120, 2);
+        RecipesAnvil.addRecipe(new ItemStack(ExPItems.ingot, 1, EnumMetal.IRON.ordinal()), (int)(EnumMetal.IRON.getMeltingTemperature() * 0.75F), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.LARGE_GEAR.ordinal()), 180, 2);
         for (EnumToolStats material : EnumToolStats.values())
         {
             if (material == EnumToolStats.STONE)

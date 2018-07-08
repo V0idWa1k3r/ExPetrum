@@ -63,7 +63,6 @@ public class BlockBellows extends BlockHorizontal implements IWeightProvider, II
     public IBlockState getStateFromMeta(int meta)
     {
         EnumFacing enumfacing = EnumFacing.getFront(meta);
-
         if (enumfacing.getAxis() == EnumFacing.Axis.Y)
         {
             enumfacing = EnumFacing.NORTH;

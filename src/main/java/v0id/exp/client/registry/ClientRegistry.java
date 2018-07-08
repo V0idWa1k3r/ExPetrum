@@ -96,6 +96,9 @@ public class ClientRegistry implements ILifecycleListener
         net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileBellows.class, new TESRBellows());
         net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileSpinningWheel.class, new TESRSpinningWheel());
         net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileChest.class, new TESRChest());
+        net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileShaft.class, new TESRShaft());
+        net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileWaterWheel.class, new TESRWaterWheel());
+        net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileMechanicalQuern.class, new TESRMechanicalQuern());
         this.loadAdditionalData();
         this.initAttacksConditions();
     }
@@ -176,6 +179,10 @@ public class ClientRegistry implements ILifecycleListener
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.spinningWheel), 0, new ModelResourceLocation(ExPBlocks.spinningWheel.getRegistryName(), "normal"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.bloomery), 0, new ModelResourceLocation(ExPBlocks.bloomery.getRegistryName(), "normal"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.fruitPress), 0, new ModelResourceLocation(ExPBlocks.fruitPress.getRegistryName(), "normal"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.gearbox), 0, new ModelResourceLocation(ExPBlocks.gearbox.getRegistryName(), "facing=north,input=south"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.waterWheel), 0, new ModelResourceLocation(ExPBlocks.waterWheel.getRegistryName(), "normal"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.splitterGearbox), 0, new ModelResourceLocation(ExPBlocks.splitterGearbox.getRegistryName(), "facing=north,out_0=east,out_1=west"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.mechanicalQuern), 0, new ModelResourceLocation(ExPBlocks.mechanicalQuern.getRegistryName(), "normal"));
         // Iteration-dependent models
         mkCustomModelResourceLocations(ExPItems.stick, EnumTreeType.values().length + EnumShrubType.values().length + EnumBerry.values().length, i -> "type=" + ExPOreDict.stickNames[i]);
         mkCustomModelResourceLocations(ExPItems.toolHead, EnumToolClass.values().length * EnumToolStats.values().length, i -> "material=" + EnumToolStats.values()[i % EnumToolStats.values().length].name().toLowerCase() + ",type=" + EnumToolClass.values()[i / EnumToolStats.values().length].name().toLowerCase());
@@ -216,6 +223,7 @@ public class ClientRegistry implements ILifecycleListener
         mkCustomModelResourceLocations(ExPItems.metalGeneric, EnumMetal.values().length * ItemMetalGeneric.EnumGenericType.values().length, i -> "type=" + ItemMetalGeneric.EnumGenericType.values()[i / EnumMetal.values().length].name().toLowerCase());
         mkCustomModelResourceLocations(ExPBlocks.moltenMetal, EnumMoltenMetalState.values().length, i -> "state=" + EnumMoltenMetalState.values()[i].getName());
         mkCustomModelResourceLocations(ExPBlocks.chest, EnumTreeType.values().length, i -> "facing=north,ttype=" + EnumTreeType.values()[i].getName());
+        mkCustomModelResourceLocations(ExPBlocks.shaft, EnumShaftMaterial.values().length, i -> "axis=x,type=" + EnumShaftMaterial.values()[i].getName());
 
         // Statically mapped item models
         registerStaticModel(ExPItems.basket, new ModelResourceLocation(ExPItems.basket.getRegistryName(), "inventory"));
@@ -240,10 +248,12 @@ public class ClientRegistry implements ILifecycleListener
     {
         TESRQuern.quernTopModel = new WavefrontObject();
         TESRSpinningWheel.model = new WavefrontObject();
+        TESRWaterWheel.model = new WavefrontObject();
         try
         {
             TESRQuern.quernTopModel.load(Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation("exp", "models/block/quern_top.obj")).getInputStream());
             TESRSpinningWheel.model.load(Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation("exp", "models/block/spinning_wheel.obj")).getInputStream());
+            TESRWaterWheel.model.load(Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation("exp", "models/block/water_wheel.obj")).getInputStream());
         }
         catch (IOException e)
         {

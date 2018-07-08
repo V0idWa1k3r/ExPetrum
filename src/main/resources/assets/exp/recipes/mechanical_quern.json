@@ -1,0 +1,21 @@
+{
+    "result": {
+        "item": "exp:mechanical_quern",
+        "data": 0
+    },
+    "pattern": [
+        " A ",
+        "SSS",
+        "SSS"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "S" : {
+            "item": "#STONE"
+        },
+        "A": {
+            "item": "exp:item_generic",
+            "data": 38
+        }
+    }
+}

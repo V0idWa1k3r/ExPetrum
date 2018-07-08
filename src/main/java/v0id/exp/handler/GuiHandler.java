@@ -106,6 +106,11 @@ public class GuiHandler implements IGuiHandler
                 return new GuiChest(player.inventory, (TileChest) tile);
             }
 
+            case 14:
+            {
+                return new GuiMechanicalQuern(player.inventory, (TileMechanicalQuern) tile);
+            }
+
             default:
             {
                 return null;
@@ -199,6 +204,11 @@ public class GuiHandler implements IGuiHandler
             case 13:
             {
                 return new ContainerChest(player.inventory, (TileChest) tile);
+            }
+
+            case 14:
+            {
+                return new ContainerMechanicalQuern(player.inventory, (TileMechanicalQuern) tile);
             }
 
             default:

@@ -1,0 +1,12 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"transform": "forge:default-block",
+		"gui3d" : true,
+		"model" : "exp:quern"
+	},
+	"variants" : {
+		"normal": [{}],
+        "inventory": [{}]
+	}
+}

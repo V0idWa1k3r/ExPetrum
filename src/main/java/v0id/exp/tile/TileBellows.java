@@ -42,7 +42,7 @@ public class TileBellows extends TileEntity
             this.world.playSound(null, this.pos.getX(), this.pos.getY(), this.pos.getZ(), SoundEvents.ENTITY_ENDERDRAGON_FLAP, SoundCategory.BLOCKS, 1.0F, 0.1F);
             if (this.world.getTileEntity(pos) instanceof ITemperatureHolder)
             {
-                ((ITemperatureHolder)this.world.getTileEntity(pos)).acceptBellows(rotation.getOpposite());
+                ((ITemperatureHolder)this.world.getTileEntity(pos)).acceptBellows(rotation.getOpposite(), false);
             }
 
             this.sendUpdatePacket();
@@ -86,5 +86,11 @@ public class TileBellows extends TileEntity
     public void handleUpdateTag(NBTTagCompound tag)
     {
         this.deserializeNBT(tag);
+    }
+
+    @Override
+    public boolean hasFastRenderer()
+    {
+        return true;
     }
 }

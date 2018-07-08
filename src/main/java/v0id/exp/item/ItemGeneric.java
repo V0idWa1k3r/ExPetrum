@@ -50,7 +50,13 @@ public class ItemGeneric extends Item implements IInitializableItem, IWeightProv
         IRON_BLOOM("iron_bloom", 1F, IWeightProvider.DEFAULT_VOLUME, "bloomIron"),
         REFINED_IRON_BLOOM("refined_iron_bloom", 0.5F, IWeightProvider.DEFAULT_VOLUME, "bloomIronRefined"),
         TREATED_STICK("treated_stick", 0.01F, IWeightProvider.DEFAULT_VOLUME, "stickWood", "stickTreated", "stickTreatedWood", "stickWoodTreated"),
-        LOCK("lock", 0.1F, IWeightProvider.DEFAULT_VOLUME, "lockIron");
+        LOCK("lock", 0.1F, IWeightProvider.DEFAULT_VOLUME, "lockIron"),
+        NAILS("nails", 0.001F, IWeightProvider.DEFAULT_VOLUME, "nailsIron"),
+        SMALL_GEAR("small_gear", 0.01F, IWeightProvider.DEFAULT_VOLUME, "gearIronSmall"),
+        MEDIUM_GEAR("medium_gear", 0.08F, IWeightProvider.DEFAULT_VOLUME, "gearIronMedium"),
+        LARGE_GEAR("large_gear", 0.2F, IWeightProvider.DEFAULT_VOLUME, "gearIron"),
+        GEAR_ASSEMBLY("gear_assembly", 0.5F, IWeightProvider.DEFAULT_VOLUME, "gearAssembly"),
+        WATER_WHEEL_BLADE("water_wheel_blade", 2.5F, Pair.of((byte)2, (byte)1), "bladeWooden");
 
         EnumGenericType(String name, float weight, Pair<Byte, Byte> volume, String... oreDictNames)
         {
