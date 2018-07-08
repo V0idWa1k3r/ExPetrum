@@ -43,5 +43,7 @@ public class ExPTileRegistry extends AbstractRegistry
 		GameRegistry.registerTileEntity(TileStructurePiece.class, new ResourceLocation("exp:structure"));
 		GameRegistry.registerTileEntity(TileSplitterGearbox.class, new ResourceLocation("exp:splitter_gearbox"));
 		GameRegistry.registerTileEntity(TileMechanicalQuern.class, new ResourceLocation("exp:mechanical_quern"));
+		GameRegistry.registerTileEntity(TileWindmill.class, new ResourceLocation("exp:windmill"));
+		GameRegistry.registerTileEntity(TileMechanicalBellows.class, new ResourceLocation("exp:mechanical_bellows"));
 	}
 }

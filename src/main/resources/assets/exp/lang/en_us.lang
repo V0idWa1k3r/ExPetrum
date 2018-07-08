@@ -365,6 +365,8 @@ tile.exp.gearbox.name=Gearbox
 tile.exp.water_wheel.name=Water Wheel
 tile.exp.splitter_gearbox.name=Splitter Gearbox
 tile.exp.mechanical_quern.name=Mechanical Quern
+tile.exp.windmill.name=Windmill
+tile.exp.mechanical_bellows.name=Mechanical Bellows
 
 item.exp.item_ingot.name=Ingot
 

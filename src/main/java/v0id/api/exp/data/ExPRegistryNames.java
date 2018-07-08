@@ -85,7 +85,9 @@ public class ExPRegistryNames
         blockWaterWheel                                                                                     = "water_wheel",
         blockStructure                                                                                      = "structure",
         blockSplitterGearbox                                                                                = "splitter_gearbox",
-        blockMechanicalQuern                                                                                = "mechanical_quern";
+        blockMechanicalQuern                                                                                = "mechanical_quern",
+        blockWindmill                                                                                       = "windmill",
+        blockMechanicalBellows                                                                              = "mechanical_bellows";
 
 	public static final String
 		itemRock																							= "item_rock",

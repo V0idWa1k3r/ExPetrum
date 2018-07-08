@@ -27,7 +27,7 @@ public class GuiBloomery extends GuiContainer
         int j = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
         float temp = this.bloomery.temperatureHandler.getCurrentTemperature();
-        int tOffset = (int)Math.min(1800, temp) / 25;
+        int tOffset = (int)(Math.min(1800, temp) / 26.5F);
         this.drawTexturedModalRect(i + 7, j + 76 - tOffset, 248, 0, 8, 5);
         float burnVal = this.bloomery.work == 0 ? 0 : (float)this.bloomery.work / 12000;
         int bOffset = (int)Math.floor(Math.min(1, burnVal) * 14);

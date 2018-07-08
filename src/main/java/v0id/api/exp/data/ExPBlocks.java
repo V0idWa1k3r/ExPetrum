@@ -327,4 +327,10 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockMechanicalQuern)
     public static final Block mechanicalQuern = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockWindmill)
+    public static final Block windmill = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockMechanicalBellows)
+    public static final Block mechanicalBellows = null;
 }

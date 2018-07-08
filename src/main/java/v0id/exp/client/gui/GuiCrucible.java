@@ -31,7 +31,7 @@ public class GuiCrucible extends GuiContainer
         int j = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
         float temp = this.crucible.temperature_handler.getCurrentTemperature();
-        int tOffset = (int)Math.min(1800, temp) / 25;
+        int tOffset = (int)(Math.min(1800, temp) / 26.5F);
         this.drawTexturedModalRect(i + 7, j + 76 - tOffset, 248, 0, 8, 5);
         if (!this.crucible.metalMap.isEmpty())
         {

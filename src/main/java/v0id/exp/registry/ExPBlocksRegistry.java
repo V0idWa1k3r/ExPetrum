@@ -132,7 +132,9 @@ public class ExPBlocksRegistry extends AbstractRegistry
                 new BlockWaterWheel(),
                 new BlockStructurePiece(),
                 new BlockSplitterGearbox(),
-                new BlockMechanicalQuern()
+                new BlockMechanicalQuern(),
+                new BlockWindmill(),
+                new BlockMechanicalBellows()
         );
 
         registryEntries.forEach(registry::register);

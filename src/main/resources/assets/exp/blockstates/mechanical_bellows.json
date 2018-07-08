@@ -1,0 +1,35 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"textures" : {
+            "0": "exp:blocks/iron_plates",
+            "1": "exp:blocks/quern",
+            "2": "exp:blocks/base",
+            "3": "exp:blocks/bellows_item_mechanical",
+            "4": "exp:blocks/bellows_item_2_mechanical",
+            "5": "exp:blocks/bellows_mechanical",
+            "particle": "exp:blocks/iron_plates"
+		},
+		"transform": "forge:default-block",
+		"gui3d" : true,
+		"model" : "exp:bellows_block_mechanical"
+	},
+	"variants" : {
+		"normal": [{}],
+        "inventory": [{ "model" : "exp:bellows_item" }],
+		"facing": {
+            "north": {
+                "y" : 0
+            },
+            "south": {
+                "y": 180
+            },
+            "east": {
+                "y": 90
+            },
+            "west": {
+                "y": 270
+            }
+        }
+	}
+}
