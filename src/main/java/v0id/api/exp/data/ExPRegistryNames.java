@@ -28,7 +28,7 @@ public class ExPRegistryNames
 		blockCoralRock																						= "coralrock",
 		blockCoralPlant																						= "coralplant",
 		blockLog																							= "log",
-		blockLogDeco																						= "logDeco",
+		blockLogDeco																						= "log_deco",
 		blockLeaves																							= "leaves",
 		blockOre																							= "ore",
 		blockPebble																							= "pebble",
@@ -146,9 +146,9 @@ public class ExPRegistryNames
         biomeWarmPlains                                                                                     = "warmplains";
 
 	public static final ResourceLocation
-		entityGravFallingBlock																				= new ResourceLocation(modid, "gravFallingBlock"),
-		entityFallingTree																					= new ResourceLocation(modid, "fallingTree"),
-		entityThrownWeapon																					= new ResourceLocation(modid, "thrownWeapon"),
+		entityGravFallingBlock																				= new ResourceLocation(modid, "grav_falling_block"),
+		entityFallingTree																					= new ResourceLocation(modid, "falling_tree"),
+		entityThrownWeapon																					= new ResourceLocation(modid, "thrown_weapon"),
         entityChicken																					    = new ResourceLocation(modid, "chicken"),
         entityCow																						    = new ResourceLocation(modid, "cow"),
         entitySheep																						    = new ResourceLocation(modid, "sheep"),
@@ -156,14 +156,14 @@ public class ExPRegistryNames
         entityWolf																						    = new ResourceLocation(modid, "wolf");
 
 	public static final ResourceLocation
-		specialAttackPiercingDash																			= new ResourceLocation(modid, "piercingDash"),
+		specialAttackPiercingDash																			= new ResourceLocation(modid, "piercing_dash"),
 		specialAttackSlash																					= new ResourceLocation(modid, "slash"),
-		specialAttackDownStrike																				= new ResourceLocation(modid, "downStrike"),
+		specialAttackDownStrike																				= new ResourceLocation(modid, "down_strike"),
 		specialAttackSpin																					= new ResourceLocation(modid, "spin"),
-		specialAttackShieldSlam																				= new ResourceLocation(modid, "shieldSlam"),
+		specialAttackShieldSlam																				= new ResourceLocation(modid, "shield_slam"),
 		specialAttackBehead																					= new ResourceLocation(modid, "behead"),
 		specialAttackStab																					= new ResourceLocation(modid, "stab"),
-		specialAttackThrow																					= new ResourceLocation(modid, "entityThrow");
+		specialAttackThrow																					= new ResourceLocation(modid, "entity_throw");
 	
 	public static final String
 		potionStunned																						="stunned";
