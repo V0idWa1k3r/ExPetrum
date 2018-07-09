@@ -75,6 +75,7 @@ public class BlockForge extends Block implements IWeightProvider, IInitializable
         return 0;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {

@@ -57,7 +57,8 @@ public class BlockWaterLily extends BlockBush implements IWeightProvider, IIniti
 		this.setDefaultState(this.blockState.getBaseState().withProperty(PLANT_BLOOMING, false).withProperty(LILY_TYPE, LEOPARDESS));
 		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
 	}
-	
+
+	@SuppressWarnings("deprecation")
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {

@@ -6,7 +6,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import org.apache.commons.lang3.tuple.Pair;
-import v0id.core.logging.LogLevel;
 import v0id.api.exp.block.EnumLeafState;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.data.ExPBlockProperties;
@@ -110,7 +109,7 @@ public class TreeGenerator extends WorldGenerator implements ITreeGenerator
 		
 		if (!worldIn.getBlockState(at).getBlock().isAssociatedBlock(Blocks.GRASS) && !worldIn.getBlockState(at).getBlock().isAssociatedBlock(Blocks.DIRT))
 		{
-			ExPMisc.modLogger.log(LogLevel.Debug, "Tried to generate tree at %s but there is no appropriate block for the tree!", position.toString());
+			ExPMisc.modLogger.debug("Tried to generate tree at %s but there is no appropriate block for the tree!", position.toString());
 			return false;
 		}
 		

@@ -6,10 +6,11 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
+import v0id.api.exp.tile.ISyncableTile;
 import v0id.api.exp.tile.crop.ExPFarmlandCapability;
 import v0id.exp.crop.ExPFarmland;
 
-public class TileFarmland extends TileEntity
+public class TileFarmland extends TileEntity implements ISyncableTile
 {
 	public final ExPFarmland farmlandState;
 	
@@ -68,5 +69,19 @@ public class TileFarmland extends TileEntity
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing)
 	{
 		return capability == ExPFarmlandCapability.farmlandCap && (facing == EnumFacing.UP || facing == null) ? ExPFarmlandCapability.farmlandCap.cast(this.farmlandState) : super.getCapability(capability, facing);
+	}
+
+	@Override
+	public NBTTagCompound serializeData()
+	{
+		NBTTagCompound ret = new NBTTagCompound();
+		ret.setTag("farmlandState", this.farmlandState.serializeNBT());
+		return ret;
+	}
+
+	@Override
+	public void readData(NBTTagCompound tag)
+	{
+        this.farmlandState.deserializeNBT(tag.getCompoundTag("farmlandState"));
 	}
 }

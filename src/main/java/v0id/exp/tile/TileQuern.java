@@ -9,19 +9,17 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import v0id.api.exp.item.IContainerTickable;
 import v0id.api.exp.recipe.RecipesQuern;
-import v0id.core.network.PacketType;
-import v0id.core.network.VoidNetwork;
-import v0id.core.util.DimBlockPos;
+import v0id.api.exp.tile.ISyncableTile;
+import v0id.exp.net.ExPNetwork;
 import v0id.exp.util.temperature.TemperatureUtils;
 
 import javax.annotation.Nullable;
 
-public class TileQuern extends TileEntity implements ITickable
+public class TileQuern extends TileEntity implements ITickable, ISyncableTile
 {
     public ItemStackHandler inventory = new ItemStackHandler(3)
     {
@@ -42,10 +40,7 @@ public class TileQuern extends TileEntity implements ITickable
     {
         if (this.world != null && !this.world.isRemote)
         {
-            NBTTagCompound sent = new NBTTagCompound();
-            sent.setTag("tileData", this.serializeNBT());
-            sent.setTag("blockPosData", new DimBlockPos(this.getPos(), this.getWorld().provider.getDimension()).serializeNBT());
-            VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), this.pos.getX(), this.pos.getY(), this.pos.getZ(), 64));
+            ExPNetwork.sendTileData(this, false);
         }
     }
 
@@ -156,5 +151,21 @@ public class TileQuern extends TileEntity implements ITickable
     public boolean hasFastRenderer()
     {
         return true;
+    }
+
+    @Override
+    public NBTTagCompound serializeData()
+    {
+        NBTTagCompound ret = new NBTTagCompound();
+        ret.setTag("inventory", this.inventory.serializeNBT());
+        ret.setByte("rotationIndex", (byte)this.rotationIndex);
+        return ret;
+    }
+
+    @Override
+    public void readData(NBTTagCompound tag)
+    {
+        this.inventory.deserializeNBT(tag.getCompoundTag("inventory"));
+        this.rotationIndex = tag.getByte("rotationIndex");
     }
 }

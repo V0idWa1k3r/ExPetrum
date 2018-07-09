@@ -28,7 +28,7 @@ import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.ILog;
 import v0id.api.exp.data.*;
 import v0id.api.exp.inventory.IWeightProvider;
-import v0id.core.VoidApi;
+import v0id.exp.ExPetrum;
 import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockLog;
@@ -90,7 +90,7 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 			return;
 		}
 
-		EntityPlayer player = VoidApi.proxy.getClientPlayer();
+		EntityPlayer player = ExPetrum.proxy.getClientPlayer();
 		if (player != null)
         {
             if (player.capabilities.isCreativeMode)
@@ -223,6 +223,7 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World worldIn, BlockPos pos)
 	{

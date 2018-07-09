@@ -18,7 +18,7 @@ import v0id.api.exp.item.IMeltableMetal;
 import v0id.api.exp.metal.EnumMetal;
 import v0id.api.exp.player.EnumPlayerProgression;
 import v0id.api.exp.player.IExPPlayer;
-import v0id.core.VoidApi;
+import v0id.exp.ExPetrum;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -89,7 +89,7 @@ public class ItemOre extends Item implements IInitializableItem, IWeightProvider
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
         super.addInformation(stack, worldIn, tooltip, flagIn);
-        EntityPlayer player = VoidApi.proxy.getClientPlayer();
+        EntityPlayer player = ExPetrum.proxy.getClientPlayer();
         if (player != null)
         {
             IExPPlayer playerData = IExPPlayer.of(player);

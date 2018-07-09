@@ -2,6 +2,7 @@ package v0id.exp.item;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,8 +24,7 @@ import v0id.api.exp.data.*;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.api.exp.player.EnumPlayerProgression;
 import v0id.api.exp.player.IExPPlayer;
-import v0id.core.VoidApi;
-import v0id.core.util.I18n;
+import v0id.exp.ExPetrum;
 
 import java.util.Arrays;
 import java.util.List;
@@ -217,7 +217,7 @@ public class ItemWoodenBucket extends Item implements IWeightProvider, IInitiali
         }
         else
         {
-            EntityPlayer playerIn = VoidApi.proxy.getClientPlayer();
+            EntityPlayer playerIn = ExPetrum.proxy.getClientPlayer();
             if (playerIn != null)
             {
                 if (IExPPlayer.of(playerIn).getProgressionStage().ordinal() < EnumPlayerProgression.IRON_AGE.ordinal())

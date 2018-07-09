@@ -108,6 +108,7 @@ public class BlockGenericShrubbery extends BlockBush implements IInitializableBl
         return Items.AIR;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {

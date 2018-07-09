@@ -6,7 +6,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import v0id.core.VoidApi;
+import v0id.exp.ExPetrum;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -50,8 +50,7 @@ public interface ILeaves
 	
 	static void checkIsAttached(World w, BlockPos origin, ILeaves leaf, IBlockState leafState)
 	{
-		IThreadListener runOn = w.isRemote ? VoidApi.proxy.getClientListener() : (WorldServer)w;
-		
+		IThreadListener runOn = w.isRemote ? ExPetrum.proxy.getClientThreadListener() : (WorldServer)w;
 		for (int dx = -LEAVES_CHECK_RADIUS; dx <= LEAVES_CHECK_RADIUS; ++dx)
 		{
 			for (int dy = -LEAVES_CHECK_RADIUS; dy <= LEAVES_CHECK_RADIUS; ++dy)

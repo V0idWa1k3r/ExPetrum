@@ -14,13 +14,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.tuple.Pair;
-import v0id.core.logging.LogLevel;
-import v0id.core.network.PacketType;
-import v0id.core.network.VoidNetwork;
-import v0id.core.util.DimBlockPos;
 import v0id.api.exp.data.*;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.api.exp.tile.crop.*;
@@ -28,6 +23,7 @@ import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.IExPWorld;
 import v0id.exp.crop.CropStats;
 import v0id.exp.crop.ExPCrop;
+import v0id.exp.net.ExPNetwork;
 import v0id.exp.tile.TileCrop;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -116,16 +112,13 @@ public class ItemSeeds extends Item implements IInitializableItem, IOreDictEntry
 					ExPCrop cropCap = (ExPCrop) IExPCrop.of(cropTile);
 					cropCap.stats = stats;
 					cropCap.timeKeeper = new Calendar(IExPWorld.of(worldIn).today().getTime());
-					NBTTagCompound sent = new NBTTagCompound();
-					sent.setTag("tileData", cropTile.serializeNBT());
-					sent.setTag("blockPosData", new DimBlockPos(pos.up(), worldIn.provider.getDimension()).serializeNBT());
-					VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new TargetPoint(worldIn.provider.getDimension(), pos.getX(), pos.up().getY(), pos.getZ(), 96));
+                    ExPNetwork.sendTileData(cropTile, true);
 					held.shrink(1);
 					return EnumActionResult.SUCCESS;
 				}
 				catch (Exception ex)
 				{
-					ExPMisc.modLogger.log(LogLevel.Error, "Unable to place seeds at %s!", ex, pos.toString());
+					ExPMisc.modLogger.error("Unable to place seeds at " + pos.toString() + "!", ex);
 				}
 			}
 		}

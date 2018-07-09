@@ -68,6 +68,7 @@ public class BlockSplitterGearbox extends BlockDirectional implements IInitializ
         return new BlockStateContainer(this, FACING, GEARBOX_OUT0, GEARBOX_OUT1);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta)
     {
@@ -128,6 +129,7 @@ public class BlockSplitterGearbox extends BlockDirectional implements IInitializ
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {

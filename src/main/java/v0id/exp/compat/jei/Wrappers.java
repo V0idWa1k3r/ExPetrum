@@ -5,6 +5,7 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import org.apache.commons.lang3.tuple.Pair;
@@ -12,7 +13,6 @@ import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.metal.EnumMetal;
 import v0id.api.exp.recipe.*;
-import v0id.core.util.I18n;
 import v0id.exp.item.ItemGeneric;
 
 import java.util.Arrays;

@@ -14,8 +14,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.tuple.Pair;
-import v0id.api.exp.metal.EnumToolStats;
-import v0id.core.logging.LogLevel;
 import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.combat.EnumWeaponWeight;
 import v0id.api.exp.combat.IWeapon;
@@ -23,6 +21,7 @@ import v0id.api.exp.combat.WeaponType;
 import v0id.api.exp.data.*;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.api.exp.metal.EnumToolClass;
+import v0id.api.exp.metal.EnumToolStats;
 import v0id.api.exp.tile.crop.EnumPlantNutrient;
 import v0id.api.exp.tile.crop.IFarmland;
 import v0id.exp.item.IInitializableItem;
@@ -128,7 +127,7 @@ public class ItemHoe extends ItemExPTool implements IWeapon, IWeightProvider, II
 				}
 				else
 				{
-					ExPMisc.modLogger.log(LogLevel.Warning, "Unknown soil block at %s!", pos);
+					ExPMisc.modLogger.warn("Unknown soil block at %s!", pos);
 				}
 				
 				return EnumActionResult.SUCCESS;

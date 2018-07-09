@@ -67,6 +67,7 @@ public class BlockGearbox extends BlockDirectional implements IInitializableBloc
         return new BlockStateContainer(this, FACING, GEARBOX_INPUT);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta)
     {
@@ -119,6 +120,7 @@ public class BlockGearbox extends BlockDirectional implements IInitializableBloc
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {

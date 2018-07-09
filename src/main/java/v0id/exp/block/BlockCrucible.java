@@ -76,6 +76,7 @@ public class BlockCrucible extends Block implements IWeightProvider, IInitializa
         return 0;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
@@ -134,6 +135,7 @@ public class BlockCrucible extends Block implements IWeightProvider, IInitializa
         return BlockFaceShape.UNDEFINED;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {

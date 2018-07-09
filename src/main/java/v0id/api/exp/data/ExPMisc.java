@@ -3,14 +3,12 @@ package v0id.api.exp.data;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.util.EnumHelper;
-import v0id.core.logging.VoidLogger;
-import v0id.core.markers.StaticStorage;
-import v0id.api.exp.fx.IParticleEngine;
+import org.apache.logging.log4j.Logger;
+import v0id.api.exp.client.IParticleEngine;
 import v0id.api.exp.settings.ISettingsManager;
 
 import java.util.Random;
 
-@StaticStorage
 public class ExPMisc
 {
 	public static WorldType worldTypeExP;
@@ -21,7 +19,7 @@ public class ExPMisc
 	
 	// This is a placeholder. Every tool stat is exposed differently! This only exists to populate toolMaterial field in ItemTool! Do not use/reference!
 	public static final ToolMaterial materialExPetrum = EnumHelper.addToolMaterial("EXPETRUM", 1, 1, 1, 1, 1);
-	public static VoidLogger modLogger;
+	public static Logger modLogger;
 	public static IParticleEngine defaultParticleEngineImpl;
 	public static ISettingsManager rootSettingsManager;
 }

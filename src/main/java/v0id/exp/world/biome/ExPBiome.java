@@ -14,7 +14,6 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
-import v0id.core.VoidApi;
 import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.data.ExPBlockProperties;
@@ -24,6 +23,7 @@ import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.world.EnumSeason;
 import v0id.api.exp.world.IBiome;
 import v0id.api.exp.world.IExPWorld;
+import v0id.exp.ExPetrum;
 import v0id.exp.world.gen.GenerationHelper;
 import v0id.exp.world.gen.ShrubEntry;
 import v0id.exp.world.gen.tree.TreeEntry;
@@ -111,7 +111,7 @@ public class ExPBiome extends Biome implements IBiome, IDictionariedBiome
             World w;
             if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
             {
-                w = VoidApi.proxy.getClientWorld();
+                w = ExPetrum.proxy.getClientWorld();
             }
             else
             {

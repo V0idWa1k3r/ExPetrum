@@ -21,7 +21,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
-import v0id.core.VoidApi;
 import v0id.api.exp.block.EnumFruit;
 import v0id.api.exp.block.EnumLeafState;
 import v0id.api.exp.data.ExPBlockProperties;
@@ -29,6 +28,7 @@ import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.world.IExPWorld;
+import v0id.exp.ExPetrum;
 import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWithMetadata;
@@ -197,10 +197,11 @@ public class BlockFruit extends Block implements IInitializableBlock, IItemBlock
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
     {
-        World w = world instanceof World ? (World) world : FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER ? FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld() : VoidApi.proxy.getClientWorld();
+        World w = world instanceof World ? (World) world : FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER ? FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld() : ExPetrum.proxy.getClientWorld();
         Random rand = w.rand;
         ItemStack item = new ItemStack(this.getItemDropped(state, rand, fortune), this.quantityDropped(state, fortune, rand), this.damageDropped(state));
         ItemFood foodItemRef = (ItemFood) item.getItem();

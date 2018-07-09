@@ -1,9 +1,9 @@
 package v0id.api.exp;
 
-import v0id.core.logging.LogLevel;
-import v0id.core.logging.VoidLogger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ExPApi
 {
-	public static final VoidLogger apiLogger = VoidLogger.createLogger(ExPApi.class, LogLevel.Fine);
+	public static final Logger apiLogger = LogManager.getLogger("ExP[API]");
 }

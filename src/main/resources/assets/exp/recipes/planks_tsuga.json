@@ -7,7 +7,7 @@
   "type": "forge:ore_shapeless",
   "ingredients": [
     {
-      "item": "exp:logDeco5",
+      "item": "exp:log_deco5",
       "data": 7
     },
     {

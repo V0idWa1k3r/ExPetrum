@@ -9,10 +9,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
+import v0id.api.exp.tile.ISyncableTile;
 import v0id.api.exp.tile.crop.ExPCropCapability;
 import v0id.exp.crop.ExPCrop;
 
-public class TileCrop extends TileEntity
+public class TileCrop extends TileEntity implements ISyncableTile
 {
 	public final ExPCrop cropState;
 	
@@ -77,5 +78,19 @@ public class TileCrop extends TileEntity
 	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate)
 	{
 		return oldState.getBlock() != newSate.getBlock();
+	}
+
+	@Override
+	public NBTTagCompound serializeData()
+	{
+		NBTTagCompound ret = new NBTTagCompound();
+        ret.setTag("cropState", this.cropState.serializeNBT());
+		return ret;
+	}
+
+	@Override
+	public void readData(NBTTagCompound tag)
+	{
+        this.cropState.deserializeNBT(tag.getCompoundTag("cropState"));
 	}
 }

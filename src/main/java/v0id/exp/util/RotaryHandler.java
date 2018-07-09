@@ -2,7 +2,7 @@ package v0id.exp.util;
 
 import net.minecraft.nbt.NBTTagCompound;
 import v0id.api.exp.tile.IRotaryHandler;
-import v0id.core.util.nbt.NBTChain;
+import v0id.api.exp.util.NBTChain;
 
 public class RotaryHandler implements IRotaryHandler
 {

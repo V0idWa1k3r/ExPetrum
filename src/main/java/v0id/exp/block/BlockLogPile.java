@@ -145,7 +145,7 @@ public class BlockLogPile extends Block implements IInitializableBlock, ISupport
                             item.shrink(1);
                         }
 
-                        tlp.markDirty();
+                        tlp.sendUpdatePacket();
                     }
 
                     return true;
@@ -162,6 +162,7 @@ public class BlockLogPile extends Block implements IInitializableBlock, ISupport
         return 0;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {

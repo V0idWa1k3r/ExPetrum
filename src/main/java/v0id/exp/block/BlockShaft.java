@@ -85,6 +85,7 @@ public class BlockShaft extends BlockRotatedPillar implements IInitializableBloc
         return new TileShaft();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state)
     {
@@ -120,6 +121,7 @@ public class BlockShaft extends BlockRotatedPillar implements IInitializableBloc
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {

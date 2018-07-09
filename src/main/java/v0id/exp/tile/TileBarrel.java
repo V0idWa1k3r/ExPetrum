@@ -16,35 +16,31 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import v0id.api.exp.item.IContainerTickable;
 import v0id.api.exp.recipe.RecipesBarrel;
-import v0id.core.network.PacketType;
-import v0id.core.network.VoidNetwork;
-import v0id.core.util.DimBlockPos;
+import v0id.api.exp.tile.ISyncableTile;
 import v0id.exp.item.ItemWoodenBucket;
+import v0id.exp.net.ExPNetwork;
 import v0id.exp.util.temperature.TemperatureUtils;
 
 import javax.annotation.Nullable;
 import java.util.Stack;
 
-public class TileBarrel extends TileEntity implements ITickable
+public class TileBarrel extends TileEntity implements ITickable, ISyncableTile
 {
     public ItemStackHandler inventory = new ItemStackHandler(2);
     public FluidTank fluidInventory = new FluidTank(10000);
     public int recipeProgress;
     public RecipesBarrel.IRecipeBarrel currentRecipe;
     public Stack<ItemStack> results = new Stack<>();
+
     public void sendUpdatePacket()
     {
         if (this.world != null && !this.world.isRemote)
         {
-            NBTTagCompound sent = new NBTTagCompound();
-            sent.setTag("tileData", this.serializeNBT());
-            sent.setTag("blockPosData", new DimBlockPos(this.getPos(), this.getWorld().provider.getDimension()).serializeNBT());
-            VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), this.pos.getX(), this.pos.getY(), this.pos.getZ(), 64));
+            ExPNetwork.sendTileData(this, false);
         }
     }
 
@@ -170,6 +166,7 @@ public class TileBarrel extends TileEntity implements ITickable
         for (NBTBase tagCompound : compound.getTagList("results", Constants.NBT.TAG_COMPOUND))
         {
             ItemStack is = new ItemStack((NBTTagCompound) tagCompound);
+            this.results.push(is);
         }
     }
 
@@ -227,5 +224,19 @@ public class TileBarrel extends TileEntity implements ITickable
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing)
     {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.inventory) : capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY ? CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(this.fluidInventory) : super.getCapability(capability, facing);
+    }
+
+    @Override
+    public NBTTagCompound serializeData()
+    {
+        NBTTagCompound ret = new NBTTagCompound();
+        this.fluidInventory.writeToNBT(ret);
+        return ret;
+    }
+
+    @Override
+    public void readData(NBTTagCompound tag)
+    {
+        this.fluidInventory.readFromNBT(tag);
     }
 }

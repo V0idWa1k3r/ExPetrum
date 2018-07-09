@@ -130,6 +130,7 @@ public class BlockBarrel extends Block implements IWeightProvider, IInitializabl
         return BlockFaceShape.UNDEFINED;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {

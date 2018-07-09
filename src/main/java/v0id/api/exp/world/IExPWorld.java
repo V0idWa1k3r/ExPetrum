@@ -6,7 +6,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.INBTSerializable;
-import v0id.core.logging.LogLevel;
 import v0id.api.exp.ExPApi;
 import v0id.api.exp.world.chunk.IExPChunk;
 
@@ -122,7 +121,7 @@ public interface IExPWorld extends INBTSerializable<NBTTagCompound>
 		assert w.profiler != null : "World provider is null which should never happen!";
 		if (w.provider.getDimensionType() != DimensionType.OVERWORLD)
 		{
-			ExPApi.apiLogger.log(LogLevel.Error, "Attempted to get the data of %s but the given world is not overworld! It is never ticked and it's data manipulations are useless!", w.toString());
+			ExPApi.apiLogger.error("Attempted to get the data of %s but the given world is not overworld! It is never ticked and it's data manipulations are useless!", w.toString());
 		}
 		
 		return w.getCapability(ExPWorldCapability.worldCap, null);

@@ -22,11 +22,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants.NBT;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import v0id.api.exp.block.ILeaves;
 import v0id.api.exp.block.ILog;
-import v0id.api.exp.data.ExPPackets;
-import v0id.core.network.VoidNetwork;
-import v0id.core.util.nbt.NBTChain;
+import v0id.exp.net.ExPNetwork;
 
 import java.util.HashSet;
 import java.util.List;
@@ -398,9 +397,7 @@ public class EntityFallingTree extends Entity
 		if (!this.world.isRemote && this.isDataConstructed && !this.isDataSent && this.ticksExisted >= 2)
 		{
 			this.isDataSent = true;
-			NBTTagCompound tag = new NBTTagCompound();
-			this.serializeDataToNBT(tag);
-			VoidNetwork.sendDataToAll(ExPPackets.FALLING_TREE, NBTChain.startChain().withTag("dataTag", tag).withString("uuid", this.getPersistentID().toString()).endChain());
+            ExPNetwork.sendFallingTree(this, new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), this.posX, this.posY, this.posZ, 32));
 			for (BlockPos pos : this.data.keySet())
 			{
 				this.world.setBlockState(pos, Blocks.AIR.getDefaultState(), 2);

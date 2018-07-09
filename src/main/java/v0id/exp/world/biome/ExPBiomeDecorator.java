@@ -8,7 +8,6 @@ import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
-import v0id.core.logging.LogLevel;
 import v0id.api.exp.block.EnumShrubState;
 import v0id.api.exp.block.EnumShrubType;
 import v0id.api.exp.block.EnumTreeType;
@@ -63,14 +62,14 @@ public class ExPBiomeDecorator extends BiomeDecorator
 
 	private static void printWarnings()
 	{
-		ExPMisc.modLogger.log(LogLevel.Fine, "Hello.");
-		ExPMisc.modLogger.log(LogLevel.Fine, "ExPetrum would like to warn you about it's terrain generation");
-		ExPMisc.modLogger.log(LogLevel.Fine, "It usually tries to avoid chunk runaway effects");
-		ExPMisc.modLogger.log(LogLevel.Fine, "However it is not always possible, especially with ore pockets");
-		ExPMisc.modLogger.log(LogLevel.Fine, "You might see some FML warnings about cascading worldgen lag later down the log file");
-		ExPMisc.modLogger.log(LogLevel.Fine, "Please do not report them to V0id, he is well aware");
-		ExPMisc.modLogger.log(LogLevel.Fine, "However that should not be the issue for the most part as chunk runaway should happen rarely");
-		ExPMisc.modLogger.log(LogLevel.Fine, "Thanks for reading this. Have a nice day :)");
+		ExPMisc.modLogger.info("Hello.");
+		ExPMisc.modLogger.info("ExPetrum would like to warn you about it's terrain generation");
+		ExPMisc.modLogger.info("It usually tries to avoid chunk runaway effects");
+		ExPMisc.modLogger.info("However it is not always possible, especially with ore pockets");
+		ExPMisc.modLogger.info("You might see some FML warnings about cascading worldgen lag later down the log file");
+		ExPMisc.modLogger.info("Please do not report them to V0id, he is well aware");
+		ExPMisc.modLogger.info("However that should not be the issue for the most part as chunk runaway should happen rarely");
+		ExPMisc.modLogger.info("Thanks for reading this. Have a nice day :)");
 		printedWarnings = true;
 	}
 	

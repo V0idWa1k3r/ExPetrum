@@ -12,7 +12,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import v0id.api.exp.block.EnumMoltenMetalState;
@@ -22,18 +21,17 @@ import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.item.ITuyere;
-import v0id.core.network.PacketType;
-import v0id.core.network.VoidNetwork;
-import v0id.core.util.DimBlockPos;
+import v0id.api.exp.tile.ISyncableTile;
 import v0id.exp.block.BlockMoltenMetal;
 import v0id.exp.item.ItemGeneric;
 import v0id.exp.item.ItemOre;
+import v0id.exp.net.ExPNetwork;
 import v0id.exp.util.temperature.TemperatureHandler;
 import v0id.exp.util.temperature.TemperatureUtils;
 
 import javax.annotation.Nullable;
 
-public class TileBloomery extends TileEntity implements ITickable
+public class TileBloomery extends TileEntity implements ITickable, ISyncableTile
 {
     public ItemStackHandler inventory = new ItemStackHandler(4);
     public TemperatureHandler temperatureHandler = new TemperatureHandler(1500);
@@ -46,10 +44,7 @@ public class TileBloomery extends TileEntity implements ITickable
     {
         if (this.world != null && !this.world.isRemote)
         {
-            NBTTagCompound sent = new NBTTagCompound();
-            sent.setTag("tileData", this.serializeNBT());
-            sent.setTag("blockPosData", new DimBlockPos(this.getPos(), this.getWorld().provider.getDimension()).serializeNBT());
-            VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), this.pos.getX(), this.pos.getY(), this.pos.getZ(), 64));
+            ExPNetwork.sendTileData(this, true);
         }
     }
 
@@ -314,5 +309,19 @@ public class TileBloomery extends TileEntity implements ITickable
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing)
     {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.inventory) : super.getCapability(capability, facing);
+    }
+
+    @Override
+    public NBTTagCompound serializeData()
+    {
+        NBTTagCompound ret = new NBTTagCompound();
+        ret.setInteger("work", this.work);
+        return ret;
+    }
+
+    @Override
+    public void readData(NBTTagCompound tag)
+    {
+        this.work = tag.getInteger("work");
     }
 }

@@ -8,10 +8,8 @@ import v0id.api.exp.combat.EnumWeaponWeight;
 import v0id.api.exp.combat.SpecialAttack;
 import v0id.api.exp.combat.WeaponType;
 import v0id.api.exp.data.ExPMisc;
-import v0id.api.exp.data.ExPPackets;
 import v0id.api.exp.player.IExPPlayer;
-import v0id.core.logging.LogLevel;
-import v0id.core.network.VoidNetwork;
+import v0id.exp.net.ExPNetwork;
 
 import java.util.UUID;
 
@@ -29,12 +27,12 @@ public class ServerCombatHandler
 			if (attack.canExecute(player, WeaponType.getType(is), EnumWeaponWeight.getWeaponWeight(is), rightClick))
 			{
 				IExPPlayer.of(player).setCurrentSpecialAttack(attack.wrap(), true);
-				VoidNetwork.sendDataToClient(ExPPackets.SPECIAL_ATTACK, tag, player);
+                ExPNetwork.sendSpecialAttackSync(tag, player);
 			}
 		}
 		catch (Exception ex)
 		{
-			ExPMisc.modLogger.log(LogLevel.Error, "Malformed client combat packet! %s", ex, tag);
+			ExPMisc.modLogger.error("Malformed client combat packet!", ex);
 		}
 	}
 }

@@ -120,6 +120,7 @@ public class BlockCraftingTable extends BlockWorkbench implements IWeightProvide
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta)
     {

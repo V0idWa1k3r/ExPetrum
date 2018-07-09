@@ -2,11 +2,9 @@ package v0id.api.exp.data;
 
 import com.google.common.collect.Maps;
 import net.minecraft.util.ResourceLocation;
-import v0id.core.markers.StaticStorage;
 
 import java.util.Map;
 
-@StaticStorage
 public class ExPRegistryNames
 {
 	public static final String modid = "exp";

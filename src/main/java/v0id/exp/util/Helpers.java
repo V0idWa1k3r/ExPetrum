@@ -14,9 +14,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.items.IItemHandler;
-import v0id.core.VoidApi;
-import v0id.core.util.java.ColorHEX;
-import v0id.core.util.java.ColorHSV;
+import v0id.api.exp.util.ColorHEX;
+import v0id.api.exp.util.ColorHSV;
 import v0id.api.exp.block.EnumGrassState;
 import v0id.api.exp.block.ICanGrowCrop;
 import v0id.api.exp.block.IGrass;
@@ -24,6 +23,7 @@ import v0id.api.exp.block.ILeaves;
 import v0id.api.exp.world.EnumSeason;
 import v0id.api.exp.world.IBiome;
 import v0id.api.exp.world.IExPWorld;
+import v0id.exp.ExPetrum;
 
 import java.util.List;
 import java.util.Optional;
@@ -96,7 +96,7 @@ public class Helpers
 			return ((ILeaves)state.getBlock()).getLeavesColor(worldIn, state, pos);
 		}
 		
-		return worldIn != null && pos != null ? VoidApi.proxy.getClientGrassColor(worldIn, pos) : 0x166612;
+		return worldIn != null && pos != null ? ExPetrum.proxy.getGrassColor(worldIn, pos) : 0x166612;
 	}
 	
 	public static int getCoralColor(IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex)
@@ -113,7 +113,7 @@ public class Helpers
 			return ((IGrass)state.getBlock()).getGrassColor(state, pos, worldIn);
 		}
 		
-		return worldIn != null && pos != null ? VoidApi.proxy.getClientGrassColor(worldIn, pos) : 0x166612;
+		return worldIn != null && pos != null ? ExPetrum.proxy.getGrassColor(worldIn, pos) : 0x166612;
 	}
 	
 	public static boolean canPlantGrow(BlockPos pos, World w)

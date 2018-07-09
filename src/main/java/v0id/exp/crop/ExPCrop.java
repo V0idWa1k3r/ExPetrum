@@ -17,18 +17,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
-import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import org.apache.commons.lang3.tuple.Pair;
-import v0id.core.network.PacketType;
-import v0id.core.network.VoidNetwork;
-import v0id.core.util.DimBlockPos;
 import v0id.api.exp.event.crop.CropEvent;
 import v0id.api.exp.event.crop.CropEvent.Harvest.Action;
 import v0id.api.exp.metal.EnumToolClass;
+import v0id.api.exp.tile.ISyncableTile;
 import v0id.api.exp.tile.crop.*;
 import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.EnumSeason;
 import v0id.api.exp.world.TemperatureRange;
+import v0id.exp.net.ExPNetwork;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -300,10 +298,9 @@ public class ExPCrop implements IExPCrop
 	
 	public void sendUpdatePacket()
 	{
+		ExPNetwork.sendTileData((ISyncableTile) this.holder, true);
 		NBTTagCompound sent = new NBTTagCompound();
 		sent.setTag("tileData", this.getContainer().serializeNBT());
-		sent.setTag("blockPosData", new DimBlockPos(this.getContainer().getPos(), this.getContainer().getWorld().provider.getDimension()).serializeNBT());
-		VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new TargetPoint(this.getContainer().getWorld().provider.getDimension(), this.getContainer().getPos().getX(), this.getContainer().getPos().getY(), this.getContainer().getPos().getZ(), 96));
 	}
 	
 	public void handleHarvest(World w, BlockPos pos, IBlockState state, Action a, boolean b)

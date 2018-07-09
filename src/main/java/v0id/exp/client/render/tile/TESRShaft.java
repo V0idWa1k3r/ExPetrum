@@ -10,7 +10,7 @@ import net.minecraftforge.client.model.animation.FastTESR;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 import v0id.api.exp.world.IExPWorld;
-import v0id.core.client.RenderUtils;
+import v0id.exp.client.render.RenderUtils;
 import v0id.exp.tile.TileShaft;
 
 public class TESRShaft extends FastTESR<TileShaft>
@@ -35,7 +35,7 @@ public class TESRShaft extends FastTESR<TileShaft>
         int j = i % 65536;
         int k = i / 65536;
         long current = IExPWorld.of(te.getWorld()).today().getTime();
-        float rotation = current - te.lastStepped <= 2 ? (float)Math.toRadians((te.lastStepped % 45F) * 8 + 8 * partialTicks) : (float)Math.toRadians((te.lastStepped % 45F) * 8);
+        float rotation = current - te.lastStepped <= 10 ? (float)Math.toRadians((te.lastStepped % 45F) * 8 + 8 * partialTicks) : (float)Math.toRadians((te.lastStepped % 45F) * 8);
         if (axis == EnumFacing.Axis.X)
         {
             transform = transform.scale(new Vector3f(1, 0.375F, 0.375F));

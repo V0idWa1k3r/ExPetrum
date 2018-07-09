@@ -9,22 +9,20 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import v0id.api.exp.item.IContainerTickable;
 import v0id.api.exp.recipe.RecipesSmelting;
 import v0id.api.exp.tile.ExPTemperatureCapability;
-import v0id.core.network.PacketType;
-import v0id.core.network.VoidNetwork;
-import v0id.core.util.DimBlockPos;
+import v0id.api.exp.tile.ISyncableTile;
+import v0id.exp.net.ExPNetwork;
 import v0id.exp.util.temperature.TemperatureHandler;
 import v0id.exp.util.temperature.TemperatureUtils;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
 
-public class TileCampfire extends TileEntity implements ITickable
+public class TileCampfire extends TileEntity implements ITickable, ISyncableTile
 {
     public ItemStackHandler inventory_wood = new ItemStackHandler(3);
     public ItemStackHandler inventory_thing = new ItemStackHandler(1);
@@ -38,10 +36,7 @@ public class TileCampfire extends TileEntity implements ITickable
     {
         if (this.world != null && !this.world.isRemote)
         {
-            NBTTagCompound sent = new NBTTagCompound();
-            sent.setTag("tileData", this.serializeNBT());
-            sent.setTag("blockPosData", new DimBlockPos(this.getPos(), this.getWorld().provider.getDimension()).serializeNBT());
-            VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), this.pos.getX(), this.pos.getY(), this.pos.getZ(), 64));
+            ExPNetwork.sendTileData(this, false);
         }
     }
 
@@ -180,5 +175,19 @@ public class TileCampfire extends TileEntity implements ITickable
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing)
     {
         return capability == ExPTemperatureCapability.cap ? ExPTemperatureCapability.cap.cast(this.temperature_handler) : capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? facing == EnumFacing.DOWN || facing == EnumFacing.UP ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.inventory_thing) : CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.inventory_wood) : super.getCapability(capability, facing);
+    }
+
+    @Override
+    public NBTTagCompound serializeData()
+    {
+        NBTTagCompound ret = new NBTTagCompound();
+        ret.setBoolean("lit", this.litUp);
+        return null;
+    }
+
+    @Override
+    public void readData(NBTTagCompound tag)
+    {
+        this.litUp = tag.getBoolean("lit");
     }
 }

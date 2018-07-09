@@ -28,7 +28,7 @@ import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import v0id.core.util.java.ColorRGB;
+import v0id.api.exp.util.ColorRGB;
 import v0id.api.exp.block.*;
 import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.data.ExPBlocks;
@@ -59,7 +59,8 @@ public class BlockFarmland extends BlockContainer implements IInitializableBlock
 		EnumDirtClass type = EnumDirtClass.values()[this.getMetaFromState(w.getBlockState(pos))];
 		return type.getNutrientMultiplier();
 	}
-	
+
+    @SuppressWarnings("deprecation")
 	@Override
 	public EnumBlockRenderType getRenderType(IBlockState state)
     {

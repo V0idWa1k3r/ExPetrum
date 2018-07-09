@@ -5,7 +5,6 @@ import com.google.gson.*;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import v0id.core.logging.LogLevel;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.ExPetrum;
@@ -84,23 +83,23 @@ public class WeightDataLoader
                             Pair<Byte, Byte> vol = Pair.of(volume.get("x").getAsByte(), volume.get("y").getAsByte());
                             IWeightProvider.registerVolume(id, meta, vol);
                             IWeightProvider.registerWeight(id, meta, weight);
-                            ExPMisc.modLogger.log(LogLevel.Debug, "Registered %s with meta %d with volume %s and weight %s", id, meta, vol.toString(), Float.toString(weight));
+                            ExPMisc.modLogger.info("Registered %s with meta %d with volume %s and weight %s", id, meta, vol.toString(), Float.toString(weight));
                         }
                     }
                 }
                 catch (JsonSyntaxException jse)
                 {
-                    ExPMisc.modLogger.log(LogLevel.Error, "%s contains JSON syntax errors!", jse, f.getAbsolutePath());
+                    ExPMisc.modLogger.error(f.getAbsolutePath() + " contains JSON syntax errors!", jse);
                 }
                 catch (JsonParseException jpe)
                 {
-                    ExPMisc.modLogger.log(LogLevel.Error, "%s is not a valid JSON file!", jpe, f.getAbsolutePath());
+                    ExPMisc.modLogger.error(f.getAbsolutePath() + " is not a valid JSON file!", jpe);
                 }
             }
 		}
 		catch (Exception ex)
 		{
-			ExPMisc.modLogger.log(LogLevel.Error, "ExPetrum was unable to load custom weight/volume data from the config file!", ex);
+			ExPMisc.modLogger.error("ExPetrum was unable to load custom weight/volume data from the config file!", ex);
 		}
 	}
 }

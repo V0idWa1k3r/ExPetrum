@@ -1,10 +1,8 @@
 package v0id.api.exp.data;
 
 import net.minecraft.util.ResourceLocation;
-import v0id.core.markers.StaticStorage;
 import v0id.api.exp.player.EnumPlayerProgression;
 
-@StaticStorage
 public class ExPTextures
 {
 	public static final ResourceLocation[] PLAYER_HUD = new ResourceLocation[EnumPlayerProgression.values().length];

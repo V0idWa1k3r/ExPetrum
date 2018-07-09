@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.Constants;
-import v0id.core.util.java.Gradient;
+import v0id.api.exp.util.Gradient;
 
 import javax.vecmath.Vector3f;
 import java.util.List;

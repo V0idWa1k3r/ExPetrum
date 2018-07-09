@@ -68,6 +68,7 @@ public class BlockMoltenMetal extends Block implements IGravitySusceptible, IIni
         return state.getValue(MOLTEN_METAL_STATE).ordinal();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta)
     {
@@ -87,6 +88,7 @@ public class BlockMoltenMetal extends Block implements IGravitySusceptible, IIni
         return BlockFaceShape.UNDEFINED;
     }
 
+    @SuppressWarnings("deprecation")
     @Nullable
     @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
@@ -109,6 +111,7 @@ public class BlockMoltenMetal extends Block implements IGravitySusceptible, IIni
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos)
     {

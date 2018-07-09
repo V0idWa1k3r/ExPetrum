@@ -63,6 +63,7 @@ public class BlockBloomery extends BlockHorizontal implements IWeightProvider, I
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(BLOOMERY_ISLIT, false));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta)
     {
@@ -88,6 +89,7 @@ public class BlockBloomery extends BlockHorizontal implements IWeightProvider, I
         return new BlockStateContainer(this, FACING, BLOOMERY_ISLIT);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {

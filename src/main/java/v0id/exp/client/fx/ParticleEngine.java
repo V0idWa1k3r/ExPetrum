@@ -11,10 +11,10 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 import v0id.api.exp.data.ExPTextures;
-import v0id.api.exp.fx.EnumParticle;
-import v0id.api.exp.fx.IParticle;
-import v0id.api.exp.fx.IParticleEngine;
-import v0id.api.exp.fx.IParticleFactory;
+import v0id.api.exp.client.EnumParticle;
+import v0id.api.exp.client.IParticle;
+import v0id.api.exp.client.IParticleEngine;
+import v0id.api.exp.client.IParticleFactory;
 
 import java.util.Map;
 import java.util.Random;

@@ -9,13 +9,12 @@ import net.minecraft.nbt.NBTTagFloat;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.util.Constants.NBT;
-import v0id.core.util.nbt.NBTChain;
 import v0id.api.exp.combat.SpecialAttack;
 import v0id.api.exp.combat.SpecialAttack.AttackWrapper;
 import v0id.api.exp.player.*;
+import v0id.api.exp.util.NBTChain;
 import v0id.exp.ExPetrum;
-import v0id.exp.net.PacketHandlerNewAge;
-import v0id.exp.net.PacketHandlerPlayerData;
+import v0id.exp.net.ExPNetwork;
 
 import java.util.Collection;
 import java.util.List;
@@ -56,8 +55,13 @@ public class ExPPlayer implements IExPPlayer
 	public boolean diseases_isDirty;
 	public boolean stage_isDirty;
 	public boolean attackWrapper_isDirty;
-	
-	@Override
+
+    public ExPPlayer()
+    {
+        this.setAllDirty(true);
+    }
+
+    @Override
 	public NBTTagCompound serializeNBT()
 	{
 		this.setAllDirty(true);
@@ -527,16 +531,10 @@ public class ExPPlayer implements IExPPlayer
 			}
 		}
 		
-		if (this.owner.world.isRemote && this.clientIsDirty)
-		{
-			this.clientIsDirty = false;
-			PacketHandlerPlayerData.sendRequestPacket();
-		}
-		
 		if (!this.owner.world.isRemote && this.serverIsDirty)
 		{
 			this.serverIsDirty = false;
-			PacketHandlerPlayerData.sendSyncPacket((EntityPlayerMP) this.owner);
+			ExPNetwork.sendPlayerData(this);
 		}
 	}
 
@@ -639,7 +637,7 @@ public class ExPPlayer implements IExPPlayer
             {
                 this.serverIsDirty = this.stage_isDirty = true;
                 this.stage = progression;
-                PacketHandlerNewAge.sendNewAge((EntityPlayerMP) this.owner, progression);
+				ExPNetwork.sendNewAge(this.owner, progression);
             }
         }
 	}
@@ -666,7 +664,7 @@ public class ExPPlayer implements IExPPlayer
 			this.nutritionLevels.put(n, 100F);
 		}
 		
-		this.clientIsDirty = true;
+		this.setAllDirty(true);
 	}
 
 	@Override

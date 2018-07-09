@@ -55,8 +55,6 @@ import v0id.api.exp.player.ExPPlayerCapability;
 import v0id.api.exp.player.IExPPlayer;
 import v0id.api.exp.world.ExPWorldCapability;
 import v0id.api.exp.world.IExPWorld;
-import v0id.core.logging.LogLevel;
-import v0id.core.util.MC;
 import v0id.exp.block.item.ItemBlockGearbox;
 import v0id.exp.item.tool.IExPTool;
 import v0id.exp.player.ExPPlayer;
@@ -267,7 +265,7 @@ public class ExPHandlerServer
 		}
 		catch (Exception ex)
 		{
-			ExPMisc.modLogger.log(LogLevel.Error, "ExPetrum was unable to initialize it's inventory system! This is most likely caused by another mod!", ex);
+			ExPMisc.modLogger.error("ExPetrum was unable to initialize it's inventory system! This is most likely caused by another mod!", ex);
 		}
 	}
 	
@@ -308,7 +306,7 @@ public class ExPHandlerServer
                 }
                 catch (Exception ex)
                 {
-                    ExPMisc.modLogger.log(LogLevel.Error, "ExPetrum was unable to initialize it's inventory system! This is most likely caused by another mod!", ex);
+                    ExPMisc.modLogger.error("ExPetrum was unable to initialize it's inventory system! This is most likely caused by another mod!", ex);
                 }
             }
 		}
@@ -427,7 +425,7 @@ public class ExPHandlerServer
 	{
 		if (!(evt.getObject().getWorldType() instanceof WorldTypeExP))
 		{
-			ExPMisc.modLogger.log(LogLevel.Debug, "The world initialized without ExPetrum world type! Have you forgot to set it in advanced world settings?");
+			ExPMisc.modLogger.info("The world initialized without ExPetrum world type! Have you forgot to set it in advanced world settings?");
 		}
 		
 		handleWorldSettings(evt.getObject());
@@ -479,7 +477,7 @@ public class ExPHandlerServer
 	@SubscribeEvent
 	public void playerClone(PlayerEvent.Clone event)
 	{
-		if (!event.isWasDeath() || MC.getSide() == Side.CLIENT)
+		if (!event.isWasDeath() || FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
 		{
 			return;
 		}

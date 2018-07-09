@@ -36,8 +36,7 @@ import org.lwjgl.opengl.GL11;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPRegistryNames;
-import v0id.core.logging.LogLevel;
-import v0id.core.util.java.Gradient;
+import v0id.api.exp.util.Gradient;
 import v0id.exp.ExPetrum;
 import v0id.exp.client.fx.ParticleEngine;
 import v0id.exp.client.model.EntityModelDynamic;
@@ -200,7 +199,7 @@ public class ExPHandlerClient
             }
             catch (Exception ex)
             {
-                ExPMisc.modLogger.log(LogLevel.Debug, "Could not reflect GuiCreateWorld!", ex);
+                ExPMisc.modLogger.error("Could not reflect GuiCreateWorld!", ex);
             }
         }
 	}

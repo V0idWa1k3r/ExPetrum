@@ -5,9 +5,10 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import v0id.core.util.java.Rectangle;
-import v0id.api.exp.fx.EnumParticle;
-import v0id.api.exp.fx.IParticle;
+import v0id.api.exp.client.EnumParticle;
+import v0id.api.exp.client.IParticle;
+
+import java.awt.*;
 
 /**
  * Created by V0idWa1k3r on 11-Jun-17.

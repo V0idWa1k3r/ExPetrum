@@ -72,12 +72,14 @@ public class BlockClay extends BlockFluidFinite implements IInitializableBlock, 
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos)
     {
         return new AxisAlignedBB(0, 0, 0, 1, 0.1F + state.getValue(LEVEL) * 0.1F * 0.9F, 1);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
@@ -90,12 +92,14 @@ public class BlockClay extends BlockFluidFinite implements IInitializableBlock, 
         return this.isCollidable();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getCollisionBoundingBox(@Nonnull IBlockState blockState, @Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos)
     {
         return this.getBoundingBox(blockState, worldIn, pos);
     }
 
+    @SuppressWarnings("deprecation")
     @Nonnull
     @Override
     public BlockFaceShape getBlockFaceShape(@Nonnull IBlockAccess worldIn, @Nonnull IBlockState state, @Nonnull BlockPos pos, @Nonnull EnumFacing face)

@@ -6,7 +6,6 @@ import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import v0id.core.logging.LogLevel;
 import v0id.api.exp.ExPApi;
 
 import java.lang.reflect.Constructor;
@@ -67,7 +66,7 @@ public class GravityHelper
 		}
 		catch (Exception ex)
 		{
-			ExPApi.apiLogger.log(LogLevel.Fatal, "Api could not reflect %s! Is the core mod ExPetrum installed?", ex, "v0id.exp.entity.EntityGravFallingBlock.<init>!");
+			ExPApi.apiLogger.fatal("Api could not reflect v0id.exp.entity.EntityGravFallingBlock.<init>! Is the core mod ExPetrum installed?", ex);
 		}
 	}
 }

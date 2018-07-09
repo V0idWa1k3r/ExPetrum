@@ -2,6 +2,7 @@ package v0id.exp.item.tool;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,18 +22,17 @@ import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.tuple.Pair;
-import v0id.api.exp.data.ExPOreDict;
-import v0id.api.exp.metal.EnumToolStats;
-import v0id.core.VoidApi;
-import v0id.core.util.I18n;
 import v0id.api.exp.block.IAcceptsWaterCan;
 import v0id.api.exp.data.ExPCreativeTabs;
+import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.api.exp.metal.EnumToolClass;
+import v0id.api.exp.metal.EnumToolStats;
 import v0id.api.exp.player.EnumPlayerProgression;
 import v0id.api.exp.player.IExPPlayer;
+import v0id.exp.ExPetrum;
 import v0id.exp.item.IInitializableItem;
 
 import java.util.Arrays;
@@ -295,7 +295,7 @@ public class ItemWateringCan extends ItemExPTool implements IWeightProvider, IIn
 				}
 				else
 				{
-                    EntityPlayer playerIn = VoidApi.proxy.getClientPlayer();
+                    EntityPlayer playerIn = ExPetrum.proxy.getClientPlayer();
                     if (playerIn != null)
                     {
                         if (IExPPlayer.of(playerIn).getProgressionStage().ordinal() < EnumPlayerProgression.IRON_AGE.ordinal())

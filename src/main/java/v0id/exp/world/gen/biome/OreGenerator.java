@@ -12,7 +12,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import org.apache.commons.lang3.tuple.Triple;
-import v0id.core.logging.LogLevel;
 import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.block.IOreHintReplaceable;
 import v0id.api.exp.block.property.EnumRockClass;
@@ -37,7 +36,7 @@ public class OreGenerator extends WorldGenerator
 	@Override
 	public boolean generate(World worldIn, Random rand, BlockPos position)
 	{
-		ExPMisc.modLogger.log(LogLevel.Debug, "Generating ore %s at %s! Could possibly cause chunk runaway effects!", this.toGenerate.getName(), position.toString());
+		ExPMisc.modLogger.info("Generating ore %s at %s! Could possibly cause chunk runaway effects!", this.toGenerate.getName(), position.toString());
 		Chunk at = worldIn.getChunkFromBlockCoords(position);
 		boolean detectedRunaway = false;
 		int veinSize = 64 + rand.nextInt(512);
@@ -57,7 +56,7 @@ public class OreGenerator extends WorldGenerator
 		{
 			if (++tries > 4096)
 			{
-				ExPMisc.modLogger.log(LogLevel.Error, "Could not properly generate ore at %s! Detected possible recursion!", position);
+				ExPMisc.modLogger.error("Could not properly generate ore at %s! Detected possible recursion!", position);
 				break;
 			}
 			
@@ -66,7 +65,7 @@ public class OreGenerator extends WorldGenerator
 				generatedResets = 0;
 				if (--yLevel <= 5)
 				{
-					ExPMisc.modLogger.log(LogLevel.Error, "Could not properly generate ore at %s! Ore generator hit bedrock level before generating all ore!", position);
+					ExPMisc.modLogger.warn("Could not properly generate ore at %s! Ore generator hit bedrock level before generating all ore!", position);
 					break;
 				}
 				
@@ -85,7 +84,7 @@ public class OreGenerator extends WorldGenerator
 			if (worldIn.getChunkFromBlockCoords(orePos) != at && !detectedRunaway)
 			{
 				detectedRunaway = true;
-				ExPMisc.modLogger.log(LogLevel.Warning, "Detected chunk runaway while generating ore at %s!", position);
+				ExPMisc.modLogger.warn("Detected chunk runaway while generating ore at %s!", position);
 			}
 			
 			IBlockState stateCurrent = worldIn.getBlockState(orePos);
@@ -112,7 +111,7 @@ public class OreGenerator extends WorldGenerator
 				}
 				else
 				{
-					ExPMisc.modLogger.log(LogLevel.Debug, "Encountered an unknown stone block at %s!", orePos);
+					ExPMisc.modLogger.info("Encountered an unknown stone block at %s!", orePos);
 					generatedResets += 2;
 				}
 			}

@@ -7,7 +7,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.model.animation.FastTESR;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
-import v0id.core.client.RenderUtils;
+import v0id.exp.client.render.RenderUtils;
 import v0id.exp.tile.TileMechanicalQuern;
 
 public class TESRMechanicalQuern extends FastTESR<TileMechanicalQuern>

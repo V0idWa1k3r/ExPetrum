@@ -72,6 +72,7 @@ public class BlockChest extends BlockHorizontal implements IInitializableBlock, 
         return super.getActualState(state, worldIn, pos).withProperty(ExPBlockProperties.TREE_TYPE, tile.type);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta)
     {
@@ -197,6 +198,7 @@ public class BlockChest extends BlockHorizontal implements IInitializableBlock, 
         super.breakBlock(worldIn, pos, state);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state)
     {

@@ -11,12 +11,8 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import v0id.api.exp.tile.ExPRotaryCapability;
 import v0id.api.exp.tile.ITemperatureHolder;
-import v0id.core.network.PacketType;
-import v0id.core.network.VoidNetwork;
-import v0id.core.util.DimBlockPos;
 import v0id.exp.util.RotaryHandler;
 
 import javax.annotation.Nullable;
@@ -26,18 +22,6 @@ public class TileMechanicalBellows extends TileEntity implements ITickable
     public float progress;
     public float progressLast;
     public RotaryHandler rotaryHandler = new RotaryHandler();
-
-    public void sendUpdatePacket()
-    {
-        if (this.world != null && !this.world.isRemote)
-        {
-            NBTTagCompound sent = new NBTTagCompound();
-            sent.setTag("tileData", this.serializeNBT());
-            sent.setTag("blockPosData", new DimBlockPos(this.getPos(), this.getWorld().provider.getDimension()).serializeNBT());
-            VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), this.pos.getX(), this.pos.getY(), this.pos.getZ(), 64));
-        }
-    }
-
 
     @Override
     public void update()

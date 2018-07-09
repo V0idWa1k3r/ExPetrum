@@ -8,7 +8,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.apache.commons.lang3.tuple.Pair;
@@ -19,11 +18,10 @@ import v0id.api.exp.metal.AlloyHelper;
 import v0id.api.exp.metal.EnumMetal;
 import v0id.api.exp.recipe.RecipesSmelting;
 import v0id.api.exp.tile.ExPTemperatureCapability;
+import v0id.api.exp.tile.ISyncableTile;
 import v0id.api.exp.tile.ITemperatureHandler;
 import v0id.api.exp.tile.ITemperatureHolder;
-import v0id.core.network.PacketType;
-import v0id.core.network.VoidNetwork;
-import v0id.core.util.DimBlockPos;
+import v0id.exp.net.ExPNetwork;
 import v0id.exp.util.temperature.TemperatureHandler;
 import v0id.exp.util.temperature.TemperatureUtils;
 
@@ -32,7 +30,7 @@ import javax.annotation.Nullable;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class TileCrucible extends TileEntity implements ITickable, ITemperatureHolder
+public class TileCrucible extends TileEntity implements ITickable, ITemperatureHolder, ISyncableTile
 {
     public Map<EnumMetal, Float> metalMap = new EnumMap<>(EnumMetal.class);
     public ItemStackHandler inventory = new ItemStackHandler(2)
@@ -50,10 +48,7 @@ public class TileCrucible extends TileEntity implements ITickable, ITemperatureH
     {
         if (this.world != null && !this.world.isRemote)
         {
-            NBTTagCompound sent = new NBTTagCompound();
-            sent.setTag("tileData", this.serializeNBT());
-            sent.setTag("blockPosData", new DimBlockPos(this.getPos(), this.getWorld().provider.getDimension()).serializeNBT());
-            VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), this.pos.getX(), this.pos.getY(), this.pos.getZ(), 64));
+            ExPNetwork.sendTileData(this, true);
         }
     }
 
@@ -230,7 +225,6 @@ public class TileCrucible extends TileEntity implements ITickable, ITemperatureH
             NBTTagCompound tag = compound.getCompoundTag("metal_" + i);
             this.metalMap.put(EnumMetal.values()[tag.getByte("k")], tag.getFloat("v"));
         }
-
     }
 
     @Override
@@ -239,14 +233,14 @@ public class TileCrucible extends TileEntity implements ITickable, ITemperatureH
         NBTTagCompound ret = super.writeToNBT(compound);
         ret.setTag("inventory", this.inventory.serializeNBT());
         ret.setTag("temp", this.temperature_handler.serializeNBT());
-        compound.setByte("metals", (byte) this.metalMap.size());
+        ret.setByte("metals", (byte) this.metalMap.size());
         int i = 0;
         for (Map.Entry<EnumMetal, Float> data : this.metalMap.entrySet())
         {
             NBTTagCompound tag = new NBTTagCompound();
             tag.setByte("k", (byte) data.getKey().ordinal());
             tag.setFloat("v", data.getValue());
-            compound.setTag("metal_" + i++, tag);
+            ret.setTag("metal_" + i++, tag);
         }
 
         return ret;
@@ -271,6 +265,34 @@ public class TileCrucible extends TileEntity implements ITickable, ITemperatureH
         if (this.world.getTileEntity(this.pos.down()) instanceof ITemperatureHolder)
         {
             ((ITemperatureHolder)this.world.getTileEntity(this.pos.down())).acceptBellows(side, b);
+        }
+    }
+
+    @Override
+    public NBTTagCompound serializeData()
+    {
+        NBTTagCompound ret = new NBTTagCompound();
+        ret.setByte("metals", (byte) this.metalMap.size());
+        int i = 0;
+        for (Map.Entry<EnumMetal, Float> data : this.metalMap.entrySet())
+        {
+            NBTTagCompound tag = new NBTTagCompound();
+            tag.setByte("k", (byte) data.getKey().ordinal());
+            tag.setFloat("v", data.getValue());
+            ret.setTag("metal_" + i++, tag);
+        }
+
+        return ret;
+    }
+
+    @Override
+    public void readData(NBTTagCompound tag)
+    {
+        this.metalMap.clear();
+        for (int i = 0; i < tag.getByte("metals"); ++i)
+        {
+            NBTTagCompound nbt = tag.getCompoundTag("metal_" + i);
+            this.metalMap.put(EnumMetal.values()[nbt.getByte("k")], nbt.getFloat("v"));
         }
     }
 }

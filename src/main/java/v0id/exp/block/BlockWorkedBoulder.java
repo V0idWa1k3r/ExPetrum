@@ -8,25 +8,20 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-import v0id.core.network.PacketType;
-import v0id.core.network.VoidNetwork;
-import v0id.core.util.DimBlockPos;
+import net.minecraftforge.registries.IForgeRegistry;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.data.*;
 import v0id.api.exp.metal.EnumToolClass;
@@ -34,6 +29,7 @@ import v0id.api.exp.metal.EnumToolStats;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.item.ItemRock;
 import v0id.exp.item.ItemToolHead;
+import v0id.exp.net.ExPNetwork;
 import v0id.exp.tile.TileWorkedBoulder;
 
 import java.util.Random;
@@ -225,10 +221,7 @@ public class BlockWorkedBoulder extends Block implements IInitializableBlock, IO
 						else
 						{
 							++twb.workedIndex;
-							NBTTagCompound sent = new NBTTagCompound();
-							sent.setTag("tileData", twb.serializeNBT());
-							sent.setTag("blockPosData", new DimBlockPos(pos, worldIn.provider.getDimension()).serializeNBT());
-							VoidNetwork.sendDataToClient(PacketType.TileData, sent, (EntityPlayerMP) playerIn);
+							ExPNetwork.sendTileData(twb, true);
 							worldIn.notifyBlockUpdate(pos, state, state.withProperty(ExPBlockProperties.WORKED_BOULDER_INDEX, (int)twb.workedIndex), 3);
 						}
 						

@@ -2,7 +2,7 @@ package v0id.exp.client.fx;
 
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import v0id.api.exp.fx.EnumParticle;
+import v0id.api.exp.client.EnumParticle;
 import v0id.api.exp.world.IExPWorld;
 
 /**

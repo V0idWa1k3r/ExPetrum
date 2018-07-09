@@ -4,7 +4,6 @@ import com.google.common.collect.Maps;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.world.WorldEvent;
-import v0id.core.logging.LogLevel;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.entity.IPackInfo;
 
@@ -80,7 +79,7 @@ public class EntityPackManager
             }
             catch (Exception ex)
             {
-                ExPMisc.modLogger.log(LogLevel.Error, "Could not save pack info %s - unable to create new file!", ex, id);
+                ExPMisc.modLogger.error("Could not save pack info " + id + " - unable to create new file!", ex);
             }
         }
 
@@ -108,7 +107,7 @@ public class EntityPackManager
         }
         catch (Exception ex)
         {
-            ExPMisc.modLogger.log(LogLevel.Error, "Could not load pack info %s!", ex, id.toString());
+            ExPMisc.modLogger.error("Could not load pack info " + id.toString() + "!", ex);
         }
     }
 
@@ -165,7 +164,7 @@ public class EntityPackManager
         }
         catch (Exception ex)
         {
-            ExPMisc.modLogger.log(LogLevel.Error, "Could not save pack info %s!", ex, info.getID().toString());
+            ExPMisc.modLogger.error("Could not save pack info " + info.getID().toString() + "!", ex);
         }
     }
 }

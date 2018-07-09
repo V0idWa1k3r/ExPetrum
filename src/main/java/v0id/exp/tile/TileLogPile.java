@@ -8,19 +8,17 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
+import v0id.api.exp.tile.ISyncableTile;
 import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.IExPWorld;
-import v0id.core.network.PacketType;
-import v0id.core.network.VoidNetwork;
-import v0id.core.util.DimBlockPos;
 import v0id.exp.block.BlockCharcoal;
 import v0id.exp.block.BlockLogPile;
+import v0id.exp.net.ExPNetwork;
 
-public class TileLogPile extends TileEntity
+public class TileLogPile extends TileEntity implements ISyncableTile
 {
     public EnumTreeType type = EnumTreeType.KALOPANAX;
     public int count = 1;
@@ -29,16 +27,11 @@ public class TileLogPile extends TileEntity
     public BlockPos cornerLit1;
     public BlockPos cornerLit2;
 
-    @Override
-    public void markDirty()
+    public void sendUpdatePacket()
     {
-        super.markDirty();
         if (this.world != null && !this.world.isRemote)
         {
-            NBTTagCompound sent = new NBTTagCompound();
-            sent.setTag("tileData", this.serializeNBT());
-            sent.setTag("blockPosData", new DimBlockPos(this.getPos(), this.getWorld().provider.getDimension()).serializeNBT());
-            VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), this.pos.getX(), this.pos.getY(), this.pos.getZ(), 64));
+            ExPNetwork.sendTileData(this, true);
         }
     }
 
@@ -128,7 +121,7 @@ public class TileLogPile extends TileEntity
                                 tlp.cornerLit1 = null;
                                 tlp.cornerLit2 = null;
                                 tlp.litAt = null;
-                                tlp.markDirty();
+                                tlp.sendUpdatePacket();
                             }
                         }
                     }
@@ -137,7 +130,7 @@ public class TileLogPile extends TileEntity
                 this.cornerLit1 = null;
                 this.cornerLit2 = null;
                 this.litAt = null;
-                this.markDirty();
+                this.sendUpdatePacket();
             }
             else
             {
@@ -263,7 +256,7 @@ public class TileLogPile extends TileEntity
                         tlp.cornerLit1 = this.cornerLit1;
                         tlp.cornerLit2 = this.cornerLit2;
                         tlp.litAt = this.litAt;
-                        tlp.markDirty();
+                        tlp.sendUpdatePacket();
                     }
                 }
             }
@@ -360,5 +353,36 @@ public class TileLogPile extends TileEntity
         }
 
         return true;
+    }
+
+    @Override
+    public NBTTagCompound serializeData()
+    {
+        NBTTagCompound ret = new NBTTagCompound();
+        ret.setByte("type", (byte)this.type.ordinal());
+        ret.setByte("count", (byte)this.count);
+        ret.setBoolean("rotated", this.rotated);
+        if (this.litAt != null)
+        {
+            ret.setTag("litAt", this.litAt.serializeNBT());
+        }
+
+        return ret;
+    }
+
+    @Override
+    public void readData(NBTTagCompound tag)
+    {
+        this.type = EnumTreeType.values()[tag.getByte("type")];
+        this.count = tag.getByte("count");
+        this.rotated = tag.getBoolean("rotated");
+        if (tag.hasKey("litAt"))
+        {
+            this.litAt = new Calendar();
+        }
+        else
+        {
+            this.litAt = null;
+        }
     }
 }

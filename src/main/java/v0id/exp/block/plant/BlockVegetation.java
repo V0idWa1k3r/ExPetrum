@@ -94,6 +94,7 @@ public class BlockVegetation extends BlockBush implements IInitializableBlock, I
         return 1;
     }
 
+	@SuppressWarnings("deprecation")
     @Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {

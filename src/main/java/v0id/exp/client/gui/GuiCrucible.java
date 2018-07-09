@@ -3,10 +3,10 @@ package v0id.exp.client.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import v0id.api.exp.data.ExPTextures;
 import v0id.api.exp.metal.EnumMetal;
-import v0id.core.util.I18n;
 import v0id.exp.container.ContainerCrucible;
 import v0id.exp.tile.TileCrucible;
 

@@ -8,30 +8,16 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import v0id.api.exp.item.IContainerTickable;
-import v0id.core.network.PacketType;
-import v0id.core.network.VoidNetwork;
 import v0id.exp.util.temperature.TemperatureUtils;
 
 import javax.annotation.Nullable;
 
 public class TilePot extends TileEntity implements ITickable
 {
-    public ItemStackHandler inventory = new ItemStackHandler(4)
-    {
-        @Override
-        protected void onContentsChanged(int slot)
-        {
-            super.onContentsChanged(slot);
-            if (!TilePot.this.world.isRemote)
-            {
-                VoidNetwork.sendDataToAllAround(PacketType.TileData, this.serializeNBT(), new NetworkRegistry.TargetPoint(TilePot.this.world.provider.getDimension(), TilePot.this.pos.getX(), TilePot.this.pos.getY(), TilePot.this.pos.getZ(), 64));
-            }
-        }
-    };
+    public ItemStackHandler inventory = new ItemStackHandler(4);
 
     @Override
     public void update()

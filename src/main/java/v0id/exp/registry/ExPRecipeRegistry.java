@@ -33,7 +33,6 @@ import v0id.api.exp.metal.EnumMetal;
 import v0id.api.exp.metal.EnumToolClass;
 import v0id.api.exp.metal.EnumToolStats;
 import v0id.api.exp.recipe.*;
-import v0id.core.logging.LogLevel;
 import v0id.exp.item.*;
 import v0id.exp.recipe.RecipeFoodCombine;
 import v0id.exp.recipe.RecipeMold;
@@ -85,11 +84,11 @@ public class ExPRecipeRegistry extends AbstractRegistry
         }
 
         String[] toRemove = new String[]{ "minecraft:torch", "minecraft:crafting_table", "minecraft:chest", "minecraft:bone_meal_from_bone", "minecraft:string_to_wool", "minecraft:fishing_rod", "minecraft:bow", "minecraft:leather_helmet", "minecraft:leather_chestplate", "minecraft:leather_leggings", "minecraft:leather_boots", "minecraft:iron_block", "minecraft:gold_block" };
-        ExPMisc.modLogger.log(LogLevel.Fine, "A fair warning.");
-        ExPMisc.modLogger.log(LogLevel.Fine, "Forge is about to spew a bunch of \"Dangerous alternative prefix\" warnings.");
-        ExPMisc.modLogger.log(LogLevel.Fine, "No, ExPetrum isn't broken.");
-        ExPMisc.modLogger.log(LogLevel.Fine, "It simply overrides vanilla recipes to a dummy implementation to effectively remove them from the game.");
-        ExPMisc.modLogger.log(LogLevel.Fine, "Thanks for reading. Have a nice day.");
+        ExPMisc.modLogger.info("A fair warning.");
+        ExPMisc.modLogger.info("Forge is about to spew a bunch of \"Dangerous alternative prefix\" warnings.");
+        ExPMisc.modLogger.info("No, ExPetrum isn't broken.");
+        ExPMisc.modLogger.info("It simply overrides vanilla recipes to a dummy implementation to effectively remove them from the game.");
+        ExPMisc.modLogger.info("Thanks for reading. Have a nice day.");
         for (String loc : toRemove)
         {
             reg.remove(new ResourceLocation(loc));

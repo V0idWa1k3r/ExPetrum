@@ -65,6 +65,7 @@ public class BlockKaolin extends Block implements IInitializableBlock, IGravityS
         return state.getValue(KAOLIN_TYPE).ordinal();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta)
     {

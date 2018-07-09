@@ -4,8 +4,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import v0id.api.exp.tile.ISyncableTile;
 
-public class TileWorkedBoulder extends TileEntity
+public class TileWorkedBoulder extends TileEntity implements ISyncableTile
 {
 	public byte workedIndex;
 	
@@ -46,5 +47,19 @@ public class TileWorkedBoulder extends TileEntity
 	public void handleUpdateTag(NBTTagCompound tag)
 	{
 		this.deserializeNBT(tag);
+	}
+
+	@Override
+	public NBTTagCompound serializeData()
+	{
+		NBTTagCompound ret = new NBTTagCompound();
+		ret.setByte("workedIndex", this.workedIndex);
+		return ret;
+	}
+
+	@Override
+	public void readData(NBTTagCompound tag)
+	{
+		this.workedIndex = tag.getByte("workedIndex");
 	}
 }

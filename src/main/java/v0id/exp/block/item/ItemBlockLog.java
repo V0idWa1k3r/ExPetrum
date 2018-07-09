@@ -38,7 +38,7 @@ public class ItemBlockLog extends ItemBlockWithMetadata
             tile.type = newCopy.getValue(ExPBlockProperties.TREE_TYPE);
             EnumFacing facing = EnumFacing.fromAngle(player.rotationYaw);
             tile.rotated = facing.getAxis() == EnumFacing.Axis.X;
-            tile.markDirty();
+            tile.sendUpdatePacket();
             world.getBlockState(pos).getBlock().onBlockPlacedBy(world, pos, newState, player, stack);
             if (player instanceof EntityPlayerMP)
             {

@@ -56,6 +56,7 @@ public class BlockMechanicalBellows extends BlockHorizontal implements IWeightPr
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta)
     {

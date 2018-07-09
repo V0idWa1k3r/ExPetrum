@@ -6,7 +6,6 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
-import v0id.core.logging.LogLevel;
 import v0id.api.exp.data.ExPMisc;
 
 import java.lang.reflect.Field;
@@ -48,7 +47,7 @@ public abstract class EntityModelDynamic extends ModelBase
         }
         catch (Exception ex)
         {
-            ExPMisc.modLogger.log(LogLevel.Debug, "Could not free GL mem of list for %s at %s!", ex, renderer.toString(), this.toString());
+            ExPMisc.modLogger.error("Could not free GL mem of list for %s at %s!", renderer.toString(), this.toString());
         }
     }
 
@@ -63,7 +62,7 @@ public abstract class EntityModelDynamic extends ModelBase
 
         lastReloadTime = currentTime;
         models.forEach(EntityModelDynamic::reloadModel);
-        ExPMisc.modLogger.log(LogLevel.Debug, "Reloaded all reloadable models!");
+        ExPMisc.modLogger.debug("Reloaded all reloadable models!");
     }
 
     @Override

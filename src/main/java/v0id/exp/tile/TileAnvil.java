@@ -12,7 +12,6 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import v0id.api.exp.data.ExPBlockProperties;
@@ -20,9 +19,6 @@ import v0id.api.exp.item.IContainerTickable;
 import v0id.api.exp.item.IHammer;
 import v0id.api.exp.metal.AnvilMinigame;
 import v0id.api.exp.recipe.RecipesAnvil;
-import v0id.core.network.PacketType;
-import v0id.core.network.VoidNetwork;
-import v0id.core.util.DimBlockPos;
 import v0id.exp.item.ItemGeneric;
 import v0id.exp.util.temperature.TemperatureUtils;
 
@@ -41,17 +37,6 @@ public class TileAnvil extends TileEntity implements ITickable
             return slot <= 3 ? 1 : super.getStackLimit(slot, stack);
         }
     };
-
-    public void sendUpdatePacket()
-    {
-        if (this.world != null && !this.world.isRemote)
-        {
-            NBTTagCompound sent = new NBTTagCompound();
-            sent.setTag("tileData", this.serializeNBT());
-            sent.setTag("blockPosData", new DimBlockPos(this.getPos(), this.getWorld().provider.getDimension()).serializeNBT());
-            VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), this.pos.getX(), this.pos.getY(), this.pos.getZ(), 64));
-        }
-    }
 
     @Override
     public void update()
@@ -113,7 +98,6 @@ public class TileAnvil extends TileEntity implements ITickable
     {
         NBTTagCompound ret = super.writeToNBT(compound);
         ret.setTag("inventory", this.inventory.serializeNBT());
-
         return ret;
     }
 

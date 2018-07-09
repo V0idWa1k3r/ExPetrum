@@ -11,7 +11,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import v0id.api.exp.block.property.EnumKaolinType;
@@ -20,17 +19,16 @@ import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.item.IContainerTickable;
 import v0id.api.exp.recipe.RecipesSmelting;
 import v0id.api.exp.tile.ExPTemperatureCapability;
+import v0id.api.exp.tile.ISyncableTile;
 import v0id.api.exp.tile.ITemperatureHolder;
-import v0id.core.network.PacketType;
-import v0id.core.network.VoidNetwork;
-import v0id.core.util.DimBlockPos;
+import v0id.exp.net.ExPNetwork;
 import v0id.exp.util.temperature.TemperatureHandler;
 import v0id.exp.util.temperature.TemperatureUtils;
 
 import javax.annotation.Nullable;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class TileForge extends TileEntity implements ITickable, ITemperatureHolder
+public class TileForge extends TileEntity implements ITickable, ITemperatureHolder, ISyncableTile
 {
     public boolean isLit;
     public int burnTimeLeft;
@@ -54,10 +52,7 @@ public class TileForge extends TileEntity implements ITickable, ITemperatureHold
     {
         if (this.world != null && !this.world.isRemote)
         {
-            NBTTagCompound sent = new NBTTagCompound();
-            sent.setTag("tileData", this.serializeNBT());
-            sent.setTag("blockPosData", new DimBlockPos(this.getPos(), this.getWorld().provider.getDimension()).serializeNBT());
-            VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), this.pos.getX(), this.pos.getY(), this.pos.getZ(), 64));
+            ExPNetwork.sendTileData(this, true);
         }
     }
 
@@ -238,5 +233,19 @@ public class TileForge extends TileEntity implements ITickable, ITemperatureHold
     public void acceptBellows(EnumFacing side, boolean b)
     {
         this.bellowsAdditionalT = Math.min(b ? 750 : 500, this.bellowsAdditionalT + (b ? 250 : 100));
+    }
+
+    @Override
+    public NBTTagCompound serializeData()
+    {
+        NBTTagCompound ret = new NBTTagCompound();
+        ret.setBoolean("lit", this.isLit);
+        return ret;
+    }
+
+    @Override
+    public void readData(NBTTagCompound tag)
+    {
+        this.isLit = tag.getBoolean("lit");
     }
 }

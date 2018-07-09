@@ -3,7 +3,6 @@ package v0id.exp.crop;
 import com.google.common.io.Files;
 import com.google.gson.*;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import v0id.core.logging.LogLevel;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.tile.crop.CropData;
 import v0id.api.exp.tile.crop.EnumCrop;
@@ -41,20 +40,20 @@ public class CropDataLoader
 					{
 						CropData cropData = serializer.fromJson(data, CropData.class);
 						cropData.crop.setData(cropData);
-						ExPMisc.modLogger.log(LogLevel.Debug, "Parsed crop %s from %s", cropData.crop.name(), f.getAbsolutePath());
+						ExPMisc.modLogger.debug("Parsed crop %s from %s", cropData.crop.name(), f.getAbsolutePath());
 					}
 					else
 					{
-						ExPMisc.modLogger.log(LogLevel.Warning, "%s is a JSON file and is located within ExPetrum's crop data folder but does not contain a valid crop definition!", f.getAbsolutePath());
+						ExPMisc.modLogger.warn("%s is a JSON file and is located within ExPetrum's crop data folder but does not contain a valid crop definition!", f.getAbsolutePath());
 					}
 				}
 				catch (JsonSyntaxException ex)
 				{
-					ExPMisc.modLogger.log(LogLevel.Error, "%s seems to be a JSON file but contains syntax errors!", ex, f.getAbsolutePath());
+					ExPMisc.modLogger.error(f.getAbsolutePath() + " seems to be a JSON file but contains syntax errors!", ex);
 				}
 				catch (JsonParseException ex)
 				{
-					ExPMisc.modLogger.log(LogLevel.Error, "%s is not a valid JSON file, it will be skipped!", ex, f.getAbsolutePath());
+					ExPMisc.modLogger.error(f.getAbsolutePath() + " is not a valid JSON file, it will be skipped!", ex);
 				}
 			}
 		}

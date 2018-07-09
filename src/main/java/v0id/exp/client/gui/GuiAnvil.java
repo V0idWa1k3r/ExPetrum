@@ -7,6 +7,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
@@ -19,11 +20,8 @@ import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.ExPTextures;
 import v0id.api.exp.metal.AnvilMinigame;
 import v0id.api.exp.recipe.RecipesAnvil;
-import v0id.core.util.I18n;
 import v0id.exp.container.ContainerAnvil;
-import v0id.exp.net.PacketHandlerAnvilRecipe;
-import v0id.exp.net.PacketHandlerCardClick;
-import v0id.exp.net.PacketHandlerWeld;
+import v0id.exp.net.ExPNetwork;
 import v0id.exp.tile.TileAnvil;
 
 import java.io.IOException;
@@ -58,7 +56,7 @@ public class GuiAnvil extends GuiContainer
         {
             if (button.id == 0)
             {
-                PacketHandlerWeld.sendPacket(this.anvil);
+                ExPNetwork.sendWeld(this.anvil);
             }
         }
     }
@@ -175,7 +173,7 @@ public class GuiAnvil extends GuiContainer
                     boolean mouseOver = mouseX > i + xOffset + 43 + k * 42 && mouseX < i + xOffset + 82 + k * 42 && mouseY > j + 7 && mouseY < j + 65;
                     if (mouseOver)
                     {
-                        PacketHandlerCardClick.sendPacket(this.anvil, cards[k].id);
+                        ExPNetwork.sendAnvilCard(this.anvil, cards[k].id);
                     }
                 }
             }
@@ -265,7 +263,7 @@ public class GuiAnvil extends GuiContainer
                         else
                         {
                             choosingRecipe = false;
-                            PacketHandlerAnvilRecipe.sendPacket(this.anvil, recipes.get(k - 1));
+                            ExPNetwork.sendAnvilRecipe(this.anvil, recipes.get(k - 1).getID());
                         }
                     }
                 }

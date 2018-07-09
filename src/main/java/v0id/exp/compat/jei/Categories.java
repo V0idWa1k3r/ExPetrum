@@ -5,11 +5,11 @@ import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.ExPTextures;
-import v0id.core.util.I18n;
 
 import java.util.Collections;
 import java.util.stream.Collectors;

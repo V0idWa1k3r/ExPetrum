@@ -64,6 +64,7 @@ public class BlockSnow extends Block implements IGravitySusceptible, IInitializa
 		this.setTickRandomly(true);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public float getPlayerRelativeBlockHardness(IBlockState state, EntityPlayer player, World worldIn, BlockPos pos)
 	{

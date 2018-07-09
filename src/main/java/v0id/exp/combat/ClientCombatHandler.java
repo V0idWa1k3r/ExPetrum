@@ -4,16 +4,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import v0id.core.logging.LogLevel;
-import v0id.core.network.VoidNetwork;
-import v0id.core.util.nbt.NBTChain;
 import v0id.api.exp.combat.EnumWeaponWeight;
 import v0id.api.exp.combat.SpecialAttack;
 import v0id.api.exp.combat.SpecialAttack.IExecuteCondition;
 import v0id.api.exp.combat.WeaponType;
 import v0id.api.exp.data.ExPMisc;
-import v0id.api.exp.data.ExPPackets;
 import v0id.api.exp.player.IExPPlayer;
+import v0id.api.exp.util.NBTChain;
+import v0id.exp.net.ExPNetwork;
 
 public class ClientCombatHandler
 {
@@ -26,7 +24,7 @@ public class ClientCombatHandler
 		}
 		catch (Exception ex)
 		{
-			ExPMisc.modLogger.log(LogLevel.Error, "Malformed server combat packet! %s", ex, tag);
+			ExPMisc.modLogger.error("Malformed server combat packet!", ex);
 		}
 	}
 	
@@ -53,9 +51,8 @@ public class ClientCombatHandler
 					{
 						continue;
 					}
-					
-					NBTTagCompound tag = NBTChain.startChain().withString("uuid", player.getPersistentID().toString()).withString("attackID", attack.id).withBool("rightClick", rightClick).endChain();
-					VoidNetwork.sendDataToServer(ExPPackets.SPECIAL_ATTACK, tag);
+
+					ExPNetwork.sendSpecialAttackClick(NBTChain.startChain().withString("uuid", player.getPersistentID().toString()).withString("attackID", attack.id).withBool("rightClick", rightClick).endChain());
 					return;
 				}
 			}

@@ -7,7 +7,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.Constants.NBT;
-import v0id.core.logging.LogLevel;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.event.world.EventGenerateTemperatureTable;
 import v0id.api.exp.player.IExPPlayer;
@@ -15,7 +14,7 @@ import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.EnumSeason;
 import v0id.api.exp.world.IExPWorld;
 import v0id.api.exp.world.chunk.IExPChunk;
-import v0id.exp.net.PacketHandlerWorldData;
+import v0id.exp.net.ExPNetwork;
 import v0id.exp.world.chunk.ExPChunk;
 
 import java.util.Map;
@@ -46,6 +45,11 @@ public class ExPWorld implements IExPWorld
 	public boolean accumulatedHumidity_isDirty;
 
 	public final Map<ChunkPos, IExPChunk> chunkDataMap = Maps.newHashMap();
+
+    public ExPWorld()
+    {
+        this.setAllDirty(true);
+    }
 
     @Override
 	public long getPersistentTicks()
@@ -237,7 +241,7 @@ public class ExPWorld implements IExPWorld
 		
 		if (ticksSkipped >= 24000)
 		{
-			ExPMisc.modLogger.log(LogLevel.Warning, "%d ticks were skipped by the world! This can cause issues.", ticksSkipped);
+			ExPMisc.modLogger.warn("%d ticks were skipped by the world! This can cause issues.", ticksSkipped);
 		}
 		
 		if (ticksSkipped >= 24000 || prevTime > this.persistentTicks % 24000)
@@ -301,17 +305,11 @@ public class ExPWorld implements IExPWorld
 				this.setWindStrength(this.getWorld().rand.nextFloat() * strengthRandomFactor);
 			}
 		}
-		
-		if (this.isRemote && this.clientIsDirty)
-		{
-			this.clientIsDirty = false;
-			PacketHandlerWorldData.sendRequestPacket();
-		}
-		
+
 		if (!this.isRemote && this.serverIsDirty)
 		{
 			this.serverIsDirty = false;
-			PacketHandlerWorldData.sendSyncPacket(this.getWorld());
+            ExPNetwork.sendWorldData(this);
 		}
 	}
 

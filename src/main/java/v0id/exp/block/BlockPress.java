@@ -65,6 +65,7 @@ public class BlockPress extends Block implements IWeightProvider, IInitializable
         this.setDefaultState(this.blockState.getBaseState().withProperty(PRESS_VALUE, 0));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta)
     {
@@ -134,12 +135,14 @@ public class BlockPress extends Block implements IWeightProvider, IInitializable
         return BlockFaceShape.UNDEFINED;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos)
     {
         return Block.FULL_BLOCK_AABB;
     }
 
+    @SuppressWarnings("deprecation")
     @Nullable
     @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
@@ -147,6 +150,7 @@ public class BlockPress extends Block implements IWeightProvider, IInitializable
         return new AxisAlignedBB(0, 0, 0, 1, 0.5F + blockState.getValue(PRESS_VALUE) * 0.0625F, 1);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState)
     {

@@ -9,13 +9,13 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.fluids.FluidStack;
 import org.lwjgl.opengl.GL11;
 import v0id.api.exp.data.ExPTextures;
 import v0id.api.exp.recipe.RecipesBarrel;
-import v0id.core.util.I18n;
-import v0id.core.util.java.ColorRGB;
+import v0id.api.exp.util.ColorRGB;
 import v0id.exp.container.ContainerBarrel;
 import v0id.exp.tile.TileBarrel;
 

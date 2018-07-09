@@ -29,6 +29,7 @@ import v0id.api.exp.gravity.IGravitySusceptible;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.util.Helpers;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -81,13 +82,18 @@ public class BlockIce extends Block implements IInitializableBlock, IGravitySusc
 	{
 		this.setHardness(8);
 		this.setResistance(0);
-		this.slipperiness = 0.98F;
 		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockIce));
 		this.setSoundType(SoundType.GLASS);
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ExPBlockProperties.ICE_IS_SALT, false));
 		this.setCreativeTab(ExPCreativeTabs.tabCommon);
 		this.setTickRandomly(true);
+	}
+
+	@Override
+	public float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable Entity entity)
+	{
+		return 0.98F;
 	}
 
 	@SuppressWarnings("deprecation")

@@ -1,5 +1,6 @@
 package v0id.exp.item;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -33,8 +34,6 @@ import v0id.api.exp.player.IExPPlayer;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.IExPWorld;
-import v0id.core.logging.LogLevel;
-import v0id.core.util.I18n;
 import v0id.exp.entity.impl.Chicken;
 import v0id.exp.tile.TileNestingBox;
 import v0id.exp.util.Helpers;
@@ -59,7 +58,7 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
             }
             catch (Exception e)
             {
-                ExPMisc.modLogger.log(LogLevel.Error, "ExP was unable to initialize Nutrition compatibility!", e);
+                ExPMisc.modLogger.error("ExP was unable to initialize Nutrition compatibility!", e);
             }
         }
 	}
@@ -228,7 +227,7 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
             }
             catch (Exception e)
             {
-                ExPMisc.modLogger.log(LogLevel.Error, "ExP was unable to provide Nutrition compatibility report this to V0id!", e);
+                ExPMisc.modLogger.error("ExP was unable to provide Nutrition compatibility report this to V0id!", e);
             }
         }
 

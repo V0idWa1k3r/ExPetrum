@@ -6,14 +6,12 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagLong;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants.NBT;
-import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import v0id.core.network.PacketType;
-import v0id.core.network.VoidNetwork;
-import v0id.core.util.DimBlockPos;
 import v0id.api.exp.data.ExPBlockProperties;
+import v0id.api.exp.tile.ISyncableTile;
 import v0id.api.exp.tile.crop.EnumPlantNutrient;
 import v0id.api.exp.tile.crop.IFarmland;
 import v0id.api.exp.world.Calendar;
+import v0id.exp.net.ExPNetwork;
 
 import java.util.EnumMap;
 import java.util.Map.Entry;
@@ -112,10 +110,7 @@ public class ExPFarmland implements IFarmland
 	@Override
 	public void setDirty()
 	{
-		NBTTagCompound sent = new NBTTagCompound();
-		sent.setTag("tileData", this.getContainer().serializeNBT());
-		sent.setTag("blockPosData", new DimBlockPos(this.getContainer().getPos(), this.getContainer().getWorld().provider.getDimension()).serializeNBT());
-		VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new TargetPoint(this.getContainer().getWorld().provider.getDimension(), this.getContainer().getPos().getX(), this.getContainer().getPos().getY(), this.getContainer().getPos().getZ(), 96));
+		ExPNetwork.sendTileData((ISyncableTile) this.holder, true);
 	}
 
 	public static ExPFarmland createDefault()

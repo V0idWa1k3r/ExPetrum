@@ -11,8 +11,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import org.apache.commons.lang3.tuple.Pair;
-import v0id.core.VoidApi;
-import v0id.core.settings.VCSettings;
 import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.event.crop.CropEvent;
 import v0id.api.exp.event.crop.EventFarmlandUpdate;
@@ -80,7 +78,7 @@ public class CropLogic
 		ItemFood item = (ItemFood) food.getItem();
 		int generation = crop.getGeneration();
 		Pair<Float, Float> dropWeight = crop.getType().getDropWeight();
-		float randomAmount = dropWeight.getLeft() + v0id.core.VCStatics.rng.nextFloat() * (dropWeight.getRight() - dropWeight.getLeft());
+		float randomAmount = (float) (dropWeight.getLeft() + Math.random() * (dropWeight.getRight() - dropWeight.getLeft()));
 		randomAmount *= Math.min(2, 1 + (float) generation / 100);
 		randomAmount *= crop.getHealth() / crop.getType().getData().baseHealth;
 		item.setLastTickTime(food, IExPWorld.of(crop.getContainer().getWorld()).today());
@@ -90,7 +88,7 @@ public class CropLogic
 		TemperatureRange rangeHig = crop.getIdealTemperature();
 		float temperature = Helpers.getTemperatureAt(crop.getContainer().getWorld(), crop.getContainer().getPos());
 		float qualityMultiplier = rangeHig.isWithinRange(temperature) ? 1.0F : rangeMed.isWithinRange(temperature) ? 0.5F : rangeMin.isWithinRange(temperature) ? 0.25F : 0F;
-		EnumQuality quality = crop.isWild() ? EnumQuality.PLAIN : EnumQuality.values()[Math.min((int)((v0id.core.VCStatics.rng.nextFloat() * qualityMultiplier) * (EnumQuality.values().length - 1)), EnumQuality.values().length - 1)];
+		EnumQuality quality = crop.isWild() ? EnumQuality.PLAIN : EnumQuality.values()[Math.min((int)((Math.random() * qualityMultiplier) * (EnumQuality.values().length - 1)), EnumQuality.values().length - 1)];
 		quality.setForItem(food);
 		return NonNullList.withSize(1, food);
 	}
@@ -105,7 +103,7 @@ public class CropLogic
 		float randomChanceMultipleSeeds = Math.min(6, (float)crop.getGeneration() * 0.1F);
 		while (randomChanceMultipleSeeds > 0)
 		{
-			if (v0id.core.VCStatics.rng.nextDouble() * randomChanceMultipleSeeds < 0.5)
+			if (Math.random() * randomChanceMultipleSeeds < 0.5)
 			{
 				seeds.grow(1);
 			}
@@ -113,7 +111,7 @@ public class CropLogic
 			--randomChanceMultipleSeeds;
 		}
 		
-		if (v0id.core.VCStatics.rng.nextInt(35) < crop.getGeneration())
+		if ((int)(Math.random() * 35) < crop.getGeneration())
 		{
 			TemperatureRange rangeMin = crop.getSurvivalTemperature();
 			TemperatureRange rangeMed = crop.getOptimalTemperature();
@@ -126,12 +124,12 @@ public class CropLogic
 			}
 		}
 		
-		if (v0id.core.VCStatics.rng.nextInt(100) < crop.getGeneration())
+		if ((int)(Math.random() * 100) < crop.getGeneration())
 		{
 			stats.growthRate *= 1.1;
 		}
 		
-		if (v0id.core.VCStatics.rng.nextInt(20) < crop.getGeneration())
+		if ((int)(Math.random() * 20) < crop.getGeneration())
 		{
 			stats.waterConsumption *= 0.94F;
 		}
@@ -143,11 +141,6 @@ public class CropLogic
 	
 	public static void onFarmlandUpdate(ExPFarmland farmland)
 	{
-		if (((VCSettings)(VoidApi.config.dataHolder)).recoveryMode)
-		{
-			return;
-		}
-		
 		if (MinecraftForge.EVENT_BUS.post(new EventFarmlandUpdate.Pre(farmland, farmland.getContainer().getWorld(), farmland.getContainer().getPos())))
 		{
 			return;

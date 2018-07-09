@@ -10,17 +10,15 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import v0id.api.exp.tile.ExPRotaryCapability;
 import v0id.api.exp.tile.IRotaryTransmitter;
-import v0id.core.network.PacketType;
-import v0id.core.network.VoidNetwork;
-import v0id.core.util.DimBlockPos;
+import v0id.api.exp.tile.ISyncableTile;
+import v0id.exp.net.ExPNetwork;
 import v0id.exp.util.RotaryHandler;
 
 import javax.annotation.Nullable;
 
-public class TileGearbox extends TileEntity implements ITickable
+public class TileGearbox extends TileEntity implements ITickable, ISyncableTile
 {
     public EnumFacing input = EnumFacing.SOUTH;
     public RotaryHandler rotaryHandler = new RotaryHandler();
@@ -29,10 +27,7 @@ public class TileGearbox extends TileEntity implements ITickable
     {
         if (this.world != null && !this.world.isRemote)
         {
-            NBTTagCompound sent = new NBTTagCompound();
-            sent.setTag("tileData", this.serializeNBT());
-            sent.setTag("blockPosData", new DimBlockPos(this.getPos(), this.getWorld().provider.getDimension()).serializeNBT());
-            VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), this.pos.getX(), this.pos.getY(), this.pos.getZ(), 64));
+            ExPNetwork.sendTileData(this, true);
         }
     }
 
@@ -108,5 +103,19 @@ public class TileGearbox extends TileEntity implements ITickable
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing)
     {
         return capability == ExPRotaryCapability.cap && facing == this.input ? ExPRotaryCapability.cap.cast(this.rotaryHandler) : super.getCapability(capability, facing);
+    }
+
+    @Override
+    public NBTTagCompound serializeData()
+    {
+        NBTTagCompound ret = new NBTTagCompound();
+        ret.setByte("input", (byte) this.input.ordinal());
+        return ret;
+    }
+
+    @Override
+    public void readData(NBTTagCompound tag)
+    {
+        this.input = EnumFacing.values()[tag.getByte("input")];
     }
 }

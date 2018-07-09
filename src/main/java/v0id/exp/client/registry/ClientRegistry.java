@@ -31,6 +31,7 @@ import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.block.property.EnumKaolinType;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.block.property.EnumWaterLilyType;
+import v0id.api.exp.client.model.WavefrontObject;
 import v0id.api.exp.combat.condition.ExecuteConditionKeyBindings;
 import v0id.api.exp.data.*;
 import v0id.api.exp.item.food.FoodEntry;
@@ -40,9 +41,6 @@ import v0id.api.exp.metal.EnumToolStats;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.tile.crop.ExPFarmlandCapability;
 import v0id.api.exp.tile.crop.IFarmland;
-import v0id.core.client.model.WavefrontObject;
-import v0id.core.logging.LogLevel;
-import v0id.core.util.IFunctionalRenderFactory;
 import v0id.exp.block.BlockCraftingTable;
 import v0id.exp.block.BlockPlanks;
 import v0id.exp.block.tree.BlockLeaf;
@@ -82,9 +80,9 @@ public class ClientRegistry implements ILifecycleListener
     @Override
     public void preInit(FMLPreInitializationEvent evt)
     {
-        IFunctionalRenderFactory.registerEntityRenderingHandler(EntityGravFallingBlock.class, RenderFallingBlock::new);
-        IFunctionalRenderFactory.registerEntityRenderingHandler(EntityFallingTree.class, RenderFallingTree::new);
-        IFunctionalRenderFactory.registerEntityRenderingHandler(EntityThrownWeapon.class, RenderThrownWeapon::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityGravFallingBlock.class, RenderFallingBlock::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityFallingTree.class, RenderFallingTree::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityThrownWeapon.class, RenderThrownWeapon::new);
         RenderingRegistry.registerEntityRenderingHandler(Chicken.class, r -> new RenderAnimal(r, ModelChicken.instance = new ModelChicken(), 1F));
         RenderingRegistry.registerEntityRenderingHandler(Cow.class, r -> new RenderAnimal(r, ModelCow.instance = new ModelCow(), 1F));
         RenderingRegistry.registerEntityRenderingHandler(Sheep.class, r -> new RenderAnimal(r, ModelSheep.instance = new ModelSheep(), 1F));
@@ -265,7 +263,7 @@ public class ClientRegistry implements ILifecycleListener
         }
         catch (IOException e)
         {
-            ExPMisc.modLogger.log(LogLevel.Error, "ExPetrum was unable to load a quern model!", e);
+            ExPMisc.modLogger.error("ExPetrum was unable to load it's wavefront models!", e);
         }
     }
 

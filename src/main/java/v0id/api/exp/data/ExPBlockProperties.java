@@ -10,10 +10,8 @@ import v0id.api.exp.block.property.EnumKaolinType;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.block.property.EnumWaterLilyType;
 import v0id.api.exp.tile.crop.EnumCrop;
-import v0id.core.markers.StaticStorage;
 import v0id.exp.block.BlockPottery;
 
-@StaticStorage
 public class ExPBlockProperties
 {	
 	public static final PropertyEnum<EnumRockClass> ROCK_CLASS = PropertyEnum.create("class", EnumRockClass.class);

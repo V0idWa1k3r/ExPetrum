@@ -87,6 +87,7 @@ public class BlockAnvil extends Block implements IWeightProvider, IInitializable
         return state.getValue(ANVIL_MATERIAL).ordinal();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta)
     {

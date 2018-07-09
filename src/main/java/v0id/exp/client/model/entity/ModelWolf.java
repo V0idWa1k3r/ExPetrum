@@ -7,8 +7,8 @@ import net.minecraft.util.math.MathHelper;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Quaternion;
 import org.lwjgl.util.vector.Vector3f;
-import v0id.core.mca.MCAModelRenderer;
-import v0id.core.mca.Utils;
+import v0id.exp.client.mca.MCAModelRenderer;
+import v0id.exp.client.mca.Utils;
 
 import java.util.HashMap;
 

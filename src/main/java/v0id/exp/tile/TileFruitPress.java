@@ -15,33 +15,18 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.item.IContainerTickable;
 import v0id.api.exp.recipe.RecipesPress;
-import v0id.core.network.PacketType;
-import v0id.core.network.VoidNetwork;
-import v0id.core.util.DimBlockPos;
 
 import javax.annotation.Nullable;
 
 public class TileFruitPress extends TileEntity implements ITickable
 {
     public ItemStackHandler inventory = new ItemStackHandler(1);
-
-    public void sendUpdatePacket()
-    {
-        if (this.world != null && !this.world.isRemote)
-        {
-            NBTTagCompound sent = new NBTTagCompound();
-            sent.setTag("tileData", this.serializeNBT());
-            sent.setTag("blockPosData", new DimBlockPos(this.getPos(), this.getWorld().provider.getDimension()).serializeNBT());
-            VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), this.pos.getX(), this.pos.getY(), this.pos.getZ(), 64));
-        }
-    }
 
     public void jump()
     {

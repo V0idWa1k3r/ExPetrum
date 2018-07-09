@@ -9,7 +9,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.item.food.FoodEntry;
 import v0id.api.exp.player.EnumFoodGroup;
-import v0id.core.logging.LogLevel;
 
 import java.lang.reflect.Field;
 
@@ -26,7 +25,7 @@ public class NutritionCompat
         }
         catch (NoSuchFieldException e)
         {
-            ExPMisc.modLogger.log(LogLevel.Error, "ExP was unable to reflectively access NUTRITION_CAPABILITY of Nutrition!", e);
+            ExPMisc.modLogger.error("ExP was unable to reflectively access NUTRITION_CAPABILITY of Nutrition!", e);
         }
     }
 
@@ -47,7 +46,7 @@ public class NutritionCompat
         }
         catch (Exception e)
         {
-            ExPMisc.modLogger.log(LogLevel.Error, "ExP was unable to reflectively access NUTRITION_CAPABILITY of Nutrition!", e);
+            ExPMisc.modLogger.error("ExP was unable to reflectively access NUTRITION_CAPABILITY of Nutrition!", e);
         }
     }
 }

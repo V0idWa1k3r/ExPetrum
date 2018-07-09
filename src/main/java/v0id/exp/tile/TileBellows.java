@@ -9,14 +9,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
+import v0id.api.exp.tile.ISyncableTile;
 import v0id.api.exp.tile.ITemperatureHolder;
 import v0id.api.exp.world.IExPWorld;
-import v0id.core.network.PacketType;
-import v0id.core.network.VoidNetwork;
-import v0id.core.util.DimBlockPos;
+import v0id.exp.net.ExPNetwork;
 
-public class TileBellows extends TileEntity
+public class TileBellows extends TileEntity implements ISyncableTile
 {
     public long bellowsLast;
 
@@ -24,10 +22,7 @@ public class TileBellows extends TileEntity
     {
         if (this.world != null && !this.world.isRemote)
         {
-            NBTTagCompound sent = new NBTTagCompound();
-            sent.setTag("tileData", this.serializeNBT());
-            sent.setTag("blockPosData", new DimBlockPos(this.getPos(), this.getWorld().provider.getDimension()).serializeNBT());
-            VoidNetwork.sendDataToAllAround(PacketType.TileData, sent, new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), this.pos.getX(), this.pos.getY(), this.pos.getZ(), 64));
+            ExPNetwork.sendTileData(this, false);
         }
     }
 
@@ -92,5 +87,19 @@ public class TileBellows extends TileEntity
     public boolean hasFastRenderer()
     {
         return true;
+    }
+
+    @Override
+    public NBTTagCompound serializeData()
+    {
+        NBTTagCompound ret = new NBTTagCompound();
+        ret.setLong("bellowsLast", this.bellowsLast);
+        return ret;
+    }
+
+    @Override
+    public void readData(NBTTagCompound tag)
+    {
+        this.bellowsLast = tag.getLong("bellowsLast");
     }
 }

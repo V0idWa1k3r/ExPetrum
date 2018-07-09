@@ -49,6 +49,7 @@ public class BlockPotteryStation extends Block implements IInitializableBlock, I
         return state.getValue(ExPBlockProperties.POTTERYSTATION_HASCLAY) ? 1 : 0;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta)
     {

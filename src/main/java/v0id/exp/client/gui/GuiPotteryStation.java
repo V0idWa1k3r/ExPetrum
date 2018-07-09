@@ -18,9 +18,8 @@ import org.apache.logging.log4j.util.Strings;
 import org.lwjgl.opengl.GL11;
 import v0id.api.exp.data.ExPTextures;
 import v0id.api.exp.recipe.RecipesPottery;
-import v0id.core.VCStatics;
 import v0id.exp.container.ContainerPotteryStation;
-import v0id.exp.net.PacketHandlerCraftPottery;
+import v0id.exp.net.ExPNetwork;
 import v0id.exp.tile.TilePotteryStation;
 import v0id.exp.util.OreDictManager;
 
@@ -85,7 +84,7 @@ public class GuiPotteryStation extends GuiContainer
             this.currentPuzzle.click(mouseX, mouseY, mouseButton);
             if (this.currentPuzzle.complete)
             {
-                PacketHandlerCraftPottery.sendCraftingPacket(this.currentRecipe, this.potteryStation);
+                ExPNetwork.sendCraftPottery(this.potteryStation, this.currentRecipe);
             }
         }
     }
@@ -170,13 +169,13 @@ public class GuiPotteryStation extends GuiContainer
                 }
             }
 
-            for (int i = 0; i < this.size + VCStatics.rng.nextInt(this.size); ++i)
+            for (int i = 0; i < this.size + (int)(this.size * Math.random()); ++i)
             {
-                PuzzlePiece p1 = this.pieces[VCStatics.rng.nextInt(this.pieces.length)];
-                PuzzlePiece p2 = this.pieces[VCStatics.rng.nextInt(this.pieces.length)];
+                PuzzlePiece p1 = this.pieces[(int)(this.pieces.length * Math.random())];
+                PuzzlePiece p2 = this.pieces[(int)(this.pieces.length * Math.random())];
                 while (p2 == p1)
                 {
-                    p2 = this.pieces[VCStatics.rng.nextInt(this.pieces.length)];
+                    p2 = this.pieces[(int)(this.pieces.length * Math.random())];
                 }
 
                 int px = p2.posX;

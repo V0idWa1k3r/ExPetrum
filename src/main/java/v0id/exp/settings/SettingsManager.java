@@ -5,12 +5,10 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import org.apache.commons.io.IOUtils;
-import v0id.core.logging.LogLevel;
-import v0id.core.network.VoidNetwork;
 import v0id.api.exp.data.ExPMisc;
-import v0id.api.exp.data.ExPPackets;
 import v0id.api.exp.settings.ISettingsManager;
 import v0id.api.exp.settings.SyncableSettings;
+import v0id.exp.net.ExPNetwork;
 import v0id.exp.settings.impl.SettingsClient;
 import v0id.exp.settings.impl.SettingsFlags;
 import v0id.exp.settings.impl.WritableSettings;
@@ -61,7 +59,7 @@ public class SettingsManager implements ISettingsManager
 
         NBTTagCompound sent = new NBTTagCompound();
         sent.setTag("settings", settingsList);
-        VoidNetwork.sendDataToClient(ExPPackets.SETTINGS_SYNC, sent, client);
+        ExPNetwork.sendSettings(sent, client);
     }
 
     public static void restoreAllClientData()
@@ -88,7 +86,7 @@ public class SettingsManager implements ISettingsManager
             }
             catch (Exception ex)
             {
-                ExPMisc.modLogger.log(LogLevel.Error, "Could not receive server settings for %s!", ex, id);
+                ExPMisc.modLogger.error("Could not receive server settings for " + id + "!", ex);
             }
         });
 
@@ -120,7 +118,7 @@ public class SettingsManager implements ISettingsManager
         }
         catch (Exception ex)
         {
-            ExPMisc.modLogger.log(LogLevel.Error, "Could not receive server settings for %s!", ex, id);
+            ExPMisc.modLogger.error("Could not receive server settings for " + id + "!", ex);
         }
     }
 
@@ -155,7 +153,7 @@ public class SettingsManager implements ISettingsManager
             }
             catch (Exception e)
             {
-                ExPMisc.modLogger.log(LogLevel.Warning, "Could not load settings of %s from %s!", e, clazz.toString(), f.toString());
+                ExPMisc.modLogger.warn("Could not load settings of %s from %s!", clazz.toString(), f.toString());
                 return this.getOrCreateChild(clazz, f, true);
             }
         }
