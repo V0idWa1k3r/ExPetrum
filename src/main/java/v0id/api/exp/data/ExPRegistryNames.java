@@ -86,7 +86,8 @@ public class ExPRegistryNames
         blockMechanicalQuern                                                                                = "mechanical_quern",
         blockWindmill                                                                                       = "windmill",
         blockMechanicalBellows                                                                              = "mechanical_bellows",
-		blockSaw                                                                                            = "saw";
+		blockSaw                                                                                            = "saw",
+		blockMechanicalPotteryStation																		= "mechanical_pottery_station";
 
 	public static final String
 		itemRock																							= "item_rock",

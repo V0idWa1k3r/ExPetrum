@@ -9,9 +9,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
+import org.apache.commons.lang3.ArrayUtils;
 import v0id.api.exp.item.IContainerTickable;
+import v0id.api.exp.recipe.RecipesPottery;
 import v0id.api.exp.tile.ExPRotaryCapability;
+import v0id.exp.util.OreDictManager;
 import v0id.exp.util.RotaryHandler;
 import v0id.exp.util.temperature.TemperatureUtils;
 
@@ -40,6 +44,39 @@ public class TileMechanicalPotteryStation extends TileEntity implements ITickabl
             {
                 ((IContainerTickable) is.getItem()).onContainerTick(is, this.world, this.pos, this);
             }
+        }
+
+        RecipesPottery.RecipePottery recipe = RecipesPottery.allRecipes.get(this.selectedRecipe);
+        ItemStack is = recipe.getItem();
+        if (this.inventory.getStackInSlot(1).isEmpty() || (ItemHandlerHelper.canItemStacksStack(this.inventory.getStackInSlot(1), is) && this.inventory.getStackInSlot(1).getCount() + is.getCount() <= this.inventory.getStackInSlot(1).getMaxStackSize()))
+        {
+            if (!this.inventory.getStackInSlot(0).isEmpty() && ArrayUtils.contains(OreDictManager.getOreNames(this.inventory.getStackInSlot(0)), "clay") && this.inventory.getStackInSlot(0).getCount() >= 4)
+            {
+                if (this.rotaryHandler.getSpeed() >= 32 && this.rotaryHandler.getTorque() >= 16)
+                {
+                    this.progress += this.rotaryHandler.getSpeed() / 8192 + this.rotaryHandler.getTorque() / 65536;
+                    this.rotaryHandler.setTorque(0);
+                    this.rotaryHandler.setSpeed(0);
+                    if (this.progress >= 1)
+                    {
+                        this.progress = 0;
+                        if (this.inventory.getStackInSlot(1).isEmpty())
+                        {
+                            this.inventory.setStackInSlot(1, is.copy());
+                        }
+                        else
+                        {
+                            this.inventory.getStackInSlot(1).grow(is.getCount());
+                        }
+
+                        this.inventory.getStackInSlot(0).shrink(4);
+                    }
+                }
+            }
+        }
+        else
+        {
+            this.progress = 0;
         }
     }
 

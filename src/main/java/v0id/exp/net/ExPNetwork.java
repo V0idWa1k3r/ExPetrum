@@ -12,6 +12,7 @@ import v0id.exp.ExPetrum;
 import v0id.exp.entity.EntityFallingTree;
 import v0id.exp.player.ExPPlayer;
 import v0id.exp.tile.TileAnvil;
+import v0id.exp.tile.TileMechanicalPotteryStation;
 import v0id.exp.tile.TilePotteryStation;
 import v0id.exp.world.ExPWorld;
 
@@ -33,6 +34,7 @@ public class ExPNetwork
         WRAPPER.registerMessage(MessageWeld.Handler.class, MessageWeld.class, 8, Side.SERVER);
         WRAPPER.registerMessage(MessageWorldData.Handler.class, MessageWorldData.class, 9, Side.CLIENT);
         WRAPPER.registerMessage(MessageTileData.Handler.class, MessageTileData.class, 10, Side.CLIENT);
+        WRAPPER.registerMessage(MessageSelectPottery.Handler.class, MessageSelectPottery.class, 11, Side.SERVER);
     }
 
     public static void sendAnvilRecipe(TileAnvil anvil, int recipe)
@@ -95,5 +97,10 @@ public class ExPNetwork
     public static void sendTileData(ISyncableTile tile, boolean doRefresh)
     {
         WRAPPER.sendToAllAround(new MessageTileData(tile, doRefresh), new NetworkRegistry.TargetPoint(tile.getWorld().provider.getDimension(), tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ(), ExPetrum.proxy.getViewDistance() << 4));
+    }
+
+    public static void sendSelectPottery(TileMechanicalPotteryStation tile, int recipe)
+    {
+        WRAPPER.sendToServer(new MessageSelectPottery(tile.getPos(), tile.getWorld().provider.getDimension(), recipe));
     }
 }

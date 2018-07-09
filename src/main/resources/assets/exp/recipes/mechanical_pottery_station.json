@@ -1,0 +1,24 @@
+{
+    "result": {
+        "item": "exp:mechanical_pottery_station",
+        "data": 0
+    },
+    "pattern": [
+        " T ",
+        " T ",
+        "PAP"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "T" : {
+            "item": "#STICKTREATED"
+        },
+        "P" : {
+            "item": "#SHEETDOUBLEIRON"
+        },
+        "A" : {
+            "item": "exp:item_generic",
+            "data": 38
+        }
+    }
+}

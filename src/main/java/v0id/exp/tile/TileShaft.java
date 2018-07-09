@@ -15,7 +15,7 @@ import v0id.api.exp.world.IExPWorld;
 
 public class TileShaft extends TileEntity implements IRotaryTransmitter
 {
-    public EnumShaftMaterial material;
+    public EnumShaftMaterial material = EnumShaftMaterial.WOOD;
     public long lastStepped;
 
     @Override

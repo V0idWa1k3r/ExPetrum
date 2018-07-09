@@ -334,4 +334,7 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockSaw)
     public static final Block saw = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockMechanicalPotteryStation)
+    public static final Block mechanicalPotteryStation = null;
 }

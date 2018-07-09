@@ -1,0 +1,15 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"textures" : {
+			"0": "exp:blocks/iron_plates"
+		},
+		"transform": "forge:default-block",
+		"gui3d" : true,
+		"model" : "exp:pottery_station_clay"
+	},
+	"variants" : {
+		"normal": [{}],
+        "inventory": [{}]
+	}
+}
