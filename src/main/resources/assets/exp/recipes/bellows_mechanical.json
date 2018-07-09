@@ -1,0 +1,28 @@
+{
+    "result": {
+        "item": "exp:mechanical_bellows",
+        "data": 0
+    },
+    "pattern": [
+        "PLN",
+        "ILL",
+        "PPP"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "I" : {
+            "item": "exp:item_generic",
+            "data": 38
+        },
+        "N" : {
+            "item": "exp:item_generic",
+            "data": 34
+        },
+        "L" : {
+            "item": "#LEATHER"
+        },
+        "P" : {
+            "item": "#SHEETIRON"
+        }
+    }
+}

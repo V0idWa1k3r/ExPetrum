@@ -1,0 +1,24 @@
+{
+    "result": {
+        "item": "exp:saw",
+        "data": 0
+    },
+    "pattern": [
+        "DAD",
+        "DSD"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "A" : {
+            "item": "exp:item_generic",
+            "data": 38
+        },
+        "S" : {
+            "item": "exp:item_generic",
+            "data": 41
+        },
+        "D" : {
+            "item": "#SHEETDOUBLEIRON"
+        }
+    }
+}

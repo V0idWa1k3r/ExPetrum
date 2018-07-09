@@ -44,7 +44,7 @@ public class ItemIngot extends Item implements IInitializableItem, IWeightProvid
 	@Override
 	public float provideWeight(ItemStack item)
 	{
-		return 0.1F;
+		return 1F;
 	}
 
 	@Override

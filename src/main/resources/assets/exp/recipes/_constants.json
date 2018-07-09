@@ -285,6 +285,19 @@
         "ingredient": [
             {
                 "type": "forge:ore_dict",
+                "ore": "doubleSheetIron"
+            },
+            {
+                "type": "forge:ore_dict",
+                "ore": "doublePlateIron"
+            }
+        ],
+        "name": "SHEETDOUBLEIRON"
+    },
+    {
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
                 "ore": "sheetCopper"
             },
             {

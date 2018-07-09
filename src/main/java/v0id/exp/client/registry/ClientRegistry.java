@@ -101,6 +101,7 @@ public class ClientRegistry implements ILifecycleListener
         net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileMechanicalQuern.class, new TESRMechanicalQuern());
         net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileWindmill.class, new TESRWindmill());
         net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileMechanicalBellows.class, new TESRMechanicalBellows());
+        net.minecraftforge.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(TileSaw.class, new TESRSaw());
         this.loadAdditionalData();
         this.initAttacksConditions();
     }
@@ -187,6 +188,7 @@ public class ClientRegistry implements ILifecycleListener
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.mechanicalQuern), 0, new ModelResourceLocation(ExPBlocks.mechanicalQuern.getRegistryName(), "normal"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.windmill), 0, new ModelResourceLocation(ExPBlocks.windmill.getRegistryName(), "normal"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.mechanicalBellows), 0, new ModelResourceLocation(ExPBlocks.mechanicalBellows.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.saw), 0, new ModelResourceLocation(ExPBlocks.saw.getRegistryName(), "normal"));
         // Iteration-dependent models
         mkCustomModelResourceLocations(ExPItems.stick, EnumTreeType.values().length + EnumShrubType.values().length + EnumBerry.values().length, i -> "type=" + ExPOreDict.stickNames[i]);
         mkCustomModelResourceLocations(ExPItems.toolHead, EnumToolClass.values().length * EnumToolStats.values().length, i -> "material=" + EnumToolStats.values()[i % EnumToolStats.values().length].name().toLowerCase() + ",type=" + EnumToolClass.values()[i / EnumToolStats.values().length].name().toLowerCase());

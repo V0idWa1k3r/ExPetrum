@@ -367,6 +367,7 @@ tile.exp.splitter_gearbox.name=Splitter Gearbox
 tile.exp.mechanical_quern.name=Mechanical Quern
 tile.exp.windmill.name=Windmill
 tile.exp.mechanical_bellows.name=Mechanical Bellows
+tile.exp.saw.name=Sawmill
 
 item.exp.item_ingot.name=Ingot
 
@@ -758,6 +759,8 @@ item.exp.item_generic.medium_gear.name=Medium Iron Gear
 item.exp.item_generic.large_gear.name=Large Iron Gear
 item.exp.item_generic.gear_assembly.name=Iron Gear Assembly
 item.exp.item_generic.water_wheel_blade.name=Water Wheel Blade
+item.exp.item_generic.windmill_blade.name=Windmill Blade
+item.exp.item_generic.saw_blade.name=Sawmill Blade
 item.exp.item_ore.acanthite.name=Acanthite Ore
 item.exp.item_ore.barite.name=Barite Ore
 item.exp.item_ore.bauxite.name=Bauxite Ore

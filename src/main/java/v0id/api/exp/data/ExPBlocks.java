@@ -333,4 +333,7 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockMechanicalBellows)
     public static final Block mechanicalBellows = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockSaw)
+    public static final Block saw = null;
 }

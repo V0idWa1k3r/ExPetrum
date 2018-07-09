@@ -208,6 +208,16 @@
                 "textures" : {
                     "layer0" : "exp:items/misc/water_wheel_blade"
                 }
+            },
+            "windmill_blade": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/windmill_blade"
+                }
+            },
+            "saw_blade": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/saw_blade"
+                }
             }
 		}
 	}

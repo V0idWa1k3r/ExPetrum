@@ -1,0 +1,24 @@
+{
+    "result": {
+        "item": "exp:item_generic",
+        "data": 40
+    },
+    "pattern": [
+        "NPN",
+        "SPS",
+        "NPN"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "N" : {
+            "item": "exp:item_generic",
+            "data": 34
+        },
+        "P" : {
+            "item": "#PLANKS"
+        },
+        "S" : {
+            "item": "#STICKTREATED"
+        }
+    }
+}

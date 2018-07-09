@@ -1,0 +1,25 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"textures" : {
+		},
+		"transform": "forge:default-block",
+		"gui3d" : true,
+		"model" : "exp:saw"
+	},
+	"variants" : {
+		"normal": [{}],
+        "inventory": [{}],
+		"axis": {
+            "x": {
+                "y": 90
+            },
+            "y": {
+                "dummy": "dummy"
+            },
+            "z": {
+                "y": 0
+            }
+        }
+	}
+}

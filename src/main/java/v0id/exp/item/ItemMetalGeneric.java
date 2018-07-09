@@ -27,9 +27,9 @@ public class ItemMetalGeneric extends Item implements IOreDictEntry, IWeightProv
 {
     public enum EnumGenericType
     {
-        CLUMP(0.2F, Pair.of((byte)2, (byte)1), "clump"),
-        SHEET(0.1F, IWeightProvider.DEFAULT_VOLUME, "sheet", "plate"),
-        DOUBLE_SHEET(0.2F, Pair.of((byte)2, (byte)1), "doubleSheet", "doublePlate");
+        CLUMP(2F, Pair.of((byte)2, (byte)1), "clump"),
+        SHEET(1F, IWeightProvider.DEFAULT_VOLUME, "sheet", "plate"),
+        DOUBLE_SHEET(2F, Pair.of((byte)2, (byte)1), "doubleSheet", "doublePlate");
 
         EnumGenericType(float weight, Pair<Byte, Byte> volume, String... oreDictNames)
         {

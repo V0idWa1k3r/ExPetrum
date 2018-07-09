@@ -368,6 +368,7 @@ public class ExPHandlerClient
         event.getMap().registerSprite(new ResourceLocation("exp", "blocks/fluid/juice"));
         event.getMap().registerSprite(new ResourceLocation("exp", "blocks/quern_side"));
         event.getMap().registerSprite(new ResourceLocation("exp", "blocks/windmill"));
+        event.getMap().registerSprite(new ResourceLocation("exp", "blocks/saw"));
         TESRQuern.quernTopTexture = event.getMap().registerSprite(new ResourceLocation("exp", "blocks/quern_top"));
     }
 }
