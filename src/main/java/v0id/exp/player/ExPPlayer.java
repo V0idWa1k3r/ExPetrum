@@ -59,6 +59,7 @@ public class ExPPlayer implements IExPPlayer
     public ExPPlayer()
     {
         this.setAllDirty(true);
+        this.serverIsDirty = true;
     }
 
     @Override

@@ -87,7 +87,9 @@ public class ExPRegistryNames
         blockWindmill                                                                                       = "windmill",
         blockMechanicalBellows                                                                              = "mechanical_bellows",
 		blockSaw                                                                                            = "saw",
-		blockMechanicalPotteryStation																		= "mechanical_pottery_station";
+		blockMechanicalPotteryStation																		= "mechanical_pottery_station",
+		blockBlastFurnaceMetal																				= "blast_furnace_metal",
+		blockBlastFurnace																					= "blast_furnace";
 
 	public static final String
 		itemRock																							= "item_rock",
@@ -193,7 +195,8 @@ public class ExPRegistryNames
         jeiCategoryPress                                                                                    = "press",
         jeiCategoryScrapingRack                                                                             = "scraping_rack",
         jeiCategorySpinningWheel                                                                            = "spinning_wheel",
-        jeiCategoryBloomery                                                                                 = "bloomery";
+        jeiCategoryBloomery                                                                                 = "bloomery",
+        jeiCategoryBlastFurnace                                                                             = "blast_furnace";
 
 	private static final Map<String, ResourceLocation> cache = Maps.newHashMap();
 

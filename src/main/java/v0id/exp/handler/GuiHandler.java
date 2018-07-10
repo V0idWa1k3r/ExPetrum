@@ -116,6 +116,11 @@ public class GuiHandler implements IGuiHandler
                 return new GuiMechanicalPotteryStation(player.inventory, (TileMechanicalPotteryStation) tile);
             }
 
+            case 16:
+            {
+                return new GuiBlastFurnace(player.inventory, (TileBlastFurnace) tile);
+            }
+
             default:
             {
                 return null;
@@ -219,6 +224,11 @@ public class GuiHandler implements IGuiHandler
             case 15:
             {
                 return new ContainerMechanicalPotteryStation(player.inventory, (TileMechanicalPotteryStation) tile);
+            }
+
+            case 16:
+            {
+                return new ContainerBlastFurnace(player.inventory, (TileBlastFurnace) tile);
             }
 
             default:

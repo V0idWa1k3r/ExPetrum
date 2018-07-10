@@ -218,6 +218,16 @@
                 "textures" : {
                     "layer0" : "exp:items/misc/saw_blade"
                 }
+            },
+            "charred_bone": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/charred_bone"
+                }
+            },
+            "bone_ash": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/bone_ash"
+                }
             }
 		}
 	}

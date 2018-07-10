@@ -1,0 +1,21 @@
+{
+    "result": {
+        "item": "exp:blast_furnace",
+        "data": 0
+    },
+    "pattern": [
+        "SSS",
+        "S S",
+        "STS"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "S" : {
+            "item": "#SHEETDOUBLEIRON"
+        },
+        "T" : {
+            "item": "exp:item_tuyere_iron",
+            "data": 0
+        }
+    }
+}

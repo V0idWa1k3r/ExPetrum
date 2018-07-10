@@ -16,7 +16,9 @@ import v0id.api.exp.recipe.*;
 import v0id.exp.item.ItemGeneric;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Wrappers
 {
@@ -253,6 +255,32 @@ public class Wrappers
         {
             ingredients.setInput(ItemStack.class, this.recipe.getInput());
             ingredients.setOutput(FluidStack.class, this.recipe.getOutput(ItemStack.EMPTY));
+        }
+    }
+
+    public static class WrapperBlastFurnace implements IRecipeWrapper
+    {
+        public final RecipesBlastFurnace.IBlastFurnaceRecipe recipe;
+
+        public WrapperBlastFurnace(RecipesBlastFurnace.IBlastFurnaceRecipe recipe)
+        {
+            this.recipe = recipe;
+        }
+
+        @Override
+        public void getIngredients(IIngredients iIngredients)
+        {
+            iIngredients.setInputLists(ItemStack.class, Arrays.stream(this.recipe.getInput()).map(Collections::singletonList).collect(Collectors.toList()));
+            iIngredients.setOutput(ItemStack.class, new ItemStack(ExPItems.ingot, 1, this.recipe.getResult().ordinal()));
+        }
+
+        @Override
+        public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY)
+        {
+            FontRenderer fr = minecraft.fontRenderer;
+            fr.drawStringWithShadow(String.format("%.2f", this.recipe.getResultAmount() / 100), 108, 20, 0xffffff);
+            fr.drawStringWithShadow(I18n.format("exp.txt.temperature", this.recipe.getTemperature()), 5, 20, 0xffffff);
+            fr.drawStringWithShadow(I18n.format("exp.txt.ticks", this.recipe.getWorkRequired()), 5, 30, 0xffffff);
         }
     }
 }

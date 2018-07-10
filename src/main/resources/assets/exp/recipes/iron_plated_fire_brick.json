@@ -1,0 +1,16 @@
+{
+  "result": {
+    "item": "exp:kaolin",
+    "data": 3
+  },
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "exp:kaolin",
+      "data": 2
+    },
+    {
+      "item": "#SHEETDOUBLEIRON"
+    }
+  ]
+}

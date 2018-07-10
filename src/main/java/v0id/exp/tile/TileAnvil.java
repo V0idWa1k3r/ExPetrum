@@ -140,7 +140,7 @@ public class TileAnvil extends TileEntity implements ITickable
             if (rec != null && rec.anvilTier <= this.getTier())
             {
                 ItemStack flux = this.inventory.getStackInSlot(5);
-                if (!flux.isEmpty() && flux.getItem() instanceof ItemGeneric && flux.getMetadata() == ItemGeneric.EnumGenericType.FLUX.ordinal())
+                if (!flux.isEmpty() && flux.getItem() instanceof ItemGeneric && (flux.getMetadata() == ItemGeneric.EnumGenericType.FLUX.ordinal() || flux.getMetadata() == ItemGeneric.EnumGenericType.BONE_ASH.ordinal()))
                 {
                     this.inventory.setStackInSlot(2, rec.itemOut.copy());
                     TemperatureUtils.setTemperature(this.inventory.getStackInSlot(2), (TemperatureUtils.getTemperature(ingot1) + TemperatureUtils.getTemperature(ingot2)) / 2F);

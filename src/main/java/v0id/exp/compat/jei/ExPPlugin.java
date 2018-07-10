@@ -40,7 +40,8 @@ public class ExPPlugin implements IModPlugin
                 new Categories.CategorySpinningWheel(registry.getJeiHelpers().getGuiHelper()),
                 new Categories.CategoryBloomery(registry.getJeiHelpers().getGuiHelper()),
                 new Categories.CategoryBarrel(registry.getJeiHelpers().getGuiHelper()),
-                new Categories.CategoryPress(registry.getJeiHelpers().getGuiHelper())
+                new Categories.CategoryPress(registry.getJeiHelpers().getGuiHelper()),
+                new Categories.CategoryBlastFurnace(registry.getJeiHelpers().getGuiHelper())
             );
     }
 
@@ -58,16 +59,20 @@ public class ExPPlugin implements IModPlugin
         registry.addRecipes(Arrays.asList(EnumOre.HEMATITE, EnumOre.MAGNETITE, EnumOre.PENTLANDITE).stream().map(Wrappers.WrapperBloomery::new).collect(Collectors.toList()), ExPRegistryNames.asLocation(ExPRegistryNames.jeiCategoryBloomery).toString());
         registry.addRecipes(RecipesBarrel.allRecipes.stream().map(Wrappers.WrapperBarrel::new).collect(Collectors.toList()), ExPRegistryNames.asLocation(ExPRegistryNames.jeiCategoryBarrel).toString());
         registry.addRecipes(RecipesPress.allRecipes.stream().map(Wrappers.WrapperPress::new).collect(Collectors.toList()), ExPRegistryNames.asLocation(ExPRegistryNames.jeiCategoryPress).toString());
+        registry.addRecipes(RecipesBlastFurnace.allRecipes.stream().map(Wrappers.WrapperBlastFurnace::new).collect(Collectors.toList()), ExPRegistryNames.asLocation(ExPRegistryNames.jeiCategoryBlastFurnace).toString());
         registry.addRecipeCatalyst(new ItemStack(ExPBlocks.campfire, 1, 0), ExPRegistryNames.asLocation(ExPRegistryNames.jeiCategorySmelting).toString());
         registry.addRecipeCatalyst(new ItemStack(ExPBlocks.forge, 1, 0), ExPRegistryNames.asLocation(ExPRegistryNames.jeiCategorySmelting).toString());
         registry.addRecipeCatalyst(new ItemStack(ExPBlocks.potteryStation, 1, 0), ExPRegistryNames.asLocation(ExPRegistryNames.jeiCategoryPottery).toString());
+        registry.addRecipeCatalyst(new ItemStack(ExPBlocks.mechanicalPotteryStation, 1, 0), ExPRegistryNames.asLocation(ExPRegistryNames.jeiCategoryPottery).toString());
         registry.addRecipeCatalyst(new ItemStack(ExPBlocks.crucible, 1, 0), ExPRegistryNames.asLocation(ExPRegistryNames.jeiCategoryAlloying).toString());
         registry.addRecipeCatalyst(new ItemStack(ExPBlocks.quern, 1, 0), ExPRegistryNames.asLocation(ExPRegistryNames.jeiCategoryQuern).toString());
+        registry.addRecipeCatalyst(new ItemStack(ExPBlocks.mechanicalQuern, 1, 0), ExPRegistryNames.asLocation(ExPRegistryNames.jeiCategoryQuern).toString());
         registry.addRecipeCatalyst(new ItemStack(ExPBlocks.scrapingRack, 1, 0), ExPRegistryNames.asLocation(ExPRegistryNames.jeiCategoryScrapingRack).toString());
         registry.addRecipeCatalyst(new ItemStack(ExPBlocks.spinningWheel, 1, 0), ExPRegistryNames.asLocation(ExPRegistryNames.jeiCategorySpinningWheel).toString());
         registry.addRecipeCatalyst(new ItemStack(ExPBlocks.bloomery, 1, 0), ExPRegistryNames.asLocation(ExPRegistryNames.jeiCategoryBloomery).toString());
         registry.addRecipeCatalyst(new ItemStack(ExPBlocks.barrel, 1, 0), ExPRegistryNames.asLocation(ExPRegistryNames.jeiCategoryBarrel).toString());
         registry.addRecipeCatalyst(new ItemStack(ExPBlocks.fruitPress, 1, 0), ExPRegistryNames.asLocation(ExPRegistryNames.jeiCategoryPress).toString());
+        registry.addRecipeCatalyst(new ItemStack(ExPBlocks.blastFurnace, 1, 0), ExPRegistryNames.asLocation(ExPRegistryNames.jeiCategoryBlastFurnace).toString());
         for (EnumAnvilMaterial tier : EnumAnvilMaterial.values())
         {
             registry.addRecipeCatalyst(new ItemStack(ExPBlocks.anvil, 1, tier.ordinal()), ExPRegistryNames.asLocation(ExPRegistryNames.jeiCategoryAnvilWeld).toString());

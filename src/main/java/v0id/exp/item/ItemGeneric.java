@@ -58,7 +58,9 @@ public class ItemGeneric extends Item implements IInitializableItem, IWeightProv
         GEAR_ASSEMBLY("gear_assembly", 0.5F, IWeightProvider.DEFAULT_VOLUME, "gearAssembly"),
         WATER_WHEEL_BLADE("water_wheel_blade", 2.5F, Pair.of((byte)2, (byte)1), "bladeWaterWheel"),
         WINDMILL_BLADE("windmill_blade", 5F, Pair.of((byte)1, (byte)2), "bladeWindmill"),
-        SAW_BLADE("saw_blade", 10F, Pair.of((byte)2, (byte)2), "bladeSawmill");
+        SAW_BLADE("saw_blade", 10F, Pair.of((byte)2, (byte)2), "bladeSawmill"),
+        CHARRED_BONE("charred_bone", 0.1F, IWeightProvider.DEFAULT_VOLUME, "bone"),
+        BONE_ASH("bone_ash", 0.05F, IWeightProvider.DEFAULT_VOLUME, "ashBone", "boneAsh");
 
         EnumGenericType(String name, float weight, Pair<Byte, Byte> volume, String... oreDictNames)
         {

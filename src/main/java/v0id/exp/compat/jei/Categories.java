@@ -454,7 +454,7 @@ public class Categories
 
         public CategoryPress(IGuiHelper helper)
         {
-            this.drawable = helper.createDrawable(ExPTextures.guiJEI, 0, 144, 54, 18);
+            this.drawable = helper.createDrawable(ExPTextures.guiJEI, 0, 180, 54, 18);
         }
 
         @Override
@@ -488,6 +488,60 @@ public class Categories
             recipeLayout.getFluidStacks().init(0, false, 41, 1, 8, 16, 10000, true, null);
             recipeLayout.getItemStacks().set(0, ingredients.getInputs(ItemStack.class).get(0));
             recipeLayout.getFluidStacks().set(0, ingredients.getOutputs(FluidStack.class).stream().map(l -> l.get(0)).collect(Collectors.toList()));
+        }
+    }
+
+    public static class CategoryBlastFurnace implements IRecipeCategory<Wrappers.WrapperBlastFurnace>
+    {
+        private final IDrawable drawable;
+
+        public CategoryBlastFurnace(IGuiHelper helper)
+        {
+            this.drawable = helper.createDrawable(ExPTextures.guiJEI, 0, 144, 126, 36);
+        }
+
+        @Override
+        public String getUid()
+        {
+            return ExPRegistryNames.asLocation(ExPRegistryNames.jeiCategoryBlastFurnace).toString();
+        }
+
+        @Override
+        public String getTitle()
+        {
+            return I18n.format("exp.jei.category.blast_furnace");
+        }
+
+        @Override
+        public String getModName()
+        {
+            return ExPRegistryNames.modid;
+        }
+
+        @Override
+        public IDrawable getBackground()
+        {
+            return this.drawable;
+        }
+
+        @Override
+        public void setRecipe(IRecipeLayout recipeLayout, Wrappers.WrapperBlastFurnace recipeWrapper, IIngredients ingredients)
+        {
+            recipeLayout.getItemStacks().init(0, true, 0, 0);
+            recipeLayout.getItemStacks().init(1, true, 36, 0);
+            recipeLayout.getItemStacks().init(2, true, 72, 0);
+            recipeLayout.getItemStacks().init(3, false, 108, 0);
+            recipeLayout.getItemStacks().set(0, ingredients.getInputs(ItemStack.class).get(0));
+            if (ingredients.getInputs(ItemStack.class).size() > 1)
+            {
+                recipeLayout.getItemStacks().set(1, ingredients.getInputs(ItemStack.class).get(1));
+                if (ingredients.getInputs(ItemStack.class).size() > 2)
+                {
+                    recipeLayout.getItemStacks().set(2, ingredients.getInputs(ItemStack.class).get(2));
+                }
+            }
+
+            recipeLayout.getItemStacks().set(3, ingredients.getOutputs(ItemStack.class).stream().map(l -> l.get(0)).collect(Collectors.toList()));
         }
     }
 }

@@ -111,6 +111,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
         RecipesSmelting.addRecipe(new RecipesSmelting.RecipeSmelting(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.CLAY.ordinal()), new ItemStack(Items.BRICK, 1, 0), 540F));
         RecipesSmelting.addRecipe(new RecipesSmelting.RecipeSmelting(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.KAOLIN.ordinal()), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.KAOLIN_BRICK.ordinal()), 570F));
         RecipesSmelting.addRecipe(new RecipesSmelting.RecipeSmelting(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.FIRE_CLAY.ordinal()), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.FIRE_BRICK.ordinal()), 600F));
+        RecipesSmelting.addRecipe(new RecipesSmelting.RecipeSmelting(new ItemStack(Items.BONE), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.CHARRED_BONE.ordinal()), 1400F));
         RecipesSmelting.addRecipe(new RecipesSmelting.RecipeOreSmelting(new ItemStack(Blocks.TORCH, 1, 0), "stickWood", 200F));
         RecipesSmelting.addRecipe(new RecipeSmeltingMeltable());
         RecipesSmelting.addRecipe(new RecipeSmeltingFood(FoodEntry.CHICKEN_RAW, FoodEntry.CHICKEN_COOKED, 200));
@@ -132,6 +133,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
         RecipesQuern.addRecipe(new ItemStack(ExPItems.ore, 1, EnumOre.CINNABAR.ordinal()), new ItemStack(Items.REDSTONE, 8, 0));
         RecipesQuern.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.CHARCOAL.ordinal()), new ItemStack(ExPItems.generic, 8, ItemGeneric.EnumGenericType.FLUX.ordinal()));
         RecipesQuern.addRecipe(new ItemStack(Items.BONE, 1, 0), new ItemStack(Items.DYE, 4, 15));
+        RecipesQuern.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.CHARRED_BONE.ordinal()), new ItemStack(ExPItems.generic, 2, ItemGeneric.EnumGenericType.BONE_ASH.ordinal()));
         for (EnumRockClass rock : EnumRockClass.values())
         {
             RecipesQuern.addRecipe(new ItemStack(ExPBlocks.rock, 1, rock.ordinal()), new ItemStack(ExPBlocks.sand, 1, rock.ordinal()));
@@ -199,6 +201,14 @@ public class ExPRecipeRegistry extends AbstractRegistry
         RecipesPress.addRecipe(new RecipePressFood(ExPFluids.juice, FoodEntry.GRAPEFRUIT));
         RecipesPress.addRecipe(new RecipePressFood(ExPFluids.juice, FoodEntry.AVOCADO));
         RecipesPress.addRecipe(new RecipePressFood(ExPFluids.juice, FoodEntry.CARAMBOLA));
+
+        RecipesBlastFurnace.addRecipe(new RecipesBlastFurnace.BlastFurnaceRecipe(new ItemStack[]{ new ItemStack(ExPItems.ore, 5, EnumOre.HEMATITE.ordinal()), new ItemStack(ExPItems.generic, 5, ItemGeneric.EnumGenericType.CHARCOAL.ordinal()), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.BONE_ASH.ordinal()) }, EnumMetal.PIG_IRON, 1700F, 12000, 50));
+        RecipesBlastFurnace.addRecipe(new RecipesBlastFurnace.BlastFurnaceRecipe(new ItemStack[]{ new ItemStack(ExPItems.ore, 5, EnumOre.HEMATITE.ordinal()), new ItemStack(ExPItems.generic, 5, ItemGeneric.EnumGenericType.ANTHRACITE.ordinal()), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.BONE_ASH.ordinal()) }, EnumMetal.PIG_IRON, 1700F, 12000, 50));
+        RecipesBlastFurnace.addRecipe(new RecipesBlastFurnace.BlastFurnaceRecipe(new ItemStack[]{ new ItemStack(ExPItems.ore, 5, EnumOre.MAGNETITE.ordinal()), new ItemStack(ExPItems.generic, 5, ItemGeneric.EnumGenericType.CHARCOAL.ordinal()), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.BONE_ASH.ordinal()) }, EnumMetal.PIG_IRON, 1700F, 12000, 50));
+        RecipesBlastFurnace.addRecipe(new RecipesBlastFurnace.BlastFurnaceRecipe(new ItemStack[]{ new ItemStack(ExPItems.ore, 5, EnumOre.MAGNETITE.ordinal()), new ItemStack(ExPItems.generic, 5, ItemGeneric.EnumGenericType.ANTHRACITE.ordinal()), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.BONE_ASH.ordinal()) }, EnumMetal.PIG_IRON, 1700F, 12000, 50));
+        RecipesBlastFurnace.addRecipe(new RecipesBlastFurnace.BlastFurnaceRecipe(new ItemStack[]{ new ItemStack(ExPItems.ore, 5, EnumOre.PENTLANDITE.ordinal()), new ItemStack(ExPItems.generic, 5, ItemGeneric.EnumGenericType.CHARCOAL.ordinal()), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.BONE_ASH.ordinal()) }, EnumMetal.PIG_IRON, 1700F, 12000, 50));
+        RecipesBlastFurnace.addRecipe(new RecipesBlastFurnace.BlastFurnaceRecipe(new ItemStack[]{ new ItemStack(ExPItems.ore, 5, EnumOre.PENTLANDITE.ordinal()), new ItemStack(ExPItems.generic, 5, ItemGeneric.EnumGenericType.ANTHRACITE.ordinal()), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.BONE_ASH.ordinal()) }, EnumMetal.PIG_IRON, 1700F, 12000, 50));
+        RecipesBlastFurnace.addRecipe(new RecipesBlastFurnace.BlastFurnaceRecipe(new ItemStack[]{ new ItemStack(ExPItems.ingot, 1, EnumMetal.PIG_IRON.ordinal()) }, EnumMetal.STEEL, 1800F, 4000, 100));
     }
 
     @Override

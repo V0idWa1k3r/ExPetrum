@@ -136,7 +136,9 @@ public class ExPBlocksRegistry extends AbstractRegistry
                 new BlockWindmill(),
                 new BlockMechanicalBellows(),
                 new BlockSaw(),
-                new BlockMechanicalPotteryStation()
+                new BlockMechanicalPotteryStation(),
+                new BlockBlastFurnaceMetal(),
+                new BlockBlastFurnace()
         );
 
         registryEntries.forEach(registry::register);

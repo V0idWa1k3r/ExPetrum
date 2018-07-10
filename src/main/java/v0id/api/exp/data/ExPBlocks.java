@@ -337,4 +337,10 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockMechanicalPotteryStation)
     public static final Block mechanicalPotteryStation = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockBlastFurnaceMetal)
+    public static final Block blastFurnaceMetal = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockBlastFurnace)
+    public static final Block blastFurnace = null;
 }

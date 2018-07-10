@@ -25,9 +25,9 @@
                     "all" : "exp:blocks/stone/fire_brick"
                 }
             },
-            "flint_powder": {
+            "iron_plated_fire_brick": {
                 "textures" : {
-                    "all" : "exp:blocks/stone/flint_powder"
+                    "all" : "exp:blocks/stone/iron_plated_fire_brick"
                 }
             }
         }

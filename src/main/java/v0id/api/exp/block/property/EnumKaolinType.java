@@ -6,7 +6,8 @@ public enum EnumKaolinType implements IStringSerializable
 {
     ROCK,
     BRICK,
-    FIRE_BRICK;
+    FIRE_BRICK,
+    IRON_PLATED_FIRE_BRICK;
 
     @Override
     public String getName()

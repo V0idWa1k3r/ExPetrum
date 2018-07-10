@@ -158,23 +158,43 @@ public class TileCrucible extends TileEntity implements ITickable, ITemperatureH
         }
 
         float addedT = -0.5F;
+        boolean lookingForTile = true;
         TileEntity tile = this.world.getTileEntity(this.pos.down());
+        if (tile != null)
         {
-            if (tile != null)
+            ITemperatureHandler handler = tile.getCapability(ExPTemperatureCapability.cap, EnumFacing.UP);
+            if (handler != null)
             {
-                ITemperatureHandler handler = tile.getCapability(ExPTemperatureCapability.cap, EnumFacing.UP);
-                if (handler != null)
+                lookingForTile = false;
+                if (handler.getCurrentTemperature() > this.temperature_handler.getCurrentTemperature())
                 {
-                    if (handler.getCurrentTemperature() > this.temperature_handler.getCurrentTemperature())
+                    addedT = 0.5F;
+                }
+                else
+                {
+                    if (handler.getCurrentTemperature() >= this.temperature_handler.getCurrentTemperature() - 1F)
                     {
-                        addedT = 0.5F;
+                        addedT = 0;
                     }
-                    else
+                }
+            }
+        }
+
+        tile = this.world.getTileEntity(this.pos.up());
+        if (tile != null && lookingForTile)
+        {
+            ITemperatureHandler handler = tile.getCapability(ExPTemperatureCapability.cap, EnumFacing.DOWN);
+            if (handler != null)
+            {
+                if (handler.getCurrentTemperature() > this.temperature_handler.getCurrentTemperature())
+                {
+                    addedT = 0.5F;
+                }
+                else
+                {
+                    if (handler.getCurrentTemperature() >= this.temperature_handler.getCurrentTemperature() - 1F)
                     {
-                        if (handler.getCurrentTemperature() >= this.temperature_handler.getCurrentTemperature() - 1F)
-                        {
-                            addedT = 0;
-                        }
+                        addedT = 0;
                     }
                 }
             }

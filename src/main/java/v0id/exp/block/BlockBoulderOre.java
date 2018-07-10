@@ -238,12 +238,15 @@ public class BlockBoulderOre extends Block implements IInitializableBlock, IOreD
     @Override
     public IBlockState chisel(IBlockState original, World world, BlockPos pos)
     {
-        this.dropBlockAsItem(world, pos, original, 0);
-        if (world.getTileEntity(pos) instanceof TileOre)
-        {
-            InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), ((TileOre) world.getTileEntity(pos)).createDrops());
-        }
-
+    	if (!world.isRemote)
+		{
+			this.dropBlockAsItem(world, pos, original, 0);
+			if (world.getTileEntity(pos) instanceof TileOre)
+			{
+				InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), ((TileOre) world.getTileEntity(pos)).createDrops());
+			}
+		}
+		
         return Blocks.AIR.getDefaultState();
     }
 }
