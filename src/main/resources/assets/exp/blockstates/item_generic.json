@@ -233,6 +233,16 @@
                 "textures" : {
                     "layer0" : "exp:items/misc/iron_stick"
                 }
+            },
+            "wood_pulp": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/wood_pulp"
+                }
+            },
+            "pressed_pulp": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/pressed_pulp"
+                }
             }
 		}
 	}

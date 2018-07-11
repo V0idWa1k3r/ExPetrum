@@ -454,7 +454,7 @@ public class Categories
 
         public CategoryPress(IGuiHelper helper)
         {
-            this.drawable = helper.createDrawable(ExPTextures.guiJEI, 0, 180, 54, 18);
+            this.drawable = helper.createDrawable(ExPTextures.guiJEI, 0, 180, 72, 18);
         }
 
         @Override
@@ -485,9 +485,11 @@ public class Categories
         public void setRecipe(IRecipeLayout recipeLayout, Wrappers.WrapperPress recipeWrapper, IIngredients ingredients)
         {
             recipeLayout.getItemStacks().init(0, true, 0, 0);
-            recipeLayout.getFluidStacks().init(0, false, 41, 1, 8, 16, 10000, true, null);
+            recipeLayout.getFluidStacks().init(0, false, 59, 1, 8, 16, 10000, true, null);
+            recipeLayout.getItemStacks().init(1, false, 36, 0);
             recipeLayout.getItemStacks().set(0, ingredients.getInputs(ItemStack.class).get(0));
             recipeLayout.getFluidStacks().set(0, ingredients.getOutputs(FluidStack.class).stream().map(l -> l.get(0)).collect(Collectors.toList()));
+            recipeLayout.getItemStacks().set(1, ingredients.getOutputs(ItemStack.class).stream().map(l -> l.get(0)).collect(Collectors.toList()));
         }
     }
 

@@ -19,11 +19,13 @@ public class RecipesPress
     {
         private final ItemStack itemIn;
         private final FluidStack fsOut;
+        private final ItemStack itemOut;
 
-        public RecipePress(ItemStack itemIn, FluidStack fsOut)
+        public RecipePress(ItemStack itemIn, FluidStack fsOut, ItemStack itemOut)
         {
             this.itemIn = itemIn;
             this.fsOut = fsOut;
+            this.itemOut = itemOut;
         }
 
         @Override
@@ -43,6 +45,12 @@ public class RecipesPress
         {
             return this.itemIn;
         }
+
+        @Override
+        public ItemStack getOutput()
+        {
+            return this.itemOut;
+        }
     }
 
     public interface IRecipePress
@@ -52,5 +60,7 @@ public class RecipesPress
         FluidStack getOutput(ItemStack is);
 
         ItemStack getInput();
+
+        ItemStack getOutput();
     }
 }

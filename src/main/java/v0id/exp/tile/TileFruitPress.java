@@ -26,7 +26,14 @@ import javax.annotation.Nullable;
 
 public class TileFruitPress extends TileEntity implements ITickable
 {
-    public ItemStackHandler inventory = new ItemStackHandler(1);
+    public ItemStackHandler inventory = new ItemStackHandler(1)
+    {
+        @Override
+        public int getSlotLimit(int slot)
+        {
+            return 1;
+        }
+    };
 
     public void jump()
     {
@@ -55,7 +62,7 @@ public class TileFruitPress extends TileEntity implements ITickable
                         IFluidHandler fh = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP);
                         fh.fill(pressRecipe.getOutput(this.inventory.getStackInSlot(0)), true);
                         this.world.playSound(null, this.pos.getX(), this.pos.getY(), this.pos.getZ(), SoundEvents.ENTITY_SLIME_ATTACK, SoundCategory.BLOCKS, 1.0F, 0.1F);
-                        this.inventory.getStackInSlot(0).shrink(1);
+                        this.inventory.setStackInSlot(0, pressRecipe.getOutput().copy());
                     }
                 }
             }

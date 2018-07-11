@@ -18,8 +18,10 @@ import net.minecraftforge.common.capabilities.Capability;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
+import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.tile.ExPRotaryCapability;
 import v0id.exp.block.tree.BlockLog;
+import v0id.exp.item.ItemGeneric;
 import v0id.exp.util.RotaryHandler;
 
 import javax.annotation.Nullable;
@@ -60,6 +62,7 @@ public class TileSaw extends TileEntity implements ITickable
                         int meta = ttype.ordinal() % 15;
                         this.world.setBlockToAir(this.pos.down());
                         InventoryHelper.spawnItemStack(this.world, this.pos.getX(), this.pos.getY() - 1, this.pos.getZ(), new ItemStack(planks, 4, meta));
+                        InventoryHelper.spawnItemStack(this.world, this.pos.getX(), this.pos.getY() - 1, this.pos.getZ(), new ItemStack(ExPItems.generic, 2, ItemGeneric.EnumGenericType.WOOD_PULP.ordinal()));
                         this.world.playSound(null, this.pos.getX(), this.pos.getY(), this.pos.getZ(), SoundEvents.BLOCK_WOOD_BREAK, SoundCategory.BLOCKS, 2.0F, 0.1F);
                     }
                 }

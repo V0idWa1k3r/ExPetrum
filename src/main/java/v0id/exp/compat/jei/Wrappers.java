@@ -255,6 +255,7 @@ public class Wrappers
         {
             ingredients.setInput(ItemStack.class, this.recipe.getInput());
             ingredients.setOutput(FluidStack.class, this.recipe.getOutput(ItemStack.EMPTY));
+            ingredients.setOutput(ItemStack.class, this.recipe.getOutput());
         }
     }
 
