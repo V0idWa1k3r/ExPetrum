@@ -724,6 +724,7 @@ item.exp.item_food.lamb_raw.name=Raw Lamb
 item.exp.item_food.lamb_cooked.name=Cooked Lamb
 item.exp.item_food.pork_raw.name=Raw Pork
 item.exp.item_food.pork_cooked.name=Cooked Pork
+item.exp.item_food.cheese.name=Cheese
 item.exp.item_generic.clay.name=Clay
 item.exp.item_generic.twine.name=Twine
 item.exp.item_generic.plant_fiber.name=Plant Fiber
@@ -1008,6 +1009,7 @@ item.exp.item_tuyere_rose_alloy.name=Rose Alloy Tuyere
 item.exp.item_tuyere_iron.name=Iron Tuyere
 item.exp.item_tuyere_steel.name=Steel Tuyere
 item.exp.item_tuyere_tool_steel.name=Tool Steel Tuyere
+item.exp.item_flint_and_iron.name=Flint And Iron
 
 exp.item.ingot.desc.type.tin=Tin
 exp.item.ingot.desc.type.barium=Barium

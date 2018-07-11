@@ -66,7 +66,7 @@ public class ExPItemsRegistry extends AbstractRegistry
         }
 
         registryEntries.addAll(Arrays.asList(
-
+            new ItemFlintAndIron()
         ));
 
         registryEntries.forEach(registry::register);

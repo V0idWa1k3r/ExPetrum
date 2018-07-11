@@ -344,7 +344,12 @@
                 "textures" : {
                     "layer0" : "exp:items/produce/pork_cooked"
                 }
-            }
+            },
+			"cheese" : {
+				"textures" : {
+					"layer0" : "exp:items/produce/cheese"
+				}
+			}
 		}
 	}
 }

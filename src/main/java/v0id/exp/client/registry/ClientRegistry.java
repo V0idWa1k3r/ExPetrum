@@ -237,6 +237,7 @@ public class ClientRegistry implements ILifecycleListener
         registerStaticModel(ExPItems.fireStarter, new ModelResourceLocation(ExPItems.fireStarter.getRegistryName(), "inventory"));
         registerStaticModel(ExPItems.grindstone, new ModelResourceLocation(ExPItems.grindstone.getRegistryName(), "inventory"));
         registerStaticModel(ExPItems.woolCard, new ModelResourceLocation(ExPItems.woolCard.getRegistryName(), "inventory"));
+        registerStaticModel(ExPItems.flintAndIron, new ModelResourceLocation(ExPItems.flintAndIron.getRegistryName(), "inventory"));
 
         // Other models
         registerToolModels();

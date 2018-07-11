@@ -83,7 +83,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
             event.getRegistry().register(new ShapelessOreRecipe(mcloc, new ItemStack(chiselIron, 1, 0), new ItemStack(ExPItems.chisel, 1, 7)).setRegistryName("exp:recipe_hardcoded_compat_cnb_chisel_iron"));
         }
 
-        String[] toRemove = new String[]{ "minecraft:torch", "minecraft:crafting_table", "minecraft:chest", "minecraft:bone_meal_from_bone", "minecraft:string_to_wool", "minecraft:fishing_rod", "minecraft:bow", "minecraft:leather_helmet", "minecraft:leather_chestplate", "minecraft:leather_leggings", "minecraft:leather_boots", "minecraft:iron_block", "minecraft:gold_block" };
+        String[] toRemove = new String[]{ "minecraft:torch", "minecraft:crafting_table", "minecraft:chest", "minecraft:bone_meal_from_bone", "minecraft:string_to_wool", "minecraft:fishing_rod", "minecraft:bow", "minecraft:leather_helmet", "minecraft:leather_chestplate", "minecraft:leather_leggings", "minecraft:leather_boots", "minecraft:iron_block", "minecraft:gold_block", "minecraft:flint_and_steel", "minecraft:iron_helmet", "minecraft:iron_chestplate", "minecraft:iron_leggings", "minecraft:iron_boots" };
         ExPMisc.modLogger.info("A fair warning.");
         ExPMisc.modLogger.info("Forge is about to spew a bunch of \"Dangerous alternative prefix\" warnings.");
         ExPMisc.modLogger.info("No, ExPetrum isn't broken.");
@@ -188,6 +188,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
         RecipesBarrel.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.WOOL.ordinal()), new FluidStack(FluidRegistry.WATER, 100), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.SOAKED_WOOL.ordinal()), 6000);
         RecipesBarrel.addRecipe(new RecipeBarrelTreatedStick(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.TREATED_STICK.ordinal()), new FluidStack(ExPFluids.oliveOil, 200), 12000));
         RecipesBarrel.addRecipe(new RecipeBarrelTreatedStick(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.TREATED_STICK.ordinal()), new FluidStack(ExPFluids.walnutOil, 500), 12000));
+        RecipesBarrel.addRecipe(new RecipeBarrelChese());
 
         RecipesPress.addRecipe(new RecipePressFood(ExPFluids.oliveOil, FoodEntry.OLIVE));
         RecipesPress.addRecipe(new RecipePressFood(ExPFluids.walnutOil, FoodEntry.WALNUT));
@@ -221,6 +222,67 @@ public class ExPRecipeRegistry extends AbstractRegistry
         RecipesSmelting.sort();
     }
 
+    private static class RecipeBarrelChese implements RecipesBarrel.IRecipeBarrel
+    {
+        @Override
+        public boolean matches(FluidStack fs, ItemStack is)
+        {
+            return fs != null && fs.getFluid() == ExPFluids.milk && is.isEmpty();
+        }
+
+        @Override
+        public int getProgressRequired(ItemStack is)
+        {
+            return 240000;
+        }
+
+        @Override
+        public ItemStack getResult(ItemStack is, FluidStack fluidStack)
+        {
+            ItemStack food = new ItemStack(ExPItems.food, 1, FoodEntry.CHEESE.getId());
+            ItemFood iFood = (ItemFood)ExPItems.food;
+            iFood.setTotalWeight(food, fluidStack == null ? 10000 : fluidStack.amount);
+            iFood.setItemRotMultiplier(food, 0.75F);
+            iFood.setTotalRot(food, 1F);
+            return food;
+        }
+
+        @Override
+        public ItemStack getInput()
+        {
+            return ItemStack.EMPTY;
+        }
+
+        @Override
+        public FluidStack getInputFluid()
+        {
+            return new FluidStack(ExPFluids.milk, 1000);
+        }
+
+        @Override
+        public FluidStack getOutputFluid(ItemStack is)
+        {
+            return null;
+        }
+
+        @Override
+        public void consumeFluid(IFluidHandler handler, ItemStack is)
+        {
+            handler.drain(Integer.MAX_VALUE, true);
+        }
+
+        @Override
+        public String getRecipeName(ItemStack is)
+        {
+            return ExPItems.food.getUnlocalizedName(new ItemStack(ExPItems.food, 1, FoodEntry.CHEESE.getId())) + ".name";
+        }
+
+        @Override
+        public void consumeItem(ItemStack is)
+        {
+        }
+    }
+
     private static class RecipeBarrelTreatedStick implements RecipesBarrel.IRecipeBarrel
     {
         private final ItemStack itemOut;
@@ -247,7 +309,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
         }
 
         @Override
-        public ItemStack getResult(ItemStack is)
+        public ItemStack getResult(ItemStack is, FluidStack fluidStack)
         {
             return this.itemOut.copy();
         }

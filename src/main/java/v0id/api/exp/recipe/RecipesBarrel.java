@@ -65,7 +65,7 @@ public class RecipesBarrel
         }
 
         @Override
-        public ItemStack getResult(ItemStack is)
+        public ItemStack getResult(ItemStack is, FluidStack fluidStack)
         {
             return ItemStack.EMPTY;
         }
@@ -138,7 +138,7 @@ public class RecipesBarrel
         }
 
         @Override
-        public ItemStack getResult(ItemStack is)
+        public ItemStack getResult(ItemStack is, FluidStack fluidStack)
         {
             return this.itemOut.copy();
         }
@@ -190,7 +190,7 @@ public class RecipesBarrel
 
         int getProgressRequired(ItemStack is);
 
-        ItemStack getResult(ItemStack is);
+        ItemStack getResult(ItemStack is, FluidStack fluidStack);
 
         ItemStack getInput();
 

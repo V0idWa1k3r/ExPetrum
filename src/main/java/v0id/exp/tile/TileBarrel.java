@@ -119,7 +119,7 @@ public class TileBarrel extends TileEntity implements ITickable, ISyncableTile
                     {
                         if (++this.recipeProgress >= this.currentRecipe.getProgressRequired(is))
                         {
-                            ItemStack stack = this.currentRecipe.getResult(is);
+                            ItemStack stack = this.currentRecipe.getResult(is, this.fluidInventory.getFluid());
                             if (!this.results.isEmpty() && this.results.peek().isItemEqual(stack) && this.results.peek().getCount() + stack.getCount() <= stack.getMaxStackSize())
                             {
                                 this.results.peek().grow(stack.getCount());

@@ -1,0 +1,15 @@
+{
+  "result": {
+    "item": "exp:item_flint_and_iron",
+    "data": 0
+  },
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "#FLINT"
+    },
+    {
+      "item": "#INGOTIRON"
+    }
+  ]
+}

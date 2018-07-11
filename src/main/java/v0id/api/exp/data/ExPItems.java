@@ -98,4 +98,7 @@ public class ExPItems
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.itemWoolCard)
     public static final Item woolCard = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemFlintAndIron)
+    public static final Item flintAndIron = null;
 }

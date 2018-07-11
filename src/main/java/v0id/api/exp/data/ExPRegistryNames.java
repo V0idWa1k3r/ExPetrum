@@ -123,7 +123,8 @@ public class ExPRegistryNames
         itemGrindstone                                                                                      = "item_grindstone",
         itemMetalGeneric                                                                                    = "item_metal_generic",
         itemWoolCard                                                                                        = "item_wool_card",
-        itemTuyere                                                                                          = "item_tuyere";
+        itemTuyere                                                                                          = "item_tuyere",
+		itemFlintAndIron																					= "item_flint_and_iron";
 
 	public static final String
         biomeBeach                                                                                          = "beach",

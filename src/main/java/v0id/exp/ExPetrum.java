@@ -29,7 +29,7 @@ import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Stream;
 
-@Mod(modid = "exp", useMetadata = true, dependencies = "after:chiselsandbits;after:jei", version = "1.11.2-1.0.0.0")
+@Mod(modid = "exp", useMetadata = true, dependencies = "after:chiselsandbits;after:jei", version = "1.0.0")
 public class ExPetrum
 {
 	@Mod.Instance("exp")

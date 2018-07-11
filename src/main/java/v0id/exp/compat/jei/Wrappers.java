@@ -230,7 +230,7 @@ public class Wrappers
         {
             ingredients.setInput(ItemStack.class, this.recipe.getInput());
             ingredients.setInput(FluidStack.class, this.recipe.getInputFluid());
-            ingredients.setOutput(ItemStack.class, this.recipe.getResult(ItemStack.EMPTY));
+            ingredients.setOutput(ItemStack.class, this.recipe.getResult(ItemStack.EMPTY, null));
             ingredients.setOutput(FluidStack.class, this.recipe.getOutputFluid(ItemStack.EMPTY));
         }
 
