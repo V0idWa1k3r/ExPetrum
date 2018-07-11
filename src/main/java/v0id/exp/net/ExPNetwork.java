@@ -3,6 +3,7 @@ package v0id.exp.net;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -96,7 +97,7 @@ public class ExPNetwork
 
     public static void sendTileData(ISyncableTile tile, boolean doRefresh)
     {
-        WRAPPER.sendToAllAround(new MessageTileData(tile, doRefresh), new NetworkRegistry.TargetPoint(tile.getWorld().provider.getDimension(), tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ(), ExPetrum.proxy.getViewDistance() << 4));
+        WRAPPER.sendToAllAround(new MessageTileData(tile, doRefresh), new NetworkRegistry.TargetPoint(((TileEntity)tile).getWorld().provider.getDimension(), ((TileEntity)tile).getPos().getX(), ((TileEntity)tile).getPos().getY(), ((TileEntity)tile).getPos().getZ(), ExPetrum.proxy.getViewDistance() << 4));
     }
 
     public static void sendSelectPottery(TileMechanicalPotteryStation tile, int recipe)

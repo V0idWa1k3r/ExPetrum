@@ -4,7 +4,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.block.EnumLeafState;
 import v0id.api.exp.block.EnumTreeType;
@@ -19,7 +18,7 @@ import java.util.Random;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
-public class TreeGenerator extends WorldGenerator implements ITreeGenerator
+public class TreeGenerator implements ITreeGenerator
 {
 	public final EnumTreeType treeType;
 	public World worldGen;

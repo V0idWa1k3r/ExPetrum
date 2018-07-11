@@ -24,7 +24,7 @@ public class MessageTileData implements IMessage
     public MessageTileData(ISyncableTile tile, boolean doRefresh)
     {
         this.doRefresh = doRefresh;
-        this.pos = tile.getPos();
+        this.pos = ((TileEntity)tile).getPos();
         this.dataTag = tile.serializeData();
     }
 
