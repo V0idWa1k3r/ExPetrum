@@ -1,0 +1,17 @@
+{
+    "result": {
+        "item": "exp:item_basket",
+        "data": 0
+    },
+    "pattern": [
+        " S ",
+        "S S",
+        "SSS"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "S" : {
+            "item": "#STICKWOOD"
+        }
+    }
+}

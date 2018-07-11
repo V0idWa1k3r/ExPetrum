@@ -162,28 +162,26 @@ public class ExPCrop implements IExPCrop
 						playerHarvestItem.damageItem(1, harvester);
 					}
 				}
-				else
-				{
-					if (stage >= this.getType().getData().growthStages - 3)
-					{
-						dropsBase.addAll(this.getMatureDrops());
-						MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.PopulateDropList(this, harvestedIn, harvestedAt, isHarvestingWithRMB, dropsBase, Action.HARVEST_DROPS));
-						if (isHarvestingWithRMB)
-						{
-							CropEvent.Harvest.PepperSetGrowth evt = new CropEvent.Harvest.PepperSetGrowth(this, harvestedIn, harvestedAt, isHarvestingWithRMB, 0.4F, Action.HARVEST_DROPS);
-							if (!MinecraftForge.EVENT_BUS.post(evt))
-							{
-								this.setGrowth(evt.growth);
-								this.sendUpdatePacket();
-							}
-						}
-					}
-					else
-					{
-						MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.Post(this, harvestedIn, harvestedAt, isHarvestingWithRMB));
-						return Pair.of(EnumActionResult.FAIL, NonNullList.withSize(0, ItemStack.EMPTY));
-					}
-				}
+
+                if (stage >= this.getType().getData().growthStages - 3)
+                {
+                    dropsBase.addAll(this.getMatureDrops());
+                    MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.PopulateDropList(this, harvestedIn, harvestedAt, isHarvestingWithRMB, dropsBase, Action.HARVEST_DROPS));
+                    if (isHarvestingWithRMB)
+                    {
+                        CropEvent.Harvest.PepperSetGrowth evt = new CropEvent.Harvest.PepperSetGrowth(this, harvestedIn, harvestedAt, isHarvestingWithRMB, 0.4F, Action.HARVEST_DROPS);
+                        if (!MinecraftForge.EVENT_BUS.post(evt))
+                        {
+                            this.setGrowth(evt.growth);
+                            this.sendUpdatePacket();
+                        }
+                    }
+                }
+                else
+                {
+                    MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.Post(this, harvestedIn, harvestedAt, isHarvestingWithRMB));
+                    return Pair.of(EnumActionResult.FAIL, NonNullList.withSize(0, ItemStack.EMPTY));
+                }
 			}
 			else
 			{
@@ -199,63 +197,61 @@ public class ExPCrop implements IExPCrop
 							playerHarvestItem.damageItem(1, harvester);
 						}
 					}
-					else
-					{
-						if (this.getType().isGrain())
-						{
-							if (playerHarvestItem.getItem().getToolClasses(playerHarvestItem).contains(EnumToolClass.SCYTHE.getName()))
-							{
-								dropsBase.addAll(this.getMatureDrops());
-								MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.PopulateDropList(this, harvestedIn, harvestedAt, isHarvestingWithRMB, dropsBase, Action.HARVEST_DROPS));
-								this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference, Action.HARVEST_DROPS, isHarvestingWithRMB);
-							}
-							else
-							{
-								if (isHarvestingWithRMB)
-								{
-									if (this.tryHarvest(0.1, harvestedIn, harvestedAt, harvestedIn.rand))
-									{
-										dropsBase.addAll(this.getMatureDrops());
-										MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.PopulateDropList(this, harvestedIn, harvestedAt, isHarvestingWithRMB, dropsBase, Action.HARVEST_DROPS));
-										this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference, Action.HARVEST_DROPS, isHarvestingWithRMB);
-									}
-									else
-									{
-										harvestedIn.playSound(null, harvestedAt, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1, 1);
-									}
-								}
-								else
-								{
-									dropsBase.addAll(this.getMatureDrops());
-									MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.PopulateDropList(this, harvestedIn, harvestedAt, isHarvestingWithRMB, dropsBase, Action.HARVEST_DROPS));
-									this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference, Action.HARVEST_DROPS, isHarvestingWithRMB);
-								}
-							}
-						}
-						else
-						{
-							if (isHarvestingWithRMB)
-							{
-								if (this.tryHarvest(0.3, harvestedIn, harvestedAt, harvestedIn.rand))
-								{
-									dropsBase.addAll(this.getMatureDrops());
-									MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.PopulateDropList(this, harvestedIn, harvestedAt, isHarvestingWithRMB, dropsBase, Action.HARVEST_DROPS));
-									this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference, Action.HARVEST_DROPS, isHarvestingWithRMB);
-								}
-								else
-								{
-									harvestedIn.playSound(null, harvestedAt, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1, 1);
-								}
-							}
-							else
-							{
-								dropsBase.addAll(this.getMatureDrops());
-								MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.PopulateDropList(this, harvestedIn, harvestedAt, isHarvestingWithRMB, dropsBase, Action.HARVEST_DROPS));
-								this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference, Action.HARVEST_DROPS, isHarvestingWithRMB);
-							}
-						}
-					}
-				}
+
+                    if (this.getType().isGrain())
+                    {
+                        if (playerHarvestItem.getItem().getToolClasses(playerHarvestItem).contains(EnumToolClass.SCYTHE.getName()))
+                        {
+                            dropsBase.addAll(this.getMatureDrops());
+                            MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.PopulateDropList(this, harvestedIn, harvestedAt, isHarvestingWithRMB, dropsBase, Action.HARVEST_DROPS));
+                            this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference, Action.HARVEST_DROPS, isHarvestingWithRMB);
+                        }
+                        else
+                        {
+                            if (isHarvestingWithRMB)
+                            {
+                                if (this.tryHarvest(0.1, harvestedIn, harvestedAt, harvestedIn.rand, isUsingSpade))
+                                {
+                                    dropsBase.addAll(this.getMatureDrops());
+                                    MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.PopulateDropList(this, harvestedIn, harvestedAt, isHarvestingWithRMB, dropsBase, Action.HARVEST_DROPS));
+                                    this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference, Action.HARVEST_DROPS, isHarvestingWithRMB);
+                                }
+                                else
+                                {
+                                    harvestedIn.playSound(null, harvestedAt, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1, 1);
+                                }
+                            }
+                            else
+                            {
+                                dropsBase.addAll(this.getMatureDrops());
+                                MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.PopulateDropList(this, harvestedIn, harvestedAt, isHarvestingWithRMB, dropsBase, Action.HARVEST_DROPS));
+                                this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference, Action.HARVEST_DROPS, isHarvestingWithRMB);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (isHarvestingWithRMB)
+                        {
+                            if (this.tryHarvest(0.3, harvestedIn, harvestedAt, harvestedIn.rand, isUsingSpade))
+                            {
+                                dropsBase.addAll(this.getMatureDrops());
+                                MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.PopulateDropList(this, harvestedIn, harvestedAt, isHarvestingWithRMB, dropsBase, Action.HARVEST_DROPS));
+                                this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference, Action.HARVEST_DROPS, isHarvestingWithRMB);
+                            }
+                            else
+                            {
+                                harvestedIn.playSound(null, harvestedAt, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1, 1);
+                            }
+                        }
+                        else
+                        {
+                            dropsBase.addAll(this.getMatureDrops());
+                            MinecraftForge.EVENT_BUS.post(new CropEvent.Harvest.PopulateDropList(this, harvestedIn, harvestedAt, isHarvestingWithRMB, dropsBase, Action.HARVEST_DROPS));
+                            this.handleHarvest(harvestedIn, harvestedAt, selfBlockReference, Action.HARVEST_DROPS, isHarvestingWithRMB);
+                        }
+                    }
+                }
 			}
 		}
 		else
@@ -274,7 +270,7 @@ public class ExPCrop implements IExPCrop
 		return Pair.of(EnumActionResult.SUCCESS, ret);
 	}
 	
-	public boolean tryHarvest(double baseChance, World w, BlockPos pos, Random rand)
+	public boolean tryHarvest(double baseChance, World w, BlockPos pos, Random rand, boolean usingSpade)
 	{
 		CropEvent.Harvest.HarvestAttempt event = new CropEvent.Harvest.HarvestAttempt(this, w, pos, baseChance);
 		switch (event.getResult())
@@ -291,7 +287,7 @@ public class ExPCrop implements IExPCrop
 			
 			default:
 			{
-				return rand.nextDouble() <= baseChance;
+				return usingSpade || rand.nextDouble() <= baseChance;
 			}
 		}
 	}

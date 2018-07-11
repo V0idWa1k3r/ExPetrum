@@ -343,4 +343,7 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockBlastFurnace)
     public static final Block blastFurnace = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockSapling)
+    public static final Block sapling = null;
 }

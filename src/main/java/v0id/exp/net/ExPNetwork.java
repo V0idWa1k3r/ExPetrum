@@ -31,11 +31,11 @@ public class ExPNetwork
         WRAPPER.registerMessage(MessagePlayerData.Handler.class, MessagePlayerData.class, 5, Side.CLIENT);
         WRAPPER.registerMessage(MessageSettings.Handler.class, MessageSettings.class, 6, Side.CLIENT);
         WRAPPER.registerMessage(MessageSpecialAttack.Handler.class, MessageSpecialAttack.class, 7, Side.CLIENT);
-        WRAPPER.registerMessage(MessageSpecialAttack.Handler.class, MessageSpecialAttack.class, 7, Side.SERVER);
-        WRAPPER.registerMessage(MessageWeld.Handler.class, MessageWeld.class, 8, Side.SERVER);
-        WRAPPER.registerMessage(MessageWorldData.Handler.class, MessageWorldData.class, 9, Side.CLIENT);
-        WRAPPER.registerMessage(MessageTileData.Handler.class, MessageTileData.class, 10, Side.CLIENT);
-        WRAPPER.registerMessage(MessageSelectPottery.Handler.class, MessageSelectPottery.class, 11, Side.SERVER);
+        WRAPPER.registerMessage(MessageSpecialAttack.Handler.class, MessageSpecialAttack.class, 8, Side.SERVER);
+        WRAPPER.registerMessage(MessageWeld.Handler.class, MessageWeld.class, 9, Side.SERVER);
+        WRAPPER.registerMessage(MessageWorldData.Handler.class, MessageWorldData.class, 10, Side.CLIENT);
+        WRAPPER.registerMessage(MessageTileData.Handler.class, MessageTileData.class, 11, Side.CLIENT);
+        WRAPPER.registerMessage(MessageSelectPottery.Handler.class, MessageSelectPottery.class, 12, Side.SERVER);
     }
 
     public static void sendAnvilRecipe(TileAnvil anvil, int recipe)

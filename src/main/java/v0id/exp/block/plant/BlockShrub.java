@@ -10,11 +10,15 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNodeType;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -25,13 +29,16 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import org.apache.commons.lang3.ArrayUtils;
 import v0id.api.exp.block.*;
 import v0id.api.exp.data.*;
+import v0id.api.exp.metal.EnumToolClass;
 import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.util.Helpers;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
@@ -66,7 +73,7 @@ public class BlockShrub extends Block implements IInitializableBlock, IShrub, IP
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		return ExPItems.stick;
+		return Items.AIR;
 	}
 
 	@Override
@@ -100,6 +107,29 @@ public class BlockShrub extends Block implements IInitializableBlock, IShrub, IP
 	{
 		return this.getExtendedState(state, worldIn, pos);
 	}
+
+    @Override
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack)
+    {
+        if (ArrayUtils.contains(ExPBlocks.shrubs, this))
+        {
+            ItemStack is = player.getHeldItem(EnumHand.MAIN_HAND);
+            boolean isSpade = is.getItem().getToolClasses(is).contains(EnumToolClass.GARDENING_SPADE.getName());
+            ItemStack drop;
+            if (isSpade)
+            {
+                drop = new ItemStack(this, 1,state.getValue(ExPBlockProperties.SHRUB_TYPE).ordinal());
+            }
+            else
+            {
+                drop = new ItemStack(ExPItems.stick, 1, this.damageDropped(state));
+            }
+
+            InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), drop);
+        }
+
+        super.harvestBlock(worldIn, player, pos, state, te, stack);
+    }
 
     @SuppressWarnings("deprecation")
 	@Override

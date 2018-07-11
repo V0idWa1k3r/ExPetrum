@@ -11,29 +11,30 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNodeType;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.commons.lang3.tuple.Pair;
-import v0id.api.exp.util.ColorRGB;
 import v0id.api.exp.block.EnumLeafState;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.block.ILeaves;
-import v0id.api.exp.data.*;
 import v0id.api.exp.client.EnumParticle;
+import v0id.api.exp.data.*;
 import v0id.api.exp.inventory.IWeightProvider;
+import v0id.api.exp.metal.EnumToolClass;
+import v0id.api.exp.util.ColorRGB;
 import v0id.api.exp.world.IExPWorld;
 import v0id.exp.ExPetrum;
 import v0id.exp.block.IInitializableBlock;
@@ -76,7 +77,7 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		return ExPItems.stick;
+		return Items.AIR;
 	}
 
 	@Override
@@ -89,6 +90,25 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 	public int quantityDroppedWithBonus(int fortune, Random random)
 	{
 		return 1 + random.nextInt(3);
+	}
+
+	@Override
+	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack)
+	{
+        ItemStack is = player.getHeldItem(EnumHand.MAIN_HAND);
+        boolean isSpade = is.getItem().getToolClasses(is).contains(EnumToolClass.GARDENING_SPADE.getName());
+        ItemStack drop;
+        if (isSpade)
+        {
+            drop = new ItemStack(ExPBlocks.sapling, 1, state.getValue(ExPBlockProperties.TREE_TYPE).ordinal());
+        }
+        else
+        {
+            drop = new ItemStack(ExPItems.stick, 1 + worldIn.rand.nextInt(3), this.damageDropped(state));
+        }
+
+        InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), drop);
+        super.harvestBlock(worldIn, player, pos, state, te, stack);
 	}
 
 	@Override

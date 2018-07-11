@@ -15,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -173,7 +172,7 @@ public class ExPHandlerServer
 	{
 		if (event.getEntityPlayer() != null)
 		{
-			if (event.getEntityPlayer().isPotionActive(ExPPotions.stunned) || !(event.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IExPTool))
+			if (event.getEntityPlayer().isPotionActive(ExPPotions.stunned))
 			{
 				event.setCanceled(true);
 			}
