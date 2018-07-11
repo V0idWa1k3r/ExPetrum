@@ -30,7 +30,7 @@
     {
         "ingredient": {
             "item": "exp:item_metal_generic",
-            "data": 23
+            "data": 28
         },
         "name": "METALCLUMPBRONZE"
     },
@@ -72,7 +72,7 @@
     {
         "ingredient": {
             "item": "exp:item_metal_generic",
-            "data": 35
+            "data": 85
         },
         "name": "METALCLUMPSTEEL"
     },
@@ -146,7 +146,7 @@
             },
             {
                 "item": "exp:item_knife",
-                "data": 3
+                "data": 8
             },
             {
                 "item": "exp:item_knife",
@@ -191,7 +191,7 @@
             },
             {
                 "item": "exp:item_saw",
-                "data": 3
+                "data": 8
             },
             {
                 "item": "exp:item_saw",
@@ -432,7 +432,14 @@
     {
         "ingredient": {
             "type": "forge:ore_dict",
-            "ore": "stickWoodTreated"
+            "ore": "stickIron"
+        },
+        "name": "STICKIRON"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "STICKIRONTreated"
         },
         "name": "STICKTREATED"
     },

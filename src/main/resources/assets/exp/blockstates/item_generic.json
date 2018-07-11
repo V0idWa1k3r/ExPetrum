@@ -228,6 +228,11 @@
                 "textures" : {
                     "layer0" : "exp:items/misc/bone_ash"
                 }
+            },
+            "iron_stick": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/iron_stick"
+                }
             }
 		}
 	}

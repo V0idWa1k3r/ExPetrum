@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "exp:item_watering_can",
+    "data": 8
+  },
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "exp:item_toolhead",
+      "data": 108
+    },
+    {
+      "item": "#STICKIRON"
+    },
+    {
+      "item": "#LEATHERSTRAP"
+    }
+  ]
+}
