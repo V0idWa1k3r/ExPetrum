@@ -50,7 +50,7 @@ public class ExPNetwork
 
     public static void sendCraftPottery(TilePotteryStation tile, int recipe)
     {
-        WRAPPER.sendToServer(new MessageCardClick(tile.getPos(), tile.getWorld().provider.getDimension(), recipe));
+        WRAPPER.sendToServer(new MessageCraftPottery(tile.getPos(), tile.getWorld().provider.getDimension(), recipe));
     }
 
     public static void sendNewAge(EntityPlayer to, EnumPlayerProgression progression)
