@@ -219,7 +219,21 @@ public class ItemSeeds extends Item implements IInitializableItem, IOreDictEntry
 		public CropStats getOrCreateStats()
 		{
 			CropStats ret = new CropStats();
-			ret.createFromItemNBT(this.seedTag());
+			if (this.seedTag().hasNoTags())
+			{
+				ret.type = EnumCrop.values()[this.container.getMetadata() + 1];
+				if (ret.type.getData() != null)
+                {
+                    ret.createDefaults(ret.type);
+                }
+
+				ret.wild = false;
+			}
+			else
+			{
+				ret.createFromItemNBT(this.seedTag());
+			}
+
 			this.container.getTagCompound().setTag("exp.seedData", ret.createItemNBT(null));
 			return ret;
 		}
