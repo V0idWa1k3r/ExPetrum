@@ -377,6 +377,12 @@ tile.exp.sapling.name=Sapling
 
 item.exp.item_ingot.name=Ingot
 
+entity.exp.chicken.name=Chicken
+entity.exp.cow.name=Cow
+entity.exp.sheep.name=Sheep
+entity.exp.pig.name=Pig
+entity.exp.wolf.name=Wolf
+
 item.exp.item_toolhead.knife.stone.name=Stone Knife Head
 item.exp.item_toolhead.knife.copper.name=Copper Knife Head
 item.exp.item_toolhead.knife.bronze.name=Bronze Knife Head
