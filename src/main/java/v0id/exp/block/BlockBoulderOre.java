@@ -123,24 +123,18 @@ public class BlockBoulderOre extends Block implements IInitializableBlock, IOreD
 	{
 		return BlockRenderLayer.CUTOUT;
 	}
-	
-	@Override
-	public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos)
-	{
-		TileEntity tile = world.getTileEntity(pos);
-		if (tile != null && tile instanceof TileOre)
-		{
-			state = state.withProperty(ExPBlockProperties.ORE_TEXTURE_ID, ((TileOre)tile).type.getTextureIndex());
-		}
-		
-		return state;
-	}
 
 	@SuppressWarnings("deprecation")
     @Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
-		return this.getExtendedState(state, worldIn, pos);
+		TileEntity tile = worldIn.getTileEntity(pos);
+		if (tile != null && tile instanceof TileOre)
+		{
+			return state.withProperty(ExPBlockProperties.ORE_TEXTURE_ID, ((TileOre)tile).type.getTextureIndex());
+		}
+
+		return super.getActualState(state, worldIn, pos);
 	}
 
 	@Override

@@ -101,24 +101,18 @@ public class BlockWorkedBoulder extends Block implements IInitializableBlock, IO
 	{
 		return BlockRenderLayer.CUTOUT;
 	}
-	
-	@Override
-	public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos)
-	{
-		TileEntity tile = world.getTileEntity(pos);
-		if (tile != null && tile instanceof TileWorkedBoulder)
-		{
-			state = state.withProperty(ExPBlockProperties.WORKED_BOULDER_INDEX, (int)((TileWorkedBoulder)tile).workedIndex);
-		}
-		
-		return state;
-	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
-		return this.getExtendedState(state, worldIn, pos);
+		TileEntity tile = worldIn.getTileEntity(pos);
+		if (tile != null && tile instanceof TileWorkedBoulder)
+		{
+			return state.withProperty(ExPBlockProperties.WORKED_BOULDER_INDEX, (int)((TileWorkedBoulder)tile).workedIndex);
+		}
+
+		return super.getActualState(state, worldIn, pos);
 	}
 
 	@Override
