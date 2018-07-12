@@ -47,16 +47,10 @@ public class ExPetrum
         configDirectory = Loader.instance().getConfigDir();
 		ExPMisc.modLogger = LogManager.getLogger("ExPetrum");
         createRegistries();
-        worker = new Thread(() ->
-        {
-            loadTemperatureRanges();
-            Stream.of(EnumOre.values()).forEach(EnumOre::registerWorldgen);
-            CropDataLoader.loadAllData();
-            WeightDataLoader.loadAllData();
-        });
-
-        worker.setDaemon(true);
-        worker.start();
+        loadTemperatureRanges();
+        Stream.of(EnumOre.values()).forEach(EnumOre::registerWorldgen);
+        CropDataLoader.loadAllData();
+        WeightDataLoader.loadAllData();
 	}
 
     private static void loadTemperatureRanges()
@@ -118,17 +112,6 @@ public class ExPetrum
 	public void postInit(FMLPostInitializationEvent evt)
 	{
 		AbstractRegistry.registries.forEach(reg -> reg.postInit(evt));
-		if (worker.isAlive())
-        {
-            try
-            {
-                worker.join();
-            }
-            catch (InterruptedException e)
-            {
-                ExPMisc.modLogger.error("Unknown threading error!", e);
-            }
-        }
 	}
 
 	@EventHandler
