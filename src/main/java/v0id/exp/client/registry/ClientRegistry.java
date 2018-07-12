@@ -114,22 +114,22 @@ public class ClientRegistry implements ILifecycleListener
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> 0x660000, ExPBlocks.grass_dead);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> ColorizerGrass.getGrassColor(1, 0.5), ExPBlocks.waterLily, ExPBlocks.genericShrubbery);
         Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) ->
-                worldIn.getBlockState(pos.down()).getBlock() instanceof IGrass ? ((IGrass) worldIn.getBlockState(pos.down()).getBlock()).getGrassColor(worldIn.getBlockState(pos.down()), pos.down(), worldIn) : Helpers.getGrassColor(state, worldIn, pos, tintIndex), ExPBlocks.vegetation, ExPBlocks.genericShrubbery);
+                worldIn != null && pos != null && worldIn.getBlockState(pos.down()).getBlock() instanceof IGrass ? ((IGrass) worldIn.getBlockState(pos.down()).getBlock()).getGrassColor(worldIn.getBlockState(pos.down()), pos.down(), worldIn) : Helpers.getGrassColor(state, worldIn, pos, tintIndex), ExPBlocks.vegetation, ExPBlocks.genericShrubbery);
         Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) ->
-                worldIn.getBlockState(pos).getBlock() instanceof IShrub ? ((IShrub) worldIn.getBlockState(pos).getBlock()).getShrubColor(state, pos, worldIn) : Helpers.getGrassColor(state, worldIn, pos, tintIndex), ArrayUtils.addAll(ExPBlocks.shrubs, ExPBlocks.berryBushes));
+                worldIn != null && pos != null && worldIn.getBlockState(pos).getBlock() instanceof IShrub ? ((IShrub) worldIn.getBlockState(pos).getBlock()).getShrubColor(state, pos, worldIn) : Helpers.getGrassColor(state, worldIn, pos, tintIndex), ArrayUtils.addAll(ExPBlocks.shrubs, ExPBlocks.berryBushes));
         Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(Helpers::getCoralColor, ExPBlocks.coralRock);
         Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(Helpers::getCoralColor, ExPBlocks.coralPlant);
         Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(Helpers::getLeafColor, ExPBlocks.leaves);
         Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) ->
-                worldIn.getTileEntity(pos) instanceof TileOre ? ((TileOre) worldIn.getTileEntity(pos)).type.getColor() : -1, ExPBlocks.ore, ExPBlocks.boulderOre);
-        Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) -> state.getValue(ExPBlockProperties.ANVIL_MATERIAL).getColor(), ExPBlocks.anvil);
+                worldIn != null && worldIn.getTileEntity(pos) instanceof TileOre ? ((TileOre) worldIn.getTileEntity(pos)).type.getColor() : -1, ExPBlocks.ore, ExPBlocks.boulderOre);
+        Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) -> state == null ? -1 : state.getValue(ExPBlockProperties.ANVIL_MATERIAL).getColor(), ExPBlocks.anvil);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> ColorizerGrass.getGrassColor(1, 0.5), ExPBlocks.vegetation);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> ColorizerGrass.getGrassColor(1, 0.5), ArrayUtils.addAll(ExPBlocks.shrubs, ExPBlocks.berryBushes));
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> ((ILeaves) Block.getBlockFromItem(stack.getItem())).getLeavesColorForMeta(stack.getMetadata()), ExPBlocks.leaves);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) ->
                 EnumOre.values()[(stack.getMetadata() / EnumRockClass.values().length) % EnumOre.values().length].getColor(), ExPBlocks.ore, ExPBlocks.boulderOre);
         Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) ->
-                worldIn.getTileEntity(pos) != null && worldIn.getTileEntity(pos) instanceof TileFarmland && worldIn.getTileEntity(pos).hasCapability(ExPFarmlandCapability.farmlandCap, EnumFacing.UP) ? ExPFarmland.getColor(IFarmland.of(worldIn.getTileEntity(pos), EnumFacing.UP)) : -1, ExPBlocks.farmland);
+                worldIn != null && worldIn.getTileEntity(pos) != null && worldIn.getTileEntity(pos) instanceof TileFarmland && worldIn.getTileEntity(pos).hasCapability(ExPFarmlandCapability.farmlandCap, EnumFacing.UP) ? ExPFarmland.getColor(IFarmland.of(worldIn.getTileEntity(pos), EnumFacing.UP)) : -1, ExPBlocks.farmland);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) ->
                 EnumMetal.values()[stack.getMetadata()].getColor(), ExPItems.ingot);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) ->

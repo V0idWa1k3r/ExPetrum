@@ -91,6 +91,11 @@ public class Helpers
 	
 	public static int getLeafColor(IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex)
 	{
+	    if (state == null)
+        {
+            return 0x166612;
+        }
+
 		if (state.getBlock() instanceof ILeaves)
 		{
 			return ((ILeaves)state.getBlock()).getLeavesColor(worldIn, state, pos);
@@ -101,6 +106,11 @@ public class Helpers
 	
 	public static int getCoralColor(IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex)
 	{
+		if (pos == null)
+		{
+			return -1;
+		}
+
 		int xzpos = pos.getX() + pos.getZ() / 2;
 		ColorHSV hsv = new ColorHSV(Math.abs(xzpos) % 360, 1, 1);
 		return ColorHEX.FromHSV(hsv).getHexcode();
@@ -108,6 +118,11 @@ public class Helpers
 	
 	public static int getGrassColor(IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex)
 	{
+	    if (state == null)
+        {
+            return 0x166612;
+        }
+
 		if (state.getBlock() instanceof IGrass)
 		{
 			return ((IGrass)state.getBlock()).getGrassColor(state, pos, worldIn);
