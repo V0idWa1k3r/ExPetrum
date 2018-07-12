@@ -439,7 +439,7 @@
     {
         "ingredient": {
             "type": "forge:ore_dict",
-            "ore": "STICKIRONTreated"
+            "ore": "stickTreated"
         },
         "name": "STICKTREATED"
     },
