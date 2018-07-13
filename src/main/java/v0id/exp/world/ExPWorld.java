@@ -26,7 +26,8 @@ public class ExPWorld implements IExPWorld
 	public boolean isRemote;
 	public World owner;
 	public final Calendar dayTimeKeeper = new Calendar();
-	
+
+	public long lastTime;
 	public long persistentTicks;
 	public Vec3d windDirection;
 	public float windStrength;
@@ -61,8 +62,7 @@ public class ExPWorld implements IExPWorld
 	public void setPersistentTicks(long newValue)
 	{
 		assert newValue >= this.persistentTicks : "Persistent ticks can't be decremented!";
-		this.persistentTicks_isDirty |= newValue != this.persistentTicks;
-		this.serverIsDirty |= this.persistentTicks_isDirty;
+		this.persistentTicks_isDirty = this.serverIsDirty = true;
 		this.persistentTicks = newValue;
 	}
 	
@@ -221,18 +221,14 @@ public class ExPWorld implements IExPWorld
 		}
 		
 		long time = this.owner.getWorldTime();
-		long prevTime = time % 24000;
-		long ticksSkipped = 0;
-		if (time > this.persistentTicks)
-		{
-			if (time - this.persistentTicks > 1)
-			{
-				ticksSkipped = time - this.persistentTicks - 1;
-			}
-			
-			this.setPersistentTicks(time);
-		}
-		
+        long ticksSkipped = 0;
+		if (this.lastTime > 0 && time - this.lastTime > 0)
+        {
+            ticksSkipped = time - lastTime;
+        }
+
+        this.lastTime = time;
+		this.setPersistentTicks(this.getPersistentTicks() + ticksSkipped);
 		if (ticksSkipped >= 100)
 		{
 			final int skipped = (int) ticksSkipped;
@@ -244,12 +240,12 @@ public class ExPWorld implements IExPWorld
 			ExPMisc.modLogger.warn("%d ticks were skipped by the world! This can cause issues.", ticksSkipped);
 		}
 		
-		if (ticksSkipped >= 24000 || prevTime > this.persistentTicks % 24000)
+		if (ticksSkipped >= 24000 || this.lastTime % 24000 > this.persistentTicks % 24000)
 		{
 			this.createDayData();
 		}
 		
-		this.rainTicksRemaining -= 1 + ticksSkipped;
+		this.rainTicksRemaining -= ticksSkipped;
 		
 		if (this.rainTicksRemaining == 0 && this.owner.isRaining())
 		{
@@ -387,7 +383,8 @@ public class ExPWorld implements IExPWorld
 		{
 			ret.setFloat("accumulatedHumidity", this.accumulatedHumidity);
 		}
-		
+
+		ret.setLong("lastTime", this.lastTime);
 		ret.setInteger("rainTicks", this.rainTicksRemaining);
 		this.setAllDirty(false);
 		return ret;
@@ -444,7 +441,8 @@ public class ExPWorld implements IExPWorld
 		{
 			this.accumulatedHumidity = nbt.getFloat("accumulatedHumidity");
 		}
-		
+
+		this.lastTime = nbt.getLong("lastTime");
 		this.rainTicksRemaining = nbt.getInteger("rainTicks");
 		if (this.isRemote)
 		{
