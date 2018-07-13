@@ -1,16 +1,15 @@
 package v0id.exp.world.gen.biome;
 
-import java.util.Random;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.common.BiomeDictionary;
 import v0id.api.exp.data.ExPBlocks;
+import v0id.exp.world.biome.impl.ExPOcean;
+
+import java.util.Random;
 
 public class CoralGenerator extends WorldGenerator
 {
@@ -91,6 +90,6 @@ public class CoralGenerator extends WorldGenerator
 	
 	public boolean checkBiome(World w, BlockPos pos)
 	{
-		return BiomeDictionary.areSimilar(w.getBiome(pos), Biomes.OCEAN);
+		return w.getBiome(pos) instanceof ExPOcean;
 	}
 }
