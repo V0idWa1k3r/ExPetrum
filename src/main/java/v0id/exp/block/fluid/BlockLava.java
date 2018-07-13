@@ -6,6 +6,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraftforge.fluids.BlockFluidFinite;
 import net.minecraftforge.registries.IForgeRegistry;
+import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPFluids;
 import v0id.api.exp.data.ExPRegistryNames;
@@ -31,6 +32,7 @@ public class BlockLava extends BlockFluidFinite implements IInitializableBlock, 
 		this.setLightOpacity(3);
 		this.setLightLevel(1);
 		this.setQuantaPerBlock(10);
+		this.displacements.put(ExPBlocks.crate, false);
 	}
 
 	@Override

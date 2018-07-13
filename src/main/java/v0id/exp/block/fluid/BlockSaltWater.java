@@ -40,6 +40,7 @@ public class BlockSaltWater extends BlockFluidFinite implements IWater, IInitial
 		this.setLightOpacity(3);
 		this.setQuantaPerBlock(10);
 		this.setTickRandomly(true);
+        this.displacements.put(ExPBlocks.crate, false);
 	}
 	
 	@Override

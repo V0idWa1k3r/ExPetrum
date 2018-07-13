@@ -40,7 +40,7 @@ public class BlockCrate extends Block implements IInitializableBlock, IItemBlock
 {
     public BlockCrate()
     {
-        super(Material.CIRCUITS);
+        super(Material.WOOD);
         this.initBlock();
     }
 
@@ -83,17 +83,24 @@ public class BlockCrate extends Block implements IInitializableBlock, IItemBlock
 
     @SuppressWarnings("deprecation")
     @Override
+    public boolean isOpaqueCube(IBlockState state)
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isFullBlock(IBlockState state)
+    {
+        return true;
+    }
+
+    @Override
     public boolean isFullCube(IBlockState state)
     {
         return true;
     }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isOpaqueCube(IBlockState state)
-    {
-        return false;
-    }
+
 
     @SuppressWarnings("deprecation")
     @Override

@@ -11,6 +11,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fluids.BlockFluidFinite;
 import net.minecraftforge.registries.IForgeRegistry;
+import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPFluids;
 import v0id.api.exp.data.ExPRegistryNames;
@@ -36,6 +37,7 @@ public class BlockOil extends BlockFluidFinite implements IInitializableBlock, I
 		this.setLightOpacity(0);
 		this.setQuantaPerBlock(10);
         Blocks.FIRE.setFireInfo(this, 1000, 2);
+		this.displacements.put(ExPBlocks.crate, false);
 	}
 
 	@Override

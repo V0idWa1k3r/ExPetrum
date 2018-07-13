@@ -44,6 +44,7 @@ public class BlockFreshWater extends BlockFluidFinite implements IWater, IInitia
 		this.setLightOpacity(3);
 		this.setQuantaPerBlock(10);
 		this.setTickRandomly(true);
+		this.displacements.put(ExPBlocks.crate, false);
 	}
 	
 	@Override
