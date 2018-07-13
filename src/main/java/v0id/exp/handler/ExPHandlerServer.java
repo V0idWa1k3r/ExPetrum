@@ -318,7 +318,7 @@ public class ExPHandlerServer
 		{
 			EntityPlayer player = event.getEntityPlayer();
 			IExPPlayer data = IExPPlayer.of(player);
-			if (data.getThirst() < data.getMaxThirst(true) - 200)
+			if (event.getEntityPlayer().getHeldItemMainhand().isEmpty() && data.getThirst() < data.getMaxThirst(true) - 200)
 			{
 				RayTraceResult rtr = event.getWorld().rayTraceBlocks(player.getPositionEyes(1), player.getPositionEyes(1).add(player.getLook(1).scale(3)), true, false, false);
 				if (rtr != null && rtr.typeOfHit == Type.BLOCK)
