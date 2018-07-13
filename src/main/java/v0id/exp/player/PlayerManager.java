@@ -34,7 +34,7 @@ import java.util.List;
 
 public class PlayerManager
 {
-	public static final DamageSource expDeathCause = new DamageSource(null){
+	public static final DamageSource expDeathCause = new DamageSource("exp.deathCause"){
 		@Override
 		public ITextComponent getDeathMessage(EntityLivingBase entityLivingBaseIn)
 	    {
