@@ -4,6 +4,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.culling.ICamera;
 import net.minecraft.client.renderer.entity.Render;
@@ -38,8 +39,10 @@ public class RenderFallingTree extends Render<EntityFallingTree>
 		Tessellator tec = Tessellator.getInstance();
 		BufferBuilder vb = tec.getBuffer();
 		Minecraft.getMinecraft().renderEngine.bindTexture(this.getEntityTexture(entity));
+		float prevX = OpenGlHelper.lastBrightnessX;
+		float prevY = OpenGlHelper.lastBrightnessY;
+		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240, 0);
 		vb.begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
-		
 		for (Map.Entry<BlockPos, IBlockState> data : entity.data.entrySet())
 		{
 			BlockPos at = data.getKey().subtract(entity.getPosition());
@@ -47,7 +50,7 @@ public class RenderFallingTree extends Render<EntityFallingTree>
 		}
 		
 		tec.draw();
-		
+		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, prevX, prevY);
 		GlStateManager.enableLighting();
         GlStateManager.popMatrix();
 	}
