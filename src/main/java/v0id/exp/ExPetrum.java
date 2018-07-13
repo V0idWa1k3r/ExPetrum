@@ -4,10 +4,7 @@ import com.google.gson.Gson;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.CoreModManager;
 import org.apache.commons.io.IOUtils;
@@ -16,6 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.world.YearlyTemperatureRange;
+import v0id.exp.command.CommandToggledownfall;
 import v0id.exp.crop.CropDataLoader;
 import v0id.exp.handler.GuiHandler;
 import v0id.exp.player.inventory.WeightDataLoader;
@@ -112,6 +110,12 @@ public class ExPetrum
 	public void postInit(FMLPostInitializationEvent evt)
 	{
 		AbstractRegistry.registries.forEach(reg -> reg.postInit(evt));
+	}
+
+    @EventHandler
+	public void serverStarting(FMLServerStartingEvent evt)
+	{
+        evt.registerServerCommand(new CommandToggledownfall());
 	}
 
 	@EventHandler

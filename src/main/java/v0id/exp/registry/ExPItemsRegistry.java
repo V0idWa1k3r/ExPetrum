@@ -1,9 +1,11 @@
 package v0id.exp.registry;
 
 import com.google.common.collect.Lists;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
+import v0id.api.exp.item.EnumArmorStats;
 import v0id.api.exp.metal.EnumToolStats;
 import v0id.exp.item.*;
 import v0id.exp.item.tool.*;
@@ -65,8 +67,17 @@ public class ExPItemsRegistry extends AbstractRegistry
             registryEntries.add(new ItemTuyere(EnumToolStats.values()[i]));
         }
 
+        registryEntries.add(new ItemFlintAndIron());
+        for (EnumArmorStats armor : EnumArmorStats.values())
+        {
+            registryEntries.add(new ItemArmor(EntityEquipmentSlot.HEAD, armor));
+            registryEntries.add(new ItemArmor(EntityEquipmentSlot.CHEST, armor));
+            registryEntries.add(new ItemArmor(EntityEquipmentSlot.LEGS, armor));
+            registryEntries.add(new ItemArmor(EntityEquipmentSlot.FEET, armor));
+        }
+
         registryEntries.addAll(Arrays.asList(
-            new ItemFlintAndIron()
+
         ));
 
         registryEntries.forEach(registry::register);
