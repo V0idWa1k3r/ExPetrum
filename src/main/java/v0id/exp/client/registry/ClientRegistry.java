@@ -8,8 +8,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.entity.RenderFallingBlock;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.ResourceLocation;
@@ -26,6 +28,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.block.*;
 import v0id.api.exp.block.property.EnumDirtClass;
 import v0id.api.exp.block.property.EnumKaolinType;
@@ -34,6 +37,7 @@ import v0id.api.exp.block.property.EnumWaterLilyType;
 import v0id.api.exp.client.model.WavefrontObject;
 import v0id.api.exp.combat.condition.ExecuteConditionKeyBindings;
 import v0id.api.exp.data.*;
+import v0id.api.exp.item.EnumArmorStats;
 import v0id.api.exp.item.food.FoodEntry;
 import v0id.api.exp.metal.EnumMetal;
 import v0id.api.exp.metal.EnumToolClass;
@@ -121,7 +125,15 @@ public class ClientRegistry implements ILifecycleListener
         Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(Helpers::getCoralColor, ExPBlocks.coralPlant);
         Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(Helpers::getLeafColor, ExPBlocks.leaves);
         Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) ->
-                worldIn != null && worldIn.getTileEntity(pos) instanceof TileOre ? ((TileOre) worldIn.getTileEntity(pos)).type.getColor() : -1, ExPBlocks.ore, ExPBlocks.boulderOre);
+                {
+                    if (worldIn != null && pos != null)
+                    {
+                        TileEntity tile = worldIn.getTileEntity(pos);
+                        return tile instanceof TileOre ? ((TileOre)tile).type.getColor() : -1;
+                    }
+
+                    return -1;
+                }, ExPBlocks.ore, ExPBlocks.boulderOre);
         Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler((IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex) -> state == null ? -1 : state.getValue(ExPBlockProperties.ANVIL_MATERIAL).getColor(), ExPBlocks.anvil);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> ColorizerGrass.getGrassColor(1, 0.5), ExPBlocks.vegetation);
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> ColorizerGrass.getGrassColor(1, 0.5), ArrayUtils.addAll(ExPBlocks.shrubs, ExPBlocks.berryBushes));
@@ -248,6 +260,7 @@ public class ClientRegistry implements ILifecycleListener
         registerBerryBushModels();
         registerShrubModels();
         registerShrubberyModels();
+        registerArmorModels();
 
         // State mappers
         registerCustomStateMappers();
@@ -301,6 +314,14 @@ public class ClientRegistry implements ILifecycleListener
         ExPWeaponAttacks.behead.executeConditions.add(new ExecuteConditionKeyBindings(Minecraft.getMinecraft().gameSettings.keyBindRight));
         ExPWeaponAttacks.stab.executeConditions.add(new ExecuteConditionKeyBindings(Minecraft.getMinecraft().gameSettings.keyBindBack));
         ExPWeaponAttacks.itemThrow.executeConditions.add(new ExecuteConditionKeyBindings(Minecraft.getMinecraft().gameSettings.keyBindBack, Minecraft.getMinecraft().gameSettings.keyBindForward));
+    }
+
+    public static void registerArmorModels()
+    {
+        for (Map.Entry<Pair<EntityEquipmentSlot, EnumArmorStats>, ItemArmor> data : ItemArmor.items.entrySet())
+        {
+            registerStaticModel(data.getValue(), new ModelResourceLocation(ExPRegistryNames.asLocation(ExPRegistryNames.itemArmor), "type=" + data.getKey().getLeft().name().toLowerCase() + "_" + data.getKey().getRight().name));
+        }
     }
 
     public static void registerBerryBushModels()
