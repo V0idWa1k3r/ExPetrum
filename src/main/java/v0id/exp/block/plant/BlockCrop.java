@@ -17,16 +17,18 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.ExPCreativeTabs;
+import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.tile.crop.ExPCropCapability;
@@ -35,6 +37,8 @@ import v0id.api.exp.tile.crop.IExPCrop;
 import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWeighted;
+import v0id.exp.crop.ExPCrop;
+import v0id.exp.item.ItemFood;
 import v0id.exp.tile.TileCrop;
 
 import javax.annotation.Nullable;
@@ -105,6 +109,22 @@ public class BlockCrop extends Block implements IInitializableBlock, IItemBlockP
     {
 		return state.getValue(ExPBlockProperties.CROP_TYPE) == EnumCrop.DEAD || state.getValue(ExPBlockProperties.CROP_TYPE) == EnumCrop.BEANS || state.getValue(ExPBlockProperties.CROP_TYPE) == EnumCrop.TOMATO ? FULL_BLOCK_AABB : state.getValue(ExPBlockProperties.CROP_GROWTH_STAGE) == 0 ? SEEDS_AABB : FULL_BLOCK_AABB;
     }
+
+	@Override
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
+	{
+		TileEntity tile = world.getTileEntity(pos);
+		if (tile instanceof TileCrop)
+		{
+			ExPCrop crop = ((TileCrop) tile).cropState;
+			if (crop.getType() != null && crop.getType() != EnumCrop.DEAD)
+			{
+				return new ItemStack(ExPItems.food, 1, ItemFood.getMetadataFromCrop(crop.getType()));
+			}
+		}
+
+		return super.getPickBlock(state, target, world, pos, player);
+	}
 
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)

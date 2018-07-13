@@ -8,6 +8,7 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathNodeType;
@@ -16,6 +17,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -153,6 +155,12 @@ public class BlockFruit extends Block implements IInitializableBlock, IItemBlock
     }
 
     @Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
+    {
+        return new ItemStack(ExPItems.food, 1, state.getValue(ExPBlockProperties.FRUIT_TYPE).getAssociatedEntry().getId());
+    }
+
+    @Override
     public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items)
     {
         Arrays.stream(EnumFruit.values()).forEach(e -> items.add(new ItemStack(this, 1, e.ordinal())));
@@ -210,5 +218,11 @@ public class BlockFruit extends Block implements IInitializableBlock, IItemBlock
         foodItemRef.setTotalWeight(item, fruit.getWeightMin() + rand.nextInt(fruit.getWeightMax() - fruit.getWeightMin()));
         foodItemRef.setTotalRot(item, rand.nextFloat() * 10);
         return Lists.newArrayList(item);
+    }
+
+    @Override
+    public boolean canHarvestBlock(IBlockAccess world, BlockPos pos, EntityPlayer player)
+    {
+        return true;
     }
 }
