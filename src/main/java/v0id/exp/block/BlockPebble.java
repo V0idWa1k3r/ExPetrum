@@ -48,7 +48,7 @@ public class BlockPebble extends Block implements IInitializableBlock, IOreHintR
 	@Override
 	public void initBlock()
 	{
-		this.setHardness(0.2f);
+		this.setHardness(0.05f);
 		this.setResistance(0);
 		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockPebble));
 		this.setSoundType(SoundType.STONE);

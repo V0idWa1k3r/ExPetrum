@@ -43,7 +43,7 @@ public class BlockFlint extends Block implements IInitializableBlock, IOreHintRe
 	@Override
 	public void initBlock()
 	{
-		this.setHardness(0.2f);
+		this.setHardness(0.05f);
 		this.setResistance(0);
 		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockFlint));
 		this.setSoundType(SoundType.STONE);
