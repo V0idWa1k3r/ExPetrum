@@ -50,7 +50,7 @@ public class ExPDenseColdForest extends ExPBiome
         this.spawnableCreatureList.add(new SpawnListEntry(Cow.class, 10, 2, 4));
         this.spawnableCreatureList.add(new SpawnListEntry(Sheep.class, 10, 2, 4));
         this.spawnableCreatureList.add(new SpawnListEntry(Pig.class, 10, 2, 4));
-        this.spawnableMonsterList.add(new SpawnListEntry(Wolf.class, 10, 2, 4));
+        this.spawnableMonsterList.add(new SpawnListEntry(Wolf.class, 10, 1, 2));
 	}
 	
 	@Override
