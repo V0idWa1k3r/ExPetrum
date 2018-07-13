@@ -62,7 +62,7 @@ public class TileCampfire extends TileEntity implements ITickable, ISyncableTile
             ItemStack is = this.inventory_thing.getStackInSlot(0);
             float t = TemperatureUtils.getTemperature(is);
             TemperatureUtils.tickItem(is, this.temperature_handler.getCurrentTemperature() < t);
-            if (this.temperature_handler.getCurrentTemperature() >= t)
+            if (this.temperature_handler.getCurrentTemperature() > t)
             {
                 TemperatureUtils.incrementTemperature(is, 0.5F);
                 RecipesSmelting.checkForSmelting(i -> this.inventory_thing.setStackInSlot(0, i), is, false, true);
