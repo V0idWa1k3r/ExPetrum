@@ -1,5 +1,6 @@
 package v0id.exp.world.gen.biome;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -48,7 +49,7 @@ public class CropGenerator extends WorldGenerator
 				continue;
 			}
 			
-			if (!worldIn.isAirBlock(offset.up()) && !worldIn.getBlockState(offset.up()).getBlock().isAssociatedBlock(Blocks.TALLGRASS) && !(worldIn.getBlockState(offset.up()).getBlock() instanceof IOreHintReplaceable) && !worldIn.getBlockState(offset.up()).getBlock().isReplaceable(worldIn, offset.up()))
+			if (!worldIn.isAirBlock(offset.up()) && !worldIn.getBlockState(offset.up()).getBlock().isAssociatedBlock(Blocks.TALLGRASS) && !(worldIn.getBlockState(offset.up()).getBlock() instanceof IOreHintReplaceable) && (!worldIn.getBlockState(offset.up()).getBlock().isReplaceable(worldIn, offset.up()) || worldIn.getBlockState(offset.up()).getMaterial() == Material.WATER))
 			{
 				continue;
 			}
