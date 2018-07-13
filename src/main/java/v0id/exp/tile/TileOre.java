@@ -11,7 +11,7 @@ import v0id.exp.item.ItemGeneric;
 
 public class TileOre extends TileEntity
 {
-	public EnumOre type;
+	public EnumOre type = EnumOre.ACANTHITE;
 	public byte subtype;
 	public byte amount;
 	
