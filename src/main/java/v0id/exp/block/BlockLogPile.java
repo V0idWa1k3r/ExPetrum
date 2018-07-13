@@ -127,28 +127,50 @@ public class BlockLogPile extends Block implements IInitializableBlock, ISupport
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
         ItemStack item = playerIn.getHeldItem(hand);
-        if (item.getItem() instanceof ItemBlockLog)
+        if (item.isEmpty())
         {
-            TileLogPile tlp = (TileLogPile) worldIn.getTileEntity(pos);
-            if (tlp != null && tlp.count < 8)
+            if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND)
             {
-                IBlockState istate = ((ItemBlockLog) item.getItem()).getBlock().getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, item.getMetadata(), playerIn, hand);
-                EnumTreeType type = istate.getValue(ExPBlockProperties.TREE_TYPE);
-                if (type == tlp.type)
+                TileLogPile tlp = (TileLogPile) worldIn.getTileEntity(pos);
+                BlockPos offset = pos.offset(facing);
+                InventoryHelper.spawnItemStack(worldIn, offset.getX(), offset.getY(), offset.getZ(), new ItemStack(Item.getItemFromBlock(ExPBlocks.logsDeco[tlp.type.ordinal() / 5]), 1, 1 + (tlp.type.ordinal() % 5) * 3));
+                if (--tlp.count <= 0)
                 {
-                    if (!worldIn.isRemote)
+                    worldIn.setBlockToAir(pos);
+                }
+                else
+                {
+                    tlp.sendUpdatePacket();
+                }
+            }
+
+            return true;
+        }
+        else
+        {
+            if (item.getItem() instanceof ItemBlockLog)
+            {
+                TileLogPile tlp = (TileLogPile) worldIn.getTileEntity(pos);
+                if (tlp != null && tlp.count < 8)
+                {
+                    IBlockState istate = ((ItemBlockLog) item.getItem()).getBlock().getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, item.getMetadata(), playerIn, hand);
+                    EnumTreeType type = istate.getValue(ExPBlockProperties.TREE_TYPE);
+                    if (type == tlp.type)
                     {
-                        ++tlp.count;
-                        worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.6F + (float)Math.random() * 0.4F);
-                        if (!playerIn.capabilities.isCreativeMode)
+                        if (!worldIn.isRemote)
                         {
-                            item.shrink(1);
+                            ++tlp.count;
+                            worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_WOOD_PLACE, SoundCategory.BLOCKS, 1.0F, 0.6F + (float) Math.random() * 0.4F);
+                            if (!playerIn.capabilities.isCreativeMode)
+                            {
+                                item.shrink(1);
+                            }
+
+                            tlp.sendUpdatePacket();
                         }
 
-                        tlp.sendUpdatePacket();
+                        return true;
                     }
-
-                    return true;
                 }
             }
         }
