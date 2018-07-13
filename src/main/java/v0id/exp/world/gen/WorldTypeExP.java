@@ -352,13 +352,11 @@ public class WorldTypeExP extends WorldType
 	        int[] aint = this.genBiomes.getInts(i, j, i1, j1);
 	        BlockPos blockpos = null;
 	        int k1 = 0;
-
 	        for (int l1 = 0; l1 < i1 * j1; ++l1)
 	        {
 	            int i2 = i + l1 % i1 << 2;
 	            int j2 = j + l1 / i1 << 2;
-	            Biome biome = Biome.getBiome(aint[l1]);
-
+	            Biome biome = this.swapHackBiome(Biome.getBiome(aint[l1]));
 	            if (biomes.contains(biome) && (blockpos == null || random.nextInt(k1 + 1) == 0))
 	            {
 	                blockpos = new BlockPos(i2, 0, j2);
