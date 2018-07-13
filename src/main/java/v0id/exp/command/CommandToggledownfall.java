@@ -32,6 +32,9 @@ public class CommandToggledownfall extends CommandBase
         else
         {
             world.rainTicksRemaining = 0;
+            world.setOverhaulHumidity(0);
+            world.accumulatedHumidity = 0F;
+            world.accumulatedHumidity_isDirty = true;
         }
 
         notifyCommandListener(sender, this, "commands.downfall.success");
