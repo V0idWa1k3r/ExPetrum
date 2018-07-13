@@ -77,7 +77,7 @@ public class BlockBerryBush extends BlockShrub
     @Override
     public int getShrubColor(IBlockState state, BlockPos pos, IBlockAccess w)
     {
-        return this.getState() == EnumShrubState.NORMAL || this.getState() == EnumShrubState.BLOOMING ? w.getBlockState(pos.down()).getBlock() instanceof IShrub ? ((IShrub)w.getBlockState(pos.down()).getBlock()).getShrubColor(w.getBlockState(pos.down()), pos.down(), w) : w.getBlockState(pos.down()).getBlock() instanceof IGrass ? ((IGrass)w.getBlockState(pos.down()).getBlock()).getGrassColor(w.getBlockState(pos.down()), pos.down(), w) : w.getBiome(pos).getGrassColorAtPos(pos) : -1;
+        return state.getBlock() == this && (this.getState() == EnumShrubState.NORMAL || this.getState() == EnumShrubState.BLOOMING) ? w.getBlockState(pos.down()).getBlock() instanceof IShrub ? ((IShrub)w.getBlockState(pos.down()).getBlock()).getShrubColor(w.getBlockState(pos.down()), pos.down(), w) : w.getBlockState(pos.down()).getBlock() instanceof IGrass ? ((IGrass)w.getBlockState(pos.down()).getBlock()).getGrassColor(w.getBlockState(pos.down()), pos.down(), w) : w.getBiome(pos).getGrassColorAtPos(pos) : -1;
     }
 
 	@Override
