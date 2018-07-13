@@ -146,10 +146,18 @@ public class BlockPottery extends Block implements IInitializableBlock
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        if (state.getValue(ExPBlockProperties.POTTERY_TYPE) == EnumPotteryType.POT)
+        if (playerIn.isSneaking())
         {
-            playerIn.openGui(ExPetrum.instance, 3, worldIn, pos.getX(), pos.getY(), pos.getZ());
+            worldIn.setBlockToAir(pos);
             return true;
+        }
+        else
+        {
+            if (state.getValue(ExPBlockProperties.POTTERY_TYPE) == EnumPotteryType.POT)
+            {
+                playerIn.openGui(ExPetrum.instance, 3, worldIn, pos.getX(), pos.getY(), pos.getZ());
+                return true;
+            }
         }
 
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
