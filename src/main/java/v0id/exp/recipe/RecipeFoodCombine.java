@@ -33,6 +33,10 @@ public class RecipeFoodCombine extends IForgeRegistryEntry.Impl<IRecipe> impleme
                         }
                     }
                 }
+                else
+                {
+                    return false;
+                }
             }
         }
 
@@ -77,7 +81,7 @@ public class RecipeFoodCombine extends IForgeRegistryEntry.Impl<IRecipe> impleme
     @Override
     public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv)
     {
-        NonNullList<ItemStack> ret = NonNullList.create();
+        NonNullList<ItemStack> ret = NonNullList.withSize(inv.getHeight() * inv.getWidth(), ItemStack.EMPTY);
         float amount = 0;
         for (int i = 0; i < inv.getWidth() * inv.getHeight(); ++i)
         {
@@ -92,18 +96,18 @@ public class RecipeFoodCombine extends IForgeRegistryEntry.Impl<IRecipe> impleme
                         float val = (amount + added) - 10000;
                         amount = 10000;
                         ((ItemFood)is.getItem()).setTotalWeight(is, val);
-                        ret.add(i, is.copy());
+                        ret.set(i, is.copy());
                     }
                     else
                     {
                         amount += added;
-                        ret.add(i, ItemStack.EMPTY);
+                        ret.set(i, ItemStack.EMPTY);
                     }
                 }
             }
             else
             {
-                ret.add(i, ItemStack.EMPTY);
+                ret.set(i, ItemStack.EMPTY);
             }
         }
 
