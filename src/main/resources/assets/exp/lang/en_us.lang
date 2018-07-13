@@ -121,6 +121,7 @@ exp.block.ore.desc.richness.2=Richness: Rich
 
 fluid.tile.water=Water
 fluid.milk=Milk
+fluid.oil=Oil
 fluid.tannin=Tannin
 fluid.olive_oil=Olive Oil
 fluid.walnut_oil=Walnut Oil
