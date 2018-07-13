@@ -129,6 +129,8 @@ fluid.fruit_juice=Fruit Juice
 
 tile.exp.ore.name=Ore
 
+generator.expworld=ExPetrum
+
 exp.txt.weightvolume=⚖ %d Gram   ⊞ %s
 exp.txt.volume.0=Tiny
 exp.txt.volume.1=Small
