@@ -1,0 +1,20 @@
+{
+    "result": {
+        "item": "exp:item_armor_leather_boots",
+        "data": 0
+    },
+    "pattern": [
+        "P P",
+        "PNP"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "P" : {
+            "item": "#LEATHER"
+        },
+        "N": {
+            "item": "exp:item_generic",
+            "data": 29
+        }
+    }
+}

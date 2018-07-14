@@ -125,7 +125,9 @@ public class ExPRegistryNames
         itemMetalGeneric                                                                                    = "item_metal_generic",
         itemWoolCard                                                                                        = "item_wool_card",
         itemTuyere                                                                                          = "item_tuyere",
-		itemFlintAndIron																					= "item_flint_and_iron";
+		itemFlintAndIron																					= "item_flint_and_iron",
+		itemArmor																							= "item_armor",
+		itemArmorFramework																					= "item_armor_framework";
 
 	public static final String
         biomeBeach                                                                                          = "beach",

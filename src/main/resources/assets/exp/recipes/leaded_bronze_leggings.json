@@ -1,0 +1,20 @@
+{
+    "result": {
+        "item": "exp:item_armor_framework",
+        "data": 22
+    },
+    "pattern": [
+        "LPL",
+        "PLP"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "P" : {
+            "item": "exp:item_metal_generic",
+            "data": 117
+        },
+        "L": {
+            "item": "#LEATHERORCLOTH"
+        }
+    }
+}

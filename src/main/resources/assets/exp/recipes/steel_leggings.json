@@ -1,0 +1,21 @@
+{
+    "result": {
+        "item": "exp:item_armor_framework",
+        "data": 38
+    },
+    "pattern": [
+        "PPP",
+        "PLP",
+        "P P"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "P" : {
+            "item": "exp:item_metal_generic",
+            "data": 127
+        },
+        "L": {
+            "item": "#LEGSCORL"
+        }
+    }
+}

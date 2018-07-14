@@ -1,6 +1,8 @@
 package v0id.api.exp.data;
 
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.util.EnumHelper;
 import org.apache.logging.log4j.Logger;
@@ -19,6 +21,7 @@ public class ExPMisc
 	
 	// This is a placeholder. Every tool stat is exposed differently! This only exists to populate toolMaterial field in ItemTool! Do not use/reference!
 	public static final ToolMaterial materialExPetrum = EnumHelper.addToolMaterial("EXPETRUM", 1, 1, 1, 1, 1);
+	public static final ItemArmor.ArmorMaterial armorMaterialExPetrum = EnumHelper.addArmorMaterial("EXPETRUM", "exp:null", 1, new int[]{ 0, 0, 0, 0 }, 0, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0);
 	public static Logger modLogger;
 	public static IParticleEngine defaultParticleEngineImpl;
 	public static ISettingsManager rootSettingsManager;

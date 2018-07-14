@@ -77,7 +77,7 @@ public class ExPItemsRegistry extends AbstractRegistry
         }
 
         registryEntries.addAll(Arrays.asList(
-
+            new ItemArmorFramework()
         ));
 
         registryEntries.forEach(registry::register);

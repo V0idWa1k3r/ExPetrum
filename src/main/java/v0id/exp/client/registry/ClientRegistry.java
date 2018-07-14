@@ -320,8 +320,10 @@ public class ClientRegistry implements ILifecycleListener
     {
         for (Map.Entry<Pair<EntityEquipmentSlot, EnumArmorStats>, ItemArmor> data : ItemArmor.items.entrySet())
         {
-            registerStaticModel(data.getValue(), new ModelResourceLocation(ExPRegistryNames.asLocation(ExPRegistryNames.itemArmor), "type=" + data.getKey().getLeft().name().toLowerCase() + "_" + data.getKey().getRight().name));
+            registerStaticModel(data.getValue(), new ModelResourceLocation(ExPRegistryNames.asLocation(ExPRegistryNames.itemArmor), "type=" + data.getKey().getLeft().getName() + "_" + data.getKey().getRight().name));
         }
+
+        mkCustomModelResourceLocations(ExPItems.armorFramework, 4 * EnumArmorStats.values().length, i -> "type=" + ItemArmorFramework.SLOTS[i % 4].getName() + "_" + EnumArmorStats.values()[i / 4].name);
     }
 
     public static void registerBerryBushModels()

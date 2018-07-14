@@ -1,0 +1,21 @@
+{
+    "result": {
+        "item": "exp:item_armor_leather_leggings",
+        "data": 0
+    },
+    "pattern": [
+        "PPP",
+        "PNP",
+        "P P"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "P" : {
+            "item": "#LEATHER"
+        },
+        "N": {
+            "item": "exp:item_generic",
+            "data": 29
+        }
+    }
+}

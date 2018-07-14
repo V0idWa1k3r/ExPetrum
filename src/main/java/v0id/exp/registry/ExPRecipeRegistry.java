@@ -2,6 +2,7 @@ package v0id.exp.registry;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -20,12 +21,14 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPFluids;
 import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.data.ExPMisc;
+import v0id.api.exp.item.EnumArmorStats;
 import v0id.api.exp.item.IMeltableMetal;
 import v0id.api.exp.item.food.FoodEntry;
 import v0id.api.exp.metal.EnumAnvilRequirement;
@@ -179,6 +182,19 @@ public class ExPRecipeRegistry extends AbstractRegistry
             if (ItemTuyere.items.containsKey(material))
             {
                 RecipesAnvil.addRecipe(new ItemStack(ExPItems.metalGeneric, 1, material.getMaterial().ordinal() + EnumMetal.values().length * 2), (int)(material.getMaterial().getMeltingTemperature() * 0.75F), new ItemStack(ItemTuyere.items.get(material), 1, 0), 200, material.getMaterial().getRequiredAnvilTier());
+            }
+        }
+
+        for (EnumArmorStats stats : EnumArmorStats.values())
+        {
+            if (stats.associatedMetal == null)
+            {
+                continue;
+            }
+
+            for (EntityEquipmentSlot slot : ItemArmorFramework.SLOTS)
+            {
+                RecipesAnvil.addRecipe(ItemArmorFramework.createFramework(stats, slot), (int)(stats.associatedMetal.getMeltingTemperature() * 0.75F), new ItemStack(ItemArmor.items.get(Pair.of(slot, stats)), 1, 0), (int) (1000 * ItemArmorFramework.slotModifiers[3 - (slot.ordinal() - 2)]), stats.associatedMetal.getRequiredAnvilTier());
             }
         }
 

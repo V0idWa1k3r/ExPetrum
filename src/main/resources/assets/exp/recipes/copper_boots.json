@@ -1,0 +1,15 @@
+{
+    "result": {
+        "item": "exp:item_armor_framework",
+        "data": 3
+    },
+    "pattern": [
+        "P P"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "P" : {
+            "item": "#SHEETDOUBLECOPPER"
+        }
+    }
+}

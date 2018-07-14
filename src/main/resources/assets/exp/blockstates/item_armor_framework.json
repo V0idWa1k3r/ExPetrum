@@ -1,0 +1,235 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "exp:item_generated",
+		"transform": "forge:default-item",
+		"textures" : {
+			"layer0" : "exp:items/armor/cloth/boots"
+		}
+	},
+	"variants" : {
+		"inventory" : [{}],
+        "type": {
+            "head_copper": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/copper/helmet"
+                }
+            },
+            "chest_copper": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/copper/chestplate"
+                }
+            },
+            "legs_copper": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/copper/leggings"
+                }
+            },
+            "feet_copper": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/copper/boots"
+                }
+            },
+            "head_leather": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/leather/helmet"
+                }
+            },
+            "chest_leather": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/leather/chestplate"
+                }
+            },
+            "legs_leather": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/leather/leggings"
+                }
+            },
+            "feet_leather": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/leather/boots"
+                }
+            },
+            "head_cloth": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/cloth/helmet"
+                }
+            },
+            "chest_cloth": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/cloth/chestplate"
+                }
+            },
+            "legs_cloth": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/cloth/leggings"
+                }
+            },
+            "feet_cloth": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/cloth/boots"
+                }
+            },
+            "head_bronze": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/bronze/helmet"
+                }
+            },
+            "chest_bronze": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/bronze/chestplate"
+                }
+            },
+            "legs_bronze": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/bronze/leggings"
+                }
+            },
+            "feet_bronze": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/bronze/boots"
+                }
+            },
+            "head_bismuth_bronze": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/bismuth_bronze/helmet"
+                }
+            },
+            "chest_bismuth_bronze": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/bismuth_bronze/chestplate"
+                }
+            },
+            "legs_bismuth_bronze": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/bismuth_bronze/leggings"
+                }
+            },
+            "feet_bismuth_bronze": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/bismuth_bronze/boots"
+                }
+            },
+            "head_leaded_bronze": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/leaded_bronze/helmet"
+                }
+            },
+            "chest_leaded_bronze": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/leaded_bronze/chestplate"
+                }
+            },
+            "legs_leaded_bronze": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/leaded_bronze/leggings"
+                }
+            },
+            "feet_leaded_bronze": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/leaded_bronze/boots"
+                }
+            },
+            "head_manganese_bronze": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/manganese_bronze/helmet"
+                }
+            },
+            "chest_manganese_bronze": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/manganese_bronze/chestplate"
+                }
+            },
+            "legs_manganese_bronze": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/manganese_bronze/leggings"
+                }
+            },
+            "feet_manganese_bronze": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/manganese_bronze/boots"
+                }
+            },
+            "head_rose_alloy": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/rose_alloy/helmet"
+                }
+            },
+            "chest_rose_alloy": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/rose_alloy/chestplate"
+                }
+            },
+            "legs_rose_alloy": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/rose_alloy/leggings"
+                }
+            },
+            "feet_rose_alloy": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/rose_alloy/boots"
+                }
+            },
+            "head_iron": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/iron/helmet"
+                }
+            },
+            "chest_iron": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/iron/chestplate"
+                }
+            },
+            "legs_iron": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/iron/leggings"
+                }
+            },
+            "feet_iron": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/iron/boots"
+                }
+            },
+            "head_steel": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/steel/helmet"
+                }
+            },
+            "chest_steel": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/steel/chestplate"
+                }
+            },
+            "legs_steel": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/steel/leggings"
+                }
+            },
+            "feet_steel": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/steel/boots"
+                }
+            },
+            "head_tool_steel": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/tool_steel/helmet"
+                }
+            },
+            "chest_tool_steel": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/tool_steel/chestplate"
+                }
+            },
+            "legs_tool_steel": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/tool_steel/leggings"
+                }
+            },
+            "feet_tool_steel": {
+                "textures" : {
+                    "layer0" : "exp:items/armor/tool_steel/boots"
+                }
+            }
+        }
+	}
+}

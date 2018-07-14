@@ -77,6 +77,71 @@
         "name": "METALCLUMPSTEEL"
     },
     {
+        "ingredient": [
+            {
+                "item": "exp:item_armor_cloth_helmet",
+                "data": 0
+            },
+            {
+                "item": "exp:item_armor_leather_helmet",
+                "data": 0
+            }
+        ],
+        "name": "HEADCORL"
+    },
+    {
+        "ingredient": [
+            {
+                "item": "exp:item_armor_cloth_chestplate",
+                "data": 0
+            },
+            {
+                "item": "exp:item_armor_leather_chestplate",
+                "data": 0
+            }
+        ],
+        "name": "CHESTCORL"
+    },
+    {
+        "ingredient": [
+            {
+                "item": "exp:item_armor_cloth_leggings",
+                "data": 0
+            },
+            {
+                "item": "exp:item_armor_leather_leggings",
+                "data": 0
+            }
+        ],
+        "name": "LEGSCORL"
+    },
+    {
+        "ingredient": [
+            {
+                "item": "exp:item_armor_cloth_boots",
+                "data": 0
+            },
+            {
+                "item": "exp:item_armor_leather_boots",
+                "data": 0
+            }
+        ],
+        "name": "FEETCORL"
+    },
+    {
+        "ingredient": [
+            {
+                "item": "exp:item_generic",
+                "data": 22
+            },
+            {
+                "item": "exp:item_generic",
+                "data": 28
+            }
+        ],
+        "name": "LEATHERORCLOTH"
+    },
+    {
         "ingredient": {
             "type": "forge:ore_dict",
             "ore": "clumpSteelHSLA"
@@ -254,6 +319,13 @@
             "ore": "wool"
         },
         "name": "WOOL"
+    },
+    {
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "cloth"
+        },
+        "name": "CLOTH"
     },
     {
         "ingredient": [

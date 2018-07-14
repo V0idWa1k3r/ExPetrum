@@ -101,4 +101,7 @@ public class ExPItems
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.itemFlintAndIron)
     public static final Item flintAndIron = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemArmorFramework)
+    public static final Item armorFramework = null;
 }
