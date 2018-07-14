@@ -109,6 +109,12 @@ public class ContainerPot extends Container
                 {
                     return stack.getItem() instanceof IMold && ((IMold) stack.getItem()).isMold(stack);
                 }
+
+                @Override
+                public int getItemStackLimit(@Nonnull ItemStack stack)
+                {
+                    return 1;
+                }
             });
         }
     }
