@@ -240,7 +240,7 @@ public class ExPWorld implements IExPWorld
 			ExPMisc.modLogger.warn("%d ticks were skipped by the world! This can cause issues.", ticksSkipped);
 		}
 		
-		if (ticksSkipped >= 24000 || this.lastTime % 24000 > this.persistentTicks % 24000)
+		if (ticksSkipped >= 24000 || this.lastTime % 24000 > time % 24000)
 		{
 			this.createDayData();
 		}
