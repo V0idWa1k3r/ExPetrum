@@ -37,10 +37,10 @@ public class TileMechanicalQuern extends TileEntity implements ITickable
         if (this.rotaryHandler.getTorque() > 32)
         {
             this.progress += this.rotaryHandler.getTorque() / 4096F + this.rotaryHandler.getSpeed() / 8192F;
-            this.rotaryHandler.setSpeed(0);
-            this.rotaryHandler.setTorque(0);
         }
 
+        this.rotaryHandler.setSpeed(0);
+        this.rotaryHandler.setTorque(0);
         if (this.world.isRemote)
         {
             return;
