@@ -12,6 +12,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.EnumFacing;
@@ -173,6 +174,11 @@ public class ExPHandlerServer
 		if (event.getEntityPlayer() != null)
 		{
 			if (event.getEntityPlayer().isPotionActive(ExPPotions.stunned))
+			{
+				event.setCanceled(true);
+			}
+
+			if (event.getEntityPlayer().getHeldItemMainhand().getItem() instanceof ItemTool && event.getEntityPlayer().getHeldItemMainhand().getItem().getRegistryName().getResourceDomain().equalsIgnoreCase("minecraft"))
 			{
 				event.setCanceled(true);
 			}

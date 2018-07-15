@@ -336,7 +336,7 @@ public class ExPHandlerClient
             event.getToolTip().add(I18n.format("exp.temp." + TemperatureUtils.getTemperatureIndex(temp)));
         }
 
-        if (is.getItem() instanceof ItemTool && !(is.getItem() instanceof IExPTool))
+        if (is.getItem() instanceof ItemTool && !(is.getItem() instanceof IExPTool) && is.getItem().getRegistryName().getResourceDomain().equalsIgnoreCase("minecraft"))
         {
             event.getToolTip().add(I18n.format("exp.txt.toolDisabled"));
         }
