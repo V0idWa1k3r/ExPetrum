@@ -63,12 +63,6 @@ public class BlockLogPile extends Block implements IInitializableBlock, ISupport
         return Items.AIR;
     }
 
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
-    {
-        TileLogPile tile = (TileLogPile) worldIn.getTileEntity(pos);
-        InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Item.getItemFromBlock(ExPBlocks.logsDeco[tile.type.ordinal() / 5]), tile.count, 1 + (tile.type.ordinal() % 5) * 3));
-    }
-
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
     {
@@ -234,5 +228,17 @@ public class BlockLogPile extends Block implements IInitializableBlock, ISupport
         }
 
         super.randomDisplayTick(stateIn, worldIn, pos, rand);
+    }
+
+    @Override
+    public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player)
+    {
+        if (!worldIn.isRemote)
+        {
+            TileLogPile tile = (TileLogPile) worldIn.getTileEntity(pos);
+            InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Item.getItemFromBlock(ExPBlocks.logsDeco[tile.type.ordinal() / 5]), tile.count, 1 + (tile.type.ordinal() % 5) * 3));
+        }
+
+        super.onBlockHarvested(worldIn, pos, state, player);
     }
 }
