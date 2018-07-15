@@ -1,7 +1,7 @@
 {
   "result": {
-    "item": "exp:item_knife",
-    "data": 5
+    "item": "exp:item_knife.manganese_bronze",
+	"data": 0
   },
   "type": "forge:ore_shapeless",
   "ingredients": [

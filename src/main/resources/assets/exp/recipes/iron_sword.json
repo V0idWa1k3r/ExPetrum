@@ -1,7 +1,7 @@
 {
     "result": {
-        "item": "exp:item_sword",
-        "data": 7
+        "item": "exp:item_sword.iron",
+        "data": 0
     },
     "type": "forge:ore_shapeless",
     "ingredients": [

@@ -1,6 +1,5 @@
 package v0id.exp.registry;
 
-import com.google.common.collect.Lists;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
@@ -10,13 +9,9 @@ import v0id.api.exp.metal.EnumToolStats;
 import v0id.exp.item.*;
 import v0id.exp.item.tool.*;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class ExPItemsRegistry extends AbstractRegistry
 {
     public static ExPItemsRegistry instance;
-    public static List<Item> registryEntries;
 	
 	public ExPItemsRegistry()
 	{
@@ -27,30 +22,15 @@ public class ExPItemsRegistry extends AbstractRegistry
 	public void registerItems(RegistryEvent.Register<Item> event)
     {
         IForgeRegistry<Item> registry = event.getRegistry();
-        registryEntries = Lists.newArrayList();
-        registryEntries.addAll(Arrays.asList(
+        event.getRegistry().registerAll(
                 new ItemRock(),
                 new ItemStick(),
                 new ItemToolHead(),
                 new ItemSeeds(),
                 new ItemFood(),
                 new ItemIngot(),
-                new ItemKnife(),
-                new ItemPickaxe(),
-                new ItemAxe(),
-                new ItemShovel(),
-                new ItemHoe(),
-                new ItemSword(),
-                new ItemScythe(),
-                new ItemBattleaxe(),
-                new ItemHammer(),
-                new ItemSpear(),
-                new ItemWateringCan(),
-                new ItemGardeningSpade(),
                 new ItemBasket(),
-                new ItemSaw(),
                 new ItemGeneric(),
-                new ItemChisel(),
                 new ItemOre(),
                 new ItemMold(false),
                 new ItemMold(true),
@@ -60,26 +40,44 @@ public class ExPItemsRegistry extends AbstractRegistry
                 new ItemGrindstone(),
                 new ItemMetalGeneric(),
                 new ItemWoolCard()
-        ));
+        );
+
+        for (EnumToolStats stats : EnumToolStats.values())
+        {
+            event.getRegistry().registerAll(
+                    new ItemKnife(stats),
+                    new ItemPickaxe(stats),
+                    new ItemAxe(stats),
+                    new ItemShovel(stats),
+                    new ItemHoe(stats),
+                    new ItemSword(stats),
+                    new ItemScythe(stats),
+                    new ItemBattleaxe(stats),
+                    new ItemHammer(stats),
+                    new ItemSpear(stats),
+                    new ItemWateringCan(stats),
+                    new ItemGardeningSpade(stats),
+                    new ItemSaw(stats),
+                    new ItemChisel(stats)
+            );
+        }
 
         for (int i = 2; i < EnumToolStats.values().length; ++i)
         {
-            registryEntries.add(new ItemTuyere(EnumToolStats.values()[i]));
+            event.getRegistry().register(new ItemTuyere(EnumToolStats.values()[i]));
         }
 
-        registryEntries.add(new ItemFlintAndIron());
+        event.getRegistry().register(new ItemFlintAndIron());
         for (EnumArmorStats armor : EnumArmorStats.values())
         {
-            registryEntries.add(new ItemArmor(EntityEquipmentSlot.HEAD, armor));
-            registryEntries.add(new ItemArmor(EntityEquipmentSlot.CHEST, armor));
-            registryEntries.add(new ItemArmor(EntityEquipmentSlot.LEGS, armor));
-            registryEntries.add(new ItemArmor(EntityEquipmentSlot.FEET, armor));
+            event.getRegistry().register(new ItemArmor(EntityEquipmentSlot.HEAD, armor));
+            event.getRegistry().register(new ItemArmor(EntityEquipmentSlot.CHEST, armor));
+            event.getRegistry().register(new ItemArmor(EntityEquipmentSlot.LEGS, armor));
+            event.getRegistry().register(new ItemArmor(EntityEquipmentSlot.FEET, armor));
         }
 
-        registryEntries.addAll(Arrays.asList(
+        event.getRegistry().registerAll(
             new ItemArmorFramework()
-        ));
-
-        registryEntries.forEach(registry::register);
+        );
     }
 }

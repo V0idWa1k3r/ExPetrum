@@ -32,9 +32,9 @@ import java.util.stream.Stream;
 
 public class ItemHoe extends ItemExPTool implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry
 {
-	public ItemHoe()
+	public ItemHoe(EnumToolStats stats)
 	{
-		super();
+		super(stats, EnumToolClass.HOE);
 		this.initItem();
 	}
 
@@ -51,7 +51,7 @@ public class ItemHoe extends ItemExPTool implements IWeapon, IWeightProvider, II
 	@Override
 	public void initItem()
 	{
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemHoe));
+		this.setSelfRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemHoe));
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabTools);
 		this.setHasSubtypes(true);
@@ -79,12 +79,6 @@ public class ItemHoe extends ItemExPTool implements IWeapon, IWeightProvider, II
 	public EnumWeaponWeight getWeaponWeight(ItemStack is)
 	{
 		return EnumWeaponWeight.HEAVY;
-	}
-
-	@Override
-	public EnumToolClass getToolClass()
-	{
-		return EnumToolClass.HOE;
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 {
   "result": {
-    "item": "exp:item_shovel",
-    "data": 4
+    "item": "exp:item_shovel.leaded_bronze",
+	"data": 0
   },
   "type": "forge:ore_shapeless",
   "ingredients": [

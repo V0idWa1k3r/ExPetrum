@@ -1,7 +1,7 @@
 {
   "result": {
-    "item": "exp:item_watering_can",
-    "data": 6
+    "item": "exp:item_watering_can.rose_alloy",
+	"data": 0
   },
   "type": "forge:ore_shapeless",
   "ingredients": [

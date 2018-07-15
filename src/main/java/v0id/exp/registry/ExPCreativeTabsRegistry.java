@@ -4,9 +4,13 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPItems;
+import v0id.api.exp.metal.EnumToolClass;
+import v0id.api.exp.metal.EnumToolStats;
+import v0id.exp.item.tool.IExPTool;
 
 public class ExPCreativeTabsRegistry extends AbstractRegistry
 {
@@ -71,7 +75,7 @@ public class ExPCreativeTabsRegistry extends AbstractRegistry
 			@Override
 			public ItemStack getTabIconItem()
 			{
-				return new ItemStack(ExPItems.knife);
+				return new ItemStack(IExPTool.allTools.get(Pair.of(EnumToolStats.STONE, EnumToolClass.KNIFE)));
 			}
 		};
 		

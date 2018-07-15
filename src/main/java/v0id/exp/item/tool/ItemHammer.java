@@ -20,9 +20,9 @@ import java.util.Arrays;
 
 public class ItemHammer extends ItemExPTool implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry, IHammer
 {
-	public ItemHammer()
+	public ItemHammer(EnumToolStats stats)
 	{
-		super();
+		super(stats, EnumToolClass.HAMMER);
 		this.initItem();
 	}
 
@@ -39,7 +39,7 @@ public class ItemHammer extends ItemExPTool implements IWeapon, IWeightProvider,
 	@Override
 	public void initItem()
 	{
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemHammer));
+		this.setSelfRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemHammer));
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabTools);
 		this.setHasSubtypes(true);
@@ -67,12 +67,6 @@ public class ItemHammer extends ItemExPTool implements IWeapon, IWeightProvider,
 	public EnumWeaponWeight getWeaponWeight(ItemStack is)
 	{
 		return EnumWeaponWeight.HEAVY;
-	}
-
-	@Override
-	public EnumToolClass getToolClass()
-	{
-		return EnumToolClass.HAMMER;
 	}
 
 	@Override

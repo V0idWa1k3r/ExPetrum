@@ -1,7 +1,7 @@
 {
   "result": {
-    "item": "exp:item_watering_can",
-    "data": 4
+    "item": "exp:item_watering_can.leaded_bronze",
+	"data": 0
   },
   "type": "forge:ore_shapeless",
   "ingredients": [

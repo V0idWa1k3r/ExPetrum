@@ -1,7 +1,7 @@
 {
     "result": {
-        "item": "exp:item_pickaxe",
-        "data": 1
+        "item": "exp:item_pickaxe.copper",
+        "data": 0
     },
     "type": "forge:ore_shapeless",
     "ingredients": [

@@ -1,7 +1,7 @@
 {
   "result": {
-    "item": "exp:item_scythe",
-    "data": 3
+    "item": "exp:item_scythe.bismuth_bronze",
+    "data": 0
   },
   "type": "forge:ore_shapeless",
   "ingredients": [

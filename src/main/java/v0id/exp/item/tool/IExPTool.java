@@ -1,22 +1,26 @@
 package v0id.exp.item.tool;
 
+import com.google.common.collect.Maps;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.metal.EnumToolClass;
 import v0id.api.exp.metal.EnumToolStats;
 
+import java.util.Map;
+
 public interface IExPTool
 {
+	Map<Pair<EnumToolClass, EnumToolStats>, Item> allTools = Maps.newHashMap();
+
 	float getAttackDamage(ItemStack is);
 	
 	float getAttackSpeed(ItemStack is);
 	
 	EnumToolClass getToolClass();
 	
-	default EnumToolStats getStats(ItemStack is)
-	{
-		return EnumToolStats.values()[Math.min(is.getMetadata(), EnumToolStats.values().length - 1)];
-	}
+	EnumToolStats getStats(ItemStack is);
 	
 	default NBTTagCompound getToolCompound(ItemStack stack)
 	{
@@ -27,7 +31,6 @@ public interface IExPTool
 	{
 		NBTTagCompound ret = new NBTTagCompound();
 		ret.setInteger("damageMax", this.getStats(stack).getDurability());
-		ret.setInteger("damageCurrent", 0);
 		ret.setFloat("skill", 1.0F);
 		ret.setFloat("purity", 1.0F);
 		ret.setFloat("efficiency", this.getStats(stack).getEfficiency());

@@ -1,7 +1,7 @@
 {
   "result": {
-    "item": "exp:item_hoe",
-    "data": 4
+    "item": "exp:item_hoe.leaded_bronze",
+	"data": 0
   },
   "type": "forge:ore_shapeless",
   "ingredients": [

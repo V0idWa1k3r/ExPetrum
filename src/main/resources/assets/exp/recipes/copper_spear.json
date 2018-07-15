@@ -1,7 +1,7 @@
 {
     "result": {
-        "item": "exp:item_spear",
-        "data": 1
+        "item": "exp:item_spear.copper",
+        "data": 0
     },
     "type": "forge:ore_shapeless",
     "ingredients": [

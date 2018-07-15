@@ -198,44 +198,44 @@
     {
         "ingredient": [
             {
-                "item": "exp:item_knife",
-                "data": 0
+                "item": "exp:item_knife.stone",
+                "data": 32767
             },
             {
-                "item": "exp:item_knife",
-                "data": 1
+                "item": "exp:item_knife.copper",
+                "data": 32767
             },
             {
-                "item": "exp:item_knife",
-                "data": 2
+                "item": "exp:item_knife.bronze",
+                "data": 32767
             },
             {
-                "item": "exp:item_knife",
-                "data": 8
+                "item": "exp:item_knife.bismuth_bronze",
+                "data": 32767
             },
             {
-                "item": "exp:item_knife",
-                "data": 4
+                "item": "exp:item_knife.leaded_bronze",
+                "data": 32767
             },
             {
-                "item": "exp:item_knife",
-                "data": 5
+                "item": "exp:item_knife.manganese_bronze",
+                "data": 32767
             },
             {
-                "item": "exp:item_knife",
-                "data": 6
+                "item": "exp:item_knife.rose_alloy",
+                "data": 32767
             },
             {
-                "item": "exp:item_knife",
-                "data": 7
+                "item": "exp:item_knife.iron",
+                "data": 32767
             },
             {
-                "item": "exp:item_knife",
-                "data": 8
+                "item": "exp:item_knife.steel",
+                "data": 32767
             },
             {
-                "item": "exp:item_knife",
-                "data": 9
+                "item": "exp:item_knife.tool_steel",
+                "data": 32767
             }
         ],
         "name": "KNIFE"
@@ -243,44 +243,44 @@
     {
         "ingredient": [
             {
-                "item": "exp:item_saw",
-                "data": 0
+                "item": "exp:item_saw.stone",
+                "data": 32767
             },
             {
-                "item": "exp:item_saw",
-                "data": 1
+                "item": "exp:item_saw.copper",
+                "data": 32767
             },
             {
-                "item": "exp:item_saw",
-                "data": 2
+                "item": "exp:item_saw.bronze",
+                "data": 32767
             },
             {
-                "item": "exp:item_saw",
-                "data": 8
+                "item": "exp:item_saw.bismuth_bronze",
+                "data": 32767
             },
             {
-                "item": "exp:item_saw",
-                "data": 4
+                "item": "exp:item_saw.leaded_bronze",
+                "data": 32767
             },
             {
-                "item": "exp:item_saw",
-                "data": 5
+                "item": "exp:item_saw.manganese_bronze",
+                "data": 32767
             },
             {
-                "item": "exp:item_saw",
-                "data": 6
+                "item": "exp:item_saw.rose_alloy",
+                "data": 32767
             },
             {
-                "item": "exp:item_saw",
-                "data": 7
+                "item": "exp:item_saw.iron",
+                "data": 32767
             },
             {
-                "item": "exp:item_saw",
-                "data": 8
+                "item": "exp:item_saw.steel",
+                "data": 32767
             },
             {
-                "item": "exp:item_saw",
-                "data": 9
+                "item": "exp:item_saw.tool_steel",
+                "data": 32767
             }
         ],
         "name": "SAW"

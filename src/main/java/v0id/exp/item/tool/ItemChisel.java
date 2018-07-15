@@ -27,9 +27,9 @@ import java.util.Arrays;
 
 public class ItemChisel extends ItemExPWeapon implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry
 {
-	public ItemChisel()
+	public ItemChisel(EnumToolStats stats)
 	{
-		super();
+		super(stats, EnumToolClass.CHISEL);
 		this.initItem();
 	}
 
@@ -46,7 +46,7 @@ public class ItemChisel extends ItemExPWeapon implements IWeapon, IWeightProvide
 	@Override
 	public void initItem()
 	{
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemChisel));
+		this.setSelfRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemChisel));
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabTools);
 		this.setHasSubtypes(true);
@@ -74,12 +74,6 @@ public class ItemChisel extends ItemExPWeapon implements IWeapon, IWeightProvide
 	public EnumWeaponWeight getWeaponWeight(ItemStack is)
 	{
 		return EnumWeaponWeight.LIGHT;
-	}
-
-	@Override
-	public EnumToolClass getToolClass()
-	{
-		return EnumToolClass.CHISEL;
 	}
 
 	@Override

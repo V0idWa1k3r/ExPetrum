@@ -1,7 +1,7 @@
 {
   "result": {
-    "item": "exp:item_chisel",
-    "data": 2
+    "item": "exp:item_chisel.bronze",
+    "data": 0
   },
   "type": "forge:ore_shapeless",
   "ingredients": [

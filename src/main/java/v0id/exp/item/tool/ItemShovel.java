@@ -33,9 +33,9 @@ import java.util.stream.Stream;
 
 public class ItemShovel extends ItemExPTool implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry
 {
-	public ItemShovel()
+	public ItemShovel(EnumToolStats stats)
 	{
-		super();
+		super(stats, EnumToolClass.SHOVEL);
 		this.initItem();
 	}
 
@@ -52,7 +52,7 @@ public class ItemShovel extends ItemExPTool implements IWeapon, IWeightProvider,
 	@Override
 	public void initItem()
 	{
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemShovel));
+		this.setSelfRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemShovel));
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabTools);
 		this.setHasSubtypes(true);
@@ -80,12 +80,6 @@ public class ItemShovel extends ItemExPTool implements IWeapon, IWeightProvider,
 	public EnumWeaponWeight getWeaponWeight(ItemStack is)
 	{
 		return EnumWeaponWeight.HEAVY;
-	}
-
-	@Override
-	public EnumToolClass getToolClass()
-	{
-		return EnumToolClass.SHOVEL;
 	}
 
 	@Override

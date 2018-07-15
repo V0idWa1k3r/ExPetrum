@@ -22,9 +22,9 @@ import java.util.Arrays;
 
 public class ItemKnife extends ItemExPWeapon implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry, IShears, IKnife
 {
-	public ItemKnife()
+	public ItemKnife(EnumToolStats stats)
 	{
-		super();
+		super(stats, EnumToolClass.KNIFE);
 		this.initItem();
 	}
 
@@ -41,7 +41,7 @@ public class ItemKnife extends ItemExPWeapon implements IWeapon, IWeightProvider
 	@Override
 	public void initItem()
 	{
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemKnife));
+		this.setSelfRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemKnife));
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabTools);
 		this.setHasSubtypes(true);
@@ -69,12 +69,6 @@ public class ItemKnife extends ItemExPWeapon implements IWeapon, IWeightProvider
 	public EnumWeaponWeight getWeaponWeight(ItemStack is)
 	{
 		return EnumWeaponWeight.LIGHT;
-	}
-
-	@Override
-	public EnumToolClass getToolClass()
-	{
-		return EnumToolClass.KNIFE;
 	}
 
 	@Override

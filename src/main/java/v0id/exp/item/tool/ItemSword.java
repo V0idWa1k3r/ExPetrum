@@ -19,9 +19,9 @@ import java.util.Arrays;
 
 public class ItemSword extends ItemExPWeapon implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry
 {
-	public ItemSword()
+	public ItemSword(EnumToolStats stats)
 	{
-		super();
+		super(stats, EnumToolClass.SWORD);
 		this.initItem();
 	}
 
@@ -38,7 +38,7 @@ public class ItemSword extends ItemExPWeapon implements IWeapon, IWeightProvider
 	@Override
 	public void initItem()
 	{
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemSword));
+		this.setSelfRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemSword));
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabTools);
 		this.setHasSubtypes(true);
@@ -66,12 +66,6 @@ public class ItemSword extends ItemExPWeapon implements IWeapon, IWeightProvider
 	public EnumWeaponWeight getWeaponWeight(ItemStack is)
 	{
 		return EnumWeaponWeight.NORMAL;
-	}
-
-	@Override
-	public EnumToolClass getToolClass()
-	{
-		return EnumToolClass.SWORD;
 	}
 
 	@Override

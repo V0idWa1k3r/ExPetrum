@@ -1,7 +1,7 @@
 {
   "result": {
-    "item": "exp:item_scythe",
-    "data": 4
+    "item": "exp:item_scythe.leaded_bronze",
+	"data": 0
   },
   "type": "forge:ore_shapeless",
   "ingredients": [

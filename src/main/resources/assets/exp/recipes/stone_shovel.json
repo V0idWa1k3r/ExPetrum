@@ -1,6 +1,6 @@
 {
     "result": {
-        "item": "exp:item_shovel",
+        "item": "exp:item_shovel.stone",
         "data": 0
     },
     "type": "forge:ore_shapeless",

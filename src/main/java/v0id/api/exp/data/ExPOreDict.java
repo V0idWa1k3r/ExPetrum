@@ -33,7 +33,7 @@ public class ExPOreDict
 		blockLeaf																										= { "treeLeaves" },
 		blockFlint                                                                                                      = { "blockFlint" },
         blockPlanks                                                                                                     = { "planks", "plank", "planksWood", "plankWood" },
-		blockCraftingTable                                                                                              = { "craftingTable", "workbench" },
+		blockCraftingTable                                                                                              = { "craftingTable", "workbench", "craftingTableWood" },
 		blockCobblestone																								= { "cobblestone" };
 	
 	public static final String[]

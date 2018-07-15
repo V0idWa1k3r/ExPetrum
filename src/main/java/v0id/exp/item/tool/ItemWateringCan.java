@@ -40,9 +40,9 @@ import java.util.List;
 
 public class ItemWateringCan extends ItemExPTool implements IWeightProvider, IInitializableItem, IOreDictEntry
 {
-	public ItemWateringCan()
+	public ItemWateringCan(EnumToolStats stats)
 	{
-		super();
+		super(stats, EnumToolClass.WATERING_CAN);
 		this.initItem();
 	}
 	
@@ -56,12 +56,6 @@ public class ItemWateringCan extends ItemExPTool implements IWeightProvider, IIn
 	public float getAttackSpeed(ItemStack is)
 	{
 		return 0;
-	}
-
-	@Override
-	public EnumToolClass getToolClass()
-	{
-		return EnumToolClass.WATERING_CAN;
 	}
 
 	@Override
@@ -89,7 +83,7 @@ public class ItemWateringCan extends ItemExPTool implements IWeightProvider, IIn
 	@Override
 	public void initItem()
 	{
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemWateringCan));
+		this.setSelfRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemWateringCan));
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabTools);
 		this.setHasSubtypes(true);

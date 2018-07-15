@@ -1,7 +1,7 @@
 {
     "result": {
-        "item": "exp:item_battleaxe",
-        "data": 7
+        "item": "exp:item_battleaxe.iron",
+        "data": 0
     },
     "type": "forge:ore_shapeless",
     "ingredients": [

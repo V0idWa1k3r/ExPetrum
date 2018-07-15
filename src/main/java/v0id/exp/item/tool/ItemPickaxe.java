@@ -21,9 +21,9 @@ import java.util.Arrays;
 
 public class ItemPickaxe extends ItemExPTool implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry
 {
-	public ItemPickaxe()
+	public ItemPickaxe(EnumToolStats stats)
 	{
-		super();
+		super(stats, EnumToolClass.PICKAXE);
 		this.initItem();
 	}
 
@@ -40,7 +40,7 @@ public class ItemPickaxe extends ItemExPTool implements IWeapon, IWeightProvider
 	@Override
 	public void initItem()
 	{
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemPickaxe));
+		this.setSelfRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemPickaxe));
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabTools);
 		this.setHasSubtypes(true);
@@ -68,12 +68,6 @@ public class ItemPickaxe extends ItemExPTool implements IWeapon, IWeightProvider
 	public EnumWeaponWeight getWeaponWeight(ItemStack is)
 	{
 		return EnumWeaponWeight.HEAVY;
-	}
-
-	@Override
-	public EnumToolClass getToolClass()
-	{
-		return EnumToolClass.PICKAXE;
 	}
 
 	@Override

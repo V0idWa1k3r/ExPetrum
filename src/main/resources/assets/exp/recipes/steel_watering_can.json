@@ -1,7 +1,7 @@
 {
   "result": {
-    "item": "exp:item_watering_can",
-    "data": 8
+    "item": "exp:item_watering_can.steel",
+    "data": 0
   },
   "type": "forge:ore_shapeless",
   "ingredients": [

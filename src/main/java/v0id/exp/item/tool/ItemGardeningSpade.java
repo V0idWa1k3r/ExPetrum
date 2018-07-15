@@ -21,9 +21,9 @@ import java.util.Arrays;
 
 public class ItemGardeningSpade extends ItemExPTool implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry
 {
-	public ItemGardeningSpade()
+	public ItemGardeningSpade(EnumToolStats stats)
 	{
-		super();
+		super(stats, EnumToolClass.GARDENING_SPADE);
 		this.initItem();
 	}
 
@@ -40,7 +40,7 @@ public class ItemGardeningSpade extends ItemExPTool implements IWeapon, IWeightP
 	@Override
 	public void initItem()
 	{
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemGardeningSpade));
+		this.setSelfRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemGardeningSpade));
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabTools);
 		this.setHasSubtypes(true);
@@ -68,12 +68,6 @@ public class ItemGardeningSpade extends ItemExPTool implements IWeapon, IWeightP
 	public EnumWeaponWeight getWeaponWeight(ItemStack is)
 	{
 		return EnumWeaponWeight.LIGHT;
-	}
-
-	@Override
-	public EnumToolClass getToolClass()
-	{
-		return EnumToolClass.SHOVEL;
 	}
 
 	@Override

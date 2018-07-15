@@ -4,16 +4,17 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
+import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.metal.EnumMetal;
+import v0id.api.exp.metal.EnumToolClass;
 import v0id.api.exp.metal.EnumToolStats;
 import v0id.exp.item.ItemIngot;
 
@@ -21,12 +22,30 @@ import java.util.Set;
 
 public abstract class ItemExPWeapon extends ItemSword implements IExPTool
 {
-	public ItemExPWeapon()
+    public final EnumToolClass type;
+    public final EnumToolStats stats;
+
+	public ItemExPWeapon(EnumToolStats stats, EnumToolClass type)
 	{
 		super(ExPMisc.materialExPetrum);
 		this.setFull3D();
 		this.setHasSubtypes(true);
+		allTools.put(Pair.of(type, stats), this);
+		this.stats = stats;
+		this.type = type;
 	}
+
+    @Override
+    public EnumToolStats getStats(ItemStack is)
+    {
+        return this.stats;
+    }
+
+    @Override
+    public EnumToolClass getToolClass()
+    {
+        return this.type;
+    }
 	
 	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
@@ -48,49 +67,17 @@ public abstract class ItemExPWeapon extends ItemSword implements IExPTool
 		return Sets.newHashSet(this.getToolClass().getName());
 	}
 
-	@Override
-	public String getUnlocalizedName(ItemStack stack)
-	{
-		return super.getUnlocalizedName(stack) + '.' + (this.getStats(stack).getMaterial() != null ? this.getStats(stack).getMaterial().name().toLowerCase() : "stone");
-	}
-
-	@Override
-	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
-	{
-		if (tab != this.getCreativeTab())
-		{
-			return;
-		}
-
-		for (int i = 0; i < EnumToolStats.values().length; ++i)
-		{
-			subItems.add(new ItemStack(this, 1, i));
-		}
-	}
-
-	@Override
-	public int getDamage(ItemStack stack)
-	{
-		return this.getToolCompound(stack).getInteger("damageCurrent");
-	}
+    public void setSelfRegistryName(ResourceLocation loc)
+    {
+        ItemStack stack = new ItemStack(this, 1, 0);
+        this.setRegistryName(new ResourceLocation(loc.getResourceDomain(), loc.getResourcePath() + "." + (this.getStats(stack).getMaterial() != null ? this.getStats(stack).getName() : "stone")));
+    }
 
 	@Override
 	public int getMaxDamage(ItemStack stack)
 	{
 		return this.getToolCompound(stack).getInteger("damageMax");
 	}
-	
-	@Override
-	public boolean isDamaged(ItemStack stack)
-    {
-		return this.getDamage(stack) > 0;
-    }
-	
-	@Override
-	public void setDamage(ItemStack stack, int damage)
-    {
-		this.getToolCompound(stack).setInteger("damageCurrent", Math.max(0, damage));
-    }
 	
 	@Override
 	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack)

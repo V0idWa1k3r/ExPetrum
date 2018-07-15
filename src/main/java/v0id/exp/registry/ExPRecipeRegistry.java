@@ -37,6 +37,7 @@ import v0id.api.exp.metal.EnumToolClass;
 import v0id.api.exp.metal.EnumToolStats;
 import v0id.api.exp.recipe.*;
 import v0id.exp.item.*;
+import v0id.exp.item.tool.IExPTool;
 import v0id.exp.recipe.RecipeFoodCombine;
 import v0id.exp.recipe.RecipeMold;
 
@@ -82,8 +83,8 @@ public class ExPRecipeRegistry extends AbstractRegistry
                 reg.remove(loc);
             }
 
-            event.getRegistry().register(new ShapelessOreRecipe(mcloc, new ItemStack(chiselStone, 1, 0), new ItemStack(ExPItems.chisel, 1, 0)).setRegistryName("exp:recipe_hardcoded_compat_cnb_chisel_stone"));
-            event.getRegistry().register(new ShapelessOreRecipe(mcloc, new ItemStack(chiselIron, 1, 0), new ItemStack(ExPItems.chisel, 1, 7)).setRegistryName("exp:recipe_hardcoded_compat_cnb_chisel_iron"));
+            event.getRegistry().register(new ShapelessOreRecipe(mcloc, new ItemStack(chiselStone, 1, 0), new ItemStack(IExPTool.allTools.get(Pair.of(EnumToolClass.CHISEL, EnumToolStats.STONE)), 1, 0)).setRegistryName("exp:recipe_hardcoded_compat_cnb_chisel_stone"));
+            event.getRegistry().register(new ShapelessOreRecipe(mcloc, new ItemStack(chiselIron, 1, 0), new ItemStack(IExPTool.allTools.get(Pair.of(EnumToolClass.CHISEL, EnumToolStats.IRON)), 1, 7)).setRegistryName("exp:recipe_hardcoded_compat_cnb_chisel_iron"));
         }
 
         String[] toRemove = new String[]{ "minecraft:torch", "minecraft:crafting_table", "minecraft:chest", "minecraft:bone_meal_from_bone", "minecraft:string_to_wool", "minecraft:fishing_rod", "minecraft:bow", "minecraft:leather_helmet", "minecraft:leather_chestplate", "minecraft:leather_leggings", "minecraft:leather_boots", "minecraft:iron_block", "minecraft:gold_block", "minecraft:flint_and_steel", "minecraft:iron_helmet", "minecraft:iron_chestplate", "minecraft:iron_leggings", "minecraft:iron_boots" };

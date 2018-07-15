@@ -62,12 +62,14 @@ import v0id.exp.entity.EntityGravFallingBlock;
 import v0id.exp.entity.EntityThrownWeapon;
 import v0id.exp.entity.impl.*;
 import v0id.exp.item.*;
+import v0id.exp.item.tool.IExPTool;
 import v0id.exp.registry.ILifecycleListener;
 import v0id.exp.tile.*;
 import v0id.exp.util.Helpers;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -376,12 +378,10 @@ public class ClientRegistry implements ILifecycleListener
 
     public static void registerToolModels()
     {
-        List<Item> toolsList = Arrays.asList(ExPItems.knife, ExPItems.pickaxe, ExPItems.axe, ExPItems.shovel, ExPItems.hoe, ExPItems.sword, ExPItems.scythe, ExPItems.battleaxe, ExPItems.hammer, ExPItems.spear, ExPItems.watering_can, ExPItems.gardening_spade, ExPItems.saw, ExPItems.chisel);
-        toolsList.forEach(tool -> ModelLoader.setCustomMeshDefinition(tool, stack -> new ModelResourceLocation(new ResourceLocation(tool.getRegistryName().getResourceDomain(), "tools/" + tool.getRegistryName().getResourcePath()), "material=" + EnumToolStats.values()[stack.getMetadata()].getName())));
+        Collection<Item> toolsList = IExPTool.allTools.values();
+        toolsList.forEach(tool -> registerStaticModel(tool, new ModelResourceLocation(new ResourceLocation(tool.getRegistryName().getResourceDomain(), "tools/" + tool.getRegistryName().getResourcePath().substring(0, tool.getRegistryName().getResourcePath().lastIndexOf('.'))), "material=" + ((IExPTool)tool).getStats(new ItemStack(tool, 1, 0)).getName())));
         for (int i = 0; i < EnumToolStats.values().length; ++i)
         {
-            Integer lambdaCaptureInt = i;
-            toolsList.forEach(tool -> ModelLoader.registerItemVariants(tool, new ModelResourceLocation(new ResourceLocation(tool.getRegistryName().getResourceDomain(), "tools/" + tool.getRegistryName().getResourcePath()), "material=" + EnumToolStats.values()[lambdaCaptureInt].getName())));
             if (ItemTuyere.items.containsKey(EnumToolStats.values()[i]))
             {
                 ModelResourceLocation mloc = new ModelResourceLocation(new ResourceLocation(ExPRegistryNames.modid, "tools/" + ExPRegistryNames.itemTuyere), "material=" + EnumToolStats.values()[i].getName());

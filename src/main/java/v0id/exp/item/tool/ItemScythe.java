@@ -23,9 +23,9 @@ import java.util.Arrays;
 
 public class ItemScythe extends ItemExPWeapon implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry, IScythe
 {
-	public ItemScythe()
+	public ItemScythe(EnumToolStats stats)
 	{
-		super();
+		super(stats, EnumToolClass.SCYTHE);
 		this.initItem();
 	}
 
@@ -42,7 +42,7 @@ public class ItemScythe extends ItemExPWeapon implements IWeapon, IWeightProvide
 	@Override
 	public void initItem()
 	{
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemScythe));
+		this.setSelfRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemScythe));
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabTools);
 		this.setHasSubtypes(true);
@@ -70,12 +70,6 @@ public class ItemScythe extends ItemExPWeapon implements IWeapon, IWeightProvide
 	public EnumWeaponWeight getWeaponWeight(ItemStack is)
 	{
 		return EnumWeaponWeight.HEAVY;
-	}
-
-	@Override
-	public EnumToolClass getToolClass()
-	{
-		return EnumToolClass.SCYTHE;
 	}
 
 	@Override

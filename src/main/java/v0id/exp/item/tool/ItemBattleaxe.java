@@ -21,9 +21,9 @@ import java.util.Arrays;
 
 public class ItemBattleaxe extends ItemExPWeapon implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry
 {
-	public ItemBattleaxe()
+	public ItemBattleaxe(EnumToolStats stats)
 	{
-		super();
+		super(stats, EnumToolClass.BATTLEAXE);
 		this.initItem();
 	}
 
@@ -40,7 +40,7 @@ public class ItemBattleaxe extends ItemExPWeapon implements IWeapon, IWeightProv
 	@Override
 	public void initItem()
 	{
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemBattleaxe));
+		this.setSelfRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemBattleaxe));
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setCreativeTab(ExPCreativeTabs.tabTools);
 		this.setHasSubtypes(true);
@@ -68,12 +68,6 @@ public class ItemBattleaxe extends ItemExPWeapon implements IWeapon, IWeightProv
 	public EnumWeaponWeight getWeaponWeight(ItemStack is)
 	{
 		return EnumWeaponWeight.HEAVY;
-	}
-
-	@Override
-	public EnumToolClass getToolClass()
-	{
-		return EnumToolClass.BATTLEAXE;
 	}
 
 	@Override
