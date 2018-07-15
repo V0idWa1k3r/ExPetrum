@@ -35,7 +35,7 @@ public class TESRShaft extends FastTESR<TileShaft>
         int j = i % 65536;
         int k = i / 65536;
         long current = IExPWorld.of(te.getWorld()).today().getTime();
-        float rotation = current - te.lastStepped <= 20 ? (float)Math.toRadians((te.getWorld().getWorldTime() % 45F) * 8 + 8 * partialTicks) : (float)Math.toRadians((te.lastStepped % 45F) * 8);
+        float rotation = current - te.lastStepped <= 5 ? (float)Math.toRadians((te.getWorld().getWorldTime() % 45F) * 8 + 8 * partialTicks) : (float)Math.toRadians((te.lastStepped % 45F) * 8);
         if (axis == EnumFacing.Axis.X)
         {
             transform = transform.scale(new Vector3f(1, 0.375F, 0.375F));

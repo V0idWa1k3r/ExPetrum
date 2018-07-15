@@ -28,8 +28,8 @@ public class TileWindmill extends TileEntity implements ITickable, IMultiblock
         }
 
         float wind = IExPWorld.of(this.getWorld()).getWindStrength();
-        float speed = wind * 16;
-        float torque = wind * 4;
+        float speed = Math.min(42, wind) * 16;
+        float torque = Math.min(42, wind) * 4;
         this.prevRotation = this.rotation;
         this.rotation += wind / 2F;
         EnumFacing offset = this.world.getBlockState(pos).getValue(BlockHorizontal.FACING);

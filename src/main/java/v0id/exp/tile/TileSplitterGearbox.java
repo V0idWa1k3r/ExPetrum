@@ -35,19 +35,22 @@ public class TileSplitterGearbox extends TileEntity implements ITickable, ISynca
     @Override
     public void update()
     {
-        EnumFacing[] faces = new EnumFacing[]{ output0, output1 };
-        for (EnumFacing face : faces)
+        if (!this.world.isBlockPowered(this.pos))
         {
-            BlockPos at = this.pos.offset(face);
-            if (this.world.getTileEntity(at) instanceof IRotaryTransmitter)
+            EnumFacing[] faces = new EnumFacing[]{output0, output1};
+            for (EnumFacing face : faces)
             {
-                if (this.rotaryHandler.getSpeed() != 0 && this.rotaryHandler.getTorque() != 0)
+                BlockPos at = this.pos.offset(face);
+                if (this.world.getTileEntity(at) instanceof IRotaryTransmitter)
                 {
-                    EnumFacing.Axis axis = this.world.getBlockState(at).getValue(BlockRotatedPillar.AXIS);
-                    if (axis == face.getAxis())
+                    if (this.rotaryHandler.getSpeed() != 0 && this.rotaryHandler.getTorque() != 0)
                     {
-                        ((IRotaryTransmitter) this.world.getTileEntity(at)).step(face.getOpposite(), this.rotaryHandler.getSpeed() / 2, this.rotaryHandler.getTorque() / 2, 0);
+                        EnumFacing.Axis axis = this.world.getBlockState(at).getValue(BlockRotatedPillar.AXIS);
+                        if (axis == face.getAxis())
+                        {
+                            ((IRotaryTransmitter) this.world.getTileEntity(at)).step(face.getOpposite(), this.rotaryHandler.getSpeed() / 2, this.rotaryHandler.getTorque() / 2, 0);
 
+                        }
                     }
                 }
             }

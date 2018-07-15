@@ -34,21 +34,25 @@ public class TileGearbox extends TileEntity implements ITickable, ISyncableTile
     @Override
     public void update()
     {
-        EnumFacing out = this.world.getBlockState(this.pos).getValue(BlockDirectional.FACING);
-        BlockPos at = this.pos.offset(out);
-        if (this.world.getTileEntity(at) instanceof IRotaryTransmitter)
+        if (!this.world.isBlockPowered(this.pos))
         {
-            if (this.rotaryHandler.getSpeed() != 0 && this.rotaryHandler.getTorque() != 0)
+            EnumFacing out = this.world.getBlockState(this.pos).getValue(BlockDirectional.FACING);
+            BlockPos at = this.pos.offset(out);
+            if (this.world.getTileEntity(at) instanceof IRotaryTransmitter)
             {
-                EnumFacing.Axis axis = this.world.getBlockState(at).getValue(BlockRotatedPillar.AXIS);
-                if (axis == out.getAxis())
+                if (this.rotaryHandler.getSpeed() != 0 && this.rotaryHandler.getTorque() != 0)
                 {
-                    ((IRotaryTransmitter) this.world.getTileEntity(at)).step(out.getOpposite(), this.rotaryHandler.getSpeed(), this.rotaryHandler.getTorque(), 0);
-                    this.rotaryHandler.setSpeed(0);
-                    this.rotaryHandler.setTorque(0);
+                    EnumFacing.Axis axis = this.world.getBlockState(at).getValue(BlockRotatedPillar.AXIS);
+                    if (axis == out.getAxis())
+                    {
+                        ((IRotaryTransmitter) this.world.getTileEntity(at)).step(out.getOpposite(), this.rotaryHandler.getSpeed(), this.rotaryHandler.getTorque(), 0);
+                    }
                 }
             }
         }
+
+        this.rotaryHandler.setSpeed(0);
+        this.rotaryHandler.setTorque(0);
     }
 
     @Override
