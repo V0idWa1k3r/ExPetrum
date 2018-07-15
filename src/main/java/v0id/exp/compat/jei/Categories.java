@@ -490,9 +490,9 @@ public class Categories
             recipeLayout.getItemStacks().init(0, true, 0, 0);
             recipeLayout.getFluidStacks().init(0, false, 59, 1, 8, 16, 10000, true, null);
             recipeLayout.getItemStacks().init(1, false, 36, 0);
-            recipeLayout.getItemStacks().set(0, ingredients.getInputs(ItemStack.class).get(0));
+            recipeLayout.getItemStacks().set(0, ingredients.getInputs(ItemStack.class).isEmpty() ? Collections.singletonList(ItemStack.EMPTY) : ingredients.getInputs(ItemStack.class).get(0));
             recipeLayout.getFluidStacks().set(0, ingredients.getOutputs(FluidStack.class).stream().map(l -> l.get(0)).collect(Collectors.toList()));
-            recipeLayout.getItemStacks().set(1, ingredients.getOutputs(ItemStack.class).stream().map(l -> l.get(0)).collect(Collectors.toList()));
+            recipeLayout.getItemStacks().set(1,  ingredients.getOutputs(ItemStack.class).isEmpty() ||  ingredients.getOutputs(ItemStack.class).get(0).isEmpty() ? Collections.singletonList(ItemStack.EMPTY) : ingredients.getOutputs(ItemStack.class).stream().map(l -> l.get(0)).collect(Collectors.toList()));
         }
     }
 
