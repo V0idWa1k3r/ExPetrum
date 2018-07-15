@@ -1,0 +1,23 @@
+{
+    "result": {
+        "item": "exp:item_light_backpack",
+        "data": 0
+    },
+    "pattern": [
+        "SLS",
+        "LCL",
+        "SLS"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "S" : {
+            "item": "#LEATHERSTRAP"
+        },
+        "L" : {
+            "item": "#LEATHER"
+        },
+        "C" : {
+            "item": "#CLOTH"
+        }
+    }
+}

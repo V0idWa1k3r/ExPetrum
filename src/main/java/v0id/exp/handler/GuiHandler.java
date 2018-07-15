@@ -12,6 +12,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import v0id.api.exp.data.ExPItems;
 import v0id.exp.client.gui.*;
 import v0id.exp.container.*;
+import v0id.exp.item.ItemBackpack;
 import v0id.exp.tile.*;
 
 import javax.annotation.Nullable;
@@ -119,6 +120,17 @@ public class GuiHandler implements IGuiHandler
             case 16:
             {
                 return new GuiBlastFurnace(player.inventory, (TileBlastFurnace) tile);
+            }
+
+            case 17:
+            {
+                ItemStack is = player.getHeldItem(EnumHand.MAIN_HAND);
+                if (!(is.getItem() instanceof ItemBackpack) || !is.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null))
+                {
+                    is = player.getHeldItem(EnumHand.OFF_HAND);
+                }
+
+                return new GuiBackpack(player.inventory, is);
             }
 
             default:
@@ -229,6 +241,17 @@ public class GuiHandler implements IGuiHandler
             case 16:
             {
                 return new ContainerBlastFurnace(player.inventory, (TileBlastFurnace) tile);
+            }
+
+            case 17:
+            {
+                ItemStack is = player.getHeldItem(EnumHand.MAIN_HAND);
+                if (!(is.getItem() instanceof ItemBackpack) || !is.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null))
+                {
+                    is = player.getHeldItem(EnumHand.OFF_HAND);
+                }
+
+                return new ContainerBackpack(player.inventory, is);
             }
 
             default:

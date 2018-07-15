@@ -62,4 +62,10 @@ public class ExPItems
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.itemArmorFramework)
     public static final Item armorFramework = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemLightBackpack)
+    public static final Item lightBackpack = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemTravelersBackpack)
+    public static final Item travelersBackpack = null;
 }

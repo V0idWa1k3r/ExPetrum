@@ -1110,6 +1110,8 @@ item.exp.item_armor_framework.tool_steel.head.name=Unfinished Tool Steel Helmet
 item.exp.item_armor_framework.tool_steel.chest.name=Unfinished Tool Steel Chestplate
 item.exp.item_armor_framework.tool_steel.legs.name=Unfinished Tool Steel Greaves
 item.exp.item_armor_framework.tool_steel.feet.name=Unfinished Tool Steel Boots
+item.exp.item_light_backpack.name=Light Backpack
+item.exp.item_travelers_backpack.name=Traveler's Backpack
 
 exp.item.ingot.desc.type.tin=Tin
 exp.item.ingot.desc.type.barium=Barium

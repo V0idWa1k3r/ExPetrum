@@ -77,7 +77,9 @@ public class ExPItemsRegistry extends AbstractRegistry
         }
 
         event.getRegistry().registerAll(
-            new ItemArmorFramework()
+            new ItemArmorFramework(),
+            new ItemBackpack(false),
+            new ItemBackpack(true)
         );
     }
 }
