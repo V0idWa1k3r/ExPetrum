@@ -140,6 +140,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
         RecipesQuern.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.CHARCOAL.ordinal()), new ItemStack(ExPItems.generic, 8, ItemGeneric.EnumGenericType.FLUX.ordinal()));
         RecipesQuern.addRecipe(new ItemStack(Items.BONE, 1, 0), new ItemStack(Items.DYE, 4, 15));
         RecipesQuern.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.CHARRED_BONE.ordinal()), new ItemStack(ExPItems.generic, 2, ItemGeneric.EnumGenericType.BONE_ASH.ordinal()));
+        RecipesQuern.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.ROCK_SALT.ordinal()), new ItemStack(ExPItems.generic, 2, ItemGeneric.EnumGenericType.SALT.ordinal()));
         for (EnumRockClass rock : EnumRockClass.values())
         {
             RecipesQuern.addRecipe(new ItemStack(ExPBlocks.rock, 1, rock.ordinal()), new ItemStack(ExPBlocks.sand, 1, rock.ordinal()));

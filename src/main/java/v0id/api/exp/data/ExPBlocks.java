@@ -346,4 +346,7 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockSapling)
     public static final Block sapling = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockRockSalt)
+    public static final Block rockSalt = null;
 }

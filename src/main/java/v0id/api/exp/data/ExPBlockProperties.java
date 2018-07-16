@@ -36,6 +36,7 @@ public class ExPBlockProperties
 	public static final PropertyBool CRUCIBLE_HASMETAL = PropertyBool.create("has_metal");
 	public static final PropertyBool BLOOMERY_ISLIT = PropertyBool.create("active");
 	public static final PropertyBool BLASTFURNACE_ISLIT = PropertyBool.create("active");
+	public static final PropertyBool ROCKSALT_ISHINT = PropertyBool.create("hint");
 	public static final PropertyInteger WORKED_BOULDER_INDEX = PropertyInteger.create("workindex", 0, 7);
 	public static final PropertyInteger LOGPILE_COUNT = PropertyInteger.create("count", 1, 8);
 	public static final PropertyInteger CHARCOAL_COUNT = PropertyInteger.create("count", 1, 16);

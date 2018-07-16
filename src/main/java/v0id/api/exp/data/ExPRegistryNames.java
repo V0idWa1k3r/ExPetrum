@@ -90,7 +90,8 @@ public class ExPRegistryNames
 		blockMechanicalPotteryStation																		= "mechanical_pottery_station",
 		blockBlastFurnaceMetal																				= "blast_furnace_metal",
 		blockBlastFurnace																					= "blast_furnace",
-        blockSapling                                                                                        = "sapling";
+        blockSapling                                                                                        = "sapling",
+		blockRockSalt																						= "rock_salt";
 
 	public static final String
 		itemRock																							= "item_rock",

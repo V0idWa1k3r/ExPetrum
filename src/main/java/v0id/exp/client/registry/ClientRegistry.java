@@ -248,6 +248,7 @@ public class ClientRegistry implements ILifecycleListener
         mkCustomModelResourceLocations(ExPBlocks.chest, EnumTreeType.values().length, i -> "facing=north,ttype=" + EnumTreeType.values()[i].getName());
         mkCustomModelResourceLocations(ExPBlocks.shaft, EnumShaftMaterial.values().length, i -> "axis=x,type=" + EnumShaftMaterial.values()[i].getName());
         mkCustomModelResourceLocations(ExPBlocks.sapling, EnumTreeType.values().length, i -> "ttype=" + EnumTreeType.values()[i].getName());
+        mkCustomModelResourceLocations(ExPBlocks.rockSalt, 2, i -> "hint=" + Boolean.toString(i == 1));
 
         // Statically mapped item models
         registerStaticModel(ExPItems.basket, new ModelResourceLocation(ExPItems.basket.getRegistryName(), "inventory"));

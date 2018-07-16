@@ -36,7 +36,8 @@ public class ExPBiomeDecorator extends BiomeDecorator
 	public static final OilGenerator genOil = new OilGenerator();
 	public static final ClayLakesGenerator genClay = new ClayLakesGenerator();
 	public static final KaolinGenerator genKaolin = new KaolinGenerator();
-	
+	public static final RockSaltGenerator genRockSalt = new RockSaltGenerator();
+
 	@Override
 	public void decorate(World worldIn, Random random, Biome biome, BlockPos pos)
     {
@@ -55,6 +56,7 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		this.doFlintPass(worldIn, random, biome, pos);
 		this.doBoulderPass(worldIn, random, biome, pos);
 		this.doOrePass(worldIn, random, biome, pos);
+		this.doRockSaltPass(worldIn, random, biome, pos);
 		this.doCropsPass(worldIn, random, biome, pos);
 		this.doCoralPass(worldIn, random, biome, pos);
 		this.doOilPass(worldIn, random, biome, pos);
@@ -133,6 +135,14 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		if (rand.nextDouble() <= 0.1)
 		{
 			this.orePassGenerate(worldIn, rand, biome, pos);
+		}
+	}
+
+	public void doRockSaltPass(World worldIn, Random rand, Biome biome, BlockPos pos)
+	{
+		if (rand.nextDouble() <= 0.01)
+		{
+			this.rockSaltPassGenerate(worldIn, rand, biome, pos);
 		}
 	}
 
@@ -352,7 +362,21 @@ public class ExPBiomeDecorator extends BiomeDecorator
 		
 		event.generator.generate(worldIn, rand, at);
 	}
-	
+
+    public void rockSaltPassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)
+    {
+        int x = rand.nextInt(16) + 8;
+        int z = rand.nextInt(16) + 8;
+        BlockPos at = new BlockPos(pos.getX() + x, 0, pos.getZ() + z);
+        EventGenOre event = new EventGenOre(worldIn, at, rand, genRockSalt);
+        if (MinecraftForge.TERRAIN_GEN_BUS.post(event))
+        {
+            return;
+        }
+
+        event.generator.generate(worldIn, rand, at);
+    }
+
 	public void pebblePassGenerate(World worldIn, Random rand, Biome biome, BlockPos pos)
 	{
 		int x = rand.nextInt(16) + 8;

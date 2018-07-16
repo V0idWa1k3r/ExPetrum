@@ -63,7 +63,9 @@ public class ItemGeneric extends Item implements IInitializableItem, IWeightProv
         BONE_ASH("bone_ash", 0.05F, IWeightProvider.DEFAULT_VOLUME, "ashBone", "boneAsh"),
         IRON_STICK("iron_stick", 0.1F, IWeightProvider.DEFAULT_VOLUME, "stickIron", "rodIron"),
         WOOD_PULP("wood_pulp", 0.01F, IWeightProvider.DEFAULT_VOLUME, "pulpWood", "sawdust", "dustWood"),
-        PRESSED_WOOD_PULP("pressed_pulp", 0.01F, IWeightProvider.DEFAULT_VOLUME, "compressedPulp", "platePulpWood", "plateSawdust", "plateWood");
+        PRESSED_WOOD_PULP("pressed_pulp", 0.01F, IWeightProvider.DEFAULT_VOLUME, "compressedPulp", "platePulpWood", "plateSawdust", "plateWood"),
+        ROCK_SALT("rock_salt", 0.3F, IWeightProvider.DEFAULT_VOLUME, "saltRock", "oreSalt"),
+        SALT("salt", 0.1F, IWeightProvider.DEFAULT_VOLUME, "salt", "dustSalt", "foodSalt");
 
         EnumGenericType(String name, float weight, Pair<Byte, Byte> volume, String... oreDictNames)
         {
