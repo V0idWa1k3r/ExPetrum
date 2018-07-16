@@ -199,7 +199,7 @@ public class Pig extends EntityAnimal
     {
         super.dropLoot(wasRecentlyHit, lootingModifier, source);
         long age = this.animalCapability.getAge();
-        this.dropItem(new ItemStack(Items.BONE, 6 + this.world.rand.nextInt(14), 0));
+        this.dropItem(new ItemStack(Items.BONE, 1 + this.world.rand.nextInt(6), 0));
         ItemStack beef = new ItemStack(ExPItems.food, 1, FoodEntry.PORK_RAW.getId());
         ItemFood food = (ItemFood)beef.getItem();
         food.setTotalWeight(beef, age < this.getAdulthoodAge() ? 100 + this.world.rand.nextInt(100) : 1500 + this.world.rand.nextInt(3000));

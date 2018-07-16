@@ -301,7 +301,7 @@ public class Chicken extends EntityAnimal
     {
         super.dropLoot(wasRecentlyHit, lootingModifier, source);
         long age = this.animalCapability.getAge();
-        this.dropItem(new ItemStack(Items.FEATHER, 4 + this.world.rand.nextInt(5), 0));
+        this.dropItem(new ItemStack(Items.FEATHER, 1 + this.world.rand.nextInt(4), 0));
         this.dropItem(new ItemStack(Items.BONE, 2 + this.world.rand.nextInt(8), 0));
         ItemStack chicken = new ItemStack(ExPItems.food, 1, FoodEntry.CHICKEN_RAW.getId());
         ItemFood food = (ItemFood)chicken.getItem();

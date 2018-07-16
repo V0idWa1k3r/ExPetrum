@@ -114,7 +114,7 @@ public class Wolf extends EntityMob
     protected void dropLoot(boolean wasRecentlyHit, int lootingModifier, DamageSource source)
     {
         super.dropLoot(wasRecentlyHit, lootingModifier, source);
-        this.dropItem(new ItemStack(Items.BONE, 6 + this.world.rand.nextInt(14), 0));
+        this.dropItem(new ItemStack(Items.BONE, 1 + this.world.rand.nextInt(6), 0));
     }
 
     public void dropItem(ItemStack is)

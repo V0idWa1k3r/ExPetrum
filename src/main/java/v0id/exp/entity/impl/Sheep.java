@@ -234,7 +234,7 @@ public class Sheep extends EntityAnimal
     {
         super.dropLoot(wasRecentlyHit, lootingModifier, source);
         long age = this.animalCapability.getAge();
-        this.dropItem(new ItemStack(Items.BONE, 6 + this.world.rand.nextInt(14), 0));
+        this.dropItem(new ItemStack(Items.BONE, 1 + this.world.rand.nextInt(6), 0));
         ItemStack lamb = new ItemStack(ExPItems.food, 1, FoodEntry.LAMB_RAW.getId());
         ItemFood food = (ItemFood)lamb.getItem();
         food.setTotalWeight(lamb, age < this.getAdulthoodAge() ? 100 + this.world.rand.nextInt(100) : 900 + this.world.rand.nextInt(1200));
