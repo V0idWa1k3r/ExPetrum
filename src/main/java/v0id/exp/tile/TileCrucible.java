@@ -1,5 +1,6 @@
 package v0id.exp.tile;
 
+import com.google.common.collect.Maps;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -139,7 +140,20 @@ public class TileCrucible extends TileEntity implements ITickable, ITemperatureH
                             }
                             else
                             {
-                                throw new UnsupportedOperationException("Impossible exception thrown! Metal that is being poured into a mold is not present in the crucible but it has no alloy composition!");
+                                Map<EnumMetal, Float> values = Maps.newEnumMap(EnumMetal.class);
+                                for (Map.Entry<EnumMetal, Float> data : this.metalMap.entrySet())
+                                {
+                                    values.put(data.getKey(), overallMetal / data.getValue());
+                                }
+
+                                for (Map.Entry<EnumMetal, Float> data : values.entrySet())
+                                {
+                                    this.metalMap.put(data.getKey(), this.metalMap.get(data.getKey()) - 100 * data.getValue());
+                                    if (this.metalMap.get(data.getKey()) <= 0)
+                                    {
+                                        this.metalMap.remove(data.getKey());
+                                    }
+                                }
                             }
                         }
 
