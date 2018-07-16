@@ -47,7 +47,10 @@ public class GuiCrucible extends GuiContainer
                 Minecraft.getMinecraft().fontRenderer.drawString(String.format(I18n.format("exp.item.ingot.desc.type." + entry.getKey().getName()) + " %.1f%%", entry.getValue() / overallMetal * 100), i + 68, j + 14 + k * 10, 0xffffff);
                 ++k;
             }
+
+            this.drawCenteredString(Minecraft.getMinecraft().fontRenderer, overallMetal + "/10000", i + 115, j + 74, 0xffffff);
         }
+
     }
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
