@@ -10,9 +10,9 @@ public class Gradient
 {
     private List<GradientPoint> keys = Lists.newArrayList();
 
-    public Function4<Gradient, List<GradientPoint>, Float, Vector3f> gradientFunc;
+    public Function3<Gradient, List<GradientPoint>, Float, Vector3f> gradientFunc;
 
-    public static Function4<Gradient, List<GradientPoint>, Float, Vector3f> Linear = (grad, collection, a) ->
+    public static Function3<Gradient, List<GradientPoint>, Float, Vector3f> Linear = (grad, collection, a) ->
     {
         int closestStart = grad.getClosest(a);
         GradientPoint point = collection.get(closestStart);
@@ -21,7 +21,7 @@ public class Gradient
         return add(scale(point.color, (1 - aRel)), scale(next.color, aRel));
     };
 
-    public static Function4<Gradient, List<GradientPoint>, Float, Vector3f> cosine = (grad, collection, a) ->
+    public static Function3<Gradient, List<GradientPoint>, Float, Vector3f> cosine = (grad, collection, a) ->
     {
         int closestStart = grad.getClosest(a);
         GradientPoint point = collection.get(closestStart);
@@ -30,7 +30,7 @@ public class Gradient
         return add(scale(point.color, (1 - aRelC)), scale(next.color, aRelC));
     };
 
-    public static Function4<Gradient, List<GradientPoint>, Float, Vector3f> cubic = (grad, collection, a) ->
+    public static Function3<Gradient, List<GradientPoint>, Float, Vector3f> cubic = (grad, collection, a) ->
     {
         int closestStart = grad.getClosest(a);
         int preStart = closestStart == 0 ? collection.size() - 1 : closestStart - 1;
@@ -47,7 +47,7 @@ public class Gradient
         return this.keys.get(this.getClosest(key)).color;
     }
 
-    public Vector3f interpolate(float value, Function4<Gradient, List<GradientPoint>, Float, Vector3f> func)
+    public Vector3f interpolate(float value, Function3<Gradient, List<GradientPoint>, Float, Vector3f> func)
     {
         return func.apply(this, this.keys, value);
     }
