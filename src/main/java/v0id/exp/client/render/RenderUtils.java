@@ -8,6 +8,7 @@ import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 import v0id.api.exp.client.model.WavefrontObject;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -27,6 +28,11 @@ public class RenderUtils
 
     public static void renderCube(BufferBuilder buffer, Matrix4f transform, Vector3f pos, float[] color, int[] lightmap, Function<EnumFacing, TextureAtlasSprite> textureGetter)
     {
+        renderCube(buffer, transform, pos, color, lightmap, textureGetter, (facing, sprite) -> new Vector4f(sprite.getMinU(), sprite.getMinV(), sprite.getMaxU(), sprite.getMaxV()));
+    }
+
+    public static void renderCube(BufferBuilder buffer, Matrix4f transform, Vector3f pos, float[] color, int[] lightmap, Function<EnumFacing, TextureAtlasSprite> textureGetter, BiFunction<EnumFacing, TextureAtlasSprite, Vector4f> uvInterpolator)
+    {
         TextureAtlasSprite top = textureGetter.apply(EnumFacing.UP);
         TextureAtlasSprite down = textureGetter.apply(EnumFacing.DOWN);
         TextureAtlasSprite west = textureGetter.apply(EnumFacing.WEST);
@@ -41,30 +47,36 @@ public class RenderUtils
         Vector4f btm_front_right = mulVecByMatrix(new Vector4f(0.5F, -0.5F, -0.5F, 1), transform);
         Vector4f btm_back_right = mulVecByMatrix(new Vector4f(0.5F, -0.5F, 0.5F, 1), transform);
         Vector4f btm_back_left = mulVecByMatrix(new Vector4f(-0.5F, -0.5F, 0.5F, 1), transform);
-        buffer.pos(pos.getX() + top_front_right.getX(), pos.getY() + top_front_right.getY(), pos.getZ() + top_front_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(top.getMinU(), top.getMinV()).lightmap(lightmap[0], lightmap[1]).endVertex();
-        buffer.pos(pos.getX() + top_front_left.getX(), pos.getY() + top_front_left.getY(), pos.getZ() + top_front_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(top.getMaxU(), top.getMinV()).lightmap(lightmap[0], lightmap[1]).endVertex();
-        buffer.pos(pos.getX() + top_back_left.getX(), pos.getY() + top_back_left.getY(), pos.getZ() + top_back_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(top.getMaxU(), top.getMaxV()).lightmap(lightmap[0], lightmap[1]).endVertex();
-        buffer.pos(pos.getX() + top_back_right.getX(), pos.getY() + top_back_right.getY(), pos.getZ() + top_back_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(top.getMinU(), top.getMaxV()).lightmap(lightmap[0], lightmap[1]).endVertex();
-        buffer.pos(pos.getX() + btm_front_right.getX(), pos.getY() + btm_front_right.getY(), pos.getZ() + btm_front_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(down.getMaxU(), down.getMaxV()).lightmap(lightmap[0], lightmap[1]).endVertex();
-        buffer.pos(pos.getX() + btm_front_left.getX(), pos.getY() + btm_front_left.getY(), pos.getZ() + btm_front_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(down.getMinU(), down.getMaxV()).lightmap(lightmap[0], lightmap[1]).endVertex();
-        buffer.pos(pos.getX() + btm_back_left.getX(), pos.getY() + btm_back_left.getY(), pos.getZ() + btm_back_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(down.getMinU(), down.getMinV()).lightmap(lightmap[0], lightmap[1]).endVertex();
-        buffer.pos(pos.getX() + btm_back_right.getX(), pos.getY() + btm_back_right.getY(), pos.getZ() + btm_back_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(down.getMaxU(), down.getMinV()).lightmap(lightmap[0], lightmap[1]).endVertex();
-        buffer.pos(pos.getX() + top_front_left.getX(), pos.getY() + top_front_left.getY(), pos.getZ() + top_front_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(north.getMinU(), north.getMinV()).lightmap(lightmap[0], lightmap[1]).endVertex();
-        buffer.pos(pos.getX() + top_front_right.getX(), pos.getY() + top_front_right.getY(), pos.getZ() + top_front_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(north.getMaxU(), north.getMinV()).lightmap(lightmap[0], lightmap[1]).endVertex();
-        buffer.pos(pos.getX() + btm_front_right.getX(), pos.getY() + btm_front_right.getY(), pos.getZ() + btm_front_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(north.getMaxU(), north.getMaxV()).lightmap(lightmap[0], lightmap[1]).endVertex();
-        buffer.pos(pos.getX() + btm_front_left.getX(), pos.getY() + btm_front_left.getY(), pos.getZ() + btm_front_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(north.getMinU(), north.getMaxV()).lightmap(lightmap[0], lightmap[1]).endVertex();
-        buffer.pos(pos.getX() + top_back_left.getX(), pos.getY() + top_back_left.getY(), pos.getZ() + top_back_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(south.getMaxU(), south.getMinV()).lightmap(lightmap[0], lightmap[1]).endVertex();
-        buffer.pos(pos.getX() + top_back_right.getX(), pos.getY() + top_back_right.getY(), pos.getZ() + top_back_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(south.getMinU(), south.getMinV()).lightmap(lightmap[0], lightmap[1]).endVertex();
-        buffer.pos(pos.getX() + btm_back_right.getX(), pos.getY() + btm_back_right.getY(), pos.getZ() + btm_back_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(south.getMinU(), south.getMaxV()).lightmap(lightmap[0], lightmap[1]).endVertex();
-        buffer.pos(pos.getX() + btm_back_left.getX(), pos.getY() + btm_back_left.getY(), pos.getZ() + btm_back_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(south.getMaxU(), south.getMaxV()).lightmap(lightmap[0], lightmap[1]).endVertex();
-        buffer.pos(pos.getX() + top_front_left.getX(), pos.getY() + top_front_left.getY(), pos.getZ() + top_front_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(west.getMinU(), west.getMinV()).lightmap(lightmap[0], lightmap[1]).endVertex();
-        buffer.pos(pos.getX() + top_back_left.getX(), pos.getY() + top_back_left.getY(), pos.getZ() + top_back_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(west.getMaxU(), west.getMinV()).lightmap(lightmap[0], lightmap[1]).endVertex();
-        buffer.pos(pos.getX() + btm_back_left.getX(), pos.getY() + btm_back_left.getY(), pos.getZ() + btm_back_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(west.getMaxU(), west.getMaxV()).lightmap(lightmap[0], lightmap[1]).endVertex();
-        buffer.pos(pos.getX() + btm_front_left.getX(), pos.getY() + btm_front_left.getY(), pos.getZ() + btm_front_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(west.getMinU(), west.getMaxV()).lightmap(lightmap[0], lightmap[1]).endVertex();
-        buffer.pos(pos.getX() + top_front_right.getX(), pos.getY() + top_front_right.getY(), pos.getZ() + top_front_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(east.getMaxU(), east.getMinV()).lightmap(lightmap[0], lightmap[1]).endVertex();
-        buffer.pos(pos.getX() + top_back_right.getX(), pos.getY() + top_back_right.getY(), pos.getZ() + top_back_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(east.getMinU(), east.getMinV()).lightmap(lightmap[0], lightmap[1]).endVertex();
-        buffer.pos(pos.getX() + btm_back_right.getX(), pos.getY() + btm_back_right.getY(), pos.getZ() + btm_back_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(east.getMinU(), east.getMaxV()).lightmap(lightmap[0], lightmap[1]).endVertex();
-        buffer.pos(pos.getX() + btm_front_right.getX(), pos.getY() + btm_front_right.getY(), pos.getZ() + btm_front_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(east.getMaxU(), east.getMaxV()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        Vector4f uv_top = uvInterpolator.apply(EnumFacing.UP, top);
+        Vector4f uv_down = uvInterpolator.apply(EnumFacing.DOWN, down);
+        Vector4f uv_west = uvInterpolator.apply(EnumFacing.WEST, west);
+        Vector4f uv_east = uvInterpolator.apply(EnumFacing.EAST, east);
+        Vector4f uv_north = uvInterpolator.apply(EnumFacing.NORTH, north);
+        Vector4f uv_south = uvInterpolator.apply(EnumFacing.SOUTH, south);
+        buffer.pos(pos.getX() + top_front_right.getX(), pos.getY() + top_front_right.getY(), pos.getZ() + top_front_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_top.getX(), uv_top.getY()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        buffer.pos(pos.getX() + top_front_left.getX(), pos.getY() + top_front_left.getY(), pos.getZ() + top_front_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_top.getZ(), uv_top.getY()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        buffer.pos(pos.getX() + top_back_left.getX(), pos.getY() + top_back_left.getY(), pos.getZ() + top_back_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_top.getZ(), uv_top.getW()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        buffer.pos(pos.getX() + top_back_right.getX(), pos.getY() + top_back_right.getY(), pos.getZ() + top_back_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_top.getX(), uv_top.getW()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        buffer.pos(pos.getX() + btm_front_right.getX(), pos.getY() + btm_front_right.getY(), pos.getZ() + btm_front_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_down.getZ(), uv_down.getW()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        buffer.pos(pos.getX() + btm_front_left.getX(), pos.getY() + btm_front_left.getY(), pos.getZ() + btm_front_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_down.getX(), uv_down.getW()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        buffer.pos(pos.getX() + btm_back_left.getX(), pos.getY() + btm_back_left.getY(), pos.getZ() + btm_back_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_down.getX(), uv_down.getY()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        buffer.pos(pos.getX() + btm_back_right.getX(), pos.getY() + btm_back_right.getY(), pos.getZ() + btm_back_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_down.getZ(), uv_down.getY()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        buffer.pos(pos.getX() + top_front_left.getX(), pos.getY() + top_front_left.getY(), pos.getZ() + top_front_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_north.getX(), uv_north.getY()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        buffer.pos(pos.getX() + top_front_right.getX(), pos.getY() + top_front_right.getY(), pos.getZ() + top_front_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_north.getZ(), uv_north.getY()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        buffer.pos(pos.getX() + btm_front_right.getX(), pos.getY() + btm_front_right.getY(), pos.getZ() + btm_front_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_north.getZ(), uv_north.getW()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        buffer.pos(pos.getX() + btm_front_left.getX(), pos.getY() + btm_front_left.getY(), pos.getZ() + btm_front_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_north.getX(), uv_north.getW()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        buffer.pos(pos.getX() + top_back_left.getX(), pos.getY() + top_back_left.getY(), pos.getZ() + top_back_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_south.getZ(), uv_south.getY()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        buffer.pos(pos.getX() + top_back_right.getX(), pos.getY() + top_back_right.getY(), pos.getZ() + top_back_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_south.getX(), uv_south.getY()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        buffer.pos(pos.getX() + btm_back_right.getX(), pos.getY() + btm_back_right.getY(), pos.getZ() + btm_back_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_south.getX(), uv_south.getW()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        buffer.pos(pos.getX() + btm_back_left.getX(), pos.getY() + btm_back_left.getY(), pos.getZ() + btm_back_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_south.getZ(), uv_south.getW()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        buffer.pos(pos.getX() + top_front_left.getX(), pos.getY() + top_front_left.getY(), pos.getZ() + top_front_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_west.getX(), uv_west.getY()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        buffer.pos(pos.getX() + top_back_left.getX(), pos.getY() + top_back_left.getY(), pos.getZ() + top_back_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_west.getZ(), uv_west.getY()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        buffer.pos(pos.getX() + btm_back_left.getX(), pos.getY() + btm_back_left.getY(), pos.getZ() + btm_back_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_west.getZ(), uv_west.getW()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        buffer.pos(pos.getX() + btm_front_left.getX(), pos.getY() + btm_front_left.getY(), pos.getZ() + btm_front_left.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_west.getX(), uv_west.getW()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        buffer.pos(pos.getX() + top_front_right.getX(), pos.getY() + top_front_right.getY(), pos.getZ() + top_front_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_east.getZ(), uv_east.getY()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        buffer.pos(pos.getX() + top_back_right.getX(), pos.getY() + top_back_right.getY(), pos.getZ() + top_back_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_east.getX(), uv_east.getY()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        buffer.pos(pos.getX() + btm_back_right.getX(), pos.getY() + btm_back_right.getY(), pos.getZ() + btm_back_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_east.getX(), uv_east.getW()).lightmap(lightmap[0], lightmap[1]).endVertex();
+        buffer.pos(pos.getX() + btm_front_right.getX(), pos.getY() + btm_front_right.getY(), pos.getZ() + btm_front_right.getZ()).color(color[0], color[1], color[2], color[3]).tex(uv_east.getZ(), uv_east.getW()).lightmap(lightmap[0], lightmap[1]).endVertex();
     }
 
     public static void renderObj(BufferBuilder buffer, WavefrontObject model, Vector3f pos, Matrix4f transform, float[] color, int[] lightmap, Supplier<TextureAtlasSprite> textureGetter)

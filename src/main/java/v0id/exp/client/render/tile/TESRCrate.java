@@ -7,8 +7,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.model.animation.FastTESR;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
+import org.lwjgl.util.vector.Vector4f;
 import v0id.exp.client.render.RenderUtils;
 import v0id.exp.tile.TileCrate;
+
+import java.util.function.BiFunction;
 
 
 public class TESRCrate extends FastTESR<TileCrate>
@@ -52,9 +55,11 @@ public class TESRCrate extends FastTESR<TileCrate>
             transform = transform.scale(new Vector3f(1, 0.0625F, 1));
         }
 
+        BiFunction<EnumFacing, TextureAtlasSprite, Vector4f> textureInterpolator = (facing1, textureAtlasSprite) -> facing1.getAxis() == EnumFacing.Axis.Y ? new Vector4f(textureAtlasSprite.getMinU(), textureAtlasSprite.getMinV(), textureAtlasSprite.getMaxU(), textureAtlasSprite.getMaxV()) : new Vector4f(textureAtlasSprite.getMinU(), textureAtlasSprite.getMinV() + (textureAtlasSprite.getMaxV() - textureAtlasSprite.getMinV()) * 0.9375F, textureAtlasSprite.getMaxU(), textureAtlasSprite.getMaxV());
+
         int i = te.getWorld().getCombinedLight(te.getPos(), 0);
         int j = i % 65536;
         int k = i / 65536;
-        RenderUtils.renderCube(buffer, transform, pos, new float[]{ 1, 1, 1, 1 }, new int[]{ k, j }, side -> sprite);
+        RenderUtils.renderCube(buffer, transform, pos, new float[]{ 1, 1, 1, 1 }, new int[]{ k, j }, side -> sprite, textureInterpolator);
     }
 }
