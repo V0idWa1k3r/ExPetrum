@@ -46,7 +46,20 @@ public class PlayerManager
 	    {
 			return true;
 	    }
-	};
+
+		@Override
+		public boolean isUnblockable()
+		{
+			return true;
+		}
+
+		@Override
+		public boolean isDamageAbsolute()
+		{
+			return true;
+		}
+
+	}.setDamageBypassesArmor().setDamageIsAbsolute().setDamageAllowedInCreativeMode();
 	public static final Field foodExhaustionLevelFld = FoodStats.class.getDeclaredFields()[2];
 	
 	static
@@ -264,13 +277,18 @@ public class PlayerManager
 	
 	public static void takeDamage(EntityPlayer player, DamageSource source, float amount)
 	{
+	    if (source == expDeathCause)
+        {
+            return;
+        }
+
 		final float baseAmount = amount;
 		IExPPlayer data = IExPPlayer.of(player);
 		List<DamageMapping> mappings = ExPDamageMappings.provide(source);
 		BodyPart part = WeightedRandom.getRandomItem(player.world.rand, mappings).getPart();
 		EntityEquipmentSlot armorCheck = part == BodyPart.HEAD ? EntityEquipmentSlot.HEAD : part == BodyPart.ARM_LEFT || part == BodyPart.ARM_RIGHT || part == BodyPart.BODY ? EntityEquipmentSlot.CHEST : player.world.rand.nextBoolean() ? EntityEquipmentSlot.LEGS : EntityEquipmentSlot.FEET;
 		ItemStack armorStack = player.getItemStackFromSlot(armorCheck);
-		if (!armorStack.isEmpty())
+		if (!armorStack.isEmpty() && !source.isUnblockable())
 		{
 			amount = handleArmorProtection(player, source, amount, armorStack, part, armorCheck);
 		}
