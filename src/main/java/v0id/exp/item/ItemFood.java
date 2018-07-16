@@ -189,6 +189,7 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 		NBTTagCompound foodTag = new NBTTagCompound();
 		foodTag.setFloat("weight", this.getEntry(is).getMaxWeight());
 		foodTag.setFloat("rot", 0.1F);
+		foodTag.setByte("preservationType", (byte)0);
 		is.setTagCompound(is.hasTagCompound() ? is.getTagCompound() : new NBTTagCompound());
 		is.getTagCompound().setTag("exp.foodData", foodTag);
 	}
