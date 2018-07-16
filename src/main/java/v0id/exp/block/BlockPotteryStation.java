@@ -33,7 +33,7 @@ public class BlockPotteryStation extends Block implements IInitializableBlock, I
 {
     public BlockPotteryStation()
     {
-        super(Material.CIRCUITS);
+        super(Material.WOOD);
         this.initBlock();
     }
 
