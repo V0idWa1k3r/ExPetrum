@@ -98,7 +98,10 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 
 		for (int i = 0; i < FoodEntry.allEntries.size(); ++i)
 		{
-			subItems.add(new ItemStack(this, 1, i));
+		    ItemStack is = new ItemStack(this, 1, i);
+		    this.setTotalWeight(is, 10000);
+		    this.setTotalRot(is, 0.1F);
+			subItems.add(is);
 		}
 	}
 
