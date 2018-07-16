@@ -5,6 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.IExPWorld;
@@ -70,9 +71,9 @@ public class TileSapling extends TileEntity
             {
                 for (int y = 0; y <= 8; ++y)
                 {
-                    if (x != this.pos.getX() || y != this.pos.getY() || z != this.pos.getZ())
+                    if (x != 0 || y != 0 || z != 0)
                     {
-                        if (!this.world.isAirBlock(this.pos.add(x, y, z)) || !this.world.getBlockState(pos.add(x, y, z)).getBlock().isAssociatedBlock(Blocks.TALLGRASS))
+                        if (!this.world.isAirBlock(this.pos.add(x, y, z)) && !this.world.getBlockState(pos.add(x, y, z)).getBlock().isAssociatedBlock(Blocks.TALLGRASS))
                         {
                             return false;
                         }
@@ -86,6 +87,6 @@ public class TileSapling extends TileEntity
 
     public void grow()
     {
-        TreeGenerators.generators.get(this.type).generate(this.world, this.world.rand, this.pos);
+        TreeGenerators.generators.get(this.type).generate(this.world, this.world.rand, this.pos.offset(EnumFacing.DOWN));
     }
 }

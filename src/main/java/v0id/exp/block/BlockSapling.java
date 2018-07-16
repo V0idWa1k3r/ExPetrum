@@ -7,6 +7,8 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -135,9 +137,17 @@ public class BlockSapling extends Block implements IWeightProvider, IInitializab
     }
 
     @Override
-    public int damageDropped(IBlockState state)
+    public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
-        return state.getValue(TREE_TYPE).ordinal();
+        return Items.AIR;
+    }
+
+    @Override
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    {
+        TileSapling sapling = (TileSapling) worldIn.getTileEntity(pos);
+        InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(this, 1, sapling.type.ordinal()));
+        super.breakBlock(worldIn, pos, state);
     }
 
     @Override
