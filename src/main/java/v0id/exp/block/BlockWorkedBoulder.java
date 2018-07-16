@@ -8,6 +8,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
@@ -22,6 +23,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
+import v0id.api.exp.block.IChiselable;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.data.*;
 import v0id.api.exp.metal.EnumToolClass;
@@ -38,7 +40,7 @@ import java.util.stream.Stream;
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
 import static v0id.api.exp.data.ExPBlockProperties.ROCK_CLASS;
 
-public class BlockWorkedBoulder extends Block implements IInitializableBlock, IOreDictEntry, IItemBlockProvider
+public class BlockWorkedBoulder extends Block implements IInitializableBlock, IOreDictEntry, IItemBlockProvider, IChiselable
 {
 	public static final AxisAlignedBB BOULDER_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.6, 0.9);
 
@@ -276,5 +278,21 @@ public class BlockWorkedBoulder extends Block implements IInitializableBlock, IO
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
 		registry.register(new ItemBlockWithMetadata(this));
+	}
+
+	@Override
+	public IBlockState chisel(IBlockState original, World world, BlockPos pos)
+	{
+		TileWorkedBoulder twb = (TileWorkedBoulder) world.getTileEntity(pos);
+		if (twb.workedIndex == 7)
+		{
+			return Blocks.AIR.getDefaultState();
+		}
+		else
+		{
+			++twb.workedIndex;
+			ExPNetwork.sendTileData(twb, true);
+			return original;
+		}
 	}
 }

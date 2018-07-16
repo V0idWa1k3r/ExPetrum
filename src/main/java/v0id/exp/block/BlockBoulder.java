@@ -20,8 +20,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.IForgeRegistry;
+import v0id.api.exp.block.IChiselable;
 import v0id.api.exp.block.IOreHintReplaceable;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.data.*;
@@ -35,7 +36,7 @@ import java.util.stream.Stream;
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
 import static v0id.api.exp.data.ExPBlockProperties.ROCK_CLASS;
 
-public class BlockBoulder extends Block implements IInitializableBlock, IOreHintReplaceable, IOreDictEntry, IItemBlockProvider
+public class BlockBoulder extends Block implements IInitializableBlock, IOreHintReplaceable, IOreDictEntry, IItemBlockProvider, IChiselable
 {
 	public static final PropertyInteger MODEL_INDEX = PropertyInteger.create("amdl", 0, 3);
 	public static final AxisAlignedBB BOULDER_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.6, 0.9);
@@ -142,7 +143,8 @@ public class BlockBoulder extends Block implements IInitializableBlock, IOreHint
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
-		return this.getExtendedState(state, worldIn, pos);
+		ExPMisc.modelVariantRandom.setSeed(MathHelper.getPositionRandom(pos));
+		return state.withProperty(MODEL_INDEX, ExPMisc.modelVariantRandom.nextInt(4));
 	}
 
 	@SuppressWarnings("deprecation")
@@ -229,13 +231,6 @@ public class BlockBoulder extends Block implements IInitializableBlock, IOreHint
 	}
 
 	@Override
-	public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos)
-	{
-		ExPMisc.modelVariantRandom.setSeed(MathHelper.getPositionRandom(pos));
-		return state.withProperty(MODEL_INDEX, ExPMisc.modelVariantRandom.nextInt(4));
-	}
-
-	@Override
 	public void registerOreDictNames()
 	{
 		Stream.of(ExPOreDict.blockBoulder).forEach(s -> { 
@@ -249,5 +244,11 @@ public class BlockBoulder extends Block implements IInitializableBlock, IOreHint
 	public void registerItem(IForgeRegistry<Item> registry)
 	{
 		registry.register(new ItemBlockWithMetadata(this));
+	}
+
+	@Override
+	public IBlockState chisel(IBlockState original, World world, BlockPos pos)
+	{
+		return ExPBlocks.workedBoulder.getDefaultState();
 	}
 }
