@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.animation.FastTESR;
+import v0id.api.exp.data.ExPBlocks;
 import v0id.exp.item.ItemGeneric;
 import v0id.exp.tile.TileScrapingRack;
 
@@ -15,7 +16,7 @@ public class TESRScrapingRack extends FastTESR<TileScrapingRack>
     @Override
     public void renderTileEntityFast(TileScrapingRack te, double x, double y, double z, float partialTicks, int destroyStage, float partial, BufferBuilder buffer)
     {
-        if (!te.inventory.getStackInSlot(0).isEmpty())
+        if (!te.inventory.getStackInSlot(0).isEmpty() && te.getWorld().getBlockState(te.getPos()).getBlock() == ExPBlocks.scrapingRack)
         {
             TextureAtlasSprite sprite = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getTextureMap().registerSprite(new ResourceLocation("exp", "items/misc/prepared_hide"));
             TextureAtlasSprite sprite2 = Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getModelManager().getTextureMap().registerSprite(new ResourceLocation("exp", "items/misc/soaked_hide"));
