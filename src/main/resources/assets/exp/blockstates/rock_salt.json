@@ -1,0 +1,23 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"textures" : {
+			"all": "exp:blocks/stone/rock_salt"
+		},
+		"transform": "forge:default-block",
+		"gui3d" : true,
+		"model" : "minecraft:cube_all"
+	},
+	"variants" : {
+		"normal": [{}],
+        "inventory": [{}],
+        "hint": {
+            "true": {
+                "model" : "exp:boulder_0"
+            },
+            "false": {
+                "model" : "minecraft:cube_all"
+            }
+        }
+	}
+}

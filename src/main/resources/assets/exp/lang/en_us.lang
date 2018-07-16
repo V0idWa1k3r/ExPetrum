@@ -379,6 +379,7 @@ tile.exp.mechanical_pottery_station.name=Mechanical Pottery Station
 tile.exp.blast_furnace.name=Blast Furnace
 tile.exp.sapling.name=Sapling
 tile.exp.flint.name=Flint
+tile.exp.rock_salt.name=Rock Salt
 
 item.exp.item_ingot.name=Ingot
 
@@ -784,6 +785,8 @@ item.exp.item_generic.bone_ash.name=Charred Bone Ash
 item.exp.item_generic.iron_stick.name=Iron Rod
 item.exp.item_generic.wood_pulp.name=Wood Pulp
 item.exp.item_generic.pressed_pulp.name=Compressed Wood Pulp
+item.exp.item_generic.rock_salt.name=Rock Salt
+item.exp.item_generic.salt.name=Salt
 item.exp.item_ore.acanthite.name=Acanthite Ore
 item.exp.item_ore.barite.name=Barite Ore
 item.exp.item_ore.bauxite.name=Bauxite Ore

@@ -243,6 +243,16 @@
                 "textures" : {
                     "layer0" : "exp:items/misc/pressed_pulp"
                 }
+            },
+            "rock_salt": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/rock_salt"
+                }
+            },
+            "salt": {
+                "textures" : {
+                    "layer0" : "exp:items/misc/salt"
+                }
             }
 		}
 	}
