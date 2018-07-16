@@ -1,5 +1,6 @@
 package v0id.exp.item.tool;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
@@ -19,6 +20,7 @@ import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.api.exp.metal.EnumToolClass;
 import v0id.api.exp.metal.EnumToolStats;
+import v0id.exp.entity.EntityThrownSpear;
 import v0id.exp.item.IInitializableItem;
 
 import java.util.Arrays;
@@ -92,6 +94,20 @@ public class ItemSpear extends ItemExPWeapon implements IWeapon, IWeightProvider
 		playerIn.setActiveHand(handIn);
 		return ActionResult.newResult(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
+
+	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
+	{
+	    if (timeLeft <= 71940)
+        {
+            EntityThrownSpear spear = new EntityThrownSpear(worldIn, entityLiving, stack.copy());
+            spear.shoot(entityLiving, entityLiving.rotationPitch, entityLiving.rotationYaw, 3F, 0F);
+            stack.shrink(1);
+            if (!worldIn.isRemote)
+            {
+                worldIn.spawnEntity(spear);
+            }
+        }
+	}
 
 	@Override
 	public EnumAction getItemUseAction(ItemStack stack)
