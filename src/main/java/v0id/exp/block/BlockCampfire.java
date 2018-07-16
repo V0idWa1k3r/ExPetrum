@@ -36,7 +36,7 @@ public class BlockCampfire extends Block implements IInitializableBlock, IItemBl
 {
     public BlockCampfire()
     {
-        super(Material.CIRCUITS);
+        super(Material.WOOD);
         this.initBlock();
     }
 
