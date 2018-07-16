@@ -1,0 +1,19 @@
+{
+    "conditions": [
+        {
+            "type": "mod_loaded",
+            "mod": "chiselsandbits"
+        }
+    ],
+    "result": {
+        "item": "chiselsandbits:chisel_iron",
+        "data": 0
+    },
+    "type": "forge:ore_shapeless",
+    "ingredients": [
+        {
+            "item": "exp:item_chisel.iron",
+            "data": 0
+        }
+    ]
+}

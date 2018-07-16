@@ -19,7 +19,6 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
 import org.apache.commons.lang3.tuple.Pair;
@@ -38,9 +37,7 @@ import v0id.api.exp.metal.EnumToolClass;
 import v0id.api.exp.metal.EnumToolStats;
 import v0id.api.exp.recipe.*;
 import v0id.exp.item.*;
-import v0id.exp.item.tool.IExPTool;
 import v0id.exp.recipe.RecipeFoodCombine;
-import v0id.exp.recipe.RecipeMold;
 
 import java.util.Collections;
 import java.util.List;
@@ -63,17 +60,6 @@ public class ExPRecipeRegistry extends AbstractRegistry
 
     public void registerRecipes(RegistryEvent.Register<IRecipe> event)
     {
-        final ResourceLocation mcloc = new ResourceLocation("minecraft:misc");
-        for (EnumMetal metal : EnumMetal.values())
-        {
-            event.getRegistry().register(new RecipeMold(new ItemStack(ExPItems.ingot, 1, metal.ordinal()), new ItemStack(ExPItems.moldIngot, 1, 2 + metal.ordinal())).setRegistryName("exp:recipe_hardcoded_mold_ingot_" + metal.getName()));
-        }
-
-        for (EnumToolClass tool : EnumToolClass.values())
-        {
-            event.getRegistry().register(new RecipeMold(ItemToolHead.createToolHead(tool, EnumToolStats.COPPER), new ItemStack(ExPItems.moldTool, 1, ItemMold.EnumMoldType.FULL.ordinal() * EnumToolClass.values().length + tool.ordinal())).setRegistryName("exp:recipe_hardcoded_mold_toolhead_" + tool.name().toLowerCase()));
-        }
-
         event.getRegistry().register(new RecipeFoodCombine().setRegistryName("exp:recipe_hardcoded_food"));
         IForgeRegistryModifiable<IRecipe> reg = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
         if (Loader.isModLoaded("chiselsandbits"))
@@ -83,16 +69,13 @@ public class ExPRecipeRegistry extends AbstractRegistry
             {
                 reg.remove(loc);
             }
-
-            event.getRegistry().register(new ShapelessOreRecipe(mcloc, new ItemStack(chiselStone, 1, 0), new ItemStack(IExPTool.allTools.get(Pair.of(EnumToolClass.CHISEL, EnumToolStats.STONE)), 1, 0)).setRegistryName("exp:recipe_hardcoded_compat_cnb_chisel_stone"));
-            event.getRegistry().register(new ShapelessOreRecipe(mcloc, new ItemStack(chiselIron, 1, 0), new ItemStack(IExPTool.allTools.get(Pair.of(EnumToolClass.CHISEL, EnumToolStats.IRON)), 1, 7)).setRegistryName("exp:recipe_hardcoded_compat_cnb_chisel_iron"));
         }
 
         String[] toRemove = new String[]{ "minecraft:torch", "minecraft:crafting_table", "minecraft:chest", "minecraft:bone_meal_from_bone", "minecraft:string_to_wool", "minecraft:fishing_rod", "minecraft:bow", "minecraft:leather_helmet", "minecraft:leather_chestplate", "minecraft:leather_leggings", "minecraft:leather_boots", "minecraft:iron_block", "minecraft:gold_block", "minecraft:flint_and_steel", "minecraft:iron_helmet", "minecraft:iron_chestplate", "minecraft:iron_leggings", "minecraft:iron_boots" };
         ExPMisc.modLogger.info("A fair warning.");
         ExPMisc.modLogger.info("Forge is about to spew a bunch of \"Dangerous alternative prefix\" warnings.");
         ExPMisc.modLogger.info("No, ExPetrum isn't broken.");
-        ExPMisc.modLogger.info("It simply overrides vanilla recipes to a dummy implementation to effectively remove them from the game.");
+        ExPMisc.modLogger.info("It simply overrides vanilla recipes to a dummy implementation to effectively remove them from the game without triggering the advancement error spam.");
         ExPMisc.modLogger.info("Thanks for reading. Have a nice day.");
         for (String loc : toRemove)
         {

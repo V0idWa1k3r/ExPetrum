@@ -3,7 +3,8 @@ package v0id.exp.recipe;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import v0id.api.exp.item.IMold;
@@ -13,9 +14,14 @@ import javax.annotation.Nonnull;
 
 public class RecipeMold extends ShapelessOreRecipe implements IRecipe
 {
+    public RecipeMold(NonNullList<Ingredient> input, @Nonnull ItemStack result)
+    {
+        super(null, input, result);
+    }
+
     public RecipeMold(@Nonnull ItemStack result, Object... input)
     {
-        super(new ResourceLocation("minecraft:misc"), result, input);
+        super(null, result, input);
     }
 
     @Override

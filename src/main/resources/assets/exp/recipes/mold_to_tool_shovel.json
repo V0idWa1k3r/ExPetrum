@@ -1,0 +1,13 @@
+{
+  "result": {
+    "item": "exp:item_toolhead",
+    "data": 21
+  },
+  "type": "exp:mold",
+  "ingredients": [
+    {
+      "item": "exp:item_tool_mold",
+      "data": 30
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "result": {
+    "item": "exp:item_ingot",
+    "data": 21
+  },
+  "type": "exp:mold",
+  "ingredients": [
+    {
+      "item": "exp:item_ingot_mold",
+      "data": 23
+    }
+  ]
+}
