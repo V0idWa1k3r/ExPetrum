@@ -14,4 +14,5 @@ public class ExPFluids
 	public static Fluid oliveOil;
 	public static Fluid walnutOil;
 	public static Fluid juice;
+	public static Fluid brine;
 }

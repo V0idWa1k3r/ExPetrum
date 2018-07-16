@@ -186,7 +186,8 @@ public class ExPRegistryNames
         fluidTannin                                                                                         = "tannin",
         fluidOliveOil                                                                                       = "olive_oil",
         fluidWalnutOil                                                                                      = "walnut_oil",
-        fluidJuice                                                                                          = "fruit_juice";
+        fluidJuice                                                                                          = "fruit_juice",
+		fluidBrine																							= "brine";
 
 	public static final String
         soundNewAge                                                                                         = "sound_new_age";

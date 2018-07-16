@@ -1,5 +1,6 @@
 package v0id.exp.registry;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -206,7 +207,26 @@ public class ExPRecipeRegistry extends AbstractRegistry
         RecipesBarrel.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.WOOL.ordinal()), new FluidStack(FluidRegistry.WATER, 100), new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.SOAKED_WOOL.ordinal()), 6000);
         RecipesBarrel.addRecipe(new RecipeBarrelTreatedStick(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.TREATED_STICK.ordinal()), new FluidStack(ExPFluids.oliveOil, 200), 12000));
         RecipesBarrel.addRecipe(new RecipeBarrelTreatedStick(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.TREATED_STICK.ordinal()), new FluidStack(ExPFluids.walnutOil, 500), 12000));
-        RecipesBarrel.addRecipe(new RecipeBarrelChese());
+        RecipesBarrel.addRecipe(new RecipeBarrelCheese());
+        RecipesBarrel.addRecipe(new RecipesBarrel.RecipeBarrelFluid(new ItemStack(ExPItems.generic, 32, ItemGeneric.EnumGenericType.SALT.ordinal()), FluidRegistry.WATER, new FluidStack(ExPFluids.brine, 10000), 24000, true));
+        RecipesBarrel.addRecipe(new RecipeBarrelPickle(FoodEntry.BEANS));
+        RecipesBarrel.addRecipe(new RecipeBarrelPickle(FoodEntry.BEETROOT));
+        RecipesBarrel.addRecipe(new RecipeBarrelPickle(FoodEntry.CABBAGE));
+        RecipesBarrel.addRecipe(new RecipeBarrelPickle(FoodEntry.CARROT));
+        RecipesBarrel.addRecipe(new RecipeBarrelPickle(FoodEntry.CUCUMBER));
+        RecipesBarrel.addRecipe(new RecipeBarrelPickle(FoodEntry.EGGPLANT));
+        RecipesBarrel.addRecipe(new RecipeBarrelPickle(FoodEntry.GARLIC));
+        RecipesBarrel.addRecipe(new RecipeBarrelPickle(FoodEntry.LEEK));
+        RecipesBarrel.addRecipe(new RecipeBarrelPickle(FoodEntry.LETTUCE));
+        RecipesBarrel.addRecipe(new RecipeBarrelPickle(FoodEntry.ONION));
+        RecipesBarrel.addRecipe(new RecipeBarrelPickle(FoodEntry.PARSNIP));
+        RecipesBarrel.addRecipe(new RecipeBarrelPickle(FoodEntry.PEPPER_GREEN));
+        RecipesBarrel.addRecipe(new RecipeBarrelPickle(FoodEntry.PEPPER_YELLOW));
+        RecipesBarrel.addRecipe(new RecipeBarrelPickle(FoodEntry.PEPPER_RED));
+        RecipesBarrel.addRecipe(new RecipeBarrelPickle(FoodEntry.PUMPKIN));
+        RecipesBarrel.addRecipe(new RecipeBarrelPickle(FoodEntry.RADISH));
+        RecipesBarrel.addRecipe(new RecipeBarrelPickle(FoodEntry.SPINACH));
+        RecipesBarrel.addRecipe(new RecipeBarrelPickle(FoodEntry.TOMATO));
 
         RecipesPress.addRecipe(new RecipePressFood(ExPFluids.oliveOil, FoodEntry.OLIVE));
         RecipesPress.addRecipe(new RecipePressFood(ExPFluids.walnutOil, FoodEntry.WALNUT));
@@ -240,7 +260,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
         RecipesSmelting.sort();
     }
 
-    private static class RecipeBarrelChese implements RecipesBarrel.IRecipeBarrel
+    private static class RecipeBarrelCheese implements RecipesBarrel.IRecipeBarrel
     {
         @Override
         public boolean matches(FluidStack fs, ItemStack is)
@@ -364,6 +384,76 @@ public class ExPRecipeRegistry extends AbstractRegistry
         public String getRecipeName(ItemStack is)
         {
             return this.itemOut.getUnlocalizedName() + ".name";
+        }
+
+        @Override
+        public void consumeItem(ItemStack is)
+        {
+            is.shrink(1);
+        }
+    }
+
+    private static class RecipeBarrelPickle implements RecipesBarrel.IRecipeBarrel
+    {
+        public final FoodEntry foodEntryIn;
+
+        private RecipeBarrelPickle(FoodEntry foodEntryIn)
+        {
+            this.foodEntryIn = foodEntryIn;
+        }
+
+        @Override
+        public boolean matches(FluidStack fs, ItemStack is)
+        {
+            return fs != null && fs.getFluid() == ExPFluids.brine && fs.amount > 2000 && is.getItem() instanceof ItemFood && ((ItemFood) is.getItem()).getPreservationType(is) == 0;
+        }
+
+        @Override
+        public int getProgressRequired(ItemStack is)
+        {
+            return 48000;
+        }
+
+        @Override
+        public ItemStack getResult(ItemStack is, FluidStack fluidStack)
+        {
+            ItemStack stack = is.isEmpty() ? new ItemStack(ExPItems.food, 1, this.foodEntryIn.getId()) : is.copy();
+            ItemFood food = (ItemFood) stack.getItem();
+            food.setTotalWeight(stack, is.isEmpty() ? 10000 : food.getTotalWeight(is));
+            food.setPreservationType(stack, (byte)1);
+            food.setItemRotMultiplier(stack, 0.5F);
+            food.setTotalRot(stack, is.isEmpty() ? 0 : food.getTotalRot(is) * 0.1F);
+            return stack;
+        }
+
+        @Override
+        public ItemStack getInput()
+        {
+            return new ItemStack(ExPItems.food, 1, this.foodEntryIn.getId());
+        }
+
+        @Override
+        public FluidStack getInputFluid()
+        {
+            return new FluidStack(ExPFluids.brine, 2000);
+        }
+
+        @Override
+        public FluidStack getOutputFluid(ItemStack is)
+        {
+            return null;
+        }
+
+        @Override
+        public void consumeFluid(IFluidHandler handler, ItemStack is)
+        {
+            handler.drain(2000, true);
+        }
+
+        @Override
+        public String getRecipeName(ItemStack is)
+        {
+            return I18n.format("exp.txt.pickled") + " " + this.getInput().getItem().getUnlocalizedName(this.getInput()) + ".name";
         }
 
         @Override

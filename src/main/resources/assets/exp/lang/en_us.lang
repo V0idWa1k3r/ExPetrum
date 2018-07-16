@@ -127,6 +127,7 @@ fluid.tannin=Tannin
 fluid.olive_oil=Olive Oil
 fluid.walnut_oil=Walnut Oil
 fluid.fruit_juice=Fruit Juice
+fluid.brine=Brine
 
 tile.exp.ore.name=Ore
 
@@ -174,6 +175,7 @@ exp.txt.anvil.tier.1=Bronze
 exp.txt.anvil.tier.2=Iron
 exp.txt.anvil.tier.3=Steel
 exp.txt.anvil.tier.4=Tool/HSLA Steel
+exp.txt.pickled=Pickled
 
 exp.jei.category.smelting=Smelting
 exp.jei.category.pottery=Pottery

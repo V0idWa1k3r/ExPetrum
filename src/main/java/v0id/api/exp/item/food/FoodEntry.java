@@ -210,7 +210,7 @@ public class FoodEntry
 	public static final FoodEntry GARLIC = new FoodEntry().withCalories(149 * BALANCE_MULTIPLIER).withName("garlic").withNutrition(EnumFoodGroup.VEGETABLE, 2);
 	public static final FoodEntry LEEK = new FoodEntry().withCalories(255 * BALANCE_MULTIPLIER).withName("leek").withNutrition(EnumFoodGroup.VEGETABLE, 2);
 	public static final FoodEntry LETTUCE = new FoodEntry().withCalories(13 * BALANCE_MULTIPLIER).withName("lettuce").withNutrition(EnumFoodGroup.VEGETABLE, 4);
-	public static final FoodEntry MILLET = new FoodEntry().withCalories(378 * BALANCE_MULTIPLIER).withName("millet").withNutrition(EnumFoodGroup.VEGETABLE, 4);
+	public static final FoodEntry MILLET = new FoodEntry().withCalories(378 * BALANCE_MULTIPLIER).withName("millet").withNutrition(EnumFoodGroup.GRAIN, 4);
 	public static final FoodEntry OAT = new FoodEntry().withCalories(389 * BALANCE_MULTIPLIER).withName("oat").withNutrition(EnumFoodGroup.GRAIN, 4);
 	public static final FoodEntry ONION = new FoodEntry().withCalories(40 * BALANCE_MULTIPLIER).withName("onion").withNutrition(EnumFoodGroup.VEGETABLE, 4);
 	public static final FoodEntry PARSNIP = new FoodEntry().withCalories(75 * BALANCE_MULTIPLIER).withName("parsnip").withNutrition(EnumFoodGroup.VEGETABLE, 4);

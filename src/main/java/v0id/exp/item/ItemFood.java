@@ -73,6 +73,12 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced)
 	{
 		super.addInformation(stack, world, tooltip, advanced);
+		byte presType = this.getPreservationType(stack);
+		if (presType == 1)
+        {
+            tooltip.add(I18n.format("exp.txt.pickled"));
+        }
+
 		DecimalFormat df = new DecimalFormat("#.#");
 		DecimalFormat df1 = new DecimalFormat("#,###");
 		tooltip.add(I18n.format("exp.txt.item.desc.rot", df.format((this.getTotalRot(stack) / this.getEntry(stack).getBaseHealth()) * 100)));
@@ -315,7 +321,17 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 	{
 		is.getOrCreateSubCompound("exp.foodData").setFloat("weight", f);
 	}
-	
+
+	public byte getPreservationType(ItemStack is)
+	{
+		return is.getOrCreateSubCompound("exp.foodData").getByte("preservationType");
+	}
+
+	public void setPreservationType(ItemStack is, byte b)
+	{
+		is.getOrCreateSubCompound("exp.foodData").setByte("preservationType", b);
+	}
+
 	public float getTotalRot(ItemStack is)
 	{
 		if (!is.hasTagCompound() || !is.getTagCompound().hasKey("exp.foodData"))
