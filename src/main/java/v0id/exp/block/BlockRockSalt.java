@@ -137,6 +137,6 @@ public class BlockRockSalt extends Block implements IInitializableBlock, IItemBl
     @Override
     public int quantityDropped(IBlockState state, int fortune, Random random)
     {
-        return state.getValue(ROCKSALT_ISHINT) ? 1 : 3 + random.nextInt(5);
+        return state.getValue(ROCKSALT_ISHINT) ? 1 : 1 + random.nextInt(3);
     }
 }
