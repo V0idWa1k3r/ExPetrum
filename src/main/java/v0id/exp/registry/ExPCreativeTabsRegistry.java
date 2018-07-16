@@ -75,7 +75,7 @@ public class ExPCreativeTabsRegistry extends AbstractRegistry
 			@Override
 			public ItemStack getTabIconItem()
 			{
-				return new ItemStack(IExPTool.allTools.get(Pair.of(EnumToolStats.STONE, EnumToolClass.KNIFE)));
+				return new ItemStack(IExPTool.allTools.get(Pair.of(EnumToolClass.KNIFE, EnumToolStats.STONE)));
 			}
 		};
 		
