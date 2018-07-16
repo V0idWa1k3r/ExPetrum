@@ -405,7 +405,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
         @Override
         public boolean matches(FluidStack fs, ItemStack is)
         {
-            return fs != null && fs.getFluid() == ExPFluids.brine && fs.amount > 2000 && is.getItem() instanceof ItemFood && ((ItemFood) is.getItem()).getPreservationType(is) == 0;
+            return fs != null && fs.getFluid() == ExPFluids.brine && fs.amount > 2000 && is.getItem() instanceof ItemFood && ((ItemFood) is.getItem()).getPreservationType(is) == 0 && is.getMetadata() == this.foodEntryIn.getId();
         }
 
         @Override
@@ -453,7 +453,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
         @Override
         public String getRecipeName(ItemStack is)
         {
-            return I18n.format("exp.txt.pickled") + " " + this.getInput().getItem().getUnlocalizedName(this.getInput()) + ".name";
+            return I18n.format("exp.txt.pickled") + " " + I18n.format(this.getInput().getItem().getUnlocalizedName(this.getInput()) + ".name");
         }
 
         @Override
