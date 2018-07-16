@@ -14,6 +14,7 @@ public class RecipeFoodCombine extends IForgeRegistryEntry.Impl<IRecipe> impleme
     public boolean matches(InventoryCrafting inv, World worldIn)
     {
         ItemStack food = ItemStack.EMPTY;
+        int matches = 0;
         for (int i = 0; i < inv.getWidth() * inv.getHeight(); ++i)
         {
             ItemStack is = inv.getStackInSlot(i);
@@ -21,6 +22,7 @@ public class RecipeFoodCombine extends IForgeRegistryEntry.Impl<IRecipe> impleme
             {
                 if (is.getItem() instanceof ItemFood)
                 {
+                    ++matches;
                     if (food.isEmpty())
                     {
                         food = is;
@@ -40,7 +42,7 @@ public class RecipeFoodCombine extends IForgeRegistryEntry.Impl<IRecipe> impleme
             }
         }
 
-        return !food.isEmpty();
+        return !food.isEmpty() && matches > 1;
     }
 
     @Override
