@@ -349,7 +349,147 @@
 				"textures" : {
 					"layer0" : "exp:items/produce/cheese"
 				}
-			}
+			},
+			"grain_barley" : {
+				"textures" : {
+					"layer0" : "exp:items/plant/grain/barley"
+				}
+			},
+            "grain_millet" : {
+                "textures" : {
+                    "layer0" : "exp:items/plant/grain/millet"
+                }
+            },
+            "grain_oat" : {
+                "textures" : {
+                    "layer0" : "exp:items/plant/grain/oat"
+                }
+            },
+            "grain_rice" : {
+                "textures" : {
+                    "layer0" : "exp:items/plant/grain/rice"
+                }
+            },
+            "grain_rye" : {
+                "textures" : {
+                    "layer0" : "exp:items/plant/grain/rye"
+                }
+            },
+            "grain_sorghum" : {
+                "textures" : {
+                    "layer0" : "exp:items/plant/grain/sorghum"
+                }
+            },
+            "grain_wheat" : {
+                "textures" : {
+                    "layer0" : "exp:items/plant/grain/wheat"
+                }
+            },
+            "flour_barley" : {
+                "textures" : {
+                    "layer0" : "exp:items/produce/flour/barley"
+                }
+            },
+            "flour_millet" : {
+                "textures" : {
+                    "layer0" : "exp:items/produce/flour/millet"
+                }
+            },
+            "flour_oat" : {
+                "textures" : {
+                    "layer0" : "exp:items/produce/flour/oat"
+                }
+            },
+            "flour_rice" : {
+                "textures" : {
+                    "layer0" : "exp:items/produce/flour/rice"
+                }
+            },
+            "flour_rye" : {
+                "textures" : {
+                    "layer0" : "exp:items/produce/flour/rye"
+                }
+            },
+            "flour_sorghum" : {
+                "textures" : {
+                    "layer0" : "exp:items/produce/flour/sorghum"
+                }
+            },
+            "flour_wheat" : {
+                "textures" : {
+                    "layer0" : "exp:items/produce/flour/wheat"
+                }
+            },
+            "dough_barley" : {
+                "textures" : {
+                    "layer0" : "exp:items/produce/dough/barley"
+                }
+            },
+            "dough_millet" : {
+                "textures" : {
+                    "layer0" : "exp:items/produce/dough/millet"
+                }
+            },
+            "dough_oat" : {
+                "textures" : {
+                    "layer0" : "exp:items/produce/dough/oat"
+                }
+            },
+            "dough_rice" : {
+                "textures" : {
+                    "layer0" : "exp:items/produce/dough/rice"
+                }
+            },
+            "dough_rye" : {
+                "textures" : {
+                    "layer0" : "exp:items/produce/dough/rye"
+                }
+            },
+            "dough_sorghum" : {
+                "textures" : {
+                    "layer0" : "exp:items/produce/dough/sorghum"
+                }
+            },
+            "dough_wheat" : {
+                "textures" : {
+                    "layer0" : "exp:items/produce/dough/wheat"
+                }
+            },
+            "bread_barley" : {
+                "textures" : {
+                    "layer0" : "exp:items/produce/bread/barley"
+                }
+            },
+            "bread_millet" : {
+                "textures" : {
+                    "layer0" : "exp:items/produce/bread/millet"
+                }
+            },
+            "bread_oat" : {
+                "textures" : {
+                    "layer0" : "exp:items/produce/bread/oat"
+                }
+            },
+            "bread_rice" : {
+                "textures" : {
+                    "layer0" : "exp:items/produce/bread/rice"
+                }
+            },
+            "bread_rye" : {
+                "textures" : {
+                    "layer0" : "exp:items/produce/bread/rye"
+                }
+            },
+            "bread_sorghum" : {
+                "textures" : {
+                    "layer0" : "exp:items/produce/bread/sorghum"
+                }
+            },
+            "bread_wheat" : {
+                "textures" : {
+                    "layer0" : "exp:items/produce/bread/wheat"
+                }
+            }
 		}
 	}
 }

@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "exp:item_food",
+    "data": 88
+  },
+  "type": "exp:food",
+  "ingredients": [
+    {
+      "item": "exp:item_food",
+      "data": 81
+    },
+    {
+      "item": "exp:item_wooden_bucket",
+      "data": 1
+    }
+  ]
+}

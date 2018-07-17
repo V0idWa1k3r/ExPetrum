@@ -108,6 +108,13 @@ public class ExPRecipeRegistry extends AbstractRegistry
         RecipesSmelting.addRecipe(new RecipeSmeltingFood(FoodEntry.BEEF_RAW, FoodEntry.BEEF_COOKED, 200));
         RecipesSmelting.addRecipe(new RecipeSmeltingFood(FoodEntry.LAMB_RAW, FoodEntry.LAMB_COOKED, 200));
         RecipesSmelting.addRecipe(new RecipeSmeltingFood(FoodEntry.PORK_RAW, FoodEntry.PORK_COOKED, 200));
+        RecipesSmelting.addRecipe(new RecipeSmeltingFood(FoodEntry.DOUGH_BARLEY, FoodEntry.BREAD_BARLEY, 400));
+        RecipesSmelting.addRecipe(new RecipeSmeltingFood(FoodEntry.DOUGH_MILLET, FoodEntry.BREAD_MILLET, 400));
+        RecipesSmelting.addRecipe(new RecipeSmeltingFood(FoodEntry.DOUGH_OAT, FoodEntry.BREAD_OAT, 400));
+        RecipesSmelting.addRecipe(new RecipeSmeltingFood(FoodEntry.DOUGH_RICE, FoodEntry.BREAD_RICE, 400));
+        RecipesSmelting.addRecipe(new RecipeSmeltingFood(FoodEntry.DOUGH_RYE, FoodEntry.BREAD_RYE, 400));
+        RecipesSmelting.addRecipe(new RecipeSmeltingFood(FoodEntry.DOUGH_SORGHUM, FoodEntry.BREAD_SORGHUM, 400));
+        RecipesSmelting.addRecipe(new RecipeSmeltingFood(FoodEntry.DOUGH_WHEAT, FoodEntry.BREAD_WHEAT, 400));
         for (EnumToolClass tool : EnumToolClass.values())
         {
             RecipesSmelting.addRecipe(new RecipesSmelting.RecipeSmelting(new ItemStack(ExPItems.moldTool, 1, tool.ordinal()), new ItemStack(ExPItems.moldTool, 1, tool.ordinal() + EnumToolClass.values().length), 540F));
@@ -125,6 +132,13 @@ public class ExPRecipeRegistry extends AbstractRegistry
         RecipesQuern.addRecipe(new ItemStack(Items.BONE, 1, 0), new ItemStack(Items.DYE, 4, 15));
         RecipesQuern.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.CHARRED_BONE.ordinal()), new ItemStack(ExPItems.generic, 2, ItemGeneric.EnumGenericType.BONE_ASH.ordinal()));
         RecipesQuern.addRecipe(new ItemStack(ExPItems.generic, 1, ItemGeneric.EnumGenericType.ROCK_SALT.ordinal()), new ItemStack(ExPItems.generic, 2, ItemGeneric.EnumGenericType.SALT.ordinal()));
+        RecipesQuern.addRecipe(new RecipeQuernFood(FoodEntry.GRAIN_BARLEY, FoodEntry.FLOUR_BARLEY));
+        RecipesQuern.addRecipe(new RecipeQuernFood(FoodEntry.GRAIN_MILLET, FoodEntry.FLOUR_MILLET));
+        RecipesQuern.addRecipe(new RecipeQuernFood(FoodEntry.GRAIN_OAT, FoodEntry.FLOUR_OAT));
+        RecipesQuern.addRecipe(new RecipeQuernFood(FoodEntry.GRAIN_RICE, FoodEntry.FLOUR_RICE));
+        RecipesQuern.addRecipe(new RecipeQuernFood(FoodEntry.GRAIN_RYE, FoodEntry.FLOUR_RYE));
+        RecipesQuern.addRecipe(new RecipeQuernFood(FoodEntry.GRAIN_SORGHUM, FoodEntry.FLOUR_SORGHUM));
+        RecipesQuern.addRecipe(new RecipeQuernFood(FoodEntry.GRAIN_WHEAT, FoodEntry.FLOUR_WHEAT));
         for (EnumRockClass rock : EnumRockClass.values())
         {
             RecipesQuern.addRecipe(new ItemStack(ExPBlocks.rock, 1, rock.ordinal()), new ItemStack(ExPBlocks.sand, 1, rock.ordinal()));
@@ -241,6 +255,52 @@ public class ExPRecipeRegistry extends AbstractRegistry
     public void postInit(FMLPostInitializationEvent evt)
     {
         RecipesSmelting.sort();
+    }
+
+    private static class RecipeQuernFood implements RecipesQuern.IRecipeQuern
+    {
+        public final FoodEntry foodIn;
+        public final FoodEntry foodOut;
+
+        public RecipeQuernFood(FoodEntry foodIn, FoodEntry foodOut)
+        {
+            this.foodIn = foodIn;
+            this.foodOut = foodOut;
+        }
+
+        @Override
+        public boolean matches(ItemStack in)
+        {
+            return in.getItem() instanceof ItemFood && in.getMetadata() == foodIn.getId();
+        }
+
+        @Override
+        public ItemStack getOut(ItemStack in)
+        {
+            ItemStack is = new ItemStack(ExPItems.food, 1, foodOut.getId());
+            ItemFood food = (ItemFood) ExPItems.food;
+            if (!in.isEmpty())
+            {
+                food.setTotalWeight(is, food.getTotalWeight(in));
+                food.setTotalRot(is, food.getTotalRot(in));
+                food.setLastTickTime(is, food.getLastTickTime(in));
+                food.setPreservationType(is, food.getPreservationType(in));
+                food.setItemRotMultiplier(is, food.getItemRotMultiplier(in));
+            }
+            else
+            {
+                food.setTotalWeight(is, 10000);
+                food.setTotalRot(is, 0.1F);
+            }
+
+            return is;
+        }
+
+        @Override
+        public ItemStack getIn()
+        {
+            return new ItemStack(ExPItems.food, 1, foodIn.getId());
+        }
     }
 
     private static class RecipeBarrelCheese implements RecipesBarrel.IRecipeBarrel

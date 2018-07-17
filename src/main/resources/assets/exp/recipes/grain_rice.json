@@ -1,0 +1,13 @@
+{
+  "result": {
+    "item": "exp:item_food",
+    "data": 71
+  },
+  "type": "exp:food",
+  "ingredients": [
+    {
+      "item": "exp:item_food",
+      "data": 23
+    }
+  ]
+}

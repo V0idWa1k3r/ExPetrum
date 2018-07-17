@@ -259,4 +259,28 @@ public class ItemWoodenBucket extends Item implements IWeightProvider, IInitiali
     {
         return super.getUnlocalizedName(stack) + "." + stack.getMetadata();
     }
+
+    @Override
+    public boolean hasContainerItem(ItemStack stack)
+    {
+        return stack.getMetadata() == 1;
+    }
+
+    @Override
+    public ItemStack getContainerItem(ItemStack itemStack)
+    {
+        if (itemStack.getMetadata() != 1)
+        {
+            return super.getContainerItem(itemStack);
+        }
+
+        ItemStack ret = itemStack.copy();
+        this.setWater(ret, this.getWater(itemStack) - 1);
+        if (this.getWater(ret) <= 0)
+        {
+            this.setWaterType(ret, null);
+        }
+
+        return ret;
+    }
 }

@@ -1,5 +1,6 @@
 {
     "recipes": {
-        "mold": "v0id.exp.recipe.RecipeMoldFactory"
+        "mold": "v0id.exp.recipe.RecipeMoldFactory",
+        "food": "v0id.exp.recipe.RecipeFoodFactory"
     }
 }
