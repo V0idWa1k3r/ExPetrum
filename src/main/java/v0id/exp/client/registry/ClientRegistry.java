@@ -187,7 +187,6 @@ public class ClientRegistry implements ILifecycleListener
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.crucible), 0, new ModelResourceLocation(ExPBlocks.crucible.getRegistryName(), "normal"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.hay), 0, new ModelResourceLocation(ExPBlocks.hay.getRegistryName(), "normal"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.nestingBox), 0, new ModelResourceLocation(ExPBlocks.nestingBox.getRegistryName(), "normal"));
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.barrel), 0, new ModelResourceLocation(ExPBlocks.barrel.getRegistryName(), "normal"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.scrapingRack), 0, new ModelResourceLocation(ExPBlocks.scrapingRack.getRegistryName(), "normal"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.bellows), 0, new ModelResourceLocation(ExPBlocks.bellows.getRegistryName(), "inventory"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.spinningWheel), 0, new ModelResourceLocation(ExPBlocks.spinningWheel.getRegistryName(), "normal"));
@@ -248,6 +247,7 @@ public class ClientRegistry implements ILifecycleListener
         mkCustomModelResourceLocations(ExPBlocks.shaft, EnumShaftMaterial.values().length, i -> "axis=x,type=" + EnumShaftMaterial.values()[i].getName());
         mkCustomModelResourceLocations(ExPBlocks.sapling, EnumTreeType.values().length, i -> "ttype=" + EnumTreeType.values()[i].getName());
         mkCustomModelResourceLocations(ExPBlocks.rockSalt, 2, i -> "hint=" + Boolean.toString(i == 1));
+        mkCustomModelResourceLocations(ExPBlocks.barrel, EnumTreeType.values().length, i -> "ttype=" + EnumTreeType.values()[i]);
 
         // Statically mapped item models
         registerStaticModel(ExPItems.basket, new ModelResourceLocation(ExPItems.basket.getRegistryName(), "inventory"));

@@ -1,0 +1,25 @@
+{
+  "result": {
+    "item": "exp:barrel",
+    "data": 19
+  },
+  "pattern": [
+    " PR",
+    "SP ",
+    " PR"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "P": {
+      "item": "exp:planks1",
+      "data": 4
+    },
+    "R": {
+      "item": "exp:item_generic",
+      "data": 19
+    },
+    "S": {
+      "item": "#SAW"
+    }
+  }
+}

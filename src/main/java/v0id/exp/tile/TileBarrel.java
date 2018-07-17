@@ -18,6 +18,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.item.IContainerTickable;
 import v0id.api.exp.recipe.RecipesBarrel;
 import v0id.api.exp.tile.ISyncableTile;
@@ -35,6 +36,7 @@ public class TileBarrel extends TileEntity implements ITickable, ISyncableTile
     public int recipeProgress;
     public RecipesBarrel.IRecipeBarrel currentRecipe;
     public Stack<ItemStack> results = new Stack<>();
+    public EnumTreeType treeType = EnumTreeType.KALOPANAX;
 
     public void sendUpdatePacket()
     {
@@ -162,6 +164,7 @@ public class TileBarrel extends TileEntity implements ITickable, ISyncableTile
         this.inventory.deserializeNBT(compound.getCompoundTag("inventory"));
         this.fluidInventory.readFromNBT(compound);
         this.recipeProgress = compound.getInteger("recipeProgress");
+        this.treeType = EnumTreeType.values()[compound.getByte("type")];
         this.results.clear();
         for (NBTBase tagCompound : compound.getTagList("results", Constants.NBT.TAG_COMPOUND))
         {
@@ -176,6 +179,7 @@ public class TileBarrel extends TileEntity implements ITickable, ISyncableTile
         NBTTagCompound ret = super.writeToNBT(compound);
         ret.setTag("inventory", this.inventory.serializeNBT());
         ret.setInteger("recipeProgress", this.recipeProgress);
+        ret.setByte("type", (byte) this.treeType.ordinal());
         this.fluidInventory.writeToNBT(compound);
         NBTTagList tagList = new NBTTagList();
         for (ItemStack is : this.results)
