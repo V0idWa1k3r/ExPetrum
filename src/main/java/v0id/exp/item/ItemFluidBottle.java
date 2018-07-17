@@ -70,7 +70,7 @@ public class ItemFluidBottle extends Item implements IInitializableItem, IWeight
     @Override
     public float provideWeight(ItemStack item)
     {
-        return 400;
+        return 0.4F;
     }
 
     @Override
