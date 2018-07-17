@@ -2,7 +2,7 @@
     "conditions": [
         {
             "type": "forge:mod_loaded",
-            "mod": "chiselsandbits"
+            "modid": "chiselsandbits"
         }
     ],
     "result": {
