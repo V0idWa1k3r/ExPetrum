@@ -15,18 +15,16 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
-import org.apache.commons.lang3.ObjectUtils;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.item.IContainerTickable;
 import v0id.api.exp.recipe.RecipesBarrel;
 import v0id.api.exp.tile.ISyncableTile;
 import v0id.exp.item.ItemWoodenBucket;
 import v0id.exp.net.ExPNetwork;
+import v0id.exp.util.Helpers;
 import v0id.exp.util.temperature.TemperatureUtils;
 
 import javax.annotation.Nullable;
@@ -69,43 +67,30 @@ public class TileBarrel extends TileEntity implements ITickable, ISyncableTile
             {
                 FluidStack fs = this.fluidInventory.getFluid();
                 int missing = this.fluidInventory.getCapacity() - this.fluidInventory.getFluidAmount();
-                if (is.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null) || is.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null))
+                if (Helpers.tryConsumeFluidItem(is, this.fluidInventory, stack ->
                 {
-                    IFluidHandler handlerItem = ObjectUtils.firstNonNull(is.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null), is.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null));
-                    if (fs == null || fs.isFluidEqual(is))
+                    if (this.inventory.getStackInSlot(1).isEmpty())
                     {
-                        FluidStack currentFluid = handlerItem.drain(Integer.MAX_VALUE, false);
-                        if (currentFluid != null)
+                        this.inventory.setStackInSlot(1, stack);
+                        return true;
+                    }
+                    else
+                    {
+                        if (ItemHandlerHelper.canItemStacksStack(stack, this.inventory.getStackInSlot(1)) && this.inventory.getStackInSlot(1).getCount() + stack.getCount() <= this.inventory.getStackInSlot(1).getMaxStackSize())
                         {
-                            if (handlerItem instanceof IFluidHandlerItem)
-                            {
-                                ItemStack container = ((IFluidHandlerItem) handlerItem).getContainer();
-                                if (this.inventory.getStackInSlot(1).isEmpty() || (ItemHandlerHelper.canItemStacksStack(container, this.inventory.getStackInSlot(1)) && this.inventory.getStackInSlot(1).getCount() + container.getCount() <= this.inventory.getStackInSlot(1).getMaxStackSize()))
-                                {
-                                    is.shrink(1);
-                                    if (this.inventory.getStackInSlot(1).isEmpty())
-                                    {
-                                        this.inventory.setStackInSlot(1, container.copy());
-                                    }
-                                    else
-                                    {
-                                        this.inventory.getStackInSlot(1).grow(container.getCount());
-                                    }
-                                }
-                                else
-                                {
-                                    continue;
-                                }
-                            }
-
-                            int added = missing >= currentFluid.amount ? currentFluid.amount : missing;
-                            handlerItem.drain(added, true);
-                            FluidStack fsAdded = currentFluid.copy();
-                            fsAdded.amount = added;
-                            this.fluidInventory.fill(fsAdded, true);
-                            continue;
+                            this.inventory.getStackInSlot(1).grow(stack.getCount());
+                            return true;
                         }
                     }
+
+                    return false;
+                }, stack ->
+                {
+                    this.inventory.getStackInSlot(0).shrink(1);
+                    return true;
+                }))
+                {
+                    this.sendUpdatePacket();
                 }
                 else
                 {

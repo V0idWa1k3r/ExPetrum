@@ -13,13 +13,18 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.IItemHandler;
-import v0id.api.exp.util.ColorHEX;
-import v0id.api.exp.util.ColorHSV;
+import org.apache.commons.lang3.ObjectUtils;
 import v0id.api.exp.block.EnumGrassState;
 import v0id.api.exp.block.ICanGrowCrop;
 import v0id.api.exp.block.IGrass;
 import v0id.api.exp.block.ILeaves;
+import v0id.api.exp.util.ColorHEX;
+import v0id.api.exp.util.ColorHSV;
 import v0id.api.exp.world.EnumSeason;
 import v0id.api.exp.world.IBiome;
 import v0id.api.exp.world.IExPWorld;
@@ -27,11 +32,44 @@ import v0id.exp.ExPetrum;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 public class Helpers
 {
 	public static final double TIME_TO_DEGREE_CONST = 0.01275;
 	public static final int DAYNIGHT_LENGTH = 24000;
+
+	public static boolean tryConsumeFluidItem(ItemStack is, IFluidHandler handler, Function<ItemStack, Boolean> resultSetter, Function<ItemStack, Boolean> itemConsumer)
+    {
+        if (is.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null) || is.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null))
+        {
+            IFluidHandler fh = ObjectUtils.firstNonNull(is.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null), is.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null));
+            FluidStack stackIn = fh.drain(Integer.MAX_VALUE, false);
+            FluidStack current = handler.drain(Integer.MAX_VALUE, false);
+            if (stackIn != null && (current == null || stackIn.isFluidEqual(current)))
+            {
+                int missing = Math.min(stackIn.amount, current == null ? handler.getTankProperties()[0].getCapacity() : handler.getTankProperties()[0].getCapacity() - current.amount);
+                FluidStack drained = fh.drain(missing, false);
+                if (drained != null && drained.amount == missing)
+                {
+                    ItemStack container = null;
+                    if (fh instanceof IFluidHandlerItem)
+                    {
+                        container = ((IFluidHandlerItem) fh).getContainer().copy();
+                    }
+
+                    if (container == null || (resultSetter.apply(container) && itemConsumer.apply(is)))
+                    {
+                        handler.fill(drained, true);
+                        fh.drain(drained, true);
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
 
 	public static void dropInventoryItems(World world, BlockPos pos, IItemHandler cap)
     {
