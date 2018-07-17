@@ -161,6 +161,7 @@ public class BlockSapling extends Block implements IWeightProvider, IInitializab
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Nullable
     @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)

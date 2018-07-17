@@ -30,7 +30,7 @@ import v0id.exp.util.Helpers;
 
 import javax.annotation.Nullable;
 
-import static v0id.api.exp.data.ExPBlockProperties.BLASTFURNACE_ISLIT;
+import static v0id.api.exp.data.ExPBlockProperties.ISLIT;
 
 public class BlockBlastFurnace extends BlockHorizontal implements IWeightProvider, IInitializableBlock, IItemBlockProvider
 {
@@ -60,7 +60,7 @@ public class BlockBlastFurnace extends BlockHorizontal implements IWeightProvide
         this.setRegistryName(ExPRegistryNames.blockBlastFurnace);
         this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
         this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(BLASTFURNACE_ISLIT, false));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(ISLIT, false));
     }
 
     @SuppressWarnings("deprecation")
@@ -86,7 +86,7 @@ public class BlockBlastFurnace extends BlockHorizontal implements IWeightProvide
     @Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, FACING, BLASTFURNACE_ISLIT);
+        return new BlockStateContainer(this, FACING, ISLIT);
     }
 
     @SuppressWarnings("deprecation")
@@ -94,7 +94,7 @@ public class BlockBlastFurnace extends BlockHorizontal implements IWeightProvide
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
         TileEntity tile = worldIn.getTileEntity(pos);
-        return super.getActualState(state, worldIn, pos).withProperty(BLASTFURNACE_ISLIT, tile instanceof TileBlastFurnace && ((TileBlastFurnace) tile).work > 0);
+        return super.getActualState(state, worldIn, pos).withProperty(ISLIT, tile instanceof TileBlastFurnace && ((TileBlastFurnace) tile).work > 0);
     }
 
     @Override

@@ -71,6 +71,7 @@ public class BlockWaterWheel extends BlockHorizontal implements IWeightProvider,
         return state.getValue(FACING).ordinal();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta)
     {
@@ -123,6 +124,7 @@ public class BlockWaterWheel extends BlockHorizontal implements IWeightProvider,
         return BlockFaceShape.UNDEFINED;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state)
     {

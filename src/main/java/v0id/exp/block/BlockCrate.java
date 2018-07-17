@@ -88,19 +88,19 @@ public class BlockCrate extends Block implements IInitializableBlock, IItemBlock
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean isFullBlock(IBlockState state)
     {
         return true;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean isFullCube(IBlockState state)
     {
         return true;
     }
-
-
 
     @SuppressWarnings("deprecation")
     @Override

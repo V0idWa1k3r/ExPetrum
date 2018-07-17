@@ -58,6 +58,7 @@ public class BlockRockSalt extends Block implements IInitializableBlock, IItemBl
         return state.getValue(ROCKSALT_ISHINT) ? 1 : 0;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta)
     {

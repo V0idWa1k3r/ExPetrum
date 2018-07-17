@@ -80,7 +80,7 @@ public class TileCrucible extends TileEntity implements ITickable, ITemperatureH
                     {
                         float amt = ((IMeltableMetal) is.getItem()).getMetalAmound(is);
                         EnumMetal metal = ((IMeltableMetal) is.getItem()).getMetal(is);
-                        if (this.metalMap.values().stream().mapToInt(f -> f.intValue()).sum() + amt <= 6400)
+                        if (this.metalMap.values().stream().mapToInt(Float::intValue).sum() + amt <= 6400)
                         {
                             if (this.metalMap.containsKey(metal))
                             {
@@ -105,7 +105,7 @@ public class TileCrucible extends TileEntity implements ITickable, ITemperatureH
             }
             else
             {
-                int overallMetal = this.metalMap.values().stream().mapToInt(f -> f.intValue()).sum();
+                int overallMetal = this.metalMap.values().stream().mapToInt(Float::intValue).sum();
                 if (is.getItem() instanceof IMold && !this.metalMap.isEmpty())
                 {
                     EnumMetal alloy = this.getCurrentAlloy();

@@ -29,7 +29,7 @@ import v0id.exp.tile.TileForge;
 
 import javax.annotation.Nullable;
 
-import static v0id.api.exp.data.ExPBlockProperties.FORGE_ISLIT;
+import static v0id.api.exp.data.ExPBlockProperties.ISLIT;
 
 public class BlockForge extends Block implements IWeightProvider, IInitializableBlock, IItemBlockProvider
 {
@@ -59,14 +59,14 @@ public class BlockForge extends Block implements IWeightProvider, IInitializable
         this.setRegistryName(ExPRegistryNames.blockForge);
         this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
         this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FORGE_ISLIT, false));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(ISLIT, false));
         this.setLightOpacity(0);
     }
 
     @Override
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, FORGE_ISLIT);
+        return new BlockStateContainer(this, ISLIT);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class BlockForge extends Block implements IWeightProvider, IInitializable
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
         TileForge forge = (TileForge)worldIn.getTileEntity(pos);
-        return super.getActualState(state, worldIn, pos).withProperty(FORGE_ISLIT, forge != null && forge.isLit);
+        return super.getActualState(state, worldIn, pos).withProperty(ISLIT, forge != null && forge.isLit);
     }
 
     @Override

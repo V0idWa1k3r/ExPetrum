@@ -69,6 +69,7 @@ public class BlockStructurePiece extends BlockHorizontal implements IInitializab
         return BlockFaceShape.UNDEFINED;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state)
     {
