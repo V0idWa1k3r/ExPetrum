@@ -384,6 +384,7 @@ tile.exp.sapling.name=Sapling
 tile.exp.flint.name=Flint
 tile.exp.rock_salt.name=Rock Salt
 tile.exp.oven.name=Oven
+tile.exp.blast_furnace_metal.name=Blast Furnace Metal
 
 item.exp.item_ingot.name=Ingot
 
