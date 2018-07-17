@@ -1,0 +1,40 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"textures" : {
+		},
+		"transform": "forge:default-block",
+		"gui3d" : true,
+		"model" : "exp:oven"
+	},
+	"variants" : {
+		"normal": [{}],
+        "inventory": [{}],
+		"facing": {
+            "north": {
+                "y" : 0
+            },
+            "south": {
+                "y": 180
+            },
+            "east": {
+                "y": 90
+            },
+            "west": {
+                "y": 270
+            }
+        },
+        "active": {
+            "true": {
+                "textures" : {
+                    "0": "exp:blocks/oven_lit"
+                }
+            },
+            "false": {
+                "textures" : {
+                    "0": "exp:blocks/oven"
+                }
+            }
+        }
+	}
+}

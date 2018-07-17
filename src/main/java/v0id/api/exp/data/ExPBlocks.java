@@ -349,4 +349,7 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockRockSalt)
     public static final Block rockSalt = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockOven)
+    public static final Block oven = null;
 }

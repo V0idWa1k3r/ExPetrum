@@ -1,0 +1,21 @@
+{
+    "result": {
+        "item": "exp:oven",
+        "data": 0
+    },
+    "pattern": [
+        "BBB",
+        "BSB",
+        "BBB"
+    ],
+    "type": "forge:ore_shaped",
+    "key": {
+        "B" : {
+            "item": "minecraft:brick_block",
+            "data": 0
+        },
+        "S" : {
+            "item": "#SHEETDOUBLEBRONZE"
+        }
+    }
+}

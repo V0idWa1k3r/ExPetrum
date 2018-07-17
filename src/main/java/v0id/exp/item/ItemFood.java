@@ -79,6 +79,11 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
             tooltip.add(I18n.format("exp.txt.pickled"));
         }
 
+		if (presType == 2)
+		{
+			tooltip.add(I18n.format("exp.txt.wellCooked"));
+		}
+
 		DecimalFormat df = new DecimalFormat("#.#");
 		DecimalFormat df1 = new DecimalFormat("#,###");
 		tooltip.add(I18n.format("exp.txt.item.desc.rot", df.format((this.getTotalRot(stack) / this.getEntry(stack).getBaseHealth()) * 100)));

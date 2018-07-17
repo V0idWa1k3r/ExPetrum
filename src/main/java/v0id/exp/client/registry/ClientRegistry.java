@@ -203,6 +203,7 @@ public class ClientRegistry implements ILifecycleListener
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.mechanicalPotteryStation), 0, new ModelResourceLocation(ExPBlocks.mechanicalPotteryStation.getRegistryName(), "normal"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.blastFurnaceMetal), 0, new ModelResourceLocation(ExPBlocks.blastFurnaceMetal.getRegistryName(), "normal"));
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.blastFurnace), 0, new ModelResourceLocation(ExPBlocks.blastFurnace.getRegistryName(), "normal"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ExPBlocks.oven), 0, new ModelResourceLocation(ExPBlocks.oven.getRegistryName(), "normal"));
         ModelLoader.setCustomModelResourceLocation(ExPItems.lightBackpack, 0, new ModelResourceLocation(ExPItems.lightBackpack.getRegistryName(), "inventory"));
         ModelLoader.setCustomModelResourceLocation(ExPItems.travelersBackpack, 0, new ModelResourceLocation(ExPItems.travelersBackpack.getRegistryName(), "inventory"));
         // Iteration-dependent models

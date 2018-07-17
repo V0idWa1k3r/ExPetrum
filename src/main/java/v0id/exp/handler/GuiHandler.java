@@ -133,6 +133,11 @@ public class GuiHandler implements IGuiHandler
                 return new GuiBackpack(player.inventory, is);
             }
 
+            case 18:
+            {
+                return new GuiOven(player.inventory, (TileOven) tile);
+            }
+
             default:
             {
                 return null;
@@ -252,6 +257,11 @@ public class GuiHandler implements IGuiHandler
                 }
 
                 return new ContainerBackpack(player.inventory, is);
+            }
+
+            case 18:
+            {
+                return new ContainerOven(player.inventory, (TileOven) tile);
             }
 
             default:
