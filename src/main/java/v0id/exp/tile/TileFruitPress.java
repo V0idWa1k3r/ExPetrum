@@ -52,7 +52,11 @@ public class TileFruitPress extends TileEntity implements ITickable
             if (pressRecipe != null)
             {
                 int current = this.world.getBlockState(this.pos).getValue(ExPBlockProperties.PRESS_VALUE);
-                this.world.setBlockState(this.pos, ExPBlocks.fruitPress.getDefaultState().withProperty(ExPBlockProperties.PRESS_VALUE, current - 1));
+                if (current != 1)
+                {
+                    this.world.setBlockState(this.pos, ExPBlocks.fruitPress.getDefaultState().withProperty(ExPBlockProperties.PRESS_VALUE, current - 1));
+                }
+
                 this.world.playSound(null, this.pos.getX(), this.pos.getY(), this.pos.getZ(), SoundEvents.ENTITY_SLIME_JUMP, SoundCategory.BLOCKS, 1.0F, 2F);
                 if (current == 1)
                 {
@@ -60,9 +64,12 @@ public class TileFruitPress extends TileEntity implements ITickable
                     if (tile.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP))
                     {
                         IFluidHandler fh = tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.UP);
-                        fh.fill(pressRecipe.getOutput(this.inventory.getStackInSlot(0)), true);
-                        this.world.playSound(null, this.pos.getX(), this.pos.getY(), this.pos.getZ(), SoundEvents.ENTITY_SLIME_ATTACK, SoundCategory.BLOCKS, 1.0F, 0.1F);
-                        this.inventory.setStackInSlot(0, pressRecipe.getOutput().copy());
+                        if (fh.fill(pressRecipe.getOutput(this.inventory.getStackInSlot(0)), true) != 0)
+                        {
+                            this.world.playSound(null, this.pos.getX(), this.pos.getY(), this.pos.getZ(), SoundEvents.ENTITY_SLIME_ATTACK, SoundCategory.BLOCKS, 1.0F, 0.1F);
+                            this.inventory.setStackInSlot(0, pressRecipe.getOutput().copy());
+                            this.world.setBlockState(this.pos, ExPBlocks.fruitPress.getDefaultState().withProperty(ExPBlockProperties.PRESS_VALUE, 0));
+                        }
                     }
                 }
             }
