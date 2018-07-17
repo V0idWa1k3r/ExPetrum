@@ -3,7 +3,7 @@
 	"textures": {
 		"0": "exp:blocks/stone/andesite",
 		"1": "exp:blocks/wood/plank/apple",
-		"2": "exp:blocks/fluid/clay",
+		"2": "exp:blocks/fluid/clay_colored",
 		"particle": "exp:blocks/stone/andesite"
 	},
 	"elements": [

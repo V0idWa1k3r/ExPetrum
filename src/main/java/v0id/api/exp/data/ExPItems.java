@@ -68,4 +68,7 @@ public class ExPItems
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.itemTravelersBackpack)
     public static final Item travelersBackpack = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemFluidBottle)
+    public static final Item fluidBottle = null;
 }

@@ -130,7 +130,8 @@ public class ExPRegistryNames
 		itemArmor																							= "item_armor",
 		itemArmorFramework																					= "item_armor_framework",
 		itemLightBackpack                                                                                   = "item_light_backpack",
-        itemTravelersBackpack                                                                               = "item_travelers_backpack";
+        itemTravelersBackpack                                                                               = "item_travelers_backpack",
+		itemFluidBottle																						= "item_fluid_bottle";
 
 	public static final String
         biomeBeach                                                                                          = "beach",

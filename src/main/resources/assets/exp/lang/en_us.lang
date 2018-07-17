@@ -1145,6 +1145,15 @@ item.exp.item_armor_framework.tool_steel.legs.name=Unfinished Tool Steel Greaves
 item.exp.item_armor_framework.tool_steel.feet.name=Unfinished Tool Steel Boots
 item.exp.item_light_backpack.name=Light Backpack
 item.exp.item_travelers_backpack.name=Traveler's Backpack
+item.exp.item_fluid_bottle.water.name=Water Bottle
+item.exp.item_fluid_bottle.salt_water.name=Salt Water Bottle
+item.exp.item_fluid_bottle.milk.name=Milk Bottle
+item.exp.item_fluid_bottle.fruit_juice.name=Juice Bottle
+item.exp.item_fluid_bottle.olive_oil.name=Olive Oil Bottle
+item.exp.item_fluid_bottle.walnut_oil.name=Walnut Oil Bottle
+item.exp.item_fluid_bottle.brine.name=Brine Bottle
+item.exp.item_fluid_bottle.tannin.name=Tannin Bottle
+item.exp.item_fluid_bottle.oil.name=Oil Bottle
 
 exp.item.ingot.desc.type.tin=Tin
 exp.item.ingot.desc.type.barium=Barium

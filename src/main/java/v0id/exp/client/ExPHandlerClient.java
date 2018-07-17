@@ -357,15 +357,9 @@ public class ExPHandlerClient
         event.getMap().registerSprite(new ResourceLocation("exp", "blocks/fluid/clay"));
         event.getMap().registerSprite(new ResourceLocation("exp", "blocks/fluid/lava_flow"));
         event.getMap().registerSprite(new ResourceLocation("exp", "blocks/fluid/lava_still"));
-        event.getMap().registerSprite(new ResourceLocation("exp", "blocks/fluid/oil_flow"));
-        event.getMap().registerSprite(new ResourceLocation("exp", "blocks/fluid/oil_still"));
+        event.getMap().registerSprite(new ResourceLocation("exp", "blocks/fluid/generic"));
         event.getMap().registerSprite(new ResourceLocation("exp", "blocks/fluid/water_flow"));
         event.getMap().registerSprite(new ResourceLocation("exp", "blocks/fluid/water_still"));
-        event.getMap().registerSprite(new ResourceLocation("exp", "blocks/fluid/milk"));
-        event.getMap().registerSprite(new ResourceLocation("exp", "blocks/fluid/tannin"));
-        event.getMap().registerSprite(new ResourceLocation("exp", "blocks/fluid/nut_oil"));
-        event.getMap().registerSprite(new ResourceLocation("exp", "blocks/fluid/juice"));
-        event.getMap().registerSprite(new ResourceLocation("exp", "blocks/fluid/brine"));
         event.getMap().registerSprite(new ResourceLocation("exp", "blocks/quern_side"));
         event.getMap().registerSprite(new ResourceLocation("exp", "blocks/windmill"));
         event.getMap().registerSprite(new ResourceLocation("exp", "blocks/saw"));

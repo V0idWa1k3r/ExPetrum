@@ -1,0 +1,14 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "exp:item_generated",
+		"transform": "forge:default-item",
+		"textures" : {
+			"layer0" : "exp:items/common/glass_bottle",
+            "layer1" : "exp:items/common/glass_bottle_overlay"
+		}
+	},
+	"variants" : {
+		"inventory" : [{}]
+	}
+}

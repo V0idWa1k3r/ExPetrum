@@ -152,6 +152,7 @@ public class ClientRegistry implements ILifecycleListener
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) ->
                 EnumAnvilMaterial.values()[stack.getMetadata()].getColor(), Item.getItemFromBlock(ExPBlocks.anvil));
         Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> EnumMetal.values()[stack.getMetadata() % EnumMetal.values().length].getColor(), ExPItems.metalGeneric);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler((ItemStack stack, int tintIndex) -> tintIndex == 1 ? ItemFluidBottle.allowedFluids.get(stack.getMetadata()).getColor() : -1, ExPItems.fluidBottle);
     }
 
     @Override
@@ -248,6 +249,7 @@ public class ClientRegistry implements ILifecycleListener
         mkCustomModelResourceLocations(ExPBlocks.sapling, EnumTreeType.values().length, i -> "ttype=" + EnumTreeType.values()[i].getName());
         mkCustomModelResourceLocations(ExPBlocks.rockSalt, 2, i -> "hint=" + Boolean.toString(i == 1));
         mkCustomModelResourceLocations(ExPBlocks.barrel, EnumTreeType.values().length, i -> "ttype=" + EnumTreeType.values()[i]);
+        mkCustomModelResourceLocations(ExPItems.fluidBottle, ItemFluidBottle.allowedFluids.size(), i -> "inventory");
 
         // Statically mapped item models
         registerStaticModel(ExPItems.basket, new ModelResourceLocation(ExPItems.basket.getRegistryName(), "inventory"));

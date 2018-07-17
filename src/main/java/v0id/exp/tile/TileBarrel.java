@@ -15,9 +15,12 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
+import org.apache.commons.lang3.ObjectUtils;
 import v0id.api.exp.block.EnumTreeType;
 import v0id.api.exp.item.IContainerTickable;
 import v0id.api.exp.recipe.RecipesBarrel;
@@ -66,14 +69,35 @@ public class TileBarrel extends TileEntity implements ITickable, ISyncableTile
             {
                 FluidStack fs = this.fluidInventory.getFluid();
                 int missing = this.fluidInventory.getCapacity() - this.fluidInventory.getFluidAmount();
-                if (is.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null))
+                if (is.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null) || is.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null))
                 {
-                    IFluidHandlerItem handlerItem = is.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+                    IFluidHandler handlerItem = ObjectUtils.firstNonNull(is.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null), is.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null));
                     if (fs == null || fs.isFluidEqual(is))
                     {
                         FluidStack currentFluid = handlerItem.drain(Integer.MAX_VALUE, false);
                         if (currentFluid != null)
                         {
+                            if (handlerItem instanceof IFluidHandlerItem)
+                            {
+                                ItemStack container = ((IFluidHandlerItem) handlerItem).getContainer();
+                                if (this.inventory.getStackInSlot(1).isEmpty() || (ItemHandlerHelper.canItemStacksStack(container, this.inventory.getStackInSlot(1)) && this.inventory.getStackInSlot(1).getCount() + container.getCount() <= this.inventory.getStackInSlot(1).getMaxStackSize()))
+                                {
+                                    is.shrink(1);
+                                    if (this.inventory.getStackInSlot(1).isEmpty())
+                                    {
+                                        this.inventory.setStackInSlot(1, container.copy());
+                                    }
+                                    else
+                                    {
+                                        this.inventory.getStackInSlot(1).grow(container.getCount());
+                                    }
+                                }
+                                else
+                                {
+                                    continue;
+                                }
+                            }
+
                             int added = missing >= currentFluid.amount ? currentFluid.amount : missing;
                             handlerItem.drain(added, true);
                             FluidStack fsAdded = currentFluid.copy();

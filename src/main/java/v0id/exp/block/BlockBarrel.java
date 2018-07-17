@@ -23,6 +23,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -34,6 +35,7 @@ import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.ExPetrum;
 import v0id.exp.block.item.ItemBlockBarrel;
+import v0id.exp.item.ItemFluidBottle;
 import v0id.exp.item.ItemPottery;
 import v0id.exp.tile.TileBarrel;
 import v0id.exp.util.Helpers;
@@ -76,6 +78,7 @@ public class BlockBarrel extends Block implements IWeightProvider, IInitializabl
         this.setLightOpacity(0);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
@@ -118,6 +121,21 @@ public class BlockBarrel extends Block implements IWeightProvider, IInitializabl
                 playerIn.setHeldItem(hand, new ItemStack(ExPItems.pottery, 1, ItemPottery.EnumPotteryType.CERAMIC_JUG_FULL.ordinal()));
                 worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 2.0F);
                 return true;
+            }
+        }
+        else
+        {
+            if (is.getItem() == Items.GLASS_BOTTLE)
+            {
+                FluidStack fs = barrel.fluidInventory.getFluid();
+                if (ItemFluidBottle.allowedFluids.contains(fs.getFluid()) && fs.amount >= 250)
+                {
+                    ItemStack bottle = ItemFluidBottle.createFluidBottle(fs.getFluid());
+                    barrel.fluidInventory.drain(250, true);
+                    playerIn.dropItem(bottle, false);
+                    worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.PLAYERS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
+                    return true;
+                }
             }
         }
 

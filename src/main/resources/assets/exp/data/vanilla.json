@@ -23,6 +23,18 @@
             "metadata": 0,
             "volume" : { "x" : 1, "y" : 1 },
             "weight" : 10
+        },
+        {
+            "id": "minecraft:glass_bottle",
+            "metadata": 0,
+            "volume" : { "x" : 1, "y" : 1 },
+            "weight" : 150
+        },
+        {
+            "id": "minecraft:bone",
+            "metadata": 0,
+            "volume" : { "x" : 1, "y" : 1 },
+            "weight" : 400
         }
     ]
 }
