@@ -23,20 +23,23 @@ public class RockSaltGenerator extends WorldGenerator
         BlockPos pos = new BlockPos(position.getX(), rand.nextInt(worldIn.getHeight(position).getY() - 4), position.getZ());
         List<BlockPos> hints = Lists.newArrayList();
         generateTendril(worldIn, rand, pos, null, 32 + rand.nextInt(96), bpos -> hints.add(bpos));
-        for (int i = 0; i < 8 + rand.nextInt(12); ++i)
+        if (!hints.isEmpty())
         {
-            BlockPos hPos = hints.get(rand.nextInt(hints.size()));
-            hPos = worldIn.getHeight(hPos).up(6);
-            while ((worldIn.isAirBlock(hPos) || !worldIn.getBlockState(hPos).isOpaqueCube()) && hPos.getY() > 0)
+            for (int i = 0; i < 8 + rand.nextInt(12); ++i)
             {
-                hPos = hPos.down();
-            }
+                BlockPos hPos = hints.get(rand.nextInt(hints.size()));
+                hPos = worldIn.getHeight(hPos).up(6);
+                while ((worldIn.isAirBlock(hPos) || !worldIn.getBlockState(hPos).isOpaqueCube()) && hPos.getY() > 0)
+                {
+                    hPos = hPos.down();
+                }
 
-            IBlockState preventing = worldIn.getBlockState(hPos.up());
-            if (preventing.getBlock().isReplaceable(worldIn, hPos) || preventing.getBlock() instanceof IOreHintReplaceable)
-            {
-                hPos = hPos.up();
-                worldIn.setBlockState(hPos, ExPBlocks.rockSalt.getDefaultState().withProperty(ExPBlockProperties.ROCKSALT_ISHINT, true), 2);
+                IBlockState preventing = worldIn.getBlockState(hPos.up());
+                if (preventing.getBlock().isReplaceable(worldIn, hPos) || preventing.getBlock() instanceof IOreHintReplaceable)
+                {
+                    hPos = hPos.up();
+                    worldIn.setBlockState(hPos, ExPBlocks.rockSalt.getDefaultState().withProperty(ExPBlockProperties.ROCKSALT_ISHINT, true), 2);
+                }
             }
         }
 
