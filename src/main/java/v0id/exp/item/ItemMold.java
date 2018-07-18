@@ -190,4 +190,21 @@ public class ItemMold extends Item implements IWeightProvider, IMold
             return ret;
         }
     }
+
+    @Override
+    public boolean hasContainerItem(ItemStack stack)
+    {
+        return this.isIngot && stack.getMetadata() >= 2;
+    }
+
+    @Override
+    public ItemStack getContainerItem(ItemStack itemStack)
+    {
+        if (this.isIngot && itemStack.getMetadata() >= 2)
+        {
+            return new ItemStack(this, 1, 1);
+        }
+
+        return super.getContainerItem(itemStack);
+    }
 }
