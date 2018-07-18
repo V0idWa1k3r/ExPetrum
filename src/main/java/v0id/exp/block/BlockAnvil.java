@@ -26,7 +26,7 @@ import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.ExPetrum;
-import v0id.exp.block.item.ItemBlockWithMetadata;
+import v0id.exp.block.item.ItemBlockAnvil;
 import v0id.exp.tile.TileAnvil;
 
 import javax.annotation.Nullable;
@@ -91,7 +91,7 @@ public class BlockAnvil extends Block implements IWeightProvider, IItemBlockProv
     @Override
     public void registerItem(IForgeRegistry<Item> registry)
     {
-        registry.register(new ItemBlockWithMetadata(this));
+        registry.register(new ItemBlockAnvil(this));
     }
 
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
