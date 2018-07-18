@@ -2,12 +2,15 @@ package v0id.exp.item;
 
 import com.google.common.collect.Lists;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.*;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.Fluid;
@@ -16,18 +19,23 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.data.*;
 import v0id.api.exp.inventory.IWeightProvider;
+import v0id.api.exp.player.EnumFoodGroup;
+import v0id.api.exp.player.IExPPlayer;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.lang.reflect.Method;
 import java.util.List;
 
 public class ItemFluidBottle extends Item implements IInitializableItem, IWeightProvider, IOreDictEntry
 {
     public static final List<Fluid> allowedFluids = Lists.newArrayList();
+    private static Method nutritionCompat_addNutrition;
 
     public ItemFluidBottle()
     {
@@ -43,6 +51,17 @@ public class ItemFluidBottle extends Item implements IInitializableItem, IWeight
         allowedFluids.add(ExPFluids.brine);
         allowedFluids.add(ExPFluids.tannin);
         allowedFluids.add(ExPFluids.oil);
+        if (Loader.isModLoaded("nutrition"))
+        {
+            try
+            {
+                nutritionCompat_addNutrition = Class.forName("v0id.exp.compat.NutritionCompat").getMethod("addNutrition", EntityPlayer.class, EnumFoodGroup.class, float.class);
+            }
+            catch (Exception e)
+            {
+                ExPMisc.modLogger.error("ExP was unable to initialize Nutrition compatibility!", e);
+            }
+        }
     }
 
     public static ItemStack createFluidBottle(Fluid f)
@@ -129,6 +148,62 @@ public class ItemFluidBottle extends Item implements IInitializableItem, IWeight
                 return CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY.cast(this.tank);
             }
         };
+    }
+
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+    {
+        ItemStack is = playerIn.getHeldItem(handIn);
+        Fluid f = allowedFluids.get(is.getMetadata());
+        if (f == FluidRegistry.WATER || f == ExPFluids.juice || f == ExPFluids.milk)
+        {
+            playerIn.setActiveHand(handIn);
+            return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, is);
+        }
+
+        return super.onItemRightClick(worldIn, playerIn, handIn);
+    }
+
+    @Override
+    public int getMaxItemUseDuration(ItemStack stack)
+    {
+        return 60;
+    }
+
+    @Override
+    public EnumAction getItemUseAction(ItemStack stack)
+    {
+        return EnumAction.DRINK;
+    }
+
+    @Override
+    public ItemStack onItemUseFinish(ItemStack is, World worldIn, EntityLivingBase entityLiving)
+    {
+        if (entityLiving instanceof EntityPlayer)
+        {
+            IExPPlayer player = IExPPlayer.of((EntityPlayer) entityLiving);
+            if (player != null && !worldIn.isRemote)
+            {
+                player.setThirst(player.getThirst() + 250, true);
+                Fluid f = allowedFluids.get(is.getMetadata());
+                if (f == ExPFluids.milk && nutritionCompat_addNutrition != null)
+                {
+                    try
+                    {
+                        nutritionCompat_addNutrition.invoke(null, entityLiving, EnumFoodGroup.DAIRY, 2F);
+                    }
+                    catch (Exception e)
+                    {
+                        ExPMisc.modLogger.error("ExP was unable to provide Nutrition compatibility report this to V0id!", e);
+                    }
+                }
+
+                is.shrink(1);
+                ((EntityPlayer)entityLiving).dropItem(new ItemStack(Items.GLASS_BOTTLE, 1, 0), false);
+            }
+        }
+
+        return super.onItemUseFinish(is, worldIn, entityLiving);
     }
 
     private static class FixedFluidTank implements IFluidHandlerItem
