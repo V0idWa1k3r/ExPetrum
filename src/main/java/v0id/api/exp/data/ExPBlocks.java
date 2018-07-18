@@ -352,4 +352,15 @@ public class ExPBlocks
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.blockOven)
     public static final Block oven = null;
+
+    public static Block[] supportBeams = new Block[3];
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockSupportBeam + "0")
+    public static final Block supportBeam0 = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockSupportBeam + "1")
+    public static final Block supportBeam1 = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.blockSupportBeam + "2")
+    public static final Block supportBeam2 = null;
 }

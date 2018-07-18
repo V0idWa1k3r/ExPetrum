@@ -92,7 +92,8 @@ public class ExPRegistryNames
 		blockBlastFurnace																					= "blast_furnace",
         blockSapling                                                                                        = "sapling",
 		blockRockSalt																						= "rock_salt",
-        blockOven                                                                                           = "oven";
+        blockOven                                                                                           = "oven",
+		blockSupportBeam																					= "support_beam";
 
 	public static final String
 		itemRock																							= "item_rock",

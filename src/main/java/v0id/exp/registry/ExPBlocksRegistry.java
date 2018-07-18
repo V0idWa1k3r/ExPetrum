@@ -141,7 +141,10 @@ public class ExPBlocksRegistry extends AbstractRegistry
                 new BlockBlastFurnace(),
                 new BlockSapling(),
                 new BlockRockSalt(),
-                new BlockOven()
+                new BlockOven(),
+                new BlockSupportBeam(0),
+                new BlockSupportBeam(1),
+                new BlockSupportBeam(2)
         );
 
         registryEntries.forEach(registry::register);
@@ -162,5 +165,6 @@ public class ExPBlocksRegistry extends AbstractRegistry
         ExPBlocks.berryBushes = new Block[]{ ExPBlocks.berryBushNormal, ExPBlocks.berryBushBerries, ExPBlocks.berryBushAutumn, ExPBlocks.berryBushDead };
         ExPBlocks.planks = new Block[]{ ExPBlocks.planks0, ExPBlocks.planks1, ExPBlocks.planks2 };
         ExPBlocks.craftingTables = new Block[]{ ExPBlocks.craftingTable0, ExPBlocks.craftingTable1, ExPBlocks.craftingTable2 };
+        ExPBlocks.supportBeams = new Block[]{ ExPBlocks.supportBeam0, ExPBlocks.supportBeam1, ExPBlocks.supportBeam2 };
     }
 }

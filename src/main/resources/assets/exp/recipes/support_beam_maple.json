@@ -1,0 +1,21 @@
+{
+  "result": {
+    "item": "exp:support_beam0",
+    "data": 11,
+    "count": 8
+  },
+  "pattern": [
+    "PS",
+    "P "
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "P": {
+      "item": "exp:planks0",
+      "data": 11
+    },
+    "S": {
+      "item": "#SAW"
+    }
+  }
+}

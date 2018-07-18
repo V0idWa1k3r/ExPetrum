@@ -7,6 +7,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import v0id.api.exp.ExPApi;
+import v0id.api.exp.block.ISupportBeam;
 
 import java.lang.reflect.Constructor;
 
@@ -15,7 +16,21 @@ public class GravityHelper
 	public static Constructor<?> newGravFallingBlock;
 	
 	public static boolean isSupported(World world, BlockPos pos)
-	{
+    {
+        for (int x = -4; x <= 4; ++x)
+        {
+            for (int z = -4; z <= 4; ++z)
+            {
+                for (int y = -2; y <= 0; ++y)
+                {
+                    BlockPos at = pos.add(x, y, z);
+                    if (world.getBlockState(at).getBlock() instanceof ISupportBeam)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
 		// If there is a full block under our block consider the block supported. 
 		return world.getBlockState(pos.down()).getBlock() instanceof ISupport || world.getBlockState(pos.down()).isOpaqueCube() || world.getBlockState(pos.down()).isSideSolid(world, pos.down(), EnumFacing.UP);
 
