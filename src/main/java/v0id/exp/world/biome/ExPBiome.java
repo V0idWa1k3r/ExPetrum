@@ -143,11 +143,13 @@ public class ExPBiome extends Biome implements IBiome, IDictionariedBiome
 	public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal)
     {
 		int i = worldIn.getSeaLevel();
-		int pz = z & 15;
-		int px = x & 15;
-		IBlockState stoneBlock = ExPBlocks.rock.getDefaultState().withProperty(ExPBlockProperties.ROCK_CLASS, GenerationHelper.getStoneTypeAt(worldIn, new BlockPos(x, 0, z)));
-		IBlockState dirtBlock = ExPBlocks.soil.getDefaultState().withProperty(ExPBlockProperties.DIRT_CLASS, GenerationHelper.getDirtTypeAt(worldIn, new BlockPos(x, 0, z)));
-		IBlockState sandBlock = ExPBlocks.sand.getDefaultState().withProperty(ExPBlockProperties.ROCK_CLASS, GenerationHelper.getStoneTypeAt(worldIn, new BlockPos(x, 0, z)));
+		int pz = x & 15;
+		int px = z & 15;
+		int gx = ((x >> 4) << 4) + px;
+		int gz = ((z >> 4) << 4) + pz;
+		IBlockState stoneBlock = ExPBlocks.rock.getDefaultState().withProperty(ExPBlockProperties.ROCK_CLASS, GenerationHelper.getStoneTypeAt(worldIn, new BlockPos(gx, 0, gz)));
+		IBlockState dirtBlock = ExPBlocks.soil.getDefaultState().withProperty(ExPBlockProperties.DIRT_CLASS, GenerationHelper.getDirtTypeAt(worldIn, new BlockPos(gx, 0, gz)));
+		IBlockState sandBlock = ExPBlocks.sand.getDefaultState().withProperty(ExPBlockProperties.ROCK_CLASS, GenerationHelper.getStoneTypeAt(worldIn, new BlockPos(gx, 0, gz)));
 		EnumSeason season = IExPWorld.of(worldIn).getCurrentSeason();
 		Block b = season == EnumSeason.WINTER ? ExPBlocks.grass_dead : season == EnumSeason.AUTUMN ? ExPBlocks.grass_dry : ExPBlocks.grass;
 		IBlockState grassBlock = b.getDefaultState().withProperty(ExPBlockProperties.DIRT_CLASS, dirtBlock.getValue(ExPBlockProperties.DIRT_CLASS));
