@@ -15,29 +15,23 @@ import java.util.Arrays;
 /**
  * Created by V0idWa1k3r on 11-Jun-17.
  */
-public class ItemGrindstone extends Item implements IInitializableItem, IOreDictEntry, IWeightProvider
+public class ItemGrindstone extends Item implements IOreDictEntry, IWeightProvider
 {
     public ItemGrindstone()
     {
         super();
-        this.initItem();
-    }
-
-    @Override
-    public void registerOreDictNames()
-    {
-        Arrays.stream(ExPOreDict.itemGrindstone).forEach(name -> OreDictionary.registerOre(name, this));
-    }
-
-    @Override
-    public void initItem()
-    {
         this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemGrindstone));
         this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
         this.setCreativeTab(ExPCreativeTabs.tabTools);
         this.setHasSubtypes(true);
         this.setMaxDamage(256);
         this.setMaxStackSize(1);
+    }
+
+    @Override
+    public void registerOreDictNames()
+    {
+        Arrays.stream(ExPOreDict.itemGrindstone).forEach(name -> OreDictionary.registerOre(name, this));
     }
 
     @Override

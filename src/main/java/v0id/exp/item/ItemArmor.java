@@ -20,7 +20,7 @@ import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.UUID;
 
-public class ItemArmor extends net.minecraft.item.ItemArmor implements IWeightProvider, IInitializableItem, IOreDictEntry
+public class ItemArmor extends net.minecraft.item.ItemArmor implements IWeightProvider, IOreDictEntry
 {
     private static final UUID[] ARMOR_MODIFIERS = new UUID[] {UUID.fromString("845DB27C-C624-495F-8C9F-6020A9A58B6B"), UUID.fromString("D8499B04-0E66-4726-AB29-64469D734E0D"), UUID.fromString("9F3D476D-C118-4544-8365-64846904B48E"), UUID.fromString("2AD3F246-FEE1-4E67-B886-69FD380BB150")};
     public final EnumArmorStats stats;
@@ -30,7 +30,10 @@ public class ItemArmor extends net.minecraft.item.ItemArmor implements IWeightPr
     {
         super(ExPMisc.armorMaterialExPetrum, 0, equipmentSlotIn);
         this.stats = stats;
-        this.initItem();
+        this.setMaxDamage(this.stats.durability);
+        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemArmor + "_" + this.stats.name + "_" + (this.getEquipmentSlot() == EntityEquipmentSlot.HEAD ? "helmet" : this.getEquipmentSlot() == EntityEquipmentSlot.CHEST ? "chestplate" : this.getEquipmentSlot() == EntityEquipmentSlot.LEGS ? "leggings" : "boots")));
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabTools);
         items.put(Pair.of(equipmentSlotIn, stats), this);
     }
 
@@ -81,15 +84,6 @@ public class ItemArmor extends net.minecraft.item.ItemArmor implements IWeightPr
                 return 0F;
             }
         }
-    }
-
-    @Override
-    public void initItem()
-    {
-        this.setMaxDamage(this.stats.durability);
-        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemArmor + "_" + this.stats.name + "_" + (this.getEquipmentSlot() == EntityEquipmentSlot.HEAD ? "helmet" : this.getEquipmentSlot() == EntityEquipmentSlot.CHEST ? "chestplate" : this.getEquipmentSlot() == EntityEquipmentSlot.LEGS ? "leggings" : "boots")));
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabTools);
     }
 
     public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)

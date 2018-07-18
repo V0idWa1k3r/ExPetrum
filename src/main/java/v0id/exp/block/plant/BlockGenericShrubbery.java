@@ -27,8 +27,10 @@ import net.minecraftforge.registries.IForgeRegistry;
 import v0id.api.exp.block.EnumGrassState;
 import v0id.api.exp.block.EnumShrubberyType;
 import v0id.api.exp.block.IGrass;
-import v0id.api.exp.data.*;
-import v0id.exp.block.IInitializableBlock;
+import v0id.api.exp.data.ExPBlockProperties;
+import v0id.api.exp.data.ExPCreativeTabs;
+import v0id.api.exp.data.ExPMisc;
+import v0id.api.exp.data.ExPRegistryNames;
 import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 
@@ -38,7 +40,7 @@ import java.util.Random;
 /**
  * Created by V0idWa1k3r on 17-Jun-17.
  */
-public class BlockGenericShrubbery extends BlockBush implements IInitializableBlock, IPlantable, IOreDictEntry, IItemBlockProvider
+public class BlockGenericShrubbery extends BlockBush implements IPlantable, IItemBlockProvider
 {
     public enum BloomColor implements IStringSerializable
     {
@@ -73,18 +75,6 @@ public class BlockGenericShrubbery extends BlockBush implements IInitializableBl
     public BlockGenericShrubbery()
     {
         super();
-        this.initBlock();
-    }
-
-    @Override
-    public void registerOreDictNames()
-    {
-
-    }
-
-    @Override
-    public void initBlock()
-    {
         this.setHardness(1);
         this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockGenericShrubbery));
         this.setResistance(1);

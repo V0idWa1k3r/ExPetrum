@@ -18,7 +18,6 @@ import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPFluids;
 import v0id.api.exp.data.ExPRegistryNames;
-import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWeighted;
 import v0id.exp.util.Helpers;
@@ -26,27 +25,20 @@ import v0id.exp.util.Helpers;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class BlockFreshWater extends BlockFluidFinite implements IWater, IInitializableBlock, IItemBlockProvider
+public class BlockFreshWater extends BlockFluidFinite implements IWater, IItemBlockProvider
 {
 	public BlockFreshWater()
 	{
 		super(ExPFluids.freshWater, Material.WATER);
-		this.initBlock();
+        this.setBlockUnbreakable();
+        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockFreshWater));
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+        this.setLightOpacity(3);
+        this.setQuantaPerBlock(10);
+        this.setTickRandomly(true);
 	}
-	
-	@Override
-	public void initBlock()
-	{
-		this.setBlockUnbreakable();
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockFreshWater));
-		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-		this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-		this.setLightOpacity(3);
-		this.setQuantaPerBlock(10);
-		this.setTickRandomly(true);
-		this.displacements.put(ExPBlocks.crate, false);
-	}
-	
+
 	@Override
 	public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random)
     {
@@ -79,7 +71,7 @@ public class BlockFreshWater extends BlockFluidFinite implements IWater, IInitia
 			}
 		}
     }
-	
+
     @Override
     public void updateTick(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand)
     {
@@ -174,7 +166,7 @@ public class BlockFreshWater extends BlockFluidFinite implements IWater, IInitia
         }
         world.setBlockState(pos, state.withProperty(LEVEL, each - 1), 2);
     }
-    
+
     @Override
 	public int tryToFlowVerticallyInto(World world, BlockPos pos, int amtToInput)
     {

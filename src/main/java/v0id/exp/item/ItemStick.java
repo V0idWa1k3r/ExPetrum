@@ -22,12 +22,15 @@ import v0id.api.exp.inventory.IWeightProvider;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
-public class ItemStick extends Item implements IInitializableItem, IWeightProvider, IOreDictEntry
+public class ItemStick extends Item implements IWeightProvider, IOreDictEntry
 {
 	public ItemStick()
 	{
 		super();
-		this.initItem();
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemStick));
+		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
+		this.setHasSubtypes(true);
 	}
 
 	@Override
@@ -40,15 +43,6 @@ public class ItemStick extends Item implements IInitializableItem, IWeightProvid
 	public Pair<Byte, Byte> provideVolume(ItemStack item)
 	{
 		return IWeightProvider.DEFAULT_VOLUME;
-	}
-
-	@Override
-	public void initItem()
-	{
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemStick));
-		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
-		this.setHasSubtypes(true);
 	}
 
 	@Override

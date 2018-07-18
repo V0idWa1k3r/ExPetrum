@@ -34,7 +34,7 @@ import java.util.stream.Stream;
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
 import static v0id.api.exp.data.ExPBlockProperties.ROCK_CLASS;
 
-public class BlockPebble extends Block implements IInitializableBlock, IOreHintReplaceable, IOreDictEntry, IItemBlockProvider
+public class BlockPebble extends Block implements IOreHintReplaceable, IOreDictEntry, IItemBlockProvider
 {
 	public static final PropertyInteger MODEL_INDEX = PropertyInteger.create("amdl", 0, 3);
 	public static final AxisAlignedBB PEBBLE_AABB = new AxisAlignedBB(0, 0, 0, 1, 0.1, 1);
@@ -42,12 +42,6 @@ public class BlockPebble extends Block implements IInitializableBlock, IOreHintR
 	public BlockPebble()
 	{
 		super(Material.ROCK);
-		this.initBlock();
-	}
-
-	@Override
-	public void initBlock()
-	{
 		this.setHardness(0.05f);
 		this.setResistance(0);
 		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockPebble));

@@ -27,17 +27,11 @@ import v0id.exp.util.temperature.TemperatureUtils;
 
 import static v0id.api.exp.data.ExPBlockProperties.TROUGH_WATER;
 
-public class BlockTrough extends Block implements IInitializableBlock, IItemBlockProvider, IWeightProvider
+public class BlockTrough extends Block implements IItemBlockProvider, IWeightProvider
 {
     public BlockTrough()
     {
         super(Material.WOOD);
-        this.initBlock();
-    }
-
-    @Override
-    public void initBlock()
-    {
         this.setHardness(1.0F);
         this.setResistance(3.0F);
         this.setRegistryName(ExPRegistryNames.blockTrough);

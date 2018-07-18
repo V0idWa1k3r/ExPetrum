@@ -15,25 +15,21 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fluids.BlockFluidFinite;
 import net.minecraftforge.registries.IForgeRegistry;
-import v0id.api.exp.data.*;
-import v0id.exp.block.IInitializableBlock;
+import v0id.api.exp.data.ExPCreativeTabs;
+import v0id.api.exp.data.ExPFluids;
+import v0id.api.exp.data.ExPItems;
+import v0id.api.exp.data.ExPRegistryNames;
 import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWeighted;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class BlockClay extends BlockFluidFinite implements IInitializableBlock, IItemBlockProvider
+public class BlockClay extends BlockFluidFinite implements IItemBlockProvider
 {
     public BlockClay()
     {
         super(ExPFluids.clay, Material.CLAY);
-        this.initBlock();
-    }
-
-    @Override
-    public void initBlock()
-    {
         this.setHardness(1.0F);
         this.setResistance(10.0F);
         this.setSoundType(SoundType.GROUND);
@@ -44,7 +40,6 @@ public class BlockClay extends BlockFluidFinite implements IInitializableBlock, 
         this.setQuantaPerBlock(10);
         this.renderLayer = BlockRenderLayer.SOLID;
         this.setLightOpacity(255);
-        this.displacements.put(ExPBlocks.crate, false);
     }
 
     @Override

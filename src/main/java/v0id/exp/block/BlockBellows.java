@@ -26,12 +26,19 @@ import v0id.exp.tile.TileBellows;
 
 import javax.annotation.Nullable;
 
-public class BlockBellows extends BlockHorizontal implements IWeightProvider, IInitializableBlock, IItemBlockProvider
+public class BlockBellows extends BlockHorizontal implements IWeightProvider, IItemBlockProvider
 {
     public BlockBellows()
     {
         super(Material.WOOD);
-        this.initBlock();
+        this.setHardness(1.0F);
+        this.setResistance(3);
+        this.setRegistryName(ExPRegistryNames.blockBellows);
+        this.setSoundType(SoundType.WOOD);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+        this.setLightOpacity(0);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
 
     @Override
@@ -44,19 +51,6 @@ public class BlockBellows extends BlockHorizontal implements IWeightProvider, II
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return Pair.of((byte)2, (byte)2);
-    }
-
-    @Override
-    public void initBlock()
-    {
-        this.setHardness(1.0F);
-        this.setResistance(3);
-        this.setRegistryName(ExPRegistryNames.blockBellows);
-        this.setSoundType(SoundType.WOOD);
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-        this.setLightOpacity(0);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
 
     @SuppressWarnings("deprecation")

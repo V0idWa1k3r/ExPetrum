@@ -31,19 +31,13 @@ import v0id.exp.block.item.ItemBlockWeighted;
 import java.util.Random;
 import java.util.stream.Stream;
 
-public class BlockFlint extends Block implements IInitializableBlock, IOreHintReplaceable, IOreDictEntry, IItemBlockProvider, IWeightProvider
+public class BlockFlint extends Block implements IOreHintReplaceable, IOreDictEntry, IItemBlockProvider, IWeightProvider
 {
 	public static final AxisAlignedBB AABB = new AxisAlignedBB(0, 0, 0, 1, 0.1, 1);
 
 	public BlockFlint()
 	{
 		super(Material.ROCK);
-		this.initBlock();
-	}
-
-	@Override
-	public void initBlock()
-	{
 		this.setHardness(0.05f);
 		this.setResistance(0);
 		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockFlint));

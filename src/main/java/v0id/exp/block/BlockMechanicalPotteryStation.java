@@ -28,29 +28,23 @@ import v0id.exp.util.Helpers;
 
 import javax.annotation.Nullable;
 
-public class BlockMechanicalPotteryStation extends Block implements IInitializableBlock, IItemBlockProvider, IWeightProvider
+public class BlockMechanicalPotteryStation extends Block implements IItemBlockProvider, IWeightProvider
 {
     public BlockMechanicalPotteryStation()
     {
         super(Material.WOOD);
-        this.initBlock();
-    }
-
-    @Override
-    protected BlockStateContainer createBlockState()
-    {
-        return new BlockStateContainer(this);
-    }
-
-    @Override
-    public void initBlock()
-    {
         this.setHardness(1.0F);
         this.setResistance(3.0F);
         this.setRegistryName(ExPRegistryNames.blockMechanicalPotteryStation);
         this.setSoundType(SoundType.STONE);
         this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
         this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+    }
+
+    @Override
+    protected BlockStateContainer createBlockState()
+    {
+        return new BlockStateContainer(this);
     }
 
     public void registerItem(IForgeRegistry<Item> registry)

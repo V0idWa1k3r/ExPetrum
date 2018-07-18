@@ -25,10 +25,10 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
-import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.IForgeRegistry;
 import v0id.api.exp.block.EnumGrassAmount;
 import v0id.api.exp.block.EnumGrassState;
 import v0id.api.exp.block.EnumShrubberyType;
@@ -36,7 +36,6 @@ import v0id.api.exp.block.IGrass;
 import v0id.api.exp.data.*;
 import v0id.api.exp.item.IScythe;
 import v0id.exp.block.BlockFarmland;
-import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.item.ItemGeneric;
@@ -46,7 +45,7 @@ import javax.annotation.Nullable;
 import java.util.Random;
 import java.util.stream.Stream;
 
-public class BlockVegetation extends BlockBush implements IInitializableBlock, IOreDictEntry, IItemBlockProvider
+public class BlockVegetation extends BlockBush implements IOreDictEntry, IItemBlockProvider
 {
 	// Not exposed, for internal use only(rendering the model)
 	// You do NOT need these! They are purely for rendering! They are not even saved with the meta!
@@ -58,12 +57,6 @@ public class BlockVegetation extends BlockBush implements IInitializableBlock, I
 	public BlockVegetation()
 	{
 		super();
-		this.initBlock();
-	}
-	
-	@Override
-	public void initBlock()
-	{
 		this.setHardness(0);
 		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockVegetation));
 		this.setResistance(0);

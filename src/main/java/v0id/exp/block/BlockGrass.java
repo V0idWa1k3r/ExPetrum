@@ -45,7 +45,7 @@ import java.util.stream.Stream;
 import static v0id.api.exp.block.property.EnumDirtClass.ACRISOL;
 import static v0id.api.exp.data.ExPBlockProperties.DIRT_CLASS;
 
-public class BlockGrass extends Block implements IWeightProvider, IGravitySusceptible, IGrass, IInitializableBlock, IOreDictEntry, IItemBlockProvider
+public class BlockGrass extends Block implements IWeightProvider, IGravitySusceptible, IGrass, IOreDictEntry, IItemBlockProvider
 {
 	public BlockGrass()
 	{
@@ -54,7 +54,6 @@ public class BlockGrass extends Block implements IWeightProvider, IGravitySuscep
 		this.setTickRandomly(true);
 	}
 
-	@Override
 	public void initBlock()
 	{
 		this.setHardness(3.5f);

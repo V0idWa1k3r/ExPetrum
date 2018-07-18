@@ -37,7 +37,6 @@ import v0id.api.exp.metal.EnumToolClass;
 import v0id.api.exp.util.ColorRGB;
 import v0id.api.exp.world.IExPWorld;
 import v0id.exp.ExPetrum;
-import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.util.Helpers;
@@ -47,7 +46,7 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
-public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IInitializableBlock, IOreDictEntry, IItemBlockProvider
+public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IOreDictEntry, IItemBlockProvider
 {
 	// Log and not leaf because this is the index of the log this leaf is a leaf of
 	// Sounds confusing enough? (>w<)
@@ -57,12 +56,6 @@ public class BlockLeaf extends Block implements ILeaves, IWeightProvider, IIniti
 	{
 		super(Material.LEAVES);
 		this.logIndex = i;
-		this.initBlock();
-	}
-	
-	@Override
-	public void initBlock()
-	{
 		this.setHardness(1.5f);
 		this.setRegistryName(this.createRegistryLocation());
 		this.setResistance(0.5f);

@@ -31,23 +31,11 @@ import java.util.Random;
 
 import static v0id.api.exp.data.ExPBlockProperties.CHARCOAL_COUNT;
 
-public class BlockCharcoal extends Block implements IGravitySusceptible, IInitializableBlock, IItemBlockProvider, ISupport
+public class BlockCharcoal extends Block implements IGravitySusceptible, IItemBlockProvider, ISupport
 {
     public BlockCharcoal()
     {
         super(Material.GROUND);
-        this.initBlock();
-    }
-
-    @Override
-    public int getFallDamage(Entity collidedWith, EntityFallingBlock self)
-    {
-        return 5;
-    }
-
-    @Override
-    public void initBlock()
-    {
         this.setHardness(1.5F);
         this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockCharcoal));
         this.setResistance(5);
@@ -55,6 +43,12 @@ public class BlockCharcoal extends Block implements IGravitySusceptible, IInitia
         this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
         this.setDefaultState(this.blockState.getBaseState().withProperty(CHARCOAL_COUNT, 1));
         this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+    }
+
+    @Override
+    public int getFallDamage(Entity collidedWith, EntityFallingBlock self)
+    {
+        return 5;
     }
 
     @Override

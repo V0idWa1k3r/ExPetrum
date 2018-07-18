@@ -31,7 +31,7 @@ import java.util.Arrays;
 
 import static v0id.api.exp.data.ExPBlockProperties.TREE_TYPE;
 
-public class BlockCraftingTable extends BlockWorkbench implements IWeightProvider, IOreDictEntry, IInitializableBlock, IItemBlockProvider
+public class BlockCraftingTable extends BlockWorkbench implements IWeightProvider, IOreDictEntry, IItemBlockProvider
 {
     public int logIndex;
 
@@ -39,7 +39,14 @@ public class BlockCraftingTable extends BlockWorkbench implements IWeightProvide
     {
         super();
         this.logIndex = i;
-        this.initBlock();
+        this.setHardness(3);
+        this.setRegistryName(createRegistryLocation());
+        this.setResistance(6);
+        this.setSoundType(SoundType.WOOD);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(TREE_TYPE, EnumTreeType.values()[this.logIndex * 15]));
+        Blocks.FIRE.setFireInfo(this, 5, 20);
     }
 
     @Override
@@ -79,19 +86,6 @@ public class BlockCraftingTable extends BlockWorkbench implements IWeightProvide
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return Pair.of((byte)2, (byte)2);
-    }
-
-    @Override
-    public void initBlock()
-    {
-        this.setHardness(3);
-        this.setRegistryName(createRegistryLocation());
-        this.setResistance(6);
-        this.setSoundType(SoundType.WOOD);
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(TREE_TYPE, EnumTreeType.values()[this.logIndex * 15]));
-        Blocks.FIRE.setFireInfo(this, 5, 20);
     }
 
     public ResourceLocation createRegistryLocation()

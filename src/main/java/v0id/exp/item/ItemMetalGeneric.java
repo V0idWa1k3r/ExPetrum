@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class ItemMetalGeneric extends Item implements IOreDictEntry, IWeightProvider, IInitializableItem, IMeltableMetal
+public class ItemMetalGeneric extends Item implements IOreDictEntry, IWeightProvider, IMeltableMetal
 {
     public enum EnumGenericType
     {
@@ -51,7 +51,10 @@ public class ItemMetalGeneric extends Item implements IOreDictEntry, IWeightProv
     public ItemMetalGeneric()
     {
         super();
-        this.initItem();
+        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemMetalGeneric));
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabMetals);
+        this.setHasSubtypes(true);
     }
 
     @Override
@@ -98,15 +101,6 @@ public class ItemMetalGeneric extends Item implements IOreDictEntry, IWeightProv
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return EnumGenericType.values()[item.getMetadata() / EnumMetal.values().length].volume;
-    }
-
-    @Override
-    public void initItem()
-    {
-        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemMetalGeneric));
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabMetals);
-        this.setHasSubtypes(true);
     }
 
     @Override

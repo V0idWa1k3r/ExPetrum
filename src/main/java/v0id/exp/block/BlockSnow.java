@@ -35,25 +35,13 @@ import java.util.stream.Stream;
 
 import static net.minecraft.block.BlockSnow.LAYERS;
 
-public class BlockSnow extends Block implements IGravitySusceptible, IInitializableBlock, IOreDictEntry, IItemBlockProvider
+public class BlockSnow extends Block implements IGravitySusceptible, IOreDictEntry, IItemBlockProvider
 {
 	protected static final AxisAlignedBB[] SNOW_AABB = new AxisAlignedBB[] {new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.25D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.375D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.75D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)};
 
 	public BlockSnow()
 	{
 		super(Material.SNOW);
-		this.initBlock();
-	}
-
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	{
-		return Items.AIR;
-	}
-
-	@Override
-	public void initBlock()
-	{
 		this.setHardness(0.1F);
 		this.setResistance(0);
 		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockSnow));
@@ -62,6 +50,12 @@ public class BlockSnow extends Block implements IGravitySusceptible, IInitializa
 		this.setDefaultState(this.blockState.getBaseState().withProperty(LAYERS, 1));
 		this.setCreativeTab(ExPCreativeTabs.tabCommon);
 		this.setTickRandomly(true);
+	}
+
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	{
+		return Items.AIR;
 	}
 
 	@SuppressWarnings("deprecation")

@@ -38,17 +38,11 @@ import v0id.exp.util.Helpers;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockChest extends BlockHorizontal implements IInitializableBlock, IItemBlockProvider, IWeightProvider
+public class BlockChest extends BlockHorizontal implements IItemBlockProvider, IWeightProvider
 {
     public BlockChest()
     {
         super(Material.WOOD);
-        this.initBlock();
-    }
-
-    @Override
-    public void initBlock()
-    {
         this.setHardness(1.0F);
         this.setResistance(3.0F);
         this.setRegistryName(ExPRegistryNames.blockChest);

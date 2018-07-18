@@ -33,7 +33,7 @@ import java.util.stream.Stream;
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
 import static v0id.api.exp.data.ExPBlockProperties.ROCK_CLASS;
 
-public class BlockDecoratedStone extends Block implements IChiselable, IWeightProvider, IInitializableBlock, IOreDictEntry, IItemBlockProvider
+public class BlockDecoratedStone extends Block implements IChiselable, IWeightProvider, IOreDictEntry, IItemBlockProvider
 {
 	public enum EnumDecorationType
     {
@@ -48,7 +48,13 @@ public class BlockDecoratedStone extends Block implements IChiselable, IWeightPr
 	{
 		super(Material.ROCK);
 		this.type = type;
-		this.initBlock();
+		this.setHardness(3);
+		this.setRegistryName(ExPRegistryNames.asLocation(this.type == EnumDecorationType.TILE ? ExPRegistryNames.blockDecoratedStoneTile : this.type == EnumDecorationType.BRICK ? ExPRegistryNames.blockDecoratedStoneBrick : ExPRegistryNames.blockDecoratedStoneBrickSmall));
+		this.setResistance(10);
+		this.setSoundType(SoundType.STONE);
+		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(ROCK_CLASS, ANDESITE));
+		this.setCreativeTab(ExPCreativeTabs.tabUnderground);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -121,18 +127,6 @@ public class BlockDecoratedStone extends Block implements IChiselable, IWeightPr
 	public Pair<Byte, Byte> provideVolume(ItemStack item)
 	{
 		return Pair.of((byte)2, (byte)2);
-	}
-
-	@Override
-	public void initBlock()
-	{
-		this.setHardness(3);
-		this.setRegistryName(ExPRegistryNames.asLocation(this.type == EnumDecorationType.TILE ? ExPRegistryNames.blockDecoratedStoneTile : this.type == EnumDecorationType.BRICK ? ExPRegistryNames.blockDecoratedStoneBrick : ExPRegistryNames.blockDecoratedStoneBrickSmall));
-		this.setResistance(10);
-		this.setSoundType(SoundType.STONE);
-		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-		this.setDefaultState(this.blockState.getBaseState().withProperty(ROCK_CLASS, ANDESITE));
-		this.setCreativeTab(ExPCreativeTabs.tabUnderground);
 	}
 	
 	@Override

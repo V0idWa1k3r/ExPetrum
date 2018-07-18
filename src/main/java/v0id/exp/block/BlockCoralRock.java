@@ -25,14 +25,20 @@ import v0id.exp.block.item.ItemBlockWithMetadata;
 
 import java.util.stream.Stream;
 
-public class BlockCoralRock extends Block implements IWeightProvider, IGravitySusceptible, IInitializableBlock, IOreDictEntry, IItemBlockProvider
+public class BlockCoralRock extends Block implements IWeightProvider, IGravitySusceptible, IOreDictEntry, IItemBlockProvider
 {
 	public static final PropertyInteger TEXTURE_INDEX_ROCK = PropertyInteger.create("rtindex", 0, 5);
 	
 	public BlockCoralRock()
 	{
 		super(Material.ROCK);
-		this.initBlock();
+		this.setHardness(8);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockCoralRock));
+		this.setResistance(10);
+		this.setSoundType(SoundType.STONE);
+		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(TEXTURE_INDEX_ROCK, 0));
+		this.setCreativeTab(ExPCreativeTabs.tabCommon);
 	}
 
 	@Override
@@ -106,18 +112,6 @@ public class BlockCoralRock extends Block implements IWeightProvider, IGravitySu
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
 		return this.getExtendedState(state, worldIn, pos);
-	}
-
-	@Override
-	public void initBlock()
-	{
-		this.setHardness(8);
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockCoralRock));
-		this.setResistance(10);
-		this.setSoundType(SoundType.STONE);
-		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-		this.setDefaultState(this.blockState.getBaseState().withProperty(TEXTURE_INDEX_ROCK, 0));
-		this.setCreativeTab(ExPCreativeTabs.tabCommon);
 	}
 	
 	@Override

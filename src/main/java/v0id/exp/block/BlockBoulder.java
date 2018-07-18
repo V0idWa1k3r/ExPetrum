@@ -36,7 +36,7 @@ import java.util.stream.Stream;
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
 import static v0id.api.exp.data.ExPBlockProperties.ROCK_CLASS;
 
-public class BlockBoulder extends Block implements IInitializableBlock, IOreHintReplaceable, IOreDictEntry, IItemBlockProvider, IChiselable
+public class BlockBoulder extends Block implements IOreHintReplaceable, IOreDictEntry, IItemBlockProvider, IChiselable
 {
 	public static final PropertyInteger MODEL_INDEX = PropertyInteger.create("amdl", 0, 3);
 	public static final AxisAlignedBB BOULDER_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.6, 0.9);
@@ -44,12 +44,6 @@ public class BlockBoulder extends Block implements IInitializableBlock, IOreHint
 	public BlockBoulder()
 	{
 		super(Material.ROCK);
-		this.initBlock();
-	}
-
-	@Override
-	public void initBlock()
-	{
 		this.setHardness(3f);
 		this.setResistance(0);
 		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockBoulder));

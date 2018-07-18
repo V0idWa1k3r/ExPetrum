@@ -26,12 +26,19 @@ import v0id.exp.tile.TileWaterWheel;
 
 import javax.annotation.Nullable;
 
-public class BlockWaterWheel extends BlockHorizontal implements IWeightProvider, IInitializableBlock, IItemBlockProvider
+public class BlockWaterWheel extends BlockHorizontal implements IWeightProvider, IItemBlockProvider
 {
     public BlockWaterWheel()
     {
         super(Material.WOOD);
-        this.initBlock();
+        this.setHardness(3.0F);
+        this.setResistance(10.0F);
+        this.setRegistryName(ExPRegistryNames.blockWaterWheel);
+        this.setSoundType(SoundType.WOOD);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+        this.setLightOpacity(0);
     }
 
     @Override
@@ -44,19 +51,6 @@ public class BlockWaterWheel extends BlockHorizontal implements IWeightProvider,
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return Pair.of((byte)3, (byte)3);
-    }
-
-    @Override
-    public void initBlock()
-    {
-        this.setHardness(3.0F);
-        this.setResistance(10.0F);
-        this.setRegistryName(ExPRegistryNames.blockWaterWheel);
-        this.setSoundType(SoundType.WOOD);
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-        this.setLightOpacity(0);
     }
 
     @Override

@@ -36,12 +36,18 @@ import java.util.stream.Stream;
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
 import static v0id.api.exp.data.ExPBlockProperties.ROCK_CLASS;
 
-public class BlockStone extends Block implements IChiselable, IWeightProvider, IGravitySusceptible, IInitializableBlock, IOreDictEntry, IItemBlockProvider
+public class BlockStone extends Block implements IChiselable, IWeightProvider, IGravitySusceptible, IOreDictEntry, IItemBlockProvider
 {
 	public BlockStone()
 	{
 		super(Material.ROCK);
-		this.initBlock();
+		this.setHardness(3);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockStone));
+		this.setResistance(10);
+		this.setSoundType(SoundType.STONE);
+		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(ROCK_CLASS, ANDESITE));
+		this.setCreativeTab(ExPCreativeTabs.tabUnderground);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -149,18 +155,6 @@ public class BlockStone extends Block implements IChiselable, IWeightProvider, I
 	{
 		super.onBlockAdded(worldIn, pos, state);
 		this.onNeighborChange(worldIn, pos, pos);
-	}
-
-	@Override
-	public void initBlock()
-	{
-		this.setHardness(3);
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockStone));
-		this.setResistance(10);
-		this.setSoundType(SoundType.STONE);
-		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-		this.setDefaultState(this.blockState.getBaseState().withProperty(ROCK_CLASS, ANDESITE));
-		this.setCreativeTab(ExPCreativeTabs.tabUnderground);
 	}
 	
 	@Override

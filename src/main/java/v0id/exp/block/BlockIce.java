@@ -33,12 +33,19 @@ import javax.annotation.Nullable;
 import java.util.Random;
 import java.util.stream.Stream;
 
-public class BlockIce extends Block implements IInitializableBlock, IGravitySusceptible, IOreDictEntry, IItemBlockProvider
+public class BlockIce extends Block implements IGravitySusceptible, IOreDictEntry, IItemBlockProvider
 {
 	public BlockIce()
 	{
 		super(Material.ICE);
-		this.initBlock();
+		this.setHardness(8);
+		this.setResistance(0);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockIce));
+		this.setSoundType(SoundType.GLASS);
+		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(ExPBlockProperties.ICE_IS_SALT, false));
+		this.setCreativeTab(ExPCreativeTabs.tabCommon);
+		this.setTickRandomly(true);
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -76,19 +83,6 @@ public class BlockIce extends Block implements IInitializableBlock, IGravitySusc
     {
         return EnumPushReaction.NORMAL;
     }
-
-	@Override
-	public void initBlock()
-	{
-		this.setHardness(8);
-		this.setResistance(0);
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockIce));
-		this.setSoundType(SoundType.GLASS);
-		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-		this.setDefaultState(this.blockState.getBaseState().withProperty(ExPBlockProperties.ICE_IS_SALT, false));
-		this.setCreativeTab(ExPCreativeTabs.tabCommon);
-		this.setTickRandomly(true);
-	}
 
 	@Override
 	public float getSlipperiness(IBlockState state, IBlockAccess world, BlockPos pos, @Nullable Entity entity)

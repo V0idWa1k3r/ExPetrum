@@ -28,12 +28,19 @@ import v0id.exp.util.Helpers;
 
 import javax.annotation.Nullable;
 
-public class BlockScrapingRack extends BlockHorizontal implements IWeightProvider, IInitializableBlock, IItemBlockProvider
+public class BlockScrapingRack extends BlockHorizontal implements IWeightProvider, IItemBlockProvider
 {
     public BlockScrapingRack()
     {
         super(Material.WOOD);
-        this.initBlock();
+        this.setHardness(1.0F);
+        this.setResistance(3);
+        this.setRegistryName(ExPRegistryNames.blockScrapingRack);
+        this.setSoundType(SoundType.WOOD);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+        this.setLightOpacity(0);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
 
     @Override
@@ -46,19 +53,6 @@ public class BlockScrapingRack extends BlockHorizontal implements IWeightProvide
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return Pair.of((byte)2, (byte)2);
-    }
-
-    @Override
-    public void initBlock()
-    {
-        this.setHardness(1.0F);
-        this.setResistance(3);
-        this.setRegistryName(ExPRegistryNames.blockScrapingRack);
-        this.setSoundType(SoundType.WOOD);
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-        this.setLightOpacity(0);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
 
     @SuppressWarnings("deprecation")

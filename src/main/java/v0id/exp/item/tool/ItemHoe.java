@@ -24,18 +24,20 @@ import v0id.api.exp.metal.EnumToolClass;
 import v0id.api.exp.metal.EnumToolStats;
 import v0id.api.exp.tile.crop.EnumPlantNutrient;
 import v0id.api.exp.tile.crop.IFarmland;
-import v0id.exp.item.IInitializableItem;
 import v0id.exp.tile.TileFarmland;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-public class ItemHoe extends ItemExPTool implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry
+public class ItemHoe extends ItemExPTool implements IWeapon, IWeightProvider, IOreDictEntry
 {
 	public ItemHoe(EnumToolStats stats)
 	{
 		super(stats, EnumToolClass.HOE);
-		this.initItem();
+		this.setSelfRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemHoe));
+		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+		this.setCreativeTab(ExPCreativeTabs.tabTools);
+		this.setHasSubtypes(true);
 	}
 
 	@Override
@@ -46,15 +48,6 @@ public class ItemHoe extends ItemExPTool implements IWeapon, IWeightProvider, II
 			OreDictionary.registerOre(name, new ItemStack(this, 1, mat.ordinal()));
 			OreDictionary.registerOre(name + Character.toUpperCase(mat.name().charAt(0)) + mat.name().toLowerCase().substring(1), new ItemStack(this, 1, mat.ordinal()));
 		}));
-	}
-
-	@Override
-	public void initItem()
-	{
-		this.setSelfRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemHoe));
-		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-		this.setCreativeTab(ExPCreativeTabs.tabTools);
-		this.setHasSubtypes(true);
 	}
 
 	@Override

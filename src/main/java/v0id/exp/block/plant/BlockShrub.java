@@ -27,13 +27,12 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.commons.lang3.ArrayUtils;
 import v0id.api.exp.block.*;
 import v0id.api.exp.data.*;
 import v0id.api.exp.metal.EnumToolClass;
-import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.util.Helpers;
@@ -43,7 +42,7 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
-public class BlockShrub extends Block implements IInitializableBlock, IShrub, IPlantable, IOreDictEntry, IItemBlockProvider
+public class BlockShrub extends Block implements IShrub, IPlantable, IOreDictEntry, IItemBlockProvider
 {
 	public static final AxisAlignedBB BASIC_AABB = new AxisAlignedBB(0.3, 0, 0.3, 0.7, 0.5, 0.7);
 	public static final AxisAlignedBB FULL_AABB = new AxisAlignedBB(0.3, 0, 0.3, 0.7, 0.5, 0.7);
@@ -56,7 +55,6 @@ public class BlockShrub extends Block implements IInitializableBlock, IShrub, IP
 		this.initBlock();
 	}
 
-	@Override
 	public void initBlock()
 	{
 		this.setHardness(1);

@@ -37,7 +37,6 @@ public class ExPetrum
 	public static final File configDirectory;
 	@SidedProxy(clientSide = "v0id.exp.proxy.ExPProxyClient", serverSide = "v0id.exp.proxy.ExPProxyServer")
 	public static IExPProxy proxy;
-	private static Thread worker;
 
 	static
 	{

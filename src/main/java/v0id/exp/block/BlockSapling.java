@@ -34,12 +34,20 @@ import java.util.Random;
 
 import static v0id.api.exp.data.ExPBlockProperties.TREE_TYPE;
 
-public class BlockSapling extends Block implements IWeightProvider, IInitializableBlock, IItemBlockProvider
+public class BlockSapling extends Block implements IWeightProvider, IItemBlockProvider
 {
     public BlockSapling()
     {
         super(Material.PLANTS);
-        this.initBlock();
+        this.setHardness(1.0F);
+        this.setResistance(3);
+        this.setRegistryName(ExPRegistryNames.blockSapling);
+        this.setSoundType(SoundType.PLANT);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(TREE_TYPE, EnumTreeType.KALOPANAX));
+        this.setLightOpacity(0);
+        this.setTickRandomly(true);
     }
 
     @Override
@@ -52,20 +60,6 @@ public class BlockSapling extends Block implements IWeightProvider, IInitializab
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return Pair.of((byte)1, (byte)1);
-    }
-
-    @Override
-    public void initBlock()
-    {
-        this.setHardness(1.0F);
-        this.setResistance(3);
-        this.setRegistryName(ExPRegistryNames.blockSapling);
-        this.setSoundType(SoundType.PLANT);
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(TREE_TYPE, EnumTreeType.KALOPANAX));
-        this.setLightOpacity(0);
-        this.setTickRandomly(true);
     }
 
     @Override

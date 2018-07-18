@@ -12,7 +12,7 @@ import v0id.api.exp.metal.EnumToolStats;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class ItemTuyere extends Item implements IWeightProvider, ITuyere, IInitializableItem
+public class ItemTuyere extends Item implements IWeightProvider, ITuyere
 {
     public static final Map<EnumToolStats, ItemTuyere> items = new EnumMap<>(EnumToolStats.class);
     public final EnumToolStats stats;
@@ -22,7 +22,12 @@ public class ItemTuyere extends Item implements IWeightProvider, ITuyere, IIniti
         super();
         this.stats = ets;
         items.put(ets, this);
-        this.initItem();
+        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemTuyere + "_" + this.stats.getName()));
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabTools);
+        this.setHasSubtypes(true);
+        this.setMaxStackSize(1);
+        this.setMaxDamage(this.stats.getDurability());
     }
 
     @Override
@@ -35,17 +40,6 @@ public class ItemTuyere extends Item implements IWeightProvider, ITuyere, IIniti
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return Pair.of((byte)3, (byte)2);
-    }
-
-    @Override
-    public void initItem()
-    {
-        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemTuyere + "_" + this.stats.getName()));
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabTools);
-        this.setHasSubtypes(true);
-        this.setMaxStackSize(1);
-        this.setMaxDamage(this.stats.getDurability());
     }
 
     @Override

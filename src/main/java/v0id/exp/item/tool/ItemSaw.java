@@ -15,16 +15,18 @@ import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.api.exp.metal.EnumToolClass;
 import v0id.api.exp.metal.EnumToolStats;
-import v0id.exp.item.IInitializableItem;
 
 import java.util.Arrays;
 
-public class ItemSaw extends ItemExPTool implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry
+public class ItemSaw extends ItemExPTool implements IWeapon, IWeightProvider, IOreDictEntry
 {
 	public ItemSaw(EnumToolStats stats)
 	{
 		super(stats, EnumToolClass.SAW);
-		this.initItem();
+		this.setSelfRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemSaw));
+		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+		this.setCreativeTab(ExPCreativeTabs.tabTools);
+		this.setHasSubtypes(true);
 	}
 
     @Override
@@ -32,15 +34,6 @@ public class ItemSaw extends ItemExPTool implements IWeapon, IWeightProvider, II
     {
         Arrays.stream(EnumToolStats.values()).forEach(mat -> Arrays.stream(ExPOreDict.itemSaw).forEach(name -> OreDictionary.registerOre(name, new ItemStack(this, 1, mat.ordinal()))));
     }
-
-	@Override
-	public void initItem()
-	{
-		this.setSelfRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemSaw));
-		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-		this.setCreativeTab(ExPCreativeTabs.tabTools);
-		this.setHasSubtypes(true);
-	}
 
 	@Override
 	public float provideWeight(ItemStack item)

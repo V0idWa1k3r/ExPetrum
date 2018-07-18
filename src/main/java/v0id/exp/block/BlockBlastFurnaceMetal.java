@@ -24,31 +24,25 @@ import java.util.Random;
 
 import static net.minecraft.block.BlockSnow.LAYERS;
 
-public class BlockBlastFurnaceMetal extends Block implements IInitializableBlock, IItemBlockProvider
+public class BlockBlastFurnaceMetal extends Block implements IItemBlockProvider
 {
 	protected static final AxisAlignedBB[] SNOW_AABB = new AxisAlignedBB[] {new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.0D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.25D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.375D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.75D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)};
 
 	public BlockBlastFurnaceMetal()
 	{
 		super(Material.ROCK);
-		this.initBlock();
-	}
-
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	{
-		return Items.AIR;
-	}
-
-	@Override
-	public void initBlock()
-	{
 		this.setHardness(10F);
 		this.setResistance(100F);
 		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockBlastFurnaceMetal));
 		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
 		this.setDefaultState(this.blockState.getBaseState().withProperty(LAYERS, 1));
 		this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+	}
+
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	{
+		return Items.AIR;
 	}
 
 	@SuppressWarnings("deprecation")

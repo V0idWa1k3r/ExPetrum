@@ -29,12 +29,18 @@ import v0id.exp.util.Helpers;
 
 import javax.annotation.Nullable;
 
-public class BlockPotteryStation extends Block implements IInitializableBlock, IItemBlockProvider, IWeightProvider
+public class BlockPotteryStation extends Block implements IItemBlockProvider, IWeightProvider
 {
     public BlockPotteryStation()
     {
         super(Material.WOOD);
-        this.initBlock();
+        this.setHardness(1.0F);
+        this.setResistance(3.0F);
+        this.setRegistryName(ExPRegistryNames.blockPotteryStation);
+        this.setSoundType(SoundType.STONE);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(ExPBlockProperties.POTTERYSTATION_HASCLAY, false));
     }
 
     @Override
@@ -54,18 +60,6 @@ public class BlockPotteryStation extends Block implements IInitializableBlock, I
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(ExPBlockProperties.POTTERYSTATION_HASCLAY, meta == 1);
-    }
-
-    @Override
-    public void initBlock()
-    {
-        this.setHardness(1.0F);
-        this.setResistance(3.0F);
-        this.setRegistryName(ExPRegistryNames.blockPotteryStation);
-        this.setSoundType(SoundType.STONE);
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(ExPBlockProperties.POTTERYSTATION_HASCLAY, false));
     }
 
     public void registerItem(IForgeRegistry<Item> registry)

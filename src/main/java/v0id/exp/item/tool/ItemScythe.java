@@ -17,16 +17,18 @@ import v0id.api.exp.item.IScythe;
 import v0id.api.exp.metal.EnumToolClass;
 import v0id.api.exp.metal.EnumToolStats;
 import v0id.exp.block.plant.BlockCrop;
-import v0id.exp.item.IInitializableItem;
 
 import java.util.Arrays;
 
-public class ItemScythe extends ItemExPWeapon implements IWeapon, IWeightProvider, IInitializableItem, IOreDictEntry, IScythe
+public class ItemScythe extends ItemExPWeapon implements IWeapon, IWeightProvider, IOreDictEntry, IScythe
 {
 	public ItemScythe(EnumToolStats stats)
 	{
 		super(stats, EnumToolClass.SCYTHE);
-		this.initItem();
+		this.setSelfRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemScythe));
+		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+		this.setCreativeTab(ExPCreativeTabs.tabTools);
+		this.setHasSubtypes(true);
 	}
 
     @Override
@@ -38,15 +40,6 @@ public class ItemScythe extends ItemExPWeapon implements IWeapon, IWeightProvide
             OreDictionary.registerOre(name + Character.toUpperCase(mat.name().charAt(0)) + mat.name().toLowerCase().substring(1), new ItemStack(this, 1, mat.ordinal()));
         }));
     }
-
-	@Override
-	public void initItem()
-	{
-		this.setSelfRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemScythe));
-		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-		this.setCreativeTab(ExPCreativeTabs.tabTools);
-		this.setHasSubtypes(true);
-	}
 
 	@Override
 	public float provideWeight(ItemStack item)

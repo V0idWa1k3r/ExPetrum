@@ -27,17 +27,11 @@ import java.util.Random;
 
 import static v0id.api.exp.data.ExPBlockProperties.ROCKSALT_ISHINT;
 
-public class BlockRockSalt extends Block implements IInitializableBlock, IItemBlockProvider
+public class BlockRockSalt extends Block implements IItemBlockProvider
 {
     public BlockRockSalt()
     {
         super(Material.ROCK);
-        this.initBlock();
-    }
-
-    @Override
-    public void initBlock()
-    {
         this.setHardness(1.0F);
         this.setResistance(3);
         this.setRegistryName(ExPRegistryNames.blockRockSalt);

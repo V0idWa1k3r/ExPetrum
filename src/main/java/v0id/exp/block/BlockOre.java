@@ -38,19 +38,13 @@ import java.util.stream.Stream;
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
 import static v0id.api.exp.data.ExPBlockProperties.ROCK_CLASS;
 
-public class BlockOre extends Block implements IInitializableBlock, IOreDictEntry, IItemBlockProvider
+public class BlockOre extends Block implements IOreDictEntry, IItemBlockProvider
 {
 	public static final float ORE_HARDNESS_MODIFIER = 2F;
 
 	public BlockOre()
 	{
 		super(Material.ROCK);
-		this.initBlock();
-	}
-	
-	@Override
-	public void initBlock()
-	{
 		this.setHardness(3);
 		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockOre));
 		this.setResistance(10);
@@ -59,7 +53,7 @@ public class BlockOre extends Block implements IInitializableBlock, IOreDictEntr
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ROCK_CLASS, ANDESITE).withProperty(ExPBlockProperties.ORE_TEXTURE_ID, 0));
 		this.setCreativeTab(ExPCreativeTabs.tabOres);
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)

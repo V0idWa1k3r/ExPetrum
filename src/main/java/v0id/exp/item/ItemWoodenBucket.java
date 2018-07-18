@@ -29,12 +29,16 @@ import v0id.exp.ExPetrum;
 import java.util.Arrays;
 import java.util.List;
 
-public class ItemWoodenBucket extends Item implements IWeightProvider, IInitializableItem, IOreDictEntry
+public class ItemWoodenBucket extends Item implements IWeightProvider, IOreDictEntry
 {
     public ItemWoodenBucket()
     {
         super();
-        this.initItem();
+        this.setHasSubtypes(true);
+        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemWoodenBucket));
+        this.setMaxStackSize(1);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabTools);
     }
 
     @Override
@@ -100,16 +104,6 @@ public class ItemWoodenBucket extends Item implements IWeightProvider, IInitiali
     public Fluid getStoredFluid(ItemStack item)
     {
         return item.getMetadata() == 0 ? null : item.getMetadata() == 1 ? FluidRegistry.WATER : item.getMetadata() == 2 ? ExPFluids.saltWater : ExPFluids.milk;
-    }
-
-    @Override
-    public void initItem()
-    {
-        this.setHasSubtypes(true);
-        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemWoodenBucket));
-        this.setMaxStackSize(1);
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabTools);
     }
 
     @Override

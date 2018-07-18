@@ -15,29 +15,23 @@ import java.util.Arrays;
 /**
  * Created by V0idWa1k3r on 11-Jun-17.
  */
-public class ItemWoolCard extends Item implements IInitializableItem, IOreDictEntry, IWeightProvider
+public class ItemWoolCard extends Item implements IOreDictEntry, IWeightProvider
 {
     public ItemWoolCard()
     {
         super();
-        this.initItem();
-    }
-
-    @Override
-    public void registerOreDictNames()
-    {
-        Arrays.stream(ExPOreDict.itemWoolCard).forEach(name -> OreDictionary.registerOre(name, this));
-    }
-
-    @Override
-    public void initItem()
-    {
         this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemWoolCard));
         this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
         this.setCreativeTab(ExPCreativeTabs.tabTools);
         this.setHasSubtypes(true);
         this.setMaxDamage(12);
         this.setMaxStackSize(1);
+    }
+
+    @Override
+    public void registerOreDictNames()
+    {
+        Arrays.stream(ExPOreDict.itemWoolCard).forEach(name -> OreDictionary.registerOre(name, this));
     }
 
     @Override

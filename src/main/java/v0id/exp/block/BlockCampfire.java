@@ -32,17 +32,11 @@ import v0id.exp.util.Helpers;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockCampfire extends Block implements IInitializableBlock, IItemBlockProvider, IWeightProvider
+public class BlockCampfire extends Block implements IItemBlockProvider, IWeightProvider
 {
     public BlockCampfire()
     {
         super(Material.WOOD);
-        this.initBlock();
-    }
-
-    @Override
-    public void initBlock()
-    {
         this.setHardness(1.0F);
         this.setResistance(3.0F);
         this.setRegistryName(ExPRegistryNames.blockCampfire);

@@ -14,7 +14,6 @@ import net.minecraftforge.fluids.BlockFluidFinite;
 import net.minecraftforge.registries.IForgeRegistry;
 import v0id.api.exp.block.IWater;
 import v0id.api.exp.data.*;
-import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWeighted;
 import v0id.exp.util.Helpers;
@@ -22,25 +21,18 @@ import v0id.exp.util.Helpers;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class BlockSaltWater extends BlockFluidFinite implements IWater, IInitializableBlock, IItemBlockProvider
+public class BlockSaltWater extends BlockFluidFinite implements IWater, IItemBlockProvider
 {
 	public BlockSaltWater()
 	{
 		super(ExPFluids.saltWater, Material.WATER);
-		this.initBlock();
-	}
-	
-	@Override
-	public void initBlock()
-	{
-		this.setBlockUnbreakable();
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockSaltWater));
-		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-		this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-		this.setLightOpacity(3);
-		this.setQuantaPerBlock(10);
-		this.setTickRandomly(true);
-        this.displacements.put(ExPBlocks.crate, false);
+        this.setBlockUnbreakable();
+        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockSaltWater));
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+        this.setLightOpacity(3);
+        this.setQuantaPerBlock(10);
+        this.setTickRandomly(true);
 	}
 	
 	@Override

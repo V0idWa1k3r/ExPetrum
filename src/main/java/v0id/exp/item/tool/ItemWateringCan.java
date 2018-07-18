@@ -33,17 +33,19 @@ import v0id.api.exp.metal.EnumToolStats;
 import v0id.api.exp.player.EnumPlayerProgression;
 import v0id.api.exp.player.IExPPlayer;
 import v0id.exp.ExPetrum;
-import v0id.exp.item.IInitializableItem;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class ItemWateringCan extends ItemExPTool implements IWeightProvider, IInitializableItem, IOreDictEntry
+public class ItemWateringCan extends ItemExPTool implements IWeightProvider, IOreDictEntry
 {
 	public ItemWateringCan(EnumToolStats stats)
 	{
 		super(stats, EnumToolClass.WATERING_CAN);
-		this.initItem();
+		this.setSelfRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemWateringCan));
+		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+		this.setCreativeTab(ExPCreativeTabs.tabTools);
+		this.setHasSubtypes(true);
 	}
 	
 	@Override
@@ -78,15 +80,6 @@ public class ItemWateringCan extends ItemExPTool implements IWeightProvider, IIn
 			OreDictionary.registerOre(name, new ItemStack(this, 1, mat.ordinal()));
 			OreDictionary.registerOre(name + Character.toUpperCase(mat.name().charAt(0)) + mat.name().toLowerCase().substring(1), new ItemStack(this, 1, mat.ordinal()));
 		}));
-	}
-
-	@Override
-	public void initItem()
-	{
-		this.setSelfRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemWateringCan));
-		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-		this.setCreativeTab(ExPCreativeTabs.tabTools);
-		this.setHasSubtypes(true);
 	}
 
 	@Override

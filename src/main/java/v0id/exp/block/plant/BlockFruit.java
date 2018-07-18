@@ -21,8 +21,8 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.registries.IForgeRegistry;
 import v0id.api.exp.block.EnumFruit;
 import v0id.api.exp.block.EnumLeafState;
 import v0id.api.exp.data.ExPBlockProperties;
@@ -31,7 +31,6 @@ import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.world.IExPWorld;
 import v0id.exp.ExPetrum;
-import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.block.tree.BlockLeaf;
@@ -45,17 +44,11 @@ import java.util.Random;
 /**
  * Created by V0idWa1k3r on 16-Jun-17.
  */
-public class BlockFruit extends Block implements IInitializableBlock, IItemBlockProvider
+public class BlockFruit extends Block implements IItemBlockProvider
 {
     public BlockFruit()
     {
         super(Material.PLANTS);
-        this.initBlock();
-    }
-
-    @Override
-    public void initBlock()
-    {
         this.setHardness(1F);
         this.setResistance(0);
         this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockFruit));

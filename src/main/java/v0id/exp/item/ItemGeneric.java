@@ -13,7 +13,7 @@ import v0id.api.exp.inventory.IWeightProvider;
 
 import java.util.stream.Stream;
 
-public class ItemGeneric extends Item implements IInitializableItem, IWeightProvider, IOreDictEntry
+public class ItemGeneric extends Item implements IWeightProvider, IOreDictEntry
 {
     public enum EnumGenericType
     {
@@ -89,7 +89,10 @@ public class ItemGeneric extends Item implements IInitializableItem, IWeightProv
     public ItemGeneric()
     {
         super();
-        this.initItem();
+        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemGeneric));
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabMiscItems);
+        this.setHasSubtypes(true);
     }
 
     @Override
@@ -108,15 +111,6 @@ public class ItemGeneric extends Item implements IInitializableItem, IWeightProv
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return EnumGenericType.values()[item.getMetadata()].volume;
-    }
-
-    @Override
-    public void initItem()
-    {
-        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemGeneric));
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabMiscItems);
-        this.setHasSubtypes(true);
     }
 
     @Override

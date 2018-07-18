@@ -33,24 +33,18 @@ import java.util.Random;
 
 import static v0id.api.exp.data.ExPBlockProperties.KAOLIN_TYPE;
 
-public class BlockKaolin extends Block implements IInitializableBlock, IGravitySusceptible, IItemBlockProvider, IHasSpecialName, IWeightProvider
+public class BlockKaolin extends Block implements IGravitySusceptible, IItemBlockProvider, IHasSpecialName, IWeightProvider
 {
     public BlockKaolin()
     {
         super(Material.ROCK);
-        this.initBlock();
-    }
-
-    @Override
-    public void initBlock()
-    {
         this.setHardness(2);
         this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockKaolin));
         this.setResistance(6);
         this.setSoundType(SoundType.STONE);
         this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
         this.setDefaultState(this.blockState.getBaseState().withProperty(KAOLIN_TYPE, EnumKaolinType.ROCK));
-        this.setCreativeTab(ExPCreativeTabs.tabUnderground);
+        this.setCreativeTab(ExPCreativeTabs.tabCommon);
     }
 
     @Override

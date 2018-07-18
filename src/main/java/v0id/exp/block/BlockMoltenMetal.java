@@ -29,23 +29,11 @@ import java.util.Random;
 
 import static v0id.api.exp.data.ExPBlockProperties.MOLTEN_METAL_STATE;
 
-public class BlockMoltenMetal extends Block implements IGravitySusceptible, IInitializableBlock, IItemBlockProvider
+public class BlockMoltenMetal extends Block implements IGravitySusceptible, IItemBlockProvider
 {
     public BlockMoltenMetal()
     {
         super(Material.LAVA);
-        this.initBlock();
-    }
-
-    @Override
-    public int getFallDamage(Entity collidedWith, EntityFallingBlock self)
-    {
-        return 20;
-    }
-
-    @Override
-    public void initBlock()
-    {
         this.setHardness(-1);
         this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockMoltenMetal));
         this.setResistance(-1);
@@ -54,6 +42,12 @@ public class BlockMoltenMetal extends Block implements IGravitySusceptible, IIni
         this.setDefaultState(this.blockState.getBaseState().withProperty(MOLTEN_METAL_STATE, EnumMoltenMetalState.NORMAL));
         this.setLightLevel(1F);
         this.setTickRandomly(true);
+    }
+
+    @Override
+    public int getFallDamage(Entity collidedWith, EntityFallingBlock self)
+    {
+        return 20;
     }
 
     @Override

@@ -16,12 +16,15 @@ import v0id.api.exp.inventory.IWeightProvider;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
-public class ItemRock extends Item implements IInitializableItem, IWeightProvider, IOreDictEntry
+public class ItemRock extends Item implements IWeightProvider, IOreDictEntry
 {
 	public ItemRock()
 	{
 		super();
-		this.initItem();
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemRock));
+		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+		this.setCreativeTab(ExPCreativeTabs.tabUnderground);
+		this.setHasSubtypes(true);
 	}
 
 	@Override
@@ -34,15 +37,6 @@ public class ItemRock extends Item implements IInitializableItem, IWeightProvide
 	public Pair<Byte, Byte> provideVolume(ItemStack item)
 	{
 		return IWeightProvider.DEFAULT_VOLUME;
-	}
-
-	@Override
-	public void initItem()
-	{
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemRock));
-		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-		this.setCreativeTab(ExPCreativeTabs.tabUnderground);
-		this.setHasSubtypes(true);
 	}
 
 	@Override

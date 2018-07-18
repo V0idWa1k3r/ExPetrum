@@ -31,7 +31,7 @@ import v0id.exp.util.temperature.TemperatureUtils;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ItemBackpack extends Item implements IInitializableItem, IWeightProvider, IContainerTickable
+public class ItemBackpack extends Item implements IWeightProvider, IContainerTickable
 {
     public final boolean isBig;
 
@@ -39,7 +39,11 @@ public class ItemBackpack extends Item implements IInitializableItem, IWeightPro
     {
         super();
         this.isBig = b;
-        this.initItem();
+        this.setHasSubtypes(true);
+        this.setCreativeTab(ExPCreativeTabs.tabMiscItems);
+        this.setRegistryName(this.isBig ? ExPRegistryNames.itemTravelersBackpack : ExPRegistryNames.itemLightBackpack);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setMaxStackSize(1);
     }
 
     @Override
@@ -64,16 +68,6 @@ public class ItemBackpack extends Item implements IInitializableItem, IWeightPro
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return IWeightProvider.DEFAULT_VOLUME;
-    }
-
-    @Override
-    public void initItem()
-    {
-        this.setHasSubtypes(true);
-        this.setCreativeTab(ExPCreativeTabs.tabMiscItems);
-        this.setRegistryName(this.isBig ? ExPRegistryNames.itemTravelersBackpack : ExPRegistryNames.itemLightBackpack);
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setMaxStackSize(1);
     }
 
     @Override

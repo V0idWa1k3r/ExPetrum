@@ -15,22 +15,21 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
-import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 
 import java.util.Random;
 
-public class BlockCoralPlant extends Block implements IWeightProvider, IInitializableBlock, IItemBlockProvider
+public class BlockCoralPlant extends Block implements IWeightProvider, IItemBlockProvider
 {
 	public static final PropertyInteger TEXTURE_INDEX_ROCK = PropertyInteger.create("rtindex", 0, 5);
 	public static final PropertyInteger TEXTURE_INDEX_PLANT = PropertyInteger.create("ptindex", 0, 15);
@@ -38,12 +37,6 @@ public class BlockCoralPlant extends Block implements IWeightProvider, IInitiali
 	public BlockCoralPlant()
 	{
 		super(Material.ROCK);
-		this.initBlock();
-	}
-
-	@Override
-	public void initBlock()
-	{
 		this.setHardness(1f);
 		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockCoralPlant));
 		this.setResistance(0);

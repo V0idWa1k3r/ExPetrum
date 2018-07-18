@@ -16,17 +16,11 @@ import v0id.exp.tile.TileStructurePiece;
 
 import javax.annotation.Nullable;
 
-public class BlockStructurePiece extends BlockHorizontal implements IInitializableBlock
+public class BlockStructurePiece extends BlockHorizontal
 {
     public BlockStructurePiece()
     {
         super(Material.WOOD);
-        this.initBlock();
-    }
-
-    @Override
-    public void initBlock()
-    {
         this.setHardness(3.0F);
         this.setResistance(10.0F);
         this.setRegistryName(ExPRegistryNames.blockStructure);

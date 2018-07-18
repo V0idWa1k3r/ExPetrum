@@ -29,12 +29,19 @@ import javax.annotation.Nullable;
 import static v0id.api.exp.data.ExPBlockProperties.GEARBOX_OUT0;
 import static v0id.api.exp.data.ExPBlockProperties.GEARBOX_OUT1;
 
-public class BlockSplitterGearbox extends BlockDirectional implements IInitializableBlock, IItemBlockProvider, IWeightProvider
+public class BlockSplitterGearbox extends BlockDirectional implements IItemBlockProvider, IWeightProvider
 {
     public BlockSplitterGearbox()
     {
         super(Material.WOOD);
-        this.initBlock();
+        this.setHardness(1.0F);
+        this.setResistance(3);
+        this.setRegistryName(ExPRegistryNames.blockSplitterGearbox);
+        this.setSoundType(SoundType.WOOD);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(GEARBOX_OUT0, EnumFacing.WEST).withProperty(GEARBOX_OUT1, EnumFacing.EAST));
+        this.setLightOpacity(0);
     }
 
     @Override
@@ -47,19 +54,6 @@ public class BlockSplitterGearbox extends BlockDirectional implements IInitializ
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return Pair.of((byte)2, (byte)2);
-    }
-
-    @Override
-    public void initBlock()
-    {
-        this.setHardness(1.0F);
-        this.setResistance(3);
-        this.setRegistryName(ExPRegistryNames.blockSplitterGearbox);
-        this.setSoundType(SoundType.WOOD);
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(GEARBOX_OUT0, EnumFacing.WEST).withProperty(GEARBOX_OUT1, EnumFacing.EAST));
-        this.setLightOpacity(0);
     }
 
     @Override

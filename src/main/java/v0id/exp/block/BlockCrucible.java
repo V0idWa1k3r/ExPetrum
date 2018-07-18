@@ -31,12 +31,19 @@ import javax.annotation.Nullable;
 
 import static v0id.api.exp.data.ExPBlockProperties.CRUCIBLE_HASMETAL;
 
-public class BlockCrucible extends Block implements IWeightProvider, IInitializableBlock, IItemBlockProvider
+public class BlockCrucible extends Block implements IWeightProvider, IItemBlockProvider
 {
     public BlockCrucible()
     {
-        super(Material.ROCK);
-        this.initBlock();
+        super(Material.IRON);
+        this.setHardness(3.0F);
+        this.setResistance(10.0F);
+        this.setRegistryName(ExPRegistryNames.blockCrucible);
+        this.setSoundType(SoundType.METAL);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(CRUCIBLE_HASMETAL, false));
+        this.setLightOpacity(0);
     }
 
     @Override
@@ -49,19 +56,6 @@ public class BlockCrucible extends Block implements IWeightProvider, IInitializa
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return Pair.of((byte)2, (byte)2);
-    }
-
-    @Override
-    public void initBlock()
-    {
-        this.setHardness(3.0F);
-        this.setResistance(10.0F);
-        this.setRegistryName(ExPRegistryNames.blockCrucible);
-        this.setSoundType(SoundType.METAL);
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(CRUCIBLE_HASMETAL, false));
-        this.setLightOpacity(0);
     }
 
     @Override

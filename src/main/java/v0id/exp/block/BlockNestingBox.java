@@ -27,12 +27,17 @@ import v0id.exp.util.Helpers;
 
 import javax.annotation.Nullable;
 
-public class BlockNestingBox extends Block implements IWeightProvider, IInitializableBlock, IItemBlockProvider
+public class BlockNestingBox extends Block implements IWeightProvider, IItemBlockProvider
 {
     public BlockNestingBox()
     {
         super(Material.WOOD);
-        this.initBlock();
+        this.setHardness(1.0F);
+        this.setResistance(3);
+        this.setRegistryName(ExPRegistryNames.blockNestingBox);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+        this.setLightOpacity(0);
     }
 
     @Override
@@ -45,17 +50,6 @@ public class BlockNestingBox extends Block implements IWeightProvider, IInitiali
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return Pair.of((byte)2, (byte)2);
-    }
-
-    @Override
-    public void initBlock()
-    {
-        this.setHardness(1.0F);
-        this.setResistance(3);
-        this.setRegistryName(ExPRegistryNames.blockNestingBox);
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-        this.setLightOpacity(0);
     }
 
     @Override

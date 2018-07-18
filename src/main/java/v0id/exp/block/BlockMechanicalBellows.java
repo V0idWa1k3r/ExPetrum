@@ -24,12 +24,18 @@ import v0id.exp.tile.TileMechanicalBellows;
 
 import javax.annotation.Nullable;
 
-public class BlockMechanicalBellows extends BlockHorizontal implements IWeightProvider, IInitializableBlock, IItemBlockProvider
+public class BlockMechanicalBellows extends BlockHorizontal implements IWeightProvider, IItemBlockProvider
 {
     public BlockMechanicalBellows()
     {
         super(Material.ROCK);
-        this.initBlock();
+        this.setHardness(1.0F);
+        this.setResistance(3);
+        this.setRegistryName(ExPRegistryNames.blockMechanicalBellows);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+        this.setLightOpacity(0);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
 
     @Override
@@ -42,18 +48,6 @@ public class BlockMechanicalBellows extends BlockHorizontal implements IWeightPr
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return Pair.of((byte)2, (byte)2);
-    }
-
-    @Override
-    public void initBlock()
-    {
-        this.setHardness(1.0F);
-        this.setResistance(3);
-        this.setRegistryName(ExPRegistryNames.blockMechanicalBellows);
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-        this.setLightOpacity(0);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
 
     @SuppressWarnings("deprecation")

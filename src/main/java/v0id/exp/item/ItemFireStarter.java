@@ -13,12 +13,15 @@ import v0id.api.exp.item.IFireProvider;
 
 import java.util.Arrays;
 
-public class ItemFireStarter extends ItemFlintAndSteel implements IWeightProvider, IOreDictEntry, IInitializableItem, IFireProvider
+public class ItemFireStarter extends ItemFlintAndSteel implements IWeightProvider, IOreDictEntry, IFireProvider
 {
     public ItemFireStarter()
     {
         super();
-        this.initItem();
+        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemFireStarter));
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabTools);
+        this.setMaxDamage(7);
     }
 
     @Override
@@ -37,14 +40,5 @@ public class ItemFireStarter extends ItemFlintAndSteel implements IWeightProvide
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return IWeightProvider.DEFAULT_VOLUME;
-    }
-
-    @Override
-    public void initItem()
-    {
-        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemFireStarter));
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabTools);
-        this.setMaxDamage(7);
     }
 }

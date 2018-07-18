@@ -32,12 +32,17 @@ import javax.annotation.Nullable;
 
 import static v0id.api.exp.data.ExPBlockProperties.ISLIT;
 
-public class BlockBlastFurnace extends BlockHorizontal implements IWeightProvider, IInitializableBlock, IItemBlockProvider
+public class BlockBlastFurnace extends BlockHorizontal implements IWeightProvider, IItemBlockProvider
 {
     public BlockBlastFurnace()
     {
         super(Material.ROCK);
-        this.initBlock();
+        this.setHardness(3.0F);
+        this.setResistance(9);
+        this.setRegistryName(ExPRegistryNames.blockBlastFurnace);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(ISLIT, false));
     }
 
     @Override
@@ -50,17 +55,6 @@ public class BlockBlastFurnace extends BlockHorizontal implements IWeightProvide
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return Pair.of((byte)2, (byte)2);
-    }
-
-    @Override
-    public void initBlock()
-    {
-        this.setHardness(3.0F);
-        this.setResistance(9);
-        this.setRegistryName(ExPRegistryNames.blockBlastFurnace);
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(ISLIT, false));
     }
 
     @SuppressWarnings("deprecation")

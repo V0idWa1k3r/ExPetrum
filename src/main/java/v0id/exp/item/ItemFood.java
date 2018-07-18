@@ -23,7 +23,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPRegistryNames;
-import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.entity.EnumGender;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.api.exp.item.IContainerTickable;
@@ -43,13 +42,17 @@ import java.text.DecimalFormat;
 import java.util.EnumMap;
 import java.util.List;
 
-public class ItemFood extends net.minecraft.item.ItemFood implements IInitializableItem, IOreDictEntry, IExPFood, IContainerTickable, IWeightProvider
+public class ItemFood extends net.minecraft.item.ItemFood implements IExPFood, IContainerTickable, IWeightProvider
 {
 	private static Method nutritionCompat_eatFood;
 	public ItemFood()
 	{
 		super(0, false);
-		this.initItem();
+        this.setHasSubtypes(true);
+        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemFood));
+        this.setMaxStackSize(1);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabFood);
 		if (Loader.isModLoaded("nutrition"))
         {
             try
@@ -141,23 +144,6 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IInitializa
 	public boolean skipHandlers(ItemStack stack)
 	{
 		return true;
-	}
-
-	@Override
-	public void registerOreDictNames()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void initItem()
-	{
-		this.setHasSubtypes(true);
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemFood));
-		this.setMaxStackSize(1);
-		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-		this.setCreativeTab(ExPCreativeTabs.tabFood);
 	}
 	
 	@Override

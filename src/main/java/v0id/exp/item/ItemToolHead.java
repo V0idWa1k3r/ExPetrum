@@ -13,12 +13,15 @@ import v0id.api.exp.metal.EnumToolStats;
 
 import java.util.stream.Stream;
 
-public class ItemToolHead extends Item implements IInitializableItem, IWeightProvider, IOreDictEntry
+public class ItemToolHead extends Item implements IWeightProvider, IOreDictEntry
 {
 	public ItemToolHead()
 	{
 		super();
-		this.initItem();
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemToolhead));
+		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+		this.setCreativeTab(ExPCreativeTabs.tabTools);
+		this.setHasSubtypes(true);
 	}
 
 	public static ItemStack createToolHead(EnumToolClass type, EnumToolStats material)
@@ -73,15 +76,6 @@ public class ItemToolHead extends Item implements IInitializableItem, IWeightPro
 				return IWeightProvider.DEFAULT_VOLUME;
 			}
 		}
-	}
-
-	@Override
-	public void initItem()
-	{
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemToolhead));
-		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-		this.setCreativeTab(ExPCreativeTabs.tabTools);
-		this.setHasSubtypes(true);
 	}
 
 	@Override

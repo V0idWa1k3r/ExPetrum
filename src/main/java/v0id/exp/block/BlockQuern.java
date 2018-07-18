@@ -26,12 +26,16 @@ import v0id.exp.tile.TileQuern;
 
 import javax.annotation.Nullable;
 
-public class BlockQuern extends Block implements IWeightProvider, IInitializableBlock, IItemBlockProvider
+public class BlockQuern extends Block implements IWeightProvider, IItemBlockProvider
 {
     public BlockQuern()
     {
         super(Material.ROCK);
-        this.initBlock();
+        this.setHardness(3.0F);
+        this.setResistance(10.0F);
+        this.setRegistryName(ExPRegistryNames.blockQuern);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
     }
 
     @Override
@@ -44,16 +48,6 @@ public class BlockQuern extends Block implements IWeightProvider, IInitializable
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return Pair.of((byte)2, (byte)2);
-    }
-
-    @Override
-    public void initBlock()
-    {
-        this.setHardness(3.0F);
-        this.setResistance(10.0F);
-        this.setRegistryName(ExPRegistryNames.blockQuern);
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
     }
 
     @Override

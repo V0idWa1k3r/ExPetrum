@@ -31,12 +31,18 @@ import javax.annotation.Nullable;
 
 import static v0id.api.exp.data.ExPBlockProperties.ISLIT;
 
-public class BlockForge extends Block implements IWeightProvider, IInitializableBlock, IItemBlockProvider
+public class BlockForge extends Block implements IWeightProvider, IItemBlockProvider
 {
     public BlockForge()
     {
         super(Material.ROCK);
-        this.initBlock();
+        this.setHardness(3.0F);
+        this.setResistance(10.0F);
+        this.setRegistryName(ExPRegistryNames.blockForge);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(ISLIT, false));
+        this.setLightOpacity(0);
     }
 
     @Override
@@ -49,18 +55,6 @@ public class BlockForge extends Block implements IWeightProvider, IInitializable
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return Pair.of((byte)2, (byte)2);
-    }
-
-    @Override
-    public void initBlock()
-    {
-        this.setHardness(3.0F);
-        this.setResistance(10.0F);
-        this.setRegistryName(ExPRegistryNames.blockForge);
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(ISLIT, false));
-        this.setLightOpacity(0);
     }
 
     @Override

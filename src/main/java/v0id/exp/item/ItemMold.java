@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-public class ItemMold extends Item implements IInitializableItem, IWeightProvider, IMold
+public class ItemMold extends Item implements IWeightProvider, IMold
 {
     public enum EnumMoldType
     {
@@ -38,7 +38,10 @@ public class ItemMold extends Item implements IInitializableItem, IWeightProvide
     {
         super();
         this.isIngot = isIngot;
-        this.initItem();
+        this.setHasSubtypes(true);
+        this.setCreativeTab(ExPCreativeTabs.tabMiscItems);
+        this.setRegistryName(this.isIngot ? ExPRegistryNames.itemMoldIngot : ExPRegistryNames.itemMoldTool);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
     }
 
     public boolean isIngot()
@@ -56,15 +59,6 @@ public class ItemMold extends Item implements IInitializableItem, IWeightProvide
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return Pair.of((byte)2, (byte)1);
-    }
-
-    @Override
-    public void initItem()
-    {
-        this.setHasSubtypes(true);
-        this.setCreativeTab(ExPCreativeTabs.tabMiscItems);
-        this.setRegistryName(this.isIngot ? ExPRegistryNames.itemMoldIngot : ExPRegistryNames.itemMoldTool);
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
     }
 
     @Override

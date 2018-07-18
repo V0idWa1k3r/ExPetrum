@@ -23,12 +23,18 @@ import v0id.exp.tile.TileSaw;
 
 import javax.annotation.Nullable;
 
-public class BlockSaw extends BlockRotatedPillar implements IWeightProvider, IInitializableBlock, IItemBlockProvider
+public class BlockSaw extends BlockRotatedPillar implements IWeightProvider, IItemBlockProvider
 {
     public BlockSaw()
     {
         super(Material.ROCK);
-        this.initBlock();
+        this.setHardness(3.0F);
+        this.setResistance(10.0F);
+        this.setRegistryName(ExPRegistryNames.blockSaw);
+        this.setSoundType(SoundType.METAL);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+        this.setLightOpacity(0);
     }
 
     @Override
@@ -41,18 +47,6 @@ public class BlockSaw extends BlockRotatedPillar implements IWeightProvider, IIn
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return Pair.of((byte)2, (byte)2);
-    }
-
-    @Override
-    public void initBlock()
-    {
-        this.setHardness(3.0F);
-        this.setResistance(10.0F);
-        this.setRegistryName(ExPRegistryNames.blockSaw);
-        this.setSoundType(SoundType.METAL);
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-        this.setLightOpacity(0);
     }
 
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)

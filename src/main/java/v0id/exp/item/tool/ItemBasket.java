@@ -9,36 +9,29 @@ import v0id.api.exp.data.ExPOreDict;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.data.IOreDictEntry;
 import v0id.api.exp.inventory.IWeightProvider;
-import v0id.exp.item.IInitializableItem;
 
 import java.util.Arrays;
 
 /**
  * Created by V0idWa1k3r on 11-Jun-17.
  */
-public class ItemBasket extends Item implements IInitializableItem, IOreDictEntry, IWeightProvider
+public class ItemBasket extends Item implements IOreDictEntry, IWeightProvider
 {
     public ItemBasket()
     {
         super();
-        this.initItem();
-    }
-
-    @Override
-    public void registerOreDictNames()
-    {
-        Arrays.stream(ExPOreDict.itemBasket).forEach(name -> OreDictionary.registerOre(name, this));
-    }
-
-    @Override
-    public void initItem()
-    {
         this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemBasket));
         this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
         this.setCreativeTab(ExPCreativeTabs.tabTools);
         this.setHasSubtypes(true);
         this.setMaxDamage(256);
         this.setMaxStackSize(1);
+    }
+
+    @Override
+    public void registerOreDictNames()
+    {
+        Arrays.stream(ExPOreDict.itemBasket).forEach(name -> OreDictionary.registerOre(name, this));
     }
 
     @Override

@@ -32,17 +32,11 @@ import javax.annotation.Nullable;
 
 import static v0id.api.exp.data.ExPBlockProperties.ISLIT;
 
-public class BlockOven extends BlockHorizontal implements IInitializableBlock, IItemBlockProvider, IWeightProvider
+public class BlockOven extends BlockHorizontal implements IItemBlockProvider, IWeightProvider
 {
     public BlockOven()
     {
         super(Material.ROCK);
-        this.initBlock();
-    }
-
-    @Override
-    public void initBlock()
-    {
         this.setHardness(1.0F);
         this.setResistance(3.0F);
         this.setRegistryName(ExPRegistryNames.blockOven);

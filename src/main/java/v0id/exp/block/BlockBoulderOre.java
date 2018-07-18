@@ -40,19 +40,13 @@ import java.util.stream.Stream;
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
 import static v0id.api.exp.data.ExPBlockProperties.ROCK_CLASS;
 
-public class BlockBoulderOre extends Block implements IInitializableBlock, IOreDictEntry, IItemBlockProvider, IChiselable
+public class BlockBoulderOre extends Block implements IOreDictEntry, IItemBlockProvider, IChiselable
 {
     public static final AxisAlignedBB BOULDER_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.6, 0.9);
 
 	public BlockBoulderOre()
 	{
 		super(Material.ROCK);
-		this.initBlock();
-	}
-	
-	@Override
-	public void initBlock()
-	{
 		this.setHardness(4);
 		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockBoulderOre));
 		this.setResistance(2);
@@ -61,7 +55,7 @@ public class BlockBoulderOre extends Block implements IInitializableBlock, IOreD
 		this.setDefaultState(this.blockState.getBaseState().withProperty(ROCK_CLASS, ANDESITE).withProperty(ExPBlockProperties.ORE_TEXTURE_ID, 0));
 		this.setCreativeTab(ExPCreativeTabs.tabOres);
 	}
-	
+
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{

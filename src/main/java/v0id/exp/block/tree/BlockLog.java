@@ -29,7 +29,6 @@ import v0id.api.exp.block.ILog;
 import v0id.api.exp.data.*;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.ExPetrum;
-import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockLog;
 import v0id.exp.entity.EntityFallingTree;
@@ -39,7 +38,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
 
-public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILog, IInitializableBlock, IOreDictEntry, IItemBlockProvider
+public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILog, IOreDictEntry, IItemBlockProvider
 {
 	public int logIndex = 0;
 	
@@ -47,12 +46,6 @@ public class BlockLog extends BlockRotatedPillar implements IWeightProvider, ILo
 	{
 		super(Material.WOOD);
 		this.logIndex = i;
-		this.initBlock();
-	}
-	
-	@Override
-	public void initBlock()
-	{
 		this.setHardness(6);
 		this.setRegistryName(createRegistryLocation());
 		this.setResistance(6);

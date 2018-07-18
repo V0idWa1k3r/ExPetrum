@@ -29,12 +29,15 @@ import v0id.exp.tile.TileCrop;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
-public class ItemSeeds extends Item implements IInitializableItem, IOreDictEntry, IWeightProvider
+public class ItemSeeds extends Item implements IOreDictEntry, IWeightProvider
 {
 	public ItemSeeds()
 	{
 		super();
-		this.initItem();
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemSeeds));
+		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
+		this.setHasSubtypes(true);
 	}
 	
 	@Override
@@ -45,15 +48,6 @@ public class ItemSeeds extends Item implements IInitializableItem, IOreDictEntry
 			AtomicInteger i = new AtomicInteger(0);
 			Stream.of(ExPOreDict.cropNames).forEach(ss -> OreDictionary.registerOre(s + Character.toUpperCase(ss.charAt(0)) + ss.substring(1), new ItemStack(this, 1, i.getAndIncrement())));
 		});
-	}
-
-	@Override
-	public void initItem()
-	{
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemSeeds));
-		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-		this.setCreativeTab(ExPCreativeTabs.tabPlantlife);
-		this.setHasSubtypes(true);
 	}
 
 	@Override

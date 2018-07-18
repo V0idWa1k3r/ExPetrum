@@ -40,12 +40,18 @@ import java.util.stream.Stream;
 import static v0id.api.exp.block.property.EnumDirtClass.ACRISOL;
 import static v0id.api.exp.data.ExPBlockProperties.DIRT_CLASS;
 
-public class BlockSoil extends Block implements IWeightProvider, IGravitySusceptible, ICanGrowCrop, IInitializableBlock, IOreDictEntry, IItemBlockProvider
+public class BlockSoil extends Block implements IWeightProvider, IGravitySusceptible, ICanGrowCrop, IOreDictEntry, IItemBlockProvider
 {
 	public BlockSoil()
 	{
 		super(Material.GROUND);
-		this.initBlock();
+		this.setHardness(3.5f);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockSoil));
+		this.setResistance(3);
+		this.setSoundType(SoundType.GROUND);
+		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(DIRT_CLASS, ACRISOL));
+		this.setCreativeTab(ExPCreativeTabs.tabCommon);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -222,18 +228,6 @@ public class BlockSoil extends Block implements IWeightProvider, IGravitySuscept
 	{
 		EnumDirtClass type = EnumDirtClass.values()[this.getMetaFromState(w.getBlockState(pos))];
 		return type.getGrowthMultiplier() / 50;
-	}
-
-	@Override
-	public void initBlock()
-	{
-		this.setHardness(3.5f);
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockSoil));
-		this.setResistance(3);
-		this.setSoundType(SoundType.GROUND);
-		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-		this.setDefaultState(this.blockState.getBaseState().withProperty(DIRT_CLASS, ACRISOL));
-		this.setCreativeTab(ExPCreativeTabs.tabCommon);
 	}
 
 	@Override

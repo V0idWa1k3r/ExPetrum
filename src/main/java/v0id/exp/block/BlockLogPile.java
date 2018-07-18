@@ -36,17 +36,11 @@ import v0id.exp.tile.TileLogPile;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockLogPile extends Block implements IInitializableBlock, ISupport
+public class BlockLogPile extends Block implements ISupport
 {
     public BlockLogPile()
     {
         super(Material.WOOD);
-        this.initBlock();
-    }
-
-    @Override
-    public void initBlock()
-    {
         this.setHardness(6);
         this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockLogPile));
         this.setResistance(6);

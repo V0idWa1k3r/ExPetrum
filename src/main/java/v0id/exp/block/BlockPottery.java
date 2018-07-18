@@ -30,7 +30,7 @@ import v0id.exp.tile.TilePot;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockPottery extends Block implements IInitializableBlock
+public class BlockPottery extends Block
 {
     public enum EnumPotteryType implements IStringSerializable
     {
@@ -48,12 +48,6 @@ public class BlockPottery extends Block implements IInitializableBlock
     public BlockPottery()
     {
         super(Material.ROCK);
-        this.initBlock();
-    }
-
-    @Override
-    public void initBlock()
-    {
         this.setHardness(1.0F);
         this.setResistance(3.0F);
         this.setRegistryName(ExPRegistryNames.blockPottery);

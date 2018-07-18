@@ -48,7 +48,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemPottery extends Item implements IInitializableItem, IWeightProvider, IContainerTickable
+public class ItemPottery extends Item implements IWeightProvider, IContainerTickable
 {
     public enum EnumPotteryType
     {
@@ -71,7 +71,11 @@ public class ItemPottery extends Item implements IInitializableItem, IWeightProv
     public ItemPottery()
     {
         super();
-        this.initItem();
+        this.setHasSubtypes(true);
+        this.setCreativeTab(ExPCreativeTabs.tabMiscItems);
+        this.setRegistryName(ExPRegistryNames.itemPottery);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setMaxStackSize(1);
     }
 
     @Override
@@ -96,16 +100,6 @@ public class ItemPottery extends Item implements IInitializableItem, IWeightProv
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return IWeightProvider.DEFAULT_VOLUME;
-    }
-
-    @Override
-    public void initItem()
-    {
-        this.setHasSubtypes(true);
-        this.setCreativeTab(ExPCreativeTabs.tabMiscItems);
-        this.setRegistryName(ExPRegistryNames.itemPottery);
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setMaxStackSize(1);
     }
 
     @Override

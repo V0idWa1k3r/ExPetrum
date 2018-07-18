@@ -27,17 +27,23 @@ import v0id.exp.block.item.ItemBlockWithMetadata;
 import v0id.exp.tile.TileFruitPress;
 
 import javax.annotation.Nullable;
-
 import java.util.List;
 
 import static v0id.api.exp.data.ExPBlockProperties.PRESS_VALUE;
 
-public class BlockPress extends Block implements IWeightProvider, IInitializableBlock, IItemBlockProvider
+public class BlockPress extends Block implements IWeightProvider, IItemBlockProvider
 {
     public BlockPress()
     {
         super(Material.WOOD);
-        this.initBlock();
+        this.setHardness(1.0F);
+        this.setResistance(3);
+        this.setRegistryName(ExPRegistryNames.blockFruitPress);
+        this.setSoundType(SoundType.WOOD);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+        this.setLightOpacity(0);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(PRESS_VALUE, 0));
     }
 
     @Override
@@ -50,19 +56,6 @@ public class BlockPress extends Block implements IWeightProvider, IInitializable
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return Pair.of((byte)2, (byte)2);
-    }
-
-    @Override
-    public void initBlock()
-    {
-        this.setHardness(1.0F);
-        this.setResistance(3);
-        this.setRegistryName(ExPRegistryNames.blockFruitPress);
-        this.setSoundType(SoundType.WOOD);
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-        this.setLightOpacity(0);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(PRESS_VALUE, 0));
     }
 
     @SuppressWarnings("deprecation")

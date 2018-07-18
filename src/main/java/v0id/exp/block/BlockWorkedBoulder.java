@@ -40,19 +40,13 @@ import java.util.stream.Stream;
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
 import static v0id.api.exp.data.ExPBlockProperties.ROCK_CLASS;
 
-public class BlockWorkedBoulder extends Block implements IInitializableBlock, IOreDictEntry, IItemBlockProvider, IChiselable
+public class BlockWorkedBoulder extends Block implements IOreDictEntry, IItemBlockProvider, IChiselable
 {
 	public static final AxisAlignedBB BOULDER_AABB = new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.6, 0.9);
 
 	public BlockWorkedBoulder()
 	{
 		super(Material.ROCK);
-		this.initBlock();
-	}
-	
-	@Override
-	public void initBlock()
-	{
 		this.setHardness(4);
 		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockBoulderWorked));
 		this.setResistance(2);

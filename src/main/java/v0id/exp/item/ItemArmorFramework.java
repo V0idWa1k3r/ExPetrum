@@ -22,14 +22,17 @@ import v0id.exp.util.temperature.TemperatureUtils;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemArmorFramework extends Item implements IWeightProvider, IInitializableItem
+public class ItemArmorFramework extends Item implements IWeightProvider
 {
     public static final EntityEquipmentSlot[] SLOTS = new EntityEquipmentSlot[]{ EntityEquipmentSlot.HEAD, EntityEquipmentSlot.CHEST, EntityEquipmentSlot.LEGS, EntityEquipmentSlot.FEET };
     public static final float[] slotModifiers = new float[]{ 0.15F, 0.4F, 0.3F, 0.15F };
     public ItemArmorFramework()
     {
         super();
-        this.initItem();
+        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemArmorFramework));
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabMetals);
+        this.setHasSubtypes(true);
     }
 
     @Override
@@ -76,15 +79,6 @@ public class ItemArmorFramework extends Item implements IWeightProvider, IInitia
     {
         EntityEquipmentSlot slot = getSlotFromFramework(item);
         return slot == EntityEquipmentSlot.HEAD || slot == EntityEquipmentSlot.FEET ? Pair.of((byte)2, (byte)2) : Pair.of((byte)3, (byte)3);
-    }
-
-    @Override
-    public void initItem()
-    {
-        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemArmorFramework));
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabMetals);
-        this.setHasSubtypes(true);
     }
 
     @Override

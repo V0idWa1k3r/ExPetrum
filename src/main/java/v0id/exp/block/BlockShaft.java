@@ -33,12 +33,19 @@ import java.util.Random;
 
 import static v0id.api.exp.data.ExPBlockProperties.SHAFT_MATERIAL;
 
-public class BlockShaft extends BlockRotatedPillar implements IInitializableBlock, IWeightProvider, IItemBlockProvider
+public class BlockShaft extends BlockRotatedPillar implements IWeightProvider, IItemBlockProvider
 {
     public BlockShaft()
     {
         super(Material.WOOD);
-        this.initBlock();
+        this.setHardness(1.0F);
+        this.setResistance(3);
+        this.setRegistryName(ExPRegistryNames.blockShaft);
+        this.setSoundType(SoundType.WOOD);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.Y).withProperty(SHAFT_MATERIAL, EnumShaftMaterial.WOOD));
+        this.setLightOpacity(0);
     }
 
     @Override
@@ -51,19 +58,6 @@ public class BlockShaft extends BlockRotatedPillar implements IInitializableBloc
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return Pair.of((byte)2, (byte)1);
-    }
-
-    @Override
-    public void initBlock()
-    {
-        this.setHardness(1.0F);
-        this.setResistance(3);
-        this.setRegistryName(ExPRegistryNames.blockShaft);
-        this.setSoundType(SoundType.WOOD);
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(AXIS, EnumFacing.Axis.Y).withProperty(SHAFT_MATERIAL, EnumShaftMaterial.WOOD));
-        this.setLightOpacity(0);
     }
 
     @Override

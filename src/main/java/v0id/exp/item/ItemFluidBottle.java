@@ -32,7 +32,7 @@ import javax.annotation.Nullable;
 import java.lang.reflect.Method;
 import java.util.List;
 
-public class ItemFluidBottle extends Item implements IInitializableItem, IWeightProvider, IOreDictEntry
+public class ItemFluidBottle extends Item implements IWeightProvider, IOreDictEntry
 {
     public static final List<Fluid> allowedFluids = Lists.newArrayList();
     private static Method nutritionCompat_addNutrition;
@@ -40,7 +40,10 @@ public class ItemFluidBottle extends Item implements IInitializableItem, IWeight
     public ItemFluidBottle()
     {
         super();
-        this.initItem();
+        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemFluidBottle));
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setHasSubtypes(true);
+        this.setCreativeTab(ExPCreativeTabs.tabMiscItems);
         allowedFluids.clear();
         allowedFluids.add(FluidRegistry.WATER);
         allowedFluids.add(ExPFluids.saltWater);
@@ -96,15 +99,6 @@ public class ItemFluidBottle extends Item implements IInitializableItem, IWeight
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return IWeightProvider.DEFAULT_VOLUME;
-    }
-
-    @Override
-    public void initItem()
-    {
-        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemFluidBottle));
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setHasSubtypes(true);
-        this.setCreativeTab(ExPCreativeTabs.tabMiscItems);
     }
 
     @Override

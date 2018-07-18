@@ -33,12 +33,19 @@ import javax.annotation.Nullable;
 
 import static v0id.api.exp.data.ExPBlockProperties.ANVIL_MATERIAL;
 
-public class BlockAnvil extends Block implements IWeightProvider, IInitializableBlock, IItemBlockProvider, IHasSpecialName
+public class BlockAnvil extends Block implements IWeightProvider, IItemBlockProvider, IHasSpecialName
 {
     public BlockAnvil()
     {
         super(Material.IRON);
-        this.initBlock();
+        this.setHardness(3.0F);
+        this.setResistance(10.0F);
+        this.setRegistryName(ExPRegistryNames.blockAnvil);
+        this.setSoundType(SoundType.ANVIL);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(ANVIL_MATERIAL, EnumAnvilMaterial.STONE));
+        this.setLightOpacity(0);
     }
 
     @Override
@@ -51,19 +58,6 @@ public class BlockAnvil extends Block implements IWeightProvider, IInitializable
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return Pair.of((byte)4, (byte)3);
-    }
-
-    @Override
-    public void initBlock()
-    {
-        this.setHardness(3.0F);
-        this.setResistance(10.0F);
-        this.setRegistryName(ExPRegistryNames.blockAnvil);
-        this.setSoundType(SoundType.ANVIL);
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(ANVIL_MATERIAL, EnumAnvilMaterial.STONE));
-        this.setLightOpacity(0);
     }
 
     @Override

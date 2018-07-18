@@ -38,12 +38,18 @@ import java.util.stream.Stream;
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
 import static v0id.api.exp.data.ExPBlockProperties.ROCK_CLASS;
 
-public class BlockSand extends Block implements IWeightProvider, IGravitySusceptible, IInitializableBlock, IOreDictEntry, IItemBlockProvider
+public class BlockSand extends Block implements IWeightProvider, IGravitySusceptible, IOreDictEntry, IItemBlockProvider
 {
 	public BlockSand()
 	{
 		super(Material.SAND);
-		this.initBlock();
+		this.setHardness(2);
+		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockSand));
+		this.setResistance(5);
+		this.setSoundType(SoundType.SAND);
+		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(ROCK_CLASS, ANDESITE));
+		this.setCreativeTab(ExPCreativeTabs.tabCommon);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -157,18 +163,6 @@ public class BlockSand extends Block implements IWeightProvider, IGravitySuscept
 	{
 		super.onBlockAdded(worldIn, pos, state);
 		this.onNeighborChange(worldIn, pos, pos);
-	}
-
-	@Override
-	public void initBlock()
-	{
-		this.setHardness(2);
-		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockSand));
-		this.setResistance(5);
-		this.setSoundType(SoundType.SAND);
-		this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-		this.setDefaultState(this.blockState.getBaseState().withProperty(ROCK_CLASS, ANDESITE));
-		this.setCreativeTab(ExPCreativeTabs.tabCommon);
 	}
 	
 	@Override

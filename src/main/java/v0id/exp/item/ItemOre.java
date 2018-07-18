@@ -24,12 +24,15 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class ItemOre extends Item implements IInitializableItem, IWeightProvider, IOreDictEntry, IMeltableMetal
+public class ItemOre extends Item implements IWeightProvider, IOreDictEntry, IMeltableMetal
 {
     public ItemOre()
     {
         super();
-        this.initItem();
+        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemOre));
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabOres);
+        this.setHasSubtypes(true);
     }
 
     @Override
@@ -54,15 +57,6 @@ public class ItemOre extends Item implements IInitializableItem, IWeightProvider
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return IWeightProvider.DEFAULT_VOLUME;
-    }
-
-    @Override
-    public void initItem()
-    {
-        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemOre));
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabOres);
-        this.setHasSubtypes(true);
     }
 
     @Override

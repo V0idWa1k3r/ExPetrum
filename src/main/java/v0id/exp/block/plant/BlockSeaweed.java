@@ -26,7 +26,6 @@ import v0id.api.exp.data.ExPCreativeTabs;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.inventory.IWeightProvider;
-import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 
@@ -35,17 +34,11 @@ import java.util.Random;
 import static v0id.api.exp.block.property.EnumRockClass.ANDESITE;
 import static v0id.api.exp.data.ExPBlockProperties.ROCK_CLASS;
 
-public class BlockSeaweed extends Block implements IWeightProvider, IInitializableBlock, IItemBlockProvider
+public class BlockSeaweed extends Block implements IWeightProvider, IItemBlockProvider
 {
 	public BlockSeaweed()
 	{
 		super(Material.GRASS);
-		this.initBlock();
-	}
-
-	@Override
-	public void initBlock()
-	{
 		this.setHardness(1f);
 		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockSeaweed));
 		this.setResistance(0);

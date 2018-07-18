@@ -45,12 +45,19 @@ import java.util.Random;
 
 import static v0id.api.exp.data.ExPBlockProperties.TREE_TYPE;
 
-public class BlockBarrel extends Block implements IWeightProvider, IInitializableBlock, IItemBlockProvider
+public class BlockBarrel extends Block implements IWeightProvider, IItemBlockProvider
 {
     public BlockBarrel()
     {
         super(Material.WOOD);
-        this.initBlock();
+        this.setHardness(1.0F);
+        this.setResistance(3);
+        this.setRegistryName(ExPRegistryNames.blockBarrel);
+        this.setSoundType(SoundType.WOOD);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(TREE_TYPE, EnumTreeType.KALOPANAX));
+        this.setLightOpacity(0);
     }
 
     @Override
@@ -63,19 +70,6 @@ public class BlockBarrel extends Block implements IWeightProvider, IInitializabl
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return Pair.of((byte)2, (byte)2);
-    }
-
-    @Override
-    public void initBlock()
-    {
-        this.setHardness(1.0F);
-        this.setResistance(3);
-        this.setRegistryName(ExPRegistryNames.blockBarrel);
-        this.setSoundType(SoundType.WOOD);
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(TREE_TYPE, EnumTreeType.KALOPANAX));
-        this.setLightOpacity(0);
     }
 
     @SuppressWarnings("deprecation")

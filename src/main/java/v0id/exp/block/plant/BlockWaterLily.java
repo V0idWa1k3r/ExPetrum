@@ -16,15 +16,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
-import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.block.property.EnumWaterLilyType;
 import v0id.api.exp.data.*;
 import v0id.api.exp.inventory.IWeightProvider;
-import v0id.exp.block.IInitializableBlock;
 import v0id.exp.block.IItemBlockProvider;
 import v0id.exp.block.item.ItemBlockWaterLily;
 import v0id.exp.util.Helpers;
@@ -36,19 +35,13 @@ import static v0id.api.exp.block.property.EnumWaterLilyType.LEOPARDESS;
 import static v0id.api.exp.data.ExPBlockProperties.LILY_TYPE;
 import static v0id.api.exp.data.ExPBlockProperties.PLANT_BLOOMING;
 
-public class BlockWaterLily extends BlockBush implements IWeightProvider, IInitializableBlock, IOreDictEntry, IItemBlockProvider
+public class BlockWaterLily extends BlockBush implements IWeightProvider, IOreDictEntry, IItemBlockProvider
 {
 	protected static final AxisAlignedBB LILY_PAD_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 0.09375D, 0.9375D);
 	
 	public BlockWaterLily()
 	{
 		super();
-		this.initBlock();
-	}
-
-	@Override
-	public void initBlock()
-	{
 		this.setHardness(0.5f);
 		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockWaterLily));
 		this.setResistance(0);

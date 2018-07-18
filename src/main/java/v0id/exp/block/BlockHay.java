@@ -6,6 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityFallingBlock;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -20,23 +21,18 @@ import v0id.api.exp.gravity.IGravitySusceptible;
 import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.block.item.ItemBlockWithMetadata;
 
-public class BlockHay extends Block implements IInitializableBlock, IGravitySusceptible, IItemBlockProvider, IWeightProvider
+public class BlockHay extends Block implements IGravitySusceptible, IItemBlockProvider, IWeightProvider
 {
     public BlockHay()
     {
-        super(Material.ROCK);
-        this.initBlock();
-    }
-
-    @Override
-    public void initBlock()
-    {
+        super(Material.PLANTS);
         this.setHardness(0.2F);
         this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockHay));
         this.setResistance(1);
         this.setSoundType(SoundType.PLANT);
         this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
         this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+        Blocks.FIRE.setFireInfo(this, 60, 100);
     }
 
     @Override

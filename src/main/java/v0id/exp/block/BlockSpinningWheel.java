@@ -24,12 +24,18 @@ import v0id.exp.tile.TileSpinningWheel;
 
 import javax.annotation.Nullable;
 
-public class BlockSpinningWheel extends Block implements IWeightProvider, IInitializableBlock, IItemBlockProvider
+public class BlockSpinningWheel extends Block implements IWeightProvider, IItemBlockProvider
 {
     public BlockSpinningWheel()
     {
         super(Material.WOOD);
-        this.initBlock();
+        this.setHardness(1.0F);
+        this.setResistance(3);
+        this.setRegistryName(ExPRegistryNames.blockSpinningWheel);
+        this.setSoundType(SoundType.WOOD);
+        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
+        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
+        this.setLightOpacity(0);
     }
 
     @Override
@@ -42,18 +48,6 @@ public class BlockSpinningWheel extends Block implements IWeightProvider, IIniti
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
         return Pair.of((byte)2, (byte)2);
-    }
-
-    @Override
-    public void initBlock()
-    {
-        this.setHardness(1.0F);
-        this.setResistance(3);
-        this.setRegistryName(ExPRegistryNames.blockSpinningWheel);
-        this.setSoundType(SoundType.WOOD);
-        this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
-        this.setCreativeTab(ExPCreativeTabs.tabMiscBlocks);
-        this.setLightOpacity(0);
     }
 
     @Override
