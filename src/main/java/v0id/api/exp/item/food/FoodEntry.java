@@ -197,7 +197,7 @@ public class FoodEntry
 	// Mind the BALANCE_MULTIPLIER. Very unrealistic but needed so it is not frustrating to gather food.
 	// Without it you would need 212 crops of barley growing CONSTANTLY to even allow bare SURVIVAL.
 	// Yeah. Really puts those huge crop fields in real life into perspective as I took all numbers from wiki.
-	public static final float BALANCE_MULTIPLIER = 8;
+	public static final float BALANCE_MULTIPLIER = 4;
 	public static final FoodEntry BARLEY = new FoodEntry().withCalories(354 * BALANCE_MULTIPLIER).withName("barley").withNutrition(EnumFoodGroup.GRAIN, 4);
 	public static final FoodEntry BEANS = new FoodEntry().withCalories(80 * BALANCE_MULTIPLIER).withName("beans").withNutrition(EnumFoodGroup.VEGETABLE, 4);
 	public static final FoodEntry BEETROOT = new FoodEntry().withCalories(43 * BALANCE_MULTIPLIER).withName("beetroot").withNutrition(EnumFoodGroup.VEGETABLE, 4);
