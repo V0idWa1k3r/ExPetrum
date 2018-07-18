@@ -18,6 +18,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.commons.lang3.tuple.Pair;
 import v0id.api.exp.block.EnumAnvilMaterial;
@@ -28,6 +29,7 @@ import v0id.api.exp.inventory.IWeightProvider;
 import v0id.exp.ExPetrum;
 import v0id.exp.block.item.ItemBlockAnvil;
 import v0id.exp.tile.TileAnvil;
+import v0id.exp.util.Helpers;
 
 import javax.annotation.Nullable;
 
@@ -155,5 +157,17 @@ public class BlockAnvil extends Block implements IWeightProvider, IItemBlockProv
     public int damageDropped(IBlockState state)
     {
         return state.getValue(ANVIL_MATERIAL).ordinal();
+    }
+
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    {
+        TileEntity tileentity = worldIn.getTileEntity(pos);
+        if (tileentity != null)
+        {
+            Helpers.dropInventoryItems(worldIn, pos, tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null));
+            worldIn.updateComparatorOutputLevel(pos, this);
+        }
+
+        super.breakBlock(worldIn, pos, state);
     }
 }
