@@ -104,6 +104,8 @@ public class TileBloomery extends TileEntity implements ITickable, ISyncableTile
                     {
                         this.world.setBlockState(this.pos.offset(facing).up(2), Blocks.AIR.getDefaultState(), 2);
                     }
+
+                    this.sendUpdatePacket();
                 }
                 else
                 {
@@ -227,7 +229,7 @@ public class TileBloomery extends TileEntity implements ITickable, ISyncableTile
                                 if (!this.world.isAirBlock(at))
                                 {
                                     IBlockState state = this.world.getBlockState(at);
-                                    if (!(state.getBlock() instanceof BlockMoltenMetal && state.getValue(ExPBlockProperties.MOLTEN_METAL_STATE) == EnumMoltenMetalState.NORMAL))
+                                    if (!(state.getBlock() instanceof BlockMoltenMetal && state.getValue(ExPBlockProperties.MOLTEN_METAL_STATE) != EnumMoltenMetalState.SOLID))
                                     {
                                         return false;
                                     }
