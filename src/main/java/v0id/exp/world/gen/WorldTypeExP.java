@@ -14,7 +14,9 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeCache;
 import net.minecraft.world.biome.BiomeProvider;
+import net.minecraft.world.gen.ChunkGeneratorOverworld;
 import net.minecraft.world.gen.ChunkGeneratorSettings;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
 import net.minecraft.world.storage.WorldInfo;
@@ -41,7 +43,13 @@ public class WorldTypeExP extends WorldType
 	     return ret;
 	}
 
-	@Override
+    @Override
+    public IChunkGenerator getChunkGenerator(World world, String generatorOptions)
+    {
+        return new ChunkGeneratorOverworld(world, world.getSeed(), false, generatorOptions);
+    }
+
+    @Override
 	public float getCloudHeight()
 	{
 		return Float.MAX_VALUE;
