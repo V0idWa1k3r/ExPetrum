@@ -199,13 +199,16 @@ public class ItemPottery extends Item implements IWeightProvider, IContainerTick
                         if (blockHit.getBlock() instanceof BlockFluidFinite)
                         {
                             int current = blockHit.getValue(BlockFluidFinite.LEVEL);
-                            if (current <= 1)
+                            if (current <= 3)
                             {
-                                w.setBlockToAir(pos);
-                            }
-                            else
-                            {
-                                w.setBlockState(pos, blockHit.withProperty(BlockFluidFinite.LEVEL, current - 1));
+                                if (current <= 1)
+                                {
+                                    w.setBlockToAir(pos);
+                                }
+                                else
+                                {
+                                    w.setBlockState(pos, blockHit.withProperty(BlockFluidFinite.LEVEL, current - 1));
+                                }
                             }
                         }
                         else

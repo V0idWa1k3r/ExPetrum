@@ -334,13 +334,16 @@ public class ExPHandlerServer
 					if (hit.getBlock() instanceof IWater && !((IWater)hit.getBlock()).isSalt(event.getWorld(), pos))
 					{
 						int level = hit.getValue(BlockFluidBase.LEVEL);
-						if (level > 0)
+						if (level <= 3)
 						{
-							event.getWorld().setBlockState(pos, hit.withProperty(BlockFluidBase.LEVEL, level - 1));
-						}
-						else
-						{
-							event.getWorld().setBlockToAir(pos);
+							if (level > 0)
+							{
+								event.getWorld().setBlockState(pos, hit.withProperty(BlockFluidBase.LEVEL, level - 1));
+							}
+							else
+							{
+								event.getWorld().setBlockToAir(pos);
+							}
 						}
 						
 						data.setThirst(data.getThirst() + 200, true);
