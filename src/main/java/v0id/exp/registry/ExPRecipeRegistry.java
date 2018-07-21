@@ -38,7 +38,9 @@ import v0id.api.exp.metal.EnumToolStats;
 import v0id.api.exp.recipe.*;
 import v0id.exp.item.*;
 import v0id.exp.recipe.RecipeFoodCombine;
+import v0id.exp.util.OreDictManager;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -380,7 +382,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
         @Override
         public boolean matches(FluidStack fs, ItemStack is)
         {
-            return fs != null && fs.isFluidEqual(fluidIn) && is.getItem() instanceof ItemStick;
+            return fs != null && fs.isFluidEqual(fluidIn) && !is.isEmpty() && Arrays.stream(OreDictManager.getOreNames(is)).anyMatch(name -> name.equalsIgnoreCase("stickWood"));
         }
 
         @Override
