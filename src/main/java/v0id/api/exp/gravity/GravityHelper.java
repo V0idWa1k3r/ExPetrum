@@ -39,14 +39,16 @@ public class GravityHelper
 	public static void doFall(IBlockState fallingBlock, World w, BlockPos pos, BlockPos trigger)
 	{
 		Block block = fallingBlock.getBlock();
-		assert block instanceof IGravitySusceptible : String.format("Can't make block %s fall as it is not an instance of IGravitySusceptible!", fallingBlock);
-		IGravitySusceptible gravityManager = (IGravitySusceptible)block;
-		if (!gravityManager.fall(w, fallingBlock, pos, trigger))
+		if (block instanceof IGravitySusceptible)
 		{
-			fall(fallingBlock, w, pos);
+			IGravitySusceptible gravityManager = (IGravitySusceptible) block;
+			if (!gravityManager.fall(w, fallingBlock, pos, trigger))
+			{
+				fall(fallingBlock, w, pos);
+			}
+
+			tryFallRecursive(w, pos);
 		}
-		
-		tryFallRecursive(w, pos);
 	}
 
 	private static void tryFallRecursive(World w, BlockPos pos)
