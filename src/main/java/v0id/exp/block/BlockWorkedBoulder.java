@@ -186,9 +186,9 @@ public class BlockWorkedBoulder extends Block implements IOreDictEntry, IItemBlo
 	}
 	
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,	EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		if (playerIn != null)
+		if (playerIn != null && hand == EnumHand.MAIN_HAND)
 		{
 			ItemStack held = playerIn.getHeldItem(hand);
 			if (!held.isEmpty() && held.getItem() instanceof ItemRock || held.getItem() == Items.FLINT)

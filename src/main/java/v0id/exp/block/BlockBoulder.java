@@ -243,6 +243,6 @@ public class BlockBoulder extends Block implements IOreHintReplaceable, IOreDict
 	@Override
 	public IBlockState chisel(IBlockState original, World world, BlockPos pos)
 	{
-		return ExPBlocks.workedBoulder.getDefaultState();
+		return ExPBlocks.workedBoulder.getDefaultState().withProperty(ROCK_CLASS, original.getValue(ROCK_CLASS));
 	}
 }
