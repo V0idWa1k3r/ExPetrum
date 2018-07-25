@@ -152,6 +152,6 @@ public class ItemMetalGeneric extends Item implements IOreDictEntry, IWeightProv
     @Override
     public int getMetalAmound(ItemStack is)
     {
-        return (is.getMetadata() == 1 ? 100 : 200) * is.getCount();
+        return (EnumGenericType.values()[is.getMetadata() / EnumMetal.values().length] == EnumGenericType.SHEET ? 100 : 200) * is.getCount();
     }
 }
