@@ -182,7 +182,7 @@ public class TileCampfire extends TileEntity implements ITickable, ISyncableTile
     {
         NBTTagCompound ret = new NBTTagCompound();
         ret.setBoolean("lit", this.litUp);
-        return null;
+        return ret;
     }
 
     @Override
