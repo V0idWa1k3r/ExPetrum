@@ -140,7 +140,7 @@ public class ItemMetalGeneric extends Item implements IOreDictEntry, IWeightProv
     @Override
     public EnumMetal getMetal(ItemStack is)
     {
-        return EnumMetal.values()[is.getMetadata()];
+        return EnumMetal.values()[is.getMetadata() % EnumMetal.values().length];
     }
 
     @Override
