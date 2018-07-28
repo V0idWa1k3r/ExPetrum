@@ -30,6 +30,7 @@ import v0id.api.exp.item.food.FoodEntry;
 import v0id.api.exp.item.food.IExPFood;
 import v0id.api.exp.player.EnumFoodGroup;
 import v0id.api.exp.player.IExPPlayer;
+import v0id.api.exp.tile.ICustomRotHandler;
 import v0id.api.exp.tile.crop.EnumCrop;
 import v0id.api.exp.world.Calendar;
 import v0id.api.exp.world.IExPWorld;
@@ -377,7 +378,7 @@ public class ItemFood extends net.minecraft.item.ItemFood implements IExPFood, I
 	{
 		if (w.getTotalWorldTime() % 500 == 0)
 		{
-			this.checkRot(is, w, pos, 1);
+			this.checkRot(is, w, pos, container instanceof ICustomRotHandler ? ((ICustomRotHandler) container).getRotMultiplier(is) : 1);
 		}
 
 		if (container instanceof TileNestingBox && is.hasTagCompound() && is.getTagCompound().getBoolean("fertilized"))
