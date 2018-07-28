@@ -38,6 +38,7 @@ import v0id.api.exp.metal.EnumToolStats;
 import v0id.api.exp.recipe.*;
 import v0id.exp.item.*;
 import v0id.exp.recipe.RecipeFoodCombine;
+import v0id.exp.recipe.RecipeFoodTrim;
 import v0id.exp.util.OreDictManager;
 
 import java.util.Arrays;
@@ -63,6 +64,7 @@ public class ExPRecipeRegistry extends AbstractRegistry
     public void registerRecipes(RegistryEvent.Register<IRecipe> event)
     {
         event.getRegistry().register(new RecipeFoodCombine().setRegistryName("exp:recipe_hardcoded_food"));
+        event.getRegistry().register(new RecipeFoodTrim().setRegistryName("exp:recipe_hardcoded_food_trim"));
         IForgeRegistryModifiable<IRecipe> reg = (IForgeRegistryModifiable<IRecipe>) event.getRegistry();
         if (Loader.isModLoaded("chiselsandbits"))
         {
