@@ -25,16 +25,19 @@ import java.io.File;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Mod(modid = "exp", useMetadata = true, dependencies = "after:chiselsandbits;after:jei", version = "1.0.9", updateJSON = "https://raw.githubusercontent.com/V0idWa1k3r/ExPetrum/master/version.json")
+@Mod(modid = "exp", useMetadata = true, dependencies = "after:chiselsandbits;after:jei", version = "1.0.9", updateJSON = "https://raw.githubusercontent.com/V0idWa1k3r/ExPetrum/master/version.json", certificateFingerprint = "fed4a2156e996f7a020359ca4c406cdde4ddcefd")
 public class ExPetrum
 {
 	@Mod.Instance("exp")
 	public static ExPetrum instance;
 	public static ModContainer containerOfSelf;
 	public static boolean isDevEnvironment;
+	private static boolean fingerprintViolated;
 	public static final File configDirectory;
+
 	@SidedProxy(clientSide = "v0id.exp.proxy.ExPProxyClient", serverSide = "v0id.exp.proxy.ExPProxyServer")
 	public static IExPProxy proxy;
 
@@ -123,8 +126,27 @@ public class ExPetrum
         EntityPackManager.saveAllPacksInfo(false);
         EntityPackManager.cleanup();
     }
-	
-	private void setDevEnvironment()
+
+    @EventHandler
+	public void fingerprintViolated(FMLFingerprintViolationEvent event)
+	{
+	    fingerprintViolated = true;
+	    if (event.isDirectory())
+        {
+            ExPMisc.modLogger.warn("ExPetrum fingerprint doesn't match but we are in a dev environment so that's okay.");
+        }
+        else
+        {
+            ExPMisc.modLogger.error("ExPetrum fingerprint doesn't match! Expected {}, got {}!", event.getExpectedFingerprint(), event.getFingerprints().stream().collect(Collectors.joining(" , ")));
+        }
+	}
+
+    public static boolean isFingerprintViolated()
+    {
+        return fingerprintViolated;
+    }
+
+    private void setDevEnvironment()
 	{
 		try
 		{

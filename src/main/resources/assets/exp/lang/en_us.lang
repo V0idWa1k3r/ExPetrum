@@ -177,6 +177,11 @@ exp.txt.anvil.tier.3=Steel
 exp.txt.anvil.tier.4=Tool/HSLA Steel
 exp.txt.pickled=Pickled
 exp.txt.wellCooked=Well Cooked
+exp.btn.exit=Close the game
+exp.btn.continue=Continue anyway.
+exp.txt.securityException=Security Exception
+exp.txt.securityWarning=Only download mods from trusted sources!
+exp.txt.securityText=ExPetrum has detected that the mod jar you are running is not the same jar that the author of the mod distributed! This may mean many things most of them negative. At the very least the jar was modified. At worst a virus software was injected into the mod jar. If you downloaded the mod from anywhere else rather than curseforge.com §4IMMEDIATELY CLOSE YOUR GAME AND DELETE THE JAR FILE!§f If you did download the mod from curseforge I would suggest checking your PC for viruses as the jar was obviously modified. Lastly if you are seeing this error and you have built the mod from sources yourself - you can safely ignore it.
 
 exp.jei.category.smelting=Smelting
 exp.jei.category.pottery=Pottery

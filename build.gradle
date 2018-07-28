@@ -58,6 +58,21 @@ dependencies {
 
 }
 
+task signJar(type: SignJar, dependsOn: reobfJar) {
+    onlyIf {
+        project.hasProperty('keyStore')
+    }
+
+    keyStore = project.keyStore
+    alias = project.alias
+    storePass = project.storePass
+    keyPass = project.keyPass
+    inputFile = jar.archivePath
+    outputFile = jar.archivePath
+}
+
+build.dependsOn signJar
+
 processResources {
     // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version

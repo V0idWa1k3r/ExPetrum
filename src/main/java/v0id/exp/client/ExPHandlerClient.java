@@ -3,6 +3,7 @@ package v0id.exp.client;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiCreateWorld;
+import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
@@ -39,6 +40,7 @@ import v0id.api.exp.data.ExPRegistryNames;
 import v0id.api.exp.util.Gradient;
 import v0id.exp.ExPetrum;
 import v0id.exp.client.fx.ParticleEngine;
+import v0id.exp.client.gui.GuiViolatedFingerprint;
 import v0id.exp.client.model.EntityModelDynamic;
 import v0id.exp.client.registry.ClientRegistry;
 import v0id.exp.client.render.gui.PlayerInventoryRenderer;
@@ -63,6 +65,8 @@ import java.lang.reflect.Field;
 @Mod.EventBusSubscriber(modid = ExPRegistryNames.modid, value = Side.CLIENT)
 public class ExPHandlerClient
 {
+    private static boolean fingerprintWarningShown;
+
     @SubscribeEvent
     public static void onKeyboardEvent(InputEvent.KeyInputEvent event)
     {
@@ -149,6 +153,16 @@ public class ExPHandlerClient
 	@SubscribeEvent
 	public static void onOpenGui(GuiScreenEvent.InitGuiEvent event)
 	{
+	    if (event.getGui() instanceof GuiMainMenu)
+        {
+            if (ExPetrum.isFingerprintViolated() && !fingerprintWarningShown)
+            {
+                fingerprintWarningShown = true;
+                Minecraft.getMinecraft().displayGuiScreen(new GuiViolatedFingerprint());
+                return;
+            }
+        }
+
 		if (event.getGui() instanceof GuiContainer)
 		{
             if (!SettingsFlags.instance.enableCustomInventory)
