@@ -13,6 +13,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -23,6 +24,7 @@ import v0id.api.exp.block.EnumGrassState;
 import v0id.api.exp.block.ICanGrowCrop;
 import v0id.api.exp.block.IGrass;
 import v0id.api.exp.block.ILeaves;
+import v0id.api.exp.event.world.EventTemperatureGetter;
 import v0id.api.exp.util.ColorHEX;
 import v0id.api.exp.util.ColorHSV;
 import v0id.api.exp.world.EnumSeason;
@@ -230,6 +232,10 @@ public class Helpers
 			tempBase *= ((IBiome)b).getTemperatureMultiplier();
 			tempBase += ((IBiome)b).getTemperatureBaseModifier();
 		}
+
+        EventTemperatureGetter getterEvent = new EventTemperatureGetter(tempBase, w, pos);
+        MinecraftForge.EVENT_BUS.post(getterEvent);
+        tempBase = getterEvent.temperature;
 		return tempBase;
 	}
 	
