@@ -2,9 +2,9 @@
   "modid": "exp",
   "name": "Ex Petrum",
   "description": "Automation, machines, hoppers, redstone... We are so used to these things that it would be impossible for us to imagine minecraft without them... But sometimes a person looks up to the stars in the sky and asks a question. A very important one. 'What if?' is tht question. Ex Petrum answers the question 'What if Minecraft was based on real life as we know it?'. Note that this mod is not supposed to be a continuation or an update of TFC(in fact I have nothing to do with TFC) but TFC(aka TerraFirmaCraft) has been a source of inspiration for me, so go and check it out, it is a really well done mod!",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "mcversion": "1.12.2",
   "logoFile": "assets/exp/textures/logo.png",
   "authorList": ["V0id_Wa1k3r"],
-  "credits": "Mojang for creating the game, duh; Minecraftforge team for their amazing work creating the API, TerraFirmaCraft for inspiration(http://terrafirmacraft.com); MrCrayfish for his Model Creator (https://mrcrayfish.com/); JannisX11 for BlockBench(https://blockbench.net/)"
+  "credits": "Mojang for creating the game, duh; Minecraftforge team for their amazing work creating the API, TerraFirmaCraft for inspiration(http://terrafirmacraft.com); MrCrayfish for his Model Creator (https://mrcrayfish.com/); JannisX11 for BlockBench(https://blockbench.net/), [EnderiumSmith, evangs1, Neko-kun, wamc2017, asanetagross, rask] for extensive alpha-testing!"
 }]
