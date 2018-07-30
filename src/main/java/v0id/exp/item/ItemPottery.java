@@ -121,6 +121,11 @@ public class ItemPottery extends Item implements IWeightProvider, IContainerTick
     {
         ItemStack is = player.getHeldItem(hand);
         EnumPotteryType type = EnumPotteryType.values()[is.getMetadata()];
+        if (!player.isSneaking())
+        {
+            return EnumActionResult.PASS;
+        }
+
         if (type == EnumPotteryType.CERAMIC_BOWL || type == EnumPotteryType.CERAMIC_JUG || type == EnumPotteryType.CERAMIC_POT)
         {
             if (type == EnumPotteryType.CERAMIC_POT && is.hasTagCompound() && is.getTagCompound().hasKey("metals"))
