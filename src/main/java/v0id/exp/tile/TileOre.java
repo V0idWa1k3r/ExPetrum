@@ -7,11 +7,13 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import v0id.api.exp.block.EnumOre;
 import v0id.api.exp.data.ExPItems;
+import v0id.api.exp.item.EnumGemType;
 import v0id.exp.item.ItemGeneric;
 
 public class TileOre extends TileEntity
 {
 	public EnumOre type = EnumOre.ACANTHITE;
+	public EnumGemType gemType = EnumGemType.AMETHYST;
 	public byte subtype;
 	public byte amount;
 	
@@ -20,6 +22,7 @@ public class TileOre extends TileEntity
 	{
 		super.readFromNBT(compound);
 		this.type = EnumOre.values()[compound.getByte("oreType")];
+		this.gemType = EnumGemType.values()[compound.getByte("gemType")];
 		this.subtype = compound.getByte("subtype");
 		this.amount = compound.getByte("amount");
 	}
@@ -29,6 +32,7 @@ public class TileOre extends TileEntity
 	{
 		NBTTagCompound ret = super.writeToNBT(compound);
 		ret.setByte("oreType", (byte) this.type.ordinal());
+		ret.setByte("gemType", (byte) this.gemType.ordinal());
 		ret.setByte("subtype", this.subtype);
 		ret.setByte("amount", this.amount);
 		return ret;
@@ -79,6 +83,12 @@ public class TileOre extends TileEntity
             case LIGNITE:
             {
                 ret = new ItemStack(ExPItems.generic, amount, ItemGeneric.EnumGenericType.LIGNITE.ordinal());
+                break;
+            }
+
+            case BERYL:
+            {
+                ret = new ItemStack(ExPItems.gem, amount, this.gemType.ordinal());
                 break;
             }
 

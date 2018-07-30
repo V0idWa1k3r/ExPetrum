@@ -18,6 +18,7 @@ import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.data.ExPBlockProperties;
 import v0id.api.exp.data.ExPBlocks;
 import v0id.api.exp.data.ExPMisc;
+import v0id.api.exp.item.EnumGemType;
 import v0id.exp.tile.TileOre;
 
 import java.util.List;
@@ -27,10 +28,12 @@ import java.util.Set;
 public class OreGenerator extends WorldGenerator
 {
 	public final EnumOre toGenerate;
+	public final EnumGemType gemType;
 	
 	public OreGenerator(Random rand)
 	{
 		this.toGenerate = WeightedRandom.getRandomItem(EnumOre.worldgenEntries, rand.nextInt(WeightedRandom.getTotalWeight(EnumOre.worldgenEntries))).getOreType();
+		this.gemType = EnumGemType.values()[rand.nextInt(EnumGemType.values().length)];
 	}
 	
 	@Override
@@ -103,6 +106,11 @@ public class OreGenerator extends WorldGenerator
 						ore.amount = oreRichness;
 						ore.subtype = meta;
 						ore.type = this.toGenerate;
+						if (this.toGenerate == EnumOre.BERYL)
+                        {
+                            ore.gemType = gemType;
+                        }
+
 						worldIn.notifyBlockUpdate(orePos, stateCurrent, stateCurrent, 2);
 					}
 					
@@ -146,6 +154,11 @@ public class OreGenerator extends WorldGenerator
 					ore.amount = 10;
 					ore.subtype = meta;
 					ore.type = this.toGenerate;
+                    if (this.toGenerate == EnumOre.BERYL)
+                    {
+                        ore.gemType = gemType;
+                    }
+
 					worldIn.notifyBlockUpdate(hintAt, current, current, 2);
 				}
 			}

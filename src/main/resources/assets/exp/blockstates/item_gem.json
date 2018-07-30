@@ -1,0 +1,85 @@
+{
+	"forge_marker" : 1,
+	"defaults" : {
+		"model" : "exp:item_generated",
+		"transform": "forge:default-item",
+		"textures" : {
+			"layer0" : "exp:items/gems/amethyst"
+		}
+	},
+	"variants" : {
+		"inventory" : [{}],
+		"type": {
+			"amethyst": {
+                "textures" : {
+                    "layer0" : "exp:items/gems/amethyst"
+                }
+            },
+            "aquamarine": {
+                "textures" : {
+                    "layer0" : "exp:items/gems/aquamarine"
+                }
+            },
+            "diamond": {
+                "textures" : {
+                    "layer0" : "exp:items/gems/diamond"
+                }
+            },
+            "emerald": {
+                "textures" : {
+                    "layer0" : "exp:items/gems/emerald"
+                }
+            },
+            "lapis": {
+                "textures" : {
+                    "layer0" : "exp:items/gems/lapis"
+                }
+            },
+            "onyx": {
+                "textures" : {
+                    "layer0" : "exp:items/gems/onyx"
+                }
+            },
+            "opal": {
+                "textures" : {
+                    "layer0" : "exp:items/gems/opal"
+                }
+            },
+            "peridot": {
+                "textures" : {
+                    "layer0" : "exp:items/gems/peridot"
+                }
+            },
+            "ruby": {
+                "textures" : {
+                    "layer0" : "exp:items/gems/ruby"
+                }
+            },
+            "sapphire": {
+                "textures" : {
+                    "layer0" : "exp:items/gems/sapphire"
+                }
+            },
+            "topaz": {
+                "textures" : {
+                    "layer0" : "exp:items/gems/topaz"
+                }
+            },
+            "tourmaline": {
+                "textures" : {
+                    "layer0" : "exp:items/gems/tourmaline"
+                }
+            },
+            "turquoise": {
+                "textures" : {
+                    "layer0" : "exp:items/gems/turquoise"
+                }
+            },
+            "zircon": {
+                "textures" : {
+                    "layer0" : "exp:items/gems/zircon"
+                }
+            }
+		}
+	}
+}

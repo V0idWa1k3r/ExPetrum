@@ -80,7 +80,8 @@ public class ExPItemsRegistry extends AbstractRegistry
             new ItemArmorFramework(),
             new ItemBackpack(false),
             new ItemBackpack(true),
-            new ItemFluidBottle()
+            new ItemFluidBottle(),
+            new ItemGem()
         );
     }
 }

@@ -71,4 +71,7 @@ public class ExPItems
 
     @GameRegistry.ObjectHolder(ExPRegistryNames.itemFluidBottle)
     public static final Item fluidBottle = null;
+
+    @GameRegistry.ObjectHolder(ExPRegistryNames.itemGem)
+    public static final Item gem = null;
 }

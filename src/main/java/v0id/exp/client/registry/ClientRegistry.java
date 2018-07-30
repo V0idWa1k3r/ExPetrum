@@ -38,6 +38,7 @@ import v0id.api.exp.client.model.WavefrontObject;
 import v0id.api.exp.combat.condition.ExecuteConditionKeyBindings;
 import v0id.api.exp.data.*;
 import v0id.api.exp.item.EnumArmorStats;
+import v0id.api.exp.item.EnumGemType;
 import v0id.api.exp.item.food.FoodEntry;
 import v0id.api.exp.metal.EnumMetal;
 import v0id.api.exp.metal.EnumToolClass;
@@ -131,7 +132,7 @@ public class ClientRegistry implements ILifecycleListener
                     if (worldIn != null && pos != null)
                     {
                         TileEntity tile = worldIn.getTileEntity(pos);
-                        return tile instanceof TileOre ? ((TileOre)tile).type.getColor() : -1;
+                        return tile instanceof TileOre ? ((TileOre) tile).type == EnumOre.BERYL ? ((TileOre) tile).gemType.getColor() : ((TileOre)tile).type.getColor() : -1;
                     }
 
                     return -1;
@@ -252,6 +253,7 @@ public class ClientRegistry implements ILifecycleListener
         mkCustomModelResourceLocations(ExPBlocks.rockSalt, 2, i -> "hint=" + Boolean.toString(i == 1));
         mkCustomModelResourceLocations(ExPBlocks.barrel, EnumTreeType.values().length, i -> "ttype=" + EnumTreeType.values()[i]);
         mkCustomModelResourceLocations(ExPItems.fluidBottle, ItemFluidBottle.allowedFluids.size(), i -> "inventory");
+        mkCustomModelResourceLocations(ExPItems.gem, EnumGemType.values().length, i -> "type=" + EnumGemType.values()[i].name().toLowerCase());
 
         // Statically mapped item models
         registerStaticModel(ExPItems.basket, new ModelResourceLocation(ExPItems.basket.getRegistryName(), "inventory"));

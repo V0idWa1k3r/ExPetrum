@@ -10,6 +10,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerPlayer;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
@@ -47,8 +48,10 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.relauncher.Side;
 import v0id.api.exp.block.IWater;
+import v0id.api.exp.data.ExPItems;
 import v0id.api.exp.data.ExPMisc;
 import v0id.api.exp.data.ExPPotions;
+import v0id.api.exp.item.EnumGemType;
 import v0id.api.exp.metal.EnumToolStats;
 import v0id.api.exp.player.EnumPlayerProgression;
 import v0id.api.exp.player.ExPPlayerCapability;
@@ -398,6 +401,11 @@ public class ExPHandlerServer
 			if (data != null)
 			{
 				PlayerManager.handlePlayerBrokeBlock(event.getPlayer(), data);
+			}
+
+			if (event.getState().getBlock().isAssociatedBlock(Blocks.STONE) && event.getWorld().rand.nextFloat() < 0.001F)
+			{
+                InventoryHelper.spawnItemStack(event.getWorld(), event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), new ItemStack(ExPItems.gem, 1, event.getWorld().rand.nextInt(EnumGemType.values().length)));
 			}
 		}
 	}
