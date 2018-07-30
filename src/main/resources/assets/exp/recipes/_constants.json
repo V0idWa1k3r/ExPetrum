@@ -72,7 +72,7 @@
     {
         "ingredient": {
             "item": "exp:item_metal_generic",
-            "data": 85
+            "data": 35
         },
         "name": "METALCLUMPSTEEL"
     },
