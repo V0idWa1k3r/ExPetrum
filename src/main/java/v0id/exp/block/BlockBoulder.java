@@ -97,7 +97,7 @@ public class BlockBoulder extends Block implements IOreHintReplaceable, IOreDict
 						worldIn.playSound(null, pos, SoundEvents.BLOCK_ANVIL_STEP, SoundCategory.BLOCKS, 1, 2f);
 						if (worldIn.rand.nextBoolean() && worldIn.rand.nextBoolean())
 						{
-							if (held.getItem() == Items.FLINT && (worldIn.rand.nextBoolean() || worldIn.rand.nextBoolean()))
+							if (held.getItem() == Items.FLINT)
 							{
 								return true;
 							}
