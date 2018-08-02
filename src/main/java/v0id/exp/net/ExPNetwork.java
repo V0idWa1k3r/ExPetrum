@@ -11,6 +11,7 @@ import v0id.api.exp.player.EnumPlayerProgression;
 import v0id.api.exp.tile.ISyncableTile;
 import v0id.exp.ExPetrum;
 import v0id.exp.entity.EntityFallingTree;
+import v0id.exp.entity.EntityProjectile;
 import v0id.exp.player.ExPPlayer;
 import v0id.exp.tile.TileAnvil;
 import v0id.exp.tile.TileMechanicalPotteryStation;
@@ -36,6 +37,7 @@ public class ExPNetwork
         WRAPPER.registerMessage(MessageWorldData.Handler.class, MessageWorldData.class, 10, Side.CLIENT);
         WRAPPER.registerMessage(MessageTileData.Handler.class, MessageTileData.class, 11, Side.CLIENT);
         WRAPPER.registerMessage(MessageSelectPottery.Handler.class, MessageSelectPottery.class, 12, Side.SERVER);
+        WRAPPER.registerMessage(MessageProjectileCollide.Handler.class, MessageProjectileCollide.class, 13, Side.CLIENT);
     }
 
     public static void sendAnvilRecipe(TileAnvil anvil, int recipe)
@@ -103,5 +105,10 @@ public class ExPNetwork
     public static void sendSelectPottery(TileMechanicalPotteryStation tile, int recipe)
     {
         WRAPPER.sendToServer(new MessageSelectPottery(tile.getPos(), tile.getWorld().provider.getDimension(), recipe));
+    }
+
+    public static void sendProjectileCollide(EntityProjectile projectile)
+    {
+        WRAPPER.sendToAllAround(new MessageProjectileCollide(projectile.getEntityId(), projectile.posX, projectile.posY, projectile.posZ, projectile.rotationYaw, projectile.rotationPitch), new NetworkRegistry.TargetPoint(projectile.dimension, projectile.posX, projectile.posY, projectile.posZ, 32));
     }
 }

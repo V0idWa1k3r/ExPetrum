@@ -24,7 +24,7 @@ public class RenderThrownSpear extends Render<EntityThrownSpear>
 	public void doRender(EntityThrownSpear entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
 		GlStateManager.pushMatrix();
-		GlStateManager.translate((float)x, (float)y + (entity.isInGround() ? 0.5 : 0), (float)z);
+		GlStateManager.translate((float)x, (float)y, (float)z);
 		GlStateManager.rotate(-90 + entity.rotationYaw, 0, 1, 0);
 		GlStateManager.rotate(-135 + entity.rotationPitch, 0, 0, 1);
 		GlStateManager.scale(2, 2, 2);
