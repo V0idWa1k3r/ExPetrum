@@ -4,11 +4,9 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import v0id.api.exp.data.ExPRegistryNames;
-import v0id.exp.entity.EntityFallingTree;
-import v0id.exp.entity.EntityGravFallingBlock;
-import v0id.exp.entity.EntityThrownSpear;
-import v0id.exp.entity.EntityThrownWeapon;
+import v0id.exp.entity.*;
 import v0id.exp.entity.impl.*;
+import v0id.exp.util.Helpers;
 
 public class ExPEntityRegistry extends AbstractRegistry
 {
@@ -18,6 +16,18 @@ public class ExPEntityRegistry extends AbstractRegistry
     {
         super();
         instance = this;
+        this.preloadEntityClasses();
+    }
+
+    public void preloadEntityClasses()
+    {
+        Helpers.preloadClass(EntityAnimal.class.getName());
+        Helpers.preloadClass(Sheep.class.getName());
+        Helpers.preloadClass(Wolf.class.getName());
+        Helpers.preloadClass(EntityGravFallingBlock.class.getName());
+        Helpers.preloadClass(EntityProjectile.class.getName());
+        Helpers.preloadClass(EntityThrownSpear.class.getName());
+        Helpers.preloadClass(EntityThrownWeapon.class.getName());
     }
 
 	public void registerEntities(RegistryEvent.Register<EntityEntry> event)

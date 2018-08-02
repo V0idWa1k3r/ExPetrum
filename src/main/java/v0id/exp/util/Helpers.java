@@ -41,6 +41,19 @@ public class Helpers
 	public static final double TIME_TO_DEGREE_CONST = 0.01275;
 	public static final int DAYNIGHT_LENGTH = 24000;
 
+	public static boolean preloadClass(String className)
+	{
+		try
+        {
+            Class.forName(className);
+            return true;
+        }
+        catch (ClassNotFoundException ex)
+        {
+            return false;
+        }
+	}
+
 	public static boolean tryConsumeFluidItem(ItemStack is, IFluidHandler handler, Function<ItemStack, Boolean> resultSetter, Function<ItemStack, Boolean> itemConsumer)
     {
         if (is.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null) || is.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null))
