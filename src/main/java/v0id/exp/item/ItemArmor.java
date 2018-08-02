@@ -25,13 +25,15 @@ public class ItemArmor extends net.minecraft.item.ItemArmor implements IWeightPr
     private static final UUID[] ARMOR_MODIFIERS = new UUID[] {UUID.fromString("845DB27C-C624-495F-8C9F-6020A9A58B6B"), UUID.fromString("D8499B04-0E66-4726-AB29-64469D734E0D"), UUID.fromString("9F3D476D-C118-4544-8365-64846904B48E"), UUID.fromString("2AD3F246-FEE1-4E67-B886-69FD380BB150")};
     public final EnumArmorStats stats;
     public static final Map<Pair<EntityEquipmentSlot, EnumArmorStats>, ItemArmor> items = Maps.newHashMap();
-
+    public final EntityEquipmentSlot slot;
+    
     public ItemArmor(EntityEquipmentSlot equipmentSlotIn, EnumArmorStats stats)
     {
         super(ExPMisc.armorMaterialExPetrum, 0, equipmentSlotIn);
         this.stats = stats;
+        this.slot = equipmentSlotIn;
         this.setMaxDamage(this.stats.durability);
-        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemArmor + "_" + this.stats.name + "_" + (this.getEquipmentSlot() == EntityEquipmentSlot.HEAD ? "helmet" : this.getEquipmentSlot() == EntityEquipmentSlot.CHEST ? "chestplate" : this.getEquipmentSlot() == EntityEquipmentSlot.LEGS ? "leggings" : "boots")));
+        this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.itemArmor + "_" + this.stats.name + "_" + (this.slot == EntityEquipmentSlot.HEAD ? "helmet" : this.slot == EntityEquipmentSlot.CHEST ? "chestplate" : this.slot == EntityEquipmentSlot.LEGS ? "leggings" : "boots")));
         this.setUnlocalizedName(this.getRegistryName().toString().replace(':', '.'));
         this.setCreativeTab(ExPCreativeTabs.tabTools);
         items.put(Pair.of(equipmentSlotIn, stats), this);
@@ -40,7 +42,7 @@ public class ItemArmor extends net.minecraft.item.ItemArmor implements IWeightPr
     @Override
     public void registerOreDictNames()
     {
-        OreDictionary.registerOre((this.getEquipmentSlot() == EntityEquipmentSlot.HEAD ? "helmet" : this.getEquipmentSlot() == EntityEquipmentSlot.FEET ? "boots" : this.getEquipmentSlot() == EntityEquipmentSlot.LEGS ? "leggings" : "chestplate") + Character.toUpperCase(this.stats.name.charAt(0)) + this.stats.name.substring(1), new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE));
+        OreDictionary.registerOre((this.slot == EntityEquipmentSlot.HEAD ? "helmet" : this.slot == EntityEquipmentSlot.FEET ? "boots" : this.slot == EntityEquipmentSlot.LEGS ? "leggings" : "chestplate") + Character.toUpperCase(this.stats.name.charAt(0)) + this.stats.name.substring(1), new ItemStack(this, 1, OreDictionary.WILDCARD_VALUE));
     }
 
     @Override
@@ -52,12 +54,12 @@ public class ItemArmor extends net.minecraft.item.ItemArmor implements IWeightPr
     @Override
     public Pair<Byte, Byte> provideVolume(ItemStack item)
     {
-        return this.getEquipmentSlot() == EntityEquipmentSlot.HEAD || this.getEquipmentSlot() == EntityEquipmentSlot.FEET ? Pair.of((byte)2, (byte)2) : Pair.of((byte)3, (byte)3);
+        return this.slot == EntityEquipmentSlot.HEAD || this.slot == EntityEquipmentSlot.FEET ? Pair.of((byte)2, (byte)2) : Pair.of((byte)3, (byte)3);
     }
 
     public float getArmorTypeMultiplier()
     {
-        switch (this.getEquipmentSlot())
+        switch (this.slot)
         {
             case HEAD:
             {
