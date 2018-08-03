@@ -128,19 +128,13 @@ public class BlockCoralPlant extends Block implements IWeightProvider, IItemBloc
 	{
 		worldIn.setBlockState(pos, ExPBlocks.coralRock.getDefaultState());
 	}
-	
-	@Override
-	public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos)
-	{
-		ExPMisc.modelVariantRandom.setSeed(MathHelper.getPositionRandom(pos));
-		return state.withProperty(TEXTURE_INDEX_ROCK, ExPMisc.modelVariantRandom.nextInt(6)).withProperty(TEXTURE_INDEX_PLANT, ExPMisc.modelVariantRandom.nextInt(16));
-	}
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
-		return this.getExtendedState(state, worldIn, pos);
+		ExPMisc.modelVariantRandom.setSeed(MathHelper.getCoordinateRandom(pos.getX(), pos.getY(), pos.getZ()));
+		return state.withProperty(TEXTURE_INDEX_ROCK, ExPMisc.modelVariantRandom.nextInt(6)).withProperty(TEXTURE_INDEX_PLANT, ExPMisc.modelVariantRandom.nextInt(16));
 	}
 
 	@Override
