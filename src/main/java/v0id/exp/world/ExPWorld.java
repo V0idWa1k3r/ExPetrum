@@ -249,7 +249,7 @@ public class ExPWorld implements IExPWorld
 		
 		if (this.rainTicksRemaining == 0 && this.owner.isRaining())
 		{
-			this.owner.setRainStrength(0);
+			this.setOwnerRainStrength(0);
 			this.owner.setThunderStrength(0);
 			this.owner.getWorldInfo().setRaining(false);
 			this.owner.getWorldInfo().setThundering(false);
@@ -260,7 +260,7 @@ public class ExPWorld implements IExPWorld
 		
 		if (this.rainTicksRemaining < 0 && this.owner.isRaining())
 		{
-			this.owner.setRainStrength(0);
+			this.setOwnerRainStrength(0);
 			this.owner.setThunderStrength(0);
 			this.owner.getWorldInfo().setRaining(false);
 			this.owner.getWorldInfo().setThundering(false);
@@ -269,7 +269,7 @@ public class ExPWorld implements IExPWorld
 		if (this.rainTicksRemaining > 0 && !this.owner.isRaining())
 		{
 			this.owner.getWorldInfo().setRaining(true);
-			this.owner.setRainStrength(1F);
+			this.setOwnerRainStrength(1);
 		}
 		
 		if (!this.isRemote)
@@ -307,6 +307,12 @@ public class ExPWorld implements IExPWorld
 			this.serverIsDirty = false;
             ExPNetwork.sendWorldData(this);
 		}
+	}
+
+	public void setOwnerRainStrength(float value)
+	{
+        this.owner.prevRainingStrength = value;
+        this.owner.rainingStrength = value;
 	}
 
     @Override
@@ -449,12 +455,12 @@ public class ExPWorld implements IExPWorld
 			if (this.rainTicksRemaining > 0)
 			{
 				this.owner.getWorldInfo().setRaining(true);
-				this.owner.setRainStrength(1.0F);
+				this.setOwnerRainStrength(1);
 			}
 			else
 			{
 				this.owner.getWorldInfo().setRaining(false);
-				this.owner.setRainStrength(0.0F);
+				this.setOwnerRainStrength(0);
 			}
 		}
 	}
