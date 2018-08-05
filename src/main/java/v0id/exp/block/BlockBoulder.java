@@ -137,7 +137,7 @@ public class BlockBoulder extends Block implements IOreHintReplaceable, IOreDict
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
-		ExPMisc.modelVariantRandom.setSeed(MathHelper.getPositionRandom(pos));
+		ExPMisc.modelVariantRandom.setSeed(MathHelper.getCoordinateRandom(pos.getX(), pos.getY(), pos.getZ()));
 		return state.withProperty(MODEL_INDEX, ExPMisc.modelVariantRandom.nextInt(4));
 	}
 

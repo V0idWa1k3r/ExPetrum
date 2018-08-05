@@ -103,7 +103,7 @@ public class BlockShrub extends Block implements IShrub, IPlantable, IOreDictEnt
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
-		return this.getExtendedState(state, worldIn, pos);
+		return state.withProperty(ExPBlockProperties.SHRUB_IS_TALL, this.canBeConnectedTo(worldIn, pos.up(), EnumFacing.DOWN));
 	}
 
     @Override
@@ -291,12 +291,6 @@ public class BlockShrub extends Block implements IShrub, IPlantable, IOreDictEnt
 		{
 			this.neighborChanged(world.getBlockState(pos), (World) world, pos, world.getBlockState(pos).getBlock(), neighbor);
 		}
-	}
-
-	@Override
-	public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos)
-	{
-		return state.withProperty(ExPBlockProperties.SHRUB_IS_TALL, this.canBeConnectedTo(world, pos.up(), EnumFacing.DOWN));
 	}
 
 	@Override

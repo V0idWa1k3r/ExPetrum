@@ -250,7 +250,7 @@ public class ExPWorld implements IExPWorld
 		if (this.rainTicksRemaining == 0 && this.owner.isRaining())
 		{
 			this.setOwnerRainStrength(0);
-			this.owner.setThunderStrength(0);
+			this.setOwnerThunderStrength(0);
 			this.owner.getWorldInfo().setRaining(false);
 			this.owner.getWorldInfo().setThundering(false);
 			this.accumulatedHumidity = this.getWorld().rand.nextFloat() / 3;
@@ -261,7 +261,7 @@ public class ExPWorld implements IExPWorld
 		if (this.rainTicksRemaining < 0 && this.owner.isRaining())
 		{
 			this.setOwnerRainStrength(0);
-			this.owner.setThunderStrength(0);
+			this.setOwnerThunderStrength(0);
 			this.owner.getWorldInfo().setRaining(false);
 			this.owner.getWorldInfo().setThundering(false);
 		}
@@ -313,6 +313,12 @@ public class ExPWorld implements IExPWorld
 	{
         this.owner.prevRainingStrength = value;
         this.owner.rainingStrength = value;
+	}
+
+	public void setOwnerThunderStrength(float strength)
+	{
+		this.owner.prevThunderingStrength = strength;
+		this.owner.thunderingStrength = strength;
 	}
 
     @Override

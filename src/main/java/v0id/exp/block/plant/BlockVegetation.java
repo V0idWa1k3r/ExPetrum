@@ -142,16 +142,6 @@ public class BlockVegetation extends BlockBush implements IOreDictEntry, IItemBl
 	}
 
 	@Override
-	public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos)
-	{
-		IBlockState growsOn = world.getBlockState(pos.down());
-		EnumGrassAmount level = growsOn.getBlock() instanceof IGrass ? ((IGrass)growsOn.getBlock()).getAmount(growsOn, pos.down(), world) : EnumGrassAmount.NORMAL;
-		int texIndex = level.ordinal() + state.getValue(ExPBlockProperties.VEGETATION_GROWTH) * 5;
-		ExPMisc.modelVariantRandom.setSeed(MathHelper.getPositionRandom(pos));
-		return state.withProperty(RANDOM_MODEL, ExPMisc.modelVariantRandom.nextInt(3)).withProperty(TEXTURE_INDEX, texIndex);
-	}
-
-	@Override
 	public BlockRenderLayer getBlockLayer()
 	{
 		return BlockRenderLayer.CUTOUT;
@@ -161,7 +151,12 @@ public class BlockVegetation extends BlockBush implements IOreDictEntry, IItemBl
     @Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
-		return this.getExtendedState(state, worldIn, pos);
+		IBlockState growsOn = worldIn.getBlockState(pos.down());
+		EnumGrassAmount level = growsOn.getBlock() instanceof IGrass ? ((IGrass)growsOn.getBlock()).getAmount(growsOn, pos.down(), worldIn) : EnumGrassAmount.NORMAL;
+		int texIndex = level.ordinal() + state.getValue(ExPBlockProperties.VEGETATION_GROWTH) * 5;
+		ExPMisc.modelVariantRandom.setSeed(MathHelper.getCoordinateRandom(pos.getX(), pos.getY(), pos.getZ()));
+		return state.withProperty(RANDOM_MODEL, ExPMisc.modelVariantRandom.nextInt(3)).withProperty(TEXTURE_INDEX, texIndex);
+
 	}
 
 	@Override

@@ -20,8 +20,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.IForgeRegistry;
 import v0id.api.exp.block.IOreHintReplaceable;
 import v0id.api.exp.block.property.EnumRockClass;
 import v0id.api.exp.data.*;
@@ -92,7 +92,8 @@ public class BlockPebble extends Block implements IOreHintReplaceable, IOreDictE
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
-		return this.getExtendedState(state, worldIn, pos);
+		ExPMisc.modelVariantRandom.setSeed(MathHelper.getCoordinateRandom(pos.getX(), pos.getY(), pos.getZ()));
+		return state.withProperty(MODEL_INDEX, ExPMisc.modelVariantRandom.nextInt(4));
 	}
 
 	@SuppressWarnings("deprecation")
@@ -182,13 +183,6 @@ public class BlockPebble extends Block implements IOreHintReplaceable, IOreDictE
 		{
 			this.neighborChanged(world.getBlockState(pos), (World) world, pos, this, neighbor);
 		}
-	}
-
-	@Override
-	public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos)
-	{
-		ExPMisc.modelVariantRandom.setSeed(MathHelper.getPositionRandom(pos));
-		return state.withProperty(MODEL_INDEX, ExPMisc.modelVariantRandom.nextInt(4));
 	}
 	
 	@Override

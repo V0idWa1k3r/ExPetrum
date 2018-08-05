@@ -178,7 +178,7 @@ public class BlockGenericShrubbery extends BlockBush implements IPlantable, IIte
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
-        ExPMisc.modelVariantRandom.setSeed(MathHelper.getPositionRandom(pos));
+        ExPMisc.modelVariantRandom.setSeed(MathHelper.getCoordinateRandom(pos.getX(), pos.getY(), pos.getZ()));
         switch (state.getValue(ExPBlockProperties.SHRUBBERY_TYPE))
         {
             case TROPICAL:
