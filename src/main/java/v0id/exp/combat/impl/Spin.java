@@ -36,7 +36,9 @@ public class Spin extends SpecialAttack
 		Vec3d playerLook = player.getLookVec();
 		Vec3d playerPos = player.getPositionVector();
 		player.world.spawnParticle(EnumParticleTypes.SWEEP_ATTACK, playerPos.x + playerLook.x, playerPos.y + player.getEyeHeight() * 0.5F, playerPos.z + playerLook.z, 0, 0, 0);
-		AxisAlignedBB aabb = new AxisAlignedBB(playerPos.addVector(-3, -1, -3), playerPos.addVector(3, 3, 3));
+		Vec3d start = playerPos.addVector(-3, -1, -3);
+		Vec3d end = playerPos.addVector(3, 3, 3);
+		AxisAlignedBB aabb = new AxisAlignedBB(start.x, start.y, start.z, end.x, end.y, end.z);
 		List<EntityLivingBase> lst = player.world.getEntitiesWithinAABB(EntityLivingBase.class, aabb, e -> e != player);
 		for (EntityLivingBase ent : lst)
 		{
