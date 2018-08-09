@@ -74,7 +74,7 @@ public class Wolf extends EntityMob
 
     protected SoundEvent getAmbientSound()
     {
-        return this.rand.nextBoolean() ? SoundEvents.ENTITY_WOLF_HOWL : SoundEvents.ENTITY_WOLF_GROWL;
+        return this.rand.nextFloat() <= 0.01F ? SoundEvents.ENTITY_WOLF_HOWL : SoundEvents.ENTITY_WOLF_GROWL;
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn)
@@ -151,5 +151,11 @@ public class Wolf extends EntityMob
         this.setHealth(this.getMaxHealth());
         this.dataManager.set(PARAM_COLOR, ColorHEX.FromHSV(color).getHexcode());
         return super.onInitialSpawn(difficulty, livingdata);
+    }
+
+    @Override
+    public boolean getCanSpawnHere()
+    {
+        return super.getCanSpawnHere() && this.world.rand.nextFloat() < 0.33F && this.world.getClosestPlayer(this.posX, this.posY, this.posZ, 32, false) == null;
     }
 }
