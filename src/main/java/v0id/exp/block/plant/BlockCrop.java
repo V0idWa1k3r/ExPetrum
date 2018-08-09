@@ -49,7 +49,7 @@ public class BlockCrop extends Block implements IItemBlockProvider, IPlantable
 	
 	public BlockCrop()
 	{
-		super(Material.PLANTS);
+		super(Material.WOOD);
 		this.setHardness(4F);
 		this.setResistance(0);
 		this.setRegistryName(ExPRegistryNames.asLocation(ExPRegistryNames.blockCrop));
