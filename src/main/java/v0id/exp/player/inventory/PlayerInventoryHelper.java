@@ -22,6 +22,29 @@ public class PlayerInventoryHelper
     {
         return (is.getItem() instanceof IWeightProvider ? ((IWeightProvider)is.getItem()).provideWeight(is) : IWeightProvider.tryGetRegisteredWeight(is).orElse(0F)) * is.getCount();
     }
+
+    public static boolean canItemStay(ItemStack is, int sX, int sY, InventoryPlayer inventory)
+    {
+        for (int x = 0; x < 9; ++x)
+        {
+            for (int y = 0; y < 3; ++y)
+            {
+                ItemStack stack = inventory.getStackInSlot(9 + y * 9 + x);
+                if (stack != is && !stack.isEmpty())
+                {
+                    Pair<Byte, Byte> vol = getVolume(stack);
+                    int stex = x + vol.getLeft() - 1;
+                    int stey = y + vol.getRight() - 1;
+                    if (sX >= x && sX <= stex && sY >= y && sY <= stey)
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
 	
 	@SuppressWarnings("SuspiciousNameCombination")
     public static Map<Pair<Integer, Integer>, Boolean> getSlotData(EntityPlayer player)

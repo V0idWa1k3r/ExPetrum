@@ -3,6 +3,7 @@ package v0id.exp.player;
 import com.google.common.collect.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagFloat;
@@ -15,6 +16,7 @@ import v0id.api.exp.player.*;
 import v0id.api.exp.util.NBTChain;
 import v0id.exp.ExPetrum;
 import v0id.exp.net.ExPNetwork;
+import v0id.exp.player.inventory.PlayerInventoryHelper;
 
 import java.util.Collection;
 import java.util.List;
@@ -41,6 +43,7 @@ public class ExPPlayer implements IExPPlayer
 	public EnumPlayerProgression stage = EnumPlayerProgression.STONE_AGE;
 	public int skippedTicks;
 	public SpecialAttack.AttackWrapper attackWrapper;
+	public int playerInventoryCheckSlotIndex = 0;
 	
 	public boolean health_isDirty;
 	public boolean modifiers_isDirty;
@@ -537,6 +540,27 @@ public class ExPPlayer implements IExPPlayer
 			this.serverIsDirty = false;
 			ExPNetwork.sendPlayerData(this);
 		}
+
+		if (!this.owner.world.isRemote)
+        {
+            int slotX = this.playerInventoryCheckSlotIndex % 9;
+            int slotY = this.playerInventoryCheckSlotIndex / 9;
+            ItemStack is = this.owner.inventory.getStackInSlot(9 + this.playerInventoryCheckSlotIndex);
+            if (!is.isEmpty())
+            {
+                if (!PlayerInventoryHelper.canItemStay(is, slotX, slotY, this.owner.inventory))
+                {
+                    this.owner.dropItem(is.copy(), false);
+                    this.owner.inventory.setInventorySlotContents(9 + this.playerInventoryCheckSlotIndex, ItemStack.EMPTY);
+                }
+            }
+
+            ++this.playerInventoryCheckSlotIndex;
+            if (this.playerInventoryCheckSlotIndex >= 27)
+            {
+                this.playerInventoryCheckSlotIndex = 0;
+            }
+        }
 	}
 
 	@Override
