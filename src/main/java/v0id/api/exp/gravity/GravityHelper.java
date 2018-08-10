@@ -17,11 +17,11 @@ public class GravityHelper
 	
 	public static boolean isSupported(World world, BlockPos pos)
     {
-        for (int x = -4; x <= 4; ++x)
+        for (int x = -5; x <= 5; ++x)
         {
-            for (int z = -4; z <= 4; ++z)
+            for (int z = -5; z <= 5; ++z)
             {
-                for (int y = -2; y <= 0; ++y)
+                for (int y = -4; y <= 2; ++y)
                 {
                     BlockPos at = pos.add(x, y, z);
                     if (world.getBlockState(at).getBlock() instanceof ISupportBeam)
