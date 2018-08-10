@@ -37,7 +37,14 @@ public class ContainerPotteryStation extends Container
 
     public void addPotInventory(IItemHandler cap)
     {
-        this.addSlotToContainer(new SlotItemHandler(cap, 0, 8, 24));
+        this.addSlotToContainer(new SlotItemHandler(cap, 0, 8, 24)
+        {
+            @Override
+            public int getSlotStackLimit()
+            {
+                return 8;
+            }
+        });
     }
 
     public void addPlayerInventory(InventoryPlayer playerInventory)
