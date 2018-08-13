@@ -21,7 +21,14 @@ public class ContainerCrucible extends Container
     {
         this.tile = crucible;
         this.addSlotToContainer(new SlotItemHandler(crucible.inventory, 0, 26, 8));
-        this.addSlotToContainer(new SlotItemHandler(crucible.inventory, 1, 26, 66));
+        this.addSlotToContainer(new SlotItemHandler(crucible.inventory, 1, 26, 66)
+        {
+            @Override
+            public int getSlotStackLimit()
+            {
+                return 1;
+            }
+        });
         this.addPlayerInventory(playerInventory);
     }
 
