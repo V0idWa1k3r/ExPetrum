@@ -115,7 +115,7 @@ public class TileOven extends TileEntity implements ITickable, ISyncableTile
                             is = this.inventory.getStackInSlot(i);
                             if (is.getItem() instanceof ItemFood)
                             {
-                                if (this.fluidTank.getFluid().getFluid() == ExPFluids.oliveOil || this.fluidTank.getFluid().getFluid() == ExPFluids.walnutOil)
+                                if (this.fluidTank.getFluid() != null && this.fluidTank.getFluid().getFluid() == ExPFluids.oliveOil || this.fluidTank.getFluid().getFluid() == ExPFluids.walnutOil)
                                 {
                                     if (this.fluidTank.getFluid().amount >= 50)
                                     {
