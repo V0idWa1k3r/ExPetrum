@@ -28,7 +28,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Mod(modid = "exp", useMetadata = true, dependencies = "after:chiselsandbits;after:jei", version = "1.0.10", updateJSON = "https://raw.githubusercontent.com/V0idWa1k3r/ExPetrum/master/version.json", certificateFingerprint = "fed4a2156e996f7a020359ca4c406cdde4ddcefd")
+@Mod(modid = "exp", useMetadata = true, dependencies = "after:chiselsandbits;after:jei", version = "1.0.11", updateJSON = "https://raw.githubusercontent.com/V0idWa1k3r/ExPetrum/master/version.json", certificateFingerprint = "fed4a2156e996f7a020359ca4c406cdde4ddcefd")
 public class ExPetrum
 {
 	@Mod.Instance("exp")
