@@ -2,10 +2,11 @@
     "homepage": "",
     "1.12.2": {
         "1.0.10": "Initial release",
-        "1,0.11": "Multiplayer is now functional. Nerfed wolves. Fixed crashes. See github commits to learn more."
+        "1,0.11": "Multiplayer is now functional. Nerfed wolves. Fixed crashes. See github commits to learn more.",
+        "1,0.12": "Fixed a crash with the Blast Furnace."
     },
     "promos": {
-        "1.12.2-latest": "1.0.11",
-        "1.12.2-recommended": "1.0.11"
+        "1.12.2-latest": "1.0.12",
+        "1.12.2-recommended": "1.0.12"
     }
 }
