@@ -415,6 +415,11 @@ public class TileBlastFurnace extends TileEntity implements ITickable, ISyncable
                             return;
                         }
                     }
+                    else
+                    {
+                        this.isStructureCorrect = false;
+                        break;
+                    }
                 }
             }
 

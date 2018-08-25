@@ -134,7 +134,7 @@ public class Helpers
 				continue;
 			}
 			
-			if (entityBB.intersects(pos, checkVec))
+			if (entityBB.intersects(Math.min(pos.x, checkVec.x), Math.min(pos.y, checkVec.y), Math.min(pos.z, checkVec.z), Math.max(pos.x, checkVec.x), Math.max(pos.y, checkVec.y), Math.max(pos.z, checkVec.z)))
 			{
 				ret.add(t);
 			}
